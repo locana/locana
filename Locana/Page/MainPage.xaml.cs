@@ -1,4 +1,6 @@
 ﻿using Kazyx.ImageStream;
+using Kazyx.RemoteApi;
+using Kazyx.RemoteApi.Camera;
 using Kazyx.Uwpmm.CameraControl;
 using Kazyx.Uwpmm.DataModel;
 using Kazyx.Uwpmm.Settings;
@@ -12,6 +14,7 @@ using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -65,7 +68,7 @@ namespace Locana
                 var pn = panels.GetPanelsToShow();
                 foreach (var panel in pn)
                 {
-                    // ControlPanel.Children.Add(panel);
+                    ControlPanel.Children.Add(panel);
                 }
             });
         }
@@ -179,14 +182,49 @@ namespace Locana
             ShowToast(v);
         }
 
-        private void ShutterButon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            ShutterButtonPressed();
-        }
-
         private void button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             ShowToast("button tapped");
+        }
+        private async void ZoomOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop); }
+            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+        }
+
+        private async void ZoomOutButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.Action1Shot); }
+            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+        }
+
+        private async void ZoomOutButton_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStart); }
+            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+        }
+
+        private async void ZoomInButton_Click(object sender, RoutedEventArgs e)
+        {
+            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStop); }
+            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+        }
+
+        private async void ZoomInButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.Action1Shot); }
+            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+        }
+
+        private async void ZoomInButton_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStart); }
+            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShutterButtonPressed();
         }
     }
 }
