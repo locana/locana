@@ -6,8 +6,10 @@ using Kazyx.Uwpmm.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -25,9 +27,9 @@ namespace Locana
             MediaDownloader.Instance.Fetched += OnFetchdImage;
         }
 
-        private void OnFetchdImage(StorageFolder arg1, StorageFile arg2, GeotaggingResult arg3)
+        private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
         {
-            throw new NotImplementedException();
+            ShowToast("picture saved!", file);
         }
 
         private TargetDevice target;
@@ -126,7 +128,7 @@ namespace Locana
                     switch (result)
                     {
                         case SequentialOperation.ShootingResult.StillSucceed:
-                            ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));                            
+                            ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
                             break;
                         case SequentialOperation.ShootingResult.StartSucceed:
                         case SequentialOperation.ShootingResult.StopSucceed:
@@ -144,9 +146,40 @@ namespace Locana
                 });
         }
 
+        private ToastNotification BuildToast(string str, StorageFile file = null)
+        {
+            ToastTemplateType template = ToastTemplateType.ToastImageAndText01;
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(template);
+            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(str));
+
+            if (file != null)
+            {
+                try
+                {
+                    var toastImageAttributes = toastXml.GetElementsByTagName("image");
+                    ((XmlElement)toastImageAttributes[0]).SetAttribute("src", file.Path);
+                }
+                catch
+                {
+                    DebugUtil.Log("OpenReadAsync Exception.");
+                }
+            }
+            return new ToastNotification(toastXml);
+        }
+
         private void ShowToast(string v)
         {
             Debug.WriteLine("toast: " + v);
+            var toast = BuildToast(v);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
+        }
+
+        private void ShowToast(string str, StorageFile file)
+        {
+            Debug.WriteLine("toast with image: " + str);
+            var toast = BuildToast(str, file);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
 
         private void ShowError(string v)
@@ -157,6 +190,11 @@ namespace Locana
         private void ShutterButon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             ShutterButtonPressed();
+        }
+
+        private void button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            ShowToast("button tapped");
         }
     }
 }

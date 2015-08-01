@@ -16,6 +16,7 @@
         <Image Grid.Row="1" x:Name="LiveviewImage" Source="{Binding Image, Mode=OneWay}"  HorizontalAlignment="Stretch" Margin="12" VerticalAlignment="Stretch"
                Loaded="LiveviewImage_Loaded" Unloaded="LiveviewImage_Unloaded"/>
         <Button x:Name="ShutterButon" Tapped="ShutterButon_Tapped" Grid.Row="2" MinWidth="0" Width="100" Height="100" Margin="12" HorizontalAlignment="Right"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="66,35,0,0" Grid.Row="2" VerticalAlignment="Top" Tapped="button_Tapped"/>
 
     </Grid>
 </Page>
