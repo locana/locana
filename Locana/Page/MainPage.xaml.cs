@@ -1,10 +1,14 @@
-﻿using Kazyx.ImageStream;
+﻿#define WINDOWS_APP
+
+using Kazyx.ImageStream;
 using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
 using Kazyx.Uwpmm.CameraControl;
+using Kazyx.Uwpmm.Control;
 using Kazyx.Uwpmm.DataModel;
 using Kazyx.Uwpmm.Settings;
 using Kazyx.Uwpmm.Utility;
+using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,7 +32,25 @@ namespace Locana
             NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_Discovered;
             NetworkObserver.INSTANCE.ForceRestart();
             MediaDownloader.Instance.Fetched += OnFetchdImage;
+            InitializeUI();
         }
+
+        private void InitializeUI()
+        {
+            HistogramControl.Init(Histogram.ColorType.White, 800);
+
+            HistogramCreator = null;
+            HistogramCreator = new HistogramCreator(HistogramCreator.HistogramResolution.Resolution_256);
+            HistogramCreator.OnHistogramCreated += async (r, g, b) =>
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    HistogramControl.SetHistogramValue(r, g, b);
+                });
+            };
+        }
+
+        private HistogramCreator HistogramCreator;
 
         private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
         {
@@ -73,7 +95,6 @@ namespace Locana
             });
         }
 
-
         void Status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var status = sender as CameraStatus;
@@ -91,7 +112,7 @@ namespace Locana
             if (IsRendering) { return; }
 
             IsRendering = true;
-            await LiveviewUtil.SetAsBitmap(e.Packet.ImageData, liveview_data, null, Dispatcher);
+            await LiveviewUtil.SetAsBitmap(e.Packet.ImageData, liveview_data, HistogramCreator, Dispatcher);
             IsRendering = false;
         }
 

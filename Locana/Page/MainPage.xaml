@@ -60,18 +60,20 @@
                                        Visibility="{Binding GeopositionEnabled, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
                 </Grid>--><!--
             </Grid>-->
-            <StackPanel x:Name="InformationPanel" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Stretch">
-                <controls:Histogram Margin="12" HorizontalAlignment="Stretch" VerticalAlignment="Top" x:Name="HistogramControl" Height="180" />
-            </StackPanel>
+
             <Grid Grid.Column="0" Margin="0,0,0,16">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="3*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
                 <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="1" Grid.Column="1" />
                 <Image x:Name="LiveviewImage" Source="{Binding Image, Mode=OneWay}" Loaded="LiveviewImage_Loaded" Unloaded="LiveviewImage_Unloaded" 
                        Grid.Column="1" Grid.Row="1" />
+                <controls:Histogram Margin="12" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="HistogramControl"
+                                    Height="120" Width="120" />
+
                 <Grid Grid.Row="2" Grid.Column="1" MaxHeight="120">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>

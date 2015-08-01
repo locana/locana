@@ -37,7 +37,7 @@ namespace Kazyx.Uwpmm.Utility
 
                 if (ApplicationSettings.GetInstance().IsHistogramDisplayed && !Histogram.IsRunning)
                 {
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Low, async () =>
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                     {
                         Histogram.IsRunning = true;
                         stream.Seek(0);
@@ -46,7 +46,7 @@ namespace Kazyx.Uwpmm.Utility
                         var writableImage = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
                         stream.Seek(0);
                         writableImage.SetSource(stream);
-                        await Histogram.CreateHistogramAsync(writableImage);
+                        Histogram.CreateHistogram(writableImage);
                     });
                 }
                 else if (Histogram.IsRunning)
