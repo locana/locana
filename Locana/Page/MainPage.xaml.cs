@@ -153,17 +153,15 @@ namespace Locana
             XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
             toastTextElements[0].AppendChild(toastXml.CreateTextNode(str));
 
-            if (file != null)
+            var toastImageAttributes = toastXml.GetElementsByTagName("image");
+
+            if (file == null)
             {
-                try
-                {
-                    var toastImageAttributes = toastXml.GetElementsByTagName("image");
-                    ((XmlElement)toastImageAttributes[0]).SetAttribute("src", file.Path);
-                }
-                catch
-                {
-                    DebugUtil.Log("OpenReadAsync Exception.");
-                }
+                ((XmlElement)toastImageAttributes[0]).SetAttribute("src", "ms-appx:///Assets/Toast/Locana_square_full.png");
+            }
+            else
+            {
+                ((XmlElement)toastImageAttributes[0]).SetAttribute("src", file.Path);
             }
             return new ToastNotification(toastXml);
         }
@@ -178,6 +176,7 @@ namespace Locana
         private void ShowError(string v)
         {
             Debug.WriteLine("error: " + v);
+            ShowToast(v);
         }
 
         private void ShutterButon_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

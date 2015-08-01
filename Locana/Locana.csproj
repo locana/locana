@@ -325,6 +325,8 @@
     <Content Include="Assets\Screen\OpenSlider.png" />
     <Content Include="Assets\Screen\protected.png" />
     <Content Include="Assets\Screen\rec.png" />
+    <Content Include="Assets\Toast\Locana_square_full.png" />
+    <Content Include="Assets\Toast\square_150.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
