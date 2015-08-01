@@ -168,14 +168,7 @@ namespace Locana
             return new ToastNotification(toastXml);
         }
 
-        private void ShowToast(string v)
-        {
-            Debug.WriteLine("toast: " + v);
-            var toast = BuildToast(v);
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
-        }
-
-        private void ShowToast(string str, StorageFile file)
+        private void ShowToast(string str, StorageFile file = null)
         {
             Debug.WriteLine("toast with image: " + str);
             var toast = BuildToast(str, file);
