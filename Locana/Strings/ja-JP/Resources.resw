@@ -1,0 +1,1106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>このアプリについて</value>
+  </data>
+  <data name="AddGeotag" xml:space="preserve">
+    <value>位置情報を付加する</value>
+  </data>
+  <data name="AddGeotag_guide" xml:space="preserve">
+    <value>カメラから取得した最新の写真に位置情報を付加します。
+モバイルネットワークが必要な場合があります。</value>
+  </data>
+  <data name="Aperture" xml:space="preserve">
+    <value>絞り</value>
+  </data>
+  <data name="AppBar_AppSetting" xml:space="preserve">
+    <value>アプリ設定</value>
+  </data>
+  <data name="AppBar_CameraRoll" xml:space="preserve">
+    <value>ギャラリー</value>
+  </data>
+  <data name="AppBar_CancelTouchAf" xml:space="preserve">
+    <value>AF解除</value>
+  </data>
+  <data name="AppBar_ControlPanel" xml:space="preserve">
+    <value>設定パネル</value>
+  </data>
+  <data name="AppBar_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="AppBar_Download" xml:space="preserve">
+    <value>転送</value>
+  </data>
+  <data name="AppBar_Exit" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>アプリケーション設定</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Locana</value>
+  </data>
+  <data name="AutoPowerOff" xml:space="preserve">
+    <value>自動電源オフ</value>
+  </data>
+  <data name="AutoPowerOff_Never" xml:space="preserve">
+    <value>無効</value>
+  </data>
+  <data name="BeepMode" xml:space="preserve">
+    <value>操作音</value>
+  </data>
+  <data name="BeepModeShutterOnly" xml:space="preserve">
+    <value>シャッター音のみ</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>黒</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>青</value>
+  </data>
+  <data name="BottomLeft" xml:space="preserve">
+    <value>左下</value>
+  </data>
+  <data name="BottomRight" xml:space="preserve">
+    <value>右下</value>
+  </data>
+  <data name="BuiltInSRNotSupported" xml:space="preserve">
+    <value>プリインストール版のスマートリモコンアプリはサードパーティ製アプリからのコントロールに対応していません。
+PlayMemories Camera Appsストアで最新版にアップデートしてください。</value>
+  </data>
+  <data name="ColorMode_Neutral" xml:space="preserve">
+    <value>ニュートラル</value>
+  </data>
+  <data name="ColorMode_Vivid" xml:space="preserve">
+    <value>ビビッド</value>
+  </data>
+  <data name="ColorSetting" xml:space="preserve">
+    <value>色合い</value>
+  </data>
+  <data name="ConnectedDevice" xml:space="preserve">
+    <value>_ssid_ に接続されています</value>
+  </data>
+  <data name="ContainsLicense" xml:space="preserve">
+    <value>このアプリケーションは下記のオープンソースソフトウェアを使用しています。</value>
+  </data>
+  <data name="ContinuousShootMode_Burst" xml:space="preserve">
+    <value>バースト</value>
+  </data>
+  <data name="ContinuousShootMode_Cont" xml:space="preserve">
+    <value>連続撮影</value>
+  </data>
+  <data name="ContinuousShootMode_MotionShot" xml:space="preserve">
+    <value>モーションショット</value>
+  </data>
+  <data name="ContinuousShootMode_Single" xml:space="preserve">
+    <value>1枚撮影</value>
+  </data>
+  <data name="ContinuousShootMode_SpeedPriority" xml:space="preserve">
+    <value>速度優先連写</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_1_25Sec" xml:space="preserve">
+    <value>10枚/1.25秒</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_2Sec" xml:space="preserve">
+    <value>10枚/2秒</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_5Sec" xml:space="preserve">
+    <value>10枚/5秒</value>
+  </data>
+  <data name="ContinuousShootSpeed_High" xml:space="preserve">
+    <value>高速</value>
+  </data>
+  <data name="ContinuousShootSpeed_Low" xml:space="preserve">
+    <value>低速</value>
+  </data>
+  <data name="ControlPanel" xml:space="preserve">
+    <value>設定パネル</value>
+  </data>
+  <data name="ContShootingMode" xml:space="preserve">
+    <value>ドライブモード</value>
+  </data>
+  <data name="ContShootingSpeed" xml:space="preserve">
+    <value>連写速度</value>
+  </data>
+  <data name="CopyRight" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="DevelopedBy" xml:space="preserve">
+    <value>Developed by</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value> - - -</value>
+  </data>
+  <data name="DisplayHistogram" xml:space="preserve">
+    <value>ヒストグラムを表示する</value>
+  </data>
+  <data name="DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>撮影ボタンを表示する</value>
+  </data>
+  <data name="Donation" xml:space="preserve">
+    <value>Donation</value>
+  </data>
+  <data name="ErrorMessage_cameraNotReady" xml:space="preserve">
+    <value>カメラが処理中です。しばらくまって再度お試しください。</value>
+  </data>
+  <data name="ErrorMessage_CantFindSonyRecord" xml:space="preserve">
+    <value>NFCタグからSSIDおよびパスワードを読み取れませんでした。</value>
+  </data>
+  <data name="ErrorMessage_Dsconnected" xml:space="preserve">
+    <value>接続が途絶しました。</value>
+  </data>
+  <data name="ErrorMessage_FailedToGetGeoposition" xml:space="preserve">
+    <value>位置情報の取得に失敗しました。元の画像がカメラロールに保存されました。</value>
+  </data>
+  <data name="ErrorMessage_fatal" xml:space="preserve">
+    <value>予期せぬエラーが発生しました。</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_DuplicatedGeotag" xml:space="preserve">
+    <value>既に位置情報が付加されているようです。取得した画像をカメラロールに保存しました。</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Geotagging" xml:space="preserve">
+    <value>位置情報の付加に失敗しました。元の画像がカメラロールに保存されました。</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Gone" xml:space="preserve">
+    <value>一部の連写画像の取得に失敗しました。</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Network" xml:space="preserve">
+    <value>ネットワークエラーが発生しました</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Other" xml:space="preserve">
+    <value>予期せぬエラーが発生しました。</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_OtherOriginal" xml:space="preserve">
+    <value>予期せぬエラーが発生しました。転送画像サイズを小さくして再度お試しください。</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Saving" xml:space="preserve">
+    <value>画像の保存に失敗しました</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_SavingOriginal" xml:space="preserve">
+    <value>画像の保存に失敗しました。転送画像サイズを小さくして再度お試しください。</value>
+  </data>
+  <data name="ErrorMessage_Interval" xml:space="preserve">
+    <value>エラーが発生したため、インターバル撮影を停止しました</value>
+  </data>
+  <data name="ErrorMessage_LocationAccessUnauthorized" xml:space="preserve">
+    <value>有効にするには、システム設定の位置情報サービスをオンにしてください。</value>
+  </data>
+  <data name="ErrorMessage_ParseNFC" xml:space="preserve">
+    <value>NFCタグの読み取りに失敗しました。</value>
+  </data>
+  <data name="ErrorMessage_shootingFailure" xml:space="preserve">
+    <value>撮影/記録開始できませんでした。カメラの状態を確認して下さい。</value>
+  </data>
+  <data name="ErrorMessage_timeout" xml:space="preserve">
+    <value>通信に失敗しました。接続を確認してください。</value>
+  </data>
+  <data name="Error_Message_FailedToGetInfo" xml:space="preserve">
+    <value>情報が取得できませんでした。
+インターネットへの接続状態を確認して下さい。</value>
+  </data>
+  <data name="ExifExposureProgram_A" xml:space="preserve">
+    <value>絞り優先</value>
+  </data>
+  <data name="ExifExposureProgram_Bulb" xml:space="preserve">
+    <value>バルブ</value>
+  </data>
+  <data name="ExifExposureProgram_HighSpeed" xml:space="preserve">
+    <value>ハイスピード</value>
+  </data>
+  <data name="ExifExposureProgram_Landscape" xml:space="preserve">
+    <value>風景</value>
+  </data>
+  <data name="ExifExposureProgram_M" xml:space="preserve">
+    <value>マニュアル</value>
+  </data>
+  <data name="ExifExposureProgram_P" xml:space="preserve">
+    <value>プログラムオート</value>
+  </data>
+  <data name="ExifExposureProgram_Portrait" xml:space="preserve">
+    <value>ポートレート</value>
+  </data>
+  <data name="ExifExposureProgram_S" xml:space="preserve">
+    <value>シャッタースピード優先</value>
+  </data>
+  <data name="ExifExposureProgram_SlowSpeed" xml:space="preserve">
+    <value>スローシャッター</value>
+  </data>
+  <data name="ExifExposureProgram_Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="ExifWBValue_Cloudy" xml:space="preserve">
+    <value>曇天</value>
+  </data>
+  <data name="ExifWBValue_CoolWhiteFluorescent" xml:space="preserve">
+    <value>蛍光灯: 白色</value>
+  </data>
+  <data name="ExifWBValue_D50" xml:space="preserve">
+    <value>D50</value>
+  </data>
+  <data name="ExifWBValue_D55" xml:space="preserve">
+    <value>D55</value>
+  </data>
+  <data name="ExifWBValue_D65" xml:space="preserve">
+    <value>D65</value>
+  </data>
+  <data name="ExifWBValue_D75" xml:space="preserve">
+    <value>D75</value>
+  </data>
+  <data name="ExifWBValue_Daylight" xml:space="preserve">
+    <value>太陽光</value>
+  </data>
+  <data name="ExifWBValue_DaylightFluorescent" xml:space="preserve">
+    <value>蛍光灯: 昼光色</value>
+  </data>
+  <data name="ExifWBValue_DayWhiteFluorescent" xml:space="preserve">
+    <value>蛍光灯: 昼白色</value>
+  </data>
+  <data name="ExifWBValue_FineWeather" xml:space="preserve">
+    <value>晴天</value>
+  </data>
+  <data name="ExifWBValue_Flash" xml:space="preserve">
+    <value>フラッシュ</value>
+  </data>
+  <data name="ExifWBValue_Fluorescent" xml:space="preserve">
+    <value>蛍光灯</value>
+  </data>
+  <data name="ExifWBValue_ISOStudioTungsten" xml:space="preserve">
+    <value>ISO Studio Tungsten</value>
+  </data>
+  <data name="ExifWBValue_Other" xml:space="preserve">
+    <value>その他</value>
+  </data>
+  <data name="ExifWBValue_Shade" xml:space="preserve">
+    <value>日陰</value>
+  </data>
+  <data name="ExifWBValue_StandardLightA" xml:space="preserve">
+    <value>Standard Light A</value>
+  </data>
+  <data name="ExifWBValue_StandardLightB" xml:space="preserve">
+    <value>Standard Light B</value>
+  </data>
+  <data name="ExifWBValue_StandardLightC" xml:space="preserve">
+    <value>Standard Light C</value>
+  </data>
+  <data name="ExifWBValue_TungstenIncandescent" xml:space="preserve">
+    <value>Tungsten (Incandescent)</value>
+  </data>
+  <data name="ExifWBValue_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="ExifWBValue_WarmWhiteFluorescent" xml:space="preserve">
+    <value>蛍光灯: 温白色</value>
+  </data>
+  <data name="ExifWBValue_WhiteFluorescent" xml:space="preserve">
+    <value>蛍光灯: 白色</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired" xml:space="preserve">
+    <value>オート・発光</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired_RedEyeReduction" xml:space="preserve">
+    <value>オート・発光・赤目補正</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired" xml:space="preserve">
+    <value>オート・非発光</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>オート・非発光・赤目補正</value>
+  </data>
+  <data name="Exif_Flash_Fired" xml:space="preserve">
+    <value>発光</value>
+  </data>
+  <data name="Exif_Flash_Fired_RedEyeReduction" xml:space="preserve">
+    <value>発光・赤目補正</value>
+  </data>
+  <data name="Exif_Flash_NoFlash" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="Exif_Flash_NoFlashFunction" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="Exif_Flash_NoFlash_RedEyeReduction" xml:space="preserve">
+    <value>なし・赤目補正</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired" xml:space="preserve">
+    <value>オフ・非発光</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>オフ・非発光・赤目補正</value>
+  </data>
+  <data name="Exif_Flash_On_Fired" xml:space="preserve">
+    <value>オン・発光</value>
+  </data>
+  <data name="Exif_Flash_On_Fired_RedEyeReduction" xml:space="preserve">
+    <value>オン・発光・赤目補正</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired" xml:space="preserve">
+    <value>オン・非発光</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>オン・非発光・赤目補正</value>
+  </data>
+  <data name="Exif_Flash_Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Exif_MeteringMode_Average" xml:space="preserve">
+    <value>評価測光</value>
+  </data>
+  <data name="Exif_MeteringMode_CenterWeightedAverage" xml:space="preserve">
+    <value>中央重点平均</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSegment" xml:space="preserve">
+    <value>多分割測光</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSpot" xml:space="preserve">
+    <value>マルチスポット</value>
+  </data>
+  <data name="Exif_MeteringMode_Other" xml:space="preserve">
+    <value>その他</value>
+  </data>
+  <data name="Exif_MeteringMode_Partial" xml:space="preserve">
+    <value>部分測光</value>
+  </data>
+  <data name="Exif_MeteringMode_Spot" xml:space="preserve">
+    <value>スポット</value>
+  </data>
+  <data name="Exif_MeteringMode_Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="ExposureCompensation" xml:space="preserve">
+    <value>EV</value>
+  </data>
+  <data name="ExposureMode" xml:space="preserve">
+    <value>露出モード</value>
+  </data>
+  <data name="ExposureMode_A" xml:space="preserve">
+    <value>絞り優先</value>
+  </data>
+  <data name="ExposureMode_iA" xml:space="preserve">
+    <value>おまかせオート</value>
+  </data>
+  <data name="ExposureMode_M" xml:space="preserve">
+    <value>マニュアル</value>
+  </data>
+  <data name="ExposureMode_P" xml:space="preserve">
+    <value>プログラムオート</value>
+  </data>
+  <data name="ExposureMode_S" xml:space="preserve">
+    <value>シャッター優先</value>
+  </data>
+  <data name="ExposureMode_sA" xml:space="preserve">
+    <value>プレミアムオート</value>
+  </data>
+  <data name="FibonacciSpiralOrigin" xml:space="preserve">
+    <value>フィボナッチ螺旋の出発点</value>
+  </data>
+  <data name="FlashMode" xml:space="preserve">
+    <value>フラッシュモード</value>
+  </data>
+  <data name="FlashMode_Auto" xml:space="preserve">
+    <value>オート</value>
+  </data>
+  <data name="FlashMode_RearSync" xml:space="preserve">
+    <value>後幕シンクロ</value>
+  </data>
+  <data name="FlashMode_SlowSync" xml:space="preserve">
+    <value>スローシンクロ</value>
+  </data>
+  <data name="FlashMode_Wireless" xml:space="preserve">
+    <value>ワイヤレス</value>
+  </data>
+  <data name="FlipMode" xml:space="preserve">
+    <value>反転</value>
+  </data>
+  <data name="FocusFrameDisplay" xml:space="preserve">
+    <value>フォーカス枠表示</value>
+  </data>
+  <data name="FocusMode" xml:space="preserve">
+    <value>フォーカスモード</value>
+  </data>
+  <data name="FocusMode_AFC" xml:space="preserve">
+    <value>AF-C</value>
+  </data>
+  <data name="FocusMode_AFS" xml:space="preserve">
+    <value>AF-S</value>
+  </data>
+  <data name="FocusMode_Manual" xml:space="preserve">
+    <value>MF</value>
+  </data>
+  <data name="FramingGridColor" xml:space="preserve">
+    <value>補助線の色</value>
+  </data>
+  <data name="FramingGrids" xml:space="preserve">
+    <value>撮影補助線</value>
+  </data>
+  <data name="GiveUsFeedback" xml:space="preserve">
+    <value>ご意見や不具合報告は、Twitterのサポートアカウントまでお願いします</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>緑</value>
+  </data>
+  <data name="Grid_Crosshairs" xml:space="preserve">
+    <value>十字</value>
+  </data>
+  <data name="Grid_Diagonal" xml:space="preserve">
+    <value>対角線</value>
+  </data>
+  <data name="Grid_Fibonacci" xml:space="preserve">
+    <value>フィボナッチの螺旋</value>
+  </data>
+  <data name="Grid_GoldenRatio" xml:space="preserve">
+    <value>黄金比</value>
+  </data>
+  <data name="Grid_RuleOfThirds" xml:space="preserve">
+    <value>三分割法</value>
+  </data>
+  <data name="Grid_Square" xml:space="preserve">
+    <value>正方形</value>
+  </data>
+  <data name="Guide_DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>本体のシャッターキーで撮影する場合には非表示にもできます。</value>
+  </data>
+  <data name="Guide_FocusFrameDisplay" xml:space="preserve">
+    <value>フォーカス枠情報を送信するようカメラに要求します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
+  </data>
+  <data name="Guide_FramingGrids" xml:space="preserve">
+    <value>構図決めサポートする補助線を表示します</value>
+  </data>
+  <data name="Guide_Histogram" xml:space="preserve">
+    <value>RGBヒストグラムを解析して表示します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
+  </data>
+  <data name="Guide_NFC" xml:space="preserve">
+    <value>NFC対応のカメラなら、タッチしてWi-Fiのパスワードを確認することができます</value>
+  </data>
+  <data name="Guide_PrioritizeOriginalSize" xml:space="preserve">
+    <value>デフォルトでは2Mサイズが優先されています。</value>
+  </data>
+  <data name="Guide_ReceiveCapturedImage" xml:space="preserve">
+    <value>撮影後にカメラから画像を受信し、カメラロールに保存します。（インターバル撮影中は無効となります）</value>
+  </data>
+  <data name="Guide_StartLiveView" xml:space="preserve">
+    <value>&lt;ssid&gt; のカメラを操作する準備が整いました。
+
+左右にスワイプしてリモコンを開始できます</value>
+  </data>
+  <data name="Guide_WiFiNotEnabled" xml:space="preserve">
+    <value>Wi-Fi設定から、対応したカメラ機器に接続してください</value>
+  </data>
+  <data name="HideDetailInfo" xml:space="preserve">
+    <value>情報を隠す</value>
+  </data>
+  <data name="InfraredRemoteControl" xml:space="preserve">
+    <value>赤外線リモコン</value>
+  </data>
+  <data name="IntervalCountPrefix" xml:space="preserve">
+    <value>撮影枚数</value>
+  </data>
+  <data name="IntervalSetting" xml:space="preserve">
+    <value>インターバル撮影</value>
+  </data>
+  <data name="IntervalTime" xml:space="preserve">
+    <value>インターバル間隔</value>
+  </data>
+  <data name="IntervalTime1" xml:space="preserve">
+    <value>インターバル間隔</value>
+  </data>
+  <data name="IntervalTimePrefix" xml:space="preserve">
+    <value>撮影間隔</value>
+  </data>
+  <data name="InvalidDuration" xml:space="preserve">
+    <value>--:--:--</value>
+  </data>
+  <data name="ISO" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="MessageCaption_error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
+    <value>読みこみに成功しました</value>
+  </data>
+  <data name="Message_Caution" xml:space="preserve">
+    <value>※これらのアプリ内アイテムの購入によって何らかの隠し機能が解放されることはありません。ご注意ください。</value>
+  </data>
+  <data name="Message_Encourage" xml:space="preserve">
+    <value>今後もアップデートを継続するため、開発者への寄付をお願いします。</value>
+  </data>
+  <data name="Message_ImageCapture_Succeed" xml:space="preserve">
+    <value>写真が撮影されました！</value>
+  </data>
+  <data name="Message_ImageDL_Succeed" xml:space="preserve">
+    <value>スマートフォンに写真を保存しました！</value>
+  </data>
+  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
+    <value>位置情報を付加してカメラロールに画像を保存しました！</value>
+  </data>
+  <data name="Message_NFC_succeed" xml:space="preserve">
+    <value>カメラのWi-Fiパスワードを読み取りました。コピーしてご利用ください。</value>
+  </data>
+  <data name="MetaDataName_CameraModel" xml:space="preserve">
+    <value>カメラ</value>
+  </data>
+  <data name="MetaDataName_DateTime" xml:space="preserve">
+    <value>撮影日</value>
+  </data>
+  <data name="MetaDataName_ExposureCompensation" xml:space="preserve">
+    <value>露出補正</value>
+  </data>
+  <data name="MetaDataName_ExposureProgram" xml:space="preserve">
+    <value>露出モード</value>
+  </data>
+  <data name="MetaDataName_ExposureTime" xml:space="preserve">
+    <value>シャッター速度</value>
+  </data>
+  <data name="MetaDataName_Flash" xml:space="preserve">
+    <value>フラッシュ</value>
+  </data>
+  <data name="MetaDataName_Fnumber" xml:space="preserve">
+    <value>F値</value>
+  </data>
+  <data name="MetaDataName_FocalLength" xml:space="preserve">
+    <value>焦点距離</value>
+  </data>
+  <data name="MetaDataName_ImageSize" xml:space="preserve">
+    <value>画像サイズ</value>
+  </data>
+  <data name="MetaDataName_Iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="MetaDataName_LensModel" xml:space="preserve">
+    <value>レンズ名称</value>
+  </data>
+  <data name="MetaDataName_MeteringMode" xml:space="preserve">
+    <value>測光モード</value>
+  </data>
+  <data name="MetaData_Geotag" xml:space="preserve">
+    <value>位置情報</value>
+  </data>
+  <data name="MetaData_Geotag_Exists" xml:space="preserve">
+    <value>あり</value>
+  </data>
+  <data name="Minute_Unit" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="MovieFileFormat" xml:space="preserve">
+    <value>動画フォーマット</value>
+  </data>
+  <data name="MovieFormatMode_MP4" xml:space="preserve">
+    <value>MP4</value>
+  </data>
+  <data name="MovieFormatMode_XAVCS" xml:space="preserve">
+    <value>XAVC S</value>
+  </data>
+  <data name="MovieQuality" xml:space="preserve">
+    <value>動画画質</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>オフ</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>オン</value>
+  </data>
+  <data name="OSSText" xml:space="preserve">
+    <value>オープンソースライセンス</value>
+  </data>
+  <data name="PeriodicalShooting_SkipLimitExceed" xml:space="preserve">
+    <value>カメラが長時間処理中のようなのでインターバル撮影を停止しました</value>
+  </data>
+  <data name="PeriodicalShooting_Skipped" xml:space="preserve">
+    <value>カメラが処理中のためスキップしました</value>
+  </data>
+  <data name="PeriodicalShooting_Status" xml:space="preserve">
+    <value>__INTERVAL__ 秒ごとに撮影中。 __PHOTO_NUM__ 枚撮影しました。</value>
+  </data>
+  <data name="PeriodicalShooting_StoppedByUser" xml:space="preserve">
+    <value>インターバル撮影を停止しました</value>
+  </data>
+  <data name="PostviewTransferSetting" xml:space="preserve">
+    <value>撮影画像を受信する</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>赤</value>
+  </data>
+  <data name="RepoURL" xml:space="preserve">
+    <value>https://github.com/locana/uwpmm</value>
+  </data>
+  <data name="ResourceFlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+    <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
+  </data>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>ja-JP</value>
+    <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>リトライ</value>
+  </data>
+  <data name="SceneSelection" xml:space="preserve">
+    <value>シーン</value>
+  </data>
+  <data name="Scene_Normal" xml:space="preserve">
+    <value>ノーマル</value>
+  </data>
+  <data name="Scene_UnderWater" xml:space="preserve">
+    <value>水中</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="SelfTimer" xml:space="preserve">
+    <value>セルフタイマー</value>
+  </data>
+  <data name="SettingSection_ContentsSync" xml:space="preserve">
+    <value>コンテンツ転送設定</value>
+  </data>
+  <data name="SettingSection_Display" xml:space="preserve">
+    <value>表示設定</value>
+  </data>
+  <data name="SettingSection_Image" xml:space="preserve">
+    <value>画像設定</value>
+  </data>
+  <data name="Setting_PostViewImageSize" xml:space="preserve">
+    <value>受信画像サイズ</value>
+  </data>
+  <data name="Setting_PrioritizeOriginalSize" xml:space="preserve">
+    <value>オリジナルサイズを優先する</value>
+  </data>
+  <data name="ShootMode" xml:space="preserve">
+    <value>動作モード</value>
+  </data>
+  <data name="ShootModeAudio" xml:space="preserve">
+    <value>音声記録</value>
+  </data>
+  <data name="ShootModeIntervalStill" xml:space="preserve">
+    <value>インターバル撮影</value>
+  </data>
+  <data name="ShootModeMovie" xml:space="preserve">
+    <value>動画記録</value>
+  </data>
+  <data name="ShootModeStill" xml:space="preserve">
+    <value>静止画記録</value>
+  </data>
+  <data name="ShowDetailInfo" xml:space="preserve">
+    <value>情報を表示</value>
+  </data>
+  <data name="ShutterSpeed" xml:space="preserve">
+    <value>SS</value>
+  </data>
+  <data name="Size2M" xml:space="preserve">
+    <value>2Mピクセル</value>
+  </data>
+  <data name="SizeOriginal" xml:space="preserve">
+    <value>オリジナル</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>ソースコード</value>
+  </data>
+  <data name="SteadyShot" xml:space="preserve">
+    <value>手ぶれ補正</value>
+  </data>
+  <data name="StillImageSize" xml:space="preserve">
+    <value>静止画サイズ</value>
+  </data>
+  <data name="StillQuality" xml:space="preserve">
+    <value>静止画画質</value>
+  </data>
+  <data name="StillQuality_Fine" xml:space="preserve">
+    <value>ファイン</value>
+  </data>
+  <data name="StillQuality_RawAndJpeg" xml:space="preserve">
+    <value>RAW+Jpeg</value>
+  </data>
+  <data name="StillQuality_Standard" xml:space="preserve">
+    <value>スタンダード</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>サポート</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>切り替え</value>
+  </data>
+  <data name="TrackingFocusMode" xml:space="preserve">
+    <value>追尾フォーカス</value>
+  </data>
+  <data name="TvColorSystem" xml:space="preserve">
+    <value>映像設定</value>
+  </data>
+  <data name="TvColorSystemMode_NTSC" xml:space="preserve">
+    <value>NTSC</value>
+  </data>
+  <data name="TvColorSystemMode_PAL" xml:space="preserve">
+    <value>PAL</value>
+  </data>
+  <data name="UpperLeft" xml:space="preserve">
+    <value>左上</value>
+  </data>
+  <data name="UpperRight" xml:space="preserve">
+    <value>右上</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
+  <data name="ViewAngle" xml:space="preserve">
+    <value>画角</value>
+  </data>
+  <data name="ViewAngleUnit" xml:space="preserve">
+    <value>°</value>
+  </data>
+  <data name="Viewer_FailedPlaybackMovie" xml:space="preserve">
+    <value>動画の再生に失敗しました</value>
+  </data>
+  <data name="Viewer_FailedToDeleteContents" xml:space="preserve">
+    <value>コンテンツの削除に失敗しました</value>
+  </data>
+  <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
+    <value>画像の取得に失敗しました</value>
+  </data>
+  <data name="Viewer_FailedToRefreshContents" xml:space="preserve">
+    <value>カメラ内コンテンツ一覧の取得に失敗しました</value>
+  </data>
+  <data name="Viewer_Header_SelectingToDelete" xml:space="preserve">
+    <value>削除するアイテムの選択中</value>
+  </data>
+  <data name="Viewer_Header_SelectingToDownload" xml:space="preserve">
+    <value>転送するアイテムの選択中</value>
+  </data>
+  <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
+    <value>スマートフォンに転送</value>
+  </data>
+  <data name="Viewer_MenuDelete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Viewer_MenuPlayback" xml:space="preserve">
+    <value>再生</value>
+  </data>
+  <data name="Viewer_NoAvContentApi" xml:space="preserve">
+    <value>この機能は現在使用できません。一度撮影画面に戻ってから再度お試しください。</value>
+  </data>
+  <data name="Viewer_NoCameraRoll" xml:space="preserve">
+    <value>ローカルコンテンツのロードに失敗しました</value>
+  </data>
+  <data name="Viewer_NoStorage" xml:space="preserve">
+    <value>メモリカードがセットされていないようです</value>
+  </data>
+  <data name="Viewer_RefreshAutomatically" xml:space="preserve">
+    <value>コンテンツを更新しています</value>
+  </data>
+  <data name="Viewer_StorageAccessNotSupported" xml:space="preserve">
+    <value>接続中のカメラでは、コンテンツへのアクセスがサポートされていません</value>
+  </data>
+  <data name="Viewer_StorageCamera" xml:space="preserve">
+    <value>カメラ内コンテンツ</value>
+  </data>
+  <data name="Viewer_StorageDetached" xml:space="preserve">
+    <value>メモリカードの取り外しを検知しました</value>
+  </data>
+  <data name="Viewer_StoragePhone" xml:space="preserve">
+    <value>端末内コンテンツ</value>
+  </data>
+  <data name="Viewer_StreamClosedByExternalCause" xml:space="preserve">
+    <value>動画の再生は外部要因で中断されました</value>
+  </data>
+  <data name="Viewer_UnplayableContent" xml:space="preserve">
+    <value>このコンテンツは再生することができません</value>
+  </data>
+  <data name="WaitingGeoposition" xml:space="preserve">
+    <value>位置情報を取得しています...</value>
+  </data>
+  <data name="WB_Auto" xml:space="preserve">
+    <value>オート</value>
+  </data>
+  <data name="WB_Cloudy" xml:space="preserve">
+    <value>曇天</value>
+  </data>
+  <data name="WB_ColorTemperture" xml:space="preserve">
+    <value>色温度調整</value>
+  </data>
+  <data name="WB_Custom" xml:space="preserve">
+    <value>カスタム</value>
+  </data>
+  <data name="WB_Custom1" xml:space="preserve">
+    <value>カスタム1</value>
+  </data>
+  <data name="WB_Custom2" xml:space="preserve">
+    <value>カスタム2</value>
+  </data>
+  <data name="WB_Custom3" xml:space="preserve">
+    <value>カスタム3</value>
+  </data>
+  <data name="WB_DayLight" xml:space="preserve">
+    <value>太陽光</value>
+  </data>
+  <data name="WB_Flash" xml:space="preserve">
+    <value>フラッシュ</value>
+  </data>
+  <data name="WB_Fluorescent_CoolWhite" xml:space="preserve">
+    <value>蛍光灯: 白色</value>
+  </data>
+  <data name="WB_Fluorescent_DayLight" xml:space="preserve">
+    <value>蛍光灯: 昼光色</value>
+  </data>
+  <data name="WB_Fluorescent_DayWhite" xml:space="preserve">
+    <value>蛍光灯: 昼白色</value>
+  </data>
+  <data name="WB_Fluorescent_WarmWhite" xml:space="preserve">
+    <value>蛍光灯: 温白色</value>
+  </data>
+  <data name="WB_Incandescent" xml:space="preserve">
+    <value>電球</value>
+  </data>
+  <data name="WB_Shade" xml:space="preserve">
+    <value>日陰</value>
+  </data>
+  <data name="White" xml:space="preserve">
+    <value>白</value>
+  </data>
+  <data name="WhiteBalance" xml:space="preserve">
+    <value>ホワイトバランス</value>
+  </data>
+  <data name="WifiSettingLauncherButtonText" xml:space="preserve">
+    <value>Wi-Fi</value>
+  </data>
+  <data name="ZoomMode_ClearImageDigital" xml:space="preserve">
+    <value>超解像ズーム</value>
+  </data>
+  <data name="ZoomMode_Optical" xml:space="preserve">
+    <value>光学のみ</value>
+  </data>
+  <data name="ZoomSetting" xml:space="preserve">
+    <value>ズーム設定</value>
+  </data>
+  <data name="Error_StopContinuousShooting" xml:space="preserve">
+    <value>連写停止に失敗しました。再度操作するかカメラ本体を操作してください。</value>
+  </data>
+  <data name="Message_ContinuousShootingGuide" xml:space="preserve">
+    <value>連写するにはボタンを長押しするか本体のシャッターキーを使用してください</value>
+  </data>
+  <data name="ProgressBar_Processing" xml:space="preserve">
+    <value>処理中...</value>
+  </data>
+  <data name="Viewer_MenuFetchMore" xml:space="preserve">
+    <value>さらに読み込む</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>左回転</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>右回転</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>よくある質問</value>
+  </data>
+  <data name="FAQURL" xml:space="preserve">
+    <value>http://locana.github.io/locana_faq.html</value>
+  </data>
+  <data name="OpenFAQ" xml:space="preserve">
+    <value>FAQページを開く</value>
+  </data>
+  <data name="OpenGithub" xml:space="preserve">
+    <value>GitHubリポジトリを開く</value>
+  </data>
+  <data name="OpenSupportTwitter" xml:space="preserve">
+    <value>Twitterのアカウントを開く</value>
+  </data>
+  <data name="WifiConnectionGuide" xml:space="preserve">
+    <value>&lt;ssid&gt; に接続中。
+
+カメラの検索処理を実行しています。</value>
+  </data>
+  <data name="FoundDlnaDeviceGuide" xml:space="preserve">
+    <value>&lt;ssid&gt; にメディアサーバを発見しました。
+
+ギャラリーを開くとカメラ内の画像が参照できます。</value>
+  </data>
+  <data name="AppBar_Refresh" xml:space="preserve">
+    <value>再読み込み</value>
+  </data>
+  <data name="Viewer_EmptyMediaServer" xml:space="preserve">
+    <value>表示するコンテンツがメディアサーバにありません</value>
+  </data>
+  <data name="Viewer_UnsupportedFileType" xml:space="preserve">
+    <value>&lt;file&gt; は、このデバイス上では取り扱えません。</value>
+  </data>
+  <data name="OpenGallery" xml:space="preserve">
+    <value>ギャラリーを開いてカメラ内のコンテンツを転送しましょう！</value>
+  </data>
+  <data name="Constraint" xml:space="preserve">
+    <value>プレミアム機能</value>
+  </data>
+  <data name="Constraint_limited" xml:space="preserve">
+    <value>一部機能が制限されています。トライアル期間が終了しました。</value>
+  </data>
+  <data name="Constraint_trial" xml:space="preserve">
+    <value>トライアル期間中はすべての機能が使用可能です。</value>
+  </data>
+  <data name="Constraint_unlimited" xml:space="preserve">
+    <value>すべての機能が使用可能です。ご購入ありがとうございます。</value>
+  </data>
+  <data name="FullVersion" xml:space="preserve">
+    <value>無制限版にアップグレード</value>
+  </data>
+  <data name="TrialMessage" xml:space="preserve">
+    <value>機能体験期間が終了しました。</value>
+  </data>
+  <data name="AudioRecording" xml:space="preserve">
+    <value>動画の音声記録</value>
+  </data>
+  <data name="LoopRecTime" xml:space="preserve">
+    <value>ループ記録時間</value>
+  </data>
+  <data name="LoopTime_Unlimited" xml:space="preserve">
+    <value>無制限</value>
+  </data>
+  <data name="WindNoiseReduction" xml:space="preserve">
+    <value>風音低減</value>
+  </data>
+  <data name="LoopRec" xml:space="preserve">
+    <value>ループ記録</value>
+  </data>
+  <data name="FullVersion_before" xml:space="preserve">
+    <value>Wi-Fi をインターネットに切り替えて、</value>
+  </data>
+  <data name="ContentsSet_Movie" xml:space="preserve">
+    <value>動画</value>
+  </data>
+  <data name="ContentsSet_Picture" xml:space="preserve">
+    <value>静止画</value>
+  </data>
+  <data name="ContentsSet_PictureMovie" xml:space="preserve">
+    <value>静止画と動画</value>
+  </data>
+  <data name="ContentTypes" xml:space="preserve">
+    <value>コンテンツのフィルタリング</value>
+  </data>
+  <data name="ContentTypesGuide" xml:space="preserve">
+    <value>グリッドに表示するコンテンツの種類</value>
+  </data>
+  <data name="Disabled_word" xml:space="preserve">
+    <value>無効</value>
+  </data>
+  <data name="AssistPattern" xml:space="preserve">
+    <value>アシストパターン</value>
+  </data>
+  <data name="LiveviewRotation" xml:space="preserve">
+    <value>カメラ回転検知</value>
+  </data>
+  <data name="LiveviewRotation_guide" xml:space="preserve">
+    <value>一部の機種では、カメラ本体の回転をライブビュー映像に反映できます</value>
+  </data>
+</root>

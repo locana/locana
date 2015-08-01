@@ -1,0 +1,15 @@
+[submodule "modules/kz-ssdp-discovery"]
+	path = modules/kz-ssdp-discovery
+	url = git@github.com:kazyx/kz-ssdp-discovery.git
+[submodule "modules/kz-remote-api"]
+	path = modules/kz-remote-api
+	url = git@github.com:kazyx/kz-remote-api.git
+[submodule "modules/kz-image-stream"]
+	path = modules/kz-image-stream
+	url = git@github.com:kazyx/kz-image-stream.git
+[submodule "modules/NtNfcLib"]
+	path = modules/NtNfcLib
+	url = git@github.com:naotaco/NtNfcLib.git
+[submodule "modules/NtImageProcessorUwp"]
+	path = modules/NtImageProcessorUwp
+	url = git@github.com:naotaco/NtImageProcessorUwp.git

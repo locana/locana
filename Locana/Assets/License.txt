@@ -1,0 +1,17 @@
+Json.NET : The MIT License (MIT)
+- https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
+
+kz-ssdp-discovery : The MIT License (MIT)
+- https://github.com/kazyx/kz-ssdp-discovery/blob/master/LICENSE
+
+kz-remote-api : The MIT License (MIT)
+- https://github.com/kazyx/kz-remote-api/blob/master/LICENSE
+
+kz-image-stream : The MIT License (MIT)
+- https://github.com/kazyx/kz-image-stream/blob/master/LICENSE
+
+NtImageLib : The MIT License (MIT)
+- https://github.com/naotaco/NtImageLib/blob/master/LICENSE
+
+NtNfcLib : The MIT License (MIT)
+- https://github.com/naotaco/NtNfcLib/blob/master/LICENSE

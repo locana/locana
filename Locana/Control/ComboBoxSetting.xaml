@@ -1,0 +1,25 @@
+﻿<UserControl
+    x:Class="Kazyx.Uwpmm.Control.ComboBoxSetting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Kazyx.Uwpmm.Control"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot" Visibility="{Binding SettingVisibility,Mode=OneWay, FallbackValue=Visible}" Margin="0,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Title, Mode=OneWay}" Name="SettingName" TextWrapping="Wrap" 
+                       VerticalAlignment="Center" Grid.Row="0" FontSize="22" Margin="0,0,10,5"/>
+        <ComboBox Name="Picker" Grid.Row="2" BorderThickness="1" Margin="40,5" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                  IsEnabled="{Binding IsActive, Mode=OneWay}" ItemsSource="{Binding Candidates, Mode=OneWay}" SelectedIndex="{Binding CurrentSetting, Mode=TwoWay}" />
+        <TextBlock Grid.Row="1"  TextWrapping="Wrap"  Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" FontSize="18"
+                   Name="SettingGuide" Text="{Binding Guide, Mode=OneWay}" Margin="5,0,0,0" Visibility="{Binding GuideVisibility, Mode=OneWay}"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{8D63CF1F-B858-4BB0-BA5D-916C783F7F0E}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Locana</RootNamespace>
+    <AssemblyName>Locana</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>Locana_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="project.json" />
+    <PRIResource Include="Strings\ja-JP\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CameraControl\CameraStatusUtility.cs" />
+    <Compile Include="CameraControl\DeviceApiHolder.cs" />
+    <Compile Include="CameraControl\MovieStreamHelper.cs" />
+    <Compile Include="CameraControl\ProductType.cs" />
+    <Compile Include="CameraControl\SequentialOperation.cs" />
+    <Compile Include="CameraControl\ServerVersion.cs" />
+    <Compile Include="CameraControl\StatusObserver.cs" />
+    <Compile Include="CameraControl\TargetDevice.cs" />
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Control\AppBarContent.xaml.cs">
+      <DependentUpon>AppBarContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\BatteryStatus.xaml.cs">
+      <DependentUpon>BatteryStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CheckBoxSetting.xaml.cs">
+      <DependentUpon>CheckBoxSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ComboBoxSetting.xaml.cs">
+      <DependentUpon>ComboBoxSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\EvSlider.xaml.cs">
+      <DependentUpon>EvSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\FocusFrameSurface.xaml.cs">
+      <DependentUpon>FocusFrameSurface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\FramingGridsSurface.xaml.cs">
+      <DependentUpon>FramingGridsSurface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\GridViewItemSelectivityBinder.cs" />
+    <Compile Include="Control\Histogram.xaml.cs">
+      <DependentUpon>Histogram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\MoviePlaybackScreen.xaml.cs">
+      <DependentUpon>MoviePlaybackScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PhotoPlaybackScreen.xaml.cs">
+      <DependentUpon>PhotoPlaybackScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ProgramShiftSlider.xaml.cs">
+      <DependentUpon>ProgramShiftSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\PullReleaseBar.xaml.cs">
+      <DependentUpon>PullReleaseBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\SettingSection.xaml.cs">
+      <DependentUpon>SettingSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ShootingParamSlider.xaml.cs">
+      <DependentUpon>ShootingParamSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Toast.xaml.cs">
+      <DependentUpon>Toast.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ToggleSetting.xaml.cs">
+      <DependentUpon>ToggleSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ZoomBar.xaml.cs">
+      <DependentUpon>ZoomBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\ApiCapabilityContainer.cs" />
+    <Compile Include="DataModel\ApplicationSettings.cs" />
+    <Compile Include="DataModel\AppSettingData.cs" />
+    <Compile Include="DataModel\AsyncConversionSource.cs" />
+    <Compile Include="DataModel\CameraStatus.cs" />
+    <Compile Include="DataModel\CompositiveDataModel.cs" />
+    <Compile Include="DataModel\ContentInfo.cs" />
+    <Compile Include="DataModel\ControlPanelDataSource.cs" />
+    <Compile Include="DataModel\ImageDataSource.cs" />
+    <Compile Include="DataModel\LiveviewScreenViewData.cs" />
+    <Compile Include="DataModel\MoviePlaybackData.cs" />
+    <Compile Include="DataModel\ObservableBase.cs" />
+    <Compile Include="DataModel\PhotoPlaybackData.cs" />
+    <Compile Include="DataModel\PlaybackAlbum.cs" />
+    <Compile Include="DataModel\PlaybackAlbumCollection.cs" />
+    <Compile Include="DataModel\PlaybackThumbnail.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Playback\ContentsLoader.cs" />
+    <Compile Include="Playback\DlnaContentsLoader.cs" />
+    <Compile Include="Playback\DummyContentsFlag.cs" />
+    <Compile Include="Playback\DummyContentsLoader.cs" />
+    <Compile Include="Playback\LocalContentsLoader.cs" />
+    <Compile Include="Playback\MimeType.cs" />
+    <Compile Include="Playback\PlaybackModeHelper.cs" />
+    <Compile Include="Playback\RemoteApiContentsLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\SettingPanelBuilder.cs" />
+    <Compile Include="UPnP\ContentDirectory\BrowseRequest.cs" />
+    <Compile Include="UPnP\ContentDirectory\ContentDirectory.cs" />
+    <Compile Include="UPnP\ContentDirectory\DestroyObjectRequest.cs" />
+    <Compile Include="UPnP\ContentDirectory\GetSearchCapabilitiesRequest.cs" />
+    <Compile Include="UPnP\ContentDirectory\Params.cs" />
+    <Compile Include="UPnP\ContentDirectory\RetrievedContents.cs" />
+    <Compile Include="UPnP\ContentDirectory\SearchCapabilities.cs" />
+    <Compile Include="UPnP\ContentDirectory\SearchRequest.cs" />
+    <Compile Include="UPnP\ConversionHelper.cs" />
+    <Compile Include="UPnP\SoapBase.cs" />
+    <Compile Include="UPnP\SoapException.cs" />
+    <Compile Include="UPnP\UpnpDefinitions.cs" />
+    <Compile Include="UPnP\UpnpDescriptionParser.cs" />
+    <Compile Include="UPnP\UpnpDevice.cs" />
+    <Compile Include="UPnP\UpnpError.cs" />
+    <Compile Include="UPnP\UpnpService.cs" />
+    <Compile Include="UPnP\ValueLessResponse.cs" />
+    <Compile Include="Utility\AnimationHelper.cs" />
+    <Compile Include="Utility\BoolToVisibilityConverter.cs" />
+    <Compile Include="Utility\CancellationTokenSourceExtensions.cs" />
+    <Compile Include="Utility\DebugUtil.cs" />
+    <Compile Include="Utility\EnumUtil.cs" />
+    <Compile Include="Utility\GeoPositionManager.cs" />
+    <Compile Include="Utility\LiveviewUtil.cs" />
+    <Compile Include="Utility\MediaDownloader.cs" />
+    <Compile Include="Utility\MetaDataValueConverter.cs" />
+    <Compile Include="Utility\NetworkObserver.cs" />
+    <Compile Include="Utility\ParameterUtil.cs" />
+    <Compile Include="Utility\PeriodicalShootingTask.cs" />
+    <Compile Include="Utility\Preference.cs" />
+    <Compile Include="Utility\ResourceManager.cs" />
+    <Compile Include="Utility\SafeDelegateExtensions.cs" />
+    <Compile Include="Utility\SettingValueConverter.cs" />
+    <Compile Include="Utility\StorageExtensions.cs" />
+    <Compile Include="Utility\SystemUtil.cs" />
+    <Compile Include="Utility\TaskExtensions.cs" />
+    <Compile Include="Utility\ThumbnailCacheLoader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="Locana_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\AppBar\appbar_cameraSetting.png" />
+    <Content Include="Assets\AppBar\appBar_cancel.png" />
+    <Content Include="Assets\AppBar\appBar_close_display.png" />
+    <Content Include="Assets\AppBar\appBar_delete.png" />
+    <Content Include="Assets\AppBar\appBar_display_info.png" />
+    <Content Include="Assets\AppBar\appBar_Dollar.png" />
+    <Content Include="Assets\AppBar\appBar_download.png" />
+    <Content Include="Assets\AppBar\appBar_ok.png" />
+    <Content Include="Assets\AppBar\appBar_playback.png" />
+    <Content Include="Assets\AppBar\appbar_rotateLeft.png" />
+    <Content Include="Assets\AppBar\appbar_rotateRight.png" />
+    <Content Include="Assets\AppBar\appBar_selection.png" />
+    <Content Include="Assets\AppBar\appBar_wifi.png" />
+    <Content Include="Assets\AppBar\ControlPanel.png" />
+    <Content Include="Assets\AppBar\feature.settings.png" />
+    <Content Include="Assets\AppBar\sync.png" />
+    <Content Include="Assets\Camera.png" />
+    <Content Include="Assets\DarkGray.png" />
+    <Content Include="Assets\License.txt" />
+    <Content Include="Assets\LightGray.png" />
+    <Content Include="Assets\LiveviewScreen\aperture.png" />
+    <Content Include="Assets\LiveviewScreen\battery_info.png" />
+    <Content Include="Assets\LiveviewScreen\battery_info_charging_background.png" />
+    <Content Include="Assets\LiveviewScreen\battery_info_charging_foreground.png" />
+    <Content Include="Assets\LiveviewScreen\battery_info_nearend_background.png" />
+    <Content Include="Assets\LiveviewScreen\battery_info_nearend_foreground.png" />
+    <Content Include="Assets\LiveviewScreen\Camcorder.png" />
+    <Content Include="Assets\LiveviewScreen\Camera.png" />
+    <Content Include="Assets\LiveviewScreen\ContShootingButton.png" />
+    <Content Include="Assets\LiveviewScreen\EVComp.png" />
+    <Content Include="Assets\LiveviewScreen\ExposureMode_A.png" />
+    <Content Include="Assets\LiveviewScreen\ExposureMode_iA.png" />
+    <Content Include="Assets\LiveviewScreen\ExposureMode_iAPlus.png" />
+    <Content Include="Assets\LiveviewScreen\ExposureMode_M.png" />
+    <Content Include="Assets\LiveviewScreen\ExposureMode_P.png" />
+    <Content Include="Assets\LiveviewScreen\ExposureMode_P_shift.png" />
+    <Content Include="Assets\LiveviewScreen\ExposureMode_S.png" />
+    <Content Include="Assets\LiveviewScreen\GeoInfoStatus_NG.png" />
+    <Content Include="Assets\LiveviewScreen\GeoInfoStatus_OK.png" />
+    <Content Include="Assets\LiveviewScreen\GeoInfoStatus_Updating.png" />
+    <Content Include="Assets\LiveviewScreen\IntervalStillRecButton.png" />
+    <Content Include="Assets\LiveviewScreen\ISO.png" />
+    <Content Include="Assets\LiveviewScreen\LoopRecButton.png" />
+    <Content Include="Assets\LiveviewScreen\memory_card.png" />
+    <Content Include="Assets\LiveviewScreen\mode_audio.png" />
+    <Content Include="Assets\LiveviewScreen\mode_interval.png" />
+    <Content Include="Assets\LiveviewScreen\mode_loop.png" />
+    <Content Include="Assets\LiveviewScreen\mode_movie.png" />
+    <Content Include="Assets\LiveviewScreen\mode_photo.png" />
+    <Content Include="Assets\LiveviewScreen\Music.png" />
+    <Content Include="Assets\LiveviewScreen\no_memory_card.png" />
+    <Content Include="Assets\LiveviewScreen\OpenSlider.png" />
+    <Content Include="Assets\LiveviewScreen\ProgramShift.png" />
+    <Content Include="Assets\LiveviewScreen\ProgramShift_cursor.png" />
+    <Content Include="Assets\LiveviewScreen\rec.png" />
+    <Content Include="Assets\LiveviewScreen\ShutterSpeed.png" />
+    <Content Include="Assets\LiveviewScreen\Stop.png" />
+    <Content Include="Assets\LiveviewScreen\ZoomIn.png" />
+    <Content Include="Assets\LiveviewScreen\ZoomOut.png" />
+    <Content Include="Assets\MediumGray.png" />
+    <Content Include="Assets\NFC_mark.png" />
+    <Content Include="Assets\PlaybackScreen\new.png" />
+    <Content Include="Assets\PlaybackScreen\playback_paused.png" />
+    <Content Include="Assets\PlaybackScreen\playback_playing.png" />
+    <Content Include="Assets\PlaybackScreen\playback_stopped.png" />
+    <Content Include="Assets\Screen\audio_locana.png" />
+    <Content Include="Assets\Screen\ExposureMode_A.png" />
+    <Content Include="Assets\Screen\ExposureMode_iA.png" />
+    <Content Include="Assets\Screen\ExposureMode_iAPlus.png" />
+    <Content Include="Assets\Screen\ExposureMode_M.png" />
+    <Content Include="Assets\Screen\ExposureMode_P.png" />
+    <Content Include="Assets\Screen\ExposureMode_P_shift.png" />
+    <Content Include="Assets\Screen\ExposureMode_S.png" />
+    <Content Include="Assets\Screen\focused.png" />
+    <Content Include="Assets\Screen\GeoInfoStatus_NG.png" />
+    <Content Include="Assets\Screen\GeoInfoStatus_OK.png" />
+    <Content Include="Assets\Screen\GeoInfoStatus_Updating.png" />
+    <Content Include="Assets\Screen\memory_card.png" />
+    <Content Include="Assets\Screen\mode_audio.png" />
+    <Content Include="Assets\Screen\mode_interval.png" />
+    <Content Include="Assets\Screen\mode_movie.png" />
+    <Content Include="Assets\Screen\mode_photo.png" />
+    <Content Include="Assets\Screen\no_memory_card.png" />
+    <Content Include="Assets\Screen\OpenSlider.png" />
+    <Content Include="Assets\Screen\protected.png" />
+    <Content Include="Assets\Screen\rec.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Control\AppBarContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\BatteryStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\CheckBoxSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\ComboBoxSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\EvSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\FocusFrameSurface.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\FramingGridsSurface.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\Histogram.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\MoviePlaybackScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\PhotoPlaybackScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\ProgramShiftSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\PullReleaseBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\SettingSection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\ShootingParamSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\Toast.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\ToggleSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\ZoomBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\modules\kz-image-stream\Project\KzImageStreamUwp.csproj">
+      <Project>{068aafa5-f654-4049-8903-bbe95c81586b}</Project>
+      <Name>KzImageStreamUwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\modules\kz-remote-api\Project\KzRemoteApiUwp.csproj">
+      <Project>{1558c99b-e826-4b36-a321-ff17e7f8ccc3}</Project>
+      <Name>KzRemoteApiUwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\modules\kz-ssdp-discovery\Project\KzSsdpDiscoveryUwp.csproj">
+      <Project>{65fc1c19-ed21-43f1-8ff7-2957dc70c551}</Project>
+      <Name>KzSsdpDiscoveryUwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\modules\NtImageProcessorUwp\NtImageProcessorUwp\NtImageProcessorUwp.csproj">
+      <Project>{f60b6857-9718-4491-9799-d94f51229be2}</Project>
+      <Name>NtImageProcessorUwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\modules\NtNfcLib\NtNfcLib\NtNfcParserUwp.csproj">
+      <Project>{ee2d1d2f-3456-4133-ac3d-3128a8fcd7d7}</Project>
+      <Name>NtNfcParserUwp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

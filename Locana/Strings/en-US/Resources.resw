@@ -1,0 +1,1184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DescriptionHeader.Text" xml:space="preserve">
+    <value>Description text:</value>
+  </data>
+  <data name="NavigationFailedExceptionMessage" xml:space="preserve">
+    <value>Navigation failed.</value>
+  </data>
+  <data name="WifiSettingLauncherButtonText" xml:space="preserve">
+    <value>Wi-Fi</value>
+  </data>
+  <data name="Guide_WiFiNotEnabled" xml:space="preserve">
+    <value>Go to Wi-Fi settings and connect to your camera device.
+
+Hint: Access point name of Sony camera devices starts from "DIRECT-".</value>
+  </data>
+  <data name="OSSText" xml:space="preserve">
+    <value>Open source licenses</value>
+  </data>
+  <data name="ContainsLicense" xml:space="preserve">
+    <value>This application contains the following open source softwares.</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="CopyRight" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="RepoURL" xml:space="preserve">
+    <value>https://github.com/locana/uwpmm</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>Source code</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="DevelopedBy" xml:space="preserve">
+    <value>Developed by</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Network" xml:space="preserve">
+    <value>Network error has occured while downloading your picture.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Other" xml:space="preserve">
+    <value>Unexpected error has occured.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Saving" xml:space="preserve">
+    <value>Failed to save the picture.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_OtherOriginal" xml:space="preserve">
+    <value>Unexpected error has occured. Please try again with smaller picture size setting.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_SavingOriginal" xml:space="preserve">
+    <value>Failed to save the picture. Please try again with smaller picture size setting.</value>
+  </data>
+  <data name="Message_ImageDL_Succeed" xml:space="preserve">
+    <value>Saved successfully!</value>
+  </data>
+  <data name="Setting_PostViewImageSize" xml:space="preserve">
+    <value>Picture size to receive</value>
+  </data>
+  <data name="Guide_StartLiveView" xml:space="preserve">
+    <value>A camera device has been detected on &lt;ssid&gt;.
+
+Swipe left or right to start remote control.</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>Switch</value>
+  </data>
+  <data name="SelfTimer" xml:space="preserve">
+    <value>Self timer</value>
+  </data>
+  <data name="ControlPanel" xml:space="preserve">
+    <value>Control panel</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value> seconds</value>
+  </data>
+  <data name="ShootMode" xml:space="preserve">
+    <value>Operation mode</value>
+  </data>
+  <data name="ShootModeMovie" xml:space="preserve">
+    <value>Movie rec</value>
+  </data>
+  <data name="ShootModeStill" xml:space="preserve">
+    <value>Still image rec</value>
+  </data>
+  <data name="Size2M" xml:space="preserve">
+    <value>2M pixels</value>
+  </data>
+  <data name="SizeOriginal" xml:space="preserve">
+    <value>Original</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value> - - - </value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>ON</value>
+  </data>
+  <data name="PostviewTransferSetting" xml:space="preserve">
+    <value>Sync fresh pictures</value>
+  </data>
+  <data name="ShootModeAudio" xml:space="preserve">
+    <value>Audio rec</value>
+  </data>
+  <data name="Message_ImageCapture_Succeed" xml:space="preserve">
+    <value>Captured successfully!</value>
+  </data>
+  <data name="IntervalSetting" xml:space="preserve">
+    <value>Interval shooting</value>
+  </data>
+  <data name="IntervalTime" xml:space="preserve">
+    <value>Interval time</value>
+  </data>
+  <data name="ErrorMessage_Interval" xml:space="preserve">
+    <value>An error has occured. Stopped interval shooting.</value>
+  </data>
+  <data name="IntervalCountPrefix" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="IntervalTimePrefix" xml:space="preserve">
+    <value>Interval</value>
+  </data>
+  <data name="Guide_NFC" xml:space="preserve">
+    <value>You can touch your NFC enabled camera to find Wi-Fi password.</value>
+  </data>
+  <data name="ErrorMessage_cameraNotReady" xml:space="preserve">
+    <value>Camera is under processing. Try again after a while.</value>
+  </data>
+  <data name="ErrorMessage_fatal" xml:space="preserve">
+    <value>Remote request failed.</value>
+  </data>
+  <data name="ErrorMessage_shootingFailure" xml:space="preserve">
+    <value>Failed to shoot or start recording. Make sure of the camera device's status.</value>
+  </data>
+  <data name="ErrorMessage_timeout" xml:space="preserve">
+    <value>Request timeout. Make sure of the Wi-Fi connection and try again.</value>
+  </data>
+  <data name="ErrorMessage_CantFindSonyRecord" xml:space="preserve">
+    <value>Couldn't find SSID or Password from the NFC tag.</value>
+  </data>
+  <data name="ErrorMessage_ParseNFC" xml:space="preserve">
+    <value>Failed to read data from the NFC tag.</value>
+  </data>
+  <data name="ErrorMessage_Dsconnected" xml:space="preserve">
+    <value>Connection has been lost.</value>
+  </data>
+  <data name="Message_NFC_succeed" xml:space="preserve">
+    <value>Wi-Fi password of your camera device is displayed below. Copy to connect.</value>
+  </data>
+  <data name="ConnectedDevice" xml:space="preserve">
+    <value>Connected to _ssid_</value>
+  </data>
+  <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
+    <value>Opened successfully!</value>
+  </data>
+  <data name="MessageCaption_error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ApplicationSettings" xml:space="preserve">
+    <value>Application settings</value>
+  </data>
+  <data name="DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>Display shutter button</value>
+  </data>
+  <data name="Guide_DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>Your phone's hardware shutter key can be an alternative trigger of remote shutter.</value>
+  </data>
+  <data name="AppBar_AppSetting" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="AppBar_CancelTouchAf" xml:space="preserve">
+    <value>Unlock AF</value>
+  </data>
+  <data name="AppBar_CameraRoll" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="Error_Message_FailedToGetInfo" xml:space="preserve">
+    <value>Failed to retrieve information.
+Please check internet connection status.</value>
+  </data>
+  <data name="Message_Caution" xml:space="preserve">
+    <value>Please acknowledge that NO secret function is unlocked by purchasing these in-app items.</value>
+  </data>
+  <data name="Message_Encourage" xml:space="preserve">
+    <value>Donation will encourage our development for continuous update!</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Donation" xml:space="preserve">
+    <value>Donation</value>
+  </data>
+  <data name="AppBar_Exit" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Guide_ReceiveCapturedImage" xml:space="preserve">
+    <value>Download fresh pictures to "Pictures" folder. This option is inactive while interval rec is going on.</value>
+  </data>
+  <data name="AppBar_ControlPanel" xml:space="preserve">
+    <value>Ctrl Panel</value>
+  </data>
+  <data name="ExposureMode" xml:space="preserve">
+    <value>Exposure mode</value>
+  </data>
+  <data name="ExposureMode_A" xml:space="preserve">
+    <value>Aperture priority</value>
+  </data>
+  <data name="ExposureMode_iA" xml:space="preserve">
+    <value>Intelligent auto</value>
+  </data>
+  <data name="ExposureMode_P" xml:space="preserve">
+    <value>Program auto</value>
+  </data>
+  <data name="ExposureMode_S" xml:space="preserve">
+    <value>Shutter priority</value>
+  </data>
+  <data name="ExposureMode_sA" xml:space="preserve">
+    <value>Superior auto</value>
+  </data>
+  <data name="ExposureCompensation" xml:space="preserve">
+    <value>Exposure compensation</value>
+  </data>
+  <data name="Aperture" xml:space="preserve">
+    <value>Aperture</value>
+  </data>
+  <data name="ISO" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="ShutterSpeed" xml:space="preserve">
+    <value>SS</value>
+  </data>
+  <data name="BeepMode" xml:space="preserve">
+    <value>System sound</value>
+  </data>
+  <data name="BeepModeShutterOnly" xml:space="preserve">
+    <value>Shutter tone only</value>
+  </data>
+  <data name="ShootModeIntervalStill" xml:space="preserve">
+    <value>Interval rec.</value>
+  </data>
+  <data name="SteadyShot" xml:space="preserve">
+    <value>Steady shot</value>
+  </data>
+  <data name="ViewAngle" xml:space="preserve">
+    <value>View angle</value>
+  </data>
+  <data name="ViewAngleUnit" xml:space="preserve">
+    <value>deg.</value>
+  </data>
+  <data name="MovieQuality" xml:space="preserve">
+    <value>Movie quality</value>
+  </data>
+  <data name="StillImageSize" xml:space="preserve">
+    <value>Picture resolution</value>
+  </data>
+  <data name="WB_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="WB_Cloudy" xml:space="preserve">
+    <value>Cloudy</value>
+  </data>
+  <data name="WB_ColorTemperture" xml:space="preserve">
+    <value>Color temperture</value>
+  </data>
+  <data name="WB_DayLight" xml:space="preserve">
+    <value>Daylight</value>
+  </data>
+  <data name="WB_Fluorescent_CoolWhite" xml:space="preserve">
+    <value>Fluor. Cool white</value>
+  </data>
+  <data name="WB_Fluorescent_DayLight" xml:space="preserve">
+    <value>Fluor. Daylight</value>
+  </data>
+  <data name="WB_Fluorescent_DayWhite" xml:space="preserve">
+    <value>Fluor. Day white</value>
+  </data>
+  <data name="WB_Fluorescent_WarmWhite" xml:space="preserve">
+    <value>Fluor. Warm white</value>
+  </data>
+  <data name="WB_Incandescent" xml:space="preserve">
+    <value>Incandescent</value>
+  </data>
+  <data name="WB_Shade" xml:space="preserve">
+    <value>Shade</value>
+  </data>
+  <data name="WhiteBalance" xml:space="preserve">
+    <value>White balance</value>
+  </data>
+  <data name="ExposureMode_M" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="FlashMode" xml:space="preserve">
+    <value>Flash mode</value>
+  </data>
+  <data name="FlashMode_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="FlashMode_RearSync" xml:space="preserve">
+    <value>Rear curtain sync.</value>
+  </data>
+  <data name="FlashMode_SlowSync" xml:space="preserve">
+    <value>Slow sync.</value>
+  </data>
+  <data name="FlashMode_Wireless" xml:space="preserve">
+    <value>Wireless</value>
+  </data>
+  <data name="FocusMode" xml:space="preserve">
+    <value>Focus mode</value>
+  </data>
+  <data name="FocusMode_AFC" xml:space="preserve">
+    <value>AF-C</value>
+  </data>
+  <data name="FocusMode_AFS" xml:space="preserve">
+    <value>AF-S</value>
+  </data>
+  <data name="FocusMode_Manual" xml:space="preserve">
+    <value>MF</value>
+  </data>
+  <data name="MetaDataName_CameraModel" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="MetaDataName_DateTime" xml:space="preserve">
+    <value>Date time</value>
+  </data>
+  <data name="MetaDataName_ExposureCompensation" xml:space="preserve">
+    <value>Exposure comp.</value>
+  </data>
+  <data name="MetaDataName_ExposureProgram" xml:space="preserve">
+    <value>Exposure mode</value>
+  </data>
+  <data name="MetaDataName_ExposureTime" xml:space="preserve">
+    <value>Shutter speed</value>
+  </data>
+  <data name="MetaDataName_Flash" xml:space="preserve">
+    <value>Flash</value>
+  </data>
+  <data name="MetaDataName_Fnumber" xml:space="preserve">
+    <value>F number</value>
+  </data>
+  <data name="MetaDataName_FocalLength" xml:space="preserve">
+    <value>Focal length</value>
+  </data>
+  <data name="MetaDataName_ImageSize" xml:space="preserve">
+    <value>Picture size</value>
+  </data>
+  <data name="MetaDataName_Iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="MetaDataName_LensModel" xml:space="preserve">
+    <value>Lens</value>
+  </data>
+  <data name="MetaDataName_MeteringMode" xml:space="preserve">
+    <value>Metering mode</value>
+  </data>
+  <data name="MetaData_Geotag" xml:space="preserve">
+    <value>Geotag</value>
+  </data>
+  <data name="MetaData_Geotag_Exists" xml:space="preserve">
+    <value>Recorded</value>
+  </data>
+  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
+    <value>Saved with location info!</value>
+  </data>
+  <data name="Minute_Unit" xml:space="preserve">
+    <value>min.</value>
+  </data>
+  <data name="MovieFileFormat" xml:space="preserve">
+    <value>Movie format</value>
+  </data>
+  <data name="MovieFormatMode_MP4" xml:space="preserve">
+    <value>MP4</value>
+  </data>
+  <data name="MovieFormatMode_XAVCS" xml:space="preserve">
+    <value>XAVC S</value>
+  </data>
+  <data name="ProgressMessageConnecting" xml:space="preserve">
+    <value>Preparing connection...</value>
+  </data>
+  <data name="ProgressMessageDetectingDevice" xml:space="preserve">
+    <value>Detecting connected camera device...</value>
+  </data>
+  <data name="ProgressMessageFetching" xml:space="preserve">
+    <value>Fetching... {0} images to complete.</value>
+  </data>
+  <data name="Progress_ChangingCameraState" xml:space="preserve">
+    <value>Changing camera state...</value>
+  </data>
+  <data name="Progress_CheckingStorage" xml:space="preserve">
+    <value>Checking storage information...</value>
+  </data>
+  <data name="Progress_DeletingSelectedContents" xml:space="preserve">
+    <value>Deleting selected contents...</value>
+  </data>
+  <data name="Progress_FetchingContents" xml:space="preserve">
+    <value>Fetching remote contents...</value>
+  </data>
+  <data name="Progress_LoadingLocalContents" xml:space="preserve">
+    <value>Loading local images...</value>
+  </data>
+  <data name="Progress_OpeningDetailImage" xml:space="preserve">
+    <value>Opening detail image...</value>
+  </data>
+  <data name="Progress_OpeningMovieStream" xml:space="preserve">
+    <value>Opening movie stream...</value>
+  </data>
+  <data name="Color_Red" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="StillQuality" xml:space="preserve">
+    <value>Picture quality</value>
+  </data>
+  <data name="StillQuality_Fine" xml:space="preserve">
+    <value>Fine</value>
+  </data>
+  <data name="StillQuality_RawAndJpeg" xml:space="preserve">
+    <value>RAW+Jpeg</value>
+  </data>
+  <data name="StillQuality_Standard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="TrackingFocusMode" xml:space="preserve">
+    <value>Tracking focus</value>
+  </data>
+  <data name="TvColorSystem" xml:space="preserve">
+    <value>TV system</value>
+  </data>
+  <data name="TvColorSystemMode_NTSC" xml:space="preserve">
+    <value>NTSC</value>
+  </data>
+  <data name="TvColorSystemMode_PAL" xml:space="preserve">
+    <value>PAL</value>
+  </data>
+  <data name="UpperLeft" xml:space="preserve">
+    <value>Top left corner</value>
+  </data>
+  <data name="UpperRight" xml:space="preserve">
+    <value>Top right corner</value>
+  </data>
+  <data name="Viewer_FailedPlaybackMovie" xml:space="preserve">
+    <value>Failed to playback movie content</value>
+  </data>
+  <data name="Viewer_FailedToDeleteContents" xml:space="preserve">
+    <value>Failed to delete contents</value>
+  </data>
+  <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
+    <value>Failed to open detail image</value>
+  </data>
+  <data name="Viewer_FailedToRefreshContents" xml:space="preserve">
+    <value>Failed to refresh camera contents list</value>
+  </data>
+  <data name="Viewer_Header_SelectingToDelete" xml:space="preserve">
+    <value>Selecting to delete...</value>
+  </data>
+  <data name="Viewer_Header_SelectingToDownload" xml:space="preserve">
+    <value>Selecting to download...</value>
+  </data>
+  <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
+    <value>Copy to local storage</value>
+  </data>
+  <data name="Viewer_MenuDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Viewer_MenuPlayback" xml:space="preserve">
+    <value>Playback</value>
+  </data>
+  <data name="Viewer_NoAvContentApi" xml:space="preserve">
+    <value>Unavailable to access the function now. Please restart from shooting screen again.</value>
+  </data>
+  <data name="Viewer_NoCameraRoll" xml:space="preserve">
+    <value>Failed to load local contents</value>
+  </data>
+  <data name="Viewer_NoStorage" xml:space="preserve">
+    <value>No storage seems to be attached</value>
+  </data>
+  <data name="Viewer_RefreshAutomatically" xml:space="preserve">
+    <value>Loading contents from new storage</value>
+  </data>
+  <data name="Viewer_StorageAccessNotSupported" xml:space="preserve">
+    <value>Storage access is not supported by your camera device</value>
+  </data>
+  <data name="Viewer_StorageCamera" xml:space="preserve">
+    <value>Camera storage</value>
+  </data>
+  <data name="Viewer_StorageDetached" xml:space="preserve">
+    <value>Memory card storage seems to be detached</value>
+  </data>
+  <data name="AddGeotag" xml:space="preserve">
+    <value>Enable geotagging</value>
+  </data>
+  <data name="AddGeotag_guide" xml:space="preserve">
+    <value>Add geotag to received fresh pictures.
+On some devices, cellular network is additionally required to obtain location info.﻿</value>
+  </data>
+  <data name="AppBar_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AppBar_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="AppBar_Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="AutoPowerOff" xml:space="preserve">
+    <value>Auto power off</value>
+  </data>
+  <data name="AutoPowerOff_Never" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="Color_Black" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="Color_Blue" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="BottomLeft" xml:space="preserve">
+    <value>Bottom left corner</value>
+  </data>
+  <data name="BottomRight" xml:space="preserve">
+    <value>Bottom right corner</value>
+  </data>
+  <data name="BuiltInSRNotSupported" xml:space="preserve">
+    <value>Built-in version of Smart Remote Control app could not be supported by 3rd party applications.
+Please update to the latest at PlayMemories Camera Apps store.</value>
+  </data>
+  <data name="ColorMode_Neutral" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="ColorMode_Vivid" xml:space="preserve">
+    <value>Vivid</value>
+  </data>
+  <data name="ColorSetting" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="ContinuousShootMode_Burst" xml:space="preserve">
+    <value>Burst</value>
+  </data>
+  <data name="ContinuousShootMode_Cont" xml:space="preserve">
+    <value>Cont. shoot.</value>
+  </data>
+  <data name="ContinuousShootMode_MotionShot" xml:space="preserve">
+    <value>Motion shot</value>
+  </data>
+  <data name="ContinuousShootMode_Single" xml:space="preserve">
+    <value>Single</value>
+  </data>
+  <data name="ContinuousShootMode_SpeedPriority" xml:space="preserve">
+    <value>Fast cont.</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_1_25Sec" xml:space="preserve">
+    <value>10pic./1.25sec.</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_2Sec" xml:space="preserve">
+    <value>10pic./2sec.</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_5Sec" xml:space="preserve">
+    <value>10pic./5sec.</value>
+  </data>
+  <data name="ContinuousShootSpeed_High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="ContinuousShootSpeed_Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="ContShootingMode" xml:space="preserve">
+    <value>Drive mode</value>
+  </data>
+  <data name="ContShootingSpeed" xml:space="preserve">
+    <value>Cont. shooting speed</value>
+  </data>
+  <data name="DisplayHistogram" xml:space="preserve">
+    <value>Display histogram</value>
+  </data>
+  <data name="ErrorMessage_FailedToGetGeoposition" xml:space="preserve">
+    <value>Failed to get location info. Original file has been saved.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_DuplicatedGeotag" xml:space="preserve">
+    <value>Original geotag is preferred. Original file has been saved.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Geotagging" xml:space="preserve">
+    <value>Failed to add geotag. Original file has been saved.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Gone" xml:space="preserve">
+    <value>Failed to fetch some pictures by limitation of continuous shooting.</value>
+  </data>
+  <data name="ErrorMessage_LocationAccessUnauthorized" xml:space="preserve">
+    <value>Please turn on location service at system settings for geotagging feature.</value>
+  </data>
+  <data name="ExifExposureProgram_A" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="ExifExposureProgram_Bulb" xml:space="preserve">
+    <value>Bulb</value>
+  </data>
+  <data name="ExifExposureProgram_HighSpeed" xml:space="preserve">
+    <value>High speed</value>
+  </data>
+  <data name="ExifExposureProgram_Landscape" xml:space="preserve">
+    <value>Landscape</value>
+  </data>
+  <data name="ExifExposureProgram_M" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="ExifExposureProgram_P" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="ExifExposureProgram_Portrait" xml:space="preserve">
+    <value>Portrait</value>
+  </data>
+  <data name="ExifExposureProgram_S" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="ExifExposureProgram_SlowSpeed" xml:space="preserve">
+    <value>Slow speed</value>
+  </data>
+  <data name="ExifExposureProgram_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="ExifWBValue_Cloudy" xml:space="preserve">
+    <value>Cloudy</value>
+  </data>
+  <data name="ExifWBValue_CoolWhiteFluorescent" xml:space="preserve">
+    <value>Cool White Fluorescent</value>
+  </data>
+  <data name="ExifWBValue_D50" xml:space="preserve">
+    <value>D50</value>
+  </data>
+  <data name="ExifWBValue_D55" xml:space="preserve">
+    <value>D55</value>
+  </data>
+  <data name="ExifWBValue_D65" xml:space="preserve">
+    <value>D65</value>
+  </data>
+  <data name="ExifWBValue_D75" xml:space="preserve">
+    <value>D75</value>
+  </data>
+  <data name="ExifWBValue_Daylight" xml:space="preserve">
+    <value>Daylight</value>
+  </data>
+  <data name="ExifWBValue_DaylightFluorescent" xml:space="preserve">
+    <value>Daylight Fluorescent</value>
+  </data>
+  <data name="ExifWBValue_DayWhiteFluorescent" xml:space="preserve">
+    <value>DayWhite Fluorescent</value>
+  </data>
+  <data name="ExifWBValue_FineWeather" xml:space="preserve">
+    <value>Fine Weather</value>
+  </data>
+  <data name="ExifWBValue_Flash" xml:space="preserve">
+    <value>Flash</value>
+  </data>
+  <data name="ExifWBValue_Fluorescent" xml:space="preserve">
+    <value>Fluorescent</value>
+  </data>
+  <data name="ExifWBValue_ISOStudioTungsten" xml:space="preserve">
+    <value>ISO Studio Tungsten</value>
+  </data>
+  <data name="ExifWBValue_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="ExifWBValue_Shade" xml:space="preserve">
+    <value>Shade</value>
+  </data>
+  <data name="ExifWBValue_StandardLightA" xml:space="preserve">
+    <value>Standard Light A</value>
+  </data>
+  <data name="ExifWBValue_StandardLightB" xml:space="preserve">
+    <value>Standard Light B</value>
+  </data>
+  <data name="ExifWBValue_StandardLightC" xml:space="preserve">
+    <value>Standard Light C</value>
+  </data>
+  <data name="ExifWBValue_TungstenIncandescent" xml:space="preserve">
+    <value>Tungsten (Incandescent)</value>
+  </data>
+  <data name="ExifWBValue_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="ExifWBValue_WarmWhiteFluorescent" xml:space="preserve">
+    <value>Warm White Fluorescent</value>
+  </data>
+  <data name="ExifWBValue_WhiteFluorescent" xml:space="preserve">
+    <value>White Fluorescent</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired" xml:space="preserve">
+    <value>Auto, Fired</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired_RedEyeReduction" xml:space="preserve">
+    <value>Auto, Fired w/ Red eye reduction</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired" xml:space="preserve">
+    <value>Auto, Not fired</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>Auto, Not fired w/ Red eye reduction</value>
+  </data>
+  <data name="Exif_Flash_Fired" xml:space="preserve">
+    <value>Fired</value>
+  </data>
+  <data name="Exif_Flash_Fired_RedEyeReduction" xml:space="preserve">
+    <value>Fired w/ Red eye reduction</value>
+  </data>
+  <data name="Exif_Flash_NoFlash" xml:space="preserve">
+    <value>No Flash</value>
+  </data>
+  <data name="Exif_Flash_NoFlashFunction" xml:space="preserve">
+    <value>No flash function</value>
+  </data>
+  <data name="Exif_Flash_NoFlash_RedEyeReduction" xml:space="preserve">
+    <value>No Flash w/ Red eye reduction</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired" xml:space="preserve">
+    <value>Off, Not fired</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>Off, Not fired w/ Red eye reduction</value>
+  </data>
+  <data name="Exif_Flash_On_Fired" xml:space="preserve">
+    <value>On, Fired</value>
+  </data>
+  <data name="Exif_Flash_On_Fired_RedEyeReduction" xml:space="preserve">
+    <value>On, Fired w/ Red eye reduction</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired" xml:space="preserve">
+    <value>On, Not fired</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>On, Not fired w/ Red eye reduction</value>
+  </data>
+  <data name="Exif_Flash_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Exif_MeteringMode_Average" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="Exif_MeteringMode_CenterWeightedAverage" xml:space="preserve">
+    <value>Center-weighted average</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSegment" xml:space="preserve">
+    <value>Multi-segment</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSpot" xml:space="preserve">
+    <value>Multi-spot</value>
+  </data>
+  <data name="Exif_MeteringMode_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Exif_MeteringMode_Partial" xml:space="preserve">
+    <value>Partial</value>
+  </data>
+  <data name="Exif_MeteringMode_Spot" xml:space="preserve">
+    <value>Spot</value>
+  </data>
+  <data name="Exif_MeteringMode_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="FibonacciSpiralOrigin" xml:space="preserve">
+    <value>Origin of Fibonacci spiral</value>
+  </data>
+  <data name="FlipMode" xml:space="preserve">
+    <value>Flip</value>
+  </data>
+  <data name="FlipMode_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="FlipMode_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="FocusFrameDisplay" xml:space="preserve">
+    <value>Display focus frame</value>
+  </data>
+  <data name="FramingGridColor" xml:space="preserve">
+    <value>Color of assist lines</value>
+  </data>
+  <data name="FramingGrids" xml:space="preserve">
+    <value>Composition assist</value>
+  </data>
+  <data name="GiveUsFeedback" xml:space="preserve">
+    <value>Any question or feedback? Ask our support account on Twitter!</value>
+  </data>
+  <data name="Color_Green" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="Grid_Crosshairs" xml:space="preserve">
+    <value>Crosshairs</value>
+  </data>
+  <data name="Grid_Diagonal" xml:space="preserve">
+    <value>Diagonal</value>
+  </data>
+  <data name="Grid_Fibonacci" xml:space="preserve">
+    <value>Fibonacci spiral</value>
+  </data>
+  <data name="Grid_GoldenRatio" xml:space="preserve">
+    <value>Golden ratio</value>
+  </data>
+  <data name="Grid_RuleOfThirds" xml:space="preserve">
+    <value>Rule of thirds</value>
+  </data>
+  <data name="Grid_Square" xml:space="preserve">
+    <value>Square</value>
+  </data>
+  <data name="Viewer_StreamClosedByExternalCause" xml:space="preserve">
+    <value>Stream is closed by external error</value>
+  </data>
+  <data name="Viewer_UnplayableContent" xml:space="preserve">
+    <value>This content is not playable</value>
+  </data>
+  <data name="WaitingGeoposition" xml:space="preserve">
+    <value>Waiting for location info...</value>
+  </data>
+  <data name="WB_Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="WB_Custom1" xml:space="preserve">
+    <value>Custom 1</value>
+  </data>
+  <data name="WB_Custom2" xml:space="preserve">
+    <value>Custom 2</value>
+  </data>
+  <data name="WB_Custom3" xml:space="preserve">
+    <value>Custom 3</value>
+  </data>
+  <data name="WB_Flash" xml:space="preserve">
+    <value>Flash</value>
+  </data>
+  <data name="Color_White" xml:space="preserve">
+    <value>White</value>
+  </data>
+  <data name="ZoomMode_ClearImageDigital" xml:space="preserve">
+    <value>ClearImage zoom</value>
+  </data>
+  <data name="ZoomMode_Optical" xml:space="preserve">
+    <value>Optical only</value>
+  </data>
+  <data name="ZoomSetting" xml:space="preserve">
+    <value>Zoom setting</value>
+  </data>
+  <data name="Guide_FocusFrameDisplay" xml:space="preserve">
+    <value>Request to send focus frame information. This may cause performance issue on some devices.</value>
+  </data>
+  <data name="Guide_FramingGrids" xml:space="preserve">
+    <value>Draw lines to assist photo composition.</value>
+  </data>
+  <data name="Guide_Histogram" xml:space="preserve">
+    <value>Display RGB histogram of finder view. This may cause performance issue on some devices.</value>
+  </data>
+  <data name="Guide_PrioritizeOriginalSize" xml:space="preserve">
+    <value>2M size pictures are preferred to the originals by default.</value>
+  </data>
+  <data name="HideDetailInfo" xml:space="preserve">
+    <value>Hide info.</value>
+  </data>
+  <data name="InfraredRemoteControl" xml:space="preserve">
+    <value>IR remote</value>
+  </data>
+  <data name="IntervalTime1" xml:space="preserve">
+    <value>Interval</value>
+  </data>
+  <data name="InvalidDuration" xml:space="preserve">
+    <value>--:--:--</value>
+  </data>
+  <data name="IrRemoteSetting_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="IrRemoteSetting_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="SceneSelection" xml:space="preserve">
+    <value>Scene</value>
+  </data>
+  <data name="Scene_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Scene_UnderWater" xml:space="preserve">
+    <value>Under water</value>
+  </data>
+  <data name="SettingSection_ContentsSync" xml:space="preserve">
+    <value>Contents sync settings</value>
+  </data>
+  <data name="SettingSection_Display" xml:space="preserve">
+    <value>Screen settings</value>
+  </data>
+  <data name="SettingSection_Image" xml:space="preserve">
+    <value>Photo settings</value>
+  </data>
+  <data name="Setting_PrioritizeOriginalSize" xml:space="preserve">
+    <value>Prefer original size pics</value>
+  </data>
+  <data name="ShowDetailInfo" xml:space="preserve">
+    <value>Show info.</value>
+  </data>
+  <data name="Off_LCC" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="On_LCC" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Locana</value>
+  </data>
+  <data name="AppInfo" xml:space="preserve">
+    <value>Application info</value>
+  </data>
+  <data name="Viewer_StoragePhone" xml:space="preserve">
+    <value>Local storage</value>
+  </data>
+  <data name="Black" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="Blue" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Green" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="Red" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="White" xml:space="preserve">
+    <value>White</value>
+  </data>
+  <data name="Viewer_Header_GroupView" xml:space="preserve">
+    <value>Jump to group</value>
+  </data>
+  <data name="PeriodicalShooting_SkipLimitExceed" xml:space="preserve">
+    <value>Something wrong. It seems the device is not ready to shoot for long time. Stopped interval rec.</value>
+  </data>
+  <data name="PeriodicalShooting_Skipped" xml:space="preserve">
+    <value>Camera is under processing. Skipped.</value>
+  </data>
+  <data name="PeriodicalShooting_Status" xml:space="preserve">
+    <value>Taking photo every __INTERVAL__ sec. __PHOTO_NUM__ pics taken.</value>
+  </data>
+  <data name="PeriodicalShooting_StoppedByUser" xml:space="preserve">
+    <value>Stopped interval shooting.</value>
+  </data>
+  <data name="Error_StopContinuousShooting" xml:space="preserve">
+    <value>Failed to stop continuous shooting. Try again or stop by hardware button on the camera.</value>
+  </data>
+  <data name="Message_ContinuousShootingGuide" xml:space="preserve">
+    <value>Long press the button or use hardware shutter button to operate continuous shooting.</value>
+  </data>
+  <data name="ProgressBar_Processing" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="Viewer_MenuFetchMore" xml:space="preserve">
+    <value>Load more contents</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Rotate Left</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Rotate Right</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="FAQURL" xml:space="preserve">
+    <value>http://locana.github.io/locana_faq.html</value>
+  </data>
+  <data name="OpenFAQ" xml:space="preserve">
+    <value>Open FAQ page</value>
+  </data>
+  <data name="OpenGithub" xml:space="preserve">
+    <value>Open GitHub</value>
+  </data>
+  <data name="OpenSupportTwitter" xml:space="preserve">
+    <value>Open support account on Twitter</value>
+  </data>
+  <data name="SupportTwitterURL" xml:space="preserve">
+    <value>https://twitter.com/locana_support</value>
+  </data>
+  <data name="WifiConnectionGuide" xml:space="preserve">
+    <value>Connected to &lt;ssid&gt;.
+
+Now detecting connected camera device...</value>
+  </data>
+  <data name="FoundDlnaDeviceGuide" xml:space="preserve">
+    <value>Media server is active on &lt;ssid&gt;.
+
+Open gallary to browse contents in your camera device.</value>
+  </data>
+  <data name="Viewer_EmptyMediaServer" xml:space="preserve">
+    <value>No contents in this media server.</value>
+  </data>
+  <data name="Nfc_Result" xml:space="preserve">
+    <value>Copy Wi-Fi password to clipboard</value>
+  </data>
+  <data name="Viewer_UnsupportedFileType" xml:space="preserve">
+    <value>&lt;file&gt; can't be supported on this device.</value>
+  </data>
+  <data name="OpenGallery" xml:space="preserve">
+    <value>Open gallary to browse contents in your camera device!</value>
+  </data>
+  <data name="ContentTypes" xml:space="preserve">
+    <value>Filter by</value>
+  </data>
+  <data name="ContentTypesGuide" xml:space="preserve">
+    <value>Contents to be displayed.</value>
+  </data>
+  <data name="FullVersion" xml:space="preserve">
+    <value>Upgrade to Full version</value>
+  </data>
+  <data name="TrialMessage" xml:space="preserve">
+    <value>Feature limited in the trial version.</value>
+  </data>
+  <data name="TrialVersion" xml:space="preserve">
+    <value>Trial version</value>
+  </data>
+  <data name="Constraint" xml:space="preserve">
+    <value>Premium features</value>
+  </data>
+  <data name="Constraint_limited" xml:space="preserve">
+    <value>Some features limited by the end of trial period.</value>
+  </data>
+  <data name="Constraint_trial" xml:space="preserve">
+    <value>Full features active during the trial period.</value>
+  </data>
+  <data name="Constraint_unlimited" xml:space="preserve">
+    <value>Full features unlimited. Thanks for the purchase!!</value>
+  </data>
+  <data name="AudioRecording" xml:space="preserve">
+    <value>Audio rec. w/movie</value>
+  </data>
+  <data name="LoopRecTime" xml:space="preserve">
+    <value>Loop rec. time</value>
+  </data>
+  <data name="LoopTime_Unlimited" xml:space="preserve">
+    <value>Unlimited</value>
+  </data>
+  <data name="WindNoiseReduction" xml:space="preserve">
+    <value>Wind noise reduction</value>
+  </data>
+  <data name="LoopRec" xml:space="preserve">
+    <value>Loop recording</value>
+  </data>
+  <data name="FullVersion_before" xml:space="preserve">
+    <value>Switch Wi-Fi to the Internet to</value>
+  </data>
+  <data name="ContentsSet_Movie" xml:space="preserve">
+    <value>Movies</value>
+  </data>
+  <data name="ContentsSet_Picture" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="ContentsSet_PictureMovie" xml:space="preserve">
+    <value>Pictures and Movies</value>
+  </data>
+  <data name="Disabled_word" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="AssistPattern" xml:space="preserve">
+    <value>Assist pattern</value>
+  </data>
+  <data name="LiveviewRotation" xml:space="preserve">
+    <value>Detect camera rotation</value>
+  </data>
+  <data name="LiveviewRotation_guide" xml:space="preserve">
+    <value>Synchronize camera and liveview orientation. Note that this feature is supported only on some models.</value>
+  </data>
+</root>
