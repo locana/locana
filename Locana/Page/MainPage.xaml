@@ -11,18 +11,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="LayoutRoot">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="0" Name="ApplicationArea">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <!--<Grid Name="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="1" MinHeight="100">
+        <!--<Grid Name="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="1" MinHeight="100">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
@@ -35,7 +25,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 </Grid>
-                --><!--<Grid Grid.Row="1" Grid.ColumnSpan="3" Height="50">
+                -->
+        <!--<Grid Grid.Row="1" Grid.ColumnSpan="3" Height="50">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
@@ -58,29 +49,36 @@
                     <controls:BatteryStatus x:Name="BatteryStatusDisplay" Grid.Column="7" Height="44" Width="88" VerticalAlignment="Center" />
                     <Image Source="{Binding GeopositionStatusImage}" Grid.Column="8" VerticalAlignment="Center" 
                                        Visibility="{Binding GeopositionEnabled, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
-                </Grid>--><!--
+                </Grid>-->
+        <!--
             </Grid>-->
 
-            <Grid Grid.Column="0" Margin="0,0,0,16">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+        <Grid Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
-                <Border Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="1" Grid.Column="1" />
-                <Image x:Name="LiveviewImage" Source="{Binding Image, Mode=OneWay}" Loaded="LiveviewImage_Loaded" Unloaded="LiveviewImage_Unloaded" 
-                       Grid.Column="1" Grid.Row="1" />
-                <controls:Histogram Margin="12" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="HistogramControl"
+            <Grid x:Name="LiveviewGrid" Grid.Column="1" Grid.Row="1">
+                <Image x:Name="LiveviewImage" Source="{Binding Image, Mode=OneWay}" Loaded="LiveviewImage_Loaded" Unloaded="LiveviewImage_Unloaded" Margin="10" />
+            </Grid>
+
+            <controls:Histogram Margin="12" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="HistogramControl"
                                     Height="120" Width="120" />
 
-                <Grid Grid.Row="2" Grid.Column="1" MaxHeight="120">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="96"/>
-                    </Grid.ColumnDefinitions>
-                    <!--<StackPanel Margin="0,24,0,0">
+            <Grid Grid.Row="2" Grid.Column="0" MaxHeight="120" x:Name="Zoom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="96"/>
+                </Grid.ColumnDefinitions>
+                <!--<StackPanel Margin="0,24,0,0">
                         <Slider Margin="12,0"  Visibility="{Binding IsZoomAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
                         <Grid Margin="0,-24,0,0"  Visibility="{Binding IsZoomAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}">
                             <Grid.ColumnDefinitions>
@@ -100,18 +98,44 @@
                             </Button>
                         </Grid>
                     </StackPanel>-->
-                    <Button Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="12" 
-                            VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                            Click="Button_Click" Grid.Row="1" Margin="0,16,0,0" BorderThickness="1" >
-                        <Image Source="{Binding ShutterButtonImage, Mode=OneWay}" Margin="0"/>
-                    </Button>
-                </Grid>
+
             </Grid>
-            <ScrollViewer Grid.Column="1" HorizontalAlignment="Stretch" MinWidth="50">
+
+            <Button Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12" x:Name="ShutterButtonGrid"
+                            VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Width="120" Height="120"
+                            Click="Button_Click" BorderThickness="1" >
+                <Image Source="{Binding ShutterButtonImage, Mode=OneWay}" Margin="0"/>
+            </Button>
+
+            <ScrollViewer Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" MinWidth="50" x:Name="ControllPanelScroll">
                 <StackPanel x:Name="ControlPanel" Margin="0" Grid.Row="1" VerticalAlignment="Center"/>
             </ScrollViewer>
         </Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="66,35,0,0" Grid.Row="2" VerticalAlignment="Top" Tapped="button_Tapped"/>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="LiveviewGrid.(Grid.Column)" Value="1"/>
+                        <Setter Target="ControllPanelScroll.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="LiveviewGrid.(Grid.Column)" Value="0"/>
+                        <Setter Target="ControllPanelScroll.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
     </Grid>
 </Page>

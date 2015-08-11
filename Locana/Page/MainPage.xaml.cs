@@ -203,10 +203,6 @@ namespace Locana
             ShowToast(v);
         }
 
-        private void button_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            ShowToast("button tapped");
-        }
         private async void ZoomOutButton_Click(object sender, RoutedEventArgs e)
         {
             try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop); }
