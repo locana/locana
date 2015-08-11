@@ -107,8 +107,8 @@
                 <Image Source="{Binding ShutterButtonImage, Mode=OneWay}" Margin="0"/>
             </Button>
 
-            <ScrollViewer Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" MinWidth="50" x:Name="ControllPanelScroll">
-                <StackPanel x:Name="ControlPanel" Margin="0" Grid.Row="1" VerticalAlignment="Center"/>
+            <ScrollViewer Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Width="180" x:Name="ControllPanelScroll">
+                <StackPanel x:Name="ControlPanel" Margin="12" Grid.Row="1" VerticalAlignment="Center"/>
             </ScrollViewer>
         </Grid>
 
