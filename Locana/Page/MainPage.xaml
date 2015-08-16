@@ -8,7 +8,8 @@
     xmlns:controls="using:Kazyx.Uwpmm.Control" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="LayoutRoot">
 
@@ -113,7 +114,7 @@
         </Grid>
 
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates">
+            <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="800" />
@@ -133,6 +134,18 @@
                         <Setter Target="LiveviewGrid.(Grid.Column)" Value="0"/>
                         <Setter Target="ControllPanelScroll.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="WindowHeightStates">
+                <VisualState x:Name="TallState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="800" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="ShortState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0" />
+                    </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>

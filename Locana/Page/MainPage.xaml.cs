@@ -50,6 +50,24 @@ namespace Locana
             };
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitializeVisualStates();
+        }
+
+        private void InitializeVisualStates()
+        {
+            var groups = VisualStateManager.GetVisualStateGroups(LayoutRoot);
+            groups[0].CurrentStateChanged += (sender, e) =>
+            {
+                Debug.WriteLine("Width state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
+            };
+            groups[1].CurrentStateChanged += (sender, e) =>
+            {
+                Debug.WriteLine("Height state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
+            };
+        }
+
         private HistogramCreator HistogramCreator;
 
         private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
