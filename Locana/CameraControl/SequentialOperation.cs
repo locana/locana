@@ -72,7 +72,7 @@ namespace Kazyx.Uwpmm.CameraControl
                 device.Observer.Stop();
                 throw;
             }
-            catch (OperationCanceledException e)
+            catch (OperationCanceledException)
             {
                 DebugUtil.Log("Operation cancelled");
                 device.Observer.Stop();
