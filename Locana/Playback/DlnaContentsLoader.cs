@@ -168,9 +168,13 @@ namespace Kazyx.Uwpmm.Playback
                     return matched;
                 }
 
-                if (item.Class.StartsWith(Class.ImageItem))
+                var nextMatched = item.Resources
+                    .FirstOrDefault(res => res.ProtocolInfo != null
+                        && res.ProtocolInfo.MimeType == MimeType.Jpeg && res.ResourceUrl.Contains("/ORG_"));
+
+                if (nextMatched != null)
                 {
-                    return item.Resources[0];
+                    return nextMatched;
                 }
             }
             else if (item.Class.StartsWith(Class.VideoItem, System.StringComparison.OrdinalIgnoreCase))
