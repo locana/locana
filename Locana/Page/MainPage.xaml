@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     Loaded="Page_Loaded">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="LayoutRoot">
+    <Grid Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" x:Name="LayoutRoot">
 
         <!--<Grid Name="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="1" MinHeight="100">
                 <Grid.ColumnDefinitions>
@@ -53,6 +53,20 @@
                 </Grid>-->
         <!--
             </Grid>-->
+
+        <Grid x:Name="FrontScreen"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  >
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,30" Background="{ThemeResource ApplicationForegroundThemeBrush}">
+                <TextBlock Text="Waiting connection..." HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundChromeHighBrush}">
+                </TextBlock>
+                <ProgressBar IsIndeterminate="True" Height="20" Foreground="{ThemeResource SystemControlForegroundChromeHighBrush}">
+                </ProgressBar>
+            </StackPanel>
+            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.6">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
 
         <Grid Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>

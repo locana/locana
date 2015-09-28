@@ -58,6 +58,7 @@ namespace Locana
         private void InitializeVisualStates()
         {
             var groups = VisualStateManager.GetVisualStateGroups(LayoutRoot);
+            Debug.WriteLine("CurrentState: " + groups[0].CurrentState.Name);
             groups[0].CurrentStateChanged += (sender, e) =>
             {
                 Debug.WriteLine("Width state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
@@ -110,7 +111,14 @@ namespace Locana
                 {
                     ControlPanel.Children.Add(panel);
                 }
+
+                HideFrontScreen();
             });
+        }
+
+        private void HideFrontScreen()
+        {
+            FrontScreen.Visibility = Visibility.Collapsed;
         }
 
         void Status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
