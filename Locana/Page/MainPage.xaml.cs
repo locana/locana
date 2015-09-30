@@ -69,6 +69,25 @@ namespace Locana
             groups[1].CurrentStateChanged += (sender, e) =>
             {
                 Debug.WriteLine("Height state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
+                switch (e.NewState.Name)
+                {
+                    case "TallState":
+                        ShootingParamSliderState = DisplayState.AlwaysVisible;
+                        if (ShootingParamSliders.Visibility == Visibility.Collapsed)
+                        {
+                            ShootingParamSliders.Visibility = Visibility.Visible;
+                            StartOpenSliderAnimation(0, 180);
+                        }
+                        break;
+                    case "ShortState":
+                        ShootingParamSliderState = DisplayState.Collapsible;
+                        if (ShootingParamSliders.Visibility == Visibility.Visible)
+                        {
+                            ShootingParamSliders.Visibility = Visibility.Collapsed;
+                            StartOpenSliderAnimation(180, 0);
+                        }
+                        break;
+                }
             };
         }
 
@@ -366,6 +385,11 @@ namespace Locana
 
         private void OpenCloseSliders()
         {
+            if (ShootingParamSliderState == DisplayState.AlwaysVisible)
+            {
+                return;
+            }
+
             if (ShootingParamSliders.Visibility == Visibility.Visible)
             {
                 ShootingParamSliders.Visibility = Visibility.Collapsed;
@@ -377,5 +401,14 @@ namespace Locana
                 StartOpenSliderAnimation(0, 180);
             }
         }
+
+        DisplayState ShootingParamSliderState = DisplayState.AlwaysVisible;
+
+        enum DisplayState
+        {
+            AlwaysVisible,
+            Collapsible,
+        }
     }
+    
 }
