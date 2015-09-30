@@ -65,6 +65,15 @@ namespace Locana
             groups[0].CurrentStateChanged += (sender, e) =>
             {
                 Debug.WriteLine("Width state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
+                switch (e.NewState.Name)
+                {
+                    case "WideState":
+                        ControlPanelState = DisplayState.AlwaysVisible;
+                        break;
+                    case "NarrowState":
+                        ControlPanelState = DisplayState.Collapsible;
+                        break;
+                }
             };
             groups[1].CurrentStateChanged += (sender, e) =>
             {
@@ -75,16 +84,16 @@ namespace Locana
                         ShootingParamSliderState = DisplayState.AlwaysVisible;
                         if (ShootingParamSliders.Visibility == Visibility.Collapsed)
                         {
-                            ShootingParamSliders.Visibility = Visibility.Visible;
-                            StartOpenSliderAnimation(0, 180);
+                            ShootingParamSliders.Visibility = Visibility.Collapsed;
+                            StartRotateAnimation(OpenSliderImage, 180, 0);
                         }
                         break;
                     case "ShortState":
                         ShootingParamSliderState = DisplayState.Collapsible;
                         if (ShootingParamSliders.Visibility == Visibility.Visible)
                         {
-                            ShootingParamSliders.Visibility = Visibility.Collapsed;
-                            StartOpenSliderAnimation(180, 0);
+                            ShootingParamSliders.Visibility = Visibility.Visible;
+                            StartRotateAnimation(OpenSliderImage, 0, 180);
                         }
                         break;
                 }
@@ -363,7 +372,7 @@ namespace Locana
             OpenCloseSliders();
         }
 
-        public void StartOpenSliderAnimation(double from, double to)
+        public void StartRotateAnimation(UIElement target, double from, double to)
         {
             var duration = new Duration(TimeSpan.FromMilliseconds(200));
             var sb = new Storyboard() { Duration = duration };
@@ -378,8 +387,8 @@ namespace Locana
             da.From = from;
             da.To = to;
 
-            OpenSliderImage.RenderTransform = rt;
-            OpenSliderImage.RenderTransformOrigin = new Point(0.5, 0.5);
+            target.RenderTransform = rt;
+            target.RenderTransformOrigin = new Point(0.5, 0.5);
             sb.Begin();
         }
 
@@ -393,22 +402,52 @@ namespace Locana
             if (ShootingParamSliders.Visibility == Visibility.Visible)
             {
                 ShootingParamSliders.Visibility = Visibility.Collapsed;
-                StartOpenSliderAnimation(180, 0);
+                StartRotateAnimation(OpenSliderImage, 180, 0);
             }
             else
             {
                 ShootingParamSliders.Visibility = Visibility.Visible;
-                StartOpenSliderAnimation(0, 180);
+                StartRotateAnimation(OpenSliderImage, 0, 180);
             }
         }
 
         DisplayState ShootingParamSliderState = DisplayState.AlwaysVisible;
+        DisplayState ControlPanelState = DisplayState.AlwaysVisible;
 
         enum DisplayState
         {
             AlwaysVisible,
             Collapsible,
         }
+
+        private void OpenCloseControlPanel()
+        {
+            if (ControlPanelState == DisplayState.AlwaysVisible)
+            {
+                return;
+            }
+
+            if (ControllPanelScroll.Visibility == Visibility.Visible)
+            {
+                ControllPanelScroll.Visibility = Visibility.Collapsed;
+                StartRotateAnimation(OpenControlPanelImage, 180, 0);
+            }
+            else
+            {
+                ControllPanelScroll.Visibility = Visibility.Visible;
+                StartRotateAnimation(OpenControlPanelImage, 0, 180);
+            }
+        }
+
+        private void Grid_ManipulationCompleted_1(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            OpenCloseControlPanel();
+        }
+
+        private void Grid_Tapped_1(object sender, TappedRoutedEventArgs e)
+        {
+            OpenCloseControlPanel();
+        }
     }
-    
+
 }

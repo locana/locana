@@ -322,7 +322,7 @@
     <Content Include="Assets\Screen\mode_movie.png" />
     <Content Include="Assets\Screen\mode_photo.png" />
     <Content Include="Assets\Screen\no_memory_card.png" />
-    <Content Include="Assets\Screen\OpenSlider.png" />
+    <Content Include="Assets\LiveviewScreen\OpenControlPanel.png" />
     <Content Include="Assets\Screen\protected.png" />
     <Content Include="Assets\Screen\rec.png" />
     <Content Include="Assets\Toast\Locana_square_full.png" />
