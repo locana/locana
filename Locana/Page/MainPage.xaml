@@ -120,11 +120,11 @@
                     </Button>
                 </Grid>
 
-                <!--<Grid Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" ManipulationMode="TranslateY"
+                <Grid Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" ManipulationMode="TranslateY"
                                   ManipulationCompleted="Grid_ManipulationCompleted" Tapped="Grid_Tapped"
                                   Visibility="{Binding IsShootingParamSettingAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"                              >
                     <Image x:Name="OpenSliderImage" Source="/Assets/LiveviewScreen/OpenSlider.png" Width="50" Height="50" Margin="12,6,12,0" />
-                </Grid>-->
+                </Grid>
 
                 <Grid x:Name="ShootingParams" Grid.Row="2" Grid.ColumnSpan="3" Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Opacity="0.7"
                                   Visibility="{Binding IsShootingParamDisplayAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"
@@ -156,7 +156,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <controls:ShootingParamSlider x:Name="FnumberSlider" IconSource="/Assets/LiveviewScreen/aperture.png"
+                    <controls:ShootingParamSlider x:Name="FnumberSlider" IconSource="/Assets/LiveviewScreen/aperture.png" 
                                                               Parameter="{Binding Status.FNumber}" Visibility="{Binding Path=Liveview.IsSetFNumberAvailable, Converter={StaticResource B2VConverter}}" />
                     <controls:ShootingParamSlider x:Name="SSSlider" IconSource="/Assets/LiveviewScreen/ShutterSpeed.png"
                                                               Parameter="{Binding Status.ShutterSpeed}" Grid.Row="1" Visibility="{Binding Path=Liveview.IsSetShutterSpeedAvailable, Converter={StaticResource B2VConverter}}"/>

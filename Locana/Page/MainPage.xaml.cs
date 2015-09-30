@@ -13,12 +13,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Windows.Data.Xml.Dom;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -112,8 +115,46 @@ namespace Locana
                     ControlPanel.Children.Add(panel);
                 }
 
+                ShootingParamSliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
+
                 HideFrontScreen();
             });
+
+            SetUIHandlers();
+        }
+
+        private void SetUIHandlers()
+        {
+            FnumberSlider.SliderOperated += async (s, arg) =>
+            {
+                DebugUtil.Log("Fnumber operated: " + arg.Selected);
+                try { await target.Api.Camera.SetFNumberAsync(arg.Selected); }
+                catch (RemoteApiException) { }
+            };
+            SSSlider.SliderOperated += async (s, arg) =>
+            {
+                DebugUtil.Log("SS operated: " + arg.Selected);
+                try { await target.Api.Camera.SetShutterSpeedAsync(arg.Selected); }
+                catch (RemoteApiException) { }
+            };
+            ISOSlider.SliderOperated += async (s, arg) =>
+            {
+                DebugUtil.Log("ISO operated: " + arg.Selected);
+                try { await target.Api.Camera.SetISOSpeedAsync(arg.Selected); }
+                catch (RemoteApiException) { }
+            };
+            EvSlider.SliderOperated += async (s, arg) =>
+            {
+                DebugUtil.Log("Ev operated: " + arg.Selected);
+                try { await target.Api.Camera.SetEvIndexAsync(arg.Selected); }
+                catch (RemoteApiException) { }
+            };
+            ProgramShiftSlider.SliderOperated += async (s, arg) =>
+            {
+                DebugUtil.Log("Program shift operated: " + arg.OperatedStep);
+                try { await target.Api.Camera.SetProgramShiftAsync(arg.OperatedStep); }
+                catch (RemoteApiException) { }
+            };
         }
 
         private void HideFrontScreen()
@@ -291,6 +332,50 @@ namespace Locana
         private void ShutterButton_Holding(object sender, HoldingRoutedEventArgs e)
         {
 
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            OpenCloseSliders();
+        }
+
+        private void Grid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            OpenCloseSliders();
+        }
+
+        public void StartOpenSliderAnimation(double from, double to)
+        {
+            var duration = new Duration(TimeSpan.FromMilliseconds(200));
+            var sb = new Storyboard() { Duration = duration };
+            var da = new DoubleAnimation() { Duration = duration };
+
+            sb.Children.Add(da);
+
+            var rt = new RotateTransform();
+
+            Storyboard.SetTarget(da, rt);
+            Storyboard.SetTargetProperty(da, "Angle");
+            da.From = from;
+            da.To = to;
+
+            OpenSliderImage.RenderTransform = rt;
+            OpenSliderImage.RenderTransformOrigin = new Point(0.5, 0.5);
+            sb.Begin();
+        }
+
+        private void OpenCloseSliders()
+        {
+            if (ShootingParamSliders.Visibility == Visibility.Visible)
+            {
+                ShootingParamSliders.Visibility = Visibility.Collapsed;
+                StartOpenSliderAnimation(180, 0);
+            }
+            else
+            {
+                ShootingParamSliders.Visibility = Visibility.Visible;
+                StartOpenSliderAnimation(0, 180);
+            }
         }
     }
 }
