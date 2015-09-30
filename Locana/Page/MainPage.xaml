@@ -11,62 +11,13 @@
     mc:Ignorable="d"
     Loaded="Page_Loaded">
 
+    <Page.Resources>
+        <util:BoolToVisibilityConverter x:Key="B2VConverter"/>
+        <util:BoolToVisibilityReverseConverter x:Key="B2VRConverter"/>
+    </Page.Resources>
+
+
     <Grid Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" x:Name="LayoutRoot">
-
-        <!--<Grid Name="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="1" MinHeight="100">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                </Grid>
-                -->
-        <!--<Grid Grid.Row="1" Grid.ColumnSpan="3" Height="50">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="{Binding ShootModeImage, Mode=OneWay}" />
-                    <Image Source="{Binding ExposureModeImage, Mode=OneWay}" Grid.Column="1" Margin="3"/>
-                    <Image Name="RecDisplay" Source="/Assets/LiveviewScreen/rec.png" Grid.Column="2" Margin="3"
-                                   Visibility="{Binding IsRecording, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
-                    <TextBlock Text="{Binding RecordingCount}" Grid.Column="3" FontSize="32" VerticalAlignment="Center" Margin="3,6,3,3"
-                                           Visibility="{Binding IsRecordingCountAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
-                    <Image Source="{Binding MemoryCardStatusImage}" Grid.Column="5" Margin="3"/>
-                    <TextBlock Text="{Binding RecordbaleAmount}" Grid.Column="6" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,6,6,3"/>
-                    <controls:BatteryStatus x:Name="BatteryStatusDisplay" Grid.Column="7" Height="44" Width="88" VerticalAlignment="Center" />
-                    <Image Source="{Binding GeopositionStatusImage}" Grid.Column="8" VerticalAlignment="Center" 
-                                       Visibility="{Binding GeopositionEnabled, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
-                </Grid>-->
-        <!--
-            </Grid>-->
-
-        <Grid x:Name="FrontScreen"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  >
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,30" Background="{ThemeResource ApplicationForegroundThemeBrush}">
-                <TextBlock Text="Waiting connection..." HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundChromeHighBrush}">
-                </TextBlock>
-                <ProgressBar IsIndeterminate="True" Height="20" Foreground="{ThemeResource SystemControlForegroundChromeHighBrush}">
-                </ProgressBar>
-            </StackPanel>
-            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.6">
-                <Rectangle.Fill>
-                    <SolidColorBrush Color="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
-                </Rectangle.Fill>
-            </Rectangle>
-        </Grid>
 
         <Grid Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
@@ -84,47 +35,164 @@
                 <Image x:Name="LiveviewImage" Source="{Binding Image, Mode=OneWay}" Loaded="LiveviewImage_Loaded" Unloaded="LiveviewImage_Unloaded" Margin="10" />
             </Grid>
 
-            <controls:Histogram Margin="12" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="HistogramControl"
-                                    Height="120" Width="120" />
-
-            <Grid Grid.Row="2" Grid.Column="0" MaxHeight="120" x:Name="Zoom">
+            <Rectangle Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Grid.ColumnSpan="3" Opacity="0.5"/>
+            <Grid x:Name="Header" HorizontalAlignment="Stretch" Grid.Column="1" MinHeight="60" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="96"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <!--<StackPanel Margin="0,24,0,0">
-                        <Slider Margin="12,0"  Visibility="{Binding IsZoomAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
-                        <Grid Margin="0,-24,0,0"  Visibility="{Binding IsZoomAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="48" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="48" />
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="ZoomOut" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Padding="6" 
-                                    VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="1"
-                                    Click="ZoomOutButton_Click" Tapped="ZoomOutButton_Tapped" Holding="ZoomOutButton_Holding">
-                                <Image Source="/Assets/LiveviewScreen/ZoomOut.png" Margin="0" />
-                            </Button>
-                            <Button x:Name="ZoomIn" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Padding="6"
-                                    VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderThickness="1"
-                                    Click="ZoomInButton_Click" Tapped="ZoomInButton_Tapped" Holding="ZoomInButton_Holding">
-                                <Image Source="/Assets/LiveviewScreen/ZoomIn.png" Margin="0" />
-                            </Button>
-                        </Grid>
-                    </StackPanel>-->
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1" Grid.ColumnSpan="3" Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding ShootModeImage, Mode=OneWay}" />
+                    <Image Source="{Binding ExposureModeImage, Mode=OneWay}" Grid.Column="1" Margin="3"/>
+                    <Image Name="RecDisplay" Source="/Assets/LiveviewScreen/rec.png" Grid.Column="2" Margin="3"
+                                   Visibility="{Binding IsRecording, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
+                    <TextBlock Text="{Binding RecordingCount}" Grid.Column="3" FontSize="32" VerticalAlignment="Center" Margin="3,6,3,3"
+                               Visibility="{Binding IsRecordingCountAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"
+                               Foreground="{StaticResource SystemControlForegroundChromeMediumBrush}"/>
+                    <Image Source="{Binding MemoryCardStatusImage}" Grid.Column="5" Margin="3"/>
+                    <TextBlock Text="{Binding RecordbaleAmount}" Grid.Column="6" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,6,6,3"
+                               Foreground="{StaticResource SystemControlForegroundChromeMediumBrush}"/>
+                    <controls:BatteryStatus x:Name="BatteryStatusDisplay" Grid.Column="7" Height="44" Width="88" VerticalAlignment="Center" />
+                    <Image Source="{Binding GeopositionStatusImage}" Grid.Column="8" VerticalAlignment="Center" 
+                                       Visibility="{Binding GeopositionEnabled, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
+                </Grid>
             </Grid>
 
-            <Button Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12" x:Name="ShutterButtonGrid"
+            <controls:Histogram Margin="12" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="HistogramControl" Grid.Row="1"
+                                    Height="120" Width="120" />
+
+            <Grid Name="Bottom" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0" Grid.Row="2" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Name="ShutterButtonWrapper" Grid.RowSpan="2" Grid.Column="2" Width="80" Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" 
+                                  Visibility="{Binding ShootButtonVisibility}" Margin="10">
+                    <Button Name="ShutterButton" MinWidth="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                    BorderThickness="1" Click="Button_Click" Tapped="ShutterButton_Tapped" Holding="ShutterButton_Holding"
+                                    IsEnabled="{Binding ShutterButtonEnabled}" Background="Black" Opacity="0.8" >
+                        <Image Source="{Binding ShutterButtonImage}" Margin="8"/>
+                    </Button>
+                </Grid>
+
+                <controls:ZoomBar Grid.Column="0" Grid.Row="0" Height="13" Margin="16,4,4,4"  VerticalAlignment="Bottom" Visibility="{Binding IsZoomAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"
+                                              PositionInCurrentBox="{Binding ZoomPositionInCurrentBox, Mode=OneWay, FallbackValue=0}" CurrentBoxIndex="{Binding ZoomBoxIndex, Mode=OneWay, FallbackValue=0}"
+                                              TotalBoxNum="{Binding ZoomBoxNum, Mode=OneWay, FallbackValue=1}" Width="140"  />
+                <Grid  Grid.Column="0" Grid.Row="1" Height="60" Visibility="{Binding IsZoomAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}" 
+                       Margin="16,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="ZoomOutButton" BorderThickness="1" MinWidth="20" Grid.Column="0" Background="Black" Opacity="0.8" Margin="2" HorizontalAlignment="Stretch" 
+                            Click="ZoomOutButton_Click" Tapped="ZoomOutButton_Tapped" Holding="ZoomOutButton_Holding" >
+                        <Image Source="/Assets/LiveviewScreen/ZoomOut.png" Margin="0" />
+                    </Button>
+                    <Button Name="ZoomInButton" BorderThickness="1" MinWidth="20" Grid.Column="1" Background="Black" Opacity="0.8" Margin="2" HorizontalAlignment="Stretch"
+                            Click="ZoomInButton_Click" Tapped="ZoomInButton_Tapped" Holding="ZoomInButton_Holding">
+                        <Image Source="/Assets/LiveviewScreen/ZoomIn.png" Margin="0"  />
+                    </Button>
+                </Grid>
+
+                <!--<Grid Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" ManipulationMode="TranslateY"
+                                  ManipulationCompleted="Grid_ManipulationCompleted" Tapped="Grid_Tapped"
+                                  Visibility="{Binding IsShootingParamSettingAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"                              >
+                    <Image x:Name="OpenSliderImage" Source="/Assets/LiveviewScreen/OpenSlider.png" Width="50" Height="50" Margin="12,6,12,0" />
+                </Grid>-->
+
+                <Grid x:Name="ShootingParams" Grid.Row="2" Grid.ColumnSpan="3" Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Opacity="0.7"
+                                  Visibility="{Binding IsShootingParamDisplayAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"
+                                  ManipulationMode="TranslateY" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="ShutterSpeed" Foreground="{Binding ShutterSpeedBrush}" HorizontalAlignment="Center"
+                               Visibility="{Binding IsAvailableGetShutterSpeed, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}" Text="{Binding ShutterSpeedDisplayValue}"  
+                                           Grid.Column="0"/>
+                    <TextBlock Name="Fnumber" Foreground="{Binding FNumberBrush}"  HorizontalAlignment="Center"
+                               Visibility="{Binding IsAvailableGetFNumber, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}" Text="{Binding FnumberDisplayValue}" 
+                                            Grid.Column="1"/>
+                    <TextBlock Name="Ev" Foreground="{Binding EvBrush}"  HorizontalAlignment="Center"
+                               Visibility="{Binding IsAvailableGetIsoSpeedRate, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}" Text="{Binding EvDisplayValue}" 
+                                              Grid.Column="2"/>
+                    <TextBlock Name="ISO" Foreground="{Binding IsoBrush}"  HorizontalAlignment="Center"
+                               Visibility="{Binding IsAvailableGetEV, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}" Text="{Binding ISODisplayValue}" 
+                                             Grid.Column="3"/>
+                </Grid>
+                <Grid x:Name="ShootingParamSliders" Grid.Row="3" Grid.ColumnSpan="3" Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Opacity="0.7" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <controls:ShootingParamSlider x:Name="FnumberSlider" IconSource="/Assets/LiveviewScreen/aperture.png"
+                                                              Parameter="{Binding Status.FNumber}" Visibility="{Binding Path=Liveview.IsSetFNumberAvailable, Converter={StaticResource B2VConverter}}" />
+                    <controls:ShootingParamSlider x:Name="SSSlider" IconSource="/Assets/LiveviewScreen/ShutterSpeed.png"
+                                                              Parameter="{Binding Status.ShutterSpeed}" Grid.Row="1" Visibility="{Binding Path=Liveview.IsSetShutterSpeedAvailable, Converter={StaticResource B2VConverter}}"/>
+                    <controls:ShootingParamSlider x:Name="ISOSlider" IconSource="/Assets/LiveviewScreen/ISO.png"
+                                                              Parameter="{Binding Status.ISOSpeedRate}" Grid.Row="2" Visibility="{Binding Path=Liveview.IsSetIsoSpeedRateAvailable, Converter={StaticResource B2VConverter}}"/>
+                    <controls:EvSlider x:Name="EvSlider" IconSource="/Assets/LiveviewScreen/EVComp.png"
+                                                              Parameter="{Binding Status.EvInfo}" Grid.Row="3" Visibility="{Binding Path=Liveview.IsSetEVAvailable, Converter={StaticResource B2VConverter}}"/>
+                    <controls:ProgramShiftSlider x:Name="ProgramShiftSlider" Grid.Row="4" Visibility="{Binding Path=Liveview.IsProgramShiftAvailable, Converter={StaticResource B2VConverter}}"
+                                                             IconSource="/Assets/LiveviewScreen/ProgramShift.png"/>
+                </Grid>
+            </Grid>
+
+            <!--<Button Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12" x:Name="ShutterButtonGrid"
                             VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Width="120" Height="120"
                             Click="Button_Click" BorderThickness="1" >
                 <Image Source="{Binding ShutterButtonImage, Mode=OneWay}" Margin="0"/>
-            </Button>
+            </Button>-->
 
             <ScrollViewer Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Width="180" x:Name="ControllPanelScroll">
                 <StackPanel x:Name="ControlPanel" Margin="12" Grid.Row="1" VerticalAlignment="Center"/>
             </ScrollViewer>
+        </Grid>
+
+        <Grid x:Name="FrontScreen"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+              Visibility="{Binding IsWaitingConnection, FallbackValue=Visible, Converter={StaticResource B2VConverter}}" >
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,30" Background="{ThemeResource ApplicationForegroundThemeBrush}">
+                <TextBlock Text="Waiting connection..." HorizontalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundChromeHighBrush}">
+                </TextBlock>
+                <ProgressBar IsIndeterminate="True" Height="20" Foreground="{ThemeResource SystemControlForegroundAccentBrush}">
+                </ProgressBar>
+            </StackPanel>
+            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.6">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="{ThemeResource SystemControlBackgroundBaseMediumBrush}"/>
+                </Rectangle.Fill>
+            </Rectangle>
         </Grid>
 
         <VisualStateManager.VisualStateGroups>
@@ -137,6 +205,10 @@
                         <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="1"/>
                         <Setter Target="LiveviewGrid.(Grid.Column)" Value="1"/>
                         <Setter Target="ControllPanelScroll.Visibility" Value="Visible"/>
+                        <Setter Target="Header.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="Header.(Grid.Column)" Value="1"/>
+                        <Setter Target="HistogramControl.(Grid.Column)" Value="0"/>
+                        <Setter Target="Bottom.(Grid.ColumnSpan)" Value="2"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -147,6 +219,10 @@
                         <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="3"/>
                         <Setter Target="LiveviewGrid.(Grid.Column)" Value="0"/>
                         <Setter Target="ControllPanelScroll.Visibility" Value="Collapsed"/>
+                        <Setter Target="Header.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="Header.(Grid.Column)" Value="0"/>
+                        <Setter Target="HistogramControl.(Grid.Column)" Value="0"/>
+                        <Setter Target="Bottom.(Grid.ColumnSpan)" Value="3"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -155,11 +231,19 @@
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowHeight="800" />
                     </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="1"/>
+                        <Setter Target="LiveviewGrid.(Grid.Row)" Value="1"/>
+                    </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ShortState">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowHeight="0" />
                     </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="3"/>
+                        <Setter Target="LiveviewGrid.(Grid.Row)" Value="0"/>
+                    </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>

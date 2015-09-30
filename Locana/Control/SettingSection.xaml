@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Border Background="{StaticResource AppBarItemDisabledForegroundThemeBrush}" Margin="0,5,0,10" >
             <TextBlock Name="TitleTextBlock" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                       FontSize="24" Foreground="{ThemeResource AccentColorBrush}" Text="" Margin="8,5,0,5" />
+                       FontSize="24" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="" Margin="8,5,0,5" />
         </Border>
         <StackPanel Name="SettingItems" Grid.Row="1" Margin="16,0" />
     </Grid>

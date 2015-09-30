@@ -103,7 +103,7 @@ namespace Locana
             {
                 ScreenViewData = new LiveviewScreenViewData(target);
                 ScreenViewData.NotifyFriendlyNameUpdated();
-                // BatteryStatusDisplay.BatteryInfo = target.Status.BatteryInfo;
+                BatteryStatusDisplay.BatteryInfo = target.Status.BatteryInfo;
                 LayoutRoot.DataContext = ScreenViewData;
                 var panels = SettingPanelBuilder.CreateNew(target);
                 var pn = panels.GetPanelsToShow();
@@ -118,7 +118,7 @@ namespace Locana
 
         private void HideFrontScreen()
         {
-            FrontScreen.Visibility = Visibility.Collapsed;
+            ScreenViewData.IsWaitingConnection = false;
         }
 
         void Status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -126,6 +126,19 @@ namespace Locana
             var status = sender as CameraStatus;
             switch (e.PropertyName)
             {
+                case "BatteryInfo":
+                    BatteryStatusDisplay.BatteryInfo = status.BatteryInfo;
+                    break;
+                case "ContShootingResult":
+                    // EnqueueContshootingResult(status.ContShootingResult);
+                    break;
+                case "Status":
+                    if (status.Status == EventParam.Idle)
+                    {
+                        // When recording is stopped, clear recording time.
+                        status.RecordingTimeSec = 0;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -268,6 +281,16 @@ namespace Locana
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ShutterButtonPressed();
+        }
+
+        private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void ShutterButton_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+
         }
     }
 }

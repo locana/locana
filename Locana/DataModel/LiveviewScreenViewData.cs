@@ -441,7 +441,7 @@ namespace Kazyx.Uwpmm.DataModel
         private Brush ShootingParamBrush(string api)
         {
             if (Device.Api == null || !Device.Api.Capability.IsAvailable(api)) { return ResourceManager.ForegroundBrush; }
-            else { return ResourceManager.AccentColorBrush; }
+            else { return ResourceManager.SystemControlForegroundAccentBrush; }
         }
 
         public bool IsShootingParamSettingAvailable { get { return IsSetFNumberAvailable || IsSetShutterSpeedAvailable || IsSetIsoSpeedRateAvailable || IsSetEVAvailable; } }
@@ -524,6 +524,20 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     _FramingGridDisplayed = value;
                     NotifyChangedOnUI("FramingGridDisplayed");
+                }
+            }
+        }
+
+        private bool _IsWaitingConnection = true;
+        public bool IsWaitingConnection
+        {
+            get { return _IsWaitingConnection; }
+            set
+            {
+                if(value != _IsWaitingConnection)
+                {
+                    _IsWaitingConnection = value;
+                    NotifyChangedOnUI("IsWaitingConnection");
                 }
             }
         }

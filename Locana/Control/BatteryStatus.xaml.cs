@@ -78,7 +78,7 @@ namespace Kazyx.Uwpmm.Control
             switch (batt.AdditionalStatus)
             {
                 case RemoteApi.Camera.BatteryStatus.NearEnd:
-                    Amount.Fill = ResourceManager.AccentColorBrush;
+                    Amount.Fill = ResourceManager.SystemControlForegroundAccentBrush;
                     Frame_NearEnd_Background.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     Frame_NearEnd_Foreground.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     break;

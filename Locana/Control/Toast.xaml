@@ -11,7 +11,7 @@
 
     <Grid Name="LayoutRoot" Background="Transparent">
 
-        <Grid Name="ToastGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{ThemeResource AccentColorBrush}" Opacity="0">
+        <Grid Name="ToastGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{ThemeResource SystemControlForegroundAccentBrush}" Opacity="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>

@@ -12,7 +12,7 @@
     <Grid x:Name="LayoutRoot" SizeChanged="LayoutRoot_SizeChanged">
         <Rectangle Name="BackgroundBar" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                    Margin="20" Height="10" />
-        <Line Name="DynamicBar"   Stroke="{StaticResource AccentColorBrush}" StrokeThickness="10" Margin="0"  />
+        <Line Name="DynamicBar"   Stroke="{StaticResource SystemControlForegroundAccentBrush}" StrokeThickness="10" Margin="0"  />
 
         <Image Name="Cursor" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" 
                    Width="25" Source="/Assets/LiveviewScreen/ProgramShift_cursor.png"/>

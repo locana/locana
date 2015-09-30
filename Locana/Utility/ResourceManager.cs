@@ -5,14 +5,14 @@ namespace Kazyx.Uwpmm.Utility
 {
     public static class ResourceManager
     {
-        public static Brush AccentColorBrush
+        public static Brush SystemControlForegroundAccentBrush
         {
-            get { return (Brush)Application.Current.Resources["AccentColorBrush"]; }
+            get { return (Brush)Application.Current.Resources["SystemControlForegroundAccentBrush"]; }
         }
 
         public static Brush ForegroundBrush
         {
-            get { return (Brush)Application.Current.Resources["ApplicationForegroundThemeBrush"]; }
+            get { return (Brush)Application.Current.Resources["SystemControlForegroundChromeMediumBrush"]; }
         }
     }
 }

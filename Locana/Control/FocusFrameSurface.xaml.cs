@@ -25,7 +25,7 @@ namespace Kazyx.Uwpmm.Control
             this.LayoutRoot.Children.Clear();
         }
 
-        Brush FocusedBrush = ResourceManager.AccentColorBrush;
+        Brush FocusedBrush = ResourceManager.SystemControlForegroundAccentBrush;
         Brush NormalBrush = (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"];
         Brush MainBrush = (Brush)Application.Current.Resources["ApplicationForegroundThemeBrush"];
         Brush SubBrush = (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"];
