@@ -36,7 +36,7 @@
             </Grid>
 
             <Rectangle Fill="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Grid.ColumnSpan="3" Opacity="0.5"/>
-            <Grid x:Name="Header" HorizontalAlignment="Stretch" Grid.Column="1" MinHeight="60" VerticalAlignment="Center">
+            <Grid x:Name="Header" HorizontalAlignment="Stretch" Grid.Column="1" VerticalAlignment="Center" Margin="8,4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
@@ -48,7 +48,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1" Grid.ColumnSpan="3" Height="50">
+                <Grid Grid.Row="1" Grid.ColumnSpan="3" Height="25">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
@@ -64,13 +64,13 @@
                     <Image Source="{Binding ExposureModeImage, Mode=OneWay}" Grid.Column="1" Margin="3"/>
                     <Image Name="RecDisplay" Source="/Assets/LiveviewScreen/rec.png" Grid.Column="2" Margin="3"
                                    Visibility="{Binding IsRecording, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
-                    <TextBlock Text="{Binding RecordingCount}" Grid.Column="3" FontSize="32" VerticalAlignment="Center" Margin="3,6,3,3"
+                    <TextBlock Text="{Binding RecordingCount}" Grid.Column="3" FontSize="18" VerticalAlignment="Center" Margin="3,6,3,3"
                                Visibility="{Binding IsRecordingCountAvailable, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"
                                Foreground="{StaticResource SystemControlForegroundChromeMediumBrush}"/>
                     <Image Source="{Binding MemoryCardStatusImage}" Grid.Column="5" Margin="3"/>
-                    <TextBlock Text="{Binding RecordbaleAmount}" Grid.Column="6" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,6,6,3"
+                    <TextBlock Text="{Binding RecordbaleAmount}" Grid.Column="6" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,6,6,3"
                                Foreground="{StaticResource SystemControlForegroundChromeMediumBrush}"/>
-                    <controls:BatteryStatus x:Name="BatteryStatusDisplay" Grid.Column="7" Height="44" Width="88" VerticalAlignment="Center" />
+                    <controls:BatteryStatus x:Name="BatteryStatusDisplay" Grid.Column="7" Height="25" Width="88" VerticalAlignment="Center" />
                     <Image Source="{Binding GeopositionStatusImage}" Grid.Column="8" VerticalAlignment="Center" 
                                        Visibility="{Binding GeopositionEnabled, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}"/>
                 </Grid>
@@ -95,7 +95,7 @@
                 <Grid Name="ShutterButtonWrapper" Grid.RowSpan="2" Grid.Column="2" Width="80" Height="80" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" 
                                   Visibility="{Binding ShootButtonVisibility}" Margin="10">
                     <Button Name="ShutterButton" MinWidth="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                    BorderThickness="1" Click="Button_Click" Tapped="ShutterButton_Tapped" Holding="ShutterButton_Holding"
+                                    BorderThickness="1" Click="ShutterButton_Click"  Tapped="ShutterButton_Tapped" Holding="ShutterButton_Holding"
                                     IsEnabled="{Binding ShutterButtonEnabled}" Background="Black" Opacity="0.8" >
                         <Image Source="{Binding ShutterButtonImage}" Margin="8"/>
                     </Button>
@@ -168,19 +168,14 @@
                                                              IconSource="/Assets/LiveviewScreen/ProgramShift.png"/>
                 </Grid>
             </Grid>
-
-            <!--<Button Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12" x:Name="ShutterButtonGrid"
-                            VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Width="120" Height="120"
-                            Click="Button_Click" BorderThickness="1" >
-                <Image Source="{Binding ShutterButtonImage, Mode=OneWay}" Margin="0"/>
-            </Button>-->
-
+            
             <Grid  HorizontalAlignment="Right" VerticalAlignment="Center" ManipulationMode="TranslateY" Grid.Row="1" Grid.Column="1"
                                   ManipulationCompleted="Grid_ManipulationCompleted_1" Tapped="Grid_Tapped_1"                                             >
                 <Image x:Name="OpenControlPanelImage" Source="/Assets/LiveviewScreen/OpenControlPanel.png" Width="50" Height="50" Margin="12,6,12,0" />
             </Grid>
 
-            <ScrollViewer Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Width="180" x:Name="ControllPanelScroll"  Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}">
+            <ScrollViewer Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="180" x:Name="ControllPanelScroll"  
+                          Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}">
                 <StackPanel x:Name="ControlPanel" Margin="12" Grid.Row="1" VerticalAlignment="Center"/>
             </ScrollViewer>
         </Grid>
@@ -204,7 +199,7 @@
             <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800" />
+                        <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="1"/>
@@ -214,6 +209,10 @@
                         <Setter Target="Header.(Grid.Column)" Value="1"/>
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0"/>
                         <Setter Target="Bottom.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="HistogramControl.Height" Value="150"/>
+                        <Setter Target="HistogramControl.Width" Value="120"/>
+                        <Setter Target="ShutterButtonWrapper.Width" Value="80"/>
+                        <Setter Target="ShutterButtonWrapper.Height" Value="80"/>
                         <Setter Target="OpenControlPanelImage.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -228,6 +227,10 @@
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="3"/>
                         <Setter Target="Header.(Grid.Column)" Value="0"/>
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0"/>
+                        <Setter Target="HistogramControl.Height" Value="72"/>
+                        <Setter Target="HistogramControl.Width" Value="80"/>
+                        <Setter Target="ShutterButtonWrapper.Width" Value="60"/>
+                        <Setter Target="ShutterButtonWrapper.Height" Value="60"/>
                         <Setter Target="Bottom.(Grid.ColumnSpan)" Value="3"/>
                         <Setter Target="OpenControlPanelImage.Visibility" Value="Visible"/>
                     </VisualState.Setters>
@@ -236,12 +239,13 @@
             <VisualStateGroup x:Name="WindowHeightStates">
                 <VisualState x:Name="TallState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowHeight="800" />
+                        <AdaptiveTrigger MinWindowHeight="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="1"/>
                         <Setter Target="LiveviewGrid.(Grid.Row)" Value="1"/>
                         <Setter Target="OpenSliderImage.Visibility" Value="Collapsed"/>
+                        <Setter Target="ShootingParamSliders.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ShortState">
@@ -252,6 +256,7 @@
                         <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="3"/>
                         <Setter Target="LiveviewGrid.(Grid.Row)" Value="0"/>
                         <Setter Target="OpenSliderImage.Visibility" Value="Visible"/>
+                        <Setter Target="ShootingParamSliders.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

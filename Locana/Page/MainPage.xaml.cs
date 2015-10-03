@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Windows.Data.Xml.Dom;
 using Windows.Foundation;
+using Windows.Graphics.Display;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
@@ -56,7 +57,19 @@ namespace Locana
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeVisualStates();
+            DisplayInformation.GetForCurrentView().OrientationChanged += MainPage_OrientationChanged;
         }
+
+        private void MainPage_OrientationChanged(DisplayInformation info, object args)
+        {
+            Debug.WriteLine("orientation: " + info.CurrentOrientation);
+            Debug.WriteLine(LayoutRoot.ActualWidth + " x " + LayoutRoot.ActualHeight);
+        }
+
+        const string WIDE_STATE = "WideState";
+        const string NARROW_STATE = "NarrowState";
+        const string TALL_STATE = "TallState";
+        const string SHORT_STATE = "ShortState";
 
         private void InitializeVisualStates()
         {
@@ -67,20 +80,30 @@ namespace Locana
                 Debug.WriteLine("Width state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
                 switch (e.NewState.Name)
                 {
-                    case "WideState":
+                    case WIDE_STATE:
                         ControlPanelState = DisplayState.AlwaysVisible;
                         break;
-                    case "NarrowState":
+                    case NARROW_STATE:
                         ControlPanelState = DisplayState.Collapsible;
                         break;
                 }
             };
+            switch (groups[0].CurrentState.Name)
+            {
+                case WIDE_STATE:
+                    ControlPanelState = DisplayState.AlwaysVisible;
+                    break;
+                case NARROW_STATE:
+                    ControlPanelState = DisplayState.Collapsible;
+                    break;
+            }
+
             groups[1].CurrentStateChanged += (sender, e) =>
             {
                 Debug.WriteLine("Height state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
                 switch (e.NewState.Name)
                 {
-                    case "TallState":
+                    case TALL_STATE:
                         ShootingParamSliderState = DisplayState.AlwaysVisible;
                         if (ShootingParamSliders.Visibility == Visibility.Collapsed)
                         {
@@ -88,7 +111,7 @@ namespace Locana
                             StartRotateAnimation(OpenSliderImage, 180, 0);
                         }
                         break;
-                    case "ShortState":
+                    case SHORT_STATE:
                         ShootingParamSliderState = DisplayState.Collapsible;
                         if (ShootingParamSliders.Visibility == Visibility.Visible)
                         {
@@ -98,6 +121,15 @@ namespace Locana
                         break;
                 }
             };
+            switch (groups[1].CurrentState.Name)
+            {
+                case TALL_STATE:
+                    ShootingParamSliderState = DisplayState.AlwaysVisible;
+                    break;
+                case SHORT_STATE:
+                    ShootingParamSliderState = DisplayState.Collapsible;
+                    break;
+            }
         }
 
         private HistogramCreator HistogramCreator;
@@ -347,14 +379,15 @@ namespace Locana
             catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ShutterButtonPressed();
-        }
-
         private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            ShutterButtonPressed();
 
+        }
+
+        private void ShutterButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShutterButtonPressed();
         }
 
         private void ShutterButton_Holding(object sender, HoldingRoutedEventArgs e)
@@ -448,6 +481,7 @@ namespace Locana
         {
             OpenCloseControlPanel();
         }
+
     }
 
 }
