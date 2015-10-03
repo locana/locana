@@ -1,8 +1,10 @@
 ﻿using Kazyx.RemoteApi;
 using Kazyx.Uwpmm.Utility;
 using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
@@ -70,6 +72,33 @@ namespace Kazyx.Uwpmm.Control
             }
             MinLabel.Text = parameter.Candidates[0].ToString();
             MaxLabel.Text = parameter.Candidates[parameter.Candidates.Count - 1].ToString();
+
+            var labels = new List<string>();
+            foreach (var value in parameter.Candidates)
+            {
+                labels.Add(value.ToString());
+            }
+            Slider.ThumbToolTipValueConverter = new SliderValueConverter() { Labels = labels };
+        }
+    }
+
+    public class SliderValueConverter : IValueConverter
+    {
+        public List<string> Labels { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var selected = (int)Math.Round((double)value);
+            DebugUtil.Log("converter: " + selected + " " + parameter as string);
+
+            if (Labels == null || selected >= Labels.Count) { return value.ToString(); }
+
+            return Labels[selected];
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
         }
     }
 

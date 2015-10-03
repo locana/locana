@@ -8,15 +8,19 @@
     mc:Ignorable="d"
     d:DesignHeight="100"
     d:DesignWidth="500">
-    
+
+    <UserControl.Resources>
+        <local:SliderValueConverter x:Key="SliderValueConverter"/>
+    </UserControl.Resources>
+
     <Grid Name="LayoutRoot" Margin="0,0,8,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <!--todo: find some way to mask this image with foreground brush-->
-        <Image Name="SettingImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Height="40"/> 
-        <Slider Name="Slider" Grid.Column="1" VerticalAlignment="Center" />
+        <Image Name="SettingImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Height="40"/>
+        <Slider Name="Slider" Grid.Column="1" VerticalAlignment="Center"/>
         <TextBlock Name="MaxLabel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="max" Margin="10" FontSize="14"/>
         <TextBlock Name="MinLabel" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="min" Margin="10" FontSize="14"/>
     </Grid>
