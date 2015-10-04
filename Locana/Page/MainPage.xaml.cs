@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
-using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -22,8 +21,6 @@ using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -106,19 +103,9 @@ namespace Locana
                 {
                     case TALL_STATE:
                         ShootingParamSliderState = DisplayState.AlwaysVisible;
-                        if (ShootingParamSliders.Visibility == Visibility.Collapsed)
-                        {
-                            ShootingParamSliders.Visibility = Visibility.Collapsed;
-                            StartRotateAnimation(OpenSliderImage, 180, 0);
-                        }
                         break;
                     case SHORT_STATE:
                         ShootingParamSliderState = DisplayState.Collapsible;
-                        if (ShootingParamSliders.Visibility == Visibility.Visible)
-                        {
-                            ShootingParamSliders.Visibility = Visibility.Visible;
-                            StartRotateAnimation(OpenSliderImage, 0, 180);
-                        }
                         break;
                 }
             };
@@ -458,7 +445,6 @@ namespace Locana
             }
         }
 
-
         private bool StartStopPeriodicalShooting()
         {
             if (target != null && target.Status != null && target.Status.ShootMode != null && target.Status.ShootMode.Current == ShootModeParam.Still)
@@ -543,26 +529,6 @@ namespace Locana
             OpenCloseSliders();
         }
 
-        public void StartRotateAnimation(UIElement target, double from, double to)
-        {
-            var duration = new Duration(TimeSpan.FromMilliseconds(200));
-            var sb = new Storyboard() { Duration = duration };
-            var da = new DoubleAnimation() { Duration = duration };
-
-            sb.Children.Add(da);
-
-            var rt = new RotateTransform();
-
-            Storyboard.SetTarget(da, rt);
-            Storyboard.SetTargetProperty(da, "Angle");
-            da.From = from;
-            da.To = to;
-
-            target.RenderTransform = rt;
-            target.RenderTransformOrigin = new Point(0.5, 0.5);
-            sb.Begin();
-        }
-
         private void OpenCloseSliders()
         {
             if (ShootingParamSliderState == DisplayState.AlwaysVisible)
@@ -573,12 +539,12 @@ namespace Locana
             if (ShootingParamSliders.Visibility == Visibility.Visible)
             {
                 ShootingParamSliders.Visibility = Visibility.Collapsed;
-                StartRotateAnimation(OpenSliderImage, 180, 0);
+                AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(200) }, 180, 0).Begin();
             }
             else
             {
                 ShootingParamSliders.Visibility = Visibility.Visible;
-                StartRotateAnimation(OpenSliderImage, 0, 180);
+                AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(200) }, 0, 180).Begin();
             }
         }
 
@@ -601,12 +567,12 @@ namespace Locana
             if (ControllPanelScroll.Visibility == Visibility.Visible)
             {
                 ControllPanelScroll.Visibility = Visibility.Collapsed;
-                StartRotateAnimation(OpenControlPanelImage, 180, 0);
+                AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenControlPanelImage, Duration = TimeSpan.FromMilliseconds(200) }, 180, 0).Begin();
             }
             else
             {
                 ControllPanelScroll.Visibility = Visibility.Visible;
-                StartRotateAnimation(OpenControlPanelImage, 0, 180);
+                AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenControlPanelImage, Duration = TimeSpan.FromMilliseconds(200) }, 0, 180).Begin();
             }
         }
 

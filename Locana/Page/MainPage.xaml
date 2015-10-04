@@ -209,8 +209,8 @@
                         <Setter Target="Header.(Grid.Column)" Value="1"/>
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0"/>
                         <Setter Target="Bottom.(Grid.ColumnSpan)" Value="2"/>
-                        <Setter Target="HistogramControl.Height" Value="150"/>
-                        <Setter Target="HistogramControl.Width" Value="120"/>
+                        <Setter Target="HistogramControl.Height" Value="120"/>
+                        <Setter Target="HistogramControl.Width" Value="148"/>
                         <Setter Target="ShutterButtonWrapper.Width" Value="80"/>
                         <Setter Target="ShutterButtonWrapper.Height" Value="80"/>
                         <Setter Target="OpenControlPanelImage.Visibility" Value="Collapsed"/>

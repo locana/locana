@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
@@ -196,6 +197,33 @@ namespace Kazyx.Uwpmm.Utility
             }
             return sb;
         }
+
+        public static Storyboard CreateRotateAnimation(AnimationRequest request, double from, double to)
+        {
+            var duration = new Duration(TimeSpan.FromMilliseconds(200));
+            if (request.Duration != null && request.Duration.Milliseconds != 0)
+            {
+                duration = request.Duration;
+            }
+            
+            var sb = new Storyboard() { Duration = duration };
+            var da = new DoubleAnimation() { Duration = duration };
+
+            sb.Children.Add(da);
+
+            var rt = new RotateTransform();
+
+            Storyboard.SetTarget(da, rt);
+            Storyboard.SetTargetProperty(da, "Angle");
+            da.From = from;
+            da.To = to;
+
+            request.Target.RenderTransform = rt;
+            request.Target.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            return sb;
+        }
+
     }
 
     public class AnimationRequest
