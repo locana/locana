@@ -148,7 +148,8 @@
                                Visibility="{Binding IsAvailableGetEV, FallbackValue=Collapsed, Converter={StaticResource B2VConverter}}" Text="{Binding ISODisplayValue}" 
                                              Grid.Column="3"/>
                 </Grid>
-                <Grid x:Name="ShootingParamSliders" Grid.Row="3" Grid.ColumnSpan="3" Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Opacity="0.7" Visibility="Collapsed">
+                <Grid x:Name="ShootingParamSliders" Grid.Row="3" Grid.ColumnSpan="3" Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Opacity="0.7" 
+                      Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -169,15 +170,21 @@
                 </Grid>
             </Grid>
 
-            <Grid  HorizontalAlignment="Right" VerticalAlignment="Center" ManipulationMode="TranslateY" Grid.Row="1" Grid.Column="1"
+            <Grid x:Name="ControlPanelUnit" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="224"/>
+                </Grid.ColumnDefinitions>
+                <Grid  HorizontalAlignment="Right" VerticalAlignment="Center" ManipulationMode="TranslateY" 
                                   ManipulationCompleted="Grid_ManipulationCompleted_1" Tapped="Grid_Tapped_1"                                             >
-                <Image x:Name="OpenControlPanelImage" Source="/Assets/LiveviewScreen/OpenControlPanel.png" Width="50" Height="50" Margin="12,6,12,0" />
+                    <Image x:Name="OpenControlPanelImage" Source="/Assets/LiveviewScreen/OpenControlPanel.png" Width="50" Height="50" Margin="12,6,12,0" />
+                </Grid>
+
+                <ScrollViewer  x:Name="ControllPanelScroll" Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}" Grid.Column="1">
+                    <StackPanel x:Name="ControlPanel" Margin="12" Grid.Row="1" VerticalAlignment="Center"/>
+                </ScrollViewer>
             </Grid>
 
-            <ScrollViewer Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="180" x:Name="ControllPanelScroll"  
-                          Background="{ThemeResource SystemControlBackgroundBaseMediumBrush}">
-                <StackPanel x:Name="ControlPanel" Margin="12" Grid.Row="1" VerticalAlignment="Center"/>
-            </ScrollViewer>
         </Grid>
 
         <Grid x:Name="FrontScreen"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
@@ -245,7 +252,6 @@
                         <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="1"/>
                         <Setter Target="LiveviewGrid.(Grid.Row)" Value="1"/>
                         <Setter Target="OpenSliderImage.Visibility" Value="Collapsed"/>
-                        <Setter Target="ShootingParamSliders.Visibility" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ShortState">
@@ -256,7 +262,6 @@
                         <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="3"/>
                         <Setter Target="LiveviewGrid.(Grid.Row)" Value="0"/>
                         <Setter Target="OpenSliderImage.Visibility" Value="Visible"/>
-                        <Setter Target="ShootingParamSliders.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

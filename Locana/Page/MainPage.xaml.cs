@@ -80,9 +80,15 @@ namespace Locana
                 {
                     case WIDE_STATE:
                         ControlPanelState = DisplayState.AlwaysVisible;
-                        break;
+                        // if it's already closed, open immidiately
+                        StartToShowControlPanel();
+                                                break;
                     case NARROW_STATE:
                         ControlPanelState = DisplayState.Collapsible;
+                        // set to original angle forcibly
+                        AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenControlPanelImage, Duration = TimeSpan.FromMilliseconds(10) }, 180, 0).Begin();
+                        StartToHideControlPanel();
+
                         break;
                 }
             };
@@ -90,9 +96,11 @@ namespace Locana
             {
                 case WIDE_STATE:
                     ControlPanelState = DisplayState.AlwaysVisible;
+                    ControlPanelDisplayed = true;
                     break;
                 case NARROW_STATE:
                     ControlPanelState = DisplayState.Collapsible;
+                    ControlPanelDisplayed = false;
                     break;
             }
 
@@ -103,9 +111,12 @@ namespace Locana
                 {
                     case TALL_STATE:
                         ShootingParamSliderState = DisplayState.AlwaysVisible;
+                        StartToShowSliders();
                         break;
                     case SHORT_STATE:
                         ShootingParamSliderState = DisplayState.Collapsible;
+                        AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(10) }, 180, 0).Begin();
+                        StartToHideSliders();
                         break;
                 }
             };
@@ -113,9 +124,11 @@ namespace Locana
             {
                 case TALL_STATE:
                     ShootingParamSliderState = DisplayState.AlwaysVisible;
+                    SlidersDisplayed = true;
                     break;
                 case SHORT_STATE:
                     ShootingParamSliderState = DisplayState.Collapsible;
+                    SlidersDisplayed = false;
                     break;
             }
         }
@@ -536,16 +549,62 @@ namespace Locana
                 return;
             }
 
-            if (ShootingParamSliders.Visibility == Visibility.Visible)
+            if (SlidersDisplayed)
             {
-                ShootingParamSliders.Visibility = Visibility.Collapsed;
+                StartToHideSliders();
                 AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(200) }, 180, 0).Begin();
             }
             else
             {
-                ShootingParamSliders.Visibility = Visibility.Visible;
+                StartToShowSliders();
                 AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(200) }, 0, 180).Begin();
             }
+        }
+
+        bool SlidersDisplayed = false;
+
+        void StartToShowSliders()
+        {
+            ShootingParamSliders.Visibility = Visibility.Visible;
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
+            {
+                Target = Bottom,
+                Duration = TimeSpan.FromMilliseconds(150),
+                RequestFadeSide = FadeSide.Bottom,
+                RequestFadeType = FadeType.FadeIn,
+                Distance = ShootingParamSliders.ActualHeight,
+                Completed = (sender, args) =>
+                {
+                    SlidersDisplayed = true;
+                }
+            }).Begin();
+        }
+
+        void StartToHideSliders()
+        {
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
+            {
+                Target = Bottom,
+                Duration = TimeSpan.FromMilliseconds(150),
+                Completed = (sender, obj) =>
+                {
+                    SlidersDisplayed = false;
+                },
+                RequestFadeSide = FadeSide.Bottom,
+                RequestFadeType = FadeType.FadeOut,
+                Distance = ShootingParamSliders.ActualHeight,
+                WithFade = false,
+            }).Begin();
+            AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
+            {
+                Target = ShootingParamSliders,
+                Duration = TimeSpan.FromMilliseconds(150),
+                RequestFadeType = FadeType.FadeOut,
+                Completed = (sender, obj) =>
+                {
+                    ShootingParamSliders.Opacity = 1.0;
+                }
+            }).Begin();
         }
 
         DisplayState ShootingParamSliderState = DisplayState.AlwaysVisible;
@@ -557,6 +616,8 @@ namespace Locana
             Collapsible,
         }
 
+        bool ControlPanelDisplayed = false;
+
         private void OpenCloseControlPanel()
         {
             if (ControlPanelState == DisplayState.AlwaysVisible)
@@ -564,16 +625,60 @@ namespace Locana
                 return;
             }
 
-            if (ControllPanelScroll.Visibility == Visibility.Visible)
+            if (ControlPanelDisplayed)
             {
-                ControllPanelScroll.Visibility = Visibility.Collapsed;
+                StartToHideControlPanel();
                 AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenControlPanelImage, Duration = TimeSpan.FromMilliseconds(200) }, 180, 0).Begin();
             }
             else
             {
-                ControllPanelScroll.Visibility = Visibility.Visible;
+                StartToShowControlPanel();
                 AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenControlPanelImage, Duration = TimeSpan.FromMilliseconds(200) }, 0, 180).Begin();
             }
+        }
+
+        private void StartToShowControlPanel(double duration = 150)
+        {
+            ControllPanelScroll.Visibility = Visibility.Visible;
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
+            {
+                Target = ControlPanelUnit,
+                Duration = TimeSpan.FromMilliseconds(duration),
+                RequestFadeSide = FadeSide.Right,
+                RequestFadeType = FadeType.FadeIn,
+                Distance = ControllPanelScroll.ActualWidth,
+                Completed = (sender, arg) =>
+                {
+                    ControlPanelDisplayed = true;
+                }
+            }).Begin();
+        }
+
+        private void StartToHideControlPanel()
+        {
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
+            {
+                Target = ControlPanelUnit,
+                Duration = TimeSpan.FromMilliseconds(150),
+                Completed = (sender, obj) =>
+                {
+                    ControlPanelDisplayed = false;
+                },
+                RequestFadeSide = FadeSide.Right,
+                RequestFadeType = FadeType.FadeOut,
+                Distance = ControllPanelScroll.ActualWidth,
+                WithFade = false,
+            }).Begin();
+            AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
+            {
+                Target = ControllPanelScroll,
+                Duration = TimeSpan.FromMilliseconds(150),
+                RequestFadeType = FadeType.FadeOut,
+                Completed = (sender, obj) =>
+                {
+                    ControllPanelScroll.Opacity = 1.0;
+                }
+            }).Begin();
         }
 
         private void Grid_ManipulationCompleted_1(object sender, ManipulationCompletedRoutedEventArgs e)

@@ -40,7 +40,7 @@ namespace Kazyx.Uwpmm.Control
             AnimationRunning = true;
             if (displayed)
             {
-                AnimationHelper.CreateSlideAnimation(new AnimationRequest()
+                AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
                 {
                     Target = DetailInfoPanel,
                     Duration = TimeSpan.FromMilliseconds(160),
@@ -48,12 +48,14 @@ namespace Kazyx.Uwpmm.Control
                     {
                         _DetailInfoDisplayed = true;
                         AnimationRunning = false;
-                    }
-                }, FadeSide.Right, FadeType.FadeIn).Begin();
+                    },
+                    RequestFadeSide = FadeSide.Right,
+                    RequestFadeType = FadeType.FadeIn
+                }).Begin();
             }
             else
             {
-                AnimationHelper.CreateSlideAnimation(new AnimationRequest()
+                AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
                 {
                     Target = DetailInfoPanel,
                     Duration = TimeSpan.FromMilliseconds(200),
@@ -61,8 +63,10 @@ namespace Kazyx.Uwpmm.Control
                     {
                         _DetailInfoDisplayed = false;
                         AnimationRunning = false;
-                    }
-                }, FadeSide.Right, FadeType.FadeOut).Begin();
+                    },
+                    RequestFadeSide = FadeSide.Right,
+                    RequestFadeType = FadeType.FadeOut
+                }).Begin();
             }
         }
 

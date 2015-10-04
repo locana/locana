@@ -36,11 +36,13 @@ namespace Kazyx.Uwpmm.Control
             ToastGrid.DataContext = content;
             DebugUtil.Log("Dequeue toast:" + content.Text);
             Running = true;
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest()
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = ToastGrid,
                 Duration = TimeSpan.FromMilliseconds(SLIDE_DURATION),
-            }, FadeSide.Top, FadeType.FadeIn).Begin();
+                RequestFadeSide = FadeSide.Top,
+                RequestFadeType = FadeType.FadeIn
+            }).Begin();
 
             var duration = TimeSpan.FromMilliseconds(3000);
             if (content.Duration != null && content.Duration.Milliseconds > SLIDE_DURATION)
@@ -50,7 +52,7 @@ namespace Kazyx.Uwpmm.Control
 
             await System.Threading.Tasks.Task.Delay(duration);
 
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest()
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = ToastGrid,
                 Duration = TimeSpan.FromMilliseconds(SLIDE_DURATION),
@@ -59,8 +61,10 @@ namespace Kazyx.Uwpmm.Control
                     Contents.RemoveAt(0);
                     Running = false;
                     DequeueToast();
-                }
-            }, FadeSide.Top, FadeType.FadeOut).Begin();
+                },
+                RequestFadeSide = FadeSide.Top,
+                RequestFadeType = FadeType.FadeOut
+            }).Begin();
         }
     }
 

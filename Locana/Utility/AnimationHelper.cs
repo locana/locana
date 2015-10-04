@@ -9,76 +9,83 @@ namespace Kazyx.Uwpmm.Utility
 {
     public class AnimationHelper
     {
-        public static Storyboard CreateSlideAnimation(AnimationRequest request, FadeSide edge, FadeType fadetype)
+
+        public static Storyboard CreateSlideAnimation(SlideAnimationRequest request)
         {
-            double distance = 0;
             var sb = new Storyboard();
             var slide = new DoubleAnimationUsingKeyFrames();
-            var fade = new DoubleAnimationUsingKeyFrames();
             var transform = new TranslateTransform();
             var duration = request.Duration.Milliseconds;
 
             var KeyframeTimes = new List<double>() { 0, duration / 6, duration }; // 3 key frames.
+
             List<double> KeyframeDistance = new List<double>();
-            List<double> KeyframeOpacity = new List<double>();
+
 
             Storyboard.SetTarget(slide, transform);
-            Storyboard.SetTargetProperty(fade, "Opacity");
-            Storyboard.SetTarget(fade, request.Target);
             request.Target.RenderTransform = transform;
 
-            switch (fadetype)
+            if (request.WithFade)
+            {
+                var fade = CreateFadeKeyframes(request.RequestFadeType, KeyframeTimes);
+                Storyboard.SetTargetProperty(fade, "Opacity");
+                Storyboard.SetTarget(fade, request.Target);
+                sb.Children.Add(fade);
+            }
+
+            double _distance = 0;
+            double requested_distance = request.Distance;
+
+            switch (request.RequestFadeType)
             {
                 case FadeType.FadeIn:
-                    KeyframeOpacity = new List<double>() { 0, 0.8, 1.0 };
 
-                    switch (edge)
+                    switch (request.RequestFadeSide)
                     {
                         case FadeSide.Top:
-                            distance = -request.Target.ActualHeight;
+                            _distance = requested_distance == 0 ? -request.Target.ActualHeight : requested_distance;
                             Storyboard.SetTargetProperty(slide, "Y");
-                            KeyframeDistance = new List<double>() { distance, distance * 0.5, 0 };
+                            KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                         case FadeSide.Bottom:
-                            distance = request.Target.ActualHeight;
+                            _distance = requested_distance == 0 ? request.Target.ActualHeight : requested_distance;
                             Storyboard.SetTargetProperty(slide, "Y");
-                            KeyframeDistance = new List<double>() { distance, distance * 0.5, 0 };
+                            KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                         case FadeSide.Left:
-                            distance = -request.Target.ActualWidth;
+                            _distance = requested_distance == 0 ? -request.Target.ActualWidth : requested_distance;
                             Storyboard.SetTargetProperty(slide, "X");
-                            KeyframeDistance = new List<double>() { distance, distance * 0.5, 0 };
+                            KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                         case FadeSide.Right:
-                            distance = request.Target.ActualWidth;
+                            _distance = requested_distance == 0 ? request.Target.ActualWidth : requested_distance;
                             Storyboard.SetTargetProperty(slide, "X");
-                            KeyframeDistance = new List<double>() { distance, distance * 0.5, 0 };
+                            KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                     }
                     break;
                 case FadeType.FadeOut:
-                    KeyframeOpacity = new List<double>() { 1.0, 0.6, 0 };
-                    switch (edge)
+                    switch (request.RequestFadeSide)
                     {
                         case FadeSide.Top:
-                            distance = -request.Target.ActualHeight;
+                            _distance = requested_distance == 0 ? -request.Target.ActualHeight : requested_distance;
                             Storyboard.SetTargetProperty(slide, "Y");
-                            KeyframeDistance = new List<double>() { 0, distance * 0.2, distance };
+                            KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                         case FadeSide.Bottom:
-                            distance = request.Target.ActualHeight;
+                            _distance = requested_distance == 0 ? request.Target.ActualHeight : requested_distance;
                             Storyboard.SetTargetProperty(slide, "Y");
-                            KeyframeDistance = new List<double>() { 0, distance * 0.2, distance };
+                            KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                         case FadeSide.Left:
-                            distance = -request.Target.ActualWidth;
+                            _distance = requested_distance == 0 ? -request.Target.ActualWidth : requested_distance;
                             Storyboard.SetTargetProperty(slide, "X");
-                            KeyframeDistance = new List<double>() { 0, distance * 0.2, distance };
+                            KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                         case FadeSide.Right:
-                            distance = request.Target.ActualWidth;
+                            _distance = requested_distance == 0 ? request.Target.ActualWidth : requested_distance;
                             Storyboard.SetTargetProperty(slide, "X");
-                            KeyframeDistance = new List<double>() { 0, distance * 0.2, distance };
+                            KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                     }
                     break;
@@ -87,13 +94,51 @@ namespace Kazyx.Uwpmm.Utility
             for (int i = 0; i < KeyframeTimes.Count; i++)
             {
                 slide.KeyFrames.Add(new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(KeyframeTimes[i])), Value = KeyframeDistance[i] });
-                fade.KeyFrames.Add(new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(KeyframeTimes[i])), Value = KeyframeOpacity[i] });
             }
 
             sb.Children.Add(slide);
-            sb.Children.Add(fade);
             if (request.Completed != null) { sb.Completed += request.Completed; }
             return sb;
+        }
+
+        public static Storyboard CreateFadeAnimation(FadeAnimationRequest request)
+        {
+            var sb = new Storyboard();
+            var duration = request.Duration.Milliseconds;
+            var KeyframeTimes = new List<double>() { 0, duration / 6, duration }; // 3 key frames.
+
+            List<double> KeyframeDistance = new List<double>();
+
+            var fade = CreateFadeKeyframes(request.RequestFadeType, KeyframeTimes);
+            Storyboard.SetTargetProperty(fade, "Opacity");
+            Storyboard.SetTarget(fade, request.Target);
+            sb.Children.Add(fade);
+
+            if (request.Completed != null) { sb.Completed += request.Completed; }
+            return sb;
+        }
+
+        static DoubleAnimationUsingKeyFrames CreateFadeKeyframes(FadeType type, List<double> KeyframeTimes)
+        {
+            var fade = new DoubleAnimationUsingKeyFrames();
+            var KeyframeOpacity = new List<double>();
+
+            switch (type)
+            {
+                case FadeType.FadeIn:
+                    KeyframeOpacity = new List<double>() { 0, 0.8, 1.0 };
+                    break;
+                case FadeType.FadeOut:
+                    KeyframeOpacity = new List<double>() { 1.0, 0.6, 0 };
+                    break;
+            }
+
+            for (int i = 0; i < KeyframeTimes.Count; i++)
+            {
+                fade.KeyFrames.Add(new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(KeyframeTimes[i])), Value = KeyframeOpacity[i] });
+            }
+
+            return fade;
         }
 
         private static DoubleAnimationUsingKeyFrames _Animation(Duration duration, double origin, double diff)
@@ -205,7 +250,7 @@ namespace Kazyx.Uwpmm.Utility
             {
                 duration = request.Duration;
             }
-            
+
             var sb = new Storyboard() { Duration = duration };
             var da = new DoubleAnimation() { Duration = duration };
 
@@ -231,6 +276,34 @@ namespace Kazyx.Uwpmm.Utility
         public FrameworkElement Target { get; set; }
         public TimeSpan Duration { get; set; }
         public EventHandler<object> Completed { get; set; }
+    }
+
+    public class FadeAnimationRequest : AnimationRequest
+    {
+        public FadeType RequestFadeType { get; set; }
+    }
+
+    public class SlideAnimationRequest : AnimationRequest
+    {
+        private double _Distance = 0;
+        /// <summary>
+        /// [Optional] If this is not set, distance of slide animation is determined by the target's size.
+        /// </summary>
+        public double Distance
+        {
+            get { return _Distance; }
+            set { _Distance = value; }
+        }
+
+        private bool _WithFade = true;
+        public bool WithFade
+        {
+            get { return _WithFade; }
+            set { _WithFade = value; }
+        }
+
+        public FadeSide RequestFadeSide { get; set; }
+        public FadeType RequestFadeType { get; set; }
     }
 
     public enum FadeSide

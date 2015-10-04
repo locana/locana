@@ -335,11 +335,11 @@ namespace Kazyx.Uwpmm.Control
             AnimationRunning = true;
             var time = TimeSpan.FromMilliseconds(250);
             var fade = FadeType.FadeOut;
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest() { Target = HeaderForeground, Duration = time }, FadeSide.Top, fade).Begin();
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest() { Target = FooterForeground, Duration = time }, FadeSide.Bottom, fade).Begin();
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest() { Target = HeaderForeground, Duration = time, RequestFadeSide = FadeSide.Top, RequestFadeType = fade }).Begin();
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest() { Target = FooterForeground, Duration = time, RequestFadeSide = FadeSide.Bottom, RequestFadeType = fade }).Begin();
             await Task.Delay(TimeSpan.FromMilliseconds(50));
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest() { Target = HeaderBackground, Duration = time }, FadeSide.Top, fade).Begin();
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest()
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest() { Target = HeaderBackground, Duration = time, RequestFadeSide = FadeSide.Top, RequestFadeType = fade }).Begin();
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = FooterBackground,
                 Duration = time,
@@ -347,8 +347,10 @@ namespace Kazyx.Uwpmm.Control
                 {
                     DetailInfoDisplayed = false;
                     AnimationRunning = false;
-                }
-            }, FadeSide.Bottom, fade).Begin();
+                },
+                RequestFadeSide = FadeSide.Bottom,
+                RequestFadeType = fade
+            }).Begin();
         }
 
         async void StartToShowInfo()
@@ -356,11 +358,11 @@ namespace Kazyx.Uwpmm.Control
             AnimationRunning = true;
             var time = TimeSpan.FromMilliseconds(250);
             var fade = FadeType.FadeIn;
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest() { Target = HeaderBackground, Duration = time }, FadeSide.Top, fade).Begin();
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest() { Target = FooterBackground, Duration = time }, FadeSide.Bottom, fade).Begin();
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest() { Target = HeaderBackground, Duration = time, RequestFadeSide = FadeSide.Top, RequestFadeType = fade }).Begin();
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest() { Target = FooterBackground, Duration = time, RequestFadeSide = FadeSide.Bottom, RequestFadeType = fade }).Begin();
             await Task.Delay(TimeSpan.FromMilliseconds(50));
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest() { Target = HeaderForeground, Duration = time }, FadeSide.Top, fade).Begin();
-            AnimationHelper.CreateSlideAnimation(new AnimationRequest()
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest() { Target = HeaderForeground, Duration = time, RequestFadeSide = FadeSide.Top, RequestFadeType = fade }).Begin();
+            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = FooterForeground,
                 Duration = time,
@@ -369,8 +371,11 @@ namespace Kazyx.Uwpmm.Control
                     DetailInfoDisplayed = true;
                     AnimationRunning = false;
                     InfoTimer.Start();
-                }
-            }, FadeSide.Bottom, fade).Begin();
+
+                },
+                RequestFadeSide = FadeSide.Bottom,
+                RequestFadeType = fade
+            }).Begin();
         }
 
         private void StartPauseButton_Tapped(object sender, TappedRoutedEventArgs e)
