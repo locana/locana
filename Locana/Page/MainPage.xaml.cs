@@ -12,6 +12,7 @@ using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Graphics.Display;
@@ -231,7 +232,7 @@ namespace Locana
                     BatteryStatusDisplay.BatteryInfo = status.BatteryInfo;
                     break;
                 case "ContShootingResult":
-                    // EnqueueContshootingResult(status.ContShootingResult);
+                    EnqueueContshootingResult(status.ContShootingResult);
                     break;
                 case "Status":
                     if (status.Status == EventParam.Idle)
@@ -242,6 +243,17 @@ namespace Locana
                     break;
                 default:
                     break;
+            }
+        }
+
+        private static void EnqueueContshootingResult(List<ContShootingResult> ContShootingResult)
+        {
+            if (ApplicationSettings.GetInstance().IsPostviewTransferEnabled)
+            {
+                foreach (var result in ContShootingResult)
+                {
+                    MediaDownloader.Instance.EnqueuePostViewImage(new Uri(result.PostviewUrl, UriKind.Absolute), GeopositionManager.INSTANCE.LatestPosition);
+                }
             }
         }
 
@@ -281,33 +293,6 @@ namespace Locana
         private void TearDownCurrentTarget()
         {
             LayoutRoot.DataContext = null;
-        }
-
-        async void ShutterButtonPressed()
-        {
-            await SequentialOperation.StartStopRecording(
-                new List<TargetDevice> { target },
-                (result) =>
-                {
-                    switch (result)
-                    {
-                        case SequentialOperation.ShootingResult.StillSucceed:
-                            ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
-                            break;
-                        case SequentialOperation.ShootingResult.StartSucceed:
-                        case SequentialOperation.ShootingResult.StopSucceed:
-                            break;
-                        case SequentialOperation.ShootingResult.StillFailed:
-                        case SequentialOperation.ShootingResult.StartFailed:
-                            ShowError(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
-                            break;
-                        case SequentialOperation.ShootingResult.StopFailed:
-                            ShowError(SystemUtil.GetStringResource("ErrorMessage_fatal"));
-                            break;
-                        default:
-                            break;
-                    }
-                });
         }
 
         private ToastNotification BuildToast(string str, StorageFile file = null)
@@ -381,18 +366,171 @@ namespace Locana
 
         private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ShutterButtonPressed();
-
+            if (CameraStatusUtility.IsContinuousShootingMode(target)) { ShowToast(SystemUtil.GetStringResource("Message_ContinuousShootingGuide")); }
+            else { ShutterButtonPressed(); }
         }
 
-        private void ShutterButton_Click(object sender, RoutedEventArgs e)
+        private async void ShutterButton_Click(object sender, RoutedEventArgs e)
         {
-            ShutterButtonPressed();
+            if (CameraStatusUtility.IsContinuousShootingMode(target))
+            {
+                await StopContShooting();
+            }
         }
 
-        private void ShutterButton_Holding(object sender, HoldingRoutedEventArgs e)
+        private async void ShutterButton_Holding(object sender, HoldingRoutedEventArgs e)
         {
+            if (CameraStatusUtility.IsContinuousShootingMode(target))
+            {
+                await StartContShooting();
+            }
+            else { ShutterButtonPressed(); }
+        }
 
+        private async Task StartContShooting()
+        {
+            if (target == null) { return; }
+            if ((PeriodicalShootingTask == null || !PeriodicalShootingTask.IsRunning) && CameraStatusUtility.IsContinuousShootingMode(target))
+            {
+                try
+                {
+                    await target.Api.Camera.StartContShootingAsync();
+                }
+                catch (RemoteApiException ex)
+                {
+                    DebugUtil.Log(ex.StackTrace);
+                    ShowError(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
+                }
+            }
+        }
+
+        private async Task StopContShooting()
+        {
+            if (target == null) { return; }
+            if ((PeriodicalShootingTask == null || !PeriodicalShootingTask.IsRunning) && CameraStatusUtility.IsContinuousShootingMode(target))
+            {
+                try
+                {
+                    await SequentialOperation.StopContinuousShooting(target.Api);
+                }
+                catch (RemoteApiException ex)
+                {
+                    DebugUtil.Log(ex.StackTrace);
+                    ShowError(SystemUtil.GetStringResource("Error_StopContinuousShooting"));
+                }
+            }
+        }
+
+        PeriodicalShootingTask PeriodicalShootingTask;
+
+        async void ShutterButtonPressed()
+        {
+            var handled = StartStopPeriodicalShooting();
+
+            if (!handled)
+            {
+                await SequentialOperation.StartStopRecording(
+                    new List<TargetDevice> { target },
+                    (result) =>
+                    {
+                        switch (result)
+                        {
+                            case SequentialOperation.ShootingResult.StillSucceed:
+                                if (!ApplicationSettings.GetInstance().IsPostviewTransferEnabled)
+                                {
+                                    ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
+                                }
+                                break;
+                            case SequentialOperation.ShootingResult.StartSucceed:
+                            case SequentialOperation.ShootingResult.StopSucceed:
+                                break;
+                            case SequentialOperation.ShootingResult.StillFailed:
+                            case SequentialOperation.ShootingResult.StartFailed:
+                                ShowError(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
+                                break;
+                            case SequentialOperation.ShootingResult.StopFailed:
+                                ShowError(SystemUtil.GetStringResource("ErrorMessage_fatal"));
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+            }
+        }
+
+
+        private bool StartStopPeriodicalShooting()
+        {
+            if (target != null && target.Status != null && target.Status.ShootMode != null && target.Status.ShootMode.Current == ShootModeParam.Still)
+            {
+                if (PeriodicalShootingTask != null && PeriodicalShootingTask.IsRunning)
+                {
+                    PeriodicalShootingTask.Stop();
+                    return true;
+                }
+                if (ApplicationSettings.GetInstance().IsIntervalShootingEnabled &&
+                    (target.Status.ContShootingMode == null || (target.Status.ContShootingMode != null && target.Status.ContShootingMode.Current == ContinuousShootMode.Single)))
+                {
+                    PeriodicalShootingTask = SetupPeriodicalShooting();
+                    PeriodicalShootingTask.Start();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private PeriodicalShootingTask SetupPeriodicalShooting()
+        {
+            var task = new PeriodicalShootingTask(new List<TargetDevice>() { target }, ApplicationSettings.GetInstance().IntervalTime);
+            task.Tick += async (result) =>
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    switch (result)
+                    {
+                        case PeriodicalShootingTask.PeriodicalShootingResult.Skipped:
+                            ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_Skipped"));
+                            break;
+                        case PeriodicalShootingTask.PeriodicalShootingResult.Succeed:
+                            ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
+                            break;
+                    };
+                });
+            };
+            task.Stopped += async (reason) =>
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    switch (reason)
+                    {
+                        case PeriodicalShootingTask.StopReason.ShootingFailed:
+                            ShowError(SystemUtil.GetStringResource("ErrorMessage_Interval"));
+                            break;
+                        case PeriodicalShootingTask.StopReason.SkipLimitExceeded:
+                            ShowError(SystemUtil.GetStringResource("PeriodicalShooting_SkipLimitExceed"));
+                            break;
+                        case PeriodicalShootingTask.StopReason.RequestedByUser:
+                            ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_StoppedByUser"));
+                            break;
+                    };
+                });
+            };
+            task.StatusUpdated += async (status) =>
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    DebugUtil.Log("Status updated: " + status.Count);
+                    //if (status.IsRunning)
+                    //{
+                    //    PeriodicalShootingStatus.Visibility = Visibility.Visible;
+                    //    PeriodicalShootingStatusText.Text = SystemUtil.GetStringResource("PeriodicalShooting_Status")
+                    //        .Replace("__INTERVAL__", status.Interval.ToString())
+                    //        .Replace("__PHOTO_NUM__", status.Count.ToString());
+                    //}
+                    //else { PeriodicalShootingStatus.Visibility = Visibility.Collapsed; }
+                });
+            };
+            return task;
         }
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
