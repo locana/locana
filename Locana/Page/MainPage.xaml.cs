@@ -85,6 +85,7 @@ namespace Locana
         private void InitializeVisualStates()
         {
             var groups = VisualStateManager.GetVisualStateGroups(LayoutRoot);
+
             Debug.WriteLine("CurrentState: " + groups[0].CurrentState.Name);
             groups[0].CurrentStateChanged += (sender, e) =>
             {
@@ -101,19 +102,20 @@ namespace Locana
                         // set to original angle forcibly
                         AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenControlPanelImage, Duration = TimeSpan.FromMilliseconds(10) }, 180, 0).Begin();
                         StartToHideControlPanel();
-
                         break;
                 }
             };
+
+            // initialize UI according to current state
             switch (groups[0].CurrentState.Name)
             {
                 case WIDE_STATE:
                     ControlPanelState = DisplayState.AlwaysVisible;
-                    ControlPanelDisplayed = true;
+                    StartToShowControlPanel(0);
                     break;
                 case NARROW_STATE:
                     ControlPanelState = DisplayState.Collapsible;
-                    ControlPanelDisplayed = false;
+                    StartToHideControlPanel(0);
                     break;
             }
 
@@ -137,11 +139,11 @@ namespace Locana
             {
                 case TALL_STATE:
                     ShootingParamSliderState = DisplayState.AlwaysVisible;
-                    SlidersDisplayed = true;
+                    StartToShowSliders(0);
                     break;
                 case SHORT_STATE:
                     ShootingParamSliderState = DisplayState.Collapsible;
-                    SlidersDisplayed = false;
+                    StartToHideSliders(0);
                     break;
             }
         }
@@ -576,13 +578,13 @@ namespace Locana
 
         bool SlidersDisplayed = false;
 
-        void StartToShowSliders()
+        void StartToShowSliders(double duration = 150)
         {
             ShootingParamSliders.Visibility = Visibility.Visible;
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = Bottom,
-                Duration = TimeSpan.FromMilliseconds(150),
+                Duration = TimeSpan.FromMilliseconds(duration),
                 RequestFadeSide = FadeSide.Bottom,
                 RequestFadeType = FadeType.FadeIn,
                 Distance = ShootingParamSliders.ActualHeight,
@@ -593,14 +595,14 @@ namespace Locana
             }).Begin();
         }
 
-        void StartToHideSliders()
+        void StartToHideSliders(double duration = 150)
         {
             if (ShootingParamSliders.ActualHeight == 0) { return; }
 
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = Bottom,
-                Duration = TimeSpan.FromMilliseconds(150),
+                Duration = TimeSpan.FromMilliseconds(duration),
                 Completed = (sender, obj) =>
                 {
                     SlidersDisplayed = false;
@@ -669,14 +671,14 @@ namespace Locana
             }).Begin();
         }
 
-        private void StartToHideControlPanel()
+        private void StartToHideControlPanel(double duration = 150)
         {
             if(ControlPanelScroll.ActualHeight == 0) { return; }
 
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = ControlPanelUnit,
-                Duration = TimeSpan.FromMilliseconds(150),
+                Duration = TimeSpan.FromMilliseconds(duration),
                 Completed = (sender, obj) =>
                 {
                     ControlPanelDisplayed = false;

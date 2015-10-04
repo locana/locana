@@ -212,7 +212,7 @@
                     <VisualState.Setters>
                         <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="1"/>
                         <Setter Target="LiveviewGrid.(Grid.Column)" Value="1"/>
-                        <Setter Target="ControllPanelScroll.Visibility" Value="Visible"/>
+                        <Setter Target="ControlPanelScroll.Visibility" Value="Visible"/>
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="1"/>
                         <Setter Target="Header.(Grid.Column)" Value="1"/>
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0"/>
@@ -231,7 +231,7 @@
                     <VisualState.Setters>
                         <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="3"/>
                         <Setter Target="LiveviewGrid.(Grid.Column)" Value="0"/>
-                        <Setter Target="ControllPanelScroll.Visibility" Value="Collapsed"/>
+                        <Setter Target="ControlPanelScroll.Visibility" Value="Collapsed"/>
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="3"/>
                         <Setter Target="Header.(Grid.Column)" Value="0"/>
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0"/>
