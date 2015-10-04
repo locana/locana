@@ -66,6 +66,11 @@ namespace Locana
             DisplayInformation.GetForCurrentView().OrientationChanged += MainPage_OrientationChanged;
         }
 
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            StopProximityDevice();
+        }
+
         private void MainPage_OrientationChanged(DisplayInformation info, object args)
         {
             Debug.WriteLine("orientation: " + info.CurrentOrientation);
