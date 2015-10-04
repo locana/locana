@@ -266,7 +266,7 @@ Swipe left or right to start remote control.</value>
     <value>Connection has been lost.</value>
   </data>
   <data name="Message_NFC_succeed" xml:space="preserve">
-    <value>Wi-Fi password of your camera device is displayed below. Copy to connect.</value>
+    <value>Wi-Fi password of your camera device is copyed on the clipboard! Find following SSID and connect it.</value>
   </data>
   <data name="ConnectedDevice" xml:space="preserve">
     <value>Connected to _ssid_</value>
