@@ -595,6 +595,8 @@ namespace Locana
 
         void StartToHideSliders()
         {
+            if (ShootingParamSliders.ActualHeight == 0) { return; }
+
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = Bottom,
@@ -652,14 +654,14 @@ namespace Locana
 
         private void StartToShowControlPanel(double duration = 150)
         {
-            ControllPanelScroll.Visibility = Visibility.Visible;
+            ControlPanelScroll.Visibility = Visibility.Visible;
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = ControlPanelUnit,
                 Duration = TimeSpan.FromMilliseconds(duration),
                 RequestFadeSide = FadeSide.Right,
                 RequestFadeType = FadeType.FadeIn,
-                Distance = ControllPanelScroll.ActualWidth,
+                Distance = ControlPanelScroll.ActualWidth,
                 Completed = (sender, arg) =>
                 {
                     ControlPanelDisplayed = true;
@@ -669,6 +671,8 @@ namespace Locana
 
         private void StartToHideControlPanel()
         {
+            if(ControlPanelScroll.ActualHeight == 0) { return; }
+
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
                 Target = ControlPanelUnit,
@@ -679,17 +683,17 @@ namespace Locana
                 },
                 RequestFadeSide = FadeSide.Right,
                 RequestFadeType = FadeType.FadeOut,
-                Distance = ControllPanelScroll.ActualWidth,
+                Distance = ControlPanelScroll.ActualWidth,
                 WithFade = false,
             }).Begin();
             AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
             {
-                Target = ControllPanelScroll,
+                Target = ControlPanelScroll,
                 Duration = TimeSpan.FromMilliseconds(150),
                 RequestFadeType = FadeType.FadeOut,
                 Completed = (sender, obj) =>
                 {
-                    ControllPanelScroll.Opacity = 1.0;
+                    ControlPanelScroll.Opacity = 1.0;
                 }
             }).Begin();
         }
