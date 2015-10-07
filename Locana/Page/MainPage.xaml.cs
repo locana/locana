@@ -673,7 +673,7 @@ namespace Locana
 
         private void StartToHideControlPanel(double duration = 150)
         {
-            if(ControlPanelScroll.ActualHeight == 0) { return; }
+            if (ControlPanelScroll.ActualHeight == 0) { return; }
 
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {
@@ -709,7 +709,6 @@ namespace Locana
         {
             OpenCloseControlPanel();
         }
-
 
         ProximityDevice _ProximityDevice;
         long ProximitySubscribeId;
@@ -779,38 +778,36 @@ namespace Locana
             {
                 DebugUtil.Log("Failed to read NFC: " + err);
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { ShowError(err); });
+                return;
             }
 
-            if (ndefRecords.Count > 0)
+            foreach (NdefRecord r in ndefRecords)
             {
-                foreach (NdefRecord r in ndefRecords)
+                if (r.SSID.Length > 0 && r.Password.Length > 0)
                 {
-                    if (r.SSID.Length > 0 && r.Password.Length > 0)
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                     {
-                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                        var sb = new StringBuilder();
+                        sb.Append(SystemUtil.GetStringResource("Message_NFC_succeed"));
+                        sb.Append(System.Environment.NewLine);
+                        sb.Append(System.Environment.NewLine);
+                        sb.Append("SSID: ");
+                        sb.Append(r.SSID);
+                        sb.Append(System.Environment.NewLine);
+                        sb.Append("Password: ");
+                        sb.Append(r.Password);
+                        sb.Append(System.Environment.NewLine);
+
+                        PutToClipBoard(r.Password);
+
+                        var dialog = new MessageDialog(sb.ToString());
+                        try
                         {
-                            var sb = new StringBuilder();
-                            sb.Append(SystemUtil.GetStringResource("Message_NFC_succeed"));
-                            sb.Append(System.Environment.NewLine);
-                            sb.Append(System.Environment.NewLine);
-                            sb.Append("SSID: ");
-                            sb.Append(r.SSID);
-                            sb.Append(System.Environment.NewLine);
-                            sb.Append("Password: ");
-                            sb.Append(r.Password);
-                            sb.Append(System.Environment.NewLine);
-
-                            PutToClipBoard(r.Password);
-
-                            var dialog = new MessageDialog(sb.ToString());
-                            try
-                            {
-                                await dialog.ShowAsync();
-                            }
-                            catch (UnauthorizedAccessException) {/* Duplicated message dialog */}
-                        });
-                        break;
-                    }
+                            await dialog.ShowAsync();
+                        }
+                        catch (UnauthorizedAccessException) {/* Duplicated message dialog */}
+                    });
+                    break;
                 }
             }
         }
