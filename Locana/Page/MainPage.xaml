@@ -102,6 +102,18 @@
             <Rectangle Grid.ColumnSpan="3"
                        Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                        Opacity="0.5" />
+
+            <Grid x:Name="LiveviewGrid"
+                  Grid.Row="1"
+                  Grid.Column="1">
+                <Image x:Name="LiveviewImage"
+                       Margin="10"
+                       Loaded="LiveviewImage_Loaded"
+                       Source="{Binding Image,
+                                        Mode=OneWay}"
+                       Unloaded="LiveviewImage_Unloaded" />
+            </Grid>
+
             <Grid x:Name="Header"
                   Grid.Column="1"
                   Margin="8,4"
@@ -184,17 +196,6 @@
                                 Margin="12"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top" />
-
-            <Grid x:Name="LiveviewGrid"
-                  Grid.Row="1"
-                  Grid.Column="1">
-                <Image x:Name="LiveviewImage"
-                       Margin="10"
-                       Loaded="LiveviewImage_Loaded"
-                       Source="{Binding Image,
-                                        Mode=OneWay}"
-                       Unloaded="LiveviewImage_Unloaded" />
-            </Grid>
 
             <Grid x:Name="ControlPanelUnit"
                   Grid.Row="1"
