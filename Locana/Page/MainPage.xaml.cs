@@ -41,6 +41,8 @@ namespace Locana
             NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_Discovered;
             NetworkObserver.INSTANCE.ForceRestart();
             MediaDownloader.Instance.Fetched += OnFetchdImage;
+
+            InitializeCommandBar();
             InitializeUI();
         }
 
@@ -57,6 +59,104 @@ namespace Locana
                     HistogramControl.SetHistogramValue(r, g, b);
                 });
             };
+
+            this.BottomAppBar = _CommandBarManager.Clear(). //
+                Command(AppBarItem.AppSetting). //
+                Content(AppBarItem.FNumberSlider). //
+                Content(AppBarItem.ShutterSpeedSlider). //
+                Content(AppBarItem.IsoSlider). //
+                Content(AppBarItem.EvSlider). //
+                Content(AppBarItem.ProgramShiftSlider). //
+                CreateNew(0.9);
+        }
+
+        CommandBarManager _CommandBarManager = new CommandBarManager();
+
+        void InitializeCommandBar()
+        {
+            _CommandBarManager.SetEvent(AppBarItem.AppSetting, (s, args) =>
+            {
+
+            });
+            _CommandBarManager.SetEvent(AppBarItem.FNumberSlider, (s, args) =>
+            {
+                ToggleVisibility(FnumberSlider);
+            });
+            _CommandBarManager.SetEvent(AppBarItem.ShutterSpeedSlider, (s, args) =>
+            {
+                ToggleVisibility(SSSlider);
+            });
+            _CommandBarManager.SetEvent(AppBarItem.IsoSlider, (s, args) =>
+            {
+                ToggleVisibility(ISOSlider);
+            });
+            _CommandBarManager.SetEvent(AppBarItem.EvSlider, (s, args) =>
+            {
+                ToggleVisibility(EvSlider);
+            });
+            _CommandBarManager.SetEvent(AppBarItem.ProgramShiftSlider, (s, args) =>
+            {
+                ToggleVisibility(ProgramShiftSlider);
+            });
+
+            SliderObjects = new List<FrameworkElement>()
+            {
+                FnumberSlider, SSSlider, ISOSlider, EvSlider, ProgramShiftSlider
+            };
+        }
+
+        void ToggleVisibility(FrameworkElement element)
+        {
+            if (element.Visibility == Visibility.Visible)
+            {
+                AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
+                {
+                    RequestFadeType = FadeType.FadeOut,
+                    Target = element,
+                    Duration = TimeSpan.FromMilliseconds(150),
+                    Completed = (sender, arg) =>
+                    {
+                        element.Visibility = Visibility.Collapsed;
+                    }
+                }).Begin();
+            }
+            else
+            {
+                HideAllSliders();
+                AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
+                {
+                    RequestFadeType = FadeType.FadeIn,
+                    Target = element,
+                    Duration = TimeSpan.FromMilliseconds(100),
+                    Completed = (sender, arg) =>
+                    {
+                        element.Visibility = Visibility.Visible;
+                    }
+                }).Begin();
+            }
+        }
+
+        List<FrameworkElement> SliderObjects;
+
+        void HideAllSliders()
+        {
+            if(SliderObjects == null) { return; }
+            foreach(var s in SliderObjects)
+            {
+                if (s.Visibility == Visibility.Visible)
+                {
+                    AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
+                    {
+                        RequestFadeType = FadeType.FadeOut,
+                        Target = s,
+                        Duration = TimeSpan.FromMilliseconds(150),
+                        Completed = (sender, arg) =>
+                        {
+                            s.Visibility = Visibility.Collapsed;
+                        }
+                    }).Begin();
+                }
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
