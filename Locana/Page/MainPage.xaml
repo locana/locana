@@ -103,22 +103,12 @@
                        Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                        Opacity="0.5" />
 
-            <Grid x:Name="LiveviewGrid"
-                  Grid.Row="1"
-                  Grid.Column="1">
-                <Image x:Name="LiveviewImage"
-                       Margin="10"
-                       Loaded="LiveviewImage_Loaded"
-                       Source="{Binding Image,
-                                        Mode=OneWay}"
-                       Unloaded="LiveviewImage_Unloaded" />
-            </Grid>
-
             <Grid x:Name="Header"
                   Grid.Column="1"
                   Margin="8,4"
                   HorizontalAlignment="Stretch"
-                  VerticalAlignment="Center">
+                  VerticalAlignment="Center"
+                  Canvas.ZIndex="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
@@ -195,13 +185,27 @@
                                 Height="120"
                                 Margin="12"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Top" />
+                                VerticalAlignment="Top"
+                                Canvas.ZIndex="20" />
+
+            <Grid x:Name="LiveviewGrid"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Canvas.ZIndex="3">
+                <Image x:Name="LiveviewImage"
+                       Margin="10"
+                       Loaded="LiveviewImage_Loaded"
+                       Source="{Binding Image,
+                                        Mode=OneWay}"
+                       Unloaded="LiveviewImage_Unloaded" />
+            </Grid>
 
             <Grid x:Name="ControlPanelUnit"
                   Grid.Row="1"
                   Grid.RowSpan="2"
                   Grid.Column="2"
-                  HorizontalAlignment="Stretch">
+                  HorizontalAlignment="Stretch"
+                  Canvas.ZIndex="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="224" />
@@ -234,7 +238,8 @@
                   Grid.ColumnSpan="3"
                   Margin="0"
                   HorizontalAlignment="Stretch"
-                  VerticalAlignment="Bottom">
+                  VerticalAlignment="Bottom"
+                  Canvas.ZIndex="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -442,6 +447,7 @@
         <Grid x:Name="FrontScreen"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
+              Canvas.ZIndex="100"
               Visibility="{Binding IsWaitingConnection,
                                    FallbackValue=Visible,
                                    Converter={StaticResource B2VConverter}}">
