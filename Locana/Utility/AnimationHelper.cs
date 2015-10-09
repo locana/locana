@@ -17,8 +17,7 @@ namespace Kazyx.Uwpmm.Utility
             var transform = new TranslateTransform();
             var duration = request.Duration.Milliseconds;
 
-            var KeyframeTimes = new List<double>() { 0, duration / 6, duration }; // 3 key frames.
-
+            var KeyframeTimes = _KeyframeTimes(request.RequestFadeType, duration);
             List<double> KeyframeDistance = new List<double>();
 
 
@@ -101,11 +100,23 @@ namespace Kazyx.Uwpmm.Utility
             return sb;
         }
 
+        static List<double> _KeyframeTimes(FadeType type, double duration)
+        {
+            switch (type)
+            {
+                case FadeType.FadeIn:
+                    return new List<double>() { 0, duration / 6, duration };
+                case FadeType.FadeOut:
+                    return new List<double>() { 0, duration / 6, duration };
+            }
+            return new List<double>() { 0, duration / 6, duration };
+        }
+
         public static Storyboard CreateFadeAnimation(FadeAnimationRequest request)
         {
             var sb = new Storyboard();
             var duration = request.Duration.Milliseconds;
-            var KeyframeTimes = new List<double>() { 0, duration / 6, duration }; // 3 key frames.
+            var KeyframeTimes = _KeyframeTimes(request.RequestFadeType, duration);
 
             List<double> KeyframeDistance = new List<double>();
 
@@ -126,7 +137,7 @@ namespace Kazyx.Uwpmm.Utility
             switch (type)
             {
                 case FadeType.FadeIn:
-                    KeyframeOpacity = new List<double>() { 0, 0.8, 1.0 };
+                    KeyframeOpacity = new List<double>() { 0, 0.6, 1.0 };
                     break;
                 case FadeType.FadeOut:
                     KeyframeOpacity = new List<double>() { 1.0, 0.6, 0 };

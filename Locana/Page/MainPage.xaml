@@ -411,7 +411,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <controls:ShootingParamSlider x:Name="FnumberSlider"
+                    <!--<controls:ShootingParamSlider x:Name="FnumberSlider"
                                                   IconSource="/Assets/LiveviewScreen/aperture.png"
                                                   Parameter="{Binding Status.FNumber}"
                                                   Visibility="{Binding Path=Liveview.IsSetFNumberAvailable,
@@ -438,10 +438,52 @@
                                                  Grid.Row="4"
                                                  IconSource="/Assets/LiveviewScreen/ProgramShift.png"
                                                  Visibility="{Binding Path=Liveview.IsProgramShiftAvailable,
-                                                                      Converter={StaticResource B2VConverter}}" />
+                                                                      Converter={StaticResource B2VConverter}}" />-->
                 </Grid>
             </Grid>
 
+        </Grid>
+
+        <Grid x:Name="Sliders"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Bottom"
+              Canvas.ZIndex="30">
+            <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Opacity="0.7" />
+            <controls:ShootingParamSlider x:Name="FnumberSlider"
+                                          MaxWidth="400"
+                                          Margin="40, 0"
+                                          HorizontalAlignment="Stretch"
+                                          IconSource="/Assets/LiveviewScreen/aperture.png"
+                                          Parameter="{Binding Status.FNumber}"
+                                          Visibility="Collapsed" />
+            <controls:ShootingParamSlider x:Name="SSSlider"
+                                          MaxWidth="400"
+                                          Margin="40, 0"
+                                          HorizontalAlignment="Stretch"
+                                          IconSource="/Assets/LiveviewScreen/ShutterSpeed.png"
+                                          Parameter="{Binding Status.ShutterSpeed}"
+                                          Visibility="Collapsed" />
+            <controls:ShootingParamSlider x:Name="ISOSlider"
+                                          MaxWidth="400"
+                                          Margin="40, 0"
+                                          HorizontalAlignment="Stretch"
+                                          IconSource="/Assets/LiveviewScreen/ISO.png"
+                                          Parameter="{Binding Status.ISOSpeedRate}"
+                                          Visibility="Collapsed" />
+            <controls:EvSlider x:Name="EvSlider"
+                               MaxWidth="400"
+                               Margin="40, 0"
+                               HorizontalAlignment="Stretch"
+                               IconSource="/Assets/LiveviewScreen/EVComp.png"
+                               Parameter="{Binding Status.EvInfo}"
+                               Visibility="Collapsed" />
+
+            <controls:ProgramShiftSlider x:Name="ProgramShiftSlider"
+                                         MaxWidth="400"
+                                         Margin="40, 0"
+                                         HorizontalAlignment="Stretch"
+                                         IconSource="/Assets/LiveviewScreen/ProgramShift.png"
+                                         Visibility="Collapsed" />
         </Grid>
 
         <Grid x:Name="FrontScreen"
