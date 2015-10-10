@@ -46,7 +46,8 @@ namespace Kazyx.Uwpmm.Utility
                     Source = data,
                     Path = new PropertyPath("IsSetFNumberAvailable"),
                     Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter()
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = false,
                 });
                 panel.Children.Add(FnumberButton);
             }

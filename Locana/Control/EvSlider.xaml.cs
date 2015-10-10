@@ -1,7 +1,9 @@
 ﻿using Kazyx.RemoteApi.Camera;
 using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
@@ -72,6 +74,40 @@ namespace Kazyx.Uwpmm.Control
 
             var center = EvConverter.GetEv(0, parameter.Candidate.IndexStep);
             CenterLabel.Text = Math.Round(center, 1, MidpointRounding.AwayFromZero).ToString("0.0");
+
+            var labels = new Dictionary<int, string>();
+            double unit = parameter.Candidate.IndexStep == EvStepDefinition.EV_1_3 ? 1.0 / 3.0 : 0.5;
+            for (int i = parameter.Candidate.MinIndex; i <= parameter.Candidate.MaxIndex; i++)
+            {
+                var value = EvConverter.GetEv(i, parameter.Candidate.IndexStep);
+                var strValue = Math.Round(value, 1, MidpointRounding.AwayFromZero).ToString("0.0");
+
+                if (value < 0) { strValue = "EV " + strValue; }
+                else if (value == 0.0f) { strValue = "EV " + strValue; }
+                else { strValue = "EV +" + strValue; }
+                labels.Add(i, strValue);
+            }
+
+            Slider.ThumbToolTipValueConverter = new EvValueConverter() { Labels = labels };
+        }
+    }
+
+    public class EvValueConverter : IValueConverter
+    {
+        public Dictionary<int, string> Labels { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            var selected = (int)Math.Round((double)value);
+
+            if (Labels == null || !Labels.ContainsKey(selected)) { return value.ToString(); }
+
+            return Labels[selected];
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -89,7 +89,6 @@ namespace Kazyx.Uwpmm.Control
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var selected = (int)Math.Round((double)value);
-            DebugUtil.Log("converter: " + selected + " " + parameter as string);
 
             if (Labels == null || selected >= Labels.Count) { return value.ToString(); }
 
