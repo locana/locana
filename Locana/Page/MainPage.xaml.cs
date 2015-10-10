@@ -225,27 +225,11 @@ namespace Locana
                 switch (e.NewState.Name)
                 {
                     case TALL_STATE:
-                        ShootingParamSliderState = DisplayState.AlwaysVisible;
-                        StartToShowSliders();
                         break;
                     case SHORT_STATE:
-                        ShootingParamSliderState = DisplayState.Collapsible;
-                        AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(10) }, 180, 0).Begin();
-                        StartToHideSliders();
                         break;
                 }
             };
-            switch (groups[1].CurrentState.Name)
-            {
-                case TALL_STATE:
-                    ShootingParamSliderState = DisplayState.AlwaysVisible;
-                    StartToShowSliders(0);
-                    break;
-                case SHORT_STATE:
-                    ShootingParamSliderState = DisplayState.Collapsible;
-                    StartToHideSliders(0);
-                    break;
-            }
         }
 
         private HistogramCreator HistogramCreator;
@@ -291,8 +275,8 @@ namespace Locana
                     ControlPanel.Children.Add(panel);
                 }
 
-                ShootingParamSliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
-
+                Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
+                ShootingParams.DataContext = ScreenViewData;
                 HideFrontScreen();
             });
 
@@ -646,85 +630,7 @@ namespace Locana
             };
             return task;
         }
-
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            OpenCloseSliders();
-        }
-
-        private void Grid_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            OpenCloseSliders();
-        }
-
-        private void OpenCloseSliders()
-        {
-            if (ShootingParamSliderState == DisplayState.AlwaysVisible)
-            {
-                return;
-            }
-
-            if (SlidersDisplayed)
-            {
-                StartToHideSliders();
-                AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(200) }, 180, 0).Begin();
-            }
-            else
-            {
-                StartToShowSliders();
-                AnimationHelper.CreateRotateAnimation(new AnimationRequest() { Target = OpenSliderImage, Duration = TimeSpan.FromMilliseconds(200) }, 0, 180).Begin();
-            }
-        }
-
-        bool SlidersDisplayed = false;
-
-        void StartToShowSliders(double duration = 150)
-        {
-            ShootingParamSliders.Visibility = Visibility.Visible;
-            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
-            {
-                Target = Bottom,
-                Duration = TimeSpan.FromMilliseconds(duration),
-                RequestFadeSide = FadeSide.Bottom,
-                RequestFadeType = FadeType.FadeIn,
-                Distance = ShootingParamSliders.ActualHeight,
-                Completed = (sender, args) =>
-                {
-                    SlidersDisplayed = true;
-                }
-            }).Begin();
-        }
-
-        void StartToHideSliders(double duration = 150)
-        {
-            if (ShootingParamSliders.ActualHeight == 0) { return; }
-
-            AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
-            {
-                Target = Bottom,
-                Duration = TimeSpan.FromMilliseconds(duration),
-                Completed = (sender, obj) =>
-                {
-                    SlidersDisplayed = false;
-                },
-                RequestFadeSide = FadeSide.Bottom,
-                RequestFadeType = FadeType.FadeOut,
-                Distance = ShootingParamSliders.ActualHeight,
-                WithFade = false,
-            }).Begin();
-            AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
-            {
-                Target = ShootingParamSliders,
-                Duration = TimeSpan.FromMilliseconds(150),
-                RequestFadeType = FadeType.FadeOut,
-                Completed = (sender, obj) =>
-                {
-                    ShootingParamSliders.Opacity = 1.0;
-                }
-            }).Begin();
-        }
-
-        DisplayState ShootingParamSliderState = DisplayState.AlwaysVisible;
+        
         DisplayState ControlPanelState = DisplayState.AlwaysVisible;
 
         enum DisplayState
