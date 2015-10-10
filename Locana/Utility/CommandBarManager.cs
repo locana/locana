@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Kazyx.Uwpmm.DataModel;
+using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Data;
 
 namespace Kazyx.Uwpmm.Utility
 {
@@ -15,7 +16,97 @@ namespace Kazyx.Uwpmm.Utility
             EnabledItems.Add(AppBarItemType.Content, new SortedSet<AppBarItem>());
         }
 
-        public CommandBar bar = new CommandBar();
+        private CommandBar bar = new CommandBar();
+
+        private LiveviewScreenViewData _ContenteViewData = null;
+        public LiveviewScreenViewData ContentViewData
+        {
+            get { return _ContenteViewData; }
+            set
+            {
+                _ContenteViewData = value;
+                this.bar.Content = BuildContentPanel(value, EnabledItems[AppBarItemType.Content]);
+            }
+        }
+
+        StackPanel BuildContentPanel(LiveviewScreenViewData data, SortedSet<AppBarItem> items)
+        {
+            var panel = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                Height = 40,
+                Margin = new Thickness(24, 0, 0, 24),
+            };
+
+            if (items.Contains(AppBarItem.FNumberSlider))
+            {
+                var FnumberButton = NewButtonWithHandler(AppBarItem.FNumberSlider);
+                FnumberButton.SetBinding(Button.VisibilityProperty, new Binding()
+                {
+                    Source = data,
+                    Path = new PropertyPath("IsSetFNumberAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter()
+                });
+                panel.Children.Add(FnumberButton);
+            }
+
+            if (items.Contains(AppBarItem.ShutterSpeedSlider))
+            {
+                var SSButton = NewButtonWithHandler(AppBarItem.ShutterSpeedSlider);
+                SSButton.SetBinding(Button.VisibilityProperty, new Binding()
+                {
+                    Source = data,
+                    Path = new PropertyPath("IsSetShutterSpeedAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter()
+                });
+                panel.Children.Add(SSButton);
+            }
+
+            if (items.Contains(AppBarItem.IsoSlider))
+            {
+                var IsoButton = NewButtonWithHandler(AppBarItem.IsoSlider);
+                IsoButton.SetBinding(Button.VisibilityProperty, new Binding()
+                {
+                    Source = data,
+                    Path = new PropertyPath("IsSetIsoSpeedRateAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter()
+                });
+                panel.Children.Add(IsoButton);
+            }
+
+            if (items.Contains(AppBarItem.EvSlider))
+            {
+                var EvButton = NewButtonWithHandler(AppBarItem.EvSlider);
+                EvButton.SetBinding(Button.VisibilityProperty, new Binding()
+                {
+                    Source = data,
+                    Path = new PropertyPath("IsSetEVAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter()
+                });
+                panel.Children.Add(EvButton);
+            }
+
+            if (items.Contains(AppBarItem.ProgramShiftSlider))
+            {
+                var ProgramShiftButton = NewButtonWithHandler(AppBarItem.ProgramShiftSlider);
+                ProgramShiftButton.SetBinding(Button.VisibilityProperty, new Binding()
+                {
+                    Source = data,
+                    Path = new PropertyPath("IsProgramShiftAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter()
+                });
+                panel.Children.Add(ProgramShiftButton);
+            }
+
+            return panel;
+        }
+
+
 
         private static AppBarButton NewButton(AppBarItem item)
         {
@@ -66,6 +157,16 @@ namespace Kazyx.Uwpmm.Utility
                 default:
                     throw new NotImplementedException();
             }
+        }
+
+        private AppBarButton NewButtonWithHandler(AppBarItem item)
+        {
+            var button = NewButton(item);
+            if (EventHolder.ContainsKey(item))
+            {
+                button.Click += EventHolder[item];
+            }
+            return button;
         }
 
         private readonly Dictionary<AppBarItemType, SortedSet<AppBarItem>> EnabledItems = new Dictionary<AppBarItemType, SortedSet<AppBarItem>>();
@@ -162,33 +263,7 @@ namespace Kazyx.Uwpmm.Utility
                 bar.SecondaryCommands.Add(button);
             }
 
-            var content = new StackPanel()
-            {
-                Orientation = Orientation.Horizontal,
-                Height = 40,
-                Margin = new Thickness(24, 0, 0, 24),
-            };
-            foreach (var item in EnabledItems[AppBarItemType.Content])
-            {
-                var button = NewButton(item);
-                if (EventHolder.ContainsKey(item))
-                {
-                    button.Click += EventHolder[item];
-                }
-                content.Children.Add(button);
-            }
-
-            if (EnabledItems[AppBarItemType.Content].Count == 0)
-            {
-                // In case no content is available, minimize the bar.
-                bar.ClosedDisplayMode = AppBarClosedDisplayMode.Minimal;
-            }
-            else
-            {
-                bar.ClosedDisplayMode = AppBarClosedDisplayMode.Compact;
-            }
-
-            bar.Content = content;
+            bar.Content = BuildContentPanel(ContentViewData, EnabledItems[AppBarItemType.Content]);
             return bar;
         }
 

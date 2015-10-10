@@ -140,8 +140,8 @@ namespace Locana
 
         void HideAllSliders()
         {
-            if(SliderObjects == null) { return; }
-            foreach(var s in SliderObjects)
+            if (SliderObjects == null) { return; }
+            foreach (var s in SliderObjects)
             {
                 if (s.Visibility == Visibility.Visible)
                 {
@@ -277,6 +277,7 @@ namespace Locana
 
                 Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
                 ShootingParams.DataContext = ScreenViewData;
+                _CommandBarManager.ContentViewData = ScreenViewData;
                 HideFrontScreen();
             });
 
@@ -630,7 +631,7 @@ namespace Locana
             };
             return task;
         }
-        
+
         DisplayState ControlPanelState = DisplayState.AlwaysVisible;
 
         enum DisplayState
