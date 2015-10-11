@@ -61,7 +61,7 @@ namespace Locana
             };
 
             this.BottomAppBar = _CommandBarManager.Clear(). //
-                Command(AppBarItem.AppSetting). //
+                HiddenItem(AppBarItem.AppSetting). //
                 Content(AppBarItem.FNumberSlider). //
                 Content(AppBarItem.ShutterSpeedSlider). //
                 Content(AppBarItem.IsoSlider). //
