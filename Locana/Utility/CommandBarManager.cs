@@ -244,6 +244,7 @@ namespace Kazyx.Uwpmm.Utility
             {
                 Opacity = opacity,
                 // ClosedDisplayMode = AppBarClosedDisplayMode.Minimal,
+                HorizontalContentAlignment = HorizontalAlignment.Right,
             };
             foreach (AppBarItem item in EnabledItems[AppBarItemType.Command])
             {
