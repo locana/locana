@@ -181,7 +181,7 @@
     <Compile Include="DataModel\PlaybackAlbum.cs" />
     <Compile Include="DataModel\PlaybackAlbumCollection.cs" />
     <Compile Include="DataModel\PlaybackThumbnail.cs" />
-    <Compile Include="Page\MainPage.xaml.cs">
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Playback\ContentsLoader.cs" />
@@ -409,7 +409,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Page\MainPage.xaml">
+    <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
