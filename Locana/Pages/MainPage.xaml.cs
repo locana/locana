@@ -60,14 +60,16 @@ namespace Locana.Pages
                 });
             };
 
-            this.BottomAppBar = _CommandBarManager.Clear(). //
+            var bar = _CommandBarManager.Clear(). //
                 HiddenItem(AppBarItem.AppSetting). //
                 Content(AppBarItem.FNumberSlider). //
                 Content(AppBarItem.ShutterSpeedSlider). //
                 Content(AppBarItem.IsoSlider). //
                 Content(AppBarItem.EvSlider). //
                 Content(AppBarItem.ProgramShiftSlider). //
-                CreateNew(0.9);
+                CreateNew(1.0);
+            this.AppBarUnit.Children.Clear();
+            this.AppBarUnit.Children.Add(bar);
         }
 
         CommandBarManager _CommandBarManager = new CommandBarManager();

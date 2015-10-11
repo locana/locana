@@ -26,6 +26,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="72" />
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -95,7 +96,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid Grid.RowSpan="3"
+        <Grid Grid.RowSpan="4"
               Margin="0"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
@@ -138,7 +139,7 @@
         </Grid>
 
         <Grid x:Name="FrontScreen"
-              Grid.RowSpan="3"
+              Grid.RowSpan="4"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
               Canvas.ZIndex="100"
@@ -163,6 +164,22 @@
                     <SolidColorBrush Color="{ThemeResource ApplicationForegroundThemeBrush}" />
                 </Rectangle.Fill>
             </Rectangle>
+        </Grid>
+
+        <StackPanel Name="AppBarUnit"
+                    Grid.RowSpan="4"
+                    VerticalAlignment="Bottom"
+                    Canvas.ZIndex="40" />
+
+        <Grid x:Name="LiveviewGrid"
+              Grid.RowSpan="4"
+              Canvas.ZIndex="3">
+            <Image x:Name="LiveviewImage"
+                   Margin="10"
+                   Loaded="LiveviewImage_Loaded"
+                   Source="{Binding Image,
+                                    Mode=OneWay}"
+                   Unloaded="LiveviewImage_Unloaded" />
         </Grid>
 
         <Grid x:Name="Header"
@@ -244,20 +261,9 @@
                             VerticalAlignment="Top"
                             Canvas.ZIndex="20" />
 
-        <Grid x:Name="LiveviewGrid"
-              Grid.Row="1"
-              Canvas.ZIndex="3">
-            <Image x:Name="LiveviewImage"
-                   Margin="10"
-                   Loaded="LiveviewImage_Loaded"
-                   Source="{Binding Image,
-                                    Mode=OneWay}"
-                   Unloaded="LiveviewImage_Unloaded" />
-        </Grid>
-
         <StackPanel x:Name="Bottom"
                     Grid.Row="1"
-                    Grid.RowSpan="2"
+                    Grid.RowSpan="3"
                     VerticalAlignment="Bottom"
                     Canvas.ZIndex="30">
 
@@ -430,6 +436,5 @@
                                                 Converter={StaticResource B2VConverter}}" />
             </Grid>
         </StackPanel>
-
     </Grid>
 </Page>
