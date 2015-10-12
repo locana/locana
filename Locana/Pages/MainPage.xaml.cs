@@ -234,6 +234,14 @@ namespace Locana.Pages
             };
         }
 
+        void HideCommandBar()
+        {
+            if (this.AppBarUnit.Children.Count > 0)
+            {
+//                (this.AppBarUnit.Children[0] as CommandBar).ClosedDisplayMode = AppBarClosedDisplayMode.
+            }
+        }
+
         private HistogramCreator HistogramCreator;
 
         private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
@@ -691,6 +699,7 @@ namespace Locana.Pages
                 Completed = (sender, obj) =>
                 {
                     ControlPanelDisplayed = false;
+                    ControlPanelScroll.Visibility = Visibility.Collapsed;
                 },
                 RequestFadeSide = FadeSide.Right,
                 RequestFadeType = FadeType.FadeOut,
