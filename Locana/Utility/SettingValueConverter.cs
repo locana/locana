@@ -383,7 +383,7 @@ namespace Kazyx.Uwpmm.Utility
             {
                 case ZoomMode.ClearImageDigital:
                     return SystemUtil.GetStringResource("ZoomMode_ClearImageDigital");
-                case ZoomMode.Optical:
+                case ZoomMode.OpticalOnly:
                     return SystemUtil.GetStringResource("ZoomMode_Optical");
             }
             return val;
