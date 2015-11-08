@@ -1,15 +1,18 @@
-﻿<UserControl
-    x:Class="Kazyx.Uwpmm.Control.ToggleSetting"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Kazyx.Uwpmm.Control"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="100"
-    d:DesignWidth="400">
+﻿<UserControl x:Class="Kazyx.Uwpmm.Control.ToggleSetting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:Kazyx.Uwpmm.Control"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="100"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Visibility="{Binding SettingVisibility,Mode=OneWay, FallbackValue=Visible}" Margin="0,0,0,5">
+    <Grid x:Name="LayoutRoot"
+          Margin="0,0,0,5"
+          Visibility="{Binding SettingVisibility,
+                               Mode=OneWay,
+                               FallbackValue=Visible}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -18,22 +21,53 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="90" />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="{Binding Title, Mode=OneWay}" Visibility="{Binding GuideVisibility, Mode=OneWay}" Name="SettingName" 
-                       Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center"
-                       FontSize="22" Margin="0"/>
-        <ToggleSwitch Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" 
-                          IsOn="{Binding CurrentSetting, Mode=TwoWay}" IsEnabled="{Binding IsActive, Mode=OneWay}" Margin="0,5,0,0" HorizontalContentAlignment="Right" RenderTransformOrigin="0.5,0.5" Padding="0,-10">
-            <ToggleSwitch.RenderTransform>
-                <CompositeTransform ScaleX="0.8" ScaleY="0.8" TranslateX="-16"/>
-            </ToggleSwitch.RenderTransform>
+        <TextBlock Name="SettingName"
+                   Grid.Column="0"
+                   Margin="0"
+                   VerticalAlignment="Center"
+                   FontSize="22"
+                   Text="{Binding Title,
+                                  Mode=OneWay}"
+                   TextWrapping="Wrap"
+                   Visibility="{Binding GuideVisibility,
+                                        Mode=OneWay}" />
+        <ToggleSwitch Grid.Column="1"
+                      MinWidth="10"
+                      Margin="0,5,0,0"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      HorizontalContentAlignment="Center"
+                      IsEnabled="{Binding IsActive,
+                                          Mode=OneWay}"
+                      IsOn="{Binding CurrentSetting,
+                                     Mode=TwoWay}"
+                      Padding="0,0"
+                      RenderTransformOrigin="0.5,0.5">
+            <!--<ToggleSwitch.RenderTransform>
+                <CompositeTransform ScaleX="0.8"
+                                    ScaleY="0.8" />
+            </ToggleSwitch.RenderTransform>-->
             <ToggleSwitch.OffContent>
-                <Rectangle Height="1" Width="1" AutomationProperties.Name="Off" Visibility="Collapsed"/>
+                <Rectangle Width="1"
+                           Height="1"
+                           AutomationProperties.Name="Off"
+                           Visibility="Collapsed" />
             </ToggleSwitch.OffContent>
             <ToggleSwitch.OnContent>
-                <Ellipse Height="1" Width="1" AutomationProperties.Name="On" Visibility="Collapsed"/>
+                <Ellipse Width="1"
+                         Height="1"
+                         AutomationProperties.Name="On"
+                         Visibility="Collapsed" />
             </ToggleSwitch.OnContent>
         </ToggleSwitch>
-        <TextBlock Grid.Row="1"  TextWrapping="Wrap" FontSize="18"
-                   Name="SettingGuide" Text="{Binding Guide, Mode=OneWay}" Margin="5,-5,0,0" Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Grid.ColumnSpan="2"/>
+        <TextBlock Name="SettingGuide"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   Margin="5,-5,0,0"
+                   FontSize="18"
+                   Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
+                   Text="{Binding Guide,
+                                  Mode=OneWay}"
+                   TextWrapping="Wrap" />
     </Grid>
 </UserControl>

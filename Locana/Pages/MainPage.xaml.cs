@@ -78,7 +78,7 @@ namespace Locana.Pages
         {
             _CommandBarManager.SetEvent(AppBarItem.AppSetting, (s, args) =>
             {
-
+                this.Frame.Navigate(typeof(AppSettingPage));
             });
             _CommandBarManager.SetEvent(AppBarItem.FNumberSlider, (s, args) =>
             {

@@ -98,7 +98,7 @@
               VerticalAlignment="Stretch"
               Canvas.ZIndex="100"
               Visibility="{Binding IsWaitingConnection,
-                                   FallbackValue=Visible,
+                                   FallbackValue=Collapsed,
                                    Converter={StaticResource B2VConverter}}">
             <StackPanel HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
