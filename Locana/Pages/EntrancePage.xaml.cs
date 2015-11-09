@@ -1,18 +1,15 @@
 ﻿using Kazyx.Uwpmm.Utility;
 using Locana.DataModel;
+using Locana.Utility;
 using Naotaco.Nfc;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Data.Xml.Dom;
 using Windows.Networking.Proximity;
-using Windows.Storage;
 using Windows.UI.Core;
-using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -103,39 +100,6 @@ namespace Locana.Pages
             content.OnClick();
         }
 
-        private ToastNotification BuildToast(string str, StorageFile file = null)
-        {
-            ToastTemplateType template = ToastTemplateType.ToastImageAndText01;
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(template);
-            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(str));
-
-            var toastImageAttributes = toastXml.GetElementsByTagName("image");
-
-            if (file == null)
-            {
-                ((XmlElement)toastImageAttributes[0]).SetAttribute("src", "ms-appx:///Assets/Toast/Locana_square_full.png");
-            }
-            else
-            {
-                ((XmlElement)toastImageAttributes[0]).SetAttribute("src", file.Path);
-            }
-            return new ToastNotification(toastXml);
-        }
-
-        private void ShowToast(string str, StorageFile file = null)
-        {
-            Debug.WriteLine("toast with image: " + str);
-            var toast = BuildToast(str, file);
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
-        }
-
-        private void ShowError(string v)
-        {
-            Debug.WriteLine("error: " + v);
-            ShowToast(v);
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeProximityDevice();
@@ -213,7 +177,7 @@ namespace Locana.Pages
             if (err != "")
             {
                 DebugUtil.Log("Failed to read NFC: " + err);
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { ShowError(err); });
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { PageHelper.ShowErrorToast(err); });
                 return;
             }
 

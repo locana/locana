@@ -8,16 +8,15 @@ using Kazyx.Uwpmm.Control;
 using Kazyx.Uwpmm.DataModel;
 using Kazyx.Uwpmm.Settings;
 using Kazyx.Uwpmm.Utility;
+using Locana.Utility;
 using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Windows.Data.Xml.Dom;
 using Windows.Graphics.Display;
 using Windows.Storage;
 using Windows.UI.Core;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -232,7 +231,7 @@ namespace Locana.Pages
 
         private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
         {
-            ShowToast("picture saved!", file);
+            PageHelper.ShowToast("picture saved!", file);
         }
 
         private TargetDevice target;
@@ -397,39 +396,6 @@ namespace Locana.Pages
             LayoutRoot.DataContext = null;
         }
 
-        private ToastNotification BuildToast(string str, StorageFile file = null)
-        {
-            ToastTemplateType template = ToastTemplateType.ToastImageAndText01;
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(template);
-            XmlNodeList toastTextElements = toastXml.GetElementsByTagName("text");
-            toastTextElements[0].AppendChild(toastXml.CreateTextNode(str));
-
-            var toastImageAttributes = toastXml.GetElementsByTagName("image");
-
-            if (file == null)
-            {
-                ((XmlElement)toastImageAttributes[0]).SetAttribute("src", "ms-appx:///Assets/Toast/Locana_square_full.png");
-            }
-            else
-            {
-                ((XmlElement)toastImageAttributes[0]).SetAttribute("src", file.Path);
-            }
-            return new ToastNotification(toastXml);
-        }
-
-        private void ShowToast(string str, StorageFile file = null)
-        {
-            Debug.WriteLine("toast with image: " + str);
-            var toast = BuildToast(str, file);
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
-        }
-
-        private void ShowError(string v)
-        {
-            Debug.WriteLine("error: " + v);
-            ShowToast(v);
-        }
-
         private async void ZoomOutButton_Click(object sender, RoutedEventArgs e)
         {
             try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop); }
@@ -468,7 +434,7 @@ namespace Locana.Pages
 
         private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (CameraStatusUtility.IsContinuousShootingMode(target)) { ShowToast(SystemUtil.GetStringResource("Message_ContinuousShootingGuide")); }
+            if (CameraStatusUtility.IsContinuousShootingMode(target)) { PageHelper.ShowToast(SystemUtil.GetStringResource("Message_ContinuousShootingGuide")); }
             else { ShutterButtonPressed(); }
         }
 
@@ -501,7 +467,7 @@ namespace Locana.Pages
                 catch (RemoteApiException ex)
                 {
                     DebugUtil.Log(ex.StackTrace);
-                    ShowError(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
+                    PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
                 }
             }
         }
@@ -518,7 +484,7 @@ namespace Locana.Pages
                 catch (RemoteApiException ex)
                 {
                     DebugUtil.Log(ex.StackTrace);
-                    ShowError(SystemUtil.GetStringResource("Error_StopContinuousShooting"));
+                    PageHelper.ShowErrorToast(SystemUtil.GetStringResource("Error_StopContinuousShooting"));
                 }
             }
         }
@@ -540,7 +506,7 @@ namespace Locana.Pages
                             case SequentialOperation.ShootingResult.StillSucceed:
                                 if (!ApplicationSettings.GetInstance().IsPostviewTransferEnabled)
                                 {
-                                    ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
+                                    PageHelper.ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
                                 }
                                 break;
                             case SequentialOperation.ShootingResult.StartSucceed:
@@ -548,10 +514,10 @@ namespace Locana.Pages
                                 break;
                             case SequentialOperation.ShootingResult.StillFailed:
                             case SequentialOperation.ShootingResult.StartFailed:
-                                ShowError(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
+                                PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
                                 break;
                             case SequentialOperation.ShootingResult.StopFailed:
-                                ShowError(SystemUtil.GetStringResource("ErrorMessage_fatal"));
+                                PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_fatal"));
                                 break;
                             default:
                                 break;
@@ -590,10 +556,10 @@ namespace Locana.Pages
                     switch (result)
                     {
                         case PeriodicalShootingTask.PeriodicalShootingResult.Skipped:
-                            ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_Skipped"));
+                            PageHelper.ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_Skipped"));
                             break;
                         case PeriodicalShootingTask.PeriodicalShootingResult.Succeed:
-                            ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
+                            PageHelper.ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
                             break;
                     };
                 });
@@ -605,13 +571,13 @@ namespace Locana.Pages
                     switch (reason)
                     {
                         case PeriodicalShootingTask.StopReason.ShootingFailed:
-                            ShowError(SystemUtil.GetStringResource("ErrorMessage_Interval"));
+                            PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_Interval"));
                             break;
                         case PeriodicalShootingTask.StopReason.SkipLimitExceeded:
-                            ShowError(SystemUtil.GetStringResource("PeriodicalShooting_SkipLimitExceed"));
+                            PageHelper.ShowErrorToast(SystemUtil.GetStringResource("PeriodicalShooting_SkipLimitExceed"));
                             break;
                         case PeriodicalShootingTask.StopReason.RequestedByUser:
-                            ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_StoppedByUser"));
+                            PageHelper.ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_StoppedByUser"));
                             break;
                     };
                 });
