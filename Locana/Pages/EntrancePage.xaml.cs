@@ -28,17 +28,21 @@ namespace Locana.Pages
         {
             this.InitializeComponent();
 
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppBar_AppSetting"), () =>
+            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppBar_AppSetting"),
+                new Uri("ms-appx:///Assets/AppBar/ControlPanel.png"), () =>
             {
                 Frame.Navigate(typeof(AppSettingPage));
             }));
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"), () =>
+            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"),
+                new Uri("ms-appx:///Assets/AppBar/appBar_wifi.png"), () =>
             {
             }));
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("Donation"), () =>
+            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("Donation"),
+                new Uri("ms-appx:///Assets/AppBar/appBar_Dollar.png"), () =>
             {
             }));
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("About"), () =>
+            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("About"),
+                new Uri("ms-appx:///Assets/AppBar/feature.settings.png"), () =>
             {
             }));
 
