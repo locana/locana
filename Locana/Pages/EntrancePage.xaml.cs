@@ -189,14 +189,14 @@ namespace Locana.Pages
                     {
                         var sb = new StringBuilder();
                         sb.Append(SystemUtil.GetStringResource("Message_NFC_succeed"));
-                        sb.Append(System.Environment.NewLine);
-                        sb.Append(System.Environment.NewLine);
+                        sb.Append(Environment.NewLine);
+                        sb.Append(Environment.NewLine);
                         sb.Append("SSID: ");
                         sb.Append(r.SSID);
-                        sb.Append(System.Environment.NewLine);
+                        sb.Append(Environment.NewLine);
                         sb.Append("Password: ");
                         sb.Append(r.Password);
-                        sb.Append(System.Environment.NewLine);
+                        sb.Append(Environment.NewLine);
 
                         PutToClipBoard(r.Password);
 
