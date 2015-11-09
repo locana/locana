@@ -9,14 +9,12 @@
       xmlns:util="using:Kazyx.Uwpmm.Utility"
       Loaded="Page_Loaded"
       RequestedTheme="Dark"
-      Unloaded="Page_Unloaded"
       mc:Ignorable="d">
 
     <Page.Resources>
         <util:BoolToVisibilityConverter x:Key="B2VConverter" />
         <util:BoolToVisibilityReverseConverter x:Key="B2VRConverter" />
     </Page.Resources>
-
 
     <Grid x:Name="LayoutRoot"
           HorizontalAlignment="Stretch"

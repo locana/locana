@@ -173,6 +173,7 @@
     <Compile Include="DataModel\CompositiveDataModel.cs" />
     <Compile Include="DataModel\ContentInfo.cs" />
     <Compile Include="DataModel\ControlPanelDataSource.cs" />
+    <Compile Include="DataModel\EntranceGridPanelCollection.cs" />
     <Compile Include="DataModel\ImageDataSource.cs" />
     <Compile Include="DataModel\LiveviewScreenViewData.cs" />
     <Compile Include="DataModel\MoviePlaybackData.cs" />
@@ -183,6 +184,9 @@
     <Compile Include="DataModel\PlaybackThumbnail.cs" />
     <Compile Include="Pages\AppSettingPage.xaml.cs">
       <DependentUpon>AppSettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EntrancePage.xaml.cs">
+      <DependentUpon>EntrancePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -413,6 +417,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\AppSettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EntrancePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

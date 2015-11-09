@@ -1103,4 +1103,10 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="LiveviewRotation_guide" xml:space="preserve">
     <value>一部の機種では、カメラ本体の回転をライブビュー映像に反映できます</value>
   </data>
+  <data name="PanelGroup_AppMenu" xml:space="preserve">
+    <value>アプリメニュー</value>
+  </data>
+  <data name="PanelGroup_Devices" xml:space="preserve">
+    <value>発見したデバイス</value>
+  </data>
 </root>

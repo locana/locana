@@ -1181,4 +1181,10 @@ Open gallary to browse contents in your camera device.</value>
   <data name="LiveviewRotation_guide" xml:space="preserve">
     <value>Synchronize camera and liveview orientation. Note that this feature is supported only on some models.</value>
   </data>
+  <data name="PanelGroup_AppMenu" xml:space="preserve">
+    <value>Application menu</value>
+  </data>
+  <data name="PanelGroup_Devices" xml:space="preserve">
+    <value>Detected devices</value>
+  </data>
 </root>

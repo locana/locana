@@ -9,25 +9,19 @@ using Kazyx.Uwpmm.DataModel;
 using Kazyx.Uwpmm.Settings;
 using Kazyx.Uwpmm.Utility;
 using Naotaco.ImageProcessor.Histogram;
-using Naotaco.Nfc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.DataTransfer;
 using Windows.Data.Xml.Dom;
 using Windows.Graphics.Display;
-using Windows.Networking.Proximity;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -38,8 +32,6 @@ namespace Locana.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_Discovered;
-            NetworkObserver.INSTANCE.ForceRestart();
             MediaDownloader.Instance.Fetched += OnFetchdImage;
 
             InitializeCommandBar();
@@ -164,13 +156,7 @@ namespace Locana.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeVisualStates();
-            InitializeProximityDevice();
             DisplayInformation.GetForCurrentView().OrientationChanged += MainPage_OrientationChanged;
-        }
-
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            StopProximityDevice();
         }
 
         private void MainPage_OrientationChanged(DisplayInformation info, object args)
@@ -238,7 +224,7 @@ namespace Locana.Pages
         {
             if (this.AppBarUnit.Children.Count > 0)
             {
-//                (this.AppBarUnit.Children[0] as CommandBar).ClosedDisplayMode = AppBarClosedDisplayMode.
+                //                (this.AppBarUnit.Children[0] as CommandBar).ClosedDisplayMode = AppBarClosedDisplayMode.
             }
         }
 
@@ -256,9 +242,15 @@ namespace Locana.Pages
 
         LiveviewScreenViewData ScreenViewData;
 
-        async void NetworkObserver_Discovered(object sender, CameraDeviceEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var target = e.CameraDevice;
+            base.OnNavigatedTo(e);
+            var target = e.Parameter as TargetDevice;
+            SetupScreen(target);
+        }
+
+        async void SetupScreen(TargetDevice target)
+        {
             try
             {
                 await SequentialOperation.SetUp(target, liveview);
@@ -726,116 +718,6 @@ namespace Locana.Pages
         private void Grid_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
             OpenCloseControlPanel();
-        }
-
-        ProximityDevice _ProximityDevice;
-        long ProximitySubscribeId;
-
-        private void InitializeProximityDevice()
-        {
-            StopProximityDevice();
-
-            try
-            {
-                _ProximityDevice = ProximityDevice.GetDefault();
-            }
-            catch (FileNotFoundException)
-            {
-                _ProximityDevice = null;
-                DebugUtil.Log("Caught ununderstandable exception. ");
-                return;
-            }
-            catch (COMException)
-            {
-                _ProximityDevice = null;
-                DebugUtil.Log("Caught ununderstandable exception. ");
-                return;
-            }
-
-            if (_ProximityDevice == null)
-            {
-                DebugUtil.Log("It seems this is not NFC available device");
-                return;
-            }
-
-            try
-            {
-                ProximitySubscribeId = _ProximityDevice.SubscribeForMessage("NDEF", ProximityMessageReceivedHandler);
-            }
-            catch (Exception e)
-            {
-                _ProximityDevice = null;
-                DebugUtil.Log("Caught ununderstandable exception. " + e.Message + e.StackTrace);
-                return;
-            }
-        }
-
-        private void StopProximityDevice()
-        {
-            if (_ProximityDevice != null)
-            {
-                _ProximityDevice.StopSubscribingForMessage(ProximitySubscribeId);
-                _ProximityDevice = null;
-            }
-        }
-
-        private async void ProximityMessageReceivedHandler(ProximityDevice sender, ProximityMessage message)
-        {
-            var parser = new NdefParser(message);
-            var ndefRecords = new List<NdefRecord>();
-
-            var err = "";
-
-            try { ndefRecords = parser.Parse(); }
-            catch (NoSonyNdefRecordException) { err = SystemUtil.GetStringResource("ErrorMessage_CantFindSonyRecord"); }
-            catch (NoNdefRecordException) { err = SystemUtil.GetStringResource("ErrorMessage_ParseNFC"); }
-            catch (NdefParseException) { err = SystemUtil.GetStringResource("ErrorMessage_ParseNFC"); }
-            catch (Exception) { err = SystemUtil.GetStringResource("ErrorMessage_fatal"); }
-
-            if (err != "")
-            {
-                DebugUtil.Log("Failed to read NFC: " + err);
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { ShowError(err); });
-                return;
-            }
-
-            foreach (NdefRecord r in ndefRecords)
-            {
-                if (r.SSID.Length > 0 && r.Password.Length > 0)
-                {
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                    {
-                        var sb = new StringBuilder();
-                        sb.Append(SystemUtil.GetStringResource("Message_NFC_succeed"));
-                        sb.Append(System.Environment.NewLine);
-                        sb.Append(System.Environment.NewLine);
-                        sb.Append("SSID: ");
-                        sb.Append(r.SSID);
-                        sb.Append(System.Environment.NewLine);
-                        sb.Append("Password: ");
-                        sb.Append(r.Password);
-                        sb.Append(System.Environment.NewLine);
-
-                        PutToClipBoard(r.Password);
-
-                        var dialog = new MessageDialog(sb.ToString());
-                        try
-                        {
-                            await dialog.ShowAsync();
-                        }
-                        catch (UnauthorizedAccessException) {/* Duplicated message dialog */}
-                    });
-                    break;
-                }
-            }
-        }
-
-        void PutToClipBoard(string s)
-        {
-            var package = new DataPackage();
-            package.RequestedOperation = DataPackageOperation.Copy;
-            package.SetText(s);
-            Clipboard.SetContent(package);
         }
     }
 
