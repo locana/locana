@@ -30,21 +30,26 @@ namespace Locana.Pages
 
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppBar_AppSetting"),
                 new Uri("ms-appx:///Assets/AppBar/ControlPanel.png"), () =>
-            {
-                Frame.Navigate(typeof(AppSettingPage));
-            }));
+                {
+                    Frame.Navigate(typeof(AppSettingPage));
+                }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"),
                 new Uri("ms-appx:///Assets/AppBar/appBar_wifi.png"), () =>
-            {
-            }));
+                {
+                }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("Donation"),
                 new Uri("ms-appx:///Assets/AppBar/appBar_Dollar.png"), () =>
-            {
-            }));
+                {
+                }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("About"),
                 new Uri("ms-appx:///Assets/AppBar/feature.settings.png"), () =>
-            {
-            }));
+                {
+                }));
+            appMenuGroup.Add(new EntrancePanel("Find QR Code",
+                new Uri("ms-appx:///Assets/AppBar/feature.settings.png"), () =>
+                {
+                    Frame.Navigate(typeof(QrCodePage));
+                }));
 
             panelSource.Add(devicesGroup);
             panelSource.Add(appMenuGroup);

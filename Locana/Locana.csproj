@@ -75,6 +75,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -190,6 +191,9 @@
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\QrCodePage.xaml.cs">
+      <DependentUpon>QrCodePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Playback\ContentsLoader.cs" />
     <Compile Include="Playback\DlnaContentsLoader.cs" />
@@ -428,6 +432,10 @@
     <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\QrCodePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\StyleResources.xaml">
       <SubType>Designer</SubType>

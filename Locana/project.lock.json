@@ -1574,6 +1574,14 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "ZXing.Net/0.14.0.1": {
+        "compile": {
+          "lib/windows8/ZXing.winmd": {}
+        },
+        "runtime": {
+          "lib/windows8/ZXing.winmd": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -3238,6 +3246,14 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "ZXing.Net/0.14.0.1": {
+        "compile": {
+          "lib/windows8/ZXing.winmd": {}
+        },
+        "runtime": {
+          "lib/windows8/ZXing.winmd": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
@@ -4873,6 +4889,14 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "ZXing.Net/0.14.0.1": {
+        "compile": {
+          "lib/windows8/ZXing.winmd": {}
+        },
+        "runtime": {
+          "lib/windows8/ZXing.winmd": {}
         }
       }
     },
@@ -6543,6 +6567,14 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "ZXing.Net/0.14.0.1": {
+        "compile": {
+          "lib/windows8/ZXing.winmd": {}
+        },
+        "runtime": {
+          "lib/windows8/ZXing.winmd": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
@@ -8178,6 +8210,14 @@
         },
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "ZXing.Net/0.14.0.1": {
+        "compile": {
+          "lib/windows8/ZXing.winmd": {}
+        },
+        "runtime": {
+          "lib/windows8/ZXing.winmd": {}
         }
       }
     },
@@ -9848,6 +9888,14 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "ZXing.Net/0.14.0.1": {
+        "compile": {
+          "lib/windows8/ZXing.winmd": {}
+        },
+        "runtime": {
+          "lib/windows8/ZXing.winmd": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
@@ -11484,6 +11532,14 @@
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "ZXing.Net/0.14.0.1": {
+        "compile": {
+          "lib/windows8/ZXing.winmd": {}
+        },
+        "runtime": {
+          "lib/windows8/ZXing.winmd": {}
+        }
       }
     }
   },
@@ -11523,7 +11579,7 @@
       ]
     },
     "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-      "sha512": "NvBQnFeiFd0O1QdBz06UGApD7zn7ztVi7qO18IsM3EjiXRNgfrEBXB+azNm8XqLY8xGFAqh3HAuSd/wHZMe0XA==",
+      "sha512": "fNCAjIwvbTV+G0dT14bgM5tptsqeSaKQaCrlq7QknOq1Xdm8ZmgsDYddMgXkvykyKLjWyU6fKuOpj6fsQJy+wQ==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -14908,6 +14964,70 @@
         "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll",
         "System.Xml.XmlSerializer.nuspec"
       ]
+    },
+    "ZXing.Net/0.14.0.1": {
+      "sha512": "XnYnyNARozhoRJwdioHTcsJFMsIbYj/wwecL9sGq0mhmEA7LbElzLiVLUMuZRFbrHiElGbVCjD2GbeQG3tzZ7Q==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/MonoAndroid/zxing.monoandroid.dll",
+        "lib/MonoAndroid/zxing.monoandroid.pdb",
+        "lib/MonoAndroid/zxing.monoandroid.xml",
+        "lib/native/ZXing.pdb",
+        "lib/native/ZXing.pri",
+        "lib/native/ZXing.winmd",
+        "lib/native/ZXing.XML",
+        "lib/net20/zxing.dll",
+        "lib/net20/zxing.pdb",
+        "lib/net20/zxing.XML",
+        "lib/net20-cf/zxing.ce2.0.dll",
+        "lib/net20-cf/zxing.ce2.0.pdb",
+        "lib/net20-cf/zxing.ce2.0.xml",
+        "lib/net35/zxing.dll",
+        "lib/net35/zxing.pdb",
+        "lib/net35/zxing.XML",
+        "lib/net35-cf/zxing.ce3.5.dll",
+        "lib/net35-cf/zxing.ce3.5.pdb",
+        "lib/net35-cf/zxing.ce3.5.xml",
+        "lib/net40/zxing.dll",
+        "lib/net40/zxing.pdb",
+        "lib/net40/zxing.presentation.dll",
+        "lib/net40/zxing.presentation.pdb",
+        "lib/net40/zxing.presentation.XML",
+        "lib/net40/zxing.XML",
+        "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.dll",
+        "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.pdb",
+        "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.XML",
+        "lib/sl3-wp/zxing.wp7.0.dll",
+        "lib/sl3-wp/zxing.wp7.0.pdb",
+        "lib/sl3-wp/zxing.wp7.0.XML",
+        "lib/sl4/zxing.sl4.dll",
+        "lib/sl4/zxing.sl4.pdb",
+        "lib/sl4/zxing.sl4.XML",
+        "lib/sl4-wp71/zxing.wp7.1.dll",
+        "lib/sl4-wp71/zxing.wp7.1.pdb",
+        "lib/sl4-wp71/zxing.wp7.1.XML",
+        "lib/sl5/zxing.sl5.dll",
+        "lib/sl5/zxing.sl5.pdb",
+        "lib/sl5/zxing.sl5.XML",
+        "lib/windows8/ZXing.pdb",
+        "lib/windows8/ZXing.pri",
+        "lib/windows8/ZXing.winmd",
+        "lib/windows8/ZXing.XML",
+        "lib/windows8-managed/zxing.winrt.dll",
+        "lib/windows8-managed/zxing.winrt.pdb",
+        "lib/windows8-managed/zxing.winrt.XML",
+        "lib/wp8/zxing.wp8.0.dll",
+        "lib/wp8/zxing.wp8.0.pdb",
+        "lib/wp8/zxing.wp8.0.XML",
+        "lib/wpa81/ZXing.pdb",
+        "lib/wpa81/ZXing.pri",
+        "lib/wpa81/ZXing.winmd",
+        "lib/wpa81/ZXing.XML",
+        "package/services/metadata/core-properties/ab33915f5fc246e0a2a0a4cfe673ee83.psmdcp",
+        "ZXing.Net.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -14915,7 +15035,8 @@
       "Microsoft.ApplicationInsights >= 1.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0"
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
+      "ZXing.Net >= 0.14.0.1"
     ],
     "UAP,Version=v10.0": []
   }

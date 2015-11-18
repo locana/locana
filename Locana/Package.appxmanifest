@@ -28,5 +28,7 @@
     <uap:Capability Name="videosLibrary" />
     <DeviceCapability Name="proximity" />
     <DeviceCapability Name="location" />
+    <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="microphone" />
   </Capabilities>
 </Package>
