@@ -64,8 +64,8 @@ namespace Locana.Pages
         private bool _isInitialized = false;
         private bool _isPreviewing = false;
 
-        private DispatcherTimer CaptureTimer = new DispatcherTimer();
-        private DispatcherTimer FocusTimer = new DispatcherTimer();
+        private DispatcherTimer CaptureTimer;
+        private DispatcherTimer FocusTimer;
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -74,12 +74,14 @@ namespace Locana.Pages
 
             await InitializeCameraAsync();
 
+            CaptureTimer = new DispatcherTimer();
             CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
             CaptureTimer.Tick += async (sender, ev) =>
             {
                 await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
             };
 
+            FocusTimer = new DispatcherTimer();
             FocusTimer.Interval = TimeSpan.FromMilliseconds(2000);
             FocusTimer.Tick += (sender, ev) =>
             {
@@ -88,15 +90,27 @@ namespace Locana.Pages
 
             CaptureTimer.Start();
             FocusTimer.Start();
+
+            SystemNavigationManager.GetForCurrentView()
+                .AppViewBackButtonVisibility
+                = Frame.CanGoBack
+                ? Windows.UI.Core.AppViewBackButtonVisibility.Visible
+                : Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+        }
+
+        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame.Navigate(typeof(EntrancePage));
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            // Handling of this event is included for completes, as it will only fire when navigating between pages and this sample only includes one page
-
-            await CleanupCameraAsync();
             CaptureTimer.Stop();
             FocusTimer.Stop();
+            await CleanupCameraAsync();
+            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
         }
 
         async void TryToFocus()
@@ -193,7 +207,7 @@ namespace Locana.Pages
         }
 
         /// <summary>
-        /// Starts the preview and adjusts it for for rotation and mirroring after making a request to keep the screen on and unlocks the UI
+        /// Starts the preview and adjusts it for rotation and mirroring after making a request to keep the screen on and unlocks the UI
         /// </summary>
         /// <returns></returns>
         private async Task StartPreviewAsync()
