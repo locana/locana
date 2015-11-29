@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Networking.Proximity;
 using Windows.UI.Core;
@@ -30,21 +31,26 @@ namespace Locana.Pages
 
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppBar_AppSetting"),
                 new Uri("ms-appx:///Assets/AppBar/ControlPanel.png"), () =>
-            {
-                Frame.Navigate(typeof(AppSettingPage));
-            }));
+                {
+                    Frame.Navigate(typeof(AppSettingPage));
+                }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"),
                 new Uri("ms-appx:///Assets/AppBar/appBar_wifi.png"), () =>
-            {
-            }));
+                {
+                }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("Donation"),
                 new Uri("ms-appx:///Assets/AppBar/appBar_Dollar.png"), () =>
-            {
-            }));
+                {
+                }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("About"),
                 new Uri("ms-appx:///Assets/AppBar/feature.settings.png"), () =>
-            {
-            }));
+                {
+                }));
+            appMenuGroup.Add(new EntrancePanel("Find QR Code",
+                new Uri("ms-appx:///Assets/AppBar/feature.settings.png"), () =>
+                {
+                    Frame.Navigate(typeof(QrCodePage));
+                }));
 
             panelSource.Add(devicesGroup);
             panelSource.Add(appMenuGroup);
@@ -52,12 +58,26 @@ namespace Locana.Pages
 
         private EntrancePanelGroupCollection panelSource = new EntrancePanelGroupCollection();
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_Discovered;
             NetworkObserver.INSTANCE.ForceRestart();
+
+            if (e.Parameter != null && (e.Parameter as string).Length > 1)
+            {
+                DebugUtil.Log("found data from QR code: " + e.Parameter as string);
+                try
+                {
+                    var data = SonyQrDataParser.ParseData(e.Parameter as string);
+                    await OnConnectionInfoFound(data.SSID, data.Password);
+                }
+                catch (FormatException ex)
+                {
+                    DebugUtil.Log("QR data parse error: " + ex.Message);
+                }
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -189,31 +209,36 @@ namespace Locana.Pages
             {
                 if (r.SSID.Length > 0 && r.Password.Length > 0)
                 {
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                    {
-                        var sb = new StringBuilder();
-                        sb.Append(SystemUtil.GetStringResource("Message_NFC_succeed"));
-                        sb.Append(Environment.NewLine);
-                        sb.Append(Environment.NewLine);
-                        sb.Append("SSID: ");
-                        sb.Append(r.SSID);
-                        sb.Append(Environment.NewLine);
-                        sb.Append("Password: ");
-                        sb.Append(r.Password);
-                        sb.Append(Environment.NewLine);
-
-                        PutToClipBoard(r.Password);
-
-                        var dialog = new MessageDialog(sb.ToString());
-                        try
-                        {
-                            await dialog.ShowAsync();
-                        }
-                        catch (UnauthorizedAccessException) {/* Duplicated message dialog */}
-                    });
+                    await OnConnectionInfoFound(r.SSID, r.Password);
                     break;
                 }
             }
+        }
+
+        private async Task OnConnectionInfoFound(string SSID, string Password)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                var sb = new StringBuilder();
+                sb.Append(SystemUtil.GetStringResource("Message_NFC_succeed"));
+                sb.Append(Environment.NewLine);
+                sb.Append(Environment.NewLine);
+                sb.Append("SSID: ");
+                sb.Append(SSID);
+                sb.Append(Environment.NewLine);
+                sb.Append("Password: ");
+                sb.Append(Password);
+                sb.Append(Environment.NewLine);
+
+                PutToClipBoard(Password);
+
+                var dialog = new MessageDialog(sb.ToString());
+                try
+                {
+                    await dialog.ShowAsync();
+                }
+                catch (UnauthorizedAccessException) {/* Duplicated message dialog */}
+            });
         }
 
         void PutToClipBoard(string s)

@@ -1,6 +1,9 @@
 Json.NET : The MIT License (MIT)
 - https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
 
+ZXing.Net : The Apache License (Apache)
+- https://zxingnet.codeplex.com/SourceControl/latest#trunk/COPYING
+
 kz-ssdp-discovery : The MIT License (MIT)
 - https://github.com/kazyx/kz-ssdp-discovery/blob/master/LICENSE
 
