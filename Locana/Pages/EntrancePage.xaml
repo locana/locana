@@ -14,6 +14,28 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowWidthStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PanelGrid.ItemHeight" Value="180" />
+                        <Setter Target="PanelGrid.ItemWidth" Value="180" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PanelGrid.ItemHeight" Value="120" />
+                        <Setter Target="PanelGrid.ItemWidth" Value="120" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <GridView x:Name="EntranceGrid"
                   ItemsSource="{Binding Source={StaticResource PanelSources}}"
                   Loaded="EntranceGrid_Loaded"
@@ -32,8 +54,9 @@
             </GridView.ItemTemplate>
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid ItemHeight="256"
-                                   ItemWidth="256"
+                    <ItemsWrapGrid x:Name="PanelGrid"
+                                   ItemHeight="120"
+                                   ItemWidth="120"
                                    Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
