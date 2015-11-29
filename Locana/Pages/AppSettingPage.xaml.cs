@@ -1,9 +1,12 @@
-﻿using Kazyx.Uwpmm.Control;
+﻿using System;
+using Kazyx.Uwpmm.Control;
 using Kazyx.Uwpmm.DataModel;
 using Kazyx.Uwpmm.Utility;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,6 +25,27 @@ namespace Locana.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeItems();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    Frame.CanGoBack
+                    ? AppViewBackButtonVisibility.Visible
+                    : AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
+        }
+
+        private void BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         void InitializeItems()
@@ -162,11 +186,6 @@ namespace Locana.Pages
                 Converter = new BoolToVisibilityConverter(),
             });
             display_settings.Add(fibonacciOriginPanel);
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage));
         }
     }
 }

@@ -91,26 +91,27 @@ namespace Locana.Pages
             CaptureTimer.Start();
             FocusTimer.Start();
 
-            SystemNavigationManager.GetForCurrentView()
-                .AppViewBackButtonVisibility
-                = Frame.CanGoBack
-                ? Windows.UI.Core.AppViewBackButtonVisibility.Visible
-                : Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                Frame.CanGoBack
+                ? AppViewBackButtonVisibility.Visible
+                : AppViewBackButtonVisibility.Collapsed;
 
-            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
         }
 
-        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        private void BackRequested(object sender, BackRequestedEventArgs e)
         {
             Frame.Navigate(typeof(EntrancePage));
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
             CaptureTimer.Stop();
             FocusTimer.Stop();
             await CleanupCameraAsync();
-            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
+            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
         }
 
         async void TryToFocus()

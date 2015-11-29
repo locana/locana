@@ -16,12 +16,6 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <HyperlinkButton x:Name="BackButton"
-                         Margin="16"
-                         HorizontalAlignment="Left"
-                         Click="BackButton_Click"
-                         Content="Back to Main Page"
-                         FontSize="20" />
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="AppSettings"
                         MaxWidth="600"
