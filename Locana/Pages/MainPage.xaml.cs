@@ -181,7 +181,7 @@ namespace Locana.Pages
                 {
                     case WIDE_STATE:
                         ControlPanelState = DisplayState.AlwaysVisible;
-                        // if it's already closed, open immidiately
+                        // if it's already closed, open immediately
                         StartToShowControlPanel();
                         break;
                     case NARROW_STATE:

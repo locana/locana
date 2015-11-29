@@ -64,7 +64,8 @@ namespace Locana.Pages
         private bool _isInitialized = false;
         private bool _isPreviewing = false;
 
-        private DispatcherTimer Timer = new DispatcherTimer();
+        private DispatcherTimer CaptureTimer = new DispatcherTimer();
+        private DispatcherTimer FocusTimer = new DispatcherTimer();
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -73,25 +74,45 @@ namespace Locana.Pages
 
             await InitializeCameraAsync();
 
-            Timer.Interval = TimeSpan.FromMilliseconds(300);
-            Timer.Tick += async (sender, ev) =>
+            CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
+            CaptureTimer.Tick += async (sender, ev) =>
             {
-                await GetPreviewFrameAsSoftwareBitmapAsync();
+                await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
             };
-            Timer.Start();
+
+            FocusTimer.Interval = TimeSpan.FromMilliseconds(2000);
+            FocusTimer.Tick += (sender, ev) =>
+            {
+                TryToFocus();
+            };
+
+            CaptureTimer.Start();
+            FocusTimer.Start();
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            // Handling of this event is included for completenes, as it will only fire when navigating between pages and this sample only includes one page
+            // Handling of this event is included for completes, as it will only fire when navigating between pages and this sample only includes one page
 
             await CleanupCameraAsync();
-            Timer.Stop();
+            CaptureTimer.Stop();
+            FocusTimer.Stop();
+        }
+
+        async void TryToFocus()
+        {
+            if (_mediaCapture == null) { return; }
+
+            var focusControl = _mediaCapture.VideoDeviceController.FocusControl;
+            if (focusControl.Supported)
+            {
+                await focusControl.FocusAsync();
+            }
         }
 
         /// <summary>
         /// In the event of the app being minimized this method handles media property change events. If the app receives a mute
-        /// notification, it is no longer in the foregroud.
+        /// notification, it is no longer in the foreground.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
@@ -242,6 +263,10 @@ namespace Locana.Pages
                         sb.Append(d);
                     }
                     DebugText.Text = sb.ToString();
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        Frame.Navigate(typeof(EntrancePage), sb.ToString());
+                    });
                 }
             }
         }
@@ -321,6 +346,11 @@ namespace Locana.Pages
         private async void CaptureButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             await GetPreviewFrameAsSoftwareBitmapAsync();
+        }
+
+        private void PreviewControl_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            TryToFocus();
         }
     }
 }

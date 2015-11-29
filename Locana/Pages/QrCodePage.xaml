@@ -13,7 +13,9 @@
                 <TextBlock Margin="20"
                            Text="Show me the QR code."
                            TextAlignment="Center" />
-                <CaptureElement Name="PreviewControl" Stretch="Uniform" />
+                <CaptureElement Name="PreviewControl"
+                                Stretch="Uniform"
+                                Tapped="PreviewControl_Tapped" />
                 <TextBlock x:Name="DebugText" />
             </StackPanel>
         </Grid>
