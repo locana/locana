@@ -6,11 +6,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
+using Windows.Devices.Sensors;
 using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
 using Windows.Media;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
+using Windows.Storage.FileProperties;
 using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -71,6 +73,7 @@ namespace Locana.Pages
         {
             // Populate orientation variables with the current state and register for future changes
             _displayOrientation = _displayInformation.CurrentOrientation;
+            _displayInformation.OrientationChanged += _displayInformation_OrientationChanged;
 
             await InitializeCameraAsync();
 
@@ -97,6 +100,59 @@ namespace Locana.Pages
                 : AppViewBackButtonVisibility.Collapsed;
 
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
+
+            await SetPreviewRotationAsync();
+        }
+
+        private async void _displayInformation_OrientationChanged(DisplayInformation sender, object args)
+        {
+            await SetPreviewRotationAsync();
+        }
+
+        private async Task SetPreviewRotationAsync()
+        {
+            // Populate orientation variables with the current state
+            _displayOrientation = _displayInformation.CurrentOrientation;
+
+            // Calculate which way and how far to rotate the preview
+            int rotationDegrees = ConvertDisplayOrientationToDegrees(_displayOrientation);
+
+            var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
+            props.Properties.Add(RotationKey, rotationDegrees);
+            await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
+
+        }
+
+        private static PhotoOrientation ConvertOrientationToPhotoOrientation(SimpleOrientation orientation)
+        {
+            switch (orientation)
+            {
+                case SimpleOrientation.Rotated90DegreesCounterclockwise:
+                    return PhotoOrientation.Rotate90;
+                case SimpleOrientation.Rotated180DegreesCounterclockwise:
+                    return PhotoOrientation.Rotate180;
+                case SimpleOrientation.Rotated270DegreesCounterclockwise:
+                    return PhotoOrientation.Rotate270;
+                case SimpleOrientation.NotRotated:
+                default:
+                    return PhotoOrientation.Normal;
+            }
+        }
+
+        private static int ConvertDisplayOrientationToDegrees(DisplayOrientations orientation)
+        {
+            switch (orientation)
+            {
+                case DisplayOrientations.Portrait:
+                    return 90;
+                case DisplayOrientations.LandscapeFlipped:
+                    return 180;
+                case DisplayOrientations.PortraitFlipped:
+                    return 270;
+                case DisplayOrientations.Landscape:
+                default:
+                    return 0;
+            }
         }
 
         private void BackRequested(object sender, BackRequestedEventArgs e)
@@ -107,11 +163,12 @@ namespace Locana.Pages
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
+            _displayInformation.OrientationChanged -= _displayInformation_OrientationChanged;
 
             CaptureTimer.Stop();
             FocusTimer.Stop();
             await CleanupCameraAsync();
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
         }
 
         async void TryToFocus()
