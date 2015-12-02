@@ -100,6 +100,21 @@ namespace Locana.Pages
             }
 
             PanelSources.Source = panelSource;
+
+
+            // Update initial visual state to the correct one.
+            var vsg = VisualStateManager.GetVisualStateGroups(LayoutRoot);
+            var width = Window.Current.CoreWindow.Bounds.Width;
+            var stateName = width < 720 ? "NarrowState" : "WideState";
+
+            foreach (var state in vsg[0].States)
+            {
+                if (state.Name == stateName)
+                {
+                    var ret = VisualStateManager.GoToState(this, state.Name, true);
+                    break;
+                }
+            }
         }
 
         private void EntranceGrid_Unloaded(object sender, RoutedEventArgs e)

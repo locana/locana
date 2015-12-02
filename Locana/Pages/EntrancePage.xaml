@@ -13,7 +13,7 @@
         <CollectionViewSource x:Name="PanelSources" IsSourceGrouped="True" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
@@ -54,10 +54,7 @@
             </GridView.ItemTemplate>
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid x:Name="PanelGrid"
-                                   ItemHeight="120"
-                                   ItemWidth="120"
-                                   Orientation="Horizontal" />
+                    <ItemsWrapGrid x:Name="PanelGrid" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
             <GridView.GroupStyle>
