@@ -243,7 +243,11 @@ namespace Locana.Pages
                 // Register for a notification when something goes wrong
                 _mediaCapture.Failed += MediaCapture_Failed;
 
-                var settings = new MediaCaptureInitializationSettings { VideoDeviceId = cameraDevice.Id };
+                var settings = new MediaCaptureInitializationSettings
+                {
+                    VideoDeviceId = cameraDevice.Id,
+                    StreamingCaptureMode = StreamingCaptureMode.Video,
+                };
 
                 // Initialize MediaCapture
                 try
