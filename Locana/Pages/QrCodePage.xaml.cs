@@ -14,6 +14,7 @@ using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.FileProperties;
 using Windows.System.Display;
+using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -109,6 +110,8 @@ namespace Locana.Pages
             await SetPreviewRotationAsync();
         }
 
+        private const string WINDOWS_DESKTOP = "Windows.Desktop";
+
         private async Task SetPreviewRotationAsync()
         {
             // Populate orientation variables with the current state
@@ -119,8 +122,12 @@ namespace Locana.Pages
 
             var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
             props.Properties.Add(RotationKey, rotationDegrees);
-            await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
 
+            // On Desktop, this setting may stop some of webcams.
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != WINDOWS_DESKTOP)
+            {
+                await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
+            }
         }
 
         private static PhotoOrientation ConvertOrientationToPhotoOrientation(SimpleOrientation orientation)
