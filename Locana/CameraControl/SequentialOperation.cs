@@ -215,12 +215,12 @@ namespace Kazyx.Uwpmm.CameraControl
             try
             {
                 await task();
-                if (Finished != null) { Finished.Invoke(ShootingResult.StartSucceed); }
+                Finished?.Invoke(ShootingResult.StartSucceed);
             }
             catch (RemoteApiException ex)
             {
                 DebugUtil.Log(ex.StackTrace);
-                if (Finished != null) { Finished.Invoke(ShootingResult.StartFailed); }
+                Finished?.Invoke(ShootingResult.StartFailed);
             }
         }
 
@@ -229,12 +229,12 @@ namespace Kazyx.Uwpmm.CameraControl
             try
             {
                 await task();
-                if (Finished != null) { Finished.Invoke(ShootingResult.StopSucceed); }
+                Finished?.Invoke(ShootingResult.StopSucceed);
             }
             catch (RemoteApiException ex)
             {
                 DebugUtil.Log(ex.StackTrace);
-                if (Finished != null) { Finished.Invoke(ShootingResult.StopFailed); }
+                Finished?.Invoke(ShootingResult.StopFailed);
 
             }
         }
@@ -253,20 +253,18 @@ namespace Kazyx.Uwpmm.CameraControl
         {
             foreach (var target in devices)
             {
-                if (target == null || target.Status == null || target.Status.ShootMode == null) { return; }
-
-                switch (target.Status.ShootMode.Current)
+                switch (target?.Status?.ShootMode?.Current ?? "")
                 {
                     case ShootModeParam.Still:
                         try
                         {
                             await TakePicture(target.Api, GeopositionManager.INSTANCE.LatestPosition);
-                            if (Finished != null) { Finished.Invoke(ShootingResult.StillSucceed); }
+                            Finished?.Invoke(ShootingResult.StillSucceed);
                         }
                         catch (RemoteApiException e)
                         {
                             DebugUtil.Log(e.StackTrace);
-                            if (Finished != null) { Finished.Invoke(ShootingResult.StillFailed); }
+                            Finished?.Invoke(ShootingResult.StillFailed);
                         }
                         break;
                     case ShootModeParam.Movie:

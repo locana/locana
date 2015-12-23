@@ -1,6 +1,5 @@
 ﻿using Kazyx.DeviceDiscovery;
 using Kazyx.Uwpmm.CameraControl;
-using Kazyx.Uwpmm.Playback;
 using Kazyx.Uwpmm.UPnP;
 using System;
 using System.Collections.Generic;
@@ -54,7 +53,7 @@ namespace Kazyx.Uwpmm.Utility
 
         protected void OnDevicesCleared()
         {
-            DevicesCleared.Raise(this, null);
+            DevicesCleared?.Invoke(this, null);
         }
 
         private Dictionary<string, TargetDevice> devices = new Dictionary<string, TargetDevice>();
@@ -75,14 +74,14 @@ namespace Kazyx.Uwpmm.Utility
 
         protected void OnDiscovered(TargetDevice device)
         {
-            CameraDiscovered.Raise(this, new CameraDeviceEventArgs { CameraDevice = device });
+            CameraDiscovered?.Invoke(this, new CameraDeviceEventArgs { CameraDevice = device });
         }
 
         public event EventHandler<CdServiceEventArgs> CdsDiscovered;
 
         protected void OnDiscovered(UpnpDevice device)
         {
-            CdsDiscovered.Raise(this, new CdServiceEventArgs { CdService = device });
+            CdsDiscovered?.Invoke(this, new CdServiceEventArgs { CdService = device });
         }
 
         void discovery_SonyCameraDeviceDiscovered(object sender, SonyCameraDeviceEventArgs e)

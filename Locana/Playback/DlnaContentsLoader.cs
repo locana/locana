@@ -80,7 +80,7 @@ namespace Kazyx.Uwpmm.Playback
             }
 
             var original = GetOriginalResource(source);
-            var mime = original == null && original.ProtocolInfo != null ? null : original.ProtocolInfo.MimeType;
+            var mime = original?.ProtocolInfo?.MimeType;
 
             return new DlnaContentInfo
             {

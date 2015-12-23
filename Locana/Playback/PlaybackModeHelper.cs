@@ -26,10 +26,7 @@ namespace Kazyx.Uwpmm.Playback
         private static async Task<bool> MoveToSpecifiedModeAsync(TargetDevice device, CancellationTokenSource cancel, string nextFunction, string nextState, bool isFirst = true)
         {
             var tcs = new TaskCompletionSource<bool>();
-            if (cancel != null)
-            {
-                cancel.Token.Register(() => tcs.TrySetCanceled(), useSynchronizationContext: false);
-            }
+            cancel?.Token.Register(() => tcs.TrySetCanceled(), useSynchronizationContext: false);
 
             PropertyChangedEventHandler status_observer = (sender, e) =>
             {
@@ -138,10 +135,10 @@ namespace Kazyx.Uwpmm.Playback
         public static async Task<string> PrepareMovieStreamingAsync(AvContentApiClient av, string contentUri)
         {
             var uri = await av.SetStreamingContentAsync(new PlaybackContent
-                {
-                    Uri = contentUri,
-                    RemotePlayType = RemotePlayMode.SimpleStreaming
-                }).ConfigureAwait(false);
+            {
+                Uri = contentUri,
+                RemotePlayType = RemotePlayMode.SimpleStreaming
+            }).ConfigureAwait(false);
             await av.StartStreamingAsync().ConfigureAwait(false);
             return uri.Url;
         }

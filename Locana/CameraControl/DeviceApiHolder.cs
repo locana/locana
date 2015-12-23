@@ -3,7 +3,6 @@ using Kazyx.RemoteApi.AvContent;
 using Kazyx.RemoteApi.Camera;
 using Kazyx.RemoteApi.System;
 using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,21 +112,21 @@ namespace Kazyx.Uwpmm.CameraControl
 
         protected void OnSupportedApisUpdated()
         {
-            SupportedApisUpdated.Raise(this, new SupportedApiEventArgs(Capability.SupportedApis));
+            SupportedApisUpdated?.Invoke(this, new SupportedApiEventArgs(Capability.SupportedApis));
         }
 
         public event EventHandler<VersionEventArgs> ServerVersionDetected;
 
         protected void OnServerVersionDetected()
         {
-            ServerVersionDetected.Raise(this, new VersionEventArgs(Capability.Version));
+            ServerVersionDetected?.Invoke(this, new VersionEventArgs(Capability.Version));
         }
 
         public event EventHandler<AvailableApiEventArgs> AvailiableApisUpdated;
 
         protected void OnAvailableApisUpdated()
         {
-            AvailiableApisUpdated.Raise(this, new AvailableApiEventArgs(Capability.AvailableApis));
+            AvailiableApisUpdated?.Invoke(this, new AvailableApiEventArgs(Capability.AvailableApis));
         }
     }
 

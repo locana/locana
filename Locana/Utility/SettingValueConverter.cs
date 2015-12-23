@@ -88,7 +88,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromSelfTimer(Capability<int> info)
         {
-            return AsDisplayNames<int>(info, FromSelfTimer);
+            return AsDisplayNames(info, FromSelfTimer);
         }
 
         private static string FromSelfTimer(int val)
@@ -99,7 +99,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromPostViewSize(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromPostViewSize);
+            return AsDisplayNames(info, FromPostViewSize);
         }
 
         private static string FromPostViewSize(string val)
@@ -117,7 +117,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromShootMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromShootMode);
+            return AsDisplayNames(info, FromShootMode);
         }
 
         private static string FromShootMode(string val)
@@ -141,7 +141,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromExposureMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromExposureMode);
+            return AsDisplayNames(info, FromExposureMode);
         }
 
         private static string FromExposureMode(string val)
@@ -167,7 +167,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromSteadyMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromSteadyMode);
+            return AsDisplayNames(info, FromSteadyMode);
         }
 
         private static string FromSteadyMode(string val)
@@ -185,7 +185,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromBeepMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromBeepMode);
+            return AsDisplayNames(info, FromBeepMode);
         }
 
         private static string FromBeepMode(string val)
@@ -205,7 +205,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromViewAngle(Capability<int> info)
         {
-            return AsDisplayNames<int>(info, FromViewAngle);
+            return AsDisplayNames(info, FromViewAngle);
         }
 
         private static string FromViewAngle(int val)
@@ -215,7 +215,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromMovieQuality(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromMovieQuality);
+            return AsDisplayNames(info, FromMovieQuality);
         }
 
         private static string FromMovieQuality(string p)
@@ -225,7 +225,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromStillImageSize(Capability<StillImageSize> info)
         {
-            return AsDisplayNames<StillImageSize>(info, FromStillImageSize);
+            return AsDisplayNames(info, FromStillImageSize);
         }
 
         private static string FromStillImageSize(StillImageSize val)
@@ -251,7 +251,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromWhiteBalance(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromWhiteBalance);
+            return AsDisplayNames(info, FromWhiteBalance);
         }
 
         private static string FromWhiteBalance(string val)
@@ -330,7 +330,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromFlashMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromFlashMode);
+            return AsDisplayNames(info, FromFlashMode);
         }
 
         private static string FromFlashMode(string val)
@@ -355,7 +355,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static Capability<string> FromFocusMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromFocusMode);
+            return AsDisplayNames(info, FromFocusMode);
         }
 
         private static string FromFocusMode(string val)
@@ -374,7 +374,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromZoomSetting(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromZoomSetting);
+            return AsDisplayNames(info, FromZoomSetting);
         }
 
         private static string FromZoomSetting(string val)
@@ -391,7 +391,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromStillQuality(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromStillQuality);
+            return AsDisplayNames(info, FromStillQuality);
         }
 
         private static string FromStillQuality(string val)
@@ -410,7 +410,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromContShootingMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromContShootingMode);
+            return AsDisplayNames(info, FromContShootingMode);
         }
 
         private static string FromContShootingMode(string val)
@@ -433,7 +433,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromContShootingSpeed(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromContShootingSpeed);
+            return AsDisplayNames(info, FromContShootingSpeed);
         }
 
         private static string FromContShootingSpeed(string val)
@@ -456,7 +456,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromFlipMode(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromFlipMode);
+            return AsDisplayNames(info, FromFlipMode);
         }
 
         private static string FromFlipMode(string val)
@@ -473,7 +473,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromSceneSelection(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromSceneSelection);
+            return AsDisplayNames(info, FromSceneSelection);
         }
 
         private static string FromSceneSelection(string val)
@@ -490,7 +490,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromIntervalTime(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromIntervalTime);
+            return AsDisplayNames(info, FromIntervalTime);
         }
 
         private static string FromIntervalTime(string val)
@@ -500,7 +500,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromColorSetting(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromColorSetting);
+            return AsDisplayNames(info, FromColorSetting);
         }
 
         private static string FromColorSetting(string val)
@@ -517,7 +517,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromMovieFileFormat(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromMovieFileFormat);
+            return AsDisplayNames(info, FromMovieFileFormat);
         }
 
         private static string FromMovieFileFormat(string val)
@@ -534,7 +534,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromInfraredRemoteControl(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromInfraredRemoteControl);
+            return AsDisplayNames(info, FromInfraredRemoteControl);
         }
 
         private static string FromInfraredRemoteControl(string val)
@@ -551,7 +551,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromTvColorSystem(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromTvColorSystem);
+            return AsDisplayNames(info, FromTvColorSystem);
         }
 
         private static string FromTvColorSystem(string val)
@@ -568,7 +568,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromTrackingFocus(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromTrackingFocus);
+            return AsDisplayNames(info, FromTrackingFocus);
         }
 
         private static string FromTrackingFocus(string val)
@@ -585,7 +585,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromAutoPowerOff(Capability<int> info)
         {
-            return AsDisplayNames<int>(info, FromAutoPowerOff);
+            return AsDisplayNames(info, FromAutoPowerOff);
         }
 
         private static string FromAutoPowerOff(int val)
@@ -596,7 +596,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromLoopRecTime(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromLoopRecTime);
+            return AsDisplayNames(info, FromLoopRecTime);
         }
 
         private static string FromLoopRecTime(string val)
@@ -619,7 +619,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromWindNoiseReduction(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromWindNoiseReduction);
+            return AsDisplayNames(info, FromWindNoiseReduction);
         }
 
         private static string FromWindNoiseReduction(string val)
@@ -636,7 +636,7 @@ namespace Kazyx.Uwpmm.Utility
 
         internal static Capability<string> FromAudioRecording(Capability<string> info)
         {
-            return AsDisplayNames<string>(info, FromAudioRecording);
+            return AsDisplayNames(info, FromAudioRecording);
         }
 
         private static string FromAudioRecording(string val)

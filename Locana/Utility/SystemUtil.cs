@@ -13,17 +13,7 @@ namespace Kazyx.Uwpmm.Utility
 
         public static CoreDispatcher GetCurrentDispatcher()
         {
-            var view = CoreApplication.MainView;
-            if (view == null)
-            {
-                return null;
-            }
-            var window = view.CoreWindow;
-            if (window == null)
-            {
-                return null;
-            }
-            return window.Dispatcher;
+            return CoreApplication.MainView?.CoreWindow?.Dispatcher;
         }
     }
 }

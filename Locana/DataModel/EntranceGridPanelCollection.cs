@@ -23,7 +23,7 @@ namespace Locana.DataModel
 
         private void OnPropertyChanged(string name)
         {
-            PropertyChanged.Raise(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -32,7 +32,7 @@ namespace Locana.DataModel
             OnPropertyChanged("Item[]");
             try
             {
-                CollectionChanged.Raise(this, e);
+                CollectionChanged?.Invoke(this, e);
             }
             catch (NotSupportedException)
             {
@@ -61,7 +61,7 @@ namespace Locana.DataModel
 
         private void OnPropertyChanged(string name)
         {
-            PropertyChanged.Raise(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -70,7 +70,7 @@ namespace Locana.DataModel
             OnPropertyChanged("Item[]");
             try
             {
-                CollectionChanged.Raise(this, e);
+                CollectionChanged?.Invoke(this, e);
             }
             catch (NotSupportedException)
             {

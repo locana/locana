@@ -22,7 +22,7 @@ namespace Kazyx.Uwpmm.DataModel
 
         protected void NotifyChanged(string name)
         {
-            PropertyChanged.Raise(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

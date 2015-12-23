@@ -35,13 +35,13 @@ namespace Kazyx.Uwpmm.Utility
         protected void OnFetched(StorageFolder folder, StorageFile file, GeotaggingResult geotaggingResult)
         {
             DebugUtil.Log("PictureSyncManager: OnFetched");
-            Fetched.Raise(folder, file, geotaggingResult);
+            Fetched?.Invoke(folder, file, geotaggingResult);
         }
 
         protected void OnFailed(DownloaderError error, GeotaggingResult geotaggingResult)
         {
             DebugUtil.Log("PictureSyncManager: OnFailed" + error);
-            Failed.Raise(error, geotaggingResult);
+            Failed?.Invoke(error, geotaggingResult);
         }
 
         public void EnqueueVideo(Uri uri, string nameBase, string extension = null)
@@ -86,7 +86,7 @@ namespace Kazyx.Uwpmm.Utility
                     extension = extension
                 };
                 DownloadQueue.Enqueue(req);
-                QueueStatusUpdated.Raise(DownloadQueue.Count);
+                QueueStatusUpdated?.Invoke(DownloadQueue.Count);
                 ProcessQueueSequentially();
             });
         }
@@ -108,7 +108,7 @@ namespace Kazyx.Uwpmm.Utility
                         DebugUtil.Log("Dequeue - remaining " + DownloadQueue.Count);
                         await DownloadToSave(DownloadQueue.Dequeue());
 
-                        QueueStatusUpdated.Raise(DownloadQueue.Count);
+                        QueueStatusUpdated?.Invoke(DownloadQueue.Count);
                     }
                     DebugUtil.Log("Queue end. Kill task");
                     task = null;
@@ -129,10 +129,10 @@ namespace Kazyx.Uwpmm.Utility
                     case HttpStatusCode.OK:
                         break;
                     case HttpStatusCode.Gone:
-                        req.Error.Raise(DownloaderError.Gone, geoResult);
+                        req.Error?.Invoke(DownloaderError.Gone, geoResult);
                         return;
                     default:
-                        req.Error.Raise(DownloaderError.Network, geoResult);
+                        req.Error?.Invoke(DownloaderError.Network, geoResult);
                         return;
                 }
 
@@ -187,7 +187,7 @@ namespace Kazyx.Uwpmm.Utility
                             }
                         }
                     }
-                    req.Completed.Raise(folder, file, geoResult);
+                    req.Completed?.Invoke(folder, file, geoResult);
                     return;
                 }
             }
@@ -195,7 +195,7 @@ namespace Kazyx.Uwpmm.Utility
             {
                 DebugUtil.Log(e.Message);
                 DebugUtil.Log(e.StackTrace);
-                req.Error.Raise(DownloaderError.Unknown, GeotaggingResult.NotRequested); // TODO
+                req.Error?.Invoke(DownloaderError.Unknown, GeotaggingResult.NotRequested); // TODO
             }
         }
     }

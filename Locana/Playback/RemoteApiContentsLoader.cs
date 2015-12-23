@@ -35,7 +35,7 @@ namespace Kazyx.Uwpmm.Playback
             }
 
             var storages = await GetStoragesUriAsync().ConfigureAwait(false);
-            if (cancel != null && cancel.IsCancellationRequested)
+            if (cancel?.IsCancellationRequested ?? false)
             {
                 DebugUtil.Log("Loading task cancelled");
                 OnCancelled();
@@ -73,14 +73,14 @@ namespace Kazyx.Uwpmm.Playback
             DebugUtil.Log("Loading number of Dates");
 
             var count = await AvContentApi.GetContentCountAsync(new CountingTarget
-                {
-                    Grouping = ContentGroupingMode.Date,
-                    Uri = uri,
-                }).ConfigureAwait(false);
+            {
+                Grouping = ContentGroupingMode.Date,
+                Uri = uri,
+            }).ConfigureAwait(false);
 
             DebugUtil.Log(count.NumOfContents + " dates exist.");
 
-            if (cancel != null && cancel.IsCancellationRequested)
+            if (cancel?.IsCancellationRequested ?? false)
             {
                 DebugUtil.Log("Loading task cancelled");
                 OnCancelled();
@@ -92,7 +92,7 @@ namespace Kazyx.Uwpmm.Playback
             for (var i = 0; i < loops; i++)
             {
                 var dates = await GetDateListAsync(uri, i * CONTENT_LOOP_STEP, CONTENT_LOOP_STEP).ConfigureAwait(false);
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     DebugUtil.Log("Loading task cancelled");
                     OnCancelled();
@@ -112,13 +112,13 @@ namespace Kazyx.Uwpmm.Playback
             DebugUtil.Log("Loading DateList: " + uri + " from " + startFrom);
 
             var contents = await AvContentApi.GetContentListAsync(new ContentListTarget
-                {
-                    Sorting = SortMode.Descending,
-                    Grouping = ContentGroupingMode.Date,
-                    Uri = uri,
-                    StartIndex = startFrom,
-                    MaxContents = count
-                }).ConfigureAwait(false);
+            {
+                Sorting = SortMode.Descending,
+                Grouping = ContentGroupingMode.Date,
+                Uri = uri,
+                StartIndex = startFrom,
+                MaxContents = count
+            }).ConfigureAwait(false);
 
             return contents.Where(content => content.IsFolder == TextBoolean.True)
                 .Select(content => new DateInfo { Title = content.Title, Uri = content.Uri })
@@ -130,11 +130,11 @@ namespace Kazyx.Uwpmm.Playback
             DebugUtil.Log("Loading: " + date.Title);
 
             var count = await AvContentApi.GetContentCountAsync(new CountingTarget
-                {
-                    Grouping = ContentGroupingMode.Date,
-                    Uri = date.Uri,
-                    Types = ContentsSetToTypes(contentsSet),
-                }).ConfigureAwait(false);
+            {
+                Grouping = ContentGroupingMode.Date,
+                Uri = date.Uri,
+                Types = ContentsSetToTypes(contentsSet),
+            }).ConfigureAwait(false);
 
             DebugUtil.Log(count.NumOfContents + " contents exist.");
 
@@ -149,7 +149,7 @@ namespace Kazyx.Uwpmm.Playback
                 }
 
                 var contents = await GetContentsOfDayAsync(date, i * CONTENT_LOOP_STEP, CONTENT_LOOP_STEP, contentsSet).ConfigureAwait(false);
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     DebugUtil.Log("Loading task cancelled");
                     OnCancelled();
@@ -180,7 +180,7 @@ namespace Kazyx.Uwpmm.Playback
             for (var i = 0; i < loops; i++)
             {
                 var contents = await GetContentsOfDayAsync(holder.AlbumGroup, i * CONTENT_LOOP_STEP, CONTENT_LOOP_STEP, contentsSet).ConfigureAwait(false);
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     DebugUtil.Log("Loading task cancelled");
                     OnCancelled();
@@ -198,18 +198,16 @@ namespace Kazyx.Uwpmm.Playback
             DebugUtil.Log("Loading ContentsOfDay: " + date.Title + " from " + startFrom);
 
             var contents = await AvContentApi.GetContentListAsync(new ContentListTarget
-                {
-                    Sorting = SortMode.Ascending,
-                    Grouping = ContentGroupingMode.Date,
-                    Uri = date.Uri,
-                    Types = ContentsSetToTypes(contentsSet),
-                    StartIndex = startFrom,
-                    MaxContents = count
-                }).ConfigureAwait(false);
+            {
+                Sorting = SortMode.Ascending,
+                Grouping = ContentGroupingMode.Date,
+                Uri = date.Uri,
+                Types = ContentsSetToTypes(contentsSet),
+                StartIndex = startFrom,
+                MaxContents = count
+            }).ConfigureAwait(false);
 
-            return contents.Where(content => content.ImageContent != null
-                        && content.ImageContent.OriginalContents != null
-                        && content.ImageContent.OriginalContents.Count > 0)
+            return contents.Where(content => content.ImageContent?.OriginalContents?.Count > 0)
                     .Select(content =>
                     {
                         var contentInfo = new RemoteApiContentInfo
@@ -221,7 +219,7 @@ namespace Kazyx.Uwpmm.Playback
                             Uri = content.Uri,
                             CreatedTime = content.CreatedTime,
                             Protected = content.IsProtected == TextBoolean.True,
-                            RemotePlaybackAvailable = (content.RemotePlayTypes != null && content.RemotePlayTypes.Contains(RemotePlayMode.SimpleStreaming)),
+                            RemotePlaybackAvailable = (content.RemotePlayTypes?.Contains(RemotePlayMode.SimpleStreaming) ?? false),
                             GroupName = date.Title,
                         };
 

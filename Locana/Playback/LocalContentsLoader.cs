@@ -15,7 +15,7 @@ namespace Kazyx.Uwpmm.Playback
 
         protected void OnContentLoaded(Thumbnail file)
         {
-            SingleContentLoaded.Raise(this, new SingleContentEventArgs { File = file });
+            SingleContentLoaded?.Invoke(this, new SingleContentEventArgs { File = file });
         }
 
         public override async Task Load(ContentsSet contentsSet, CancellationTokenSource cancel)
@@ -41,7 +41,7 @@ namespace Kazyx.Uwpmm.Playback
 
                 DebugUtil.Log("Load from local picture folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     OnCancelled();
                     break;
@@ -57,7 +57,7 @@ namespace Kazyx.Uwpmm.Playback
 
                 DebugUtil.Log("Load from local picture folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     OnCancelled();
                     break;
@@ -80,7 +80,7 @@ namespace Kazyx.Uwpmm.Playback
 
                 DebugUtil.Log("Load from local video folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     OnCancelled();
                     break;
@@ -96,7 +96,7 @@ namespace Kazyx.Uwpmm.Playback
 
                 DebugUtil.Log("Load from local video folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     OnCancelled();
                     break;
@@ -109,7 +109,7 @@ namespace Kazyx.Uwpmm.Playback
             var list = new List<StorageFile>();
             await LoadFilesRecursively(list, folder, cancel).ConfigureAwait(false);
 
-            if (cancel != null && cancel.IsCancellationRequested)
+            if (cancel?.IsCancellationRequested ?? false)
             {
                 return;
             }
@@ -117,7 +117,7 @@ namespace Kazyx.Uwpmm.Playback
             var thumbs = list.Select(file =>
                 {
                     var thumb = StorageFileToThumbnail(folder, file);
-                    SingleContentLoaded.Raise(this, new SingleContentEventArgs { File = thumb });
+                    SingleContentLoaded?.Invoke(this, new SingleContentEventArgs { File = thumb });
                     return thumb;
                 }).ToList();
 
@@ -141,7 +141,7 @@ namespace Kazyx.Uwpmm.Playback
         {
             var files = await folder.GetFilesAsync();
 
-            if (cancel != null && cancel.IsCancellationRequested)
+            if (cancel?.IsCancellationRequested ?? false)
             {
                 return;
             }
@@ -153,7 +153,7 @@ namespace Kazyx.Uwpmm.Playback
 
             foreach (var child in await folder.GetFoldersAsync())
             {
-                if (cancel != null && cancel.IsCancellationRequested)
+                if (cancel?.IsCancellationRequested ?? false)
                 {
                     return;
                 }

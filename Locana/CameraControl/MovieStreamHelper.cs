@@ -55,14 +55,10 @@ namespace Kazyx.Uwpmm.CameraControl
                     AvContent = null;
                 }
 
-                var dispatcher = SystemUtil.GetCurrentDispatcher();
-                if (dispatcher != null)
+                await SystemUtil.GetCurrentDispatcher()?.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
-                    await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        MoviePlaybackData.FileName = name;
-                    });
-                }
+                    MoviePlaybackData.FileName = name;
+                });
 
                 return success;
             }
@@ -78,14 +74,10 @@ namespace Kazyx.Uwpmm.CameraControl
         {
             StreamProcessor.CloseConnection();
 
-            var dispatcher = SystemUtil.GetCurrentDispatcher();
-            if (dispatcher != null)
+            await SystemUtil.GetCurrentDispatcher()?.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                    MoviePlaybackData.Image = null;
-                });
-            }
+                MoviePlaybackData.Image = null;
+            });
 
             if (AvContent == null)
             {
@@ -138,23 +130,20 @@ namespace Kazyx.Uwpmm.CameraControl
 
         protected void OnStatusChanged(StreamingStatus status)
         {
-            StatusChanged.Raise(this, new StreamingStatusEventArgs { Status = status });
+            StatusChanged?.Invoke(this, new StreamingStatusEventArgs { Status = status });
         }
 
         void StreamProcessor_Closed(object sender, EventArgs e)
         {
             DebugUtil.Log("StreamClosed. Finish MovieStreamHelper");
             Finish();
-            StreamClosed.Raise(sender, e);
+            StreamClosed?.Invoke(sender, e);
         }
 
         async void StreamProcessor_PlaybackInfoRetrieved(object sender, PlaybackInfoEventArgs e)
         {
             // DebugUtil.Log("playback info: " + MoviePlaybackData.FileName + " " + e.Packet.Duration.TotalSeconds);
-            var dispatcher = SystemUtil.GetCurrentDispatcher();
-            if (dispatcher == null) { return; }
-
-            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await SystemUtil.GetCurrentDispatcher()?.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MoviePlaybackData.CurrentPosition = e.Packet.CurrentPosition;
                 MoviePlaybackData.Duration = e.Packet.Duration;

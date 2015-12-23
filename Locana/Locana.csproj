@@ -249,7 +249,6 @@
     <Compile Include="Utility\PeriodicalShootingTask.cs" />
     <Compile Include="Utility\Preference.cs" />
     <Compile Include="Utility\ResourceManager.cs" />
-    <Compile Include="Utility\SafeDelegateExtensions.cs" />
     <Compile Include="Utility\SettingValueConverter.cs" />
     <Compile Include="Utility\SonyQrDataParser.cs" />
     <Compile Include="Utility\StorageExtensions.cs" />

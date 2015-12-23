@@ -144,7 +144,7 @@ namespace Kazyx.Uwpmm.DataModel
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string name)
         {
-            PropertyChanged.Raise(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -154,7 +154,7 @@ namespace Kazyx.Uwpmm.DataModel
             OnPropertyChanged("Item[]");
             try
             {
-                CollectionChanged.Raise(this, e);
+                CollectionChanged?.Invoke(this, e);
             }
             catch (NotSupportedException)
             {

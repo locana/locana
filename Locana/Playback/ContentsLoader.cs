@@ -14,7 +14,7 @@ namespace Kazyx.Uwpmm.Playback
         protected void OnPartLoaded(IList<Thumbnail> contents)
         {
             DebugUtil.Log("ContentsLoader OnPartLoaded");
-            PartLoaded.Raise(this, new ContentsLoadedEventArgs(contents));
+            PartLoaded?.Invoke(this, new ContentsLoadedEventArgs(contents));
         }
 
         public event EventHandler Completed;
@@ -22,7 +22,7 @@ namespace Kazyx.Uwpmm.Playback
         protected void OnCompleted()
         {
             DebugUtil.Log("ContentsLoader OnCompleted");
-            Completed.Raise(this, null);
+            Completed?.Invoke(this, null);
         }
 
         public event EventHandler Cancelled;
@@ -30,7 +30,7 @@ namespace Kazyx.Uwpmm.Playback
         protected void OnCancelled()
         {
             DebugUtil.Log("ContentsLoader OnCancelled");
-            Cancelled.Raise(this, null);
+            Cancelled?.Invoke(this, null);
         }
 
         public abstract Task Load(ContentsSet contentsSet, CancellationTokenSource cancel);
