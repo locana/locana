@@ -155,6 +155,8 @@ namespace Kazyx.Uwpmm.Utility
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ProgramShift.png") }, Label = "ProgramShift" };
                 case AppBarItem.EvSlider:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/EVComp.png") }, Label = "EV" };
+                case AppBarItem.Tmp_WfdPage:
+                    return new AppBarButton() { Label = "WFD page" };
                 default:
                     throw new NotImplementedException();
             }
@@ -306,5 +308,6 @@ namespace Kazyx.Uwpmm.Utility
         IsoSlider,
         EvSlider,
         ProgramShiftSlider,
+        Tmp_WfdPage,
     }
 }

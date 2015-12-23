@@ -194,6 +194,7 @@
     <Compile Include="DataModel\PlaybackAlbumCollection.cs" />
     <Compile Include="DataModel\PlaybackThumbnail.cs" />
     <Compile Include="NavMenuItem.cs" />
+    <Compile Include="Network\WifiDirectUtil.cs" />
     <Compile Include="Pages\AppSettingPage.xaml.cs">
       <DependentUpon>AppSettingPage.xaml</DependentUpon>
     </Compile>
@@ -205,6 +206,9 @@
     </Compile>
     <Compile Include="Pages\QrCodePage.xaml.cs">
       <DependentUpon>QrCodePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WifiDirectPage.xaml.cs">
+      <DependentUpon>WifiDirectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Playback\ContentsLoader.cs" />
     <Compile Include="Playback\DlnaContentsLoader.cs" />
@@ -243,8 +247,8 @@
     <Compile Include="Utility\LiveviewUtil.cs" />
     <Compile Include="Utility\MediaDownloader.cs" />
     <Compile Include="Utility\MetaDataValueConverter.cs" />
-    <Compile Include="Utility\NetworkObserver.cs" />
     <Compile Include="Utility\PageHelper.cs" />
+    <Compile Include="Network\NetworkObserver.cs" />
     <Compile Include="Utility\ParameterUtil.cs" />
     <Compile Include="Utility\PeriodicalShootingTask.cs" />
     <Compile Include="Utility\Preference.cs" />
@@ -453,6 +457,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\QrCodePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WifiDirectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

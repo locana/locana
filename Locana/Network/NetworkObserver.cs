@@ -191,7 +191,7 @@ namespace Kazyx.Uwpmm.Utility
 
         private bool IsCameraAccessPoint(string ssid)
         {
-            return ssid != null && ssid.StartsWith("direct-", StringComparison.OrdinalIgnoreCase);
+            return ssid?.StartsWith("direct-", StringComparison.OrdinalIgnoreCase) ?? false;
         }
 
         public string PreviousSsid { private set; get; }
@@ -205,46 +205,44 @@ namespace Kazyx.Uwpmm.Utility
                 IsWlanConnectionProfile = true,
             };
             var profiles = await NetworkInformation.FindConnectionProfilesAsync(filter);
-            foreach (var profile in profiles)
+
+            var wifiSsid = profiles.Select(profile => profile.WlanConnectionProfileDetails.GetConnectedSsid())
+                .FirstOrDefault(ssid => IsCameraAccessPoint(ssid));
+
+            if (wifiSsid != null)
             {
-                var ssid = profile.WlanConnectionProfileDetails.GetConnectedSsid();
-
-                if (IsCameraAccessPoint(ssid))
+                var previous = PreviousSsid;
+                PreviousSsid = wifiSsid;
+                // Connected to Access Point and it is a camera device.
+                if (wifiSsid == previous && devices.Count != 0)
                 {
-                    var previous = PreviousSsid;
-                    PreviousSsid = ssid;
-                    // Connected to Access Point and it is a camera device.
-                    if (ssid == previous && devices.Count != 0)
-                    {
-                        // Keep searching even if CDS provider is discovered.
-                        DebugUtil.Log("Some devices discovered on the previous SSID. Finish auto discovery.");
-                        return;
-                    }
-
-                    if (ssid != previous)
-                    {
-                        DebugUtil.Log("New access point detected. Refresh.");
-                        RefreshDevices();
-                    }
-                    else
-                    {
-                        DebugUtil.Log("No devices discovered yet. keep searching.");
-                    }
-
-                    SearchCamera();
-                    SearchCds();
-                    await Task.Delay(5000);
-
-                    if (!cancel.IsCancellationRequested)
-                    {
-                        await checkConnection(cancel);
-                    }
+                    // Keep searching even if CDS provider is discovered.
+                    DebugUtil.Log("Some devices discovered on the previous SSID. Finish auto discovery.");
                     return;
+                }
+
+                if (wifiSsid != previous)
+                {
+                    DebugUtil.Log("New access point detected. Refresh.");
+                    RefreshDevices();
+                }
+                else
+                {
+                    DebugUtil.Log("No devices discovered yet. keep searching.");
                 }
             }
 
-            DebugUtil.Log("Not connected to camera device.");
-            Clear();
+            SearchCamera();
+            SearchCds();
+            await Task.Delay(5000);
+
+            if (!cancel.IsCancellationRequested)
+            {
+                await checkConnection(cancel);
+            }
+
+            // DebugUtil.Log("Not connected to camera device.");
+            // Clear();
         }
 
         CancellationTokenSource Canceller;

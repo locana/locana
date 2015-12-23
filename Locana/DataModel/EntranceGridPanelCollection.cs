@@ -1,4 +1,5 @@
-﻿using Kazyx.Uwpmm.CameraControl;
+﻿using Kazyx.Uwpmm;
+using Kazyx.Uwpmm.CameraControl;
 using Locana.Pages;
 using System;
 using System.Collections.Generic;
@@ -100,7 +101,8 @@ namespace Locana.DataModel
             : base(device.FriendlyName,
                   new Uri("ms-appx:///Assets/Screen/mode_photo.png"), () =>
              {
-                 var frame = Window.Current.Content as Frame;
+                 var shell = Window.Current.Content as AppShell;
+                 var frame = shell.AppFrame as Frame;
                  frame.Navigate(typeof(MainPage), device);
              })
         {

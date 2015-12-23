@@ -41,6 +41,12 @@ namespace Kazyx.Uwpmm
                     Label = "QrCodePage",
                     DestPage = typeof(QrCodePage)
                 },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Camera,
+                    Label = "WifiDirectPage",
+                    DestPage = typeof(WifiDirectPage)
+                },
             });
 
         public static AppShell Current = null;

@@ -1,4 +1,4 @@
-﻿#define WINDOWS_APP
+#define WINDOWS_APP
 
 using Kazyx.ImageStream;
 using Kazyx.RemoteApi;
