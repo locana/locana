@@ -1,5 +1,4 @@
 ﻿using Kazyx.Uwpmm.CameraControl;
-using Kazyx.Uwpmm.Utility;
 using Locana.Pages;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace Locana.DataModel
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged("Count");
+            OnPropertyChanged(nameof(Count));
             OnPropertyChanged("Item[]");
             try
             {
@@ -66,7 +65,7 @@ namespace Locana.DataModel
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged("Count");
+            OnPropertyChanged(nameof(Count));
             OnPropertyChanged("Item[]");
             try
             {

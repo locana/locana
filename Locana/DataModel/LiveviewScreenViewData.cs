@@ -17,59 +17,59 @@ namespace Kazyx.Uwpmm.DataModel
             Device = d;
             Device.Status.PropertyChanged += (sender, e) =>
             {
-                NotifyChangedOnUI("ZoomPositionInCurrentBox");
-                NotifyChangedOnUI("ZoomBoxIndex");
-                NotifyChangedOnUI("ZoomBoxNum");
-                NotifyChangedOnUI("ShutterButtonImage");
-                NotifyChangedOnUI("ShutterButtonEnabled");
-                NotifyChangedOnUI("IsRecording");
-                NotifyChangedOnUI("Processing");
-                NotifyChangedOnUI("ShootModeImage");
-                NotifyChangedOnUI("ExposureModeImage");
-                NotifyChangedOnUI("MemoryCardStatusImage");
-                NotifyChangedOnUI("RecordbaleAmount");
-                NotifyChangedOnUI("RecordingCount");
-                NotifyChangedOnUI("IsRecordingCountAvailable");
+                NotifyChangedOnUI(nameof(ZoomPositionInCurrentBox));
+                NotifyChangedOnUI(nameof(ZoomBoxIndex));
+                NotifyChangedOnUI(nameof(ZoomBoxNum));
+                NotifyChangedOnUI(nameof(ShutterButtonImage));
+                NotifyChangedOnUI(nameof(ShutterButtonEnabled));
+                NotifyChangedOnUI(nameof(IsRecording));
+                NotifyChangedOnUI(nameof(Processing));
+                NotifyChangedOnUI(nameof(ShootModeImage));
+                NotifyChangedOnUI(nameof(ExposureModeImage));
+                NotifyChangedOnUI(nameof(MemoryCardStatusImage));
+                NotifyChangedOnUI(nameof(RecordbaleAmount));
+                NotifyChangedOnUI(nameof(RecordingCount));
+                NotifyChangedOnUI(nameof(IsRecordingCountAvailable));
                 NotifyChangedOnUI("EvVisibility");
-                NotifyChangedOnUI("EvDisplayValue");
+                NotifyChangedOnUI(nameof(EvDisplayValue));
                 NotifyChangedOnUI("FnumberVisibility");
-                NotifyChangedOnUI("FnumberDisplayValue");
+                NotifyChangedOnUI(nameof(FnumberDisplayValue));
                 NotifyChangedOnUI("ISOVisibility");
-                NotifyChangedOnUI("ISODisplayValue");
+                NotifyChangedOnUI(nameof(ISODisplayValue));
                 NotifyChangedOnUI("ShutterSpeedVisibility");
-                NotifyChangedOnUI("ShutterSpeedDisplayValue");
-                NotifyChangedOnUI("IsAudioMode");
-                NotifyChangedOnUI("LiveviewImageDisplayed");
-                NotifyChangedOnUI("FramingGridDisplayed");
+                NotifyChangedOnUI(nameof(ShutterSpeedDisplayValue));
+                NotifyChangedOnUI(nameof(IsAudioMode));
+                NotifyChangedOnUI(nameof(LiveviewImageDisplayed));
+                NotifyChangedOnUI(nameof(FramingGridDisplayed));
             };
             Device.Api.AvailiableApisUpdated += (sender, e) =>
             {
-                NotifyChangedOnUI("IsZoomAvailable");
-                NotifyChangedOnUI("ShutterButtonEnabled");
-                NotifyChangedOnUI("IsRecording");
-                NotifyChangedOnUI("FNumberBrush");
-                NotifyChangedOnUI("ShutterSpeedBrush");
-                NotifyChangedOnUI("EvBrush");
-                NotifyChangedOnUI("IsoBrush");
-                NotifyChangedOnUI("ShutterSpeedDisplayValue");
-                NotifyChangedOnUI("ISODisplayValue");
-                NotifyChangedOnUI("FnumberDisplayValue");
-                NotifyChangedOnUI("IsSetFNumberAvailable");
-                NotifyChangedOnUI("IsSetShutterSpeedAvailable");
-                NotifyChangedOnUI("IsSetIsoSpeedRateAvailable");
-                NotifyChangedOnUI("IsSetEVAvailable");
-                NotifyChangedOnUI("IsAvailableGetShutterSpeed");
-                NotifyChangedOnUI("IsAvailableGetFNumber");
-                NotifyChangedOnUI("IsAvailableGetIsoSpeedRate");
-                NotifyChangedOnUI("IsAvailableGetEV");
-                NotifyChangedOnUI("IsShootingParamAvailable");
-                NotifyChangedOnUI("IsShootingParamSettingAvailable");
-                NotifyChangedOnUI("IsProgramShiftAvailable");
+                NotifyChangedOnUI(nameof(IsZoomAvailable));
+                NotifyChangedOnUI(nameof(ShutterButtonEnabled));
+                NotifyChangedOnUI(nameof(IsRecording));
+                NotifyChangedOnUI(nameof(FNumberBrush));
+                NotifyChangedOnUI(nameof(ShutterSpeedBrush));
+                NotifyChangedOnUI(nameof(EvBrush));
+                NotifyChangedOnUI(nameof(IsoBrush));
+                NotifyChangedOnUI(nameof(ShutterSpeedDisplayValue));
+                NotifyChangedOnUI(nameof(ISODisplayValue));
+                NotifyChangedOnUI(nameof(FnumberDisplayValue));
+                NotifyChangedOnUI(nameof(IsSetFNumberAvailable));
+                NotifyChangedOnUI(nameof(IsSetShutterSpeedAvailable));
+                NotifyChangedOnUI(nameof(IsSetIsoSpeedRateAvailable));
+                NotifyChangedOnUI(nameof(IsSetEVAvailable));
+                NotifyChangedOnUI(nameof(IsAvailableGetShutterSpeed));
+                NotifyChangedOnUI(nameof(IsAvailableGetFNumber));
+                NotifyChangedOnUI(nameof(IsAvailableGetIsoSpeedRate));
+                NotifyChangedOnUI(nameof(IsAvailableGetEV));
+                NotifyChangedOnUI(nameof(IsShootingParamAvailable));
+                NotifyChangedOnUI(nameof(IsShootingParamSettingAvailable));
+                NotifyChangedOnUI(nameof(IsProgramShiftAvailable));
             };
 
             ApplicationSettings.GetInstance().PropertyChanged += (sender, args) =>
             {
-                NotifyChangedOnUI("ShutterButtonImage");
+                NotifyChangedOnUI(nameof(ShutterButtonImage));
             };
         }
 
@@ -464,7 +464,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _GeopositionStatus = value;
-                NotifyChangedOnUI("GeopositionStatusImage");
+                NotifyChangedOnUI(nameof(GeopositionStatusImage));
                 DebugUtil.Log("Geoposition status: " + value);
             }
         }
@@ -496,7 +496,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _GeopositionEnabled = value;
-                NotifyChangedOnUI("GeopositionEnabled");
+                NotifyChangedOnUI(nameof(GeopositionEnabled));
             }
         }
 
@@ -523,7 +523,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_FramingGridDisplayed != value)
                 {
                     _FramingGridDisplayed = value;
-                    NotifyChangedOnUI("FramingGridDisplayed");
+                    NotifyChangedOnUI(nameof(FramingGridDisplayed));
                 }
             }
         }
@@ -534,10 +534,10 @@ namespace Kazyx.Uwpmm.DataModel
             get { return _IsWaitingConnection; }
             set
             {
-                if(value != _IsWaitingConnection)
+                if (value != _IsWaitingConnection)
                 {
                     _IsWaitingConnection = value;
-                    NotifyChangedOnUI("IsWaitingConnection");
+                    NotifyChangedOnUI(nameof(IsWaitingConnection));
                 }
             }
         }
@@ -549,7 +549,7 @@ namespace Kazyx.Uwpmm.DataModel
 
         public void NotifyFriendlyNameUpdated()
         {
-            NotifyChangedOnUI("FriendlyName");
+            NotifyChangedOnUI(nameof(FriendlyName));
         }
     }
 }

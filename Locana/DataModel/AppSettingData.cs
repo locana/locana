@@ -25,7 +25,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _Title = value;
-                NotifyChangedOnUI("Title");
+                NotifyChangedOnUI(nameof(Title));
             }
             get { return _Title; }
         }
@@ -36,8 +36,8 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _Guide = value;
-                NotifyChangedOnUI("Guide");
-                NotifyChangedOnUI("GuideVisibility");
+                NotifyChangedOnUI(nameof(Guide));
+                NotifyChangedOnUI(nameof(GuideVisibility));
             }
             get { return _Guide; }
         }
@@ -48,7 +48,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _Candidates = value;
-                NotifyChangedOnUI("Candidates");
+                NotifyChangedOnUI(nameof(Candidates));
             }
             get { return _Candidates; }
         }
@@ -67,7 +67,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 StateChanger.Invoke(value);
-                NotifyChangedOnUI("CurrentSetting");
+                NotifyChangedOnUI(nameof(CurrentSetting));
             }
         }
 
@@ -81,7 +81,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _IsActive = value;
-                NotifyChangedOnUI("IsActive");
+                NotifyChangedOnUI(nameof(IsActive));
             }
         }
 
@@ -95,7 +95,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     this._SettingVisibility = value;
                     DebugUtil.Log("visibility changed: " + _SettingVisibility);
-                    NotifyChangedOnUI("SettingVisibility");
+                    NotifyChangedOnUI(nameof(SettingVisibility));
                 }
             }
         }

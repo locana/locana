@@ -13,7 +13,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _CurrentPosition = value;
-                NotifyChanged("CurrentPosition");
+                NotifyChanged(nameof(CurrentPosition));
             }
         }
 
@@ -24,7 +24,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _Duration = value;
-                NotifyChanged("Duration");
+                NotifyChanged(nameof(Duration));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_FileName != value)
                 {
                     _FileName = value;
-                    NotifyChanged("FileName");
+                    NotifyChanged(nameof(FileName));
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_SeekAvailable != value)
                 {
                     _SeekAvailable = value;
-                    NotifyChanged("SeekAvailable");
+                    NotifyChanged(nameof(SeekAvailable));
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_StreamingStatus != value)
                 {
                     _StreamingStatus = value;
-                    NotifyChanged("StreamingStatus");
+                    NotifyChanged(nameof(StreamingStatus));
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_StreamingStatusTransitionFactor != value)
                 {
                     _StreamingStatusTransitionFactor = value;
-                    NotifyChanged("StreamingStatusTransitionFactor");
+                    NotifyChanged(nameof(StreamingStatusTransitionFactor));
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _EntryList = value;
-                NotifyChangedOnUI("EntryList");
+                NotifyChangedOnUI(nameof(EntryList));
             }
         }
 
@@ -41,8 +41,8 @@ namespace Kazyx.Uwpmm.DataModel
             }
         }
 
-        uint[] GeneralMetaDataKeys = new uint[] 
-        { 
+        uint[] GeneralMetaDataKeys = new uint[]
+        {
             ExifKeys.Fnumber,
             ExifKeys.Iso,
             ExifKeys.DateTime,

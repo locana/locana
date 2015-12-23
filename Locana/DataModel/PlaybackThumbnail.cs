@@ -103,7 +103,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 factor = value;
-                NotifyChanged("IsSelectable");
+                NotifyChanged(nameof(IsSelectable));
             }
             get { return factor; }
         }
@@ -178,8 +178,8 @@ namespace Kazyx.Uwpmm.DataModel
                 DebugUtil.Log("Failed to load thumbnail from file. Retry " + delay + " msec later.");
 
                 await Task.Delay(delay);
-                NotifyChanged("ThumbnailImage");
-                NotifyChanged("LargeImage");
+                NotifyChanged(nameof(ThumbnailImage));
+                NotifyChanged(nameof(LargeImage));
             }
             else
             {
@@ -196,8 +196,8 @@ namespace Kazyx.Uwpmm.DataModel
             private set
             {
                 _ThumbnailImage = value;
-                NotifyChanged("ThumbnailImage");
-                NotifyChanged("LargeImage");
+                NotifyChanged(nameof(ThumbnailImage));
+                NotifyChanged(nameof(LargeImage));
             }
             get { return GetImage(ImageMode.Image); }
         }
@@ -209,7 +209,7 @@ namespace Kazyx.Uwpmm.DataModel
             private set
             {
                 _LargeImage = value;
-                NotifyChanged("LargeImage");
+                NotifyChanged(nameof(LargeImage));
             }
             get { return GetImage(ImageMode.Album); }
         }

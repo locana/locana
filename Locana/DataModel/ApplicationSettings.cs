@@ -43,7 +43,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.PostviewSyncEnabled = value;
                     _IsPostviewTransferEnabled = value;
-                    NotifyChangedOnUI("IsPostviewTransferEnabled");
+                    NotifyChangedOnUI(nameof(IsPostviewTransferEnabled));
                 }
             }
             get
@@ -61,7 +61,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.OriginalSizeContentsPrioritized = value;
                     _PrioritizeOriginalSizeContents = value;
-                    NotifyChangedOnUI("PrioritizeOriginalSizeContents");
+                    NotifyChangedOnUI(nameof(PrioritizeOriginalSizeContents));
                 }
             }
             get { return _PrioritizeOriginalSizeContents; }
@@ -76,8 +76,8 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     _IsIntervalShootingEnabled = value;
 
-                    NotifyChangedOnUI("IsIntervalShootingEnabled");
-                    NotifyChangedOnUI("IntervalTimeDisplayString");
+                    NotifyChangedOnUI(nameof(IsIntervalShootingEnabled));
+                    NotifyChangedOnUI(nameof(IntervalTimeDisplayString));
                 }
             }
             get
@@ -97,8 +97,8 @@ namespace Kazyx.Uwpmm.DataModel
                     Preference.IntervalTime = value;
                     _IntervalTime = value;
                     // DebugUtil.Log("IntervalTime changed: " + value);
-                    NotifyChangedOnUI("IntervalTime");
-                    NotifyChangedOnUI("IntervalTimeDisplayString");
+                    NotifyChangedOnUI(nameof(IntervalTime));
+                    NotifyChangedOnUI(nameof(IntervalTimeDisplayString));
                 }
             }
             get
@@ -131,7 +131,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.ShootButtonVisible = value;
                     _IsShootButtonDisplayed = value;
-                    NotifyChangedOnUI("ShootButtonVisibility");
+                    NotifyChangedOnUI(nameof(ShootButtonVisibility));
                     DebugUtil.Log("ShootbuttonVisibility updated: " + value.ToString());
                 }
             }
@@ -150,7 +150,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.HistogramVisible = value;
                     _IsHistogramDisplayed = value;
-                    NotifyChangedOnUI("IsHistogramDisplayed");
+                    NotifyChangedOnUI(nameof(IsHistogramDisplayed));
                 }
             }
             get { return _IsHistogramDisplayed; }
@@ -165,7 +165,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.GeoTaggingEnabled = value;
                     _GeotagEnabled = value;
-                    NotifyChangedOnUI("GeotagEnabled");
+                    NotifyChangedOnUI(nameof(GeotagEnabled));
                 }
             }
             get { return _GeotagEnabled; }
@@ -180,7 +180,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.FocusFrameEnabled = value;
                     _RequestFocusFrameInfo = value;
-                    NotifyChangedOnUI("RequestFocusFrameInfo");
+                    NotifyChangedOnUI(nameof(RequestFocusFrameInfo));
                 }
             }
             get
@@ -198,8 +198,8 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.FramingGridEnabled = value;
                     _FramingGridEnabled = value;
-                    NotifyChangedOnUI("FramingGridEnabled");
-                    NotifyChangedOnUI("IsFibonacciSpiralEnabled");
+                    NotifyChangedOnUI(nameof(FramingGridEnabled));
+                    NotifyChangedOnUI(nameof(IsFibonacciSpiralEnabled));
                 }
             }
             get { return _FramingGridEnabled; }
@@ -215,8 +215,8 @@ namespace Kazyx.Uwpmm.DataModel
                     DebugUtil.Log("GridType updated: " + value);
                     Preference.FramingGridType = value;
                     _GridType = value;
-                    NotifyChangedOnUI("GridType");
-                    NotifyChangedOnUI("IsFibonacciSpiralEnabled");
+                    NotifyChangedOnUI(nameof(GridType));
+                    NotifyChangedOnUI(nameof(IsFibonacciSpiralEnabled));
                 }
             }
             get { return _GridType; }
@@ -236,8 +236,8 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.FramingGridColor = value;
                     _GridColor = value;
-                    NotifyChangedOnUI("GridColor");
-                    NotifyChangedOnUI("GridColorBrush");
+                    NotifyChangedOnUI(nameof(GridColor));
+                    NotifyChangedOnUI(nameof(GridColorBrush));
                 }
             }
             get { return _GridColor; }
@@ -284,7 +284,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.FibonacciOrigin = value;
                     this._FibonacciLineOrigin = value;
-                    NotifyChangedOnUI("FibonacciLineOrigin");
+                    NotifyChangedOnUI(nameof(FibonacciLineOrigin));
                 }
             }
         }
@@ -313,7 +313,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (value != _ShootButtonTemporaryCollapsed)
                 {
                     _ShootButtonTemporaryCollapsed = value;
-                    NotifyChangedOnUI("ShootButtonVisibility");
+                    NotifyChangedOnUI(nameof(ShootButtonVisibility));
                 }
             }
         }
@@ -328,7 +328,7 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     Preference.RemoteContentsSet = value;
                     _RemoteContentsType = value;
-                    NotifyChangedOnUI("RemoteContentsSet");
+                    NotifyChangedOnUI(nameof(RemoteContentsSet));
                 }
             }
         }
@@ -342,7 +342,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (value != _LiveviewRotationEnabled)
                 {
                     _LiveviewRotationEnabled = value;
-                    NotifyChangedOnUI("LiveviewRotationEnabled");
+                    NotifyChangedOnUI(nameof(LiveviewRotationEnabled));
                 }
             }
         }

@@ -1,5 +1,4 @@
-﻿using Windows.UI.Core;
-using Windows.UI.Xaml.Media.Imaging;
+﻿using Windows.UI.Xaml.Media.Imaging;
 
 namespace Kazyx.Uwpmm.DataModel
 {
@@ -11,7 +10,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _Image = value;
-                NotifyChanged("Image");
+                NotifyChanged(nameof(Image));
             }
             get
             {

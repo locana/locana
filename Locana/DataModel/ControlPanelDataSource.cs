@@ -1,9 +1,7 @@
-﻿using Kazyx.RemoteApi;
-using Kazyx.RemoteApi.Camera;
+﻿using Kazyx.RemoteApi.Camera;
 using Kazyx.Uwpmm.CameraControl;
 using Kazyx.Uwpmm.Utility;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Kazyx.Uwpmm.DataModel
 {
@@ -26,41 +24,41 @@ namespace Kazyx.Uwpmm.DataModel
             Device.Status.PropertyChanged += (sender, e) =>
             {
                 GenericPropertyChanged(e.PropertyName);
-                NotifyChangedOnUI("IsPeriodicalShootingAvailable");
+                NotifyChangedOnUI(nameof(IsPeriodicalShootingAvailable));
             };
             Device.Api.AvailiableApisUpdated += (sender, e) =>
             {
-                NotifyChangedOnUI("IsAvailableExposureMode");
-                NotifyChangedOnUI("IsAvailableShootMode");
-                NotifyChangedOnUI("IsAvailableBeepMode");
-                NotifyChangedOnUI("IsAvailableSelfTimer");
-                NotifyChangedOnUI("IsAvailablePostviewSize");
-                NotifyChangedOnUI("IsAvailableStillImageSize");
-                NotifyChangedOnUI("IsAvailableWhiteBalance");
-                NotifyChangedOnUI("IsAvailableColorTemperture");
-                NotifyChangedOnUI("IsAvailableFocusMode");
-                NotifyChangedOnUI("IsAvailableMovieQuality");
-                NotifyChangedOnUI("IsAvailableFlashMode");
-                NotifyChangedOnUI("IsAvailableSteadyMode");
-                NotifyChangedOnUI("IsAvailableViewAngle");
-                NotifyChangedOnUI("IsAvailableZoomSetting");
-                NotifyChangedOnUI("IsAvailableSceneSelection");
-                NotifyChangedOnUI("IsAvailableTrackingFocus");
-                NotifyChangedOnUI("IsAvailableStillQuality");
-                NotifyChangedOnUI("IsAvailableMovieFileFormat");
-                NotifyChangedOnUI("IsAvailableFlipMode");
-                NotifyChangedOnUI("IsAvailableIntervalTime");
-                NotifyChangedOnUI("IsAvailableColorSetting");
-                NotifyChangedOnUI("IsAvailableInfraredRemoteControl");
-                NotifyChangedOnUI("IsAvailableTvColorSystem");
-                NotifyChangedOnUI("IsAvailableAutoPowerOff");
-                NotifyChangedOnUI("IsAvailableLoopRecTime");
-                NotifyChangedOnUI("IsAvailableWindNoiseReduction");
-                NotifyChangedOnUI("IsAvailableAudioRecording");
+                NotifyChangedOnUI(nameof(IsAvailableExposureMode));
+                NotifyChangedOnUI(nameof(IsAvailableShootMode));
+                NotifyChangedOnUI(nameof(IsAvailableBeepMode));
+                NotifyChangedOnUI(nameof(IsAvailableSelfTimer));
+                NotifyChangedOnUI(nameof(IsAvailablePostviewSize));
+                NotifyChangedOnUI(nameof(IsAvailableStillImageSize));
+                NotifyChangedOnUI(nameof(IsAvailableWhiteBalance));
+                NotifyChangedOnUI(nameof(IsAvailableColorTemperture));
+                NotifyChangedOnUI(nameof(IsAvailableFocusMode));
+                NotifyChangedOnUI(nameof(IsAvailableMovieQuality));
+                NotifyChangedOnUI(nameof(IsAvailableFlashMode));
+                NotifyChangedOnUI(nameof(IsAvailableSteadyMode));
+                NotifyChangedOnUI(nameof(IsAvailableViewAngle));
+                NotifyChangedOnUI(nameof(IsAvailableZoomSetting));
+                NotifyChangedOnUI(nameof(IsAvailableSceneSelection));
+                NotifyChangedOnUI(nameof(IsAvailableTrackingFocus));
+                NotifyChangedOnUI(nameof(IsAvailableStillQuality));
+                NotifyChangedOnUI(nameof(IsAvailableMovieFileFormat));
+                NotifyChangedOnUI(nameof(IsAvailableFlipMode));
+                NotifyChangedOnUI(nameof(IsAvailableIntervalTime));
+                NotifyChangedOnUI(nameof(IsAvailableColorSetting));
+                NotifyChangedOnUI(nameof(IsAvailableInfraredRemoteControl));
+                NotifyChangedOnUI(nameof(IsAvailableTvColorSystem));
+                NotifyChangedOnUI(nameof(IsAvailableAutoPowerOff));
+                NotifyChangedOnUI(nameof(IsAvailableLoopRecTime));
+                NotifyChangedOnUI(nameof(IsAvailableWindNoiseReduction));
+                NotifyChangedOnUI(nameof(IsAvailableAudioRecording));
             };
             Device.Api.ServerVersionDetected += (sender, e) =>
             {
-                NotifyChangedOnUI("IsRestrictedApiVisible");
+                NotifyChangedOnUI(nameof(IsRestrictedApiAvailable));
             };
         }
 

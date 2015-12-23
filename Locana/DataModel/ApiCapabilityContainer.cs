@@ -32,7 +32,7 @@ namespace Kazyx.Uwpmm.DataModel
                     SupportedApis.Add(method.Name, list);
                 }
             }
-            NotifyChanged("SupportedApis");
+            NotifyChanged(nameof(SupportedApis));
         }
 
         public bool IsSupported(string apiName)
@@ -52,7 +52,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 version = value;
-                NotifyChanged("Version");
+                NotifyChanged(nameof(Version));
             }
             get
             {
@@ -98,7 +98,7 @@ namespace Kazyx.Uwpmm.DataModel
                 else
                     AvailableApiList = new List<string>();
 
-                NotifyChanged("AvailableApis");
+                NotifyChanged(nameof(AvailableApis));
             }
             get { return _AvailableApis; }
         }

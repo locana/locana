@@ -37,7 +37,7 @@ namespace Kazyx.Uwpmm.DataModel
         {
             if (e.PropertyName == "LargeImage")
             {
-                OnPropertyChanged("RandomThumbnail");
+                OnPropertyChanged(nameof(RandomThumbnail));
             }
         }
 
@@ -93,7 +93,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (previous == 0)
                 {
                     Thumb = null;
-                    OnPropertyChanged("RandomThumbnail");
+                    OnPropertyChanged(nameof(RandomThumbnail));
                 }
             }
         }
@@ -150,7 +150,7 @@ namespace Kazyx.Uwpmm.DataModel
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged("Count");
+            OnPropertyChanged(nameof(Count));
             OnPropertyChanged("Item[]");
             try
             {

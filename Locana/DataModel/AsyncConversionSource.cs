@@ -16,20 +16,20 @@ namespace Kazyx.Uwpmm.DataModel
                 var scheduler = (SynchronizationContext.Current == null) ? TaskScheduler.Current : TaskScheduler.FromCurrentSynchronizationContext();
                 task.ContinueWith(t =>
                 {
-                    NotifyChangedOnUI("IsCompleted");
+                    NotifyChangedOnUI(nameof(IsCompleted));
                     if (t.IsCanceled)
                     {
-                        NotifyChangedOnUI("IsCanceled");
+                        NotifyChangedOnUI(nameof(IsCanceled));
                     }
                     else if (t.IsFaulted)
                     {
-                        NotifyChangedOnUI("IsFaulted");
+                        NotifyChangedOnUI(nameof(IsFaulted));
                         NotifyChangedOnUI("ErrorMessage");
                     }
                     else
                     {
-                        NotifyChangedOnUI("IsSuccessfullyCompleted");
-                        NotifyChangedOnUI("Result");
+                        NotifyChangedOnUI(nameof(IsSuccessfullyCompleted));
+                        NotifyChangedOnUI(nameof(Result));
                     }
                 },
                 CancellationToken.None,

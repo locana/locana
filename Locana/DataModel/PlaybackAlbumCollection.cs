@@ -11,7 +11,7 @@ namespace Kazyx.Uwpmm.DataModel
     {
         private readonly bool SortAlbum;
 
-        public Kazyx.Uwpmm.DataModel.Album.SortOrder ContentSortOrder { set; get; }
+        public Album.SortOrder ContentSortOrder { set; get; }
 
         public AlbumGroupCollection(bool sortAlbum = true)
         {
@@ -118,7 +118,7 @@ namespace Kazyx.Uwpmm.DataModel
         public event NotifyCollectionChangedEventHandler CollectionChanged;
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged("Count");
+            OnPropertyChanged(nameof(Count));
             OnPropertyChanged("Item[]");
             try
             {

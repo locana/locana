@@ -14,7 +14,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ExposureMode = value;
-                NotifyChangedOnUI("ExposureMode");
+                NotifyChangedOnUI(nameof(ExposureMode));
             }
             get { return _ExposureMode; }
         }
@@ -25,7 +25,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ShootMode = value;
-                NotifyChangedOnUI("ShootMode");
+                NotifyChangedOnUI(nameof(ShootMode));
             }
             get { return _ShootMode; }
         }
@@ -36,7 +36,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _PostviewSize = value;
-                NotifyChangedOnUI("PostviewSize");
+                NotifyChangedOnUI(nameof(PostviewSize));
             }
             get { return _PostviewSize; }
         }
@@ -47,7 +47,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _BeepMode = value;
-                NotifyChangedOnUI("BeepMode");
+                NotifyChangedOnUI(nameof(BeepMode));
             }
             get { return _BeepMode; }
         }
@@ -58,7 +58,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _SelfTimer = value;
-                NotifyChangedOnUI("SelfTimer");
+                NotifyChangedOnUI(nameof(SelfTimer));
             }
             get { return _SelfTimer; }
         }
@@ -69,7 +69,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _StillImageSize = value;
-                NotifyChangedOnUI("StillImageSize");
+                NotifyChangedOnUI(nameof(StillImageSize));
             }
             get { return _StillImageSize; }
         }
@@ -80,8 +80,8 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _WhiteBalance = value;
-                NotifyChangedOnUI("WhiteBalance");
-                NotifyChangedOnUI("ColorTemperture");
+                NotifyChangedOnUI(nameof(WhiteBalance));
+                NotifyChangedOnUI(nameof(ColorTemperture));
             }
             get { return _WhiteBalance; }
         }
@@ -92,7 +92,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ColorTemperture = value;
-                NotifyChangedOnUI("ColorTemperture");
+                NotifyChangedOnUI(nameof(ColorTemperture));
             }
             get { return _ColorTemperture; }
         }
@@ -103,7 +103,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ColorTempertureCandidates = value;
-                NotifyChangedOnUI("ColorTemperture");
+                NotifyChangedOnUI(nameof(ColorTemperture));
             }
             get { return _ColorTempertureCandidates; }
         }
@@ -114,7 +114,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ShutterSpeed = value;
-                NotifyChangedOnUI("ShutterSpeed");
+                NotifyChangedOnUI(nameof(ShutterSpeed));
             }
             get { return _ShutterSpeed; }
         }
@@ -125,7 +125,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ISOSpeedRate = value;
-                NotifyChangedOnUI("ISOSpeedRate");
+                NotifyChangedOnUI(nameof(ISOSpeedRate));
             }
             get { return _ISOSpeedRate; }
         }
@@ -136,7 +136,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _FNumber = value;
-                NotifyChangedOnUI("FNumber");
+                NotifyChangedOnUI(nameof(FNumber));
             }
             get { return _FNumber; }
         }
@@ -149,7 +149,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (value != _Status)
                 {
                     _Status = value;
-                    NotifyChangedOnUI("Status");
+                    NotifyChangedOnUI(nameof(Status));
                 }
             }
             get { return _Status; }
@@ -161,7 +161,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ZoomInfo = value;
-                NotifyChangedOnUI("ZoomInfo");
+                NotifyChangedOnUI(nameof(ZoomInfo));
             }
             get { return _ZoomInfo; }
         }
@@ -173,7 +173,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _FocusMode = value;
-                NotifyChangedOnUI("FocusMode");
+                NotifyChangedOnUI(nameof(FocusMode));
             }
             get { return _FocusMode; }
         }
@@ -184,7 +184,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _MovieQuality = value;
-                NotifyChangedOnUI("MovieQuality");
+                NotifyChangedOnUI(nameof(MovieQuality));
             }
             get { return _MovieQuality; }
         }
@@ -195,7 +195,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _SteadyMode = value;
-                NotifyChangedOnUI("SteadyMode");
+                NotifyChangedOnUI(nameof(SteadyMode));
             }
             get { return _SteadyMode; }
         }
@@ -206,7 +206,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ViewAngle = value;
-                NotifyChangedOnUI("ViewAngle");
+                NotifyChangedOnUI(nameof(ViewAngle));
             }
             get { return _ViewAngle; }
         }
@@ -217,7 +217,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _FlashMode = value;
-                NotifyChangedOnUI("FlashMode");
+                NotifyChangedOnUI(nameof(FlashMode));
             }
             get { return _FlashMode; }
         }
@@ -228,7 +228,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _TouchFocusStatus = value;
-                NotifyChangedOnUI("TouchFocusStatus");
+                NotifyChangedOnUI(nameof(TouchFocusStatus));
             }
             get
             {
@@ -242,7 +242,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _EvInfo = value;
-                NotifyChangedOnUI("EvInfo");
+                NotifyChangedOnUI(nameof(EvInfo));
             }
             get { return _EvInfo; }
         }
@@ -253,7 +253,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _Storages = value;
-                NotifyChangedOnUI("Storages");
+                NotifyChangedOnUI(nameof(Storages));
             }
             get { return _Storages; }
         }
@@ -287,7 +287,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_LiveviewOrientation != value)
                 {
                     _LiveviewOrientation = value;
-                    NotifyChangedOnUI("LiveviewOrientation");
+                    NotifyChangedOnUI(nameof(LiveviewOrientation));
                 }
             }
             get { return _LiveviewOrientation == null ? Orientation.Straight : _LiveviewOrientation; }
@@ -297,7 +297,7 @@ namespace Kazyx.Uwpmm.DataModel
         {
             get
             {
-               switch (_LiveviewOrientation)
+                switch (_LiveviewOrientation)
                 {
                     case RemoteApi.Camera.Orientation.Straight:
                         return 0;
@@ -318,7 +318,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _PictureUrls = value;
-                // NotifyChangedOnUI("PictureUrls");
+                // NotifyChangedOnUI(nameof(PictureUrls));
                 // This logic should not be implemented here in DataModel... 
                 if (value != null && ApplicationSettings.GetInstance().IsPostviewTransferEnabled)
                 {
@@ -345,7 +345,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_ProgramShiftActivated != value)
                 {
                     _ProgramShiftActivated = value;
-                    NotifyChangedOnUI("ProgramShiftActivated");
+                    NotifyChangedOnUI(nameof(ProgramShiftActivated));
                 }
             }
             get { return _ProgramShiftActivated; }
@@ -357,7 +357,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ProgramShiftRange = value;
-                NotifyChangedOnUI("ProgramShiftRange");
+                NotifyChangedOnUI(nameof(ProgramShiftRange));
             }
             get
             {
@@ -373,7 +373,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_FocusStatus != value)
                 {
                     _FocusStatus = value;
-                    NotifyChangedOnUI("FocusStatus");
+                    NotifyChangedOnUI(nameof(FocusStatus));
                 }
             }
             get { return _FocusStatus; }
@@ -387,7 +387,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_IsLiveviewAvailable != value)
                 {
                     _IsLiveviewAvailable = value;
-                    NotifyChangedOnUI("IsLiveviewAvailable");
+                    NotifyChangedOnUI(nameof(IsLiveviewAvailable));
                 }
             }
             get
@@ -404,7 +404,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_IsFocusFrameInfoAvailable != value)
                 {
                     _IsFocusFrameInfoAvailable = value;
-                    NotifyChangedOnUI("IsFocusFrameInfoAvailable");
+                    NotifyChangedOnUI(nameof(IsLiveviewFrameInfoAvailable));
                 }
             }
             get
@@ -421,7 +421,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ZoomSetting = value;
-                NotifyChangedOnUI("ZoomSetting");
+                NotifyChangedOnUI(nameof(ZoomSetting));
             }
             get { return _ZoomSetting; }
         }
@@ -432,7 +432,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _StillQuality = value;
-                NotifyChangedOnUI("StillQuality");
+                NotifyChangedOnUI(nameof(StillQuality));
             }
             get { return _StillQuality; }
         }
@@ -443,7 +443,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ContShootingMode = value;
-                NotifyChangedOnUI("ContShootingMode");
+                NotifyChangedOnUI(nameof(ContShootingMode));
             }
             get { return _ContShootingMode; }
         }
@@ -454,7 +454,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ContShootingSpeed = value;
-                NotifyChangedOnUI("ContShootingSpeed");
+                NotifyChangedOnUI(nameof(ContShootingSpeed));
             }
             get { return _ContShootingSpeed; }
         }
@@ -465,7 +465,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ContShootingResult = value;
-                NotifyChangedOnUI("ContShootingResult");
+                NotifyChangedOnUI(nameof(ContShootingResult));
             }
             get { return _ContShootingResult; }
         }
@@ -476,7 +476,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _FlipMode = value;
-                NotifyChangedOnUI("FlipMode");
+                NotifyChangedOnUI(nameof(FlipMode));
             }
             get { return _FlipMode; }
         }
@@ -487,7 +487,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _SceneSelection = value;
-                NotifyChangedOnUI("SceneSelection");
+                NotifyChangedOnUI(nameof(SceneSelection));
             }
             get { return _SceneSelection; }
         }
@@ -498,7 +498,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _IntervalTime = value;
-                NotifyChangedOnUI("IntervalTime");
+                NotifyChangedOnUI(nameof(IntervalTime));
             }
             get { return _IntervalTime; }
         }
@@ -509,7 +509,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _ColorSetting = value;
-                NotifyChangedOnUI("ColorSetting");
+                NotifyChangedOnUI(nameof(ColorSetting));
             }
             get { return _ColorSetting; }
         }
@@ -520,7 +520,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _MovieFileFormat = value;
-                NotifyChangedOnUI("MovieFileFormat");
+                NotifyChangedOnUI(nameof(MovieFileFormat));
             }
             get { return _MovieFileFormat; }
         }
@@ -531,7 +531,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _InfraredRemoteControl = value;
-                NotifyChangedOnUI("InfraredRemoteControl");
+                NotifyChangedOnUI(nameof(InfraredRemoteControl));
             }
             get { return _InfraredRemoteControl; }
         }
@@ -542,7 +542,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _TvColorSystem = value;
-                NotifyChangedOnUI("TvColorSystem");
+                NotifyChangedOnUI(nameof(TvColorSystem));
             }
             get { return _TvColorSystem; }
         }
@@ -555,7 +555,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_TrackingFocusStatus != value)
                 {
                     _TrackingFocusStatus = value;
-                    NotifyChangedOnUI("TrackingFocusStatus");
+                    NotifyChangedOnUI(nameof(TrackingFocusStatus));
                 }
             }
             get { return _TrackingFocusStatus; }
@@ -567,7 +567,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _TrackingFocus = value;
-                NotifyChangedOnUI("TrackingFocus");
+                NotifyChangedOnUI(nameof(TrackingFocus));
             }
             get { return _TrackingFocus; }
         }
@@ -578,7 +578,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _BatteryInfo = value;
-                NotifyChangedOnUI("BatteryInfo");
+                NotifyChangedOnUI(nameof(BatteryInfo));
             }
             get { return _BatteryInfo; }
         }
@@ -591,7 +591,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_RecordingTimeSec != value)
                 {
                     _RecordingTimeSec = value;
-                    NotifyChangedOnUI("RecordingTimeSec");
+                    NotifyChangedOnUI(nameof(RecordingTimeSec));
                 }
             }
             get { return _RecordingTimeSec; }
@@ -605,7 +605,7 @@ namespace Kazyx.Uwpmm.DataModel
                 if (_NumberOfShots != value)
                 {
                     _NumberOfShots = value;
-                    NotifyChangedOnUI("NumberOfShots");
+                    NotifyChangedOnUI(nameof(NumberOfShots));
                 }
             }
             get { return _NumberOfShots; }
@@ -617,7 +617,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _AutoPowerOff = value;
-                NotifyChangedOnUI("AutoPowerOff");
+                NotifyChangedOnUI(nameof(AutoPowerOff));
             }
             get { return _AutoPowerOff; }
         }
@@ -628,7 +628,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _LoopRecTime = value;
-                NotifyChangedOnUI("LoopRecTime");
+                NotifyChangedOnUI(nameof(LoopRecTime));
             }
             get { return _LoopRecTime; }
         }
@@ -639,7 +639,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _WindNoiseReduction = value;
-                NotifyChangedOnUI("WindNoiseReduction");
+                NotifyChangedOnUI(nameof(WindNoiseReduction));
             }
             get { return _WindNoiseReduction; }
         }
@@ -650,7 +650,7 @@ namespace Kazyx.Uwpmm.DataModel
             set
             {
                 _AudioRecording = value;
-                NotifyChangedOnUI("AudioRecording");
+                NotifyChangedOnUI(nameof(AudioRecording));
             }
             get { return _AudioRecording; }
         }
