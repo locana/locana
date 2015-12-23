@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="using:Kazyx.Uwpmm.Control"
-                    xmlns:local="using:Locana.Styles">
+                    xmlns:local="using:Kazyx.Uwpmm">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>

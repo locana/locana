@@ -105,6 +105,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppShell.xaml.cs">
+      <DependentUpon>AppShell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CameraControl\CameraStatusUtility.cs" />
     <Compile Include="CameraControl\DeviceApiHolder.cs" />
     <Compile Include="CameraControl\MovieStreamHelper.cs" />
@@ -144,6 +147,10 @@
     </Compile>
     <Compile Include="Control\MoviePlaybackScreen.xaml.cs">
       <DependentUpon>MoviePlaybackScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\NavMenuListView.cs" />
+    <Compile Include="Control\PageHeader.xaml.cs">
+      <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\PhotoPlaybackScreen.xaml.cs">
       <DependentUpon>PhotoPlaybackScreen.xaml</DependentUpon>
@@ -186,6 +193,7 @@
     <Compile Include="DataModel\PlaybackAlbum.cs" />
     <Compile Include="DataModel\PlaybackAlbumCollection.cs" />
     <Compile Include="DataModel\PlaybackThumbnail.cs" />
+    <Compile Include="NavMenuItem.cs" />
     <Compile Include="Pages\AppSettingPage.xaml.cs">
       <DependentUpon>AppSettingPage.xaml</DependentUpon>
     </Compile>
@@ -357,6 +365,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AppShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Control\AppBarContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -390,6 +402,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Control\MoviePlaybackScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\PageHeader.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -446,6 +462,10 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Resources\ShellStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\modules\kz-image-stream\Project\KzImageStreamUwp.csproj">
@@ -468,6 +488,9 @@
       <Project>{ee2d1d2f-3456-4133-ac3d-3128a8fcd7d7}</Project>
       <Name>NtNfcParserUwp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Styles\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -1,6 +1,7 @@
 ﻿<Page x:Class="Locana.Pages.QrCodePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:c="using:Kazyx.Uwpmm.Control"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Locana.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,7 +9,18 @@
       mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Grid.Row="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <c:PageHeader x:Name="pageHeader">
+            <c:PageHeader.HeaderContent>
+                <TextBlock x:Name="title"
+                           Style="{ThemeResource PageTitleTextBlockStyle}"
+                           Text="QR Code Page [TBD]" />
+            </c:PageHeader.HeaderContent>
+        </c:PageHeader>
+        <Grid Grid.Row="1">
             <StackPanel>
                 <TextBlock Margin="20"
                            Text="Show me the QR code."
