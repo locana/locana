@@ -100,6 +100,52 @@ namespace Kazyx.Uwpmm.Utility
             return sb;
         }
 
+        public static Storyboard CreateMoveAndResizeAnimation(MoveAndResizeAnimation request)
+        {
+            var transform = request.Target.RenderTransform as CompositeTransform;
+
+            if (transform == null)
+            {
+                transform = new CompositeTransform()
+                {
+                    TranslateX = 0,
+                    TranslateY = 0,
+                    ScaleX = 1,
+                    ScaleY = 1,
+                };
+                request.Target.RenderTransform = transform;
+            }
+
+            var duration = new Duration(TimeSpan.FromMilliseconds(200));
+            if (request.Duration != null && request.Duration.Milliseconds != 0)
+            {
+                duration = request.Duration;
+            }
+
+            var sb = new Storyboard() { Duration = duration };
+
+            var animation_x = _Animation(duration, transform.TranslateX, request.newX - transform.TranslateX);
+            var animation_scale_x = _Animation(duration, transform.ScaleX, request.newScaleX - transform.ScaleX);
+            var animation_scale_y = _Animation(duration, transform.ScaleY, request.newScaleY - transform.ScaleY);
+            Storyboard.SetTargetProperty(animation_x, "TranslateX");
+            Storyboard.SetTargetProperty(animation_scale_x, "ScaleX");
+            Storyboard.SetTargetProperty(animation_scale_y, "ScaleY");
+            Storyboard.SetTarget(animation_x, transform);
+            Storyboard.SetTarget(animation_scale_x, transform);
+            Storyboard.SetTarget(animation_scale_y, transform);
+
+            sb.Children.Add(animation_x);
+            sb.Children.Add(animation_scale_x);
+            sb.Children.Add(animation_scale_y);
+
+            if (request.Completed != null)
+            {
+                sb.Completed += request.Completed;
+            }
+
+            return sb;
+        }
+
         static List<double> _KeyframeTimes(FadeType type, double duration)
         {
             switch (type)
@@ -292,6 +338,14 @@ namespace Kazyx.Uwpmm.Utility
     public class FadeAnimationRequest : AnimationRequest
     {
         public FadeType RequestFadeType { get; set; }
+    }
+
+    public class MoveAndResizeAnimation : AnimationRequest
+    {
+        public double newX { get; set; }
+        public double newY { get; set; }
+        public double newScaleX { get; set; }
+        public double newScaleY { get; set; }
     }
 
     public class SlideAnimationRequest : AnimationRequest

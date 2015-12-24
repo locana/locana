@@ -132,6 +132,9 @@
     <Compile Include="Control\ComboBoxSetting.xaml.cs">
       <DependentUpon>ComboBoxSetting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Control\EllipseButton.xaml.cs">
+      <DependentUpon>EllipseButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\EvSlider.xaml.cs">
       <DependentUpon>EvSlider.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,9 @@
     </Compile>
     <Compile Include="Control\MoviePlaybackScreen.xaml.cs">
       <DependentUpon>MoviePlaybackScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\MultiModeShutterButton.xaml.cs">
+      <DependentUpon>MultiModeShutterButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Control\NavMenuListView.cs" />
     <Compile Include="Control\PageHeader.xaml.cs">
@@ -388,6 +394,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Control\EllipseButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Control\EvSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -405,6 +415,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Control\MoviePlaybackScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\MultiModeShutterButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
