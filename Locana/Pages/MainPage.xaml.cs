@@ -20,6 +20,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -298,6 +299,7 @@ namespace Locana.Pages
                 Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
                 ShootingParams.DataContext = ScreenViewData;
                 _CommandBarManager.ContentViewData = ScreenViewData;
+                UpdateShutterButton(target.Status);
                 HideFrontScreen();
             });
 
@@ -361,9 +363,42 @@ namespace Locana.Pages
                         status.RecordingTimeSec = 0;
                     }
                     break;
+                case "ShootMode":
+                    UpdateShutterButton(status);
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void UpdateShutterButton(CameraStatus status)
+        {
+            if (status == null || status.ShootMode == null || status.ShootMode.Candidates.Count == 0) { return; }
+            var icons = new Dictionary<string, BitmapImage>();
+            foreach (var m in status.ShootMode.Candidates)
+            {
+                icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
+            }
+            MultiShutterButton.ModeInfo = new Control.ShootModeInfo()
+            {
+                ShootModeCapability = status.ShootMode,
+                ModeSelected = async (mode) =>
+                {
+                    if (target != null)
+                    {
+                        try
+                        {
+                            await target.Api.Camera.SetShootModeAsync(mode);
+                        }
+                        catch (RemoteApiException) { }
+                    }
+                },
+                ButtonPressed = () =>
+                {
+                    ShutterButtonPressed();
+                },
+                Icons = icons,
+            };
         }
 
         private static void EnqueueContshootingResult(List<ContShootingResult> ContShootingResult)

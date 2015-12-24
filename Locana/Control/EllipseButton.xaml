@@ -12,9 +12,7 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent"
           IsTapEnabled="True"
-          ManipulationCompleted="LayoutRoot_ManipulationCompleted"
           ManipulationMode="All"
-          ManipulationStarted="LayoutRoot_ManipulationStarted"
           PointerEntered="LayoutRoot_PointerEntered"
           PointerExited="LayoutRoot_PointerExited"
           Tapped="LayoutRoot_Tapped">

@@ -10,9 +10,14 @@ namespace Kazyx.Uwpmm.Utility
             get { return (Brush)Application.Current.Resources["SystemControlForegroundAccentBrush"]; }
         }
 
+        public static Brush BackGroundBrush
+        {
+            get { return (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"]; }
+        }
+
         public static Brush ForegroundBrush
         {
-            get { return (Brush)Application.Current.Resources["SystemControlForegroundChromeMediumBrush"]; }
+            get { return (Brush)Application.Current.Resources["ApplicationForegroundThemeBrush"]; }
         }
     }
 }

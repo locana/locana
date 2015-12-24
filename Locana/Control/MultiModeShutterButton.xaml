@@ -10,14 +10,15 @@
              mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot"
-          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Background="Transparent"
           SizeChanged="Grid_SizeChanged">
-        <Ellipse Width="80"
-                 Height="80"
-                 VerticalAlignment="Center"
-                 Opacity="0.6"
-                 Stroke="{ThemeResource ApplicationForegroundThemeBrush}"
-                 StrokeThickness="0.5" />
-
+        <Grid x:Name="Buttons" Canvas.ZIndex="10" />
+        <ProgressRing x:Name="ProgressRing"
+                      Margin="10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Canvas.ZIndex="100"
+                      IsActive="false"
+                      Visibility="Visible" />
     </Grid>
 </UserControl>

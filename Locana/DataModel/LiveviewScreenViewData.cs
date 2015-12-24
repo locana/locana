@@ -98,6 +98,25 @@ namespace Kazyx.Uwpmm.DataModel
         private static readonly BitmapImage AvailableMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/memory_card.png", UriKind.Absolute));
         private static readonly BitmapImage NoMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/no_memory_card.png", UriKind.Absolute));
 
+        public static BitmapImage GetShootModeIcon(string mode)
+        {
+            switch (mode)
+            {
+                case ShootModeParam.Still:
+                    return StillImage;
+                case ShootModeParam.Movie:
+                    return CamImage;
+                case ShootModeParam.Audio:
+                    return AudioImage;
+                case ShootModeParam.Interval:
+                    return IntervalStillImage;
+                case ShootModeParam.Loop:
+                    return LoopRecImage;
+                default:
+                    return StillImage;
+            }
+        }
+
         public BitmapImage ShutterButtonImage
         {
             get
@@ -106,33 +125,37 @@ namespace Kazyx.Uwpmm.DataModel
                 {
                     return StillImage;
                 }
-                switch (Device.Status.ShootMode.Current)
-                {
-                    case ShootModeParam.Still:
-                        if (Device.Status.ContShootingMode != null &&
-                            (Device.Status.ContShootingMode.Current == ContinuousShootMode.Cont ||
-                            Device.Status.ContShootingMode.Current == ContinuousShootMode.SpeedPriority ||
-                            Device.Status.ContShootingMode.Current == ContinuousShootMode.Burst ||
-                            Device.Status.ContShootingMode.Current == ContinuousShootMode.MotionShot))
-                        {
-                            return ContShootingImage;
-                        }
-                        if (ApplicationSettings.GetInstance().IsIntervalShootingEnabled)
-                        {
-                            return IntervalStillImage;
-                        }
-                        return StillImage;
-                    case ShootModeParam.Movie:
-                        return CamImage;
-                    case ShootModeParam.Audio:
-                        return AudioImage;
-                    case ShootModeParam.Interval:
+                return CurrentModeImage();
+            }
+        }
+        private BitmapImage CurrentModeImage()
+        {
+            switch (Device.Status.ShootMode.Current)
+            {
+                case ShootModeParam.Still:
+                    if (Device.Status.ContShootingMode != null &&
+                        (Device.Status.ContShootingMode.Current == ContinuousShootMode.Cont ||
+                        Device.Status.ContShootingMode.Current == ContinuousShootMode.SpeedPriority ||
+                        Device.Status.ContShootingMode.Current == ContinuousShootMode.Burst ||
+                        Device.Status.ContShootingMode.Current == ContinuousShootMode.MotionShot))
+                    {
+                        return ContShootingImage;
+                    }
+                    if (ApplicationSettings.GetInstance().IsIntervalShootingEnabled)
+                    {
                         return IntervalStillImage;
-                    case ShootModeParam.Loop:
-                        return LoopRecImage;
-                    default:
-                        return null;
-                }
+                    }
+                    return StillImage;
+                case ShootModeParam.Movie:
+                    return CamImage;
+                case ShootModeParam.Audio:
+                    return AudioImage;
+                case ShootModeParam.Interval:
+                    return IntervalStillImage;
+                case ShootModeParam.Loop:
+                    return LoopRecImage;
+                default:
+                    return null;
             }
         }
 

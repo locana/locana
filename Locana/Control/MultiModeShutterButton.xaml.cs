@@ -2,22 +2,10 @@
 using Kazyx.Uwpmm.Utility;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -35,10 +23,72 @@ namespace Locana.Control
         {
             set
             {
-                bool refresh = this._ModeInfo == null || IsUpdated(this._ModeInfo.ShootModeCapability, value.ShootModeCapability);
-                UpdateCandidates(value, refresh);
+                bool refresh = this._ModeInfo == null || IsUpdated(this._ModeInfo?.ShootModeCapability, value.ShootModeCapability);
+                if (refresh)
+                {
+                    UpdateCandidates(value);
+                    RequestingMode = this._ModeInfo?.ShootModeCapability?.Current;
+                }
+                else
+                {
+                    ShiftButtons(value, value.ShootModeCapability.Current);
+                    UpdateProgressVisibility(this.RequestingMode, value.ShootModeCapability?.Current);
+                    RequestingMode = this._ModeInfo?.ShootModeCapability?.Current;
+                }
+
                 this._ModeInfo = value;
             }
+        }
+
+        private string _RequestingMode = "";
+        public string RequestingMode
+        {
+            get { return _RequestingMode; }
+            private set
+            {
+                _RequestingMode = value;
+                UpdateProgressVisibility(value, this._ModeInfo?.ShootModeCapability?.Current ?? "");
+            }
+        }
+
+        void UpdateProgressVisibility(string requesting, string current)
+        {
+            if (requesting == null || current == null) { return; }
+
+            if (requesting == current)
+            {
+                ProgressRing.IsActive = false;
+                SetAllButtonEnabled(true);
+            }
+            else
+            {
+                ProgressRing.IsActive = true;
+                SetAllButtonEnabled(false);
+            }
+        }
+
+        private void SetAllButtonEnabled(bool enable)
+        {
+            foreach (EllipseButton b in this.Buttons.Children)
+            {
+                if (b != null) { b.Enabled = enable; }
+            }
+        }
+
+        EllipseButton FindButton(string mode)
+        {
+            int i = 0;
+            foreach (var b in this.Buttons.Children)
+            {
+                if (b as EllipseButton == null) { continue; }
+
+                if (this._ModeInfo.ShootModeCapability.Candidates[i] == mode)
+                {
+                    return b as EllipseButton;
+                }
+                i++;
+            }
+            return null;
         }
 
         const double BUTTON_SIZE = 80;
@@ -47,23 +97,16 @@ namespace Locana.Control
         /// Clear all buttons and create new buttons.
         /// </summary>
         /// <param name="info"></param>
-        async void UpdateCandidates(ShootModeInfo info, bool refresh)
+        void UpdateCandidates(ShootModeInfo info)
         {
             if (info == null) { return; }
 
-            var selectedIndex = SettingValueConverter.GetSelectedIndex(info.ShootModeCapability);
-            var xCenter = this.ActualWidth / 2;
-            var yCenter = this.ActualHeight / 2;
-            var bigSize = this.ActualWidth * 0.8;
-            var smallSize = bigSize / 2;
+            var targetShootMode = info.ShootModeCapability.Current;
 
+            var selectedIndex = FindCandidateIndex(info.ShootModeCapability, targetShootMode);
             int currentIndex = 0;
 
-            if (refresh)
-            {
-                LayoutRoot.Children.Clear();
-            }
-
+            Buttons.Children.Clear();
 
             foreach (var i in info.ShootModeCapability.Candidates)
             {
@@ -73,37 +116,64 @@ namespace Locana.Control
                     icon = info.Icons[i];
                 }
 
-                var scale = i == info.ShootModeCapability.Current ? 1.0 : 0.6;
-                EllipseButton button;
+                var scale = i == targetShootMode ? 1.0 : 0.6;
                 double newX = (currentIndex - selectedIndex) * 50;
                 if (newX < 0) { newX -= 30; }
                 else if (newX > 0) { newX += 30; }
 
-                if (refresh)
-                {
-                    button = CreateBaseButton(icon, scale);
-                    LayoutRoot.Children.Add(button);
-                    (button.RenderTransform as CompositeTransform).TranslateX = newX;
-                }
-                else
-                {
+                var button = CreateBaseButton(icon, scale);
+                Buttons.Children.Add(button);
+                (button.RenderTransform as CompositeTransform).TranslateX = newX;
 
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-                    {
-                        button = LayoutRoot.Children[currentIndex] as EllipseButton;
-                        AnimationHelper.CreateMoveAndResizeAnimation(new MoveAndResizeAnimation()
-                        {
-                            Target = button,
-                            Duration = TimeSpan.FromMilliseconds(500),
-                            newX = newX,
-                            newScaleX = scale,
-                            newScaleY = scale,
-                        }).Begin();
-                    });
-                }
 
                 currentIndex++;
             }
+        }
+
+        private void ShiftButtons(ShootModeInfo info, string targetShootMode)
+        {
+            if (info == null) { return; }
+
+            var selectedIndex = FindCandidateIndex(info?.ShootModeCapability, targetShootMode);
+            int currentIndex = 0;
+
+            foreach (var i in info.ShootModeCapability.Candidates)
+            {
+                BitmapImage icon = null;
+                if (info.Icons != null && info.Icons.ContainsKey(i))
+                {
+                    icon = info.Icons[i];
+                }
+
+                var scale = i == targetShootMode ? 1.0 : 0.6;
+                double newX = (currentIndex - selectedIndex) * 50;
+                if (newX < 0) { newX -= 30; }
+                else if (newX > 0) { newX += 30; }
+
+                AnimationHelper.CreateMoveAndResizeAnimation(new MoveAndResizeAnimation()
+                {
+                    Target = Buttons.Children[currentIndex] as EllipseButton,
+                    Duration = TimeSpan.FromMilliseconds(300),
+                    newX = newX,
+                    newScaleX = scale,
+                    newScaleY = scale,
+                }).Begin();
+
+                currentIndex++;
+            }
+        }
+
+        int FindCandidateIndex<T>(Capability<T> capability, T target)
+        {
+            if (capability == null) { return 0; }
+
+            int i = 0;
+            foreach (var candidate in capability.Candidates)
+            {
+                if (target.Equals(candidate)) { return i; }
+                i++;
+            }
+            return 0;
         }
 
         bool IsUpdated(Capability<string> last, Capability<string> current)
@@ -114,6 +184,11 @@ namespace Locana.Control
             }
 
             if (last.Candidates.Count != current.Candidates.Count) { return true; }
+
+            for (int i = 0; i < last.Candidates.Count; i++)
+            {
+                if (last.Candidates[i] != current.Candidates[i]) { return true; }
+            }
 
             return false;
         }
@@ -147,7 +222,7 @@ namespace Locana.Control
         {
             var sender = s as EllipseButton;
             int i = 0;
-            foreach (var e in LayoutRoot.Children)
+            foreach (var e in Buttons.Children)
             {
                 if (e.Equals(sender))
                 {
@@ -155,15 +230,16 @@ namespace Locana.Control
 
                     if (this._ModeInfo.ShootModeCapability.Candidates[i] == this._ModeInfo.ShootModeCapability.Current)
                     {
-                        if (this._ModeInfo.ButtonPressed != null) { this._ModeInfo.ButtonPressed(); }
+                        // when the center button is pressed:
+                        this._ModeInfo.ButtonPressed?.Invoke();
                     }
                     else
                     {
                         // When one of other buttons is selected
-                        if (this._ModeInfo.ModeSelected != null)
-                        {
-                            this._ModeInfo.ModeSelected(this._ModeInfo.ShootModeCapability.Candidates[i]);
-                        }
+                        var requestMode = this._ModeInfo.ShootModeCapability.Candidates[i];
+                        this.ShiftButtons(this._ModeInfo, requestMode);
+                        this._ModeInfo.ModeSelected?.Invoke(requestMode);
+                        RequestingMode = requestMode;
                     }
                 }
                 i++;
@@ -172,7 +248,7 @@ namespace Locana.Control
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            UpdateCandidates(_ModeInfo, false);
+            ShiftButtons(this._ModeInfo, this._ModeInfo?.ShootModeCapability?.Current);
         }
     }
 
