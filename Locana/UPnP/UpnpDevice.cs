@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Windows.Networking;
 
-namespace Kazyx.Uwpmm.UPnP
+namespace Locana.UPnP
 {
     public class UpnpDevice
     {

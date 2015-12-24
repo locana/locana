@@ -5,7 +5,7 @@ using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     class GeopositionManager
     {

@@ -1,11 +1,11 @@
-﻿using Kazyx.Uwpmm.DataModel;
+﻿using Locana.DataModel;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class CommandBarManager
     {

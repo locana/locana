@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class BoolToVisibilityConverter : IValueConverter
     {

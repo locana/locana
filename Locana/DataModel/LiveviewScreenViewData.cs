@@ -1,12 +1,12 @@
 ﻿
 using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.CameraControl;
-using Kazyx.Uwpmm.Utility;
+using Locana.CameraControl;
+using Locana.Utility;
 using System;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class LiveviewScreenViewData : ObservableBase
     {

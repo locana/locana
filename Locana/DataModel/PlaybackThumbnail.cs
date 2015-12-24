@@ -1,5 +1,5 @@
-﻿using Kazyx.Uwpmm.Playback;
-using Kazyx.Uwpmm.Utility;
+﻿using Locana.Playback;
+using Locana.Utility;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +7,7 @@ using Windows.Storage;
 using Windows.Storage.FileProperties;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class RemainingContentsHolder : Thumbnail
     {

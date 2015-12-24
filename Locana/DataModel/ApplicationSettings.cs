@@ -1,12 +1,12 @@
 ﻿
-using Kazyx.Uwpmm.Playback;
-using Kazyx.Uwpmm.Utility;
+using Locana.Playback;
+using Locana.Utility;
 using Locana.Controls;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class ApplicationSettings : ObservableBase
     {

@@ -1,4 +1,4 @@
-﻿using Kazyx.Uwpmm.DataModel;
+﻿using Locana.DataModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class ThumbnailCacheLoader
     {

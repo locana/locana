@@ -3,11 +3,10 @@
 using Kazyx.ImageStream;
 using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.CameraControl;
-using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.Settings;
-using Kazyx.Uwpmm.Utility;
+using Locana.Settings;
+using Locana.CameraControl;
 using Locana.Controls;
+using Locana.DataModel;
 using Locana.Utility;
 using Naotaco.ImageProcessor.Histogram;
 using System;

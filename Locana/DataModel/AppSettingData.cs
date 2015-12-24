@@ -1,8 +1,8 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using Windows.UI.Xaml;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class AppSettingData<T> : ObservableBase
     {

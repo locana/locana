@@ -1,6 +1,6 @@
 ﻿using Kazyx.RemoteApi.Camera;
 
-namespace Kazyx.Uwpmm.CameraControl
+namespace Locana.CameraControl
 {
     public class CameraStatusUtility
     {

@@ -1,5 +1,5 @@
 using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.Utility;
+using Locana.Utility;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

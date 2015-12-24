@@ -1,5 +1,5 @@
 ﻿
-namespace Kazyx.Uwpmm.Playback
+namespace Locana.Playback
 {
     public class MimeType
     {

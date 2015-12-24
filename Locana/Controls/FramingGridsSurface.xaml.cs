@@ -1,4 +1,4 @@
-using Kazyx.Uwpmm.Utility;
+using Locana.Utility;
 using System;
 using Windows.Foundation;
 using Windows.UI;

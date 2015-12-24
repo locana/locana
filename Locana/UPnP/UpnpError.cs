@@ -1,5 +1,5 @@
 ﻿
-namespace Kazyx.Uwpmm.UPnP
+namespace Locana.UPnP
 {
     public enum UpnpError
     {

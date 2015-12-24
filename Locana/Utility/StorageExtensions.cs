@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public static class StorageExtensions
     {

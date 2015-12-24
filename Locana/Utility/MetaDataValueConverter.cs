@@ -1,8 +1,8 @@
-﻿using Kazyx.Uwpmm.DataModel;
+﻿using Locana.DataModel;
 using Naotaco.ImageProcessor.MetaData.Structure;
 using System.Collections.Generic;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class MetaDataValueConverter
     {

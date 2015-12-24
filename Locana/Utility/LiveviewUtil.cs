@@ -1,4 +1,4 @@
-﻿using Kazyx.Uwpmm.DataModel;
+﻿using Locana.DataModel;
 using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -7,7 +7,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class LiveviewUtil
     {

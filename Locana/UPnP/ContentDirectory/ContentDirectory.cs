@@ -1,5 +1,5 @@
 ﻿
-namespace Kazyx.Uwpmm.UPnP.ContentDirectory
+namespace Locana.UPnP.ContentDirectory
 {
     public abstract class ContentDirectoryRequest : Request
     {

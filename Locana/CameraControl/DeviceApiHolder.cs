@@ -2,13 +2,13 @@
 using Kazyx.RemoteApi.AvContent;
 using Kazyx.RemoteApi.Camera;
 using Kazyx.RemoteApi.System;
-using Kazyx.Uwpmm.DataModel;
+using Locana.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kazyx.Uwpmm.CameraControl
+namespace Locana.CameraControl
 {
     public class DeviceApiHolder
     {

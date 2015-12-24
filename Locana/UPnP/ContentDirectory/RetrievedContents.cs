@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace Kazyx.Uwpmm.UPnP.ContentDirectory
+namespace Locana.UPnP.ContentDirectory
 {
     public class RetrievedContents : ContentDirectoryResponse
     {

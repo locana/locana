@@ -1,13 +1,13 @@
 ﻿#if DEBUG
 using Kazyx.RemoteApi.AvContent;
-using Kazyx.Uwpmm.DataModel;
+using Locana.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 #endif
 
-namespace Kazyx.Uwpmm.Playback
+namespace Locana.Playback
 {
 #if DEBUG
     public class DummyContentsLoader : ContentsLoader
@@ -74,7 +74,7 @@ namespace Kazyx.Uwpmm.Playback
             foreach (var content in contents)
             {
                 content.GroupName = holder.AlbumGroup.Title;
-                Kazyx.Uwpmm.Utility.DebugUtil.Log("Add content for " + content.GroupName);
+                Locana.Utility.DebugUtil.Log("Add content for " + content.GroupName);
                 list.Add(new Thumbnail(content, CurrentUuid));
             }
 

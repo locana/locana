@@ -1,13 +1,13 @@
 ﻿using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
 
-using Kazyx.Uwpmm.Playback;
+using Locana.Playback;
 using Locana.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class SettingValueConverter
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public static class TaskExtensions
     {

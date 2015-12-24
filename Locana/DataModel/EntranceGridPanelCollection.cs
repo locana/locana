@@ -1,5 +1,5 @@
-﻿using Kazyx.Uwpmm;
-using Kazyx.Uwpmm.CameraControl;
+﻿using Locana;
+using Locana.CameraControl;
 using Locana.Pages;
 using System;
 using System.Collections.Generic;

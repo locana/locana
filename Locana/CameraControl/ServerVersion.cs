@@ -1,8 +1,8 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using System.Diagnostics;
 
-namespace Kazyx.Uwpmm.CameraControl
+namespace Locana.CameraControl
 {
     public class ServerVersion
     {

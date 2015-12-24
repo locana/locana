@@ -1,7 +1,7 @@
 ﻿using Kazyx.RemoteApi;
-using Kazyx.Uwpmm.DataModel;
+using Locana.DataModel;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class ParameterUtil
     {

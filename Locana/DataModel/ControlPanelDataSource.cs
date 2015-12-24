@@ -1,9 +1,9 @@
 ﻿using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.CameraControl;
-using Kazyx.Uwpmm.Utility;
+using Locana.CameraControl;
+using Locana.Utility;
 using System.Collections.Generic;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     class ControlPanelDataSource : ObservableBase
     {

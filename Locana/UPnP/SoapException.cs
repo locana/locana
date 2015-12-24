@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kazyx.Uwpmm.UPnP
+namespace Locana.UPnP
 {
     public class SoapException : Exception
     {

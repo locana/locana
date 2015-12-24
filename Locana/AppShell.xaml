@@ -1,4 +1,4 @@
-﻿<Page x:Class="Kazyx.Uwpmm.AppShell"
+﻿<Page x:Class="Locana.AppShell"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:controls="using:Locana.Controls"

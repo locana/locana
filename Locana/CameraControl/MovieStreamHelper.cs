@@ -1,14 +1,14 @@
 ﻿using Kazyx.ImageStream;
 using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.AvContent;
-using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.Utility;
+using Locana.DataModel;
+using Locana.Utility;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Kazyx.Uwpmm.CameraControl
+namespace Locana.CameraControl
 {
     public class MovieStreamHelper
     {

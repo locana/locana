@@ -1,13 +1,13 @@
-﻿using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.UPnP;
-using Kazyx.Uwpmm.UPnP.ContentDirectory;
-using Kazyx.Uwpmm.Utility;
+﻿using Locana.DataModel;
+using Locana.UPnP;
+using Locana.UPnP.ContentDirectory;
+using Locana.Utility;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Kazyx.Uwpmm.Playback
+namespace Locana.Playback
 {
     public class DlnaContentsLoader : ContentsLoader
     {

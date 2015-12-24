@@ -2,7 +2,7 @@
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class SystemUtil
     {

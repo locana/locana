@@ -1,4 +1,5 @@
-﻿using Locana.Pages;
+﻿using Locana.Controls;
+using Locana.Pages;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
@@ -9,10 +10,8 @@ using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using Locana;
-using Locana.Controls;
 
-namespace Kazyx.Uwpmm
+namespace Locana
 {
     /// <summary>
     /// The "chrome" layer of the app that provides top-level navigation with

@@ -1,16 +1,16 @@
 ﻿using Kazyx.ImageStream;
 using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.Playback;
-using Kazyx.Uwpmm.Utility;
+using Locana.DataModel;
+using Locana.Playback;
+using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 
-namespace Kazyx.Uwpmm.CameraControl
+namespace Locana.CameraControl
 {
     public class SequentialOperation
     {

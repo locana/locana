@@ -1,10 +1,10 @@
 ﻿using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.Utility;
+using Locana.Utility;
 using System;
 using System.Collections.Generic;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class CameraStatus : ObservableBase
     {
@@ -263,16 +263,16 @@ namespace Kazyx.Uwpmm.DataModel
         {
             switch (_LiveviewOrientation)
             {
-                case RemoteApi.Camera.Orientation.Straight:
+                case Orientation.Straight:
                     LiveviewOrientation = "90";
                     break;
-                case RemoteApi.Camera.Orientation.Right:
+                case Orientation.Right:
                     LiveviewOrientation = "180";
                     break;
-                case RemoteApi.Camera.Orientation.Left:
+                case Orientation.Left:
                     LiveviewOrientation = "0";
                     break;
-                case RemoteApi.Camera.Orientation.Opposite:
+                case Orientation.Opposite:
                     LiveviewOrientation = "270";
                     break;
             }
@@ -299,13 +299,13 @@ namespace Kazyx.Uwpmm.DataModel
             {
                 switch (_LiveviewOrientation)
                 {
-                    case RemoteApi.Camera.Orientation.Straight:
+                    case Orientation.Straight:
                         return 0;
-                    case RemoteApi.Camera.Orientation.Right:
+                    case Orientation.Right:
                         return 90;
-                    case RemoteApi.Camera.Orientation.Left:
+                    case Orientation.Left:
                         return 270;
-                    case RemoteApi.Camera.Orientation.Opposite:
+                    case Orientation.Opposite:
                         return 180;
                 }
                 return 0;

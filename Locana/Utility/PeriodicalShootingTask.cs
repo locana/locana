@@ -1,10 +1,11 @@
-﻿using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.CameraControl;
+﻿using Kazyx.RemoteApi;
+using Kazyx.RemoteApi.Camera;
+using Locana.CameraControl;
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class PeriodicalShootingTask
     {
@@ -70,7 +71,7 @@ namespace Kazyx.Uwpmm.Utility
                 {
                     await device.Api.Camera.ActTakePictureAsync();
                 }
-                catch (RemoteApi.RemoteApiException)
+                catch (RemoteApiException)
                 {
                     this._Stop();
                     if (Stopped != null) { Stopped(StopReason.ShootingFailed); }
