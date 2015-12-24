@@ -1,4 +1,4 @@
-﻿using Kazyx.RemoteApi;
+using Kazyx.RemoteApi;
 using Kazyx.Uwpmm.Utility;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Kazyx.Uwpmm.Control
+namespace Locana.Control
 {
     public sealed partial class ShootingParamSlider : UserControl
     {

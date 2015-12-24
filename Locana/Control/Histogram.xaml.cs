@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Media;
 
 // ユーザー コントロールのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234236 を参照してください
 
-namespace Kazyx.Uwpmm.Control
+namespace Locana.Control
 {
     public sealed partial class Histogram : UserControl
     {

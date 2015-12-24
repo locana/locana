@@ -1,8 +1,8 @@
-﻿<UserControl
-    x:Class="Kazyx.Uwpmm.Control.MoviePlaybackScreen"
+<UserControl
+    x:Class="Locana.Control.MoviePlaybackScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Kazyx.Uwpmm.Control"
+    xmlns:local="using:Locana.Control"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -45,15 +45,15 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <ProgressBar Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="ProgressBar" Minimum="0.0" Maximum="1000" Margin="3,6" 
+                    <ProgressBar Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="ProgressBar" Minimum="0.0" Maximum="1000" Margin="3,6"
                              Height="4"/>
                     <Slider Grid.ColumnSpan="4"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="SeekBar" Visibility="Collapsed"
                         Margin="3,6" Height="30" Minimum="0.0" Maximum="1000" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="PositionText" 
+                    <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="PositionText"
                            Foreground="{StaticResource ApplicationForegroundThemeBrush}" FontSize="16"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="/" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="TimeSeparator" 
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="/" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="TimeSeparator"
                            Foreground="{StaticResource ApplicationForegroundThemeBrush}" FontSize="16"/>
-                    <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="DurationText" 
+                    <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="DurationText"
                            Foreground="{StaticResource ApplicationForegroundThemeBrush}" FontSize="16"/>
                     <Button Tapped="StartPauseButton_Tapped"  Width="60" Height="60" BorderThickness="0"  Grid.Row="2" Grid.ColumnSpan="4" HorizontalAlignment="Center"
                         x:Name="StartPauseButton" MinHeight="10" MinWidth="10">

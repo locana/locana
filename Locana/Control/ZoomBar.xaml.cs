@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Shapes;
 
 // ユーザー コントロールのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=234236 を参照してください
 
-namespace Kazyx.Uwpmm.Control
+namespace Locana.Control
 {
     public sealed partial class ZoomBar : UserControl
     {

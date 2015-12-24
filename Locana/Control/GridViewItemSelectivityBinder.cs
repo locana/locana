@@ -1,9 +1,9 @@
-﻿using Kazyx.Uwpmm.DataModel;
+using Kazyx.Uwpmm.DataModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
-namespace Kazyx.Uwpmm.Control
+namespace Locana.Control
 {
     public class GridViewItemSelectivityBinder : StyleSelector
     {

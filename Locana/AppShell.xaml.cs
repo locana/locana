@@ -1,5 +1,4 @@
-﻿using Kazyx.Uwpmm.Control;
-using Locana.Pages;
+﻿using Locana.Pages;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
@@ -10,6 +9,8 @@ using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Locana;
+using Locana.Control;
 
 namespace Kazyx.Uwpmm
 {

@@ -1,4 +1,4 @@
-﻿using Kazyx.Uwpmm.Utility;
+using Kazyx.Uwpmm.Utility;
 using System;
 using Windows.Foundation;
 using Windows.UI.Xaml;
@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Kazyx.Uwpmm.Control
+namespace Locana.Control
 {
     public sealed partial class PhotoPlaybackScreen : UserControl
     {

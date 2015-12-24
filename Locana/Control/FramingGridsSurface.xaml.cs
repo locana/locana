@@ -1,4 +1,4 @@
-﻿using Kazyx.Uwpmm.Utility;
+using Kazyx.Uwpmm.Utility;
 using System;
 using Windows.Foundation;
 using Windows.UI;
@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Shapes;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Kazyx.Uwpmm.Control
+namespace Locana.Control
 {
     public sealed partial class FramingGridsSurface : UserControl
     {

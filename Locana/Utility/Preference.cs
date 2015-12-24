@@ -1,5 +1,5 @@
-﻿using Kazyx.Uwpmm.Control;
-using Kazyx.Uwpmm.Playback;
+﻿using Kazyx.Uwpmm.Playback;
+using Locana.Control;
 using System;
 using Windows.Storage;
 

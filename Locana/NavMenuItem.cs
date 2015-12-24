@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
 
-namespace Kazyx.Uwpmm
+namespace Locana
 {
     /// <summary>
     /// Data to represent an item in the nav menu.

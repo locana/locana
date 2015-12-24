@@ -1,8 +1,8 @@
-﻿<UserControl
-    x:Class="Kazyx.Uwpmm.Control.PhotoPlaybackScreen"
+<UserControl
+    x:Class="Locana.Control.PhotoPlaybackScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Kazyx.Uwpmm.Control"
+    xmlns:local="using:Locana.Control"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -18,10 +18,10 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Border Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource AppBarItemPointerOverBackgroundThemeBrush}" >
-                    <TextBlock Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12,1,0,1" TextWrapping="Wrap" 
+                    <TextBlock Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12,1,0,1" TextWrapping="Wrap"
                                FontSize="18" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
                 </Border>
-                <ListBox Grid.Row="1" x:Name="Values" Margin="12,0,0,0" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding ValuesList}"  
+                <ListBox Grid.Row="1" x:Name="Values" Margin="12,0,0,0" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding ValuesList}"
                          IsHitTestVisible="False" ItemTemplate="{StaticResource DetailInfoTemplate}" Background="Transparent" />
             </Grid>
         </DataTemplate>
@@ -50,7 +50,7 @@
             <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0.7"/>
 
             <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Column="1" Margin="0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-                <ListBox x:Name="DetailInfoList" Margin="0,28,0,22" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding EntryList}" 
+                <ListBox x:Name="DetailInfoList" Margin="0,28,0,22" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding EntryList}"
                          IsHitTestVisible="False" ItemTemplate="{StaticResource VerticalItemTemplate}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  />
             </ScrollViewer>
         </Grid>

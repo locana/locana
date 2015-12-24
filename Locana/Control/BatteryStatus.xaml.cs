@@ -1,4 +1,4 @@
-﻿using Kazyx.RemoteApi.Camera;
+using Kazyx.RemoteApi.Camera;
 using Kazyx.Uwpmm.Utility;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Kazyx.Uwpmm.Control
+namespace Locana.Control
 {
     public sealed partial class BatteryStatus : UserControl
     {
@@ -27,6 +27,8 @@ namespace Kazyx.Uwpmm.Control
             }
             get { return (List<BatteryInfo>)GetValue(BatteryInfoProperty); }
         }
+
+        public object RemoteApi { get; private set; }
 
         public static readonly DependencyProperty BatteryInfoProperty = DependencyProperty.Register(
             "BatteryInfo",
@@ -77,12 +79,12 @@ namespace Kazyx.Uwpmm.Control
 
             switch (batt.AdditionalStatus)
             {
-                case RemoteApi.Camera.BatteryStatus.NearEnd:
+                case Kazyx.RemoteApi.Camera.BatteryStatus.NearEnd:
                     Amount.Fill = ResourceManager.SystemControlForegroundAccentBrush;
                     Frame_NearEnd_Background.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     Frame_NearEnd_Foreground.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     break;
-                case RemoteApi.Camera.BatteryStatus.Charging:
+                case Kazyx.RemoteApi.Camera.BatteryStatus.Charging:
                     Amount.Fill = ResourceManager.ForegroundBrush;
                     Frame_Charging_Background.Visibility = Windows.UI.Xaml.Visibility.Visible;
                     Frame_Charging_Foreground.Visibility = Windows.UI.Xaml.Visibility.Visible;
@@ -100,7 +102,7 @@ namespace Kazyx.Uwpmm.Control
             {
                 switch (b.Status)
                 {
-                    case RemoteApi.Camera.BatteryStatus.Active:
+                    case Kazyx.RemoteApi.Camera.BatteryStatus.Active:
                         return b;
                 }
             }
