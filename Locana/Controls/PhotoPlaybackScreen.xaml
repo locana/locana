@@ -1,0 +1,58 @@
+<UserControl
+    x:Class="Locana.Controls.PhotoPlaybackScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Locana.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="VerticalItemTemplate">
+            <Grid Margin="-7,-6,0,-6" HorizontalAlignment="Center" Width="224" VerticalAlignment="Center" Background="Transparent" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Border Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource AppBarItemPointerOverBackgroundThemeBrush}" >
+                    <TextBlock Grid.Row="0" Text="{Binding Name}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="12,1,0,1" TextWrapping="Wrap"
+                               FontSize="18" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
+                </Border>
+                <ListBox Grid.Row="1" x:Name="Values" Margin="12,0,0,0" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding ValuesList}"
+                         IsHitTestVisible="False" ItemTemplate="{StaticResource DetailInfoTemplate}" Background="Transparent" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" >
+        <Border x:Name="background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0.7"/>
+
+        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,12" ZoomMode="Enabled" DoubleTapped="Image_DoubleTapped">
+            <Image Name="Image" CacheMode="BitmapCache" ManipulationMode="All" ManipulationDelta="Image_ManipulationDelta"  HorizontalAlignment="Center" DoubleTapped="Image_DoubleTapped"
+                   VerticalAlignment="Center" Height="315" Width="360" RenderTransformOrigin="0.5, 0.5" >
+                <Image.RenderTransform>
+                    <CompositeTransform></CompositeTransform>
+                </Image.RenderTransform>
+            </Image>
+        </ScrollViewer>
+
+        <Grid VerticalAlignment="Stretch" Width="230" HorizontalAlignment="Right" Name="DetailInfoPanel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="SlideTransform" X="230"/>
+            </Grid.RenderTransform>
+            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0.7"/>
+
+            <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Column="1" Margin="0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+                <ListBox x:Name="DetailInfoList" Margin="0,28,0,22" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding EntryList}"
+                         IsHitTestVisible="False" ItemTemplate="{StaticResource VerticalItemTemplate}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  />
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

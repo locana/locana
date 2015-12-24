@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Locana;
-using Locana.Control;
+using Locana.Controls;
 
 namespace Kazyx.Uwpmm
 {

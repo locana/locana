@@ -120,66 +120,66 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Control\AppBarContent.xaml.cs">
+    <Compile Include="Controls\AppBarContent.xaml.cs">
       <DependentUpon>AppBarContent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\BatteryStatus.xaml.cs">
+    <Compile Include="Controls\BatteryStatus.xaml.cs">
       <DependentUpon>BatteryStatus.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\CheckBoxSetting.xaml.cs">
+    <Compile Include="Controls\CheckBoxSetting.xaml.cs">
       <DependentUpon>CheckBoxSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ComboBoxSetting.xaml.cs">
+    <Compile Include="Controls\ComboBoxSetting.xaml.cs">
       <DependentUpon>ComboBoxSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\EllipseButton.xaml.cs">
+    <Compile Include="Controls\EllipseButton.xaml.cs">
       <DependentUpon>EllipseButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\EvSlider.xaml.cs">
+    <Compile Include="Controls\EvSlider.xaml.cs">
       <DependentUpon>EvSlider.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\FocusFrameSurface.xaml.cs">
+    <Compile Include="Controls\FocusFrameSurface.xaml.cs">
       <DependentUpon>FocusFrameSurface.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\FramingGridsSurface.xaml.cs">
+    <Compile Include="Controls\FramingGridsSurface.xaml.cs">
       <DependentUpon>FramingGridsSurface.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\GridViewItemSelectivityBinder.cs" />
-    <Compile Include="Control\Histogram.xaml.cs">
+    <Compile Include="Controls\GridViewItemSelectivityBinder.cs" />
+    <Compile Include="Controls\Histogram.xaml.cs">
       <DependentUpon>Histogram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\MoviePlaybackScreen.xaml.cs">
+    <Compile Include="Controls\MoviePlaybackScreen.xaml.cs">
       <DependentUpon>MoviePlaybackScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\MultiModeShutterButton.xaml.cs">
+    <Compile Include="Controls\MultiModeShutterButton.xaml.cs">
       <DependentUpon>MultiModeShutterButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\NavMenuListView.cs" />
-    <Compile Include="Control\PageHeader.xaml.cs">
+    <Compile Include="Controls\NavMenuListView.cs" />
+    <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\PhotoPlaybackScreen.xaml.cs">
+    <Compile Include="Controls\PhotoPlaybackScreen.xaml.cs">
       <DependentUpon>PhotoPlaybackScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ProgramShiftSlider.xaml.cs">
+    <Compile Include="Controls\ProgramShiftSlider.xaml.cs">
       <DependentUpon>ProgramShiftSlider.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\PullReleaseBar.xaml.cs">
+    <Compile Include="Controls\PullReleaseBar.xaml.cs">
       <DependentUpon>PullReleaseBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\SettingSection.xaml.cs">
+    <Compile Include="Controls\SettingSection.xaml.cs">
       <DependentUpon>SettingSection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ShootingParamSlider.xaml.cs">
+    <Compile Include="Controls\ShootingParamSlider.xaml.cs">
       <DependentUpon>ShootingParamSlider.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\Toast.xaml.cs">
+    <Compile Include="Controls\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ToggleSetting.xaml.cs">
+    <Compile Include="Controls\ToggleSetting.xaml.cs">
       <DependentUpon>ToggleSetting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\ZoomBar.xaml.cs">
+    <Compile Include="Controls\ZoomBar.xaml.cs">
       <DependentUpon>ZoomBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataModel\ApiCapabilityContainer.cs" />
@@ -378,83 +378,83 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\AppBarContent.xaml">
+    <Page Include="Controls\AppBarContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\BatteryStatus.xaml">
+    <Page Include="Controls\BatteryStatus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\CheckBoxSetting.xaml">
+    <Page Include="Controls\CheckBoxSetting.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\ComboBoxSetting.xaml">
+    <Page Include="Controls\ComboBoxSetting.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\EllipseButton.xaml">
+    <Page Include="Controls\EllipseButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\EvSlider.xaml">
+    <Page Include="Controls\EvSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\FocusFrameSurface.xaml">
+    <Page Include="Controls\FocusFrameSurface.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\FramingGridsSurface.xaml">
+    <Page Include="Controls\FramingGridsSurface.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\Histogram.xaml">
+    <Page Include="Controls\Histogram.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\MoviePlaybackScreen.xaml">
+    <Page Include="Controls\MoviePlaybackScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\MultiModeShutterButton.xaml">
+    <Page Include="Controls\MultiModeShutterButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\PageHeader.xaml">
+    <Page Include="Controls\PageHeader.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\PhotoPlaybackScreen.xaml">
+    <Page Include="Controls\PhotoPlaybackScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\ProgramShiftSlider.xaml">
+    <Page Include="Controls\ProgramShiftSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\PullReleaseBar.xaml">
+    <Page Include="Controls\PullReleaseBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\SettingSection.xaml">
+    <Page Include="Controls\SettingSection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\ShootingParamSlider.xaml">
+    <Page Include="Controls\ShootingParamSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\Toast.xaml">
+    <Page Include="Controls\Toast.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\ToggleSetting.xaml">
+    <Page Include="Controls\ToggleSetting.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\ZoomBar.xaml">
+    <Page Include="Controls\ZoomBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

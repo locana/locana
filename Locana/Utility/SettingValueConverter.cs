@@ -2,7 +2,7 @@
 using Kazyx.RemoteApi.Camera;
 
 using Kazyx.Uwpmm.Playback;
-using Locana.Control;
+using Locana.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;

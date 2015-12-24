@@ -1,7 +1,7 @@
 ﻿
 using Kazyx.Uwpmm.Playback;
 using Kazyx.Uwpmm.Utility;
-using Locana.Control;
+using Locana.Controls;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;

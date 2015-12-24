@@ -7,7 +7,7 @@ using Kazyx.Uwpmm.CameraControl;
 using Kazyx.Uwpmm.DataModel;
 using Kazyx.Uwpmm.Settings;
 using Kazyx.Uwpmm.Utility;
-using Locana.Control;
+using Locana.Controls;
 using Locana.Utility;
 using Naotaco.ImageProcessor.Histogram;
 using System;
@@ -379,7 +379,7 @@ namespace Locana.Pages
             {
                 icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
             }
-            MultiShutterButton.ModeInfo = new Control.ShootModeInfo()
+            MultiShutterButton.ModeInfo = new Controls.ShootModeInfo()
             {
                 ShootModeCapability = status.ShootMode,
                 ModeSelected = async (mode) =>
