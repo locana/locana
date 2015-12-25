@@ -249,6 +249,17 @@ namespace Locana.Utility
                 HorizontalContentAlignment = HorizontalAlignment.Right,
                 Background = null,
             };
+
+            Apply(bar);
+            return bar;
+        }
+
+        public void Apply(CommandBar bar)
+        {
+            bar.PrimaryCommands.Clear();
+            bar.SecondaryCommands.Clear();
+            bar.Content = null;
+
             foreach (AppBarItem item in EnabledItems[AppBarItemType.Command])
             {
                 var button = NewButton(item);
@@ -269,7 +280,6 @@ namespace Locana.Utility
             }
 
             bar.Content = BuildContentPanel(ContentViewData, EnabledItems[AppBarItemType.Content]);
-            return bar;
         }
 
         public bool IsEnabled(AppBarItemType type, AppBarItem item)

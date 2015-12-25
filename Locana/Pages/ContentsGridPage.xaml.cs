@@ -220,14 +220,11 @@ namespace Locana.Pages
         {
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                AppBarUnit.Children.Clear();
-                CommandBar bar = null;
                 switch (InnerState)
                 {
                     case ViewerState.LocalSelecting:
-                        bar = CommandBarManager.Clear()
-                            .Command(AppBarItem.Ok)
-                            .CreateNew(1.0);
+                        CommandBarManager.Clear()
+                            .Command(AppBarItem.Ok);
                         break;
                     case ViewerState.LocalSingle:
                         UpdateLocalSelectionMode(SelectivityFactor.None);
@@ -238,31 +235,29 @@ namespace Locana.Pages
                             {
                                 tmp.Command(AppBarItem.DeleteMultiple);
                             }
-                            bar = tmp.CreateNew(1.0);
                         }
                         break;
                     case ViewerState.LocalStillPlayback:
                         if (PhotoScreen.DetailInfoDisplayed)
                         {
-                            bar = CommandBarManager.Clear()
+                            CommandBarManager.Clear()
                                 .Command(AppBarItem.RotateRight)
                                 .Command(AppBarItem.HideDetailInfo)
-                                .Command(AppBarItem.RotateLeft)
-                                .CreateNew(1.0);
+                                .Command(AppBarItem.RotateLeft);
                         }
                         else
                         {
-                            bar = CommandBarManager.Clear()
+                            CommandBarManager.Clear()
                                 .Command(AppBarItem.RotateRight)
                                 .Command(AppBarItem.ShowDetailInfo)
-                                .Command(AppBarItem.RotateLeft)
-                                .CreateNew(1.0);
+                                .Command(AppBarItem.RotateLeft);
                         }
                         break;
                     default:
-                        return;
+                        CommandBarManager.Clear();
+                        break;
                 }
-                AppBarUnit.Children.Add(bar);
+                CommandBarManager.Apply(AppBarUnit);
             });
         }
 
@@ -476,7 +471,7 @@ namespace Locana.Pages
         private void ContentsGrid_Loaded(object sender, RoutedEventArgs e)
         {
             GridSources.Source = ContentsCollection;
-            (SemanticZoom.ZoomedOutView as ListViewBase).ItemsSource = GridSources.View.CollectionGroups;
+            (GridHolder.ZoomedOutView as ListViewBase).ItemsSource = GridSources.View.CollectionGroups;
         }
 
         private void ContentsGrid_Unloaded(object sender, RoutedEventArgs e)

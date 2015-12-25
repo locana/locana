@@ -60,6 +60,8 @@
                     <VisualState.Setters>
                         <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
                         <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource LargeGridItemTemplate}" />
+                        <Setter Target="GridHolder.(Grid.RowSpan)" Value="1" />
+                        <Setter Target="AppBarUnit.Background" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -69,6 +71,8 @@
                     <VisualState.Setters>
                         <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource SmallGridItemTemplate}" />
                         <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
+                        <Setter Target="GridHolder.(Grid.RowSpan)" Value="2" />
+                        <Setter Target="AppBarUnit.Background" Value="{ThemeResource SystemChromeBlackLowColor}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -76,6 +80,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <c:PageHeader x:Name="pageHeader">
             <c:PageHeader.HeaderContent>
@@ -122,16 +127,7 @@
                       VerticalAlignment="Center"
                       Canvas.ZIndex="40"
                       Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-
-        <StackPanel Name="AppBarUnit"
-                    Grid.RowSpan="2"
-                    VerticalAlignment="Bottom"
-                    Canvas.ZIndex="40">
-            <StackPanel.Background>
-                <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
-            </StackPanel.Background>
-        </StackPanel>
-        <SemanticZoom x:Name="SemanticZoom" Grid.Row="1">
+        <SemanticZoom x:Name="GridHolder" Grid.Row="1">
             <SemanticZoom.ZoomedInView>
                 <GridView x:Name="ContentsGrid"
                           ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
@@ -262,5 +258,10 @@
                 </GridView>
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
+
+        <CommandBar Name="AppBarUnit"
+                    Grid.Row="2"
+                    Grid.RowSpan="1"
+                    Canvas.ZIndex="40" />
     </Grid>
 </Page>
