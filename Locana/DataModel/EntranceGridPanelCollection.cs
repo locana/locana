@@ -1,5 +1,4 @@
-﻿using Locana;
-using Locana.CameraControl;
+﻿using Locana.CameraControl;
 using Locana.Pages;
 using System;
 using System.Collections.Generic;
@@ -68,6 +67,7 @@ namespace Locana.DataModel
         {
             OnPropertyChanged(nameof(Count));
             OnPropertyChanged("Item[]");
+            OnPropertyChanged(nameof(HasNoContent));
             try
             {
                 CollectionChanged?.Invoke(this, e);
@@ -77,6 +77,8 @@ namespace Locana.DataModel
                 OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
+
+        public bool HasNoContent => Count == 0;
     }
 
     public class EntrancePanel

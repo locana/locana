@@ -82,9 +82,19 @@
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
                             <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
                                 <TextBlock Padding="8,0"
-                                           Style="{StaticResource SubheaderTextBlockStyle}"
+                                           Style="{StaticResource TitleTextBlockStyle}"
                                            Text="{Binding GroupKey}" />
+                                <ProgressRing Grid.Column="1"
+                                              Width="32"
+                                              Height="32"
+                                              Margin="8,0,0,0"
+                                              IsActive="{Binding HasNoContent,
+                                                                 Mode=OneWay}" />
                             </Grid>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
