@@ -1,4 +1,4 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;

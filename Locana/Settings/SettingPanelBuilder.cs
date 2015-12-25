@@ -1,8 +1,8 @@
 ﻿using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
-using Kazyx.Uwpmm.CameraControl;
-using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.Utility;
+using Locana.CameraControl;
+using Locana.DataModel;
+using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace Kazyx.Uwpmm.Settings
+namespace Locana.Settings
 {
     class SettingPanelBuilder
     {

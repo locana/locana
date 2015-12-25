@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
 
-namespace Kazyx.Uwpmm.UPnP
+namespace Locana.UPnP
 {
     public abstract class Request
     {

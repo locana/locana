@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class AnimationHelper
     {

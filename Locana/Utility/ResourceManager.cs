@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public static class ResourceManager
     {

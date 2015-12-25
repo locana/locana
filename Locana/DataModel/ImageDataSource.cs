@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Media.Imaging;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class ImageDataSource : ObservableBase
     {

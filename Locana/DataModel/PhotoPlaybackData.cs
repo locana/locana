@@ -1,9 +1,9 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using Naotaco.ImageProcessor.MetaData.Structure;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class PhotoPlaybackData : ObservableBase
     {

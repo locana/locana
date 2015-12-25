@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public static class EnumUtil<T>
     {

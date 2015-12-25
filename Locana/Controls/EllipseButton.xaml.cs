@@ -1,4 +1,4 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;

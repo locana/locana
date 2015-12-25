@@ -10,7 +10,7 @@ using Windows.Devices.Geolocation;
 using Windows.Storage;
 using Windows.UI.Core;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class MediaDownloader
     {

@@ -1,11 +1,11 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Web.Http;
 
-namespace Kazyx.Uwpmm.UPnP
+namespace Locana.UPnP
 {
     public class UpnpService
     {

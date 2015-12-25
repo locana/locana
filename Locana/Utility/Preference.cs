@@ -1,9 +1,9 @@
-﻿using Kazyx.Uwpmm.Playback;
+﻿using Locana.Playback;
 using Locana.Controls;
 using System;
 using Windows.Storage;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class Preference
     {

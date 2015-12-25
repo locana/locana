@@ -1,8 +1,8 @@
 ﻿using Kazyx.DeviceDiscovery;
-using Kazyx.Uwpmm.DataModel;
+using Locana.DataModel;
 using Windows.Networking;
 
-namespace Kazyx.Uwpmm.CameraControl
+namespace Locana.CameraControl
 {
     public class TargetDevice
     {

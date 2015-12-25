@@ -1,9 +1,9 @@
 ﻿using Kazyx.RemoteApi;
-using Kazyx.Uwpmm.CameraControl;
+using Locana.CameraControl;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class ApiCapabilityContainer : ObservableBase
     {

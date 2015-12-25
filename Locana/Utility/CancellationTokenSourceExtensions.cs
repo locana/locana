@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public static class CancellationTokenSourceExtensions
     {

@@ -1,5 +1,5 @@
-﻿using Kazyx.Uwpmm.Common;
-using Kazyx.Uwpmm.Utility;
+﻿using Locana.Common;
+using Locana.Utility;
 using Locana.Network;
 using System;
 using System.Collections.ObjectModel;

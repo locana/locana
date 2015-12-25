@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 #endif
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class DebugUtil
     {

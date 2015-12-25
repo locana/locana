@@ -1,11 +1,11 @@
-﻿using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.Utility;
+﻿using Locana.DataModel;
+using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Kazyx.Uwpmm.Playback
+namespace Locana.Playback
 {
     public abstract class ContentsLoader
     {

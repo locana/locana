@@ -1,11 +1,11 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class Album : List<Thumbnail>, INotifyPropertyChanged, INotifyCollectionChanged
     {

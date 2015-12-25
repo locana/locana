@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 
-namespace Kazyx.Uwpmm.UPnP
+namespace Locana.UPnP
 {
     public class OptionalValueHelper
     {

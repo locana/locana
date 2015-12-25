@@ -1,6 +1,6 @@
 using Kazyx.RemoteApi.AvContent;
-using Kazyx.Uwpmm.DataModel;
-using Kazyx.Uwpmm.Utility;
+using Locana.DataModel;
+using Locana.Utility;
 using System;
 using System.Text;
 using System.Threading.Tasks;

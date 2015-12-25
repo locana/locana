@@ -1,11 +1,11 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public class AlbumGroupCollection : List<Album>, INotifyPropertyChanged, INotifyCollectionChanged
     {

@@ -1,4 +1,4 @@
-using Kazyx.Uwpmm.DataModel;
+using Locana.DataModel;
 using System;
 using Windows.UI.Xaml.Controls;
 

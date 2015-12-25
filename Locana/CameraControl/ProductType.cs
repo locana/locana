@@ -1,5 +1,5 @@
 ﻿
-namespace Kazyx.Uwpmm.CameraControl
+namespace Locana.CameraControl
 {
     public enum ProductType
     {

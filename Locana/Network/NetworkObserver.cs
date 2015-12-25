@@ -1,6 +1,6 @@
 ﻿using Kazyx.DeviceDiscovery;
-using Kazyx.Uwpmm.CameraControl;
-using Kazyx.Uwpmm.UPnP;
+using Locana.UPnP;
+using Locana.CameraControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Networking.Connectivity;
 
-namespace Kazyx.Uwpmm.Utility
+namespace Locana.Utility
 {
     public class NetworkObserver
     {

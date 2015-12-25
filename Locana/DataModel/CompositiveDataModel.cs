@@ -1,4 +1,4 @@
-﻿namespace Kazyx.Uwpmm.DataModel
+﻿namespace Locana.DataModel
 {
     public class ShootingParamViewData
     {

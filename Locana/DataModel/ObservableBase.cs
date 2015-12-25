@@ -1,9 +1,9 @@
-﻿using Kazyx.Uwpmm.Utility;
+﻿using Locana.Utility;
 using System;
 using System.ComponentModel;
 using Windows.UI.Core;
 
-namespace Kazyx.Uwpmm.DataModel
+namespace Locana.DataModel
 {
     public abstract class ObservableBase : INotifyPropertyChanged
     {
