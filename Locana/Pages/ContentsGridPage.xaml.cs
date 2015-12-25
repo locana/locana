@@ -40,6 +40,56 @@ namespace Locana.Pages
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            CommandBarManager.SetEvent(AppBarItem.Ok, (s, args) =>
+            {
+                DebugUtil.Log("Ok clicked");
+                switch (InnerState)
+                {
+                    case ViewerState.LocalSelecting:
+                        switch (ContentsCollection.SelectivityFactor)
+                        {
+                            case SelectivityFactor.Delete:
+                                DeleteSelectedLocalImages();
+                                break;
+                            default:
+                                DebugUtil.Log("Nothing to do for current SelectivityFactor: " + ContentsCollection.SelectivityFactor);
+                                break;
+                        }
+                        UpdateLocalSelectionMode(SelectivityFactor.None);
+                        UpdateInnerState(ViewerState.LocalSingle);
+                        break;
+                    default:
+                        DebugUtil.Log("Nothing to do for current InnerState: " + InnerState);
+                        break;
+                }
+            });
+            CommandBarManager.SetEvent(AppBarItem.DeleteMultiple, (s, args) =>
+            {
+                DebugUtil.Log("Delete clicked");
+                UpdateLocalSelectionMode(SelectivityFactor.Delete);
+                UpdateInnerState(ViewerState.LocalMulti);
+            });
+            CommandBarManager.SetEvent(AppBarItem.RotateRight, (s, args) =>
+            {
+                PhotoScreen.RotateImage(Rotation.Right);
+            });
+            CommandBarManager.SetEvent(AppBarItem.RotateLeft, (s, args) =>
+            {
+                PhotoScreen.RotateImage(Rotation.Left);
+            });
+            CommandBarManager.SetEvent(AppBarItem.ShowDetailInfo, async (s, args) =>
+            {
+                PhotoScreen.DetailInfoDisplayed = true;
+                await Task.Delay(500);
+                UpdateAppBar();
+            });
+            CommandBarManager.SetEvent(AppBarItem.HideDetailInfo, async (s, args) =>
+            {
+                PhotoScreen.DetailInfoDisplayed = false;
+                await Task.Delay(500);
+                UpdateAppBar();
+            });
         }
 
         /// <summary>
@@ -172,12 +222,14 @@ namespace Locana.Pages
         {
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
+                AppBarUnit.Children.Clear();
+                CommandBar bar = null;
                 switch (InnerState)
                 {
                     case ViewerState.LocalSelecting:
-                        BottomAppBar = CommandBarManager.Clear()
+                        bar = CommandBarManager.Clear()
                             .Command(AppBarItem.Ok)
-                            .CreateNew(0.5);
+                            .CreateNew(1.0);
                         break;
                     case ViewerState.LocalSingle:
                         UpdateLocalSelectionMode(SelectivityFactor.None);
@@ -188,31 +240,31 @@ namespace Locana.Pages
                             {
                                 tmp.Command(AppBarItem.DeleteMultiple);
                             }
-                            BottomAppBar = tmp.CreateNew(0.5);
+                            bar = tmp.CreateNew(1.0);
                         }
                         break;
                     case ViewerState.LocalStillPlayback:
                         if (PhotoScreen.DetailInfoDisplayed)
                         {
-                            BottomAppBar = CommandBarManager.Clear()
+                            bar = CommandBarManager.Clear()
                                 .Command(AppBarItem.RotateRight)
                                 .Command(AppBarItem.HideDetailInfo)
                                 .Command(AppBarItem.RotateLeft)
-                                .CreateNew(0.5);
+                                .CreateNew(1.0);
                         }
                         else
                         {
-                            BottomAppBar = CommandBarManager.Clear()
+                            bar = CommandBarManager.Clear()
                                 .Command(AppBarItem.RotateRight)
                                 .Command(AppBarItem.ShowDetailInfo)
                                 .Command(AppBarItem.RotateLeft)
-                                .CreateNew(0.5);
+                                .CreateNew(1.0);
                         }
                         break;
                     default:
-                        BottomAppBar = null;
-                        break;
+                        return;
                 }
+                AppBarUnit.Children.Add(bar);
             });
         }
 

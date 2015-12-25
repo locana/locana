@@ -113,6 +113,15 @@
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Top"
                  Canvas.ZIndex="20" />
+
+        <StackPanel Name="AppBarUnit"
+                    Grid.RowSpan="2"
+                    VerticalAlignment="Bottom"
+                    Canvas.ZIndex="40">
+            <StackPanel.Background>
+                <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+            </StackPanel.Background>
+        </StackPanel>
         <SemanticZoom x:Name="SemanticZoom" Grid.Row="1">
             <SemanticZoom.ZoomedInView>
                 <GridView x:Name="ContentsGrid"
@@ -120,6 +129,7 @@
                           ItemsSource="{Binding Source={StaticResource GridSources}}"
                           Loaded="ContentsGrid_Loaded"
                           ScrollViewer.IsHorizontalScrollChainingEnabled="False"
+                          SelectionChanged="ContentsGrid_SelectionChanged"
                           Unloaded="ContentsGrid_Unloaded">
                     <GridView.ItemTemplate>
                         <DataTemplate>
