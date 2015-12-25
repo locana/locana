@@ -1043,7 +1043,7 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
     <value>White</value>
   </data>
   <data name="Viewer_Header_GroupView" xml:space="preserve">
-    <value>Jump to group</value>
+    <value>Albums</value>
   </data>
   <data name="PeriodicalShooting_SkipLimitExceed" xml:space="preserve">
     <value>Something wrong. It seems the device is not ready to shoot for long time. Stopped interval rec.</value>

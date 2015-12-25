@@ -14,15 +14,13 @@
         <CollectionViewSource x:Name="PanelSources" IsSourceGrouped="True" />
 
         <ItemsPanelTemplate x:Key="WideGridItemTemplate">
-            <ItemsWrapGrid x:Name="PanelGrid"
-                           ItemHeight="180"
+            <ItemsWrapGrid ItemHeight="180"
                            ItemWidth="180"
                            Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="NarrowGridItemTemplate">
-            <ItemsWrapGrid x:Name="PanelGrid"
-                           ItemHeight="120"
+            <ItemsWrapGrid ItemHeight="120"
                            ItemWidth="120"
                            Orientation="Horizontal" />
         </ItemsPanelTemplate>

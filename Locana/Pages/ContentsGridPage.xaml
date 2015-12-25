@@ -29,10 +29,50 @@
                              To="0" />
         </Storyboard>
 
+        <ItemsPanelTemplate x:Key="LargeGridItemTemplate">
+            <ItemsWrapGrid ItemHeight="240"
+                           ItemWidth="240"
+                           Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="MediumGridItemTemplate">
+            <ItemsWrapGrid ItemHeight="180"
+                           ItemWidth="180"
+                           Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="SmallGridItemTemplate">
+            <ItemsWrapGrid ItemHeight="120"
+                           ItemWidth="120"
+                           Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+
         <c:GridViewItemSelectivityBinder x:Key="GridViewItemSelectivityBinder" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowWidthStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
+                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource LargeGridItemTemplate}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource SmallGridItemTemplate}" />
+                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -83,9 +123,7 @@
                           Unloaded="ContentsGrid_Unloaded">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="116"
-                                  Height="116"
-                                  Margin="2,2"
+                            <Grid Margin="2,2"
                                   Background="{ThemeResource ContentDialogBackgroundThemeBrush}"
                                   Holding="ContentsGrid_Holding"
                                   Tapped="ContentsGrid_Tapped">
@@ -114,14 +152,10 @@
                                 </FlyoutBase.AttachedFlyout>
                                 <Image Grid.RowSpan="2"
                                        Grid.ColumnSpan="3"
-                                       Width="116"
-                                       Height="116"
                                        Source="{Binding ThumbnailImage}"
                                        Stretch="Uniform" />
                                 <TextBlock Grid.RowSpan="2"
                                            Grid.ColumnSpan="3"
-                                           Width="108"
-                                           Height="108"
                                            Margin="8,8,0,0"
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"
@@ -157,13 +191,6 @@
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsWrapGrid ItemHeight="120"
-                                           ItemWidth="120"
-                                           Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
                     <GridView.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
@@ -178,13 +205,12 @@
                 </GridView>
             </SemanticZoom.ZoomedInView>
             <SemanticZoom.ZoomedOutView>
-                <GridView Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" ScrollViewer.IsVerticalScrollChainingEnabled="False">
+                <GridView x:Name="GroupsGrid"
+                          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                          ScrollViewer.IsVerticalScrollChainingEnabled="False">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="116"
-                                  Height="116"
-                                  Margin="2"
-                                  Background="{ThemeResource ContentDialogBackgroundThemeBrush}">
+                            <Grid Margin="2" Background="{ThemeResource ContentDialogBackgroundThemeBrush}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40" />
                                     <RowDefinition Height="*" />

@@ -1109,4 +1109,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="PanelGroup_Devices" xml:space="preserve">
     <value>発見したデバイス</value>
   </data>
+  <data name="Viewer_Header_GroupView" xml:space="preserve">
+    <value>アルバム一覧</value>
+  </data>
 </root>
