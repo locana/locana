@@ -12,6 +12,20 @@
 
     <Page.Resources>
         <CollectionViewSource x:Name="PanelSources" IsSourceGrouped="True" />
+
+        <ItemsPanelTemplate x:Key="WideGridItemTemplate">
+            <ItemsWrapGrid x:Name="PanelGrid"
+                           ItemHeight="180"
+                           ItemWidth="180"
+                           Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="NarrowGridItemTemplate">
+            <ItemsWrapGrid x:Name="PanelGrid"
+                           ItemHeight="120"
+                           ItemWidth="120"
+                           Orientation="Horizontal" />
+        </ItemsPanelTemplate>
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -27,8 +41,7 @@
                         <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="PanelGrid.ItemHeight" Value="180" />
-                        <Setter Target="PanelGrid.ItemWidth" Value="180" />
+                        <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource WideGridItemTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -36,8 +49,7 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="PanelGrid.ItemHeight" Value="120" />
-                        <Setter Target="PanelGrid.ItemWidth" Value="120" />
+                        <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource NarrowGridItemTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -67,11 +79,6 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid x:Name="PanelGrid" Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
             <GridView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
