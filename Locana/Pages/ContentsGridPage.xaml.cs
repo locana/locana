@@ -11,8 +11,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 using Windows.System.Display;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -139,8 +141,6 @@ namespace Locana.Pages
 
             displayRequest.RequestActive();
 
-            ChangeProgressText("processing.");
-
             UpdateInnerState(ViewerState.LocalSingle);
 
             Canceller = new CancellationTokenSource();
@@ -205,8 +205,6 @@ namespace Locana.Pages
 
             this.navigationHelper.OnNavigatedFrom(e);
         }
-
-        // private StatusBar statusBar = StatusBar.GetForCurrentView();
 
         CommandBarManager CommandBarManager = new CommandBarManager();
 
@@ -340,7 +338,12 @@ namespace Locana.Pages
             DebugUtil.Log("Hide Progress");
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                // await statusBar.ProgressIndicator.HideAsync();
+                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                {
+                    // Maybe mobile devices
+                    await StatusBar.GetForCurrentView().ProgressIndicator.HideAsync();
+                }
+                ProgressCircle.IsActive = false;
             });
         }
 
@@ -349,11 +352,15 @@ namespace Locana.Pages
             DebugUtil.Log("Show Progress: " + text);
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
             {
-                /*
-                statusBar.ProgressIndicator.ProgressValue = null;
-                statusBar.ProgressIndicator.Text = text;
-                await statusBar.ProgressIndicator.ShowAsync();
-                */
+                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+                {
+                    // Maybe mobile devices
+                    var bar = StatusBar.GetForCurrentView();
+                    bar.ProgressIndicator.ProgressValue = null;
+                    bar.ProgressIndicator.Text = text;
+                    await bar.ProgressIndicator.ShowAsync();
+                }
+                ProgressCircle.IsActive = true;
             });
         }
 

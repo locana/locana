@@ -114,6 +114,15 @@
                  VerticalAlignment="Top"
                  Canvas.ZIndex="20" />
 
+        <ProgressRing x:Name="ProgressCircle"
+                      Grid.RowSpan="2"
+                      Width="60"
+                      Height="60"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Canvas.ZIndex="40"
+                      Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+
         <StackPanel Name="AppBarUnit"
                     Grid.RowSpan="2"
                     VerticalAlignment="Bottom"
