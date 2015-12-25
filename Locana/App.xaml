@@ -11,8 +11,21 @@
                 <ResourceDictionary Source="Resources/StyleResources.xaml" />
                 <ResourceDictionary Source="Resources/ShellStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
 
+            <!--  For PhotoPlaybackScreem.xaml  -->
+            <DataTemplate x:Key="DetailInfoTemplate">
+                <TextBlock Grid.Row="1"
+                           Margin="0,-3"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           FontSize="16"
+                           Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
+                           Text="{Binding}"
+                           TextWrapping="Wrap" />
+            </DataTemplate>
+
+            <local:LocalizedStrings x:Key="LocalizedStrings" />
+        </ResourceDictionary>
     </Application.Resources>
 
 </Application>

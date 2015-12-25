@@ -47,6 +47,12 @@ namespace Locana
                     Label = "WifiDirectPage",
                     DestPage = typeof(WifiDirectPage)
                 },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Pictures,
+                    Label = "Local Contents",
+                    DestPage = typeof(ContentsGridPage)
+                },
             });
 
         public static AppShell Current = null;
