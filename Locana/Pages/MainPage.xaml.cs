@@ -53,6 +53,7 @@ namespace Locana.Pages
 
             var bar = _CommandBarManager.Clear(). //
                 HiddenItem(AppBarItem.AppSetting). //
+                Content(AppBarItem.Zoom). //
                 Content(AppBarItem.FNumberSlider). //
                 Content(AppBarItem.ShutterSpeedSlider). //
                 Content(AppBarItem.IsoSlider). //
@@ -91,11 +92,10 @@ namespace Locana.Pages
             {
                 ToggleVisibility(ProgramShiftSlider);
             });
-
-            SliderObjects = new List<FrameworkElement>()
+            _CommandBarManager.SetEvent(AppBarItem.Zoom, (s, args) =>
             {
-                FnumberSlider, SSSlider, ISOSlider, EvSlider, ProgramShiftSlider
-            };
+                ToggleVisibility(ZoomElements);
+            });
         }
 
         void ToggleVisibility(FrameworkElement element)
@@ -129,19 +129,16 @@ namespace Locana.Pages
             }
         }
 
-        List<FrameworkElement> SliderObjects;
-
         void HideAllSliders()
         {
-            if (SliderObjects == null) { return; }
-            foreach (var s in SliderObjects)
+            foreach (var s in Sliders.Children)
             {
                 if (s.Visibility == Visibility.Visible)
                 {
                     AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
                     {
                         RequestFadeType = FadeType.FadeOut,
-                        Target = s,
+                        Target = s as FrameworkElement,
                         Duration = TimeSpan.FromMilliseconds(150),
                         Completed = (sender, arg) =>
                         {
@@ -298,6 +295,7 @@ namespace Locana.Pages
                 Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
                 ShootingParams.DataContext = ScreenViewData;
                 _CommandBarManager.ContentViewData = ScreenViewData;
+                ZoomElements.DataContext = ScreenViewData;
                 UpdateShutterButton(target.Status);
                 HideFrontScreen();
             });

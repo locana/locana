@@ -104,6 +104,19 @@ namespace Locana.Utility
                 panel.Children.Add(ProgramShiftButton);
             }
 
+            if (items.Contains(AppBarItem.Zoom))
+            {
+                var ZoomButton = NewButtonWithHandler(AppBarItem.Zoom);
+                ZoomButton.SetValue(Button.VisibilityProperty, new Binding()
+                {
+                    Source = data,
+                    Path = new PropertyPath("IsZoomAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter()
+                });
+                panel.Children.Add(ZoomButton);
+            }
+
             return panel;
         }
 
@@ -155,6 +168,8 @@ namespace Locana.Utility
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ProgramShift.png") }, Label = "ProgramShift" };
                 case AppBarItem.EvSlider:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/EVComp.png") }, Label = "EV" };
+                case AppBarItem.Zoom:
+                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ZoomIn.png") }, Label = "Zoom" };
                 case AppBarItem.Tmp_WfdPage:
                     return new AppBarButton() { Label = "WFD page" };
                 default:
@@ -319,5 +334,6 @@ namespace Locana.Utility
         EvSlider,
         ProgramShiftSlider,
         Tmp_WfdPage,
+        Zoom,
     }
 }
