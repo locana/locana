@@ -1,6 +1,7 @@
 ﻿using Kazyx.DeviceDiscovery;
-using Locana.UPnP;
 using Locana.CameraControl;
+using Locana.UPnP;
+using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Networking.Connectivity;
 
-namespace Locana.Utility
+namespace Locana.Network
 {
     public class NetworkObserver
     {
@@ -152,11 +153,8 @@ namespace Locana.Utility
         public void Finish()
         {
             NetworkInformation.NetworkStatusChanged -= NetworkInformation_NetworkStatusChanged;
-            if (Canceller != null)
-            {
-                Canceller.Cancel();
-                Canceller = null;
-            }
+            Canceller?.Cancel();
+            Canceller = null;
             Clear();
             Started = false;
         }
@@ -234,11 +232,11 @@ namespace Locana.Utility
 
             SearchCamera();
             SearchCds();
-            await Task.Delay(5000);
+            await Task.Delay(5000).ConfigureAwait(false);
 
             if (!cancel.IsCancellationRequested)
             {
-                await checkConnection(cancel);
+                await checkConnection(cancel).ConfigureAwait(false);
             }
 
             // DebugUtil.Log("Not connected to camera device.");
@@ -255,15 +253,9 @@ namespace Locana.Utility
 
         private void startTask()
         {
-            if (Canceller != null)
-            {
-                Canceller.Cancel();
-                Canceller = null;
-            }
-
-            var cancel = new CancellationTokenSource();
-            Canceller = cancel;
-            var task = checkConnection(cancel);
+            Canceller?.Cancel();
+            Canceller = new CancellationTokenSource();
+            var task = checkConnection(Canceller);
         }
     }
 

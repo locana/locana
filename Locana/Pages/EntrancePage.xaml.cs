@@ -1,4 +1,5 @@
 ﻿using Locana.DataModel;
+using Locana.Network;
 using Locana.Utility;
 using Naotaco.Nfc;
 using System;
