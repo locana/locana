@@ -48,7 +48,7 @@ namespace Locana.Controls
 
         private void LayoutRoot_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            _Ellipse.Fill = ResourceManager.ForegroundBrush;
+            _Ellipse.Fill = ResourceManager.BackGroundBrush;
         }
     }
 }

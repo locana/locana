@@ -12,12 +12,12 @@ namespace Locana.Utility
 
         public static Brush BackGroundBrush
         {
-            get { return (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"]; }
+            get { return (Brush)Application.Current.Resources["SystemControlBackgroundBaseMediumBrush"]; }
         }
 
         public static Brush ForegroundBrush
         {
-            get { return (Brush)Application.Current.Resources["ApplicationForegroundThemeBrush"]; }
+            get { return (Brush)Application.Current.Resources["SystemControlForegroundChromeMediumBrush"]; }
         }
     }
 }
