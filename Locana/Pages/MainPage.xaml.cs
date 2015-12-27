@@ -99,6 +99,11 @@ namespace Locana.Pages
             {
                 ToggleVisibility(ZoomElements);
             });
+            _CommandBarManager.SetEvent(AppBarItem.CancelTouchAF, async (s, args) =>
+            {
+                if (target == null || target.Api == null) { return; }
+                await target.Api.Camera.CancelTouchAFAsync();
+            });
 
             _FocusFrameSurface.OnTouchFocusOperated += async (obj, args) =>
             {
@@ -448,8 +453,59 @@ namespace Locana.Pages
                 case "ShootMode":
                     UpdateShutterButton(status);
                     break;
+                case "FocusStatus":
+                    UpdateFocusStatus(status.FocusStatus);
+                    break;
+                case "TouchFocusStatus":
+                    UpdateTouchFocus(status.TouchFocusStatus);
+                    break;
                 default:
                     break;
+            }
+        }
+
+        private void UpdateFocusStatus(string FocusStatus)
+        {
+            DebugUtil.Log("Focus status changed: " + FocusStatus);
+            if (FocusStatus == Kazyx.RemoteApi.Camera.FocusState.Focused)
+            {
+                ShowCancelTouchAFButton();
+                _FocusFrameSurface.Focused = true;
+            }
+            else
+            {
+                HideCancelTouchAFButton();
+                _FocusFrameSurface.Focused = false;
+            }
+        }
+
+        private void HideCancelTouchAFButton()
+        {
+            var bar = _CommandBarManager.Disable(AppBarItemType.Command, AppBarItem.CancelTouchAF).CreateNew(1.0);
+            this.AppBarUnit.Children.Clear();
+            this.AppBarUnit.Children.Add(bar);
+        }
+
+        void ShowCancelTouchAFButton()
+        {
+            var bar = _CommandBarManager.Command(AppBarItem.CancelTouchAF).CreateNew(1.0);
+            this.AppBarUnit.Children.Clear();
+            this.AppBarUnit.Children.Add(bar);
+        }
+
+        private void UpdateTouchFocus(TouchFocusStatus status)
+        {
+            if (status == null) { return; }
+            DebugUtil.Log("TouchFocusStatus changed: " + status.Focused);
+            if (status.Focused)
+            {
+                ShowCancelTouchAFButton();
+                _FocusFrameSurface.Focused = true;
+            }
+            else
+            {
+                HideCancelTouchAFButton();
+                _FocusFrameSurface.Focused = false;
             }
         }
 
