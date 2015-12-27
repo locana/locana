@@ -124,9 +124,27 @@
             <Image x:Name="LiveviewImage"
                    Margin="10"
                    Loaded="LiveviewImage_Loaded"
+                   SizeChanged="LiveviewImage_SizeChanged"
                    Source="{Binding Image,
                                     Mode=OneWay}"
                    Unloaded="LiveviewImage_Unloaded" />
+            <controls:FramingGridsSurface x:Name="FramingGuideSurface"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                          FibonacciOrigin="{Binding Path=AppSetting.FibonacciLineOrigin,
+                                                                    Mode=OneWay}"
+                                          Stroke="{Binding Path=AppSetting.GridColorBrush,
+                                                           Mode=OneWay}"
+                                          Type="{Binding Path=AppSetting.GridType,
+                                                         Mode=OneWay}"
+                                          Visibility="{Binding Path=AppSetting.FramingGridEnabled,
+                                                               FallbackValue=Collapsed,
+                                                               Converter={StaticResource B2VConverter}}" />
+
+            <controls:FocusFrameSurface x:Name="_FocusFrameSurface"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch" />
+
         </Grid>
 
         <StackPanel x:Name="Header"

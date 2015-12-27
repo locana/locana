@@ -296,6 +296,8 @@ namespace Locana.Pages
                 ShootingParams.DataContext = ScreenViewData;
                 _CommandBarManager.ContentViewData = ScreenViewData;
                 ZoomElements.DataContext = ScreenViewData;
+
+                FramingGuideSurface.DataContext = new OptionalElementsViewData() { AppSetting = ApplicationSettings.GetInstance() };
                 UpdateShutterButton(target.Status);
                 HideFrontScreen();
             });
@@ -735,6 +737,21 @@ namespace Locana.Pages
         private void Grid_Tapped_1(object sender, TappedRoutedEventArgs e)
         {
             OpenCloseControlPanel();
+        }
+
+        private void LiveviewImage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            var height = (sender as Image).RenderSize.Height;
+            var width = (sender as Image).RenderSize.Width;
+
+            // To fit focus frames and grids to liveview image
+            this._FocusFrameSurface.Height = height;
+            this._FocusFrameSurface.Width = width;
+            this.FramingGuideSurface.Height = height;
+            this.FramingGuideSurface.Width = width;
+
+            // FollowLiveviewDisplay();
         }
     }
 
