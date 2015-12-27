@@ -30,13 +30,9 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(RecordbaleAmount));
                 NotifyChangedOnUI(nameof(RecordingCount));
                 NotifyChangedOnUI(nameof(IsRecordingCountAvailable));
-                NotifyChangedOnUI("EvVisibility");
                 NotifyChangedOnUI(nameof(EvDisplayValue));
-                NotifyChangedOnUI("FnumberVisibility");
                 NotifyChangedOnUI(nameof(FnumberDisplayValue));
-                NotifyChangedOnUI("ISOVisibility");
                 NotifyChangedOnUI(nameof(ISODisplayValue));
-                NotifyChangedOnUI("ShutterSpeedVisibility");
                 NotifyChangedOnUI(nameof(ShutterSpeedDisplayValue));
                 NotifyChangedOnUI(nameof(IsAudioMode));
                 NotifyChangedOnUI(nameof(LiveviewImageDisplayed));
@@ -65,6 +61,7 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(IsShootingParamAvailable));
                 NotifyChangedOnUI(nameof(IsShootingParamSettingAvailable));
                 NotifyChangedOnUI(nameof(IsProgramShiftAvailable));
+                NotifyChangedOnUI(nameof(IsShootingParamDisplayAvailable));
             };
 
             ApplicationSettings.GetInstance().PropertyChanged += (sender, args) =>
