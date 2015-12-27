@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.Phone.UI.Input;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -62,6 +63,8 @@ namespace Locana.Pages
                 CreateNew(1.0);
             this.AppBarUnit.Children.Clear();
             this.AppBarUnit.Children.Add(bar);
+
+            
         }
 
         CommandBarManager _CommandBarManager = new CommandBarManager();
@@ -96,6 +99,20 @@ namespace Locana.Pages
             {
                 ToggleVisibility(ZoomElements);
             });
+
+            _FocusFrameSurface.OnTouchFocusOperated += async (obj, args) =>
+            {
+                DebugUtil.Log("Touch AF operated: " + args.X + " " + args.Y);
+                if (target == null || target.Api == null || !target.Api.Capability.IsAvailable("setTouchAFPosition")) { return; }
+                try
+                {
+                    await target.Api.Camera.SetAFPositionAsync(args.X, args.Y);
+                }
+                catch (RemoteApiException ex)
+                {
+                    DebugUtil.Log(ex.StackTrace);
+                }
+            };
         }
 
         void ToggleVisibility(FrameworkElement element)
@@ -153,12 +170,53 @@ namespace Locana.Pages
         {
             InitializeVisualStates();
             DisplayInformation.GetForCurrentView().OrientationChanged += MainPage_OrientationChanged;
+
+            HardwareButtons.CameraHalfPressed += HardwareButtons_CameraHalfPressed;
+            HardwareButtons.CameraReleased += HardwareButtons_CameraReleased;
+            HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            HardwareButtons.CameraHalfPressed -= HardwareButtons_CameraHalfPressed;
+            HardwareButtons.CameraReleased -= HardwareButtons_CameraReleased;
+            HardwareButtons.CameraPressed -= HardwareButtons_CameraPressed;
         }
 
         private void MainPage_OrientationChanged(DisplayInformation info, object args)
         {
             Debug.WriteLine("orientation: " + info.CurrentOrientation);
             Debug.WriteLine(LayoutRoot.ActualWidth + " x " + LayoutRoot.ActualHeight);
+        }
+
+        async void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
+        {
+            if (CameraStatusUtility.IsContinuousShootingMode(target)) { await StartContShooting(); }
+            else { ShutterButtonPressed(); }
+        }
+
+        async void HardwareButtons_CameraReleased(object sender, CameraEventArgs e)
+        {
+            if (target == null || target.Api == null) { return; }
+            if (target.Api.Capability.IsAvailable("cancelHalfPressShutter"))
+            {
+                try
+                {
+                    await target.Api.Camera.CancelHalfPressShutterAsync();
+                }
+                catch (RemoteApiException) { }
+            }
+            await StopContShooting();
+        }
+
+        async void HardwareButtons_CameraHalfPressed(object sender, CameraEventArgs e)
+        {
+            if (target == null || target.Api == null || !target.Api.Capability.IsAvailable("actHalfPressShutter")) { return; }
+            try
+            {
+                await target.Api.Camera.ActHalfPressShutterAsync();
+            }
+            catch (RemoteApiException) { }
         }
 
         const string WIDE_STATE = "WideState";
@@ -279,7 +337,7 @@ namespace Locana.Pages
             this.target = target;
             target.Status.PropertyChanged += Status_PropertyChanged;
 
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 ScreenViewData = new LiveviewScreenViewData(target);
                 ScreenViewData.NotifyFriendlyNameUpdated();
@@ -299,10 +357,35 @@ namespace Locana.Pages
 
                 FramingGuideSurface.DataContext = new OptionalElementsViewData() { AppSetting = ApplicationSettings.GetInstance() };
                 UpdateShutterButton(target.Status);
+
+                await SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);
+                _FocusFrameSurface.ClearFrames();
+
                 HideFrontScreen();
             });
 
             SetUIHandlers();
+        }
+
+        private async Task<bool> SetupFocusFrame(bool RequestFocusFrameEnabled)
+        {
+            if (target == null)
+            {
+                DebugUtil.Log("No target to set up focus frame is available.");
+                return false;
+            }
+            if (target.Api.Capability.IsAvailable("setLiveviewFrameInfo"))
+            {
+                await target.Api.Camera.SetLiveviewFrameInfoAsync(new FrameInfoSetting() { TransferFrameInfo = RequestFocusFrameEnabled });
+            }
+
+            if (RequestFocusFrameEnabled && !target.Api.Capability.IsSupported("setLiveviewFrameInfo") && target.Api.Capability.IsAvailable("setTouchAFPosition"))
+            {
+                // For devices which does not support to transfer focus frame info, draw focus frame itself.
+                _FocusFrameSurface.SelfDrawTouchAFFrame = true;
+            }
+            else { _FocusFrameSurface.SelfDrawTouchAFFrame = false; }
+            return true;
         }
 
         private void SetUIHandlers()
@@ -433,6 +516,15 @@ namespace Locana.Pages
             image.DataContext = liveview_data;
             liveview.JpegRetrieved += liveview_JpegRetrieved;
             liveview.Closed += liveview_Closed;
+            liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
+        }
+
+        private async void Liveview_FocusFrameRetrieved(object sender, FocusFrameEventArgs e)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                _FocusFrameSurface.SetFocusFrames(e.Packet.FocusFrames);
+            });
         }
 
         private void LiveviewImage_Unloaded(object sender, RoutedEventArgs e)
@@ -441,6 +533,7 @@ namespace Locana.Pages
             image.DataContext = null;
             liveview.JpegRetrieved -= liveview_JpegRetrieved;
             liveview.Closed -= liveview_Closed;
+            liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
             TearDownCurrentTarget();
         }
 
@@ -753,6 +846,7 @@ namespace Locana.Pages
 
             // FollowLiveviewDisplay();
         }
+
     }
 
 }

@@ -9,6 +9,7 @@
       xmlns:util="using:Locana.Utility"
       Loaded="Page_Loaded"
       RequestedTheme="Dark"
+      Unloaded="Page_Unloaded"
       mc:Ignorable="d">
 
     <Page.Resources>
