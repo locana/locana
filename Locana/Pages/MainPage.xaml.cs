@@ -3,17 +3,19 @@
 using Kazyx.ImageStream;
 using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
-using Locana.Settings;
 using Locana.CameraControl;
 using Locana.Controls;
 using Locana.DataModel;
+using Locana.Settings;
 using Locana.Utility;
 using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
+using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -21,7 +23,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Windows.Phone.UI.Input;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -64,7 +65,7 @@ namespace Locana.Pages
             this.AppBarUnit.Children.Clear();
             this.AppBarUnit.Children.Add(bar);
 
-            
+
         }
 
         CommandBarManager _CommandBarManager = new CommandBarManager();
@@ -176,16 +177,22 @@ namespace Locana.Pages
             InitializeVisualStates();
             DisplayInformation.GetForCurrentView().OrientationChanged += MainPage_OrientationChanged;
 
-            HardwareButtons.CameraHalfPressed += HardwareButtons_CameraHalfPressed;
-            HardwareButtons.CameraReleased += HardwareButtons_CameraReleased;
-            HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
+            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                HardwareButtons.CameraHalfPressed += HardwareButtons_CameraHalfPressed;
+                HardwareButtons.CameraReleased += HardwareButtons_CameraReleased;
+                HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
+            }
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            HardwareButtons.CameraHalfPressed -= HardwareButtons_CameraHalfPressed;
-            HardwareButtons.CameraReleased -= HardwareButtons_CameraReleased;
-            HardwareButtons.CameraPressed -= HardwareButtons_CameraPressed;
+            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            {
+                HardwareButtons.CameraHalfPressed -= HardwareButtons_CameraHalfPressed;
+                HardwareButtons.CameraReleased -= HardwareButtons_CameraReleased;
+                HardwareButtons.CameraPressed -= HardwareButtons_CameraPressed;
+            }
         }
 
         private void MainPage_OrientationChanged(DisplayInformation info, object args)
