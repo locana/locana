@@ -352,7 +352,13 @@
                                              VerticalAlignment="Bottom"
                                              Canvas.ZIndex="100"
                                              CurrentModeButtonImage="{Binding ShutterButtonImage,
-                                                                              Mode=OneWay}" />
+                                                                              Mode=OneWay}"
+                                             ModeButtonsEnabled="{Binding ShootModeChangingAvailable,
+                                                                          Mode=OneWay,
+                                                                          FallbackValue=false}"
+                                             ShutterButtonEnabled="{Binding ShutterButtonEnabled,
+                                                                            Mode=OneWay,
+                                                                            FallbackValue=false}" />
             <Grid x:Name="Sliders"
                   MaxWidth="400"
                   Margin="40,0">

@@ -44,6 +44,42 @@ namespace Locana.Controls
             (d as MultiModeShutterButton).UpdateCurrentModeButtonImage(image);
         }
 
+        public bool ShutterButtonEnabled
+        {
+            set { SetValue(ShutterButtonEnabledProperty, value); }
+            get { return (bool)GetValue(ShutterButtonEnabledProperty); }
+        }
+
+        public static readonly DependencyProperty ShutterButtonEnabledProperty = DependencyProperty.Register(
+            nameof(ShutterButtonEnabled),
+            typeof(bool),
+            typeof(MultiModeShutterButton),
+            new PropertyMetadata(false, new PropertyChangedCallback(MultiModeShutterButton.ShutterButtonEnabledUpdated)));
+
+        private static void ShutterButtonEnabledUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue == null) { return; }
+            (d as MultiModeShutterButton).SetCurrentModeButtonEnable((bool)e.NewValue);
+        }
+
+        public bool ModeButtonsEnabled
+        {
+            set { SetValue(ModeButtonsEnabledProperty, value); }
+            get { return (bool)GetValue(ModeButtonsEnabledProperty); }
+        }
+
+        public static readonly DependencyProperty ModeButtonsEnabledProperty = DependencyProperty.Register(
+            nameof(ModeButtonsEnabled),
+            typeof(bool),
+            typeof(MultiModeShutterButton),
+            new PropertyMetadata(false, new PropertyChangedCallback(MultiModeShutterButton.ModeButtonsEnabledUpdated)));
+
+        private static void ModeButtonsEnabledUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue == null) { return; }
+            (d as MultiModeShutterButton).SetModeButtonsEnable((bool)e.NewValue);
+        }
+
         private ShootModeInfo _ModeInfo;
         public ShootModeInfo ModeInfo
         {
@@ -84,20 +120,23 @@ namespace Locana.Controls
             if (requesting == current)
             {
                 ProgressRing.IsActive = false;
-                SetAllButtonEnabled(true);
             }
             else
             {
                 ProgressRing.IsActive = true;
-                SetAllButtonEnabled(false);
             }
         }
 
-        private void SetAllButtonEnabled(bool enable)
+        private void SetModeButtonsEnable(bool enable)
         {
             foreach (EllipseButton b in this.Buttons.Children)
             {
-                if (b != null) { b.Enabled = enable; }
+
+                if (this._ModeInfo?.ShootModeCapability == null) { continue; }
+                var SelectedModeButton = FindButton(this._ModeInfo.ShootModeCapability.Current);
+
+                // set enable other than selected button
+                if (b != null && !b.Equals(SelectedModeButton)) { b.Enabled = enable; }
             }
         }
 
@@ -203,6 +242,16 @@ namespace Locana.Controls
             if (button != null)
             {
                 button.Icon = newIcon;
+            }
+        }
+
+        void SetCurrentModeButtonEnable(bool enable)
+        {
+            if (this._ModeInfo?.ShootModeCapability == null) { return; }
+            var button = FindButton(this._ModeInfo.ShootModeCapability.Current);
+            if (button != null)
+            {
+                button.Enabled = enable;
             }
         }
 

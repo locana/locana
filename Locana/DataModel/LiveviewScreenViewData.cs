@@ -62,6 +62,7 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(IsShootingParamSettingAvailable));
                 NotifyChangedOnUI(nameof(IsProgramShiftAvailable));
                 NotifyChangedOnUI(nameof(IsShootingParamDisplayAvailable));
+                NotifyChangedOnUI(nameof(ShootModeChangingAvailable));
             };
 
             ApplicationSettings.GetInstance().PropertyChanged += (sender, args) =>
@@ -125,6 +126,7 @@ namespace Locana.DataModel
                 return CurrentModeImage();
             }
         }
+
         private BitmapImage CurrentModeImage()
         {
             switch (Device.Status.ShootMode.Current)
@@ -258,6 +260,15 @@ namespace Locana.DataModel
                         return Device.Status.Status == EventParam.Idle || Device.Status.Status == EventParam.LoopRecording;
                 }
                 return false;
+            }
+        }
+
+        public bool ShootModeChangingAvailable
+        {
+            get
+            {
+                if (Device?.Api?.Capability == null) { return false; }
+                return Device.Api.Capability.IsAvailable("setShootMode");
             }
         }
 
