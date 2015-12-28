@@ -350,8 +350,9 @@
                                              Margin="0,10"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Bottom"
-                                             Canvas.ZIndex="100" />
-
+                                             Canvas.ZIndex="100"
+                                             CurrentModeButtonImage="{Binding ShutterButtonImage,
+                                                                              Mode=OneWay}" />
             <Grid x:Name="Sliders"
                   MaxWidth="400"
                   Margin="40,0">

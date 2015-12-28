@@ -18,6 +18,32 @@ namespace Locana.Controls
             this.InitializeComponent();
         }
 
+        public BitmapImage CurrentModeButtonImage
+        {
+            set
+            {
+                SetValue(CurrentModeButtonImageProperty, value);
+            }
+            get
+            {
+                return (BitmapImage)GetValue(CurrentModeButtonImageProperty);
+            }
+        }
+
+        public static readonly DependencyProperty CurrentModeButtonImageProperty = DependencyProperty.Register(
+            nameof(CurrentModeButtonImage),
+            typeof(BitmapImage),
+            typeof(MultiModeShutterButton),
+            new PropertyMetadata(null, new PropertyChangedCallback(MultiModeShutterButton.CurrentModeButtonImageUpdated)));
+
+        private static void CurrentModeButtonImageUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue == null) { return; }
+            var image = e.NewValue as BitmapImage;
+            // (d as MultiModeShutterButton).CurrentModeButtonImage = image;
+            (d as MultiModeShutterButton).UpdateCurrentModeButtonImage(image);
+        }
+
         private ShootModeInfo _ModeInfo;
         public ShootModeInfo ModeInfo
         {
@@ -111,7 +137,12 @@ namespace Locana.Controls
             foreach (var i in info.ShootModeCapability.Candidates)
             {
                 BitmapImage icon = null;
-                if (info.Icons != null && info.Icons.ContainsKey(i))
+
+                if (selectedIndex == currentIndex)
+                {
+                    icon = this.CurrentModeButtonImage;
+                }
+                else if (info.Icons != null && info.Icons.ContainsKey(i))
                 {
                     icon = info.Icons[i];
                 }
@@ -145,6 +176,8 @@ namespace Locana.Controls
                     icon = info.Icons[i];
                 }
 
+                (Buttons.Children[currentIndex] as EllipseButton).Icon = icon;
+
                 var scale = i == targetShootMode ? 1.0 : 0.6;
                 double newX = (currentIndex - selectedIndex) * 50;
                 if (newX < 0) { newX -= 30; }
@@ -160,6 +193,16 @@ namespace Locana.Controls
                 }).Begin();
 
                 currentIndex++;
+            }
+        }
+
+        void UpdateCurrentModeButtonImage(BitmapImage newIcon)
+        {
+            if (this._ModeInfo?.ShootModeCapability == null) { return; }
+            var button = FindButton(this._ModeInfo.ShootModeCapability.Current);
+            if (button != null)
+            {
+                button.Icon = newIcon;
             }
         }
 
