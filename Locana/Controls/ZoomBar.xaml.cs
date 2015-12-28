@@ -12,7 +12,7 @@ namespace Locana.Controls
     {
         public int CurrentBoxIndex { get; set; }
         public static readonly DependencyProperty CurrentBoxProperty = DependencyProperty.Register(
-        "CurrentBoxIndex",
+        nameof(CurrentBoxIndex),
         typeof(int),
         typeof(ZoomBar),
         new PropertyMetadata(0, new PropertyChangedCallback(ZoomBar.OnCurrentBoxUpdated)));
@@ -26,7 +26,7 @@ namespace Locana.Controls
 
         public int TotalBoxNum { get; set; }
         public static readonly DependencyProperty TotalBoxNumProperty = DependencyProperty.Register(
-            "TotalBoxNum",
+            nameof(TotalBoxNum),
             typeof(int),
             typeof(ZoomBar),
             new PropertyMetadata(0, new PropertyChangedCallback(ZoomBar.OnTotalBoxNumUpdated)));
@@ -40,7 +40,7 @@ namespace Locana.Controls
 
         public int PositionInCurrentBox { get; set; }
         public static readonly DependencyProperty PositionInCurrentBoxProperty = DependencyProperty.Register(
-            "PositionInCurrentBox",
+            nameof(PositionInCurrentBox),
             typeof(int),
             typeof(ZoomBar),
             new PropertyMetadata(0, new PropertyChangedCallback(ZoomBar.OnPositionInCurrentBoxUpdated)));

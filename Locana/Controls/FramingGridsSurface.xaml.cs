@@ -63,7 +63,7 @@ namespace Locana.Controls
         private const double GoldenRatio = 0.382;
 
         public static readonly DependencyProperty GridTypeProperty = DependencyProperty.Register(
-            "Type",
+            nameof(Type),
             typeof(FramingGridTypes),
             typeof(FramingGridsSurface),
             new PropertyMetadata("", new PropertyChangedCallback(FramingGridsSurface.OnGridTypeChanged)));
@@ -75,7 +75,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(
-            "Stroke",
+            nameof(Stroke),
             typeof(SolidColorBrush),
             typeof(FramingGridsSurface),
             new PropertyMetadata(null, new PropertyChangedCallback(FramingGridsSurface.OnStrokeChanged)));
@@ -87,7 +87,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
-            "StrokeThickness",
+            nameof(StrokeThickness),
             typeof(double),
             typeof(FramingGridsSurface),
             new PropertyMetadata(0, new PropertyChangedCallback(FramingGridsSurface.OnStrokeThicknessChanged)));
@@ -113,7 +113,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty FibonacciOriginProperty = DependencyProperty.Register(
-            "FibonacciOrigin",
+            nameof(FibonacciOrigin),
             typeof(FibonacciLineOrigins),
             typeof(FramingGridsSurface),
             new PropertyMetadata("", new PropertyChangedCallback(FramingGridsSurface.OnFibonacciOriginChanged)));

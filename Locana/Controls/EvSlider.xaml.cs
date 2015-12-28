@@ -41,7 +41,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty ParameterProperty = DependencyProperty.Register(
-            "Parameter",
+            nameof(Parameter),
             typeof(EvCapability),
             typeof(EvSlider),
             new PropertyMetadata(null, new PropertyChangedCallback(EvSlider.ParameterUpdated)));

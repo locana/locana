@@ -103,7 +103,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty SourceBitmapProperty = DependencyProperty.Register(
-            "SourceBitmap",
+            nameof(SourceBitmap),
             typeof(BitmapImage),
             typeof(PhotoPlaybackScreen),
             new PropertyMetadata(null, new PropertyChangedCallback(PhotoPlaybackScreen.OnSourceBitmapUpdated)));

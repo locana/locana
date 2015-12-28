@@ -112,7 +112,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty CurrentPositionProperty = DependencyProperty.Register(
-            "CurrentPosition",
+            nameof(CurrentPosition),
             typeof(TimeSpan),
             typeof(MoviePlaybackScreen),
             new PropertyMetadata(new TimeSpan(0, 0, 0), new PropertyChangedCallback(MoviePlaybackScreen.OnCurrentPositionChanged)));
@@ -149,7 +149,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty DurationProperty = DependencyProperty.Register(
-            "Duration",
+            nameof(Duration),
             typeof(TimeSpan),
             typeof(MoviePlaybackScreen),
             new PropertyMetadata(new TimeSpan(0, 0, 0), new PropertyChangedCallback(MoviePlaybackScreen.OnDurationChanged)));
@@ -188,7 +188,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty SeekAvailabilityProperty = DependencyProperty.Register(
-            "SeekAvailable",
+            nameof(SeekAvailable),
             typeof(bool),
             typeof(MoviePlaybackScreen),
             new PropertyMetadata(false, new PropertyChangedCallback(MoviePlaybackScreen.OnSeekAvailabilityChanged)));
@@ -224,7 +224,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty PlaybackStatusProperty = DependencyProperty.Register(
-            "PlaybackStatus",
+            nameof(PlaybackStatus),
             typeof(string),
             typeof(MoviePlaybackScreen),
             new PropertyMetadata("", new PropertyChangedCallback(MoviePlaybackScreen.OnPlaybackStatusUpdated)));
@@ -266,7 +266,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty MovieTypeProperty = DependencyProperty.Register(
-            "MovieType",
+            nameof(MovieType),
             typeof(MovieFileType),
             typeof(MoviePlaybackScreen),
             new PropertyMetadata(MovieFileType.LocalMovie, new PropertyChangedCallback(MoviePlaybackScreen.OnMovieTypeUpdated)));

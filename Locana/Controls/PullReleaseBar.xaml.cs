@@ -23,13 +23,13 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty MaxProperty = DependencyProperty.Register(
-            "Max",
+            nameof(Max),
             typeof(int),
             typeof(PullReleaseBar),
             new PropertyMetadata(new PropertyChangedCallback(PullReleaseBar.OnMaxValueChanged)));
 
         public static readonly DependencyProperty MinProperty = DependencyProperty.Register(
-            "Min",
+            nameof(Min),
             typeof(int),
             typeof(PullReleaseBar),
             new PropertyMetadata(new PropertyChangedCallback(PullReleaseBar.OnMinValueChanged)));

@@ -41,7 +41,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty ParameterProperty = DependencyProperty.Register(
-            "Parameter",
+            nameof(Parameter),
             typeof(Capability<string>),
             typeof(ShootingParamSlider),
             new PropertyMetadata(null, new PropertyChangedCallback(ShootingParamSlider.ParameterUpdated)));

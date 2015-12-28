@@ -31,7 +31,7 @@ namespace Locana.Controls
         public object RemoteApi { get; private set; }
 
         public static readonly DependencyProperty BatteryInfoProperty = DependencyProperty.Register(
-            "BatteryInfo",
+            nameof(BatteryInfo),
             typeof(List<BatteryInfo>),
             typeof(BatteryStatus),
             new PropertyMetadata(null, new PropertyChangedCallback(BatteryStatus.BatteryInfoUpdated)));

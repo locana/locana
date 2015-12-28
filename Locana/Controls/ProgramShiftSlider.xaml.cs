@@ -39,7 +39,7 @@ namespace Locana.Controls
         }
 
         public static readonly DependencyProperty ParameterProperty = DependencyProperty.Register(
-            "Parameter",
+            nameof(Parameter),
             typeof(ProgramShiftRange),
             typeof(ProgramShiftSlider),
             new PropertyMetadata(null, new PropertyChangedCallback(ProgramShiftSlider.ParameterUpdated)));
