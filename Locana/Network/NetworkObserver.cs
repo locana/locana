@@ -150,13 +150,18 @@ namespace Locana.Network
             startTask();
         }
 
-        public void Finish()
+        public void Stop()
         {
             NetworkInformation.NetworkStatusChanged -= NetworkInformation_NetworkStatusChanged;
             Canceller?.Cancel();
             Canceller = null;
-            Clear();
             Started = false;
+        }
+
+        public void Finish()
+        {
+            Stop();
+            Clear();
         }
 
         private void SearchCds()
@@ -196,47 +201,45 @@ namespace Locana.Network
 
         private async Task checkConnection(CancellationTokenSource cancel)
         {
-            var filter = new ConnectionProfileFilter
+            while (!cancel.IsCancellationRequested)
             {
-                IsConnected = true,
-                IsWwanConnectionProfile = false,
-                IsWlanConnectionProfile = true,
-            };
-            var profiles = await NetworkInformation.FindConnectionProfilesAsync(filter);
-
-            var wifiSsid = profiles.Select(profile => profile.WlanConnectionProfileDetails.GetConnectedSsid())
-                .FirstOrDefault(ssid => IsCameraAccessPoint(ssid));
-
-            if (wifiSsid != null)
-            {
-                var previous = PreviousSsid;
-                PreviousSsid = wifiSsid;
-                // Connected to Access Point and it is a camera device.
-                if (wifiSsid == previous && devices.Count != 0)
+                var filter = new ConnectionProfileFilter
                 {
-                    // Keep searching even if CDS provider is discovered.
-                    DebugUtil.Log("Some devices discovered on the previous SSID. Finish auto discovery.");
-                    return;
+                    IsConnected = true,
+                    IsWwanConnectionProfile = false,
+                    IsWlanConnectionProfile = true,
+                };
+                var profiles = await NetworkInformation.FindConnectionProfilesAsync(filter);
+
+                var wifiSsid = profiles.Select(profile => profile.WlanConnectionProfileDetails.GetConnectedSsid())
+                    .FirstOrDefault(ssid => IsCameraAccessPoint(ssid));
+
+                if (wifiSsid != null)
+                {
+                    var previous = PreviousSsid;
+                    PreviousSsid = wifiSsid;
+                    // Connected to Access Point and it is a camera device.
+                    if (wifiSsid == previous && devices.Count != 0)
+                    {
+                        // Keep searching even if CDS provider is discovered.
+                        DebugUtil.Log("Some devices discovered on the previous SSID. Finish auto discovery.");
+                        return;
+                    }
+
+                    if (wifiSsid != previous)
+                    {
+                        DebugUtil.Log("New access point detected. Refresh.");
+                        RefreshDevices();
+                    }
+                    else
+                    {
+                        DebugUtil.Log("No devices discovered yet. keep searching.");
+                    }
                 }
 
-                if (wifiSsid != previous)
-                {
-                    DebugUtil.Log("New access point detected. Refresh.");
-                    RefreshDevices();
-                }
-                else
-                {
-                    DebugUtil.Log("No devices discovered yet. keep searching.");
-                }
-            }
-
-            SearchCamera();
-            SearchCds();
-            await Task.Delay(5000).ConfigureAwait(false);
-
-            if (!cancel.IsCancellationRequested)
-            {
-                await checkConnection(cancel).ConfigureAwait(false);
+                SearchCamera();
+                SearchCds();
+                await Task.Delay(5000).ConfigureAwait(false);
             }
 
             // DebugUtil.Log("Not connected to camera device.");

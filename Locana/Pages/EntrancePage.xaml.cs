@@ -83,6 +83,7 @@ namespace Locana.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             NetworkObserver.INSTANCE.CameraDiscovered -= NetworkObserver_Discovered;
+            NetworkObserver.INSTANCE.Stop();
 
             base.OnNavigatedFrom(e);
         }
