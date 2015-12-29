@@ -38,6 +38,8 @@ namespace Locana.Utility
                 Margin = new Thickness(24, 0, 0, 24),
             };
 
+            if (data == null) { return panel; }
+
             if (items.Contains(AppBarItem.FNumberSlider))
             {
                 var FnumberButton = NewButtonWithHandler(AppBarItem.FNumberSlider);
@@ -47,7 +49,7 @@ namespace Locana.Utility
                     Path = new PropertyPath("IsSetFNumberAvailable"),
                     Mode = BindingMode.OneWay,
                     Converter = new BoolToVisibilityConverter(),
-                    FallbackValue = false,
+                    FallbackValue = Visibility.Collapsed
                 });
                 panel.Children.Add(FnumberButton);
             }
@@ -60,7 +62,8 @@ namespace Locana.Utility
                     Source = data,
                     Path = new PropertyPath("IsSetShutterSpeedAvailable"),
                     Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter()
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
                 });
                 panel.Children.Add(SSButton);
             }
@@ -73,7 +76,8 @@ namespace Locana.Utility
                     Source = data,
                     Path = new PropertyPath("IsSetIsoSpeedRateAvailable"),
                     Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter()
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
                 });
                 panel.Children.Add(IsoButton);
             }
@@ -86,7 +90,8 @@ namespace Locana.Utility
                     Source = data,
                     Path = new PropertyPath("IsSetEVAvailable"),
                     Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter()
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
                 });
                 panel.Children.Add(EvButton);
             }
@@ -99,7 +104,8 @@ namespace Locana.Utility
                     Source = data,
                     Path = new PropertyPath("IsProgramShiftAvailable"),
                     Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter()
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
                 });
                 panel.Children.Add(ProgramShiftButton);
             }
@@ -112,7 +118,8 @@ namespace Locana.Utility
                     Source = data,
                     Path = new PropertyPath("IsZoomAvailable"),
                     Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter()
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
                 });
                 panel.Children.Add(ZoomButton);
             }
