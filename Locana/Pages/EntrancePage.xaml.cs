@@ -63,6 +63,7 @@ namespace Locana.Pages
             base.OnNavigatedTo(e);
 
             NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_Discovered;
+            NetworkObserver.INSTANCE.DevicesCleared += NetworkObserver_DevicesCleared;
             NetworkObserver.INSTANCE.ForceRestart();
 
             if (e.Parameter != null && (e.Parameter as string).Length > 1)
@@ -83,6 +84,7 @@ namespace Locana.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             NetworkObserver.INSTANCE.CameraDiscovered -= NetworkObserver_Discovered;
+            NetworkObserver.INSTANCE.DevicesCleared -= NetworkObserver_DevicesCleared;
             NetworkObserver.INSTANCE.Stop();
 
             base.OnNavigatedFrom(e);
@@ -108,13 +110,19 @@ namespace Locana.Pages
             PanelSources.Source = null;
         }
 
-        async void NetworkObserver_Discovered(object sender, CameraDeviceEventArgs e)
+        private void NetworkObserver_Discovered(object sender, CameraDeviceEventArgs e)
         {
-            var target = e.CameraDevice;
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                devicesGroup.Add(new DevicePanel(target));
+                devicesGroup.Add(new DevicePanel(e.CameraDevice));
+            });
+        }
+
+        private void NetworkObserver_DevicesCleared(object sender, EventArgs e)
+        {
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                devicesGroup.Clear();
             });
         }
 

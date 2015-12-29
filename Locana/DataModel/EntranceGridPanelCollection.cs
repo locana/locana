@@ -58,6 +58,23 @@ namespace Locana.DataModel
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, panel, Count - 1));
         }
 
+        new public bool Remove(EntrancePanel content)
+        {
+            var index = IndexOf(content);
+            var removed = base.Remove(content);
+            if (removed)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, content, index));
+            }
+            return removed;
+        }
+
+        new public void Clear()
+        {
+            base.Clear();
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
         private void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

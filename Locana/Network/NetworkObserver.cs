@@ -21,15 +21,15 @@ namespace Locana.Network
             get { return sInstance; }
         }
 
-        private SsdpDiscovery discovery = new SsdpDiscovery();
-        private SsdpDiscovery cdsDiscovery = new SsdpDiscovery();
+        private readonly SsdpDiscovery discovery = new SsdpDiscovery();
 
         private NetworkObserver()
         {
             discovery.SonyCameraDeviceDiscovered += discovery_SonyCameraDeviceDiscovered;
-            cdsDiscovery.DescriptionObtained += cdsDiscovery_DescriptionObtained;
+            discovery.DescriptionObtained += cdsDiscovery_DescriptionObtained;
         }
 
+        /*
         public async Task Initialize()
         {
             var filter = new ConnectionProfileFilter
@@ -49,6 +49,7 @@ namespace Locana.Network
                 }
             }
         }
+        */
 
         public event EventHandler DevicesCleared;
 
@@ -166,7 +167,7 @@ namespace Locana.Network
 
         private void SearchCds()
         {
-            cdsDiscovery.SearchUpnpDevices("urn:schemas-upnp-org:service:ContentDirectory:1");
+            discovery.SearchUpnpDevices("urn:schemas-upnp-org:service:ContentDirectory:1");
         }
 
         private void SearchCamera()
@@ -176,7 +177,7 @@ namespace Locana.Network
 
         private void Clear()
         {
-            PreviousSsid = null;
+            // PreviousSsid = null;
             RefreshDevices();
         }
 
@@ -184,9 +185,11 @@ namespace Locana.Network
         {
             devices.Clear();
             cdServices.Clear();
+            discovery.ClearCache();
             OnDevicesCleared();
         }
 
+        /*
         public bool IsConnectedToCamera
         {
             get { return IsCameraAccessPoint(PreviousSsid); }
@@ -198,11 +201,17 @@ namespace Locana.Network
         }
 
         public string PreviousSsid { private set; get; }
+        */
 
         private async Task checkConnection(CancellationTokenSource cancel)
         {
+            var adapters = await SsdpDiscovery.GetActiveAdaptersAsync();
+            discovery.TargetNetworkAdapters = adapters;
+            RefreshDevices();
+
             while (!cancel.IsCancellationRequested)
             {
+                /*
                 var filter = new ConnectionProfileFilter
                 {
                     IsConnected = true,
@@ -236,6 +245,7 @@ namespace Locana.Network
                         DebugUtil.Log("No devices discovered yet. keep searching.");
                     }
                 }
+                */
 
                 SearchCamera();
                 SearchCds();
