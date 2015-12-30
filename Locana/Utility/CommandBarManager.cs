@@ -113,7 +113,7 @@ namespace Locana.Utility
             if (items.Contains(AppBarItem.Zoom))
             {
                 var ZoomButton = NewButtonWithHandler(AppBarItem.Zoom);
-                ZoomButton.SetValue(Button.VisibilityProperty, new Binding()
+                ZoomButton.SetBinding(Button.VisibilityProperty, new Binding()
                 {
                     Source = data,
                     Path = new PropertyPath("IsZoomAvailable"),
@@ -191,6 +191,7 @@ namespace Locana.Utility
             {
                 button.Click += EventHolder[item];
             }
+            DebugUtil.Log("Creating button: " + item+" "+button.Visibility);
             return button;
         }
 
@@ -309,6 +310,8 @@ namespace Locana.Utility
             return EnabledItems[type].Contains(item);
         }
     }
+
+
 
     public enum AppBarItemType
     {
