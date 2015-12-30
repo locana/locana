@@ -1,6 +1,7 @@
 ﻿<Page x:Class="Locana.Pages.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
       xmlns:common="using:Locana.Common"
       xmlns:controls="using:Locana.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -122,13 +123,17 @@
         <Grid x:Name="LiveviewGrid"
               Grid.RowSpan="4"
               Canvas.ZIndex="3">
-            <Image x:Name="LiveviewImage"
+            <!--<Image x:Name="LiveviewImage"
                    Margin="10"
                    Loaded="LiveviewImage_Loaded"
                    SizeChanged="LiveviewImage_SizeChanged"
                    Source="{Binding Image,
                                     Mode=OneWay}"
-                   Unloaded="LiveviewImage_Unloaded" />
+                   Unloaded="LiveviewImage_Unloaded" />-->
+            <canvas:CanvasControl x:Name="LiveviewImageCanvas"
+                                  ClearColor="CornflowerBlue"
+                                  Draw="CanvasControl_Draw" />
+
             <controls:FramingGridsSurface x:Name="FramingGuideSurface"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch"

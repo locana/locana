@@ -8,21 +8,27 @@ using Locana.Controls;
 using Locana.DataModel;
 using Locana.Settings;
 using Locana.Utility;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -349,6 +355,8 @@ namespace Locana.Pages
             this.target = target;
             target.Status.PropertyChanged += Status_PropertyChanged;
 
+            liveview.JpegRetrieved += Liveview_JpegRetrieved_win2d;
+
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 ScreenViewData = new LiveviewScreenViewData(target);
@@ -568,19 +576,51 @@ namespace Locana.Pages
             IsRendering = false;
         }
 
+        CanvasBitmap LiveviewImageBitmap;
+        InMemoryRandomAccessStream LiveviewImageTempStream;
+        BitmapImage LiveviewBitmap = new BitmapImage();
+
+        private async void Liveview_JpegRetrieved_win2d(object sender, JpegEventArgs e)
+        {
+            if (IsRendering) { return; }
+            IsRendering = true;
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                var temp = new InMemoryRandomAccessStream();
+                await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
+                temp.Seek(0);
+                LiveviewBitmap.SetSource(temp);
+
+                var wb = new WriteableBitmap(LiveviewBitmap.PixelWidth, LiveviewBitmap.PixelHeight);
+                temp.Seek(0);
+
+                wb.SetSource(temp);
+
+                LiveviewImageTempStream = new InMemoryRandomAccessStream();
+                await LiveviewImageTempStream.WriteAsync(wb.PixelBuffer);
+
+                LiveviewImageCanvas.Invalidate();
+
+                IsRendering = false;
+
+            });
+        }
+
         void liveview_Closed(object sender, EventArgs e)
         {
             Debug.WriteLine("Liveview connection closed");
         }
 
-        private void LiveviewImage_Loaded(object sender, RoutedEventArgs e)
-        {
-            var image = sender as Image;
-            image.DataContext = liveview_data;
-            liveview.JpegRetrieved += liveview_JpegRetrieved;
-            liveview.Closed += liveview_Closed;
-            liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
-        }
+        // todo: do same things at somewhere
+        //private void LiveviewImage_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    var image = sender as Image;
+        //    image.DataContext = liveview_data;
+        //    liveview.JpegRetrieved += liveview_JpegRetrieved;
+        //    liveview.Closed += liveview_Closed;
+        //    liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
+        //}
 
         private async void Liveview_FocusFrameRetrieved(object sender, FocusFrameEventArgs e)
         {
@@ -590,15 +630,16 @@ namespace Locana.Pages
             });
         }
 
-        private void LiveviewImage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            var image = sender as Image;
-            image.DataContext = null;
-            liveview.JpegRetrieved -= liveview_JpegRetrieved;
-            liveview.Closed -= liveview_Closed;
-            liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
-            TearDownCurrentTarget();
-        }
+        // todo
+        //private void LiveviewImage_Unloaded(object sender, RoutedEventArgs e)
+        //{
+        //    var image = sender as Image;
+        //    image.DataContext = null;
+        //    liveview.JpegRetrieved -= liveview_JpegRetrieved;
+        //    liveview.Closed -= liveview_Closed;
+        //    liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
+        //    TearDownCurrentTarget();
+        //}
 
         private void TearDownCurrentTarget()
         {
@@ -910,6 +951,15 @@ namespace Locana.Pages
             // FollowLiveviewDisplay();
         }
 
+        async void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            if (LiveviewImageTempStream == null) { return; }
+            LiveviewImageTempStream.Seek(0);
+            LiveviewImageBitmap = await CanvasBitmap.LoadAsync(sender, LiveviewImageTempStream); // System.Exception
+
+            args.DrawingSession.DrawImage(LiveviewImageBitmap, 0, 0);
+            args.DrawingSession.DrawText("Hello, world!", 100, 100, Colors.Yellow);
+        }
     }
 
 }
