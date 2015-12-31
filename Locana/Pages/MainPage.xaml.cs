@@ -577,6 +577,7 @@ namespace Locana.Pages
 
         CanvasBitmap LiveviewImageBitmap;
         BitmapImage LiveviewBitmap = new BitmapImage();
+        double LiveviewMagnification = 1.0;
 
         private async void Liveview_JpegRetrieved_win2d(object sender, JpegEventArgs e)
         {
@@ -596,12 +597,14 @@ namespace Locana.Pages
 
                 wb.SetSource(temp);
 
-
                 if (LiveviewImageBitmap == null)
                 {
-                    LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized);
+                    LiveviewMagnification = (double)wb.PixelWidth / LiveviewImageCanvas.ActualWidth;
+                    var dpi = GetLogicalDpi() / (float)LiveviewMagnification;
+                    LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, dpi);
                 }
-                else {
+                else
+                {
                     LiveviewImageBitmap.SetPixelBytes(wb.PixelBuffer.ToArray());
                 }
 
@@ -610,6 +613,11 @@ namespace Locana.Pages
                 IsRendering = false;
 
             });
+        }
+
+        float GetLogicalDpi()
+        {
+            return DisplayInformation.GetForCurrentView().LogicalDpi;
         }
 
         void liveview_Closed(object sender, EventArgs e)
@@ -959,7 +967,9 @@ namespace Locana.Pages
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (LiveviewImageBitmap == null) { return; }
-            args.DrawingSession.DrawImage(LiveviewImageBitmap, 0, 0);
+            var imageHeight = LiveviewImageBitmap.SizeInPixels.Height / LiveviewMagnification;
+            var vOffset = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
+            args.DrawingSession.DrawImage(LiveviewImageBitmap, 0, (float)vOffset);
         }
     }
 
