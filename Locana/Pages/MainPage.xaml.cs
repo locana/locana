@@ -596,9 +596,10 @@ namespace Locana.Pages
 
                 wb.SetSource(temp);
 
+
                 if (LiveviewImageBitmap == null)
                 {
-                    LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalizedSrgb);
+                    LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized);
                 }
                 else {
                     LiveviewImageBitmap.SetPixelBytes(wb.PixelBuffer.ToArray());
