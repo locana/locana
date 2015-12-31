@@ -14,21 +14,20 @@ using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
+using Windows.Graphics.DirectX;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -577,7 +576,6 @@ namespace Locana.Pages
         }
 
         CanvasBitmap LiveviewImageBitmap;
-        InMemoryRandomAccessStream LiveviewImageTempStream;
         BitmapImage LiveviewBitmap = new BitmapImage();
 
         private async void Liveview_JpegRetrieved_win2d(object sender, JpegEventArgs e)
@@ -585,11 +583,12 @@ namespace Locana.Pages
             if (IsRendering) { return; }
             IsRendering = true;
 
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            var temp = new InMemoryRandomAccessStream();
+            await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
+            temp.Seek(0);
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                var temp = new InMemoryRandomAccessStream();
-                await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
-                temp.Seek(0);
                 LiveviewBitmap.SetSource(temp);
 
                 var wb = new WriteableBitmap(LiveviewBitmap.PixelWidth, LiveviewBitmap.PixelHeight);
@@ -597,8 +596,13 @@ namespace Locana.Pages
 
                 wb.SetSource(temp);
 
-                LiveviewImageTempStream = new InMemoryRandomAccessStream();
-                await LiveviewImageTempStream.WriteAsync(wb.PixelBuffer);
+                if (LiveviewImageBitmap == null)
+                {
+                    LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalizedSrgb);
+                }
+                else {
+                    LiveviewImageBitmap.SetPixelBytes(wb.PixelBuffer.ToArray());
+                }
 
                 LiveviewImageCanvas.Invalidate();
 
@@ -951,14 +955,10 @@ namespace Locana.Pages
             // FollowLiveviewDisplay();
         }
 
-        async void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            if (LiveviewImageTempStream == null) { return; }
-            LiveviewImageTempStream.Seek(0);
-            LiveviewImageBitmap = await CanvasBitmap.LoadAsync(sender, LiveviewImageTempStream); // System.Exception
-
+            if (LiveviewImageBitmap == null) { return; }
             args.DrawingSession.DrawImage(LiveviewImageBitmap, 0, 0);
-            args.DrawingSession.DrawText("Hello, world!", 100, 100, Colors.Yellow);
         }
     }
 
