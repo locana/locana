@@ -590,7 +590,7 @@ namespace Locana.Pages
                 await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
                 temp.Seek(0);
 
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
                     LiveviewBitmap.SetSource(temp);
 
@@ -611,6 +611,14 @@ namespace Locana.Pages
                     }
 
                     LiveviewImageCanvas.Invalidate();
+
+                    if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
+                    {
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
+                        {
+                            HistogramCreator.CreateHistogram(wb);
+                        });
+                    }
 
                     IsRendering = false;
 
