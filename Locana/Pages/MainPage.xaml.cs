@@ -578,46 +578,59 @@ namespace Locana.Pages
         CanvasBitmap LiveviewImageBitmap;
         BitmapImage LiveviewBitmap = new BitmapImage();
         double LiveviewMagnification = 1.0;
+        double DEFAULT_DPI = 96;
 
         private async void Liveview_JpegRetrieved_win2d(object sender, JpegEventArgs e)
         {
             if (IsRendering) { return; }
             IsRendering = true;
 
-            var temp = new InMemoryRandomAccessStream();
-            await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
-            temp.Seek(0);
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            using (var temp = new InMemoryRandomAccessStream())
             {
-                LiveviewBitmap.SetSource(temp);
-
-                var wb = new WriteableBitmap(LiveviewBitmap.PixelWidth, LiveviewBitmap.PixelHeight);
+                await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
                 temp.Seek(0);
 
-                wb.SetSource(temp);
-
-                if (LiveviewImageBitmap == null)
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
-                    LiveviewMagnification = (double)wb.PixelWidth / LiveviewImageCanvas.ActualWidth;
-                    var dpi = GetLogicalDpi() / (float)LiveviewMagnification;
-                    LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, dpi);
-                }
-                else
-                {
-                    LiveviewImageBitmap.SetPixelBytes(wb.PixelBuffer.ToArray());
-                }
+                    LiveviewBitmap.SetSource(temp);
 
-                LiveviewImageCanvas.Invalidate();
+                    var wb = new WriteableBitmap(LiveviewBitmap.PixelWidth, LiveviewBitmap.PixelHeight);
+                    temp.Seek(0);
 
-                IsRendering = false;
+                    wb.SetSource(temp);
 
-            });
+                    if (LiveviewImageBitmap == null)
+                    {
+                        LiveviewMagnification = CalcLiveviewMagnification(wb);
+                        var dpi = DEFAULT_DPI / LiveviewMagnification;
+                        LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, (float)dpi);
+                    }
+                    else
+                    {
+                        LiveviewImageBitmap.SetPixelBytes(wb.PixelBuffer.ToArray());
+                    }
+
+                    LiveviewImageCanvas.Invalidate();
+
+                    IsRendering = false;
+
+                });
+            }
         }
 
-        float GetLogicalDpi()
+        double CalcLiveviewMagnification(WriteableBitmap liveview)
         {
-            return DisplayInformation.GetForCurrentView().LogicalDpi;
+            var mag_h = LiveviewImageCanvas.ActualWidth / (double)liveview.PixelWidth;
+            var mag_v = LiveviewImageCanvas.ActualHeight / (double)liveview.PixelHeight;
+            return Math.Min(mag_h, mag_v);
+        }
+
+        void InvalidateLiveviewImageBitmap()
+        {
+            if (LiveviewImageBitmap == null) { return; }
+
+            LiveviewImageBitmap.Dispose();
+            LiveviewImageBitmap = null;
         }
 
         void liveview_Closed(object sender, EventArgs e)
@@ -967,9 +980,16 @@ namespace Locana.Pages
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (LiveviewImageBitmap == null) { return; }
-            var imageHeight = LiveviewImageBitmap.SizeInPixels.Height / LiveviewMagnification;
+            var imageHeight = LiveviewImageBitmap.SizeInPixels.Height * LiveviewMagnification;
             var vOffset = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
-            args.DrawingSession.DrawImage(LiveviewImageBitmap, 0, (float)vOffset);
+            var imageWidth = LiveviewImageBitmap.SizeInPixels.Width * LiveviewMagnification;
+            var hOffset = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
+            args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)hOffset, (float)vOffset);
+        }
+
+        private void LiveviewImageCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            InvalidateLiveviewImageBitmap();
         }
     }
 

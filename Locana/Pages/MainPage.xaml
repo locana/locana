@@ -131,8 +131,9 @@
                                     Mode=OneWay}"
                    Unloaded="LiveviewImage_Unloaded" />-->
             <canvas:CanvasControl x:Name="LiveviewImageCanvas"
-                                  ClearColor="CornflowerBlue"
-                                  Draw="CanvasControl_Draw" />
+                                  ClearColor="Transparent"
+                                  Draw="CanvasControl_Draw"
+                                  SizeChanged="LiveviewImageCanvas_SizeChanged" />
 
             <controls:FramingGridsSurface x:Name="FramingGuideSurface"
                                           HorizontalAlignment="Stretch"
