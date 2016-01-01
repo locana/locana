@@ -334,6 +334,11 @@ namespace Locana.Pages
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+
+            liveview.JpegRetrieved -= liveview_JpegRetrieved;
+            liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
+            liveview.Closed -= liveview_Closed;
+
             base.OnNavigatingFrom(e);
             SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
@@ -354,7 +359,9 @@ namespace Locana.Pages
             this.target = target;
             target.Status.PropertyChanged += Status_PropertyChanged;
 
-            liveview.JpegRetrieved += Liveview_JpegRetrieved_win2d;
+            liveview.JpegRetrieved += liveview_JpegRetrieved;
+            liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
+            liveview.Closed += liveview_Closed;
 
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
@@ -565,22 +572,13 @@ namespace Locana.Pages
         }
 
         private bool IsRendering = false;
-
-        async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
-        {
-            if (IsRendering) { return; }
-
-            IsRendering = true;
-            await LiveviewUtil.SetAsBitmap(e.Packet.ImageData, liveview_data, HistogramCreator, Dispatcher);
-            IsRendering = false;
-        }
-
+        
         CanvasBitmap LiveviewImageBitmap;
         BitmapImage LiveviewBitmap = new BitmapImage();
         double LiveviewMagnification = 1.0;
         double DEFAULT_DPI = 96;
 
-        private async void Liveview_JpegRetrieved_win2d(object sender, JpegEventArgs e)
+        private async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
         {
             if (IsRendering) { return; }
             IsRendering = true;
@@ -604,6 +602,7 @@ namespace Locana.Pages
                         LiveviewMagnification = CalcLiveviewMagnification(wb);
                         var dpi = DEFAULT_DPI / LiveviewMagnification;
                         LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, (float)dpi);
+                        ResizeOverlayControls(LiveviewMagnification);
                     }
                     else
                     {
@@ -645,17 +644,7 @@ namespace Locana.Pages
         {
             Debug.WriteLine("Liveview connection closed");
         }
-
-        // todo: do same things at somewhere
-        //private void LiveviewImage_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    var image = sender as Image;
-        //    image.DataContext = liveview_data;
-        //    liveview.JpegRetrieved += liveview_JpegRetrieved;
-        //    liveview.Closed += liveview_Closed;
-        //    liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
-        //}
-
+        
         private async void Liveview_FocusFrameRetrieved(object sender, FocusFrameEventArgs e)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -663,18 +652,7 @@ namespace Locana.Pages
                 _FocusFrameSurface.SetFocusFrames(e.Packet.FocusFrames);
             });
         }
-
-        // todo
-        //private void LiveviewImage_Unloaded(object sender, RoutedEventArgs e)
-        //{
-        //    var image = sender as Image;
-        //    image.DataContext = null;
-        //    liveview.JpegRetrieved -= liveview_JpegRetrieved;
-        //    liveview.Closed -= liveview_Closed;
-        //    liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
-        //    TearDownCurrentTarget();
-        //}
-
+        
         private void TearDownCurrentTarget()
         {
             LayoutRoot.DataContext = null;
@@ -970,34 +948,40 @@ namespace Locana.Pages
             OpenCloseControlPanel();
         }
 
-        private void LiveviewImage_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-            var height = (sender as Image).RenderSize.Height;
-            var width = (sender as Image).RenderSize.Width;
-
-            // To fit focus frames and grids to liveview image
-            this._FocusFrameSurface.Height = height;
-            this._FocusFrameSurface.Width = width;
-            this.FramingGuideSurface.Height = height;
-            this.FramingGuideSurface.Width = width;
-
-            // FollowLiveviewDisplay();
-        }
-
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (LiveviewImageBitmap == null) { return; }
-            var imageHeight = LiveviewImageBitmap.SizeInPixels.Height * LiveviewMagnification;
-            var vOffset = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
-            var imageWidth = LiveviewImageBitmap.SizeInPixels.Width * LiveviewMagnification;
-            var hOffset = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
+
+            double imageHeight, vOffset, imageWidth, hOffset;
+            CalcImageLayout(LiveviewMagnification, out imageHeight, out vOffset, out imageWidth, out hOffset);
+
             args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)hOffset, (float)vOffset);
         }
 
         private void LiveviewImageCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             InvalidateLiveviewImageBitmap();
+        }
+
+        void ResizeOverlayControls(double liveviewMagnification)
+        {
+            double imageHeight, vOffset, imageWidth, hOffset;
+            CalcImageLayout(liveviewMagnification, out imageHeight, out vOffset, out imageWidth, out hOffset);
+
+            this._FocusFrameSurface.Height = imageHeight;
+            this._FocusFrameSurface.Width = imageWidth;
+            this._FocusFrameSurface.Margin = new Thickness(hOffset, vOffset, 0, 0);
+            this.FramingGuideSurface.Height = imageHeight;
+            this.FramingGuideSurface.Width = imageWidth;
+            this.FramingGuideSurface.Margin = new Thickness(hOffset, vOffset, 0, 0);
+        }
+
+        private void CalcImageLayout(double liveviewMagnification, out double imageHeight, out double vOffset, out double imageWidth, out double hOffset)
+        {
+            imageHeight = LiveviewImageBitmap.SizeInPixels.Height * liveviewMagnification;
+            vOffset = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
+            imageWidth = LiveviewImageBitmap.SizeInPixels.Width * liveviewMagnification;
+            hOffset = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
         }
     }
 
