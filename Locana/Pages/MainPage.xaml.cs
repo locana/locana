@@ -572,11 +572,10 @@ namespace Locana.Pages
         }
 
         private bool IsRendering = false;
-        
+
         CanvasBitmap LiveviewImageBitmap;
-        BitmapImage LiveviewBitmap = new BitmapImage();
+        BitmapImage LiveviewTempBitmap = new BitmapImage();
         double LiveviewMagnification = 1.0;
-        double DEFAULT_DPI = 96;
 
         private async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
         {
@@ -588,40 +587,34 @@ namespace Locana.Pages
                 await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
                 temp.Seek(0);
 
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                var writeable = await LiveviewUtil.AsWriteableBitmap(e.Packet.ImageData, LiveviewTempBitmap, Dispatcher);
+
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
-                    LiveviewBitmap.SetSource(temp);
+                    LiveviewMagnification = CalcLiveviewMagnification(writeable);
 
-                    var wb = new WriteableBitmap(LiveviewBitmap.PixelWidth, LiveviewBitmap.PixelHeight);
-                    temp.Seek(0);
+                    bool sizeChanged = (LiveviewImageBitmap == null);
 
-                    wb.SetSource(temp);
-
-                    if (LiveviewImageBitmap == null)
-                    {
-                        LiveviewMagnification = CalcLiveviewMagnification(wb);
-                        var dpi = DEFAULT_DPI / LiveviewMagnification;
-                        LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(LiveviewImageCanvas, wb.PixelBuffer.ToArray(), wb.PixelWidth, wb.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, (float)dpi);
-                        ResizeOverlayControls(LiveviewMagnification);
-                    }
-                    else
-                    {
-                        LiveviewImageBitmap.SetPixelBytes(wb.PixelBuffer.ToArray());
-                    }
+                    LiveviewImageBitmap = LiveviewUtil.SetAsCanvasBitmap(writeable, LiveviewImageBitmap, LiveviewImageCanvas, LiveviewMagnification);
 
                     LiveviewImageCanvas.Invalidate();
 
-                    if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
+                    if (sizeChanged)
                     {
-                        await Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
-                        {
-                            HistogramCreator.CreateHistogram(wb);
-                        });
+                        ResizeOverlayControls(LiveviewMagnification);
                     }
-
-                    IsRendering = false;
-
                 });
+
+                if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
+                {
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
+                    {
+                        HistogramCreator.CreateHistogram(writeable);
+                    });
+                }
+
+                IsRendering = false;
+
             }
         }
 
@@ -644,7 +637,7 @@ namespace Locana.Pages
         {
             Debug.WriteLine("Liveview connection closed");
         }
-        
+
         private async void Liveview_FocusFrameRetrieved(object sender, FocusFrameEventArgs e)
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -652,7 +645,7 @@ namespace Locana.Pages
                 _FocusFrameSurface.SetFocusFrames(e.Packet.FocusFrames);
             });
         }
-        
+
         private void TearDownCurrentTarget()
         {
             LayoutRoot.DataContext = null;
@@ -965,6 +958,8 @@ namespace Locana.Pages
 
         void ResizeOverlayControls(double liveviewMagnification)
         {
+            if (LiveviewImageBitmap == null) { return; }
+
             double imageHeight, vOffset, imageWidth, hOffset;
             CalcImageLayout(liveviewMagnification, out imageHeight, out vOffset, out imageWidth, out hOffset);
 
