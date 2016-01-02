@@ -1,6 +1,7 @@
 ﻿<Page x:Class="Locana.Pages.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
       xmlns:common="using:Locana.Common"
       xmlns:controls="using:Locana.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -122,16 +123,14 @@
         <Grid x:Name="LiveviewGrid"
               Grid.RowSpan="4"
               Canvas.ZIndex="3">
-            <Image x:Name="LiveviewImage"
-                   Margin="10"
-                   Loaded="LiveviewImage_Loaded"
-                   SizeChanged="LiveviewImage_SizeChanged"
-                   Source="{Binding Image,
-                                    Mode=OneWay}"
-                   Unloaded="LiveviewImage_Unloaded" />
+            <canvas:CanvasControl x:Name="LiveviewImageCanvas"
+                                  ClearColor="Transparent"
+                                  Draw="CanvasControl_Draw"
+                                  SizeChanged="LiveviewImageCanvas_SizeChanged" />
+
             <controls:FramingGridsSurface x:Name="FramingGuideSurface"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Top"
                                           FibonacciOrigin="{Binding Path=AppSetting.FibonacciLineOrigin,
                                                                     Mode=OneWay}"
                                           Stroke="{Binding Path=AppSetting.GridColorBrush,
@@ -143,8 +142,8 @@
                                                                Converter={StaticResource B2VConverter}}" />
 
             <controls:FocusFrameSurface x:Name="_FocusFrameSurface"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch" />
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top" />
 
         </Grid>
 

@@ -8,10 +8,13 @@ using Locana.Controls;
 using Locana.DataModel;
 using Locana.Settings;
 using Locana.Utility;
+using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
@@ -329,6 +332,11 @@ namespace Locana.Pages
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+
+            liveview.JpegRetrieved -= liveview_JpegRetrieved;
+            liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
+            liveview.Closed -= liveview_Closed;
+
             base.OnNavigatingFrom(e);
             SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
@@ -348,6 +356,10 @@ namespace Locana.Pages
 
             this.target = target;
             target.Status.PropertyChanged += Status_PropertyChanged;
+
+            liveview.JpegRetrieved += liveview_JpegRetrieved;
+            liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
+            liveview.Closed += liveview_Closed;
 
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
@@ -559,27 +571,63 @@ namespace Locana.Pages
 
         private bool IsRendering = false;
 
-        async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
+        CanvasBitmap LiveviewImageBitmap;
+        BitmapImage LiveviewTempBitmap = new BitmapImage();
+
+        private int OriginalLvWidth, OriginalLvHeight;
+        private double LvOffsetV, LvOffsetH;
+
+        private async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
         {
             if (IsRendering) { return; }
-
             IsRendering = true;
-            await LiveviewUtil.SetAsBitmap(e.Packet.ImageData, liveview_data, HistogramCreator, Dispatcher);
+
+            var writeable = await LiveviewUtil.AsWriteableBitmap(e.Packet.ImageData, LiveviewTempBitmap, Dispatcher);
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (OriginalLvWidth != writeable.PixelWidth || OriginalLvWidth != writeable.PixelHeight || LiveviewImageBitmap == null)
+                {
+                    OriginalLvWidth = writeable.PixelWidth;
+                    OriginalLvHeight = writeable.PixelHeight;
+                    var magnification = CalcLiveviewMagnification(writeable);
+                    DisposeLiveviewImageBitmap();
+
+                    LiveviewImageBitmap = LiveviewUtil.NewCanvasBitmap(writeable, LiveviewImageCanvas, magnification);
+                    RefreshOverlayControlParams(magnification);
+                }
+                else
+                {
+                    LiveviewImageBitmap.SetPixelBytes(writeable.PixelBuffer.ToArray());
+                }
+
+                LiveviewImageCanvas.Invalidate();
+
+                if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
+                {
+                    HistogramCreator.CreateHistogram(writeable);
+                }
+            });
+
             IsRendering = false;
+        }
+
+        double CalcLiveviewMagnification(WriteableBitmap liveview)
+        {
+            var mag_h = LiveviewImageCanvas.ActualWidth / liveview.PixelWidth;
+            var mag_v = LiveviewImageCanvas.ActualHeight / liveview.PixelHeight;
+            return Math.Min(mag_h, mag_v);
+        }
+
+        void DisposeLiveviewImageBitmap()
+        {
+            LiveviewImageBitmap?.Dispose();
+            LiveviewImageBitmap = null;
         }
 
         void liveview_Closed(object sender, EventArgs e)
         {
             Debug.WriteLine("Liveview connection closed");
-        }
-
-        private void LiveviewImage_Loaded(object sender, RoutedEventArgs e)
-        {
-            var image = sender as Image;
-            image.DataContext = liveview_data;
-            liveview.JpegRetrieved += liveview_JpegRetrieved;
-            liveview.Closed += liveview_Closed;
-            liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
         }
 
         private async void Liveview_FocusFrameRetrieved(object sender, FocusFrameEventArgs e)
@@ -588,16 +636,6 @@ namespace Locana.Pages
             {
                 _FocusFrameSurface.SetFocusFrames(e.Packet.FocusFrames);
             });
-        }
-
-        private void LiveviewImage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            var image = sender as Image;
-            image.DataContext = null;
-            liveview.JpegRetrieved -= liveview_JpegRetrieved;
-            liveview.Closed -= liveview_Closed;
-            liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
-            TearDownCurrentTarget();
         }
 
         private void TearDownCurrentTarget()
@@ -895,21 +933,34 @@ namespace Locana.Pages
             OpenCloseControlPanel();
         }
 
-        private void LiveviewImage_SizeChanged(object sender, SizeChangedEventArgs e)
+        void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
+            if (LiveviewImageBitmap == null) { return; }
 
-            var height = (sender as Image).RenderSize.Height;
-            var width = (sender as Image).RenderSize.Width;
-
-            // To fit focus frames and grids to liveview image
-            this._FocusFrameSurface.Height = height;
-            this._FocusFrameSurface.Width = width;
-            this.FramingGuideSurface.Height = height;
-            this.FramingGuideSurface.Width = width;
-
-            // FollowLiveviewDisplay();
+            args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
         }
 
+        private void LiveviewImageCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            DisposeLiveviewImageBitmap();
+        }
+
+        private void RefreshOverlayControlParams(double magnification)
+        {
+            double imageHeight, imageWidth;
+
+            imageHeight = LiveviewImageBitmap.SizeInPixels.Height * magnification;
+            LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
+            imageWidth = LiveviewImageBitmap.SizeInPixels.Width * magnification;
+            LvOffsetH = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
+
+            _FocusFrameSurface.Height = imageHeight;
+            _FocusFrameSurface.Width = imageWidth;
+            _FocusFrameSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
+            FramingGuideSurface.Height = imageHeight;
+            FramingGuideSurface.Width = imageWidth;
+            FramingGuideSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
+        }
     }
 
 }
