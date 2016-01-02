@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KzRemoteApiUwp", "modules\k
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KzSsdpDiscoveryUwp", "modules\kz-ssdp-discovery\Project\KzSsdpDiscoveryUwp.csproj", "{65FC1C19-ED21-43F1-8FF7-2957DC70C551}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtImageProcessorUwp", "modules\NtImageProcessorUwp\NtImageProcessorUwp\NtImageProcessorUwp.csproj", "{F60B6857-9718-4491-9799-D94F51229BE2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtNfcParserUwp", "modules\NtNfcLib\NtNfcLib\NtNfcParserUwp.csproj", "{EE2D1D2F-3456-4133-AC3D-3128A8FCD7D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtImageProcessorUwp", "modules\NtImageProcessorUwp\NtImageProcessorUwp\NtImageProcessorUwp.csproj", "{F60B6857-9718-4491-9799-D94F51229BE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,22 +97,6 @@ Global
 		{65FC1C19-ED21-43F1-8FF7-2957DC70C551}.Release|x64.Build.0 = Release|x64
 		{65FC1C19-ED21-43F1-8FF7-2957DC70C551}.Release|x86.ActiveCfg = Release|x86
 		{65FC1C19-ED21-43F1-8FF7-2957DC70C551}.Release|x86.Build.0 = Release|x86
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|ARM.ActiveCfg = Debug|ARM
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|ARM.Build.0 = Debug|ARM
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x64.ActiveCfg = Debug|x64
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x64.Build.0 = Debug|x64
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x86.ActiveCfg = Debug|x86
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x86.Build.0 = Debug|x86
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|ARM.ActiveCfg = Release|ARM
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|ARM.Build.0 = Release|ARM
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x64.ActiveCfg = Release|x64
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x64.Build.0 = Release|x64
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x86.ActiveCfg = Release|x86
-		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x86.Build.0 = Release|x86
 		{EE2D1D2F-3456-4133-AC3D-3128A8FCD7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE2D1D2F-3456-4133-AC3D-3128A8FCD7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE2D1D2F-3456-4133-AC3D-3128A8FCD7D7}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -129,6 +113,22 @@ Global
 		{EE2D1D2F-3456-4133-AC3D-3128A8FCD7D7}.Release|x64.Build.0 = Release|x64
 		{EE2D1D2F-3456-4133-AC3D-3128A8FCD7D7}.Release|x86.ActiveCfg = Release|x86
 		{EE2D1D2F-3456-4133-AC3D-3128A8FCD7D7}.Release|x86.Build.0 = Release|x86
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|ARM.Build.0 = Debug|ARM
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x64.ActiveCfg = Debug|x64
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x64.Build.0 = Debug|x64
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x86.ActiveCfg = Debug|x86
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Debug|x86.Build.0 = Debug|x86
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|ARM.ActiveCfg = Release|ARM
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|ARM.Build.0 = Release|ARM
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x64.ActiveCfg = Release|x64
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x64.Build.0 = Release|x64
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x86.ActiveCfg = Release|x86
+		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

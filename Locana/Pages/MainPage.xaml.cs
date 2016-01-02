@@ -40,6 +40,7 @@ namespace Locana.Pages
 
             InitializeCommandBar();
             InitializeUI();
+            InitializeTimer();
         }
 
         private void InitializeUI()
@@ -67,8 +68,21 @@ namespace Locana.Pages
                 CreateNew(1.0);
             this.AppBarUnit.Children.Clear();
             this.AppBarUnit.Children.Add(bar);
+        }
 
+        DispatcherTimer LiveviewFpsTimer = new DispatcherTimer();
+        const int FPS_INTERVAL = 5000;
+        int LiveviewFrameCount = 0;
 
+        void InitializeTimer()
+        {
+            LiveviewFpsTimer.Interval = TimeSpan.FromMilliseconds(FPS_INTERVAL);
+            LiveviewFpsTimer.Tick += (sender, arg) =>
+            {
+                var fps = (double)LiveviewFrameCount * 1000 / (double)FPS_INTERVAL;
+                DebugUtil.Log(string.Format("[LV CanvasBitmap] {0} fps", fps));
+                LiveviewFrameCount = 0;
+            };
         }
 
         CommandBarManager _CommandBarManager = new CommandBarManager();
@@ -336,6 +350,8 @@ namespace Locana.Pages
             liveview.JpegRetrieved -= liveview_JpegRetrieved;
             liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
             liveview.Closed -= liveview_Closed;
+            HistogramCreator.Stop();
+            LiveviewFpsTimer.Stop();
 
             base.OnNavigatingFrom(e);
             SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
@@ -360,6 +376,7 @@ namespace Locana.Pages
             liveview.JpegRetrieved += liveview_JpegRetrieved;
             liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
             liveview.Closed += liveview_Closed;
+            LiveviewFpsTimer.Start();
 
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
@@ -938,6 +955,7 @@ namespace Locana.Pages
             if (LiveviewImageBitmap == null) { return; }
 
             args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
+            LiveviewFrameCount++;
         }
 
         private void LiveviewImageCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
