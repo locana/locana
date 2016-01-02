@@ -13,3 +13,6 @@
 [submodule "modules/NtImageProcessorUwp"]
 	path = modules/NtImageProcessorUwp
 	url = git@github.com:naotaco/NtImageProcessorUwp.git
+[submodule "modules/nt-histogram"]
+	path = modules/nt-histogram
+	url = git@github.com:naotaco/nt-histogram.git
