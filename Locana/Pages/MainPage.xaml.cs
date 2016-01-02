@@ -589,9 +589,11 @@ namespace Locana.Pages
             }
         }
 
-        private bool IsRendering = false;
+        private bool IsDecoding = false;
 
         CanvasBitmap LiveviewImageBitmap;
+
+        private JpegPacket PendingPakcet;
 
         private BitmapSize OriginalLvSize;
         private double LvOffsetV, LvOffsetH;
@@ -600,22 +602,26 @@ namespace Locana.Pages
 
         private async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
         {
-            if (IsRendering) { return; }
-            IsRendering = true;
+            if (IsDecoding)
+            {
+                PendingPakcet = e.Packet;
+                return;
+            }
 
-            await DrawLiveviewFrame(e);
-
-            IsRendering = false;
+            IsDecoding = true;
+            await DecodeLiveviewFrame(e.Packet);
+            IsDecoding = false;
 
             if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
             {
                 HistogramCreator.CreateHistogram(LiveviewImageBitmap);
             }
+
         }
 
         private double dpi;
 
-        private async Task DrawLiveviewFrame(JpegEventArgs data, bool retry = false)
+        private async Task DecodeLiveviewFrame(JpegPacket packet, bool retry = false)
         {
             Action trailingTask = null;
 
@@ -623,7 +629,7 @@ namespace Locana.Pages
             {
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                    var writeable = await LiveviewUtil.AsWriteableBitmap(data.Packet.ImageData, Dispatcher);
+                    var writeable = await LiveviewUtil.AsWriteableBitmap(packet.ImageData, Dispatcher);
                     OriginalLvSize = new BitmapSize { Width = (uint)writeable.PixelWidth, Height = (uint)writeable.PixelHeight };
 
                     var magnification = CalcLiveviewMagnification();
@@ -646,7 +652,7 @@ namespace Locana.Pages
 
             using (var stream = new InMemoryRandomAccessStream())
             {
-                await stream.WriteAsync(data.Packet.ImageData.AsBuffer());
+                await stream.WriteAsync(packet.ImageData.AsBuffer());
                 stream.Seek(0);
 
                 LiveviewImageBitmap = await CanvasBitmap.LoadAsync(LiveviewImageCanvas, stream, (float)dpi);
@@ -656,7 +662,7 @@ namespace Locana.Pages
                     DisposeLiveviewImageBitmap();
                     if (!retry)
                     {
-                        await DrawLiveviewFrame(data, true);
+                        await DecodeLiveviewFrame(packet, true);
                     }
                     return;
                 }
@@ -667,6 +673,12 @@ namespace Locana.Pages
                 LiveviewImageCanvas.Invalidate();
                 trailingTask?.Invoke();
             });
+
+            if (PendingPakcet != null)
+            {
+                var task = DecodeLiveviewFrame(PendingPakcet);
+                PendingPakcet = null;
+            }
         }
 
         double CalcLiveviewMagnification()
