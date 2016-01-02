@@ -56,24 +56,21 @@ namespace Locana.Utility
             }
         }
 
-        public static async Task<WriteableBitmap> AsWriteableBitmap(byte[] BitmapData, CoreDispatcher Dispatcher)
+        public static async Task<WriteableBitmap> AsWriteableBitmap(byte[] jpegData, CoreDispatcher Dispatcher)
         {
             WriteableBitmap wb = null;
-            using (var temp = new InMemoryRandomAccessStream())
+            using (var stream = new InMemoryRandomAccessStream())
             {
-                await temp.WriteAsync(BitmapData.AsBuffer());
-                temp.Seek(0);
+                await stream.WriteAsync(jpegData.AsBuffer());
+                stream.Seek(0);
 
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                    var LiveviewTempBitmap = new BitmapImage();
-                    LiveviewTempBitmap.SetSource(temp);
+                var bitmap = new BitmapImage();
+                bitmap.SetSource(stream);
 
-                    wb = new WriteableBitmap(LiveviewTempBitmap.PixelWidth, LiveviewTempBitmap.PixelHeight);
-                    temp.Seek(0);
+                wb = new WriteableBitmap(bitmap.PixelWidth, bitmap.PixelHeight);
+                stream.Seek(0);
 
-                    wb.SetSource(temp);
-                });
+                wb.SetSource(stream);
             }
             return wb;
         }

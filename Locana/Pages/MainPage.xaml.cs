@@ -629,6 +629,14 @@ namespace Locana.Pages
                     };
                 });
             }
+            else
+            {
+                var toDelete = LiveviewImageBitmap;
+                trailingTask = () =>
+                {
+                    toDelete.Dispose();
+                };
+            }
 
             using (var stream = new InMemoryRandomAccessStream())
             {
