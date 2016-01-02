@@ -602,10 +602,7 @@ namespace Locana.Pages
             if (IsRendering) { return; }
             IsRendering = true;
 
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-            {
-                await DrawLiveviewFrame(e);
-            });
+            await DrawLiveviewFrame(e);
 
             IsRendering = false;
         }
@@ -614,20 +611,23 @@ namespace Locana.Pages
 
         private async Task DrawLiveviewFrame(JpegEventArgs data, bool retry = false)
         {
-            Action task = null;
+            Action trailingTask = null;
 
             if (LiveviewImageBitmap == null)
             {
-                var writeable = await LiveviewUtil.AsWriteableBitmap(data.Packet.ImageData, Dispatcher);
-                OriginalLvSize = new BitmapSize { Width = (uint)writeable.PixelWidth, Height = (uint)writeable.PixelHeight };
-
-                var magnification = CalcLiveviewMagnification();
-                dpi = DEFAULT_DPI / magnification;
-
-                task = () =>
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
-                    RefreshOverlayControlParams(magnification);
-                };
+                    var writeable = await LiveviewUtil.AsWriteableBitmap(data.Packet.ImageData, Dispatcher);
+                    OriginalLvSize = new BitmapSize { Width = (uint)writeable.PixelWidth, Height = (uint)writeable.PixelHeight };
+
+                    var magnification = CalcLiveviewMagnification();
+                    dpi = DEFAULT_DPI / magnification;
+
+                    trailingTask = () =>
+                    {
+                        RefreshOverlayControlParams(magnification);
+                    };
+                });
             }
 
             using (var stream = new InMemoryRandomAccessStream())
@@ -640,14 +640,19 @@ namespace Locana.Pages
                 if (!OriginalLvSize.Equals(LiveviewImageBitmap.SizeInPixels))
                 {
                     DisposeLiveviewImageBitmap();
-                    await DrawLiveviewFrame(data, true);
+                    if (!retry)
+                    {
+                        await DrawLiveviewFrame(data, true);
+                    }
                     return;
                 }
             }
 
-            LiveviewImageCanvas.Invalidate();
-
-            task?.Invoke();
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                LiveviewImageCanvas.Invalidate();
+                trailingTask?.Invoke();
+            });
 
             /*
             if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
