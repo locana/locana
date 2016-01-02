@@ -10,7 +10,7 @@ using Locana.Settings;
 using Locana.Utility;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
-using Naotaco.ImageProcessor.Histogram;
+using Naotaco.Histogram.Win2d;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -50,7 +50,8 @@ namespace Locana.Pages
             HistogramControl.Init(Histogram.ColorType.White, 800);
 
             HistogramCreator = null;
-            HistogramCreator = new HistogramCreator(HistogramCreator.HistogramResolution.Resolution_256);
+            HistogramCreator = new HistogramCreator(HistogramCreator.HistogramResolution.Resolution_128);
+            HistogramCreator.PixelSkipRate = 10;
             HistogramCreator.OnHistogramCreated += async (r, g, b) =>
             {
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -661,13 +662,11 @@ namespace Locana.Pages
                 LiveviewImageCanvas.Invalidate();
                 trailingTask?.Invoke();
             });
-
-            /*
+            
             if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
             {
-                HistogramCreator.CreateHistogram(writeable);
+                HistogramCreator.CreateHistogram(LiveviewImageBitmap);
             }
-            */
         }
 
         double CalcLiveviewMagnification()

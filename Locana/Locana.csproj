@@ -509,6 +509,10 @@
       <Project>{65fc1c19-ed21-43f1-8ff7-2957dc70c551}</Project>
       <Name>KzSsdpDiscoveryUwp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\modules\nt-histogram\NtHistogramWin2d\NtHistogramWin2d.csproj">
+      <Project>{6ec75e53-268a-4252-b88b-fcce96919cd8}</Project>
+      <Name>NtHistogramWin2d</Name>
+    </ProjectReference>
     <ProjectReference Include="..\modules\NtImageProcessorUwp\NtImageProcessorUwp\NtImageProcessorUwp.csproj">
       <Project>{f60b6857-9718-4491-9799-d94f51229be2}</Project>
       <Name>NtImageProcessorUwp</Name>
