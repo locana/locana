@@ -61,19 +61,10 @@ namespace Locana.Utility
 
         const double DEFAULT_DPI = 96;
 
-        public static CanvasBitmap SetAsCanvasBitmap(WriteableBitmap writeable, CanvasBitmap LiveviewImageBitmap, CanvasControl TargetCanvas, double LiveviewMagnification)
+        public static CanvasBitmap NewCanvasBitmap(WriteableBitmap writeable, CanvasControl TargetCanvas, double LiveviewMagnification)
         {
-            if (LiveviewImageBitmap == null)
-            {
-                var dpi = DEFAULT_DPI / LiveviewMagnification;
-                LiveviewImageBitmap = CanvasBitmap.CreateFromBytes(TargetCanvas, writeable.PixelBuffer.ToArray(), writeable.PixelWidth, writeable.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, (float)dpi);
-            }
-            else
-            {
-                LiveviewImageBitmap.SetPixelBytes(writeable.PixelBuffer.ToArray());
-            }
-
-            return LiveviewImageBitmap;
+            var dpi = DEFAULT_DPI / LiveviewMagnification;
+            return CanvasBitmap.CreateFromBytes(TargetCanvas, writeable.PixelBuffer.ToArray(), writeable.PixelWidth, writeable.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, (float)dpi);
         }
 
         public static async Task<WriteableBitmap> AsWriteableBitmap(byte[] BitmapData, BitmapImage LiveviewTempBitmap, CoreDispatcher Dispatcher)

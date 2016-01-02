@@ -17,11 +17,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
-using Windows.Graphics.DirectX;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
-using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -575,61 +573,55 @@ namespace Locana.Pages
 
         CanvasBitmap LiveviewImageBitmap;
         BitmapImage LiveviewTempBitmap = new BitmapImage();
-        double LiveviewMagnification = 1.0;
+
+        private int OriginalLvWidth, OriginalLvHeight;
+        private double LvOffsetV, LvOffsetH;
 
         private async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
         {
             if (IsRendering) { return; }
             IsRendering = true;
 
-            using (var temp = new InMemoryRandomAccessStream())
+            var writeable = await LiveviewUtil.AsWriteableBitmap(e.Packet.ImageData, LiveviewTempBitmap, Dispatcher);
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                await temp.WriteAsync(e.Packet.ImageData.AsBuffer());
-                temp.Seek(0);
-
-                var writeable = await LiveviewUtil.AsWriteableBitmap(e.Packet.ImageData, LiveviewTempBitmap, Dispatcher);
-
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                if (OriginalLvWidth != writeable.PixelWidth || OriginalLvWidth != writeable.PixelHeight || LiveviewImageBitmap == null)
                 {
-                    LiveviewMagnification = CalcLiveviewMagnification(writeable);
+                    OriginalLvWidth = writeable.PixelWidth;
+                    OriginalLvHeight = writeable.PixelHeight;
+                    var magnification = CalcLiveviewMagnification(writeable);
+                    DisposeLiveviewImageBitmap();
 
-                    bool sizeChanged = (LiveviewImageBitmap == null);
+                    LiveviewImageBitmap = LiveviewUtil.NewCanvasBitmap(writeable, LiveviewImageCanvas, magnification);
+                    RefreshOverlayControlParams(magnification);
+                }
+                else
+                {
+                    LiveviewImageBitmap.SetPixelBytes(writeable.PixelBuffer.ToArray());
+                }
 
-                    LiveviewImageBitmap = LiveviewUtil.SetAsCanvasBitmap(writeable, LiveviewImageBitmap, LiveviewImageCanvas, LiveviewMagnification);
-
-                    LiveviewImageCanvas.Invalidate();
-
-                    if (sizeChanged)
-                    {
-                        ResizeOverlayControls(LiveviewMagnification);
-                    }
-                });
+                LiveviewImageCanvas.Invalidate();
 
                 if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
                 {
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
-                    {
-                        HistogramCreator.CreateHistogram(writeable);
-                    });
+                    HistogramCreator.CreateHistogram(writeable);
                 }
+            });
 
-                IsRendering = false;
-
-            }
+            IsRendering = false;
         }
 
         double CalcLiveviewMagnification(WriteableBitmap liveview)
         {
-            var mag_h = LiveviewImageCanvas.ActualWidth / (double)liveview.PixelWidth;
-            var mag_v = LiveviewImageCanvas.ActualHeight / (double)liveview.PixelHeight;
+            var mag_h = LiveviewImageCanvas.ActualWidth / liveview.PixelWidth;
+            var mag_v = LiveviewImageCanvas.ActualHeight / liveview.PixelHeight;
             return Math.Min(mag_h, mag_v);
         }
 
-        void InvalidateLiveviewImageBitmap()
+        void DisposeLiveviewImageBitmap()
         {
-            if (LiveviewImageBitmap == null) { return; }
-
-            LiveviewImageBitmap.Dispose();
+            LiveviewImageBitmap?.Dispose();
             LiveviewImageBitmap = null;
         }
 
@@ -945,38 +937,29 @@ namespace Locana.Pages
         {
             if (LiveviewImageBitmap == null) { return; }
 
-            double imageHeight, vOffset, imageWidth, hOffset;
-            CalcImageLayout(LiveviewMagnification, out imageHeight, out vOffset, out imageWidth, out hOffset);
-
-            args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)hOffset, (float)vOffset);
+            args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
         }
 
         private void LiveviewImageCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            InvalidateLiveviewImageBitmap();
+            DisposeLiveviewImageBitmap();
         }
 
-        void ResizeOverlayControls(double liveviewMagnification)
+        private void RefreshOverlayControlParams(double magnification)
         {
-            if (LiveviewImageBitmap == null) { return; }
+            double imageHeight, imageWidth;
 
-            double imageHeight, vOffset, imageWidth, hOffset;
-            CalcImageLayout(liveviewMagnification, out imageHeight, out vOffset, out imageWidth, out hOffset);
+            imageHeight = LiveviewImageBitmap.SizeInPixels.Height * magnification;
+            LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
+            imageWidth = LiveviewImageBitmap.SizeInPixels.Width * magnification;
+            LvOffsetH = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
 
-            this._FocusFrameSurface.Height = imageHeight;
-            this._FocusFrameSurface.Width = imageWidth;
-            this._FocusFrameSurface.Margin = new Thickness(hOffset, vOffset, 0, 0);
-            this.FramingGuideSurface.Height = imageHeight;
-            this.FramingGuideSurface.Width = imageWidth;
-            this.FramingGuideSurface.Margin = new Thickness(hOffset, vOffset, 0, 0);
-        }
-
-        private void CalcImageLayout(double liveviewMagnification, out double imageHeight, out double vOffset, out double imageWidth, out double hOffset)
-        {
-            imageHeight = LiveviewImageBitmap.SizeInPixels.Height * liveviewMagnification;
-            vOffset = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
-            imageWidth = LiveviewImageBitmap.SizeInPixels.Width * liveviewMagnification;
-            hOffset = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
+            _FocusFrameSurface.Height = imageHeight;
+            _FocusFrameSurface.Width = imageWidth;
+            _FocusFrameSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
+            FramingGuideSurface.Height = imageHeight;
+            FramingGuideSurface.Width = imageWidth;
+            FramingGuideSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
         }
     }
 
