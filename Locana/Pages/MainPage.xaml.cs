@@ -606,6 +606,11 @@ namespace Locana.Pages
             await DrawLiveviewFrame(e);
 
             IsRendering = false;
+
+            if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
+            {
+                HistogramCreator.CreateHistogram(LiveviewImageBitmap);
+            }
         }
 
         private double dpi;
@@ -662,11 +667,6 @@ namespace Locana.Pages
                 LiveviewImageCanvas.Invalidate();
                 trailingTask?.Invoke();
             });
-            
-            if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
-            {
-                HistogramCreator.CreateHistogram(LiveviewImageBitmap);
-            }
         }
 
         double CalcLiveviewMagnification()
