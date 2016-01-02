@@ -18,8 +18,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
+using Windows.Graphics.Imaging;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -589,50 +591,76 @@ namespace Locana.Pages
         private bool IsRendering = false;
 
         CanvasBitmap LiveviewImageBitmap;
-        BitmapImage LiveviewTempBitmap = new BitmapImage();
 
-        private int OriginalLvWidth, OriginalLvHeight;
+        private BitmapSize OriginalLvSize;
         private double LvOffsetV, LvOffsetH;
+
+        private const double DEFAULT_DPI = 96.0;
 
         private async void liveview_JpegRetrieved(object sender, JpegEventArgs e)
         {
             if (IsRendering) { return; }
             IsRendering = true;
 
-            var writeable = await LiveviewUtil.AsWriteableBitmap(e.Packet.ImageData, LiveviewTempBitmap, Dispatcher);
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                if (OriginalLvWidth != writeable.PixelWidth || OriginalLvWidth != writeable.PixelHeight || LiveviewImageBitmap == null)
-                {
-                    OriginalLvWidth = writeable.PixelWidth;
-                    OriginalLvHeight = writeable.PixelHeight;
-                    var magnification = CalcLiveviewMagnification(writeable);
-                    DisposeLiveviewImageBitmap();
-
-                    LiveviewImageBitmap = LiveviewUtil.NewCanvasBitmap(writeable, LiveviewImageCanvas, magnification);
-                    RefreshOverlayControlParams(magnification);
-                }
-                else
-                {
-                    LiveviewImageBitmap.SetPixelBytes(writeable.PixelBuffer.ToArray());
-                }
-
-                LiveviewImageCanvas.Invalidate();
-
-                if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
-                {
-                    HistogramCreator.CreateHistogram(writeable);
-                }
+                await DrawLiveviewFrame(e);
             });
 
             IsRendering = false;
         }
 
-        double CalcLiveviewMagnification(WriteableBitmap liveview)
+        private double dpi;
+
+        private async Task DrawLiveviewFrame(JpegEventArgs data, bool retry = false)
         {
-            var mag_h = LiveviewImageCanvas.ActualWidth / liveview.PixelWidth;
-            var mag_v = LiveviewImageCanvas.ActualHeight / liveview.PixelHeight;
+            Action task = null;
+
+            if (LiveviewImageBitmap == null)
+            {
+                var writeable = await LiveviewUtil.AsWriteableBitmap(data.Packet.ImageData, Dispatcher);
+                OriginalLvSize = new BitmapSize { Width = (uint)writeable.PixelWidth, Height = (uint)writeable.PixelHeight };
+
+                var magnification = CalcLiveviewMagnification();
+                dpi = DEFAULT_DPI / magnification;
+
+                task = () =>
+                {
+                    RefreshOverlayControlParams(magnification);
+                };
+            }
+
+            using (var stream = new InMemoryRandomAccessStream())
+            {
+                await stream.WriteAsync(data.Packet.ImageData.AsBuffer());
+                stream.Seek(0);
+
+                LiveviewImageBitmap = await CanvasBitmap.LoadAsync(LiveviewImageCanvas, stream, (float)dpi);
+
+                if (!OriginalLvSize.Equals(LiveviewImageBitmap.SizeInPixels))
+                {
+                    DisposeLiveviewImageBitmap();
+                    await DrawLiveviewFrame(data, true);
+                    return;
+                }
+            }
+
+            LiveviewImageCanvas.Invalidate();
+
+            task?.Invoke();
+
+            /*
+            if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
+            {
+                HistogramCreator.CreateHistogram(writeable);
+            }
+            */
+        }
+
+        double CalcLiveviewMagnification()
+        {
+            var mag_h = LiveviewImageCanvas.ActualWidth / OriginalLvSize.Width;
+            var mag_v = LiveviewImageCanvas.ActualHeight / OriginalLvSize.Height;
             return Math.Min(mag_h, mag_v);
         }
 

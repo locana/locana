@@ -1,11 +1,8 @@
 ﻿using Locana.DataModel;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.UI.Xaml;
 using Naotaco.ImageProcessor.Histogram;
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Graphics.DirectX;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Media.Imaging;
@@ -59,15 +56,7 @@ namespace Locana.Utility
             }
         }
 
-        const double DEFAULT_DPI = 96;
-
-        public static CanvasBitmap NewCanvasBitmap(WriteableBitmap writeable, CanvasControl TargetCanvas, double LiveviewMagnification)
-        {
-            var dpi = DEFAULT_DPI / LiveviewMagnification;
-            return CanvasBitmap.CreateFromBytes(TargetCanvas, writeable.PixelBuffer.ToArray(), writeable.PixelWidth, writeable.PixelHeight, DirectXPixelFormat.B8G8R8A8UIntNormalized, (float)dpi);
-        }
-
-        public static async Task<WriteableBitmap> AsWriteableBitmap(byte[] BitmapData, BitmapImage LiveviewTempBitmap, CoreDispatcher Dispatcher)
+        public static async Task<WriteableBitmap> AsWriteableBitmap(byte[] BitmapData, CoreDispatcher Dispatcher)
         {
             WriteableBitmap wb = null;
             using (var temp = new InMemoryRandomAccessStream())
@@ -77,6 +66,7 @@ namespace Locana.Utility
 
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
+                    var LiveviewTempBitmap = new BitmapImage();
                     LiveviewTempBitmap.SetSource(temp);
 
                     wb = new WriteableBitmap(LiveviewTempBitmap.PixelWidth, LiveviewTempBitmap.PixelHeight);
