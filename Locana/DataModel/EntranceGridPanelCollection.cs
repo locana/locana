@@ -100,16 +100,16 @@ namespace Locana.DataModel
 
     public class EntrancePanel
     {
-        public EntrancePanel(string name, Uri icon, Action onClick)
+        public EntrancePanel(string name, Symbol symbol, Action onClick)
         {
             PanelTitle = name;
             OnClick = onClick;
-            PanelIcon = icon;
+            IconSymbol = symbol;
         }
 
         public string PanelTitle { private set; get; }
 
-        public Uri PanelIcon { private set; get; }
+        public Symbol IconSymbol { private set; get; }
 
         public Action OnClick { private set; get; }
     }
@@ -118,7 +118,7 @@ namespace Locana.DataModel
     {
         public DevicePanel(TargetDevice device)
             : base(device.FriendlyName,
-                  new Uri("ms-appx:///Assets/Screen/mode_photo.png"), () =>
+                  Symbol.Camera, () =>
              {
                  var shell = Window.Current.Content as AppShell;
                  var frame = shell.AppFrame as Frame;

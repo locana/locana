@@ -72,8 +72,14 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="48" />
                         </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="{Binding PanelIcon}" />
-                        <TextBlock Grid.Row="1" Text="{Binding PanelTitle}" />
+                        <Viewbox Grid.Row="0"
+                                 MaxWidth="180"
+                                 MaxHeight="180">
+                            <SymbolIcon Margin="10" Symbol="{Binding IconSymbol}" />
+                        </Viewbox>
+                        <TextBlock Grid.Row="1"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding PanelTitle}" />
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

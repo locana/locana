@@ -278,21 +278,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AppBar\appbar_cameraSetting.png" />
-    <Content Include="Assets\AppBar\appBar_cancel.png" />
-    <Content Include="Assets\AppBar\appBar_close_display.png" />
-    <Content Include="Assets\AppBar\appBar_delete.png" />
-    <Content Include="Assets\AppBar\appBar_display_info.png" />
-    <Content Include="Assets\AppBar\appBar_Dollar.png" />
-    <Content Include="Assets\AppBar\appBar_download.png" />
-    <Content Include="Assets\AppBar\appBar_ok.png" />
     <Content Include="Assets\AppBar\appBar_playback.png" />
-    <Content Include="Assets\AppBar\appbar_rotateLeft.png" />
-    <Content Include="Assets\AppBar\appbar_rotateRight.png" />
     <Content Include="Assets\AppBar\appBar_selection.png" />
-    <Content Include="Assets\AppBar\appBar_wifi.png" />
     <Content Include="Assets\AppBar\ControlPanel.png" />
-    <Content Include="Assets\AppBar\feature.settings.png" />
-    <Content Include="Assets\AppBar\sync.png" />
     <Content Include="Assets\Camera.png" />
     <Content Include="Assets\DarkGray.png" />
     <Content Include="Assets\License.txt" />

@@ -1,9 +1,11 @@
 ﻿using Locana.DataModel;
 using System;
 using System.Collections.Generic;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 
 namespace Locana.Utility
 {
@@ -136,35 +138,35 @@ namespace Locana.Utility
                 case AppBarItem.ControlPanel:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_cameraSetting.png", UriKind.Absolute) }, Label = SystemUtil.GetStringResource("AppBar_ControlPanel") };
                 case AppBarItem.AppSetting:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/feature.settings.png", UriKind.Absolute) }, Label = SystemUtil.GetStringResource("AppBar_AppSetting") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Setting), Label = SystemUtil.GetStringResource("AppBar_AppSetting") };
                 case AppBarItem.CancelTouchAF:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_cancel.png", UriKind.Absolute) }, Label = SystemUtil.GetStringResource("AppBar_CancelTouchAf") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_CancelTouchAf") };
                 case AppBarItem.AboutPage:
                     return new AppBarButton() { Label = SystemUtil.GetStringResource("About") };
                 case AppBarItem.LoggerPage:
                     return new AppBarButton() { Label = "Logger" };
                 case AppBarItem.PlaybackPage:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_playback.png", UriKind.Absolute) }, Label = SystemUtil.GetStringResource("AppBar_CameraRoll") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Pictures), Label = SystemUtil.GetStringResource("AppBar_CameraRoll") };
                 case AppBarItem.DeleteMultiple:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_delete.png") }, Label = SystemUtil.GetStringResource("AppBar_Delete") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Delete), Label = SystemUtil.GetStringResource("AppBar_Delete") };
                 case AppBarItem.DownloadMultiple:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_download.png") }, Label = SystemUtil.GetStringResource("AppBar_Download") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Download), Label = SystemUtil.GetStringResource("AppBar_Download") };
                 case AppBarItem.ShowDetailInfo:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_display_info.png") }, Label = SystemUtil.GetStringResource("ShowDetailInfo") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.OpenPane) { RenderTransform = new ScaleTransform { ScaleX = -1 }, RenderTransformOrigin = new Point { X = 0.5, Y = 0.5 } }, Label = SystemUtil.GetStringResource("ShowDetailInfo") };
                 case AppBarItem.HideDetailInfo:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_close_display.png") }, Label = SystemUtil.GetStringResource("HideDetailInfo") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.ClosePane) { RenderTransform = new ScaleTransform { ScaleX = -1 }, RenderTransformOrigin = new Point { X = 0.5, Y = 0.5 } }, Label = SystemUtil.GetStringResource("HideDetailInfo") };
                 case AppBarItem.Ok:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_ok.png") }, Label = SystemUtil.GetStringResource("AppBar_Exit") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Accept), Label = SystemUtil.GetStringResource("AppBar_Exit") };
                 case AppBarItem.WifiSetting:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_wifi.png") }, Label = SystemUtil.GetStringResource("WifiSettingLauncherButtonText") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.ThreeBars), Label = SystemUtil.GetStringResource("WifiSettingLauncherButtonText") };
                 case AppBarItem.Donation:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_Dollar.png") }, Label = SystemUtil.GetStringResource("Donation") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Like), Label = SystemUtil.GetStringResource("Donation") };
                 case AppBarItem.RotateLeft:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_rotateLeft.png") }, Label = SystemUtil.GetStringResource("RotateLeft") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Rotate) { RenderTransform = new ScaleTransform { ScaleX = -1 }, RenderTransformOrigin = new Point { X = 0.5, Y = 0.5 } }, Label = SystemUtil.GetStringResource("RotateLeft") };
                 case AppBarItem.RotateRight:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_rotateRight.png") }, Label = SystemUtil.GetStringResource("RotateRight") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Rotate), Label = SystemUtil.GetStringResource("RotateRight") };
                 case AppBarItem.Refresh:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/sync.png") }, Label = SystemUtil.GetStringResource("AppBar_Refresh") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Refresh), Label = SystemUtil.GetStringResource("AppBar_Refresh") };
                 case AppBarItem.FNumberSlider:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/aperture.png") }, Label = "F number" };
                 case AppBarItem.ShutterSpeedSlider:
@@ -176,9 +178,7 @@ namespace Locana.Utility
                 case AppBarItem.EvSlider:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/EVComp.png") }, Label = "EV" };
                 case AppBarItem.Zoom:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ZoomIn.png") }, Label = "Zoom" };
-                case AppBarItem.Tmp_WfdPage:
-                    return new AppBarButton() { Label = "WFD page" };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Zoom), Label = "Zoom" };
                 default:
                     throw new NotImplementedException();
             }
@@ -191,7 +191,7 @@ namespace Locana.Utility
             {
                 button.Click += EventHolder[item];
             }
-            DebugUtil.Log("Creating button: " + item+" "+button.Visibility);
+            DebugUtil.Log("Creating button: " + item + " " + button.Visibility);
             return button;
         }
 

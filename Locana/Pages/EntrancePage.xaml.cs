@@ -30,24 +30,24 @@ namespace Locana.Pages
             this.InitializeComponent();
 
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppBar_AppSetting"),
-                new Uri("ms-appx:///Assets/AppBar/ControlPanel.png"), () =>
+                Symbol.Setting, () =>
                 {
                     Frame.Navigate(typeof(AppSettingPage));
                 }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"),
-                new Uri("ms-appx:///Assets/AppBar/appBar_wifi.png"), () =>
+                Symbol.ThreeBars, () =>
                 {
                 }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("Donation"),
-                new Uri("ms-appx:///Assets/AppBar/appBar_Dollar.png"), () =>
+                Symbol.Like, () =>
                 {
                 }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("About"),
-                new Uri("ms-appx:///Assets/AppBar/feature.settings.png"), () =>
+                Symbol.Help, () =>
                 {
                 }));
             appMenuGroup.Add(new EntrancePanel("Find QR Code",
-                new Uri("ms-appx:///Assets/AppBar/feature.settings.png"), () =>
+                Symbol.WebCam, () =>
                 {
                     Frame.Navigate(typeof(QrCodePage));
                 }));
