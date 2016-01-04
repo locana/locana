@@ -158,11 +158,17 @@
                                                                        Source={StaticResource LocalizedStrings}}"
                                                         Visibility="{Binding IsPlayable,
                                                                              Converter={StaticResource B2VConverter}}" />
+                                        <MenuFlyoutItem Click="CopyToPhone_Click"
+                                                        Text="{Binding [Viewer_MenuCopyToPhone],
+                                                                       Source={StaticResource LocalizedStrings}}"
+                                                        Visibility="{Binding IsCopyable,
+                                                                             Converter={StaticResource B2VConverter}}" />
                                         <MenuFlyoutItem Click="Delete_Click"
                                                         Text="{Binding [Viewer_MenuDelete],
                                                                        Source={StaticResource LocalizedStrings}}"
                                                         Visibility="{Binding IsDeletable,
                                                                              Converter={StaticResource B2VConverter}}" />
+
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
                                 <Image Grid.RowSpan="2"

@@ -74,6 +74,7 @@ namespace Locana.DataModel
             Source = content;
             DeviceUuid = uuid;
             IsRecent = false;
+            IsLocal = false;
         }
 
         public Thumbnail(ContentInfo content, StorageFile localfile)
@@ -83,7 +84,10 @@ namespace Locana.DataModel
             Source = content;
             DeviceUuid = "localhost";
             IsRecent = false;
+            IsLocal = true;
         }
+
+        public bool IsLocal { private set; get; }
 
         public ContentInfo Source { private set; get; }
 
@@ -132,7 +136,7 @@ namespace Locana.DataModel
         {
             get
             {
-                return Source.MimeType.StartsWith(MimeType.Image) || Source.MimeType.StartsWith(MimeType.Video);
+                return !IsLocal && (Source.MimeType.StartsWith(MimeType.Image) || Source.MimeType.StartsWith(MimeType.Video));
             }
         }
 

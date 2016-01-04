@@ -52,6 +52,9 @@ namespace Locana.Pages
                             case SelectivityFactor.Delete:
                                 DeleteSelectedFiles();
                                 break;
+                            case SelectivityFactor.CopyToPhone:
+                                FetchSelectedImages();
+                                break;
                             default:
                                 DebugUtil.Log("Nothing to do for current SelectivityFactor: " + Operator.ContentsCollection.SelectivityFactor);
                                 break;
@@ -626,6 +629,19 @@ namespace Locana.Pages
             });
         }
 
+        private void CopyToPhone_Click(object sender, RoutedEventArgs e)
+        {
+            var item = sender as MenuFlyoutItem;
+            try
+            {
+                EnqueueDownload(item.DataContext as Thumbnail);
+            }
+            catch (Exception ex)
+            {
+                DebugUtil.Log(ex.StackTrace);
+            }
+        }
+
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             var item = sender as MenuFlyoutItem;
@@ -652,6 +668,56 @@ namespace Locana.Pages
                 var holder = image.DataContext as RemainingContentsHolder;
                 Operator.ContentsCollection.Remove(holder, false);
                 await Operator.LoadRemainingContents(holder);
+            }
+        }
+
+        private void FetchSelectedImages()
+        {
+            var items = ContentsGrid.SelectedItems;
+            if (items.Count == 0)
+            {
+                HideProgress();
+                return;
+            }
+
+            foreach (var item in new List<object>(items))
+            {
+                try
+                {
+                    EnqueueDownload(item as Thumbnail);
+                }
+                catch (Exception e)
+                {
+                    DebugUtil.Log(e.StackTrace);
+                }
+            }
+        }
+
+        private void EnqueueDownload(Thumbnail source)
+        {
+            if (source.IsMovie)
+            {
+                string ext;
+                switch (source.Source.MimeType)
+                {
+                    case MimeType.Mp4:
+                        ext = ".mp4";
+                        break;
+                    default:
+                        ext = null;
+                        break;
+                }
+                MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
+            }
+            else if (ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents && source.Source.OriginalUrl != null)
+            {
+                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
+                    source.Source.MimeType == MimeType.Jpeg ? ".jpg" : null);
+            }
+            else
+            {
+                // Fallback to large size image
+                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
             }
         }
     }
