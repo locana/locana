@@ -92,6 +92,11 @@ namespace Locana.Pages
                 await Task.Delay(500);
                 UpdateAppBar();
             });
+            CommandBarManager.SetEvent(AppBarItem.Close, (s, args) =>
+            {
+                ReleaseDetail();
+                UpdateInnerState(ViewerState.Single);
+            });
         }
 
         /// <summary>
@@ -203,6 +208,8 @@ namespace Locana.Pages
             MoviePlayer.LocalMediaFailed -= LocalMoviePlayer_MediaFailed;
             MoviePlayer.LocalMediaOpened -= LocalMoviePlayer_MediaOpened;
             FinishMoviePlayback();
+            ReleaseDetail();
+            PhotoScreen.DataContext = null;
 
             Canceller.Cancel();
 
@@ -240,11 +247,14 @@ namespace Locana.Pages
                     case ViewerState.Single:
                         UpdateSelectionMode(SelectivityFactor.None);
                         {
-                            var tmp = CommandBarManager.Clear();
-                            //.NoIcon(AppBarItem.AppSetting);
+                            CommandBarManager.Clear();
                             if (ContentsCollection.Count != 0)
                             {
-                                tmp.Command(AppBarItem.DeleteMultiple);
+                                if (TargetStorageType != StorageType.Local)
+                                {
+                                    CommandBarManager.Command(AppBarItem.DownloadMultiple);
+                                }
+                                CommandBarManager.Command(AppBarItem.DeleteMultiple);
                             }
                         }
                         break;
@@ -253,15 +263,17 @@ namespace Locana.Pages
                         {
                             CommandBarManager.Clear()
                                 .Command(AppBarItem.RotateRight)
+                                .Command(AppBarItem.RotateLeft)
                                 .Command(AppBarItem.HideDetailInfo)
-                                .Command(AppBarItem.RotateLeft);
+                                .Command(AppBarItem.Close);
                         }
                         else
                         {
                             CommandBarManager.Clear()
                                 .Command(AppBarItem.RotateRight)
+                                .Command(AppBarItem.RotateLeft)
                                 .Command(AppBarItem.ShowDetailInfo)
-                                .Command(AppBarItem.RotateLeft);
+                                .Command(AppBarItem.Close);
                         }
                         break;
                     default:
@@ -388,12 +400,6 @@ namespace Locana.Pages
                 ContentsGrid.IsEnabled = true;
                 UpdateInnerState(ViewerState.Single);
             }
-        }
-
-        void InitBitmapBeforeOpen()
-        {
-            DebugUtil.Log("Before open");
-            PhotoScreen.Init();
         }
 
         private void ReleaseDetail()
@@ -541,7 +547,7 @@ namespace Locana.Pages
                             var bitmap = new BitmapImage();
                             await bitmap.SetSourceAsync(stream.AsRandomAccessStream());
                             PhotoScreen.SourceBitmap = bitmap;
-                            InitBitmapBeforeOpen();
+                            PhotoScreen.Init();
                             PhotoScreen.SetBitmap();
                             try
                             {

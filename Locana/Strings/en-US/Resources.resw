@@ -1187,4 +1187,7 @@ Open gallary to browse contents in your camera device.</value>
   <data name="PanelGroup_Devices" xml:space="preserve">
     <value>Detected devices</value>
   </data>
+  <data name="AppBar_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>

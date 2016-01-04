@@ -1112,4 +1112,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="Viewer_Header_GroupView" xml:space="preserve">
     <value>アルバム一覧</value>
   </data>
+  <data name="AppBar_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
 </root>

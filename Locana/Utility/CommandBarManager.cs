@@ -141,6 +141,8 @@ namespace Locana.Utility
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Setting), Label = SystemUtil.GetStringResource("AppBar_AppSetting") };
                 case AppBarItem.CancelTouchAF:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_CancelTouchAf") };
+                case AppBarItem.Close:
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_Close") };
                 case AppBarItem.AboutPage:
                     return new AppBarButton() { Label = SystemUtil.GetStringResource("About") };
                 case AppBarItem.LoggerPage:
@@ -332,9 +334,10 @@ namespace Locana.Utility
         WifiSetting,
         Donation,
         RotateRight,
+        RotateLeft,
         ShowDetailInfo,
         HideDetailInfo,
-        RotateLeft,
+        Close,
         Refresh,
         AppSetting,
         ControlPanel,
