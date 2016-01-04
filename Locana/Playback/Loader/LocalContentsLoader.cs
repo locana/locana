@@ -11,13 +11,6 @@ namespace Locana.Playback
 {
     public class LocalContentsLoader : ContentsLoader
     {
-        public event EventHandler<SingleContentEventArgs> SingleContentLoaded;
-
-        protected void OnContentLoaded(Thumbnail file)
-        {
-            SingleContentLoaded?.Invoke(this, new SingleContentEventArgs { File = file });
-        }
-
         public override async Task Load(ContentsSet contentsSet, CancellationTokenSource cancel)
         {
             await LoadPictures(cancel);
@@ -117,7 +110,7 @@ namespace Locana.Playback
             var thumbs = list.Select(file =>
                 {
                     var thumb = StorageFileToThumbnail(folder, file);
-                    SingleContentLoaded?.Invoke(this, new SingleContentEventArgs { File = thumb });
+                    OnSingleContentLoaded(thumb);
                     return thumb;
                 }).ToList();
 

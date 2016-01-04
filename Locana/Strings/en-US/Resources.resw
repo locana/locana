@@ -1190,4 +1190,10 @@ Open gallary to browse contents in your camera device.</value>
   <data name="AppBar_Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="AppBar_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="AppBar_Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
 </root>

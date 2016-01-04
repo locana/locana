@@ -181,6 +181,10 @@ namespace Locana.Utility
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/EVComp.png") }, Label = "EV" };
                 case AppBarItem.Zoom:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Zoom), Label = "Zoom" };
+                case AppBarItem.Resume:
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Play), Label = SystemUtil.GetStringResource("AppBar_Play") };
+                case AppBarItem.Pause:
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Pause), Label = SystemUtil.GetStringResource("AppBar_Pause") };
                 default:
                     throw new NotImplementedException();
             }
@@ -337,6 +341,8 @@ namespace Locana.Utility
         RotateLeft,
         ShowDetailInfo,
         HideDetailInfo,
+        Resume,
+        Pause,
         Close,
         Refresh,
         AppSetting,

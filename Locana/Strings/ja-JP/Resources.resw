@@ -1115,4 +1115,10 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="AppBar_Close" xml:space="preserve">
     <value>閉じる</value>
   </data>
+  <data name="AppBar_Pause" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="AppBar_Play" xml:space="preserve">
+    <value>再生</value>
+  </data>
 </root>

@@ -220,14 +220,16 @@
     <Compile Include="Pages\WifiDirectPage.xaml.cs">
       <DependentUpon>WifiDirectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Playback\ContentsLoader.cs" />
-    <Compile Include="Playback\DlnaContentsLoader.cs" />
+    <Compile Include="Playback\Loader\ContentsLoader.cs" />
+    <Compile Include="Playback\Operator\ContentsOperator.cs" />
+    <Compile Include="Playback\Loader\DlnaContentsLoader.cs" />
     <Compile Include="Playback\DummyContentsFlag.cs" />
-    <Compile Include="Playback\DummyContentsLoader.cs" />
-    <Compile Include="Playback\LocalContentsLoader.cs" />
+    <Compile Include="Playback\Loader\DummyContentsLoader.cs" />
+    <Compile Include="Playback\Operator\LocalContentsOperator.cs" />
+    <Compile Include="Playback\Loader\LocalContentsLoader.cs" />
     <Compile Include="Playback\MimeType.cs" />
     <Compile Include="Playback\PlaybackModeHelper.cs" />
-    <Compile Include="Playback\RemoteApiContentsLoader.cs" />
+    <Compile Include="Playback\Loader\RemoteApiContentsLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\SettingPanelBuilder.cs" />
     <Compile Include="UPnP\ContentDirectory\BrowseRequest.cs" />

@@ -9,7 +9,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -39,16 +38,17 @@ namespace Locana.Controls
             LocalMoviePositionTimer.Interval = TimeSpan.FromMilliseconds(200);
             LocalMoviePositionTimer.Tick += (obj, sender) =>
             {
-                if (this.DataContext != null && MovieType == MovieFileType.LocalMovie)
+                if (DataContext != null && MovieType == MovieFileType.LocalMovie)
                 {
-                    (this.DataContext as MoviePlaybackData).CurrentPosition = LocalMoviePlayer.Position;
+                    (DataContext as MoviePlaybackData).CurrentPosition = LocalMoviePlayer.Position;
                 }
             };
         }
 
         void LocalMoviePlayer_CurrentStateChanged(object sender, RoutedEventArgs e)
         {
-            var data = this.DataContext as MoviePlaybackData;
+            var data = DataContext as MoviePlaybackData;
+
             switch (LocalMoviePlayer.CurrentState)
             {
                 case MediaElementState.Paused:
@@ -66,7 +66,7 @@ namespace Locana.Controls
         private void LocalMoviePlayer_MediaOpened(object sender, RoutedEventArgs e)
         {
             if (LocalMediaOpened != null) { LocalMediaOpened(sender, e); }
-            var data = this.DataContext as MoviePlaybackData;
+            var data = DataContext as MoviePlaybackData;
             data.Duration = LocalMoviePlayer.NaturalDuration.TimeSpan;
         }
 
@@ -242,23 +242,6 @@ namespace Locana.Controls
 
         void UpdatePlaybackStatus(string status)
         {
-            var image = new BitmapImage(new Uri("ms-appx:///Assets/PlaybackScreen/playback_paused.png", UriKind.Absolute));
-            switch (status)
-            {
-                case StreamStatus.Paused:
-                    image = new BitmapImage(new Uri("ms-appx:///Assets/PlaybackScreen/playback_playing.png", UriKind.Absolute));
-                    break;
-                case StreamStatus.Started:
-                    image = new BitmapImage(new Uri("ms-appx:///Assets/PlaybackScreen/playback_paused.png", UriKind.Absolute));
-                    break;
-                case StreamStatus.PausedByEdge:
-                    image = new BitmapImage(new Uri("ms-appx:///Assets/PlaybackScreen/playback_playing.png", UriKind.Absolute));
-                    break;
-                default:
-                    break;
-            }
-            StartPauseButtonImage.Source = image;
-
             if (!DetailInfoDisplayed)
             {
                 StartToShowInfo();
@@ -378,7 +361,7 @@ namespace Locana.Controls
             }).Begin();
         }
 
-        private void StartPauseButton_Tapped(object sender, TappedRoutedEventArgs e)
+        public void Resume()
         {
             RenewInfoTimer();
 
@@ -391,14 +374,11 @@ namespace Locana.Controls
                         switch (this.PlaybackStatus)
                         {
                             case StreamStatus.Paused:
-                                r = PlaybackRequest.Start;
-                                break;
-                            case StreamStatus.Started:
-                                r = PlaybackRequest.Pause;
-                                break;
                             case StreamStatus.PausedByEdge:
                                 r = PlaybackRequest.Start;
                                 break;
+                            default:
+                                return;
                         }
                         if (r != PlaybackRequest.None)
                         {
@@ -413,12 +393,49 @@ namespace Locana.Controls
                         case MediaElementState.Stopped:
                             LocalMoviePlayer.Play();
                             break;
-                        case MediaElementState.Playing:
-                            LocalMoviePlayer.Pause();
-                            break;
+                        default:
+                            return;
                     }
                     break;
             }
+        }
+
+        public void Pause()
+        {
+            RenewInfoTimer();
+
+            switch (this.MovieType)
+            {
+                case MovieFileType.SimpleStreamingMovie:
+                    if (OnStreamingOperationRequested != null)
+                    {
+                        var r = PlaybackRequest.None;
+                        switch (this.PlaybackStatus)
+                        {
+                            case StreamStatus.Started:
+                                r = PlaybackRequest.Pause;
+                                break;
+                            default:
+                                return;
+                        }
+                        if (r != PlaybackRequest.None)
+                        {
+                            OnStreamingOperationRequested(this, new PlaybackRequestArgs() { Request = r });
+                        }
+                    }
+                    break;
+                case MovieFileType.LocalMovie:
+                    switch (LocalMoviePlayer.CurrentState)
+                    {
+                        case MediaElementState.Playing:
+                            LocalMoviePlayer.Pause();
+                            break;
+                        default:
+                            return;
+                    }
+                    break;
+            }
+
         }
 
         public void NotifyStartingStreamingMoviePlayback()
@@ -440,10 +457,12 @@ namespace Locana.Controls
                 var stream = await content.CacheFile.OpenAsync(FileAccessMode.Read);
                 LocalMoviePlayer.SetSource(stream, content.CacheFile.ContentType);
 
-                var data = this.DataContext as MoviePlaybackData;
+                var data = new MoviePlaybackData();
                 data.FileName = content.CacheFile.Name;
                 data.CurrentPosition = TimeSpan.FromMilliseconds(0);
                 data.SeekAvailable = LocalMoviePlayer.CanSeek;
+
+                DataContext = data;
 
                 LocalMoviePlayer.Play();
                 LocalMoviePositionTimer.Start();

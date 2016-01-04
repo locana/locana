@@ -3,11 +3,7 @@ using Locana.Controls;
 using Locana.DataModel;
 using Locana.Playback;
 using Locana.Utility;
-using Naotaco.ImageProcessor.MetaData;
-using Naotaco.ImageProcessor.MetaData.Misc;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +15,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -32,6 +27,8 @@ namespace Locana.Pages
     public sealed partial class ContentsGridPage : Page
     {
         private NavigationHelper navigationHelper;
+
+        private ContentsOperator Operator;
 
         private DisplayRequest displayRequest = new DisplayRequest();
 
@@ -49,13 +46,13 @@ namespace Locana.Pages
                 switch (InnerState)
                 {
                     case ViewerState.Selecting:
-                        switch (ContentsCollection.SelectivityFactor)
+                        switch (Operator.ContentsCollection.SelectivityFactor)
                         {
                             case SelectivityFactor.Delete:
                                 DeleteSelectedFiles();
                                 break;
                             default:
-                                DebugUtil.Log("Nothing to do for current SelectivityFactor: " + ContentsCollection.SelectivityFactor);
+                                DebugUtil.Log("Nothing to do for current SelectivityFactor: " + Operator.ContentsCollection.SelectivityFactor);
                                 break;
                         }
                         UpdateSelectionMode(SelectivityFactor.None);
@@ -92,9 +89,25 @@ namespace Locana.Pages
                 await Task.Delay(500);
                 UpdateAppBar();
             });
+            CommandBarManager.SetEvent(AppBarItem.Resume, (s, args) =>
+            {
+                MoviePlayer.Resume();
+            });
+            CommandBarManager.SetEvent(AppBarItem.Pause, (s, args) =>
+            {
+                MoviePlayer.Pause();
+            });
             CommandBarManager.SetEvent(AppBarItem.Close, (s, args) =>
             {
-                ReleaseDetail();
+                switch (InnerState)
+                {
+                    case ViewerState.StillPlayback:
+                        ReleaseDetail();
+                        break;
+                    case ViewerState.MoviePlayback:
+                        FinishMoviePlayback();
+                        break;
+                }
                 UpdateInnerState(ViewerState.Single);
             });
         }
@@ -134,7 +147,9 @@ namespace Locana.Pages
         {
         }
 
-        private StorageType TargetStorageType = StorageType.Local;
+        public StorageType TargetStorageType { private set; get; } = StorageType.Local;
+
+        public MoviePlaybackScreen MoviePlayerScreen { get { return MoviePlayer; } }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -165,12 +180,12 @@ namespace Locana.Pages
 
             UpdateInnerState(ViewerState.Single);
 
-            Canceller = new CancellationTokenSource();
-
-            ContentsCollection = new AlbumGroupCollection(TargetStorageType != StorageType.Local)
-            {
-                ContentSortOrder = Album.SortOrder.NewOneFirst,
-            };
+            Operator = ContentsOperatorFactory.CreateNew(this);
+            Operator.SingleContentLoaded += Helper_SingleContentLoaded;
+            Operator.PartLoaded += Helper_PartLoaded;
+            Operator.ErrorMessageRaised += Helper_ErrorMessageRaised;
+            Operator.MovieStreamError += Helper_MovieStreamError;
+            Operator.Canceller = new CancellationTokenSource();
 
             FinishMoviePlayback();
 
@@ -179,15 +194,61 @@ namespace Locana.Pages
 
             LoadContents();
 
-            MoviePlayer.LocalMediaFailed += LocalMoviePlayer_MediaFailed;
-            MoviePlayer.LocalMediaOpened += LocalMoviePlayer_MediaOpened;
-
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
+        }
+
+        private void Helper_MovieStreamError()
+        {
+            UpdateInnerState(ViewerState.Single);
+
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                MoviePlayerWrapper.Visibility = Visibility.Collapsed;
+                HideProgress();
+            });
+        }
+
+        private void Helper_ErrorMessageRaised(string obj)
+        {
+            ShowToast(obj);
+        }
+
+        private void Helper_PartLoaded(object sender, ContentsLoadedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async void Helper_SingleContentLoaded(object sender, SingleContentEventArgs e)
+        {
+            if (InnerState == ViewerState.OutOfPage) return;
+
+            bool updateAppBarAfterAdded = false;
+            if (Operator.ContentsCollection.Count == 0)
+            {
+                updateAppBarAfterAdded = true;
+            }
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                switch (ApplicationSettings.GetInstance().RemoteContentsSet)
+                {
+                    case ContentsSet.Images:
+                        if (e.File.IsMovie) return;
+                        break;
+                    case ContentsSet.Movies:
+                        if (!e.File.IsMovie) return;
+                        break;
+                }
+                Operator.ContentsCollection.Add(e.File);
+                if (updateAppBarAfterAdded)
+                {
+                    UpdateAppBar();
+                }
+            });
         }
 
         private void UpdateSelectionMode(SelectivityFactor factor)
         {
-            ContentsCollection.SelectivityFactor = factor;
+            Operator.ContentsCollection.SelectivityFactor = factor;
             switch (factor)
             {
                 case SelectivityFactor.None:
@@ -205,15 +266,17 @@ namespace Locana.Pages
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
 
-            MoviePlayer.LocalMediaFailed -= LocalMoviePlayer_MediaFailed;
-            MoviePlayer.LocalMediaOpened -= LocalMoviePlayer_MediaOpened;
             FinishMoviePlayback();
             ReleaseDetail();
             PhotoScreen.DataContext = null;
 
-            Canceller.Cancel();
-
-            ContentsCollection.Clear();
+            Operator.SingleContentLoaded -= Helper_SingleContentLoaded;
+            Operator.PartLoaded -= Helper_PartLoaded;
+            Operator.ErrorMessageRaised -= Helper_ErrorMessageRaised;
+            Operator.MovieStreamError -= Helper_MovieStreamError;
+            Operator.Canceller.Cancel();
+            Operator.ContentsCollection.Clear();
+            Operator.Dispose();
 
             HideProgress();
 
@@ -248,7 +311,7 @@ namespace Locana.Pages
                         UpdateSelectionMode(SelectivityFactor.None);
                         {
                             CommandBarManager.Clear();
-                            if (ContentsCollection.Count != 0)
+                            if (Operator.ContentsCollection.Count != 0)
                             {
                                 if (TargetStorageType != StorageType.Local)
                                 {
@@ -276,6 +339,12 @@ namespace Locana.Pages
                                 .Command(AppBarItem.Close);
                         }
                         break;
+                    case ViewerState.MoviePlayback:
+                        CommandBarManager.Clear()
+                            .Command(AppBarItem.Resume)
+                            .Command(AppBarItem.Pause)
+                            .Command(AppBarItem.Close);
+                        break;
                     default:
                         CommandBarManager.Clear();
                         break;
@@ -290,66 +359,16 @@ namespace Locana.Pages
         {
             ChangeProgressText(SystemUtil.GetStringResource("Progress_LoadingLocalContents"));
 
-            switch (TargetStorageType)
-            {
-                case StorageType.Local:
-                    var loader = new LocalContentsLoader();
-                    loader.SingleContentLoaded += LocalContentsLoader_SingleContentLoaded;
-                    try
-                    {
-                        await loader.Load(ContentsSet.Images, Canceller).ConfigureAwait(false);
-                    }
-                    catch
-                    {
-                        ShowToast(SystemUtil.GetStringResource("Viewer_NoCameraRoll"));
-                    }
-                    finally
-                    {
-                        loader.SingleContentLoaded -= LocalContentsLoader_SingleContentLoaded;
-                        HideProgress();
-                    }
-                    break;
-            }
+            await Operator.LoadContents();
+            HideProgress();
         }
-
-        async void LocalContentsLoader_SingleContentLoaded(object sender, SingleContentEventArgs e)
-        {
-            if (InnerState == ViewerState.OutOfPage) return;
-
-            bool updateAppBarAfterAdded = false;
-            if (ContentsCollection.Count == 0)
-            {
-                updateAppBarAfterAdded = true;
-            }
-            await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-            {
-                switch (ApplicationSettings.GetInstance().RemoteContentsSet)
-                {
-                    case ContentsSet.Images:
-                        if (e.File.IsMovie) return;
-                        break;
-                    case ContentsSet.Movies:
-                        if (!e.File.IsMovie) return;
-                        break;
-                }
-                ContentsCollection.Add(e.File);
-                if (updateAppBarAfterAdded)
-                {
-                    UpdateAppBar();
-                }
-            });
-        }
-
-        private CancellationTokenSource Canceller;
-
-        private AlbumGroupCollection ContentsCollection;
 
         private async void InitializeContentsGridContents()
         {
             DebugUtil.Log("InitializeContentsGridContents");
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
-                ContentsCollection.Clear();
+                Operator.ContentsCollection.Clear();
             });
         }
 
@@ -420,15 +439,7 @@ namespace Locana.Pages
                 return;
             }
 
-            switch (TargetStorageType)
-            {
-                case StorageType.Local:
-                    foreach (var data in new List<object>(items).Select(item => item as Thumbnail).Where(thumb => thumb.CacheFile != null))
-                    {
-                        await TryDeleteLocalFile(data);
-                    }
-                    break;
-            }
+            await Operator.DeleteSelectedFiles(items.Select(item => item as Thumbnail));
 
             UpdateAppBar();
         }
@@ -495,7 +506,7 @@ namespace Locana.Pages
 
         private void ContentsGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            GridSources.Source = ContentsCollection;
+            GridSources.Source = Operator.ContentsCollection;
             (GridHolder.ZoomedOutView as ListViewBase).ItemsSource = GridSources.View.CollectionGroups;
         }
 
@@ -539,29 +550,18 @@ namespace Locana.Pages
 
             try
             {
-                switch (TargetStorageType)
+                var res = await Operator.PlaybackStillImage(content);
+
+                PhotoScreen.SourceBitmap = res.Item1;
+                PhotoScreen.Init();
+                PhotoScreen.SetBitmap();
+
+                PhotoData.MetaData = res.Item2;
+                if (res.Item2 == null)
                 {
-                    case StorageType.Local:
-                        using (var stream = await content.CacheFile.OpenStreamForReadAsync())
-                        {
-                            var bitmap = new BitmapImage();
-                            await bitmap.SetSourceAsync(stream.AsRandomAccessStream());
-                            PhotoScreen.SourceBitmap = bitmap;
-                            PhotoScreen.Init();
-                            PhotoScreen.SetBitmap();
-                            try
-                            {
-                                PhotoData.MetaData = await JpegMetaDataParser.ParseImageAsync(stream);
-                            }
-                            catch (UnsupportedFileFormatException)
-                            {
-                                PhotoData.MetaData = null;
-                                PhotoScreen.DetailInfoDisplayed = false;
-                            }
-                            SetStillDetailVisibility(true);
-                        }
-                        break;
+                    PhotoScreen.DetailInfoDisplayed = false;
                 }
+                SetStillDetailVisibility(true);
             }
             catch
             {
@@ -573,20 +573,15 @@ namespace Locana.Pages
             }
         }
 
-        MoviePlaybackData MovieData = new MoviePlaybackData();
-
-        private void PlaybackMovie(Thumbnail content)
+        private async void PlaybackMovie(Thumbnail content)
         {
             ChangeProgressText(SystemUtil.GetStringResource("Progress_OpeningMovieStream"));
             UpdateInnerState(ViewerState.MoviePlayback);
 
-            switch (TargetStorageType)
-            {
-                case StorageType.Local:
-                    MoviePlayerWrapper.DataContext = MovieData;
-                    MoviePlayer.SetLocalContent(content);
-                    break;
-            }
+            await Operator.PlaybackMovie(content);
+
+            MoviePlayerWrapper.Visibility = Visibility.Visible;
+            HideProgress();
         }
 
         private void FinishMoviePlayback()
@@ -595,30 +590,8 @@ namespace Locana.Pages
 
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                MoviePlayer.Finish();
+                Operator.FinishMoviePlayback();
                 MoviePlayerWrapper.Visibility = Visibility.Collapsed;
-            });
-        }
-
-        void LocalMoviePlayer_MediaOpened(object sender, RoutedEventArgs e)
-        {
-            var task = Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-            {
-                MoviePlayerWrapper.Visibility = Visibility.Visible;
-                HideProgress();
-            });
-        }
-
-        void LocalMoviePlayer_MediaFailed(object sender, string e)
-        {
-            UpdateInnerState(ViewerState.Single);
-
-            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                MoviePlayerWrapper.Visibility = Visibility.Collapsed;
-                DebugUtil.Log("LocalMoviePlayer MediaFailed: " + e);
-                ShowToast(SystemUtil.GetStringResource("Viewer_FailedPlaybackMovie"));
-                HideProgress();
             });
         }
 
@@ -626,26 +599,7 @@ namespace Locana.Pages
         {
             var item = sender as MenuFlyoutItem;
             var data = item.DataContext as Thumbnail;
-            switch (TargetStorageType)
-            {
-                case StorageType.Local:
-                    await TryDeleteLocalFile(data);
-                    break;
-            }
-        }
-
-        private async Task TryDeleteLocalFile(Thumbnail data)
-        {
-            try
-            {
-                ContentsCollection.Remove(data);
-                DebugUtil.Log("Delete " + data.CacheFile?.DisplayName);
-                await data.CacheFile?.DeleteAsync();
-            }
-            catch (Exception ex)
-            {
-                DebugUtil.Log("Failed to delete file: " + ex.StackTrace);
-            }
+            await Operator.DeleteSelectedFile(data);
         }
 
         private void ContentsGrid_Tapped(object sender, TappedRoutedEventArgs e)
@@ -657,11 +611,14 @@ namespace Locana.Pages
 
             var image = sender as Grid;
             var content = image.DataContext as Thumbnail;
-            switch (TargetStorageType)
+
+            if (content.IsContent)
             {
-                case StorageType.Local:
-                    PlaybackContent(content);
-                    break;
+                PlaybackContent(content);
+            }
+            else
+            {
+                // load remainings
             }
         }
     }

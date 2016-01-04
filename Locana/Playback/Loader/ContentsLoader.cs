@@ -10,11 +10,16 @@ namespace Locana.Playback
     public abstract class ContentsLoader
     {
         public event EventHandler<ContentsLoadedEventArgs> PartLoaded;
+        public event EventHandler<SingleContentEventArgs> SingleContentLoaded;
 
         protected void OnPartLoaded(IList<Thumbnail> contents)
         {
-            DebugUtil.Log("ContentsLoader OnPartLoaded");
             PartLoaded?.Invoke(this, new ContentsLoadedEventArgs(contents));
+        }
+
+        protected void OnSingleContentLoaded(Thumbnail file)
+        {
+            SingleContentLoaded?.Invoke(this, new SingleContentEventArgs { File = file });
         }
 
         public event EventHandler Completed;
