@@ -4,6 +4,7 @@ using Locana.DataModel;
 using Locana.Playback;
 using Locana.Utility;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -181,10 +182,10 @@ namespace Locana.Pages
             UpdateInnerState(ViewerState.Single);
 
             Operator = ContentsOperatorFactory.CreateNew(this);
-            Operator.SingleContentLoaded += Helper_SingleContentLoaded;
-            Operator.PartLoaded += Helper_PartLoaded;
-            Operator.ErrorMessageRaised += Helper_ErrorMessageRaised;
-            Operator.MovieStreamError += Helper_MovieStreamError;
+            Operator.SingleContentLoaded += Operator_SingleContentLoaded;
+            Operator.ChunkContentsLoaded += Operator_ChunkContentsLoaded;
+            Operator.ErrorMessageRaised += Operator_ErrorMessageRaised;
+            Operator.MovieStreamError += Operator_MovieStreamError;
             Operator.Canceller = new CancellationTokenSource();
 
             FinishMoviePlayback();
@@ -197,7 +198,7 @@ namespace Locana.Pages
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
         }
 
-        private void Helper_MovieStreamError()
+        private void Operator_MovieStreamError()
         {
             UpdateInnerState(ViewerState.Single);
 
@@ -208,42 +209,61 @@ namespace Locana.Pages
             });
         }
 
-        private void Helper_ErrorMessageRaised(string obj)
+        private void Operator_ErrorMessageRaised(string obj)
         {
             ShowToast(obj);
         }
 
-        private void Helper_PartLoaded(object sender, ContentsLoadedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private async void Helper_SingleContentLoaded(object sender, SingleContentEventArgs e)
+        private async void Operator_ChunkContentsLoaded(object sender, ContentsLoadedEventArgs e)
         {
             if (InnerState == ViewerState.OutOfPage) return;
 
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                DebugUtil.Log("Adding " + e.Contents.Count + " contents to RemoteGrid");
+                AddContentsToCollection(e.Contents);
+            });
+        }
+
+        private async void Operator_SingleContentLoaded(object sender, SingleContentEventArgs e)
+        {
+            if (InnerState == ViewerState.OutOfPage) return;
+
+            var list = new List<Thumbnail>();
+            list.Add(e.File);
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                AddContentsToCollection(list);
+            });
+        }
+
+        private void AddContentsToCollection(IList<Thumbnail> contents)
+        {
             bool updateAppBarAfterAdded = false;
             if (Operator.ContentsCollection.Count == 0)
             {
                 updateAppBarAfterAdded = true;
             }
-            await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            foreach (var content in contents)
             {
                 switch (ApplicationSettings.GetInstance().RemoteContentsSet)
                 {
                     case ContentsSet.Images:
-                        if (e.File.IsMovie) return;
+                        if (content.IsMovie) continue;
                         break;
                     case ContentsSet.Movies:
-                        if (!e.File.IsMovie) return;
+                        if (!content.IsMovie) continue;
                         break;
                 }
-                Operator.ContentsCollection.Add(e.File);
+
+                Operator.ContentsCollection.Add(content);
                 if (updateAppBarAfterAdded)
                 {
                     UpdateAppBar();
+                    updateAppBarAfterAdded = false;
                 }
-            });
+            }
         }
 
         private void UpdateSelectionMode(SelectivityFactor factor)
@@ -270,10 +290,10 @@ namespace Locana.Pages
             ReleaseDetail();
             PhotoScreen.DataContext = null;
 
-            Operator.SingleContentLoaded -= Helper_SingleContentLoaded;
-            Operator.PartLoaded -= Helper_PartLoaded;
-            Operator.ErrorMessageRaised -= Helper_ErrorMessageRaised;
-            Operator.MovieStreamError -= Helper_MovieStreamError;
+            Operator.SingleContentLoaded -= Operator_SingleContentLoaded;
+            Operator.ChunkContentsLoaded -= Operator_ChunkContentsLoaded;
+            Operator.ErrorMessageRaised -= Operator_ErrorMessageRaised;
+            Operator.MovieStreamError -= Operator_MovieStreamError;
             Operator.Canceller.Cancel();
             Operator.ContentsCollection.Clear();
             Operator.Dispose();

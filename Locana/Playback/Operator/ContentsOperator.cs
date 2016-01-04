@@ -34,16 +34,16 @@ namespace Locana.Playback
             ErrorMessageRaised?.Invoke(message);
         }
 
-        public event EventHandler<ContentsLoadedEventArgs> PartLoaded;
-        protected void OnPartLoaded(IList<Thumbnail> contents)
+        public event EventHandler<ContentsLoadedEventArgs> ChunkContentsLoaded;
+        protected void OnPartLoaded(ContentsLoadedEventArgs e)
         {
-            PartLoaded?.Invoke(this, new ContentsLoadedEventArgs(contents));
+            ChunkContentsLoaded?.Invoke(this, e);
         }
 
         public event EventHandler<SingleContentEventArgs> SingleContentLoaded;
-        protected void OnSingleContentLoaded(Thumbnail file)
+        protected void OnSingleContentLoaded(SingleContentEventArgs e)
         {
-            SingleContentLoaded?.Invoke(this, new SingleContentEventArgs { File = file });
+            SingleContentLoaded?.Invoke(this, e);
         }
 
         public event Action MovieStreamError;

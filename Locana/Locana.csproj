@@ -225,6 +225,7 @@
     <Compile Include="Playback\Loader\DlnaContentsLoader.cs" />
     <Compile Include="Playback\DummyContentsFlag.cs" />
     <Compile Include="Playback\Loader\DummyContentsLoader.cs" />
+    <Compile Include="Playback\Operator\DlnaContentsOperator.cs" />
     <Compile Include="Playback\Operator\LocalContentsOperator.cs" />
     <Compile Include="Playback\Loader\LocalContentsLoader.cs" />
     <Compile Include="Playback\MimeType.cs" />
@@ -280,8 +281,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AppBar\appbar_cameraSetting.png" />
-    <Content Include="Assets\AppBar\appBar_playback.png" />
-    <Content Include="Assets\AppBar\appBar_selection.png" />
     <Content Include="Assets\AppBar\ControlPanel.png" />
     <Content Include="Assets\Camera.png" />
     <Content Include="Assets\DarkGray.png" />
@@ -329,9 +328,6 @@
     <Content Include="Assets\MediumGray.png" />
     <Content Include="Assets\NFC_mark.png" />
     <Content Include="Assets\PlaybackScreen\new.png" />
-    <Content Include="Assets\PlaybackScreen\playback_paused.png" />
-    <Content Include="Assets\PlaybackScreen\playback_playing.png" />
-    <Content Include="Assets\PlaybackScreen\playback_stopped.png" />
     <Content Include="Assets\Screen\audio_locana.png" />
     <Content Include="Assets\Screen\ExposureMode_A.png" />
     <Content Include="Assets\Screen\ExposureMode_iA.png" />
@@ -351,7 +347,7 @@
     <Content Include="Assets\Screen\mode_photo.png" />
     <Content Include="Assets\Screen\no_memory_card.png" />
     <Content Include="Assets\LiveviewScreen\OpenControlPanel.png" />
-    <Content Include="Assets\Screen\protected.png" />
+    <Content Include="Assets\PlaybackScreen\protected.png" />
     <Content Include="Assets\Screen\rec.png" />
     <Content Include="Assets\Toast\Locana_square_full.png" />
     <Content Include="Properties\Default.rd.xml" />

@@ -69,7 +69,7 @@ namespace Locana.Playback
 
         private void Loader_SingleContentLoaded(object sender, SingleContentEventArgs e)
         {
-            OnSingleContentLoaded(e.File);
+            OnSingleContentLoaded(e);
         }
 
         public override async Task PlaybackMovie(Thumbnail content)
