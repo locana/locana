@@ -220,9 +220,6 @@ namespace Locana.Utility
                 request.Target.RenderTransform = transform;
             }
 
-            transform.CenterX = request.Target.RenderSize.Width / 2;
-            transform.CenterY = request.Target.RenderSize.Height / 2;
-
             var duration = new Duration(TimeSpan.FromMilliseconds(200));
             if (request.Duration != null && request.Duration.Milliseconds != 0)
             {
