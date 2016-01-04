@@ -3,26 +3,20 @@ using Locana.CameraControl;
 using Locana.Controls;
 using Locana.DataModel;
 using Locana.Utility;
-using Naotaco.ImageProcessor.MetaData;
-using Naotaco.ImageProcessor.MetaData.Misc;
-using Naotaco.ImageProcessor.MetaData.Structure;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Storage.Streams;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.Web.Http;
 
 namespace Locana.Playback.Operator
 {
-    public class CameraApiContentsOperator : ContentsOperator
+    public class CameraApiContentsOperator : RemoteContentsOperator
     {
         private TargetDevice TargetDevice;
         private readonly MoviePlaybackScreen MovieScreen;
-        private HttpClient HttpClient = new HttpClient();
 
         public CameraApiContentsOperator(TargetDevice device, MoviePlaybackScreen movieScreen)
         {
@@ -199,41 +193,6 @@ namespace Locana.Playback.Operator
             }
 
             MovieScreen.NotifyStartingStreamingMoviePlayback();
-        }
-
-        public override async Task<Tuple<BitmapImage, JpegMetaData>> PlaybackStillImage(Thumbnail content)
-        {
-            using (var res = await HttpClient.GetAsync(new Uri(content.Source.LargeUrl)))
-            {
-                if (!res.IsSuccessStatusCode)
-                {
-                    OnMovieStreamError();
-                    throw new IOException();
-                }
-
-                var buff = await res.Content.ReadAsBufferAsync();
-                using (var stream = new InMemoryRandomAccessStream())
-                {
-                    await stream.WriteAsync(buff); // Copy to the new stream to avoid stream crash issue.
-                    if (stream.Size == 0)
-                    {
-                        throw new IOException();
-                    }
-                    stream.Seek(0);
-
-                    var bitmap = new BitmapImage();
-                    await bitmap.SetSourceAsync(stream);
-                    try
-                    {
-                        var meta = await JpegMetaDataParser.ParseImageAsync(stream.AsStream());
-                        return Tuple.Create(bitmap, meta);
-                    }
-                    catch (UnsupportedFileFormatException)
-                    {
-                        return Tuple.Create<BitmapImage, JpegMetaData>(bitmap, null);
-                    }
-                }
-            }
         }
     }
 }
