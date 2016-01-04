@@ -633,7 +633,7 @@ namespace Locana.Pages
             await Operator.DeleteSelectedFile(data);
         }
 
-        private void ContentsGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void ContentsGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (ContentsGrid.SelectionMode == ListViewSelectionMode.Multiple)
             {
@@ -649,7 +649,9 @@ namespace Locana.Pages
             }
             else
             {
-                // load remainings
+                var holder = image.DataContext as RemainingContentsHolder;
+                Operator.ContentsCollection.Remove(holder, false);
+                await Operator.LoadRemainingContents(holder);
             }
         }
     }

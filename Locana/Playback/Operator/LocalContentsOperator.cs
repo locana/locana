@@ -138,5 +138,10 @@ namespace Locana.Playback
         {
             MovieScreen.LocalMediaFailed -= MovieScreen_LocalMediaFailed;
         }
+
+        public override Task LoadRemainingContents(RemainingContentsHolder holder)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

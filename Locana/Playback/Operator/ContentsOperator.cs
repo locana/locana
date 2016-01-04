@@ -64,6 +64,7 @@ namespace Locana.Playback
         }
 
         public abstract Task LoadContents();
+        public abstract Task LoadRemainingContents(RemainingContentsHolder holder);
         public abstract Task DeleteSelectedFiles(IEnumerable<Thumbnail> items);
         public abstract Task DeleteSelectedFile(Thumbnail item);
         public abstract Task<Tuple<BitmapImage, JpegMetaData>> PlaybackStillImage(Thumbnail item);

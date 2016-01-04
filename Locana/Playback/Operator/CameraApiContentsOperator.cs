@@ -194,5 +194,24 @@ namespace Locana.Playback.Operator
 
             MovieScreen.NotifyStartingStreamingMoviePlayback();
         }
+
+        public override async Task LoadRemainingContents(RemainingContentsHolder holder)
+        {
+            var loader = new RemoteApiContentsLoader(TargetDevice);
+            loader.PartLoaded += RemoteContentsLoader_PartLoaded;
+            try
+            {
+                await loader.LoadRemainingAsync(holder, ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
+            }
+            catch (Exception e)
+            {
+                DebugUtil.Log(e.StackTrace);
+                OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedToRefreshContents"));
+            }
+            finally
+            {
+                loader.PartLoaded -= RemoteContentsLoader_PartLoaded;
+            }
+        }
     }
 }

@@ -91,7 +91,7 @@ namespace Locana.Playback.Operator
             loader.PartLoaded += RemoteContentsLoader_PartLoaded;
             try
             {
-                await loader.Load(ContentsSet.Images, Canceller);
+                await loader.Load(ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
             }
             catch (SoapException e)
             {
@@ -112,6 +112,25 @@ namespace Locana.Playback.Operator
         public override Task PlaybackMovie(Thumbnail item)
         {
             throw new NotImplementedException("DLNA movie playback is not supported");
+        }
+
+        public override async Task LoadRemainingContents(RemainingContentsHolder holder)
+        {
+            var loader = new DlnaContentsLoader(UpnpDevice);
+            loader.PartLoaded += RemoteContentsLoader_PartLoaded;
+            try
+            {
+                await loader.LoadRemainingAsync(holder, ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
+            }
+            catch (Exception e)
+            {
+                DebugUtil.Log(e.StackTrace);
+                OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedToRefreshContents"));
+            }
+            finally
+            {
+                loader.PartLoaded -= RemoteContentsLoader_PartLoaded;
+            }
         }
     }
 }
