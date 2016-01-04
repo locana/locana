@@ -34,6 +34,12 @@ namespace Locana.Playback
             ErrorMessageRaised?.Invoke(message);
         }
 
+        public event Action<string> ProgressMessageRaised;
+        protected void OnProgressMessage(string message)
+        {
+            ProgressMessageRaised?.Invoke(message);
+        }
+
         public event EventHandler<ContentsLoadedEventArgs> ChunkContentsLoaded;
         protected void OnPartLoaded(ContentsLoadedEventArgs e)
         {

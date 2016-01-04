@@ -221,6 +221,7 @@
       <DependentUpon>WifiDirectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Playback\Loader\ContentsLoader.cs" />
+    <Compile Include="Playback\Operator\CameraApiContentsOperator.cs" />
     <Compile Include="Playback\Operator\ContentsOperator.cs" />
     <Compile Include="Playback\Loader\DlnaContentsLoader.cs" />
     <Compile Include="Playback\DummyContentsFlag.cs" />

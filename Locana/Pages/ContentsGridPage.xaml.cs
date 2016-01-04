@@ -598,10 +598,21 @@ namespace Locana.Pages
             ChangeProgressText(SystemUtil.GetStringResource("Progress_OpeningMovieStream"));
             UpdateInnerState(ViewerState.MoviePlayback);
 
-            await Operator.PlaybackMovie(content);
-
-            MoviePlayerWrapper.Visibility = Visibility.Visible;
-            HideProgress();
+            try
+            {
+                MoviePlayerWrapper.Visibility = Visibility.Visible;
+                await Operator.PlaybackMovie(content);
+            }
+            catch (Exception e)
+            {
+                DebugUtil.Log(e.StackTrace);
+                MoviePlayerWrapper.Visibility = Visibility.Collapsed;
+                UpdateInnerState(ViewerState.Single);
+            }
+            finally
+            {
+                HideProgress();
+            }
         }
 
         private void FinishMoviePlayback()

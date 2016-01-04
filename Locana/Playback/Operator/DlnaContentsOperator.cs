@@ -26,24 +26,30 @@ namespace Locana.Playback.Operator
             UpnpDevice = upnp;
         }
 
-        public override Task DeleteSelectedFile(Thumbnail item)
+        public override async Task DeleteSelectedFile(Thumbnail item)
         {
             var cds = UpnpDevice.Services[URN.ContentDirectory];
-            return DeleteDlnaContentAsync(cds, (item.Source as DlnaContentInfo)?.Id);
+
+            await DeleteDlnaContentAsync(cds, (item.Source as DlnaContentInfo)?.Id);
+
+            ContentsCollection.Remove(item);
         }
 
-        public override Task DeleteSelectedFiles(IEnumerable<Thumbnail> items)
+        public override async Task DeleteSelectedFiles(IEnumerable<Thumbnail> items)
         {
             DebugUtil.Log("DeleteSelectedImages");
 
-            var copy = new List<object>(items);
-
-            var dlna = copy
-                .Select(item => (item as Thumbnail).Source as DlnaContentInfo)
+            var dlna = items
+                .Select(item => item.Source as DlnaContentInfo)
                 .Where(info => info != null)
                 .Select(info => info.Id).ToList();
 
-            return DeleteDlnaContentsAsync(dlna);
+            await DeleteDlnaContentsAsync(dlna);
+
+            foreach (var item in items)
+            {
+                ContentsCollection.Remove(item);
+            }
         }
 
         private Task DeleteDlnaContentsAsync(IList<string> objectIdList)

@@ -119,9 +119,9 @@ namespace Locana.Playback
         {
             try
             {
-                ContentsCollection.Remove(data);
                 DebugUtil.Log("Delete " + data.CacheFile?.DisplayName);
                 await data.CacheFile?.DeleteAsync();
+                ContentsCollection.Remove(data);
             }
             catch (Exception ex)
             {
