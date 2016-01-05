@@ -20,7 +20,7 @@
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title"
                            Style="{ThemeResource PageTitleTextBlockStyle}"
-                           Text="{Binding [ApplicationTitle],
+                           Text="{Binding [About],
                                           Source={StaticResource LocalizedStrings}}" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
