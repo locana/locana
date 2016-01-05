@@ -42,10 +42,6 @@ namespace Locana.Pages
                 Symbol.Like, () =>
                 {
                 }));
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("About"),
-                Symbol.Help, () =>
-                {
-                }));
             appMenuGroup.Add(new EntrancePanel("Find QR Code",
                 Symbol.WebCam, () =>
                 {

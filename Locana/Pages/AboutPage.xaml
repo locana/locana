@@ -1,0 +1,161 @@
+﻿<Page x:Class="Locana.Pages.AboutPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:c="using:Locana.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:Locana"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      Loaded="Page_Loaded"
+      RequestedTheme="Dark"
+      mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <c:PageHeader x:Name="pageHeader">
+            <c:PageHeader.HeaderContent>
+                <TextBlock x:Name="title"
+                           Style="{ThemeResource PageTitleTextBlockStyle}"
+                           Text="{Binding [ApplicationTitle],
+                                          Source={StaticResource LocalizedStrings}}" />
+            </c:PageHeader.HeaderContent>
+        </c:PageHeader>
+
+        <Pivot Grid.Row="1">
+            <PivotItem Margin="12,14,12,0">
+                <PivotItem.Header>
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding [About], Source={StaticResource LocalizedStrings}}" />
+                </PivotItem.Header>
+                <ScrollViewer>
+                    <StackPanel Margin="9,0">
+                        <TextBlock Grid.Row="0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [Version],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <StackPanel Margin="20,4,0,4" Orientation="Horizontal">
+                            <TextBlock Grid.Row="0"
+                                       Margin="0,0,9,0"
+                                       Text="{Binding [ApplicationTitle],
+                                                      Source={StaticResource LocalizedStrings}}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,9,0" Text="ver." />
+                            <TextBlock x:Name="VERSION_STR" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="0"
+                                   Margin="0,12,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [Constraint],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <StackPanel Margin="20,4,0,4" Orientation="Vertical">
+                            <TextBlock x:Name="Unlimited"
+                                       Grid.Row="0"
+                                       Text="{Binding [Constraint_unlimited],
+                                                      Source={StaticResource LocalizedStrings}}"
+                                       TextWrapping="Wrap"
+                                       Visibility="Collapsed" />
+                            <TextBlock x:Name="Trial"
+                                       Grid.Row="0"
+                                       Text="{Binding [Constraint_trial],
+                                                      Source={StaticResource LocalizedStrings}}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock x:Name="Limited"
+                                       Grid.Row="0"
+                                       Text="{Binding [Constraint_limited],
+                                                      Source={StaticResource LocalizedStrings}}"
+                                       TextWrapping="Wrap"
+                                       Visibility="Collapsed" />
+                            <Button x:Name="TrialButton"
+                                    Margin="0,8,40,4"
+                                    HorizontalAlignment="Left"
+                                    BorderThickness="1"
+                                    Click="TrialButton_Click"
+                                    Content="{Binding [FullVersion],
+                                                      Source={StaticResource LocalizedStrings}}" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="0"
+                                   Margin="0,12,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [CopyRight],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="COPYRIGHT" Margin="20,4,0,4" />
+                        <TextBlock Grid.Row="0"
+                                   Margin="0,15,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [DevelopedBy],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="DEV_BY" Margin="20,4,0,4" />
+                        <TextBlock Grid.Row="0"
+                                   Margin="0,12,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [FAQ],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <Button Grid.Row="7"
+                                Margin="20,8,40,0"
+                                HorizontalAlignment="Left"
+                                BorderThickness="1"
+                                Click="FAQ_Click"
+                                Content="{Binding [OpenFAQ],
+                                                  Source={StaticResource LocalizedStrings}}" />
+                        <TextBlock Grid.Row="0"
+                                   Margin="0,12,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [Support],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <Button Grid.Row="7"
+                                Margin="20,8,40,0"
+                                HorizontalAlignment="Left"
+                                BorderThickness="1"
+                                Click="Support_Click"
+                                Content="{Binding [OpenSupportTwitter],
+                                                  Source={StaticResource LocalizedStrings}}" />
+                        <TextBlock Grid.Row="0"
+                                   Margin="0,12,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [SourceCode],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <Button Grid.Row="7"
+                                Margin="20,8,40,16"
+                                HorizontalAlignment="Left"
+                                BorderThickness="1"
+                                Click="SourceCode_Click"
+                                Content="{Binding [OpenGithub],
+                                                  Source={StaticResource LocalizedStrings}}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+
+            <PivotItem Margin="12,14,12,0">
+                <PivotItem.Header>
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding [OSSText], Source={StaticResource LocalizedStrings}}" />
+                </PivotItem.Header>
+                <Grid Margin="9,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding [ContainsLicense], Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" />
+                    <ScrollViewer Grid.Row="1" Margin="4,12,4,8">
+                        <RichTextBlock HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Paragraph x:Name="Contents" />
+                        </RichTextBlock>
+                    </ScrollViewer>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+
+        <CommandBar Name="AppBarUnit"
+                    Grid.Row="2"
+                    Background="{ThemeResource SystemControlForegroundAccentBrush}" />
+    </Grid>
+</Page>

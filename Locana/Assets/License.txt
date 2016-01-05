@@ -1,20 +1,20 @@
-Json.NET : The MIT License (MIT)
+Json.NET : The MIT License
 - https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
 
-ZXing.Net : The Apache License (Apache)
+ZXing.Net : Apache Software License, Version 2.0
 - https://zxingnet.codeplex.com/SourceControl/latest#trunk/COPYING
 
-kz-ssdp-discovery : The MIT License (MIT)
+kz-ssdp-discovery : The MIT License
 - https://github.com/kazyx/kz-ssdp-discovery/blob/master/LICENSE
 
-kz-remote-api : The MIT License (MIT)
+kz-remote-api : The MIT License
 - https://github.com/kazyx/kz-remote-api/blob/master/LICENSE
 
-kz-image-stream : The MIT License (MIT)
+kz-image-stream : The MIT License
 - https://github.com/kazyx/kz-image-stream/blob/master/LICENSE
 
-NtImageLib : The MIT License (MIT)
+NtImageLib : The MIT License
 - https://github.com/naotaco/NtImageLib/blob/master/LICENSE
 
-NtNfcLib : The MIT License (MIT)
+NtNfcLib : The MIT License
 - https://github.com/naotaco/NtNfcLib/blob/master/LICENSE

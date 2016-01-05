@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Locana.Utility;
+using System;
+using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -24,6 +26,24 @@ namespace Locana
             this.Suspending += OnSuspending;
         }
 
+        public bool IsFunctionLimited
+        {
+            private set;
+            get;
+        }
+
+        public bool IsTrialVersion
+        {
+            private set;
+            get;
+        }
+
+        public string AppVersion
+        {
+            private set;
+            get;
+        }
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -38,6 +58,33 @@ namespace Locana
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            var assembly = (typeof(App)).GetTypeInfo().Assembly;
+            AppVersion = assembly.GetName().Version.ToString();
+
+            var lastVersion = Preference.LastLaunchedVersion;
+            if (lastVersion != AppVersion)
+            {
+                DebugUtil.Log("Update detected!! from: " + lastVersion);
+                Preference.LastLaunchedVersion = AppVersion;
+                Preference.InitialLaunchedDateTime = DateTimeOffset.Now;
+            }
+
+            var init = Preference.InitialLaunchedDateTime;
+            DebugUtil.Log("Initial launched datetime: " + init.ToString());
+#if DEBUG
+            IsTrialVersion = true;
+#else
+            IsTrialVersion = Windows.ApplicationModel.Store.CurrentApp.LicenseInformation.IsTrial;
+#endif
+            if (IsTrialVersion)
+            {
+                var diff = DateTimeOffset.Now.Subtract(init);
+                IsFunctionLimited = diff.Days > 30;
+            }
+            else
+            {
+                IsFunctionLimited = false;
+            }
 
             AppShell shell = Window.Current.Content as AppShell;
 

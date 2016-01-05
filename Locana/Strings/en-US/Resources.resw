@@ -138,7 +138,7 @@ Hint: Access point name of Sony camera devices starts from "DIRECT-".</value>
     <value>This application contains the following open source softwares.</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>about</value>
+    <value>About Locana</value>
   </data>
   <data name="CopyRight" xml:space="preserve">
     <value>Copyright</value>
@@ -1020,9 +1020,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Locana</value>
-  </data>
-  <data name="AppInfo" xml:space="preserve">
-    <value>Application info</value>
   </data>
   <data name="Viewer_StoragePhone" xml:space="preserve">
     <value>Local storage</value>

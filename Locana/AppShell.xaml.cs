@@ -1,5 +1,6 @@
 ﻿using Locana.Controls;
 using Locana.Pages;
+using Locana.Utility;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
@@ -53,6 +54,12 @@ namespace Locana
                     Label = "Local Contents",
                     DestPage = typeof(ContentsGridPage)
                 },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Important,
+                    Label = SystemUtil.GetStringResource("About"),
+                    DestPage = typeof(AboutPage)
+                }
             });
 
         public static AppShell Current = null;
