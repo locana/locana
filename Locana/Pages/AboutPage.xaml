@@ -25,13 +25,13 @@
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
 
-        <Pivot Grid.Row="1">
-            <PivotItem Margin="12,14,12,0">
+        <Pivot Grid.Row="1" Grid.RowSpan="2">
+            <PivotItem Margin="12,14,0,0">
                 <PivotItem.Header>
                     <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding [About], Source={StaticResource LocalizedStrings}}" />
                 </PivotItem.Header>
-                <ScrollViewer>
-                    <StackPanel Margin="9,0">
+                <ScrollViewer Margin="9,0">
+                    <StackPanel>
                         <TextBlock Grid.Row="0"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    Text="{Binding [Version],
@@ -125,7 +125,7 @@
                                                   Source={StaticResource LocalizedStrings}}"
                                    TextWrapping="Wrap" />
                         <Button Grid.Row="7"
-                                Margin="20,8,40,16"
+                                Margin="20,8,40,48"
                                 HorizontalAlignment="Left"
                                 BorderThickness="1"
                                 Click="SourceCode_Click"
@@ -135,7 +135,7 @@
                 </ScrollViewer>
             </PivotItem>
 
-            <PivotItem Margin="12,14,12,0">
+            <PivotItem Margin="12,14,0,0">
                 <PivotItem.Header>
                     <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding [OSSText], Source={StaticResource LocalizedStrings}}" />
                 </PivotItem.Header>
@@ -145,8 +145,10 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock Text="{Binding [ContainsLicense], Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" />
-                    <ScrollViewer Grid.Row="1" Margin="4,12,4,8">
-                        <RichTextBlock HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <ScrollViewer Grid.Row="1" Margin="4,12,4,0">
+                        <RichTextBlock Margin="0,0,0,48"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">
                             <Paragraph x:Name="Contents" />
                         </RichTextBlock>
                     </ScrollViewer>
@@ -156,6 +158,6 @@
 
         <CommandBar Name="AppBarUnit"
                     Grid.Row="2"
-                    Background="{ThemeResource SystemControlForegroundAccentBrush}" />
+                    Background="{ThemeResource SystemChromeBlackLowColor}" />
     </Grid>
 </Page>
