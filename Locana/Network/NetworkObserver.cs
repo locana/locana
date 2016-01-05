@@ -217,7 +217,6 @@ namespace Locana.Network
         {
             var adapters = await SsdpDiscovery.GetActiveAdaptersAsync();
             discovery.TargetNetworkAdapters = adapters;
-            RefreshDevices();
 
             while (!cancel.IsCancellationRequested)
             {
@@ -271,6 +270,7 @@ namespace Locana.Network
         void NetworkInformation_NetworkStatusChanged(object sender)
         {
             DebugUtil.Log("NetworkInformation NetworkStatusChanged");
+            RefreshDevices();
             startTask();
         }
 

@@ -309,6 +309,42 @@ namespace Locana.Pages
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
 
             UpdateTopBar();
+
+            NetworkObserver.INSTANCE.CdsDiscovered += NetworkObserver_CdsDiscovered;
+            NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_CameraDiscovered;
+            NetworkObserver.INSTANCE.DevicesCleared += NetworkObserver_DevicesCleared;
+            NetworkObserver.INSTANCE.Start();
+        }
+
+        private void NetworkObserver_DevicesCleared(object sender, EventArgs e)
+        {
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                if (TargetStorageType != StorageType.Local)
+                {
+                    var tuple = Tuple.Create<string, string>(nameof(StorageType.Local), null);
+                    Frame.Navigate(typeof(ContentsGridPage), tuple);
+                }
+                else {
+                    UpdateTopBar();
+                }
+            });
+        }
+
+        private void NetworkObserver_CameraDiscovered(object sender, CameraDeviceEventArgs e)
+        {
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                UpdateTopBar();
+            });
+        }
+
+        private void NetworkObserver_CdsDiscovered(object sender, CdServiceEventArgs e)
+        {
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                UpdateTopBar();
+            });
         }
 
         private void UpdateTopBar()
@@ -434,6 +470,11 @@ namespace Locana.Pages
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            NetworkObserver.INSTANCE.Stop();
+            NetworkObserver.INSTANCE.CdsDiscovered -= NetworkObserver_CdsDiscovered;
+            NetworkObserver.INSTANCE.CameraDiscovered -= NetworkObserver_CameraDiscovered;
+            NetworkObserver.INSTANCE.DevicesCleared -= NetworkObserver_DevicesCleared;
+
             ThumbnailCacheLoader.INSTANCE.CleanupRemainingTasks();
 
             SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
