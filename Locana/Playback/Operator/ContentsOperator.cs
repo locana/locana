@@ -1,5 +1,8 @@
-﻿using Locana.DataModel;
+﻿using Locana.CameraControl;
+using Locana.DataModel;
+using Locana.Network;
 using Locana.Pages;
+using Locana.UPnP;
 using Naotaco.ImageProcessor.MetaData;
 using Naotaco.ImageProcessor.MetaData.Misc;
 using Naotaco.ImageProcessor.MetaData.Structure;
@@ -12,19 +15,34 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Web.Http;
 
-namespace Locana.Playback
+namespace Locana.Playback.Operator
 {
     public class ContentsOperatorFactory
     {
-        public static ContentsOperator CreateNew(ContentsGridPage page)
+        public static ContentsOperator CreateNew(ContentsGridPage page, string id)
         {
             switch (page.TargetStorageType)
             {
                 case StorageType.Local:
                     return new LocalContentsOperator(page.MoviePlayerScreen);
-                default:
-                    return null;
+                case StorageType.CameraApi:
+                    TargetDevice device = null;
+                    if (NetworkObserver.INSTANCE.TryGetCameraDevice(id, out device))
+                    {
+                        return new CameraApiContentsOperator(device, page.MoviePlayerScreen);
+                    }
+                    break;
+                case StorageType.Dlna:
+                    UpnpDevice cds = null;
+                    if (NetworkObserver.INSTANCE.TryGetCdsDevice(id, out cds))
+                    {
+                        return new DlnaContentsOperator(cds);
+                    }
+                    break;
+                case StorageType.Dummy:
+                    return new DummyContentsOperator();
             }
+            return null;
         }
     }
 

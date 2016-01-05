@@ -227,6 +227,7 @@
     <Compile Include="Playback\DummyContentsFlag.cs" />
     <Compile Include="Playback\Loader\DummyContentsLoader.cs" />
     <Compile Include="Playback\Operator\DlnaContentsOperator.cs" />
+    <Compile Include="Playback\Operator\DummyContentsOperator.cs" />
     <Compile Include="Playback\Operator\LocalContentsOperator.cs" />
     <Compile Include="Playback\Loader\LocalContentsLoader.cs" />
     <Compile Include="Playback\MimeType.cs" />

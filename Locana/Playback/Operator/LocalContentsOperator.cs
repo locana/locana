@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Locana.Playback
+namespace Locana.Playback.Operator
 {
     public class LocalContentsOperator : ContentsOperator
     {

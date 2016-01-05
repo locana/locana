@@ -58,18 +58,28 @@ namespace Locana.Network
             DevicesCleared?.Invoke(this, null);
         }
 
-        private Dictionary<string, TargetDevice> devices = new Dictionary<string, TargetDevice>();
+        private Dictionary<string, TargetDevice> remoteApiDevices = new Dictionary<string, TargetDevice>();
 
         public List<TargetDevice> CameraDevices
         {
-            get { return new List<TargetDevice>(devices.Values); }
+            get { return new List<TargetDevice>(remoteApiDevices.Values); }
         }
 
-        private Dictionary<string, UpnpDevice> cdServices = new Dictionary<string, UpnpDevice>();
-
-        public List<UpnpDevice> CdsProviders
+        public bool TryGetCameraDevice(string id, out TargetDevice device)
         {
-            get { return new List<UpnpDevice>(cdServices.Values); }
+            return remoteApiDevices.TryGetValue(id, out device);
+        }
+
+        private Dictionary<string, UpnpDevice> cdsDevices = new Dictionary<string, UpnpDevice>();
+
+        public List<UpnpDevice> CdsDevices
+        {
+            get { return new List<UpnpDevice>(cdsDevices.Values); }
+        }
+
+        public bool TryGetCdsDevice(string id, out UpnpDevice device)
+        {
+            return cdsDevices.TryGetValue(id, out device);
         }
 
         public event EventHandler<CameraDeviceEventArgs> CameraDiscovered;
@@ -89,13 +99,13 @@ namespace Locana.Network
         void discovery_SonyCameraDeviceDiscovered(object sender, SonyCameraDeviceEventArgs e)
         {
             var device = new TargetDevice(e.SonyCameraDevice, e.LocalAddress);
-            lock (devices)
+            lock (remoteApiDevices)
             {
-                if (devices.ContainsKey(e.SonyCameraDevice.UDN))
+                if (remoteApiDevices.ContainsKey(e.SonyCameraDevice.UDN))
                 {
                     return;
                 }
-                devices.Add(device.Udn, device);
+                remoteApiDevices.Add(device.Udn, device);
             }
             OnDiscovered(device);
         }
@@ -107,9 +117,9 @@ namespace Locana.Network
                 var device = UpnpDescriptionParser.ParseDescription(XDocument.Parse(e.Description), e.Location);
                 device.LocalAddress = e.LocalAddress;
 
-                lock (cdServices)
+                lock (cdsDevices)
                 {
-                    if (cdServices.ContainsKey(device.UDN))
+                    if (cdsDevices.ContainsKey(device.UDN))
                     {
                         return;
                     }
@@ -117,7 +127,7 @@ namespace Locana.Network
                     if (device.Services.Any(service => service.Key == URN.ContentDirectory))
                     {
                         DebugUtil.Log("CDS found. Notify discovered.");
-                        cdServices.Add(device.UDN, device);
+                        cdsDevices.Add(device.UDN, device);
                         OnDiscovered(device);
                     }
                 }
@@ -183,8 +193,8 @@ namespace Locana.Network
 
         public void RefreshDevices()
         {
-            devices.Clear();
-            cdServices.Clear();
+            remoteApiDevices.Clear();
+            cdsDevices.Clear();
             discovery.ClearCache();
             OnDevicesCleared();
         }

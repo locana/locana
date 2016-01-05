@@ -2,6 +2,7 @@
 using Locana.Controls;
 using Locana.DataModel;
 using Locana.Playback;
+using Locana.Playback.Operator;
 using Locana.Utility;
 using System;
 using System.Collections.Generic;
@@ -159,14 +160,16 @@ namespace Locana.Pages
         {
             navigationHelper.OnNavigatedTo(e);
 
+            displayRequest.RequestActive();
+
             if (e.NavigationMode != NavigationMode.New)
             {
                 navigationHelper.GoBack();
                 return;
             }
 
-            var type = e.Parameter as string;
-            switch (type ?? "")
+            var tuple = e.Parameter as Tuple<string, string>;
+            switch (tuple?.Item1 ?? "")
             {
                 case nameof(StorageType.Local):
                 case "":
@@ -180,11 +183,17 @@ namespace Locana.Pages
                     break;
             }
 
-            displayRequest.RequestActive();
-
             UpdateInnerState(ViewerState.Single);
 
-            Operator = ContentsOperatorFactory.CreateNew(this);
+            Operator = ContentsOperatorFactory.CreateNew(this, tuple?.Item2);
+
+            if (Operator == null)
+            {
+                // Specified device is invalidated.
+                navigationHelper.GoBack();
+                return;
+            }
+
             Operator.SingleContentLoaded += Operator_SingleContentLoaded;
             Operator.ChunkContentsLoaded += Operator_ChunkContentsLoaded;
             Operator.ErrorMessageRaised += Operator_ErrorMessageRaised;
@@ -293,13 +302,16 @@ namespace Locana.Pages
             ReleaseDetail();
             PhotoScreen.DataContext = null;
 
-            Operator.SingleContentLoaded -= Operator_SingleContentLoaded;
-            Operator.ChunkContentsLoaded -= Operator_ChunkContentsLoaded;
-            Operator.ErrorMessageRaised -= Operator_ErrorMessageRaised;
-            Operator.MovieStreamError -= Operator_MovieStreamError;
-            Operator.Canceller.Cancel();
-            Operator.ContentsCollection.Clear();
-            Operator.Dispose();
+            if (Operator != null)
+            {
+                Operator.SingleContentLoaded -= Operator_SingleContentLoaded;
+                Operator.ChunkContentsLoaded -= Operator_ChunkContentsLoaded;
+                Operator.ErrorMessageRaised -= Operator_ErrorMessageRaised;
+                Operator.MovieStreamError -= Operator_MovieStreamError;
+                Operator.Canceller.Cancel();
+                Operator.ContentsCollection.Clear();
+                Operator.Dispose();
+            }
 
             HideProgress();
 
@@ -307,7 +319,7 @@ namespace Locana.Pages
 
             displayRequest.RequestRelease();
 
-            this.navigationHelper.OnNavigatedFrom(e);
+            navigationHelper.OnNavigatedFrom(e);
         }
 
         CommandBarManager CommandBarManager = new CommandBarManager();
@@ -737,5 +749,6 @@ namespace Locana.Pages
         Local,
         Dlna,
         CameraApi,
+        Dummy,
     }
 }
