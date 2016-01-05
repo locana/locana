@@ -98,8 +98,8 @@
 
         <c:PhotoPlaybackScreen x:Name="PhotoScreen"
                                Grid.RowSpan="2"
-                               Margin="0"
-                               Canvas.ZIndex="10" />
+                               Canvas.ZIndex="10"
+                               Visibility="Collapsed" />
 
         <Border x:Name="MoviePlayerWrapper"
                 Grid.RowSpan="2"
@@ -123,7 +123,8 @@
                  Grid.RowSpan="2"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Top"
-                 Canvas.ZIndex="20" />
+                 Canvas.ZIndex="20"
+                 IsHitTestVisible="False" />
 
         <ProgressRing x:Name="ProgressCircle"
                       Grid.RowSpan="2"
@@ -147,6 +148,7 @@
                             <Grid Margin="2,2"
                                   Background="{ThemeResource ContentDialogBackgroundThemeBrush}"
                                   Holding="ContentsGrid_Holding"
+                                  RightTapped="ContentsGrid_RightTapped"
                                   Tapped="ContentsGrid_Tapped">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="48" />
@@ -164,7 +166,7 @@
                                                                        Source={StaticResource LocalizedStrings}}"
                                                         Visibility="{Binding IsPlayable,
                                                                              Converter={StaticResource B2VConverter}}" />
-                                        <MenuFlyoutItem Click="CopyToPhone_Click"
+                                        <MenuFlyoutItem Click="Download_Click"
                                                         Text="{Binding [Viewer_MenuCopyToPhone],
                                                                        Source={StaticResource LocalizedStrings}}"
                                                         Visibility="{Binding IsCopyable,

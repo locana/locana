@@ -881,7 +881,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>転送するアイテムの選択中</value>
   </data>
   <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
-    <value>スマートフォンに転送</value>
+    <value>ダウンロード</value>
   </data>
   <data name="Viewer_MenuDelete" xml:space="preserve">
     <value>削除</value>
@@ -911,7 +911,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>メモリカードの取り外しを検知しました</value>
   </data>
   <data name="Viewer_StoragePhone" xml:space="preserve">
-    <value>端末内コンテンツ</value>
+    <value>ローカル コンテンツ</value>
   </data>
   <data name="Viewer_StreamClosedByExternalCause" xml:space="preserve">
     <value>動画の再生は外部要因で中断されました</value>
@@ -1120,5 +1120,13 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="AppBar_Play" xml:space="preserve">
     <value>再生</value>
+  </data>
+  <data name="AppBar_LocalStorage" xml:space="preserve">
+    <value>ローカル
+コンテンツ</value>
+  </data>
+  <data name="AppBar_RemoteStorage" xml:space="preserve">
+    <value>ネットワーク
+コンテンツ</value>
   </data>
 </root>

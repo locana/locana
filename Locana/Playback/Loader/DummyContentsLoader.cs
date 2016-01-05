@@ -1,6 +1,7 @@
 ﻿#if DEBUG
 using Kazyx.RemoteApi.AvContent;
 using Locana.DataModel;
+using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -18,7 +19,7 @@ namespace Locana.Playback
         public DummyContentsLoader()
         {
             random = new Random();
-            CurrentUuid = DummyContentsLoader.RandomUuid();
+            CurrentUuid = RandomUuid();
         }
 
         private readonly string CurrentUuid;
@@ -54,7 +55,9 @@ namespace Locana.Playback
                 foreach (var content in contents)
                 {
                     content.GroupName = date.Title;
-                    list.Add(new Thumbnail(content, CurrentUuid));
+                    var thumb = new Thumbnail(content, CurrentUuid);
+                    thumb.IsPlayable = !thumb.IsMovie;
+                    list.Add(thumb);
                 }
 
                 OnPartLoaded(list);
@@ -74,7 +77,7 @@ namespace Locana.Playback
             foreach (var content in contents)
             {
                 content.GroupName = holder.AlbumGroup.Title;
-                Locana.Utility.DebugUtil.Log("Add content for " + content.GroupName);
+                DebugUtil.Log("Add content for " + content.GroupName);
                 list.Add(new Thumbnail(content, CurrentUuid));
             }
 

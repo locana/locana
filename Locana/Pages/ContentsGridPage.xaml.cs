@@ -1,6 +1,7 @@
 ﻿using Locana.Common;
 using Locana.Controls;
 using Locana.DataModel;
+using Locana.Network;
 using Locana.Playback;
 using Locana.Playback.Operator;
 using Locana.Utility;
@@ -53,7 +54,7 @@ namespace Locana.Pages
                             case SelectivityFactor.Delete:
                                 DeleteSelectedFiles();
                                 break;
-                            case SelectivityFactor.CopyToPhone:
+                            case SelectivityFactor.Download:
                                 FetchSelectedImages();
                                 break;
                             default:
@@ -70,8 +71,12 @@ namespace Locana.Pages
             });
             CommandBarManager.SetEvent(AppBarItem.DeleteMultiple, (s, args) =>
             {
-                DebugUtil.Log("Delete clicked");
                 UpdateSelectionMode(SelectivityFactor.Delete);
+                UpdateInnerState(ViewerState.Multi);
+            });
+            CommandBarManager.SetEvent(AppBarItem.DownloadMultiple, (s, args) =>
+            {
+                UpdateSelectionMode(SelectivityFactor.Download);
                 UpdateInnerState(ViewerState.Multi);
             });
             CommandBarManager.SetEvent(AppBarItem.RotateRight, (s, args) =>
@@ -115,6 +120,85 @@ namespace Locana.Pages
                 }
                 UpdateInnerState(ViewerState.Single);
             });
+            CommandBarManager.SetEvent(AppBarItem.LocalStorage, (s, args) =>
+            {
+                var tuple = Tuple.Create<string, string>(nameof(StorageType.Local), null);
+                Frame.Navigate(typeof(ContentsGridPage), tuple);
+            });
+            CommandBarManager.SetEvent(AppBarItem.RemoteStorage, (s, args) =>
+            {
+                var menuFlyout = CreateRemoteDrivesMenuFlyout();
+
+                switch (menuFlyout.Items.Count)
+                {
+                    case 0:
+                        UpdateTopBar();
+                        break;
+                    // case 1:
+                    // TODO Transit directly
+                    // break;
+                    default:
+                        FlyoutBase.SetAttachedFlyout(s as FrameworkElement, menuFlyout);
+                        FlyoutBase.ShowAttachedFlyout(s as FrameworkElement);
+                        break;
+                }
+            });
+        }
+
+        private MenuFlyout CreateRemoteDrivesMenuFlyout()
+        {
+            var menu = new MenuFlyout();
+
+            if (TargetStorageType != StorageType.Dummy && DummyContentsFlag.Enabled)
+            {
+                var item = new MenuFlyoutItem
+                {
+                    Text = "Dummy storage",
+                };
+                item.Tapped += DummyStorage_Tapped;
+                menu.Items.Add(item);
+            }
+
+            NetworkObserver.INSTANCE.CameraDevices.Where(device =>
+            {
+                return device.Api.AvContent != null && device.Udn != RemoteStorageId;
+            }).ToList().ForEach(device =>
+            {
+                var item = new RemoteStorageMenuFlyoutItem(device.Udn, StorageType.CameraApi)
+                {
+                    Text = device.FriendlyName,
+                };
+                item.Tapped += RemoteStorage_Tapped;
+                menu.Items.Add(item);
+            });
+
+            NetworkObserver.INSTANCE.CdsDevices.Where(upnp =>
+            {
+                return upnp.UDN != RemoteStorageId;
+            }).ToList().ForEach(upnp =>
+            {
+                var item = new RemoteStorageMenuFlyoutItem(upnp.UDN, StorageType.Dlna)
+                {
+                    Text = upnp.FriendlyName,
+                };
+                item.Tapped += RemoteStorage_Tapped;
+                menu.Items.Add(item);
+            });
+
+            return menu;
+        }
+
+        private void RemoteStorage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var item = sender as RemoteStorageMenuFlyoutItem;
+            var tuple = Tuple.Create(item.StorageType.ToString(), item.Id);
+            Frame.Navigate(typeof(ContentsGridPage), tuple);
+        }
+
+        private void DummyStorage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var tuple = Tuple.Create<string, string>(nameof(StorageType.Dummy), null);
+            Frame.Navigate(typeof(ContentsGridPage), tuple);
         }
 
         /// <summary>
@@ -154,6 +238,8 @@ namespace Locana.Pages
 
         public StorageType TargetStorageType { private set; get; } = StorageType.Local;
 
+        private string RemoteStorageId { set; get; }
+
         public MoviePlaybackScreen MoviePlayerScreen { get { return MoviePlayer; } }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -181,15 +267,22 @@ namespace Locana.Pages
                 case nameof(StorageType.Dlna):
                     TargetStorageType = StorageType.Dlna;
                     break;
+                case nameof(StorageType.Dummy):
+                    TargetStorageType = StorageType.Dummy;
+                    break;
             }
+
+            RemoteStorageId = tuple?.Item2;
+
+            DebugUtil.Log("OnNavigatedTo: " + tuple);
 
             UpdateInnerState(ViewerState.Single);
 
-            Operator = ContentsOperatorFactory.CreateNew(this, tuple?.Item2);
+            Operator = ContentsOperatorFactory.CreateNew(this, RemoteStorageId);
 
             if (Operator == null)
             {
-                // Specified device is invalidated.
+                DebugUtil.Log("Specified device is invalidated");
                 navigationHelper.GoBack();
                 return;
             }
@@ -210,6 +303,46 @@ namespace Locana.Pages
             LoadContents();
 
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
+
+            UpdateTopBar();
+        }
+
+        private void UpdateTopBar()
+        {
+            CommandBarManager.Clear();
+
+            if (TargetStorageType != StorageType.Local)
+            {
+                CommandBarManager.Command(AppBarItem.LocalStorage);
+            }
+            if (CountRemoteStorages() != 0)
+            {
+                CommandBarManager.Command(AppBarItem.RemoteStorage);
+            }
+
+            CommandBarManager.ApplyCommands(TitleBar);
+        }
+
+        private int CountRemoteStorages()
+        {
+            var count = 0;
+
+            count += NetworkObserver.INSTANCE.CameraDevices.Where(device =>
+            {
+                return device.Api.AvContent != null && device.Udn != RemoteStorageId;
+            }).Count();
+
+            count += NetworkObserver.INSTANCE.CdsDevices.Where(upnp =>
+            {
+                return upnp.UDN != RemoteStorageId;
+            }).Count();
+
+            if (TargetStorageType != StorageType.Dummy && DummyContentsFlag.Enabled)
+            {
+                count++;
+            }
+
+            return count;
         }
 
         private void Operator_MovieStreamError()
@@ -289,6 +422,7 @@ namespace Locana.Pages
                     ContentsGrid.SelectionMode = ListViewSelectionMode.None;
                     break;
                 case SelectivityFactor.Delete:
+                case SelectivityFactor.Download:
                     ContentsGrid.SelectionMode = ListViewSelectionMode.Multiple;
                     break;
             }
@@ -386,7 +520,16 @@ namespace Locana.Pages
                         CommandBarManager.Clear();
                         break;
                 }
-                CommandBarManager.Apply(AppBarUnit);
+                CommandBarManager.ApplyAll(AppBarUnit);
+
+                if (AppBarUnit.PrimaryCommands.Count == 0)
+                {
+                    AppBarUnit.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    AppBarUnit.Visibility = Visibility.Visible;
+                }
             });
         }
 
@@ -557,6 +700,11 @@ namespace Locana.Pages
             FlyoutBase.ShowAttachedFlyout(sender as FrameworkElement);
         }
 
+        private void ContentsGrid_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout(sender as FrameworkElement);
+        }
+
         private void Playback_Click(object sender, RoutedEventArgs e)
         {
             var item = sender as MenuFlyoutItem;
@@ -643,7 +791,7 @@ namespace Locana.Pages
             });
         }
 
-        private void CopyToPhone_Click(object sender, RoutedEventArgs e)
+        private void Download_Click(object sender, RoutedEventArgs e)
         {
             var item = sender as MenuFlyoutItem;
             try
@@ -752,5 +900,17 @@ namespace Locana.Pages
         Dlna,
         CameraApi,
         Dummy,
+    }
+
+    public class RemoteStorageMenuFlyoutItem : MenuFlyoutItem
+    {
+        public RemoteStorageMenuFlyoutItem(string id, StorageType type)
+        {
+            Id = id;
+            StorageType = type;
+        }
+
+        public string Id { private set; get; }
+        public StorageType StorageType { private set; get; }
     }
 }

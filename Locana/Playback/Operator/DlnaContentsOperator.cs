@@ -18,6 +18,7 @@ namespace Locana.Playback.Operator
         {
             UpnpDevice = upnp;
             TitleText = UpnpDevice.FriendlyName;
+            ContentsCollection = new AlbumGroupCollection();
         }
 
         public override async Task DeleteSelectedFile(Thumbnail item)
@@ -83,7 +84,6 @@ namespace Locana.Playback.Operator
 
         public override void FinishMoviePlayback()
         {
-            throw new NotImplementedException("DLNA movie playback is not supported");
         }
 
         public override async Task LoadContents()

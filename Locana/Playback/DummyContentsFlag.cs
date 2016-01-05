@@ -8,7 +8,7 @@ namespace Locana.Playback
             get
             {
 #if DEBUG
-                return false;
+                return true;
 #else
                 return false;
 #endif

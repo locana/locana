@@ -10,6 +10,7 @@ namespace Locana.Playback.Operator
         public DummyContentsOperator()
         {
             TitleText = "Dummy storage";
+            ContentsCollection = new AlbumGroupCollection();
         }
 
         public override Task DeleteSelectedFile(Thumbnail item)
@@ -35,7 +36,6 @@ namespace Locana.Playback.Operator
 
         public override void FinishMoviePlayback()
         {
-            throw new NotImplementedException();
         }
 
         public override async Task LoadContents()

@@ -185,6 +185,10 @@ namespace Locana.Utility
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Play), Label = SystemUtil.GetStringResource("AppBar_Play") };
                 case AppBarItem.Pause:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Pause), Label = SystemUtil.GetStringResource("AppBar_Pause") };
+                case AppBarItem.LocalStorage:
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.CellPhone), Label = SystemUtil.GetStringResource("AppBar_LocalStorage") }; // TODO desktop or tablet devices
+                case AppBarItem.RemoteStorage:
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.MapDrive), Label = SystemUtil.GetStringResource("AppBar_RemoteStorage") };
                 default:
                     throw new NotImplementedException();
             }
@@ -279,15 +283,14 @@ namespace Locana.Utility
                 Background = null,
             };
 
-            Apply(bar);
+            ApplyAll(bar);
             return bar;
         }
 
-        public void Apply(CommandBar bar)
+        public void ApplyCommands(CommandBar bar)
         {
             bar.PrimaryCommands.Clear();
             bar.SecondaryCommands.Clear();
-            bar.Content = null;
 
             foreach (AppBarItem item in EnabledItems[AppBarItemType.Command])
             {
@@ -307,7 +310,13 @@ namespace Locana.Utility
                 }
                 bar.SecondaryCommands.Add(button);
             }
+        }
 
+        public void ApplyAll(CommandBar bar)
+        {
+            ApplyCommands(bar);
+
+            bar.Content = null;
             bar.Content = BuildContentPanel(ContentViewData, EnabledItems[AppBarItemType.Content]);
         }
 
@@ -352,7 +361,8 @@ namespace Locana.Utility
         IsoSlider,
         EvSlider,
         ProgramShiftSlider,
-        Tmp_WfdPage,
         Zoom,
+        LocalStorage,
+        RemoteStorage,
     }
 }

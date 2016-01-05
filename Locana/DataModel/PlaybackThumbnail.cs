@@ -120,7 +120,7 @@ namespace Locana.DataModel
                 {
                     case SelectivityFactor.None:
                         return true;
-                    case SelectivityFactor.CopyToPhone:
+                    case SelectivityFactor.Download:
                         return IsCopyable;
                     case SelectivityFactor.Delete:
                         return !Source.Protected;
@@ -271,7 +271,7 @@ namespace Locana.DataModel
     public enum SelectivityFactor
     {
         None,
-        CopyToPhone,
+        Download,
         Delete,
     }
 }

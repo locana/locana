@@ -579,7 +579,7 @@ Please check internet connection status.</value>
     <value>Selecting to download...</value>
   </data>
   <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
-    <value>Copy to local storage</value>
+    <value>Download</value>
   </data>
   <data name="Viewer_MenuDelete" xml:space="preserve">
     <value>Delete</value>
@@ -1195,5 +1195,11 @@ Open gallary to browse contents in your camera device.</value>
   </data>
   <data name="AppBar_Play" xml:space="preserve">
     <value>Play</value>
+  </data>
+  <data name="AppBar_LocalStorage" xml:space="preserve">
+    <value>Local Storage</value>
+  </data>
+  <data name="AppBar_RemoteStorage" xml:space="preserve">
+    <value>Network Storage</value>
   </data>
 </root>

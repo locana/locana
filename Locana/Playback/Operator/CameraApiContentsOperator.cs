@@ -23,6 +23,7 @@ namespace Locana.Playback.Operator
             TargetDevice = device;
             TitleText = TargetDevice.FriendlyName;
             MovieScreen = movieScreen;
+            ContentsCollection = new AlbumGroupCollection();
 
             MovieStreamHelper.INSTANCE.MoviePlaybackData.SeekAvailable = TargetDevice.Api.Capability.IsSupported("seekStreamingPosition");
 

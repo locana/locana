@@ -125,7 +125,10 @@ namespace Locana.Playback
                 MimeType = file.ContentType,
                 GroupName = folder.DisplayName,
                 OriginalUrl = file.Path,
-            }, file);
+            }, file)
+            {
+                IsPlayable = true,
+            };
         }
 
         // readonly string[] IMAGE_MIME_TYPES = { "image/jpeg", "image/png", "image/bmp", "image/gif", "video/mp4" };
