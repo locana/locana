@@ -1,11 +1,9 @@
 using Locana.Utility;
 using System;
-using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -114,7 +112,7 @@ namespace Locana.Controls
         }
 
         const double MAX_SCALE = 5.0;
-        const double MIN_SCALE = 0.9;
+        const double MIN_SCALE = 0.5;
         const double IMAGE_CLEARANCE = 50;
 
         BitmapImage _SourceBitmap;
@@ -155,30 +153,7 @@ namespace Locana.Controls
 
         private void Image_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            UIElement element = sender as UIElement;
-            var parent = (sender as Image).Parent as ScrollViewer;
-            CompositeTransform transform = element.RenderTransform as CompositeTransform;
-            if (transform != null && parent != null)
-            {
-                transform.ScaleX = LimitToRange(transform.ScaleX * e.Delta.Scale, MIN_SCALE, MAX_SCALE);
-                transform.ScaleY = LimitToRange(transform.ScaleY * e.Delta.Scale, MIN_SCALE, MAX_SCALE);
-
-                double h_size, v_size;
-                if (transform.Rotation % 180 == 0)
-                {
-                    h_size = element.RenderSize.Width * transform.ScaleX;
-                    v_size = element.RenderSize.Height * transform.ScaleY;
-                }
-                else
-                {
-                    h_size = element.RenderSize.Height * transform.ScaleY;
-                    v_size = element.RenderSize.Width * transform.ScaleX;
-                }
-                var translateLimitX = (parent.ActualWidth + h_size) / 2 - IMAGE_CLEARANCE;
-                var translateLimitY = (parent.ActualHeight + v_size) / 2 - IMAGE_CLEARANCE;
-                transform.TranslateX = LimitToRange(transform.TranslateX + e.Delta.Translation.X, -translateLimitX, translateLimitX);
-                transform.TranslateY = LimitToRange(transform.TranslateY + e.Delta.Translation.Y, -translateLimitY, translateLimitY);
-            }
+            TransformImage(e.Delta.Scale, e.Delta.Translation.X, e.Delta.Translation.Y);
         }
 
         double LimitToRange(double value, double min, double max)
@@ -191,6 +166,41 @@ namespace Locana.Controls
         private void Image_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             Init();
+        }
+
+        private void Image_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
+        {
+            var image = sender as Image;
+
+            var delta = e.GetCurrentPoint(image).Properties.MouseWheelDelta;
+            var scale = 1.0 + (delta < 0 ? 0.1 : -0.1);
+
+            TransformImage(scale, 0, 0);
+        }
+
+        private void TransformImage(double scale, double translationX, double translationY)
+        {
+            var parent = Image.Parent as Border;
+            var transform = Image.RenderTransform as CompositeTransform;
+
+            transform.ScaleX = LimitToRange(transform.ScaleX * scale, MIN_SCALE, MAX_SCALE);
+            transform.ScaleY = LimitToRange(transform.ScaleY * scale, MIN_SCALE, MAX_SCALE);
+
+            double h_size, v_size;
+            if (transform.Rotation % 180 == 0)
+            {
+                h_size = Image.RenderSize.Width * transform.ScaleX;
+                v_size = Image.RenderSize.Height * transform.ScaleY;
+            }
+            else
+            {
+                h_size = Image.RenderSize.Height * transform.ScaleY;
+                v_size = Image.RenderSize.Width * transform.ScaleX;
+            }
+            var translateLimitX = (parent.ActualWidth + h_size) / 2 - IMAGE_CLEARANCE;
+            var translateLimitY = (parent.ActualHeight + v_size) / 2 - IMAGE_CLEARANCE;
+            transform.TranslateX = LimitToRange(transform.TranslateX + translationX, -translateLimitX, translateLimitX);
+            transform.TranslateY = LimitToRange(transform.TranslateY + translationY, -translateLimitY, translateLimitY);
         }
     }
 
