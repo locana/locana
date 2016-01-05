@@ -21,6 +21,7 @@ namespace Locana.Playback.Operator
         public CameraApiContentsOperator(TargetDevice device, MoviePlaybackScreen movieScreen)
         {
             TargetDevice = device;
+            TitleText = TargetDevice.FriendlyName;
             MovieScreen = movieScreen;
 
             MovieStreamHelper.INSTANCE.MoviePlaybackData.SeekAvailable = TargetDevice.Api.Capability.IsSupported("seekStreamingPosition");

@@ -82,13 +82,19 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <c:PageHeader x:Name="pageHeader">
-            <c:PageHeader.HeaderContent>
-                <TextBlock x:Name="title"
-                           Style="{ThemeResource PageTitleTextBlockStyle}"
-                           Text="Contents Grid Page [TBD]" />
-            </c:PageHeader.HeaderContent>
-        </c:PageHeader>
+        <CommandBar x:Name="TitleBar"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Stretch">
+            <CommandBar.Content>
+                <c:PageHeader>
+                    <c:PageHeader.HeaderContent>
+                        <TextBlock x:Name="TitleBarText"
+                                   Style="{ThemeResource PageTitleTextBlockStyle}"
+                                   TextWrapping="Wrap" />
+                    </c:PageHeader.HeaderContent>
+                </c:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
 
         <c:PhotoPlaybackScreen x:Name="PhotoScreen"
                                Grid.RowSpan="2"

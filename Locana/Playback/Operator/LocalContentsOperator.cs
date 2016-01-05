@@ -20,6 +20,8 @@ namespace Locana.Playback.Operator
 
         public LocalContentsOperator(MoviePlaybackScreen movieScreen)
         {
+            TitleText = SystemUtil.GetStringResource("Viewer_StoragePhone");
+
             ContentsCollection = new AlbumGroupCollection(false)
             {
                 ContentSortOrder = Album.SortOrder.NewOneFirst,

@@ -89,6 +89,7 @@ namespace Locana.Playback.Operator
         public abstract Task PlaybackMovie(Thumbnail item);
         public abstract void FinishMoviePlayback();
         public abstract void Dispose();
+        public string TitleText { protected set; get; }
     }
 
     public abstract class RemoteContentsOperator : ContentsOperator

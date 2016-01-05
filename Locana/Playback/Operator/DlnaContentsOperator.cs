@@ -17,6 +17,7 @@ namespace Locana.Playback.Operator
         public DlnaContentsOperator(UpnpDevice upnp)
         {
             UpnpDevice = upnp;
+            TitleText = UpnpDevice.FriendlyName;
         }
 
         public override async Task DeleteSelectedFile(Thumbnail item)

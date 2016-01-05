@@ -194,6 +194,8 @@ namespace Locana.Pages
                 return;
             }
 
+            TitleBarText.Text = Operator.TitleText;
+
             Operator.SingleContentLoaded += Operator_SingleContentLoaded;
             Operator.ChunkContentsLoaded += Operator_ChunkContentsLoaded;
             Operator.ErrorMessageRaised += Operator_ErrorMessageRaised;

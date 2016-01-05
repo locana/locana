@@ -7,6 +7,11 @@ namespace Locana.Playback.Operator
 {
     public class DummyContentsOperator : RemoteContentsOperator
     {
+        public DummyContentsOperator()
+        {
+            TitleText = "Dummy storage";
+        }
+
         public override Task DeleteSelectedFile(Thumbnail item)
         {
             ContentsCollection.Remove(item);
