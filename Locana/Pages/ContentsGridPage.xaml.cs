@@ -48,7 +48,7 @@ namespace Locana.Pages
                 DebugUtil.Log("Ok clicked");
                 switch (InnerState)
                 {
-                    case ViewerState.Selecting:
+                    case ViewerState.Multi:
                         switch (Operator.ContentsCollection.SelectivityFactor)
                         {
                             case SelectivityFactor.Delete:
@@ -142,6 +142,10 @@ namespace Locana.Pages
                         FlyoutBase.ShowAttachedFlyout(s as FrameworkElement);
                         break;
                 }
+            });
+            CommandBarManager.SetEvent(AppBarItem.Cancel, (s, args) =>
+            {
+                UpdateInnerState(ViewerState.Single);
             });
         }
 
@@ -474,22 +478,24 @@ namespace Locana.Pages
             {
                 switch (InnerState)
                 {
-                    case ViewerState.Selecting:
+                    case ViewerState.Multi:
                         CommandBarManager.Clear()
-                            .Command(AppBarItem.Ok);
+                            .Command(AppBarItem.Cancel);
+                        if (ContentsGrid.SelectedItems.Count != 0)
+                        {
+                            CommandBarManager.Command(AppBarItem.Ok);
+                        }
                         break;
                     case ViewerState.Single:
                         UpdateSelectionMode(SelectivityFactor.None);
+                        CommandBarManager.Clear();
+                        if (Operator.ContentsCollection.Count != 0)
                         {
-                            CommandBarManager.Clear();
-                            if (Operator.ContentsCollection.Count != 0)
+                            if (TargetStorageType != StorageType.Local)
                             {
-                                if (TargetStorageType != StorageType.Local)
-                                {
-                                    CommandBarManager.Command(AppBarItem.DownloadMultiple);
-                                }
-                                CommandBarManager.Command(AppBarItem.DeleteMultiple);
+                                CommandBarManager.Command(AppBarItem.DownloadMultiple);
                             }
+                            CommandBarManager.Command(AppBarItem.DeleteMultiple);
                         }
                         break;
                     case ViewerState.StillPlayback:
@@ -673,14 +679,8 @@ namespace Locana.Pages
                 DebugUtil.Log("SelectionChanged in multi mode");
                 var contents = selector.SelectedItems;
                 DebugUtil.Log("Selected Items: " + contents.Count);
-                if (contents.Count > 0)
-                {
-                    UpdateInnerState(ViewerState.Selecting);
-                }
-                else
-                {
-                    UpdateInnerState(ViewerState.Multi);
-                }
+
+                UpdateInnerState(ViewerState.Multi);
             }
         }
 
@@ -890,7 +890,6 @@ namespace Locana.Pages
         StillPlayback,
         MoviePlayback,
         Multi,
-        Selecting,
         OutOfPage,
     }
 

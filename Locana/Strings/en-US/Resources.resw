@@ -1202,4 +1202,7 @@ Open gallary to browse contents in your camera device.</value>
   <data name="AppBar_RemoteStorage" xml:space="preserve">
     <value>Network Storage</value>
   </data>
+  <data name="AppBar_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

@@ -189,6 +189,8 @@ namespace Locana.Utility
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.CellPhone), Label = SystemUtil.GetStringResource("AppBar_LocalStorage") }; // TODO desktop or tablet devices
                 case AppBarItem.RemoteStorage:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.MapDrive), Label = SystemUtil.GetStringResource("AppBar_RemoteStorage") };
+                case AppBarItem.Cancel:
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_Cancel") };
                 default:
                     throw new NotImplementedException();
             }
@@ -364,5 +366,6 @@ namespace Locana.Utility
         Zoom,
         LocalStorage,
         RemoteStorage,
+        Cancel,
     }
 }

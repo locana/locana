@@ -1129,4 +1129,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>ネットワーク
 コンテンツ</value>
   </data>
+  <data name="AppBar_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
 </root>
