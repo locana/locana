@@ -1202,4 +1202,7 @@ Open gallary to browse contents in your camera device.</value>
   <data name="AppBar_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="VersionNumber" xml:space="preserve">
+    <value>ver. {0}</value>
+  </data>
 </root>

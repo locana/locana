@@ -1,20 +1,44 @@
-Json.NET : The MIT License
-- https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
-
-ZXing.Net : Apache Software License, Version 2.0
-- https://zxingnet.codeplex.com/SourceControl/latest#trunk/COPYING
-
-kz-ssdp-discovery : The MIT License
-- https://github.com/kazyx/kz-ssdp-discovery/blob/master/LICENSE
-
-kz-remote-api : The MIT License
-- https://github.com/kazyx/kz-remote-api/blob/master/LICENSE
-
-kz-image-stream : The MIT License
-- https://github.com/kazyx/kz-image-stream/blob/master/LICENSE
-
-NtImageLib : The MIT License
-- https://github.com/naotaco/NtImageLib/blob/master/LICENSE
-
-NtNfcLib : The MIT License
-- https://github.com/naotaco/NtNfcLib/blob/master/LICENSE
+{
+  "oss_list": [
+    {
+      "name": "Json.NET",
+      "license": "The MIT License",
+      "url": "https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md"
+    },
+    {
+      "name": "ZXing.Net",
+      "license": "Apache Software License, Version 2.0",
+      "url": "https://zxingnet.codeplex.com/SourceControl/latest#trunk/COPYING"
+    },
+    {
+      "name": "kz-ssdp-discovery",
+      "license": "The MIT License",
+      "url": "https://github.com/kazyx/kz-ssdp-discovery/blob/master/LICENSE"
+    },
+    {
+      "name": "kz-remote-api",
+      "license": "The MIT License",
+      "url": "https://github.com/kazyx/kz-remote-api/blob/master/LICENSE"
+    },
+    {
+      "name": "kz-image-stream",
+      "license": "The MIT License",
+      "url": "https://github.com/kazyx/kz-image-stream/blob/master/LICENSE"
+    },
+    {
+      "name": "NT JPEG metadata editor",
+      "license": "The MIT License",
+      "url": "https://github.com/naotaco/nt-jpeg-metadata-editor/blob/master/LICENSE"
+    },
+    {
+      "name": "NT Histogram",
+      "license": "The MIT License",
+      "url": "https://github.com/naotaco/nt-histogram/blob/master/LICENSE"
+    },
+    {
+      "name": "NtNfcLib",
+      "license": "The MIT License",
+      "url": "https://github.com/naotaco/NtNfcLib/blob/master/LICENSE"
+    }
+  ]
+}

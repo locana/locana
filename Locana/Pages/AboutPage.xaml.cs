@@ -1,6 +1,7 @@
 ﻿using Locana.Common;
 using Locana.Controls;
 using Locana.Utility;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Reflection;
@@ -96,9 +97,8 @@ namespace Locana.Pages
         #endregion
 
         private static bool IsManifestLoaded = false;
-        private static string license = "";
+        private static LicenseJson license;
         private static string copyright = "";
-        private const string developer = "kazyx and naotaco (@naotaco_dev)";
 
         CommandBarManager CommandBarManager = new CommandBarManager();
 
@@ -108,11 +108,17 @@ namespace Locana.Pages
             {
                 LoadAssemblyInformation();
             }
-            VERSION_STR.Text = (Application.Current as App).AppVersion;
+            VERSION_STR.Text = string.Format(SystemUtil.GetStringResource("VersionNumber"), (Application.Current as App).AppVersion);
 
             COPYRIGHT.Text = copyright;
 
-            DEV_BY.Text = developer;
+            DEV_BY.Inlines.Add(GetAsLink("kazyx", "https://github.com/kazyx"));
+            DEV_BY.Inlines.Add(new Run() { Text = " and ", Foreground = (Brush)Resources["ApplicationSecondaryForegroundThemeBrush"] });
+            DEV_BY.Inlines.Add(GetAsLink("naotaco", "https://twitter.com/naotaco_dev"));
+
+            FaqLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenFAQ"), SystemUtil.GetStringResource("FAQURL")));
+            SupportLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenSupportTwitter"), SystemUtil.GetStringResource("SupportTwitterURL")));
+            RepoLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenGithub"), SystemUtil.GetStringResource("RepoURL")));
 
             LoadLicenseFile();
         }
@@ -132,55 +138,39 @@ namespace Locana.Pages
 
         private async void LoadLicenseFile()
         {
-            if (string.IsNullOrEmpty(license))
+            if (license == null)
             {
                 var installedFolder = Package.Current.InstalledLocation;
                 var folder = await installedFolder.GetFolderAsync("Assets");
                 var file = await folder.GetFileAsync("License.txt");
-                var stream = await file.OpenReadAsync();
-                var reader = new StreamReader(stream.AsStreamForRead());
-                license = reader.ReadToEnd();
-                license = license.Replace("\r\n", "\n").Replace("\r", "\n").Replace("\n", "\r\n"); // Avoid autocrlf effect
-            }
-            await SystemUtil.GetCurrentDispatcher().RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                FormatRichText(Contents, license);
-            });
-        }
-
-        private static void FormatRichText(Paragraph place, string text)
-        {
-            if (text != null && text.Length != 0)
-            {
-                char[] separators = { ' ', '\n', '\t', '　' };
-                var words = text.Split(separators);
-                foreach (var word in words)
+                using (var stream = await file.OpenReadAsync())
                 {
-                    if (word.StartsWith("http://") || word.StartsWith("https://"))
+                    using (var reader = new StreamReader(stream.AsStreamForRead()))
                     {
-                        place.Inlines.Add(GetAsLink(word));
-                        place.Inlines.Add(new Run()
-                        {
-                            Text = " ",
-                        });
-                    }
-                    else
-                    {
-                        place.Inlines.Add(new Run()
-                        {
-                            Text = word + " ",
-                        });
+                        license = JsonConvert.DeserializeObject<LicenseJson>(reader.ReadToEnd());
                     }
                 }
             }
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                foreach (var oss in license.OssList)
+                {
+                    Contents.Inlines.Add(new Run() { Text = oss.Name, FontSize = 18 });
+                    Contents.Inlines.Add(new LineBreak());
+                    Contents.Inlines.Add(GetAsLink(oss.License, oss.Url));
+                    Contents.Inlines.Add(new LineBreak());
+                    Contents.Inlines.Add(new LineBreak());
+                };
+            });
         }
 
-        private static Hyperlink GetAsLink(string word)
+        private Hyperlink GetAsLink(string word, string link = null)
         {
             var hl = new Hyperlink
             {
-                NavigateUri = new Uri(word),
-                Foreground = (SolidColorBrush)(Application.Current.Resources["ProgressBarForegroundThemeBrush"]),
+                NavigateUri = new Uri(link == null ? word : link),
+                Foreground = (SolidColorBrush)(Resources["SystemControlForegroundAccentBrush"]),
             };
 
             hl.Inlines.Add(new Run()
@@ -189,24 +179,6 @@ namespace Locana.Pages
             });
 
             return hl;
-        }
-
-        private async void SourceCode_Click(object sender, RoutedEventArgs e)
-        {
-            var success = await Launcher.LaunchUriAsync(new Uri(SystemUtil.GetStringResource("RepoURL")));
-            if (!success) DebugUtil.Log("Failed to open Github page.");
-        }
-
-        private async void FAQ_Click(object sender, RoutedEventArgs e)
-        {
-            var success = await Launcher.LaunchUriAsync(new Uri(SystemUtil.GetStringResource("FAQURL")));
-            if (!success) DebugUtil.Log("Failed to open FAQ page.");
-        }
-
-        private async void Support_Click(object sender, RoutedEventArgs e)
-        {
-            var success = await Launcher.LaunchUriAsync(new Uri(SystemUtil.GetStringResource("SupportTwitterURL")));
-            if (!success) DebugUtil.Log("Failed to open Support page.");
         }
 
         private async void TrialButton_Click(object sender, RoutedEventArgs e)
