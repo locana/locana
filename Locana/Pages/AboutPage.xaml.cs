@@ -61,7 +61,6 @@ namespace Locana.Pages
             this.navigationHelper.OnNavigatedTo(e);
 
             UpdatePurchaseInformation();
-            CommandBarManager.Clear().Command(AppBarItem.WifiSetting).ApplyAll(AppBarUnit);
         }
 
         private void UpdatePurchaseInformation()

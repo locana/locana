@@ -114,7 +114,7 @@
                                    Text="{Binding [SourceCode],
                                                   Source={StaticResource LocalizedStrings}}"
                                    TextWrapping="Wrap" />
-                        <RichTextBlock Margin="20,4,0,48" HorizontalAlignment="Left">
+                        <RichTextBlock Margin="20,4,0,32" HorizontalAlignment="Left">
                             <Paragraph x:Name="RepoLink" />
                         </RichTextBlock>
                     </StackPanel>
@@ -132,18 +132,12 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="{Binding [ContainsLicense], Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" />
                     <ScrollViewer Grid.Row="1" Margin="4,12,4,0">
-                        <RichTextBlock Margin="0,0,0,48"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top">
+                        <RichTextBlock HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Paragraph x:Name="Contents" />
                         </RichTextBlock>
                     </ScrollViewer>
                 </Grid>
             </PivotItem>
         </Pivot>
-
-        <CommandBar Name="AppBarUnit"
-                    Grid.Row="2"
-                    Background="{ThemeResource SystemChromeBlackLowColor}" />
     </Grid>
 </Page>
