@@ -10,9 +10,9 @@
 [submodule "modules/NtNfcLib"]
 	path = modules/NtNfcLib
 	url = git@github.com:naotaco/NtNfcLib.git
-[submodule "modules/NtImageProcessorUwp"]
-	path = modules/NtImageProcessorUwp
-	url = git@github.com:naotaco/NtImageProcessorUwp.git
 [submodule "modules/nt-histogram"]
 	path = modules/nt-histogram
 	url = git@github.com:naotaco/nt-histogram.git
+[submodule "modules/nt-jpeg-metadata-editor"]
+	path = modules/nt-jpeg-metadata-editor
+	url = git@github.com:naotaco/nt-jpeg-metadata-editor.git

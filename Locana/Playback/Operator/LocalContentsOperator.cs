@@ -1,9 +1,9 @@
 ﻿using Locana.Controls;
 using Locana.DataModel;
 using Locana.Utility;
-using Naotaco.ImageProcessor.MetaData;
-using Naotaco.ImageProcessor.MetaData.Misc;
-using Naotaco.ImageProcessor.MetaData.Structure;
+using Naotaco.Jpeg.MetaData;
+using Naotaco.Jpeg.MetaData.Misc;
+using Naotaco.Jpeg.MetaData.Structure;
 using System;
 using System.Collections.Generic;
 using System.IO;

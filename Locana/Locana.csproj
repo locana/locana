@@ -510,9 +510,9 @@
       <Project>{6ec75e53-268a-4252-b88b-fcce96919cd8}</Project>
       <Name>NtHistogramWin2d</Name>
     </ProjectReference>
-    <ProjectReference Include="..\modules\NtImageProcessorUwp\NtImageProcessorUwp\NtImageProcessorUwp.csproj">
+    <ProjectReference Include="..\modules\nt-jpeg-metadata-editor\NtJpegMetadata\NtJpegMetadata.csproj">
       <Project>{f60b6857-9718-4491-9799-d94f51229be2}</Project>
-      <Name>NtImageProcessorUwp</Name>
+      <Name>NtJpegMetadata</Name>
     </ProjectReference>
     <ProjectReference Include="..\modules\NtNfcLib\NtNfcLib\NtNfcParserUwp.csproj">
       <Project>{ee2d1d2f-3456-4133-ac3d-3128a8fcd7d7}</Project>
