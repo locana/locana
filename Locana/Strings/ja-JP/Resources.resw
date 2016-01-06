@@ -130,10 +130,10 @@
   <data name="Aperture" xml:space="preserve">
     <value>絞り</value>
   </data>
-  <data name="AppBar_AppSetting" xml:space="preserve">
+  <data name="AppSettings" xml:space="preserve">
     <value>アプリ設定</value>
   </data>
-  <data name="AppBar_CameraRoll" xml:space="preserve">
+  <data name="PhotoGallery" xml:space="preserve">
     <value>ギャラリー</value>
   </data>
   <data name="AppBar_CancelTouchAf" xml:space="preserve">

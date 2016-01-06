@@ -74,14 +74,26 @@
                    IsTabStop="False"
                    OpenPaneLength="256">
             <SplitView.Pane>
-                <!--  A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event.  -->
-                <controls:NavMenuListView x:Name="NavMenuList"
-                                          Margin="0,48,0,0"
-                                          ContainerContentChanging="NavMenuItemContainerContentChanging"
-                                          ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                                          ItemInvoked="NavMenuList_ItemInvoked"
-                                          ItemTemplate="{StaticResource NavMenuItemTemplate}"
-                                          TabIndex="3" />
+                <Grid>
+                    <!--  A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event.  -->
+                    <controls:NavMenuListView x:Name="NavMenuList"
+                                              Margin="0,48,0,0"
+                                              ContainerContentChanging="NavMenuItemContainerContentChanging"
+                                              ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
+                                              ItemInvoked="NavMenuList_ItemInvoked"
+                                              ItemTemplate="{StaticResource NavMenuItemTemplate}"
+                                              Loaded="NavMenuList_Loaded"
+                                              TabIndex="3" />
+
+                    <controls:NavMenuListView x:Name="NavMenuListBottom"
+                                              VerticalAlignment="Bottom"
+                                              ContainerContentChanging="NavMenuItemContainerContentChanging"
+                                              ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
+                                              ItemInvoked="NavMenuList_ItemInvoked"
+                                              ItemTemplate="{StaticResource NavMenuItemTemplate}"
+                                              Loaded="NavMenuList_Loaded"
+                                              TabIndex="4" />
+                </Grid>
             </SplitView.Pane>
 
             <!--

@@ -7,7 +7,6 @@ using System.IO;
 using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Store;
-using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -26,11 +25,6 @@ namespace Locana.Pages
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
-
-            CommandBarManager.SetEvent(AppBarItem.WifiSetting, async (s, args) =>
-            {
-                await Launcher.LaunchUriAsync(new Uri("ms-settings-wifi:"));
-            });
         }
 
         /// <summary>

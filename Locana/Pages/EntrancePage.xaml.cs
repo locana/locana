@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Networking.Proximity;
+using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -29,23 +30,20 @@ namespace Locana.Pages
         {
             this.InitializeComponent();
 
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppBar_AppSetting"),
-                Symbol.Setting, () =>
-                {
-                    Frame.Navigate(typeof(AppSettingPage));
-                }));
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"),
-                Symbol.ThreeBars, () =>
-                {
-                }));
-            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("Donation"),
-                Symbol.Like, () =>
-                {
-                }));
             appMenuGroup.Add(new EntrancePanel("Find QR Code",
                 Symbol.WebCam, () =>
                 {
                     Frame.Navigate(typeof(QrCodePage));
+                }));
+            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"),
+                Symbol.ThreeBars, async () =>
+                {
+                    await Launcher.LaunchUriAsync(new Uri("ms-settings-wifi:"));
+                }));
+            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppSettings"),
+                Symbol.Setting, () =>
+                {
+                    Frame.Navigate(typeof(AppSettingPage));
                 }));
 
             panelSource.Add(devicesGroup);

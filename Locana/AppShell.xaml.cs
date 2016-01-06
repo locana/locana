@@ -26,33 +26,37 @@ namespace Locana
             {
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Home,
-                    Label = "EntrancePage",
+                    Symbol = Symbol.Camera,
+                    Label = "EntrancePage [TBD]",
                     DestPage = typeof(EntrancePage)
                 },
                 new NavMenuItem()
                 {
+                    Symbol = Symbol.Pictures,
+                    Label = SystemUtil.GetStringResource("PhotoGallery"),
+                    DestPage = typeof(ContentsGridPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.ThreeBars,
+                    Label = "WifiDirectPage [TBD]",
+                    DestPage = typeof(WifiDirectPage)
+                },
+            });
+        private List<NavMenuItem> navBottomlist = new List<NavMenuItem>(
+            new[]
+            {
+                new NavMenuItem()
+                {
                     Symbol = Symbol.Setting,
-                    Label = "AppSettingPage",
+                    Label = SystemUtil.GetStringResource("AppSettings"),
                     DestPage = typeof(AppSettingPage)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Camera,
-                    Label = "QrCodePage",
-                    DestPage = typeof(QrCodePage)
-                },
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.Camera,
-                    Label = "WifiDirectPage",
-                    DestPage = typeof(WifiDirectPage)
-                },
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.Pictures,
-                    Label = "Local Contents",
-                    DestPage = typeof(ContentsGridPage)
+                    Symbol = Symbol.Like,
+                    Label = SystemUtil.GetStringResource("Donation"),
+                    DestPage = typeof(DonationPage)
                 },
                 new NavMenuItem()
                 {
@@ -61,6 +65,8 @@ namespace Locana
                     DestPage = typeof(AboutPage)
                 }
             });
+
+        private List<NavMenuItem> wholeList = new List<NavMenuItem>();
 
         public static AppShell Current = null;
 
@@ -72,6 +78,9 @@ namespace Locana
         public AppShell()
         {
             this.InitializeComponent();
+
+            navlist.ForEach(item => wholeList.Add(item));
+            navBottomlist.ForEach(item => wholeList.Add(item));
 
             this.Loaded += (sender, args) =>
             {
@@ -92,6 +101,7 @@ namespace Locana
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
 
             NavMenuList.ItemsSource = navlist;
+            NavMenuListBottom.ItemsSource = navBottomlist;
         }
 
         public Frame AppFrame { get { return this.frame; } }
@@ -189,37 +199,47 @@ namespace Locana
         {
             if (e.NavigationMode == NavigationMode.Back)
             {
-                var item = (from p in this.navlist where p.DestPage == e.SourcePageType select p).SingleOrDefault();
-                if (item == null && this.AppFrame.BackStackDepth > 0)
-                {
-                    // In cases where a page drills into sub-pages then we'll highlight the most recent
-                    // navigation menu item that appears in the BackStack
-                    foreach (var entry in this.AppFrame.BackStack.Reverse())
-                    {
-                        item = (from p in this.navlist where p.DestPage == entry.SourcePageType select p).SingleOrDefault();
-                        if (item != null)
-                            break;
-                    }
-                }
-
-                var container = (ListViewItem)NavMenuList.ContainerFromItem(item);
-
-                // While updating the selection state of the item prevent it from taking keyboard focus.  If a
-                // user is invoking the back button via the keyboard causing the selected nav menu item to change
-                // then focus will remain on the back button.
-                if (container != null) container.IsTabStop = false;
-                NavMenuList.SetSelectedItem(container);
-                if (container != null) container.IsTabStop = true;
+                RevertSelection(NavMenuList, e);
+                RevertSelection(NavMenuListBottom, e);
             }
+        }
+
+        private void RevertSelection(NavMenuListView view, NavigatingCancelEventArgs e)
+        {
+            var item = (from p in wholeList where p.DestPage == e.SourcePageType select p).SingleOrDefault();
+            if (item == null && this.AppFrame.BackStackDepth > 0)
+            {
+                // In cases where a page drills into sub-pages then we'll highlight the most recent
+                // navigation menu item that appears in the BackStack
+                foreach (var entry in this.AppFrame.BackStack.Reverse())
+                {
+                    item = (from p in wholeList where p.DestPage == entry.SourcePageType select p).SingleOrDefault();
+                    if (item != null)
+                        break;
+                }
+            }
+
+            var container = (ListViewItem)view.ContainerFromItem(item);
+
+            // While updating the selection state of the item prevent it from taking keyboard focus.  If a
+            // user is invoking the back button via the keyboard causing the selected nav menu item to change
+            // then focus will remain on the back button.
+            if (container != null) container.IsTabStop = false;
+            view.SetSelectedItem(container);
+            if (container != null) container.IsTabStop = true;
         }
 
         private void OnNavigatedToPage(object sender, NavigationEventArgs e)
         {
+            DebugUtil.Log("Shell: OnNavigatedToPage: " + e.Content.GetType());
             // After a successful navigation set keyboard focus to the loaded page
             if (e.Content is Page && e.Content != null)
             {
                 var control = (Page)e.Content;
                 control.Loaded += Page_Loaded;
+
+                UpdateSelection(NavMenuList, control);
+                UpdateSelection(NavMenuListBottom, control);
             }
 
             // Update the Back button depending on whether we can go Back.
@@ -227,6 +247,19 @@ namespace Locana
                 AppFrame.CanGoBack ?
                 AppViewBackButtonVisibility.Visible :
                 AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private void UpdateSelection(NavMenuListView view, Page page)
+        {
+            var item = (from p in wholeList where p.DestPage == page.GetType() select p).SingleOrDefault();
+
+            var container = (ListViewItem)view.ContainerFromItem(item);
+
+            if (container == null) DebugUtil.Log("Nothing selected");
+
+            if (container != null) container.IsTabStop = false;
+            view.SetSelectedItem(container);
+            if (container != null) container.IsTabStop = true;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -303,6 +336,16 @@ namespace Locana
             {
                 args.ItemContainer.ClearValue(AutomationProperties.NameProperty);
             }
+        }
+
+        private void NavMenuList_Loaded(object sender, RoutedEventArgs e)
+        {
+            var page = frame.Content as Page;
+            if (page == null)
+            {
+                return;
+            }
+            UpdateSelection(sender as NavMenuListView, page);
         }
     }
 }

@@ -138,17 +138,11 @@ namespace Locana.Utility
                 case AppBarItem.ControlPanel:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_cameraSetting.png", UriKind.Absolute) }, Label = SystemUtil.GetStringResource("AppBar_ControlPanel") };
                 case AppBarItem.AppSetting:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Setting), Label = SystemUtil.GetStringResource("AppBar_AppSetting") };
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Setting), Label = SystemUtil.GetStringResource("AppSetting") };
                 case AppBarItem.CancelTouchAF:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_CancelTouchAf") };
                 case AppBarItem.Close:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_Close") };
-                case AppBarItem.AboutPage:
-                    return new AppBarButton() { Label = SystemUtil.GetStringResource("About") };
-                case AppBarItem.LoggerPage:
-                    return new AppBarButton() { Label = "Logger" };
-                case AppBarItem.PlaybackPage:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Pictures), Label = SystemUtil.GetStringResource("AppBar_CameraRoll") };
                 case AppBarItem.DeleteMultiple:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Delete), Label = SystemUtil.GetStringResource("AppBar_Delete") };
                 case AppBarItem.DownloadMultiple:
@@ -339,9 +333,6 @@ namespace Locana.Utility
 
     public enum AppBarItem
     {
-        PlaybackPage,
-        AboutPage,
-        LoggerPage,
         CancelTouchAF,
         DownloadMultiple,
         DeleteMultiple,

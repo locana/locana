@@ -286,14 +286,14 @@ Swipe left or right to start remote control.</value>
   <data name="Guide_DisplayTakeImageButtonSetting" xml:space="preserve">
     <value>Your phone's hardware shutter key can be an alternative trigger of remote shutter.</value>
   </data>
-  <data name="AppBar_AppSetting" xml:space="preserve">
+  <data name="AppSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="AppBar_CancelTouchAf" xml:space="preserve">
     <value>Unlock AF</value>
   </data>
-  <data name="AppBar_CameraRoll" xml:space="preserve">
-    <value>Gallery</value>
+  <data name="PhotoGallery" xml:space="preserve">
+    <value>Photo Gallery</value>
   </data>
   <data name="Error_Message_FailedToGetInfo" xml:space="preserve">
     <value>Failed to retrieve information.
