@@ -39,8 +39,10 @@ namespace Locana.Playback.Operator
                         return new DlnaContentsOperator(cds);
                     }
                     break;
+#if DEBUG
                 case StorageType.Dummy:
                     return new DummyContentsOperator();
+#endif
             }
             return null;
         }

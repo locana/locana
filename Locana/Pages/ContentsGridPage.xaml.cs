@@ -153,6 +153,7 @@ namespace Locana.Pages
         {
             var menu = new MenuFlyout();
 
+#if DEBUG
             if (TargetStorageType != StorageType.Dummy && DummyContentsFlag.Enabled)
             {
                 var item = new MenuFlyoutItem
@@ -162,6 +163,7 @@ namespace Locana.Pages
                 item.Tapped += DummyStorage_Tapped;
                 menu.Items.Add(item);
             }
+#endif
 
             NetworkObserver.INSTANCE.CameraDevices.Where(device =>
             {
@@ -199,11 +201,13 @@ namespace Locana.Pages
             Frame.Navigate(typeof(ContentsGridPage), tuple);
         }
 
+#if DEBUG
         private void DummyStorage_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var tuple = Tuple.Create<string, string>(nameof(StorageType.Dummy), null);
             Frame.Navigate(typeof(ContentsGridPage), tuple);
         }
+#endif
 
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
@@ -271,9 +275,11 @@ namespace Locana.Pages
                 case nameof(StorageType.Dlna):
                     TargetStorageType = StorageType.Dlna;
                     break;
+#if DEBUG
                 case nameof(StorageType.Dummy):
                     TargetStorageType = StorageType.Dummy;
                     break;
+#endif
             }
 
             RemoteStorageId = tuple?.Item2;
@@ -377,10 +383,12 @@ namespace Locana.Pages
                 return upnp.UDN != RemoteStorageId;
             }).Count();
 
+#if DEBUG
             if (TargetStorageType != StorageType.Dummy && DummyContentsFlag.Enabled)
             {
                 count++;
             }
+#endif
 
             return count;
         }
@@ -939,7 +947,9 @@ namespace Locana.Pages
         Local,
         Dlna,
         CameraApi,
+#if DEBUG
         Dummy,
+#endif
     }
 
     public class RemoteStorageMenuFlyoutItem : MenuFlyoutItem

@@ -1,10 +1,13 @@
-﻿using Locana.DataModel;
+﻿#if DEBUG
+using Locana.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+#endif
 
 namespace Locana.Playback.Operator
 {
+#if DEBUG
     public class DummyContentsOperator : RemoteContentsOperator
     {
         public DummyContentsOperator()
@@ -76,4 +79,5 @@ namespace Locana.Playback.Operator
             throw new NotImplementedException();
         }
     }
+#endif
 }
