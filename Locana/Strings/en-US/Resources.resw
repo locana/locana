@@ -248,7 +248,7 @@ Swipe left or right to start remote control.</value>
     <value>Camera is under processing. Try again after a while.</value>
   </data>
   <data name="ErrorMessage_fatal" xml:space="preserve">
-    <value>Remote request failed.</value>
+    <value>Unexpected error has occured.</value>
   </data>
   <data name="ErrorMessage_shootingFailure" xml:space="preserve">
     <value>Failed to shoot or start recording. Make sure of the camera device's status.</value>

@@ -25,6 +25,14 @@
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
 
+        <c:Toast x:Name="Toast"
+                 Grid.RowSpan="2"
+                 MinHeight="48"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Top"
+                 Canvas.ZIndex="20"
+                 IsHitTestVisible="False" />
+
         <Pivot Grid.Row="1" Grid.RowSpan="2">
             <PivotItem Margin="12,14,0,0">
                 <PivotItem.Header>

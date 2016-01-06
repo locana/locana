@@ -121,6 +121,7 @@
 
         <c:Toast x:Name="Toast"
                  Grid.RowSpan="2"
+                 MinHeight="48"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Top"
                  Canvas.ZIndex="20"

@@ -1,4 +1,5 @@
 ﻿using Locana.Common;
+using Locana.Controls;
 using Locana.Utility;
 using System;
 using System.IO;
@@ -58,14 +59,20 @@ namespace Locana.Pages
         {
             this.navigationHelper.OnNavigatedTo(e);
 
-            if ((App.Current as App).IsFunctionLimited)
+            UpdatePurchaseInformation();
+            CommandBarManager.Clear().Command(AppBarItem.WifiSetting).ApplyAll(AppBarUnit);
+        }
+
+        private void UpdatePurchaseInformation()
+        {
+            if ((Application.Current as App).IsFunctionLimited)
             {
                 Unlimited.Visibility = Visibility.Collapsed;
                 Trial.Visibility = Visibility.Collapsed;
                 Limited.Visibility = Visibility.Visible;
                 TrialButton.Visibility = Visibility.Visible;
             }
-            else if ((App.Current as App).IsTrialVersion)
+            else if ((Application.Current as App).IsTrialVersion)
             {
                 Unlimited.Visibility = Visibility.Collapsed;
                 Trial.Visibility = Visibility.Visible;
@@ -79,8 +86,6 @@ namespace Locana.Pages
                 Limited.Visibility = Visibility.Collapsed;
                 TrialButton.Visibility = Visibility.Collapsed;
             }
-
-            CommandBarManager.Clear().Command(AppBarItem.WifiSetting).ApplyAll(AppBarUnit);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -103,7 +108,7 @@ namespace Locana.Pages
             {
                 LoadAssemblyInformation();
             }
-            VERSION_STR.Text = (App.Current as App).AppVersion;
+            VERSION_STR.Text = (Application.Current as App).AppVersion;
 
             COPYRIGHT.Text = copyright;
 
@@ -206,7 +211,31 @@ namespace Locana.Pages
 
         private async void TrialButton_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(CurrentApp.LinkUri);
+            try
+            {
+#if DEBUG
+                await CurrentAppSimulator.RequestAppPurchaseAsync(false);
+#else
+                await CurrentApp.RequestAppPurchaseAsync(false);
+#endif
+            }
+            catch
+            {
+                ShowToast(SystemUtil.GetStringResource("ErrorMessage_fatal"));
+                return;
+            }
+
+            (Application.Current as App).UpdatePurchaseInfo();
+            UpdatePurchaseInformation();
+        }
+
+        private async void ShowToast(string message)
+        {
+            DebugUtil.Log(message);
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                Toast.PushToast(new ToastContent() { Text = message });
+            });
         }
     }
 }

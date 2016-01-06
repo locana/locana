@@ -3,6 +3,7 @@ using System;
 using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Store;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
@@ -69,22 +70,7 @@ namespace Locana
                 Preference.InitialLaunchedDateTime = DateTimeOffset.Now;
             }
 
-            var init = Preference.InitialLaunchedDateTime;
-            DebugUtil.Log("Initial launched datetime: " + init.ToString());
-#if DEBUG
-            IsTrialVersion = true;
-#else
-            IsTrialVersion = Windows.ApplicationModel.Store.CurrentApp.LicenseInformation.IsTrial;
-#endif
-            if (IsTrialVersion)
-            {
-                var diff = DateTimeOffset.Now.Subtract(init);
-                IsFunctionLimited = diff.Days > 30;
-            }
-            else
-            {
-                IsFunctionLimited = false;
-            }
+            UpdatePurchaseInfo();
 
             AppShell shell = Window.Current.Content as AppShell;
 
@@ -116,6 +102,33 @@ namespace Locana
             }
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        public void UpdatePurchaseInfo()
+        {
+            var init = Preference.InitialLaunchedDateTime;
+            DebugUtil.Log("Initial launched datetime: " + init.ToString());
+#if DEBUG
+            IsTrialVersion = CurrentAppSimulator.LicenseInformation.IsTrial;
+#else
+            try
+            {
+                IsTrialVersion = CurrentApp.LicenseInformation.IsTrial;
+            }
+            catch
+            {
+                IsTrialVersion = true;
+            }
+#endif
+            if (IsTrialVersion)
+            {
+                var diff = DateTimeOffset.Now.Subtract(init);
+                IsFunctionLimited = diff.Days > 30;
+            }
+            else
+            {
+                IsFunctionLimited = false;
+            }
         }
 
         /// <summary>
