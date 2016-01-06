@@ -90,7 +90,7 @@
                                    Text="{Binding [DevelopedBy],
                                                   Source={StaticResource LocalizedStrings}}"
                                    TextWrapping="Wrap" />
-                        <RichTextBlock Margin="20,4,0,4">
+                        <RichTextBlock Margin="20,4,0,4" HorizontalAlignment="Left">
                             <Paragraph x:Name="DEV_BY" />
                         </RichTextBlock>
                         <TextBlock Margin="0,12,0,0"
@@ -98,7 +98,7 @@
                                    Text="{Binding [FAQ],
                                                   Source={StaticResource LocalizedStrings}}"
                                    TextWrapping="Wrap" />
-                        <RichTextBlock Margin="20,4,0,4">
+                        <RichTextBlock Margin="20,4,0,4" HorizontalAlignment="Left">
                             <Paragraph x:Name="FaqLink" />
                         </RichTextBlock>
                         <TextBlock Margin="0,12,0,0"
@@ -106,7 +106,7 @@
                                    Text="{Binding [Support],
                                                   Source={StaticResource LocalizedStrings}}"
                                    TextWrapping="Wrap" />
-                        <RichTextBlock Margin="20,4,0,4">
+                        <RichTextBlock Margin="20,4,0,4" HorizontalAlignment="Left">
                             <Paragraph x:Name="SupportLink" />
                         </RichTextBlock>
                         <TextBlock Margin="0,12,0,0"
@@ -114,7 +114,7 @@
                                    Text="{Binding [SourceCode],
                                                   Source={StaticResource LocalizedStrings}}"
                                    TextWrapping="Wrap" />
-                        <RichTextBlock Margin="20,4,0,48">
+                        <RichTextBlock Margin="20,4,0,48" HorizontalAlignment="Left">
                             <Paragraph x:Name="RepoLink" />
                         </RichTextBlock>
                     </StackPanel>
