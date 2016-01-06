@@ -162,7 +162,7 @@ namespace Locana.CameraControl
             if (IsRendering) { return; }
 
             IsRendering = true;
-            await LiveviewUtil.SetAsBitmap(e.Packet.ImageData, MoviePlaybackData, null);
+            await LiveviewUtil.SetAsBitmap(e.Packet.ImageData, MoviePlaybackData);
             IsRendering = false;
         }
     }
