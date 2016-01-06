@@ -6,7 +6,6 @@
       xmlns:local="using:Locana.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       Loaded="Page_Loaded"
-      RequestedTheme="Dark"
       Unloaded="Page_Unloaded"
       mc:Ignorable="d">
 

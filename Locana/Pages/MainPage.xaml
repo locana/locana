@@ -9,7 +9,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:util="using:Locana.Utility"
       Loaded="Page_Loaded"
-      RequestedTheme="Dark"
       Unloaded="Page_Unloaded"
       mc:Ignorable="d">
 

@@ -6,7 +6,6 @@
       xmlns:local="using:Locana.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:util="using:Locana.Utility"
-      RequestedTheme="Dark"
       mc:Ignorable="d">
     <Page.Resources>
         <CollectionViewSource x:Name="GridSources" IsSourceGrouped="True" />
