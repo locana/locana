@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtNfcParserUwp", "modules\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtHistogramWin2d", "modules\nt-histogram\NtHistogramWin2d\NtHistogramWin2d.csproj", "{6EC75E53-268A-4252-B88B-FCCE96919CD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtImageProcessorUwp", "modules\NtImageProcessorUwp\NtImageProcessorUwp\NtImageProcessorUwp.csproj", "{F60B6857-9718-4491-9799-D94F51229BE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtJpegMetadata", "modules\nt-jpeg-metadata-editor\NtJpegMetadata\NtJpegMetadata.csproj", "{F60B6857-9718-4491-9799-D94F51229BE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

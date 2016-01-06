@@ -1,5 +1,5 @@
 ﻿using Locana.Utility;
-using Naotaco.ImageProcessor.MetaData.Structure;
+using Naotaco.Jpeg.MetaData.Structure;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
