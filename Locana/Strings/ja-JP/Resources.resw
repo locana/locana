@@ -154,9 +154,6 @@
   <data name="ApplicationSettings" xml:space="preserve">
     <value>アプリケーション設定</value>
   </data>
-  <data name="ApplicationTitle" xml:space="preserve">
-    <value>Locana</value>
-  </data>
   <data name="AutoPowerOff" xml:space="preserve">
     <value>自動電源オフ</value>
   </data>
@@ -239,12 +236,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="ContShootingSpeed" xml:space="preserve">
     <value>連写速度</value>
   </data>
-  <data name="CopyRight" xml:space="preserve">
-    <value>Copyright</value>
-  </data>
-  <data name="DevelopedBy" xml:space="preserve">
-    <value>Developed by</value>
-  </data>
   <data name="Disabled" xml:space="preserve">
     <value> - - -</value>
   </data>
@@ -255,7 +246,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>撮影ボタンを表示する</value>
   </data>
   <data name="Donation" xml:space="preserve">
-    <value>Donation</value>
+    <value>ドネーション</value>
   </data>
   <data name="ErrorMessage_cameraNotReady" xml:space="preserve">
     <value>カメラが処理中です。しばらくまって再度お試しください。</value>
@@ -350,18 +341,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="ExifWBValue_CoolWhiteFluorescent" xml:space="preserve">
     <value>蛍光灯: 白色</value>
-  </data>
-  <data name="ExifWBValue_D50" xml:space="preserve">
-    <value>D50</value>
-  </data>
-  <data name="ExifWBValue_D55" xml:space="preserve">
-    <value>D55</value>
-  </data>
-  <data name="ExifWBValue_D65" xml:space="preserve">
-    <value>D65</value>
-  </data>
-  <data name="ExifWBValue_D75" xml:space="preserve">
-    <value>D75</value>
   </data>
   <data name="ExifWBValue_Daylight" xml:space="preserve">
     <value>太陽光</value>
@@ -483,9 +462,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="Exif_MeteringMode_Unknown" xml:space="preserve">
     <value>不明</value>
   </data>
-  <data name="ExposureCompensation" xml:space="preserve">
-    <value>EV</value>
-  </data>
   <data name="ExposureMode" xml:space="preserve">
     <value>露出モード</value>
   </data>
@@ -533,15 +509,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="FocusMode" xml:space="preserve">
     <value>フォーカスモード</value>
-  </data>
-  <data name="FocusMode_AFC" xml:space="preserve">
-    <value>AF-C</value>
-  </data>
-  <data name="FocusMode_AFS" xml:space="preserve">
-    <value>AF-S</value>
-  </data>
-  <data name="FocusMode_Manual" xml:space="preserve">
-    <value>MF</value>
   </data>
   <data name="FramingGridColor" xml:space="preserve">
     <value>補助線の色</value>
@@ -626,9 +593,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="InvalidDuration" xml:space="preserve">
     <value>--:--:--</value>
   </data>
-  <data name="ISO" xml:space="preserve">
-    <value>ISO</value>
-  </data>
   <data name="MessageCaption_error" xml:space="preserve">
     <value>エラー</value>
   </data>
@@ -680,9 +644,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="MetaDataName_ImageSize" xml:space="preserve">
     <value>画像サイズ</value>
   </data>
-  <data name="MetaDataName_Iso" xml:space="preserve">
-    <value>ISO</value>
-  </data>
   <data name="MetaDataName_LensModel" xml:space="preserve">
     <value>レンズ名称</value>
   </data>
@@ -700,12 +661,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="MovieFileFormat" xml:space="preserve">
     <value>動画フォーマット</value>
-  </data>
-  <data name="MovieFormatMode_MP4" xml:space="preserve">
-    <value>MP4</value>
-  </data>
-  <data name="MovieFormatMode_XAVCS" xml:space="preserve">
-    <value>XAVC S</value>
   </data>
   <data name="MovieQuality" xml:space="preserve">
     <value>動画画質</value>
@@ -736,9 +691,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="Red" xml:space="preserve">
     <value>赤</value>
-  </data>
-  <data name="RepoURL" xml:space="preserve">
-    <value>https://github.com/locana/uwpmm</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
@@ -799,9 +751,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="ShowDetailInfo" xml:space="preserve">
     <value>情報を表示</value>
   </data>
-  <data name="ShutterSpeed" xml:space="preserve">
-    <value>SS</value>
-  </data>
   <data name="Size2M" xml:space="preserve">
     <value>2Mピクセル</value>
   </data>
@@ -840,12 +789,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="TvColorSystem" xml:space="preserve">
     <value>映像設定</value>
-  </data>
-  <data name="TvColorSystemMode_NTSC" xml:space="preserve">
-    <value>NTSC</value>
-  </data>
-  <data name="TvColorSystemMode_PAL" xml:space="preserve">
-    <value>PAL</value>
   </data>
   <data name="UpperLeft" xml:space="preserve">
     <value>左上</value>
@@ -1005,9 +948,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="FAQ" xml:space="preserve">
     <value>よくある質問</value>
-  </data>
-  <data name="FAQURL" xml:space="preserve">
-    <value>http://locana.github.io/locana_faq.html</value>
   </data>
   <data name="OpenFAQ" xml:space="preserve">
     <value>FAQページを開く</value>
