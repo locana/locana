@@ -13,30 +13,21 @@
         <util:BoolToVisibilityConverter x:Key="B2VConverter" />
         <util:BoolToVisibilityReverseConverter x:Key="B2VRConverter" />
 
-        <Storyboard x:Name="ShowTitleBlockAnimation">
-            <DoubleAnimation Duration="0:0:0.5"
-                             From="0.0"
-                             Storyboard.TargetName="TitleBlock"
-                             Storyboard.TargetProperty="Opacity"
-                             To="0.9" />
-        </Storyboard>
-        <Storyboard x:Name="HideTitleBlockAnimation">
-            <DoubleAnimation Duration="0:0:0.5"
-                             From="109"
-                             Storyboard.TargetName="TitleBlock"
-                             Storyboard.TargetProperty="Height"
-                             To="0" />
-        </Storyboard>
+        <ItemsPanelTemplate x:Key="ExtraLargeGridItemTemplate">
+            <ItemsWrapGrid ItemHeight="210"
+                           ItemWidth="210"
+                           Orientation="Horizontal" />
+        </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="LargeGridItemTemplate">
-            <ItemsWrapGrid ItemHeight="240"
-                           ItemWidth="240"
+            <ItemsWrapGrid ItemHeight="180"
+                           ItemWidth="180"
                            Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="MediumGridItemTemplate">
-            <ItemsWrapGrid ItemHeight="180"
-                           ItemWidth="180"
+            <ItemsWrapGrid ItemHeight="150"
+                           ItemWidth="150"
                            Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
@@ -58,7 +49,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
-                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource LargeGridItemTemplate}" />
+                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource ExtraLargeGridItemTemplate}" />
                         <Setter Target="GridHolder.(Grid.RowSpan)" Value="1" />
                         <Setter Target="AppBarUnit.Background" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                     </VisualState.Setters>
@@ -69,7 +60,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource SmallGridItemTemplate}" />
-                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
+                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource LargeGridItemTemplate}" />
                         <Setter Target="GridHolder.(Grid.RowSpan)" Value="2" />
                         <Setter Target="AppBarUnit.Background" Value="{ThemeResource SystemChromeBlackLowColor}" />
                     </VisualState.Setters>
@@ -272,7 +263,14 @@
                 </GridView>
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
-
+        <TextBlock x:Name="NoContentsText"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Style="{StaticResource SubheaderTextBlockStyle}"
+                   Text="{Binding [Viewer_NoContents],
+                                  Source={StaticResource LocalizedStrings}}"
+                   Visibility="Collapsed" />
         <CommandBar Name="AppBarUnit"
                     Grid.Row="2"
                     Grid.RowSpan="1"

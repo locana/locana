@@ -971,8 +971,8 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="AppBar_Refresh" xml:space="preserve">
     <value>再読み込み</value>
   </data>
-  <data name="Viewer_EmptyMediaServer" xml:space="preserve">
-    <value>表示するコンテンツがメディアサーバにありません</value>
+  <data name="Viewer_NoContents" xml:space="preserve">
+    <value>コンテンツがありません</value>
   </data>
   <data name="Viewer_UnsupportedFileType" xml:space="preserve">
     <value>&lt;file&gt; は、このデバイス上では取り扱えません。</value>

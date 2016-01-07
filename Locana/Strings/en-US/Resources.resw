@@ -1100,8 +1100,8 @@ Now detecting connected camera device...</value>
 
 Open gallary to browse contents in your camera device.</value>
   </data>
-  <data name="Viewer_EmptyMediaServer" xml:space="preserve">
-    <value>No contents in this media server.</value>
+  <data name="Viewer_NoContents" xml:space="preserve">
+    <value>No contents available</value>
   </data>
   <data name="Nfc_Result" xml:space="preserve">
     <value>Copy Wi-Fi password to clipboard</value>

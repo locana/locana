@@ -596,6 +596,11 @@ namespace Locana.Pages
 
             await Operator.LoadContents();
             HideProgress();
+
+            if (Operator.ContentsCollection.Count == 0)
+            {
+                NoContentsText.Visibility = Visibility.Visible;
+            }
         }
 
         private async void InitializeContentsGridContents()

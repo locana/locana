@@ -13,8 +13,8 @@
         <CollectionViewSource x:Name="PanelSources" IsSourceGrouped="True" />
 
         <ItemsPanelTemplate x:Key="WideGridItemTemplate">
-            <ItemsWrapGrid ItemHeight="180"
-                           ItemWidth="180"
+            <ItemsWrapGrid ItemHeight="150"
+                           ItemWidth="150"
                            Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
@@ -72,8 +72,8 @@
                             <RowDefinition Height="48" />
                         </Grid.RowDefinitions>
                         <Viewbox Grid.Row="0"
-                                 MaxWidth="180"
-                                 MaxHeight="180">
+                                 MaxWidth="150"
+                                 MaxHeight="150">
                             <SymbolIcon Margin="10" Symbol="{Binding IconSymbol}" />
                         </Viewbox>
                         <TextBlock Grid.Row="1"
