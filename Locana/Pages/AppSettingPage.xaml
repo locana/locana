@@ -19,7 +19,8 @@
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title"
                            Style="{ThemeResource PageTitleTextBlockStyle}"
-                           Text="App Settings Page [TBD]" />
+                           Text="{Binding [AppSettings],
+                                          Source={StaticResource LocalizedStrings}}" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">

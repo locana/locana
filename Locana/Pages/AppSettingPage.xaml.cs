@@ -1,5 +1,6 @@
 ﻿using Locana.Controls;
 using Locana.DataModel;
+using Locana.Playback;
 using Locana.Utility;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -36,16 +37,21 @@ namespace Locana.Pages
 
         void InitializeItems()
         {
-            var limited = (Application.Current as App).IsFunctionLimited;
+            AppSettings.Children.Add(BuildShootingSection());
+            AppSettings.Children.Add(BuildDisplaySection());
+            AppSettings.Children.Add(BuildGallerySection());
+        }
 
-            var image_settings = new SettingSection(SystemUtil.GetStringResource("SettingSection_Image"));
+        private static SettingSection BuildShootingSection()
+        {
+            var section = new SettingSection(SystemUtil.GetStringResource("SettingSection_Image"));
 
-            AppSettings.Children.Add(image_settings);
-
-            image_settings.Add(new ToggleSetting(
+            section.Add(new ToggleSetting(
                 new AppSettingData<bool>(SystemUtil.GetStringResource("PostviewTransferSetting"), SystemUtil.GetStringResource("Guide_ReceiveCapturedImage"),
                 () => { return ApplicationSettings.GetInstance().IsPostviewTransferEnabled; },
                 enabled => { ApplicationSettings.GetInstance().IsPostviewTransferEnabled = enabled; })));
+
+            var limited = (Application.Current as App).IsFunctionLimited;
 
             var geoGuide = limited ? "TrialMessage" : "AddGeotag_guide";
             var geoSetting = new AppSettingData<bool>(SystemUtil.GetStringResource("AddGeotag"), SystemUtil.GetStringResource(geoGuide),
@@ -68,18 +74,21 @@ namespace Locana.Pages
                 ApplicationSettings.GetInstance().GeotagEnabled = false;
                 geoSetting.IsActive = false;
             }
-            image_settings.Add(geoToggle);
+            section.Add(geoToggle);
 
-            var display_settings = new SettingSection(SystemUtil.GetStringResource("SettingSection_Display"));
+            return section;
+        }
 
-            AppSettings.Children.Add(display_settings);
+        private static SettingSection BuildDisplaySection()
+        {
+            var section = new SettingSection(SystemUtil.GetStringResource("SettingSection_Display"));
 
-            display_settings.Add(new ToggleSetting(
+            section.Add(new ToggleSetting(
                 new AppSettingData<bool>(SystemUtil.GetStringResource("DisplayTakeImageButtonSetting"), SystemUtil.GetStringResource("Guide_DisplayTakeImageButtonSetting"),
                 () => { return ApplicationSettings.GetInstance().IsShootButtonDisplayed; },
                 enabled => { ApplicationSettings.GetInstance().IsShootButtonDisplayed = enabled; })));
 
-            display_settings.Add(new ToggleSetting(
+            section.Add(new ToggleSetting(
                 new AppSettingData<bool>(SystemUtil.GetStringResource("DisplayHistogram"), SystemUtil.GetStringResource("Guide_Histogram"),
                 () => { return ApplicationSettings.GetInstance().IsHistogramDisplayed; },
                 enabled => { ApplicationSettings.GetInstance().IsHistogramDisplayed = enabled; })));
@@ -93,9 +102,9 @@ namespace Locana.Pages
                     //await SetupFocusFrame(enabled);
                     //if (!enabled) { _FocusFrameSurface.ClearFrames(); }
                 });
-            display_settings.Add(new ToggleSetting(FocusFrameSetting));
+            section.Add(new ToggleSetting(FocusFrameSetting));
 
-            display_settings.Add(new ToggleSetting(
+            section.Add(new ToggleSetting(
                 new AppSettingData<bool>(SystemUtil.GetStringResource("LiveviewRotation"), SystemUtil.GetStringResource("LiveviewRotation_guide"),
                     () => { return ApplicationSettings.GetInstance().LiveviewRotationEnabled; },
                     enabled =>
@@ -112,7 +121,7 @@ namespace Locana.Pages
                         //}
                     })));
 
-            display_settings.Add(new ToggleSetting(
+            section.Add(new ToggleSetting(
                 new AppSettingData<bool>(SystemUtil.GetStringResource("FramingGrids"), SystemUtil.GetStringResource("Guide_FramingGrids"),
                     () => { return ApplicationSettings.GetInstance().FramingGridEnabled; },
                     enabled =>
@@ -137,7 +146,7 @@ namespace Locana.Pages
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });
-            display_settings.Add(gridTypePanel);
+            section.Add(gridTypePanel);
 
             var gridColorPanel = new ComboBoxSetting(new AppSettingData<int>(SystemUtil.GetStringResource("FramingGridColor"), null,
                     () => { return (int)ApplicationSettings.GetInstance().GridColor; },
@@ -154,7 +163,7 @@ namespace Locana.Pages
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });
-            display_settings.Add(gridColorPanel);
+            section.Add(gridColorPanel);
 
             var fibonacciOriginPanel = new ComboBoxSetting(new AppSettingData<int>(SystemUtil.GetStringResource("FibonacciSpiralOrigin"), null,
                 () => { return (int)ApplicationSettings.GetInstance().FibonacciLineOrigin; },
@@ -171,7 +180,33 @@ namespace Locana.Pages
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });
-            display_settings.Add(fibonacciOriginPanel);
+            section.Add(fibonacciOriginPanel);
+
+            return section;
+        }
+
+        private static SettingSection BuildGallerySection()
+        {
+            var section = new SettingSection(SystemUtil.GetStringResource("SettingSection_ContentsSync"));
+
+            section.Add(new ToggleSetting(
+                new AppSettingData<bool>(SystemUtil.GetStringResource("Setting_PrioritizeOriginalSize"), SystemUtil.GetStringResource("Guide_PrioritizeOriginalSize"),
+                    () => { return ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents; },
+                    enabled => { ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents = enabled; })));
+
+            section.Add(new ComboBoxSetting(
+                new AppSettingData<int>(SystemUtil.GetStringResource("ContentTypes"), SystemUtil.GetStringResource("ContentTypesGuide"),
+                    () => { return (int)ApplicationSettings.GetInstance().RemoteContentsSet; },
+                    newValue =>
+                    {
+                        if (newValue != -1)
+                        {
+                            ApplicationSettings.GetInstance().RemoteContentsSet = (ContentsSet)newValue;
+                        }
+                    },
+                    SettingValueConverter.FromContentsSet(EnumUtil<ContentsSet>.GetValueEnumerable()))));
+
+            return section;
         }
     }
 }
