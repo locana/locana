@@ -1078,4 +1078,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="MoreInfo" xml:space="preserve">
     <value>詳しく</value>
   </data>
+  <data name="RemoteStorageOffline" xml:space="preserve">
+    <value>{0} に接続できません</value>
+  </data>
 </root>

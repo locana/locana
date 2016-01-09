@@ -82,7 +82,10 @@ namespace Locana.Pages
             if (_mediaCapture == null)
             {
                 AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("LocalCameraUnavailable") });
-                AppShell.Current.AppFrame.GoBack();
+                var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    AppShell.Current.AppFrame.GoBack();
+                });
                 return;
             }
 

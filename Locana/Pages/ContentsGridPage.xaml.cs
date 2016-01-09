@@ -256,12 +256,6 @@ namespace Locana.Pages
 
             displayRequest.RequestActive();
 
-            if (e.NavigationMode != NavigationMode.New)
-            {
-                navigationHelper.GoBack();
-                return;
-            }
-
             var tuple = e.Parameter as Tuple<string, string>;
             switch (tuple?.Item1 ?? "")
             {
@@ -293,7 +287,20 @@ namespace Locana.Pages
             if (Operator == null)
             {
                 DebugUtil.Log("Specified device is invalidated");
-                navigationHelper.GoBack();
+
+                string name = null;
+                if (!NetworkObserver.INSTANCE.TryGetDeviceName(RemoteStorageId, out name))
+                {
+                    name = SystemUtil.GetStringResource("AppBar_RemoteStorage");
+                }
+                AppShell.Current.Toast.PushToast(new ToastContent
+                {
+                    Text = string.Format(SystemUtil.GetStringResource("RemoteStorageOffline"), name)
+                });
+                var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    AppShell.Current.AppFrame.GoBack();
+                });
                 return;
             }
 
@@ -471,7 +478,10 @@ namespace Locana.Pages
 
         private void UpdateSelectionMode(SelectivityFactor factor)
         {
-            Operator.ContentsCollection.SelectivityFactor = factor;
+            if (Operator != null)
+            {
+                Operator.ContentsCollection.SelectivityFactor = factor;
+            }
             switch (factor)
             {
                 case SelectivityFactor.None:
@@ -546,7 +556,7 @@ namespace Locana.Pages
                     case ViewerState.Single:
                         UpdateSelectionMode(SelectivityFactor.None);
                         CommandBarManager.Clear();
-                        if (Operator.ContentsCollection.Count != 0)
+                        if (Operator?.ContentsCollection.Count != 0)
                         {
                             if (TargetStorageType != StorageType.Local)
                             {
@@ -749,8 +759,8 @@ namespace Locana.Pages
 
         private void ContentsGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            GridSources.Source = Operator.ContentsCollection;
-            (GridHolder.ZoomedOutView as ListViewBase).ItemsSource = GridSources.View.CollectionGroups;
+            GridSources.Source = Operator?.ContentsCollection;
+            (GridHolder.ZoomedOutView as ListViewBase).ItemsSource = GridSources.View?.CollectionGroups;
         }
 
         private void ContentsGrid_Unloaded(object sender, RoutedEventArgs e)
@@ -849,7 +859,7 @@ namespace Locana.Pages
 
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Operator.FinishMoviePlayback();
+                Operator?.FinishMoviePlayback();
                 MoviePlayerWrapper.Visibility = Visibility.Collapsed;
             });
         }

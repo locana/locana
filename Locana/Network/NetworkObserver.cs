@@ -51,6 +51,14 @@ namespace Locana.Network
         }
         */
 
+        // This collection is kept even if the device went offline.
+        private Dictionary<string, string> DeviceNames = new Dictionary<string, string>();
+
+        public bool TryGetDeviceName(string id, out string name)
+        {
+            return DeviceNames.TryGetValue(id, out name);
+        }
+
         public event EventHandler DevicesCleared;
 
         protected void OnDevicesCleared()
@@ -99,6 +107,9 @@ namespace Locana.Network
         void discovery_SonyCameraDeviceDiscovered(object sender, SonyCameraDeviceEventArgs e)
         {
             var device = new TargetDevice(e.SonyCameraDevice, e.LocalAddress);
+
+            UpdateDeviceNameDictionary(device.Udn, device.FriendlyName, device.DeviceName);
+
             lock (remoteApiDevices)
             {
                 if (remoteApiDevices.ContainsKey(e.SonyCameraDevice.UDN))
@@ -116,6 +127,8 @@ namespace Locana.Network
             {
                 var device = UpnpDescriptionParser.ParseDescription(XDocument.Parse(e.Description), e.Location);
                 device.LocalAddress = e.LocalAddress;
+
+                UpdateDeviceNameDictionary(device.UDN, device.FriendlyName, device.ModelName);
 
                 lock (cdsDevices)
                 {
@@ -137,7 +150,18 @@ namespace Locana.Network
                 DebugUtil.Log("failed to parse upnp device description.");
                 DebugUtil.Log(ex.StackTrace);
             }
+        }
 
+        private void UpdateDeviceNameDictionary(string udn, string primaryName, string secondaryName)
+        {
+            if (primaryName != null)
+            {
+                DeviceNames[udn] = primaryName;
+            }
+            else if (secondaryName != null)
+            {
+                DeviceNames[udn] = secondaryName;
+            }
         }
 
         private bool Started = false;
