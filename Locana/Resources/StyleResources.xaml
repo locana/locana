@@ -38,7 +38,7 @@
                 <Setter Property="Margin" Value="3,6,3,3" />
                 <Setter Property="FontSize" Value="18" />
                 <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Foreground" Value="{StaticResource SystemControlForegroundChromeMediumBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource ApplicationForegroundThemeBrush}" />
             </Style>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
