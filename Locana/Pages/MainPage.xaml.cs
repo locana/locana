@@ -290,18 +290,6 @@ namespace Locana.Pages
                     StartToHideControlPanel(0);
                     break;
             }
-
-            groups[1].CurrentStateChanged += (sender, e) =>
-            {
-                Debug.WriteLine("Height state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
-                switch (e.NewState.Name)
-                {
-                    case TALL_STATE:
-                        break;
-                    case SHORT_STATE:
-                        break;
-                }
-            };
         }
 
         void HideCommandBar()
@@ -365,32 +353,31 @@ namespace Locana.Pages
             liveview.Closed += liveview_Closed;
             LiveviewFpsTimer.Start();
 
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            ScreenViewData = new LiveviewScreenViewData(target);
+            ScreenViewData.NotifyFriendlyNameUpdated();
+            BatteryStatusDisplay.BatteryInfo = target.Status.BatteryInfo;
+            LayoutRoot.DataContext = ScreenViewData;
+            var panels = SettingPanelBuilder.CreateNew(target);
+            var pn = panels.GetPanelsToShow();
+            foreach (var panel in pn)
             {
-                ScreenViewData = new LiveviewScreenViewData(target);
-                ScreenViewData.NotifyFriendlyNameUpdated();
-                BatteryStatusDisplay.BatteryInfo = target.Status.BatteryInfo;
-                LayoutRoot.DataContext = ScreenViewData;
-                var panels = SettingPanelBuilder.CreateNew(target);
-                var pn = panels.GetPanelsToShow();
-                foreach (var panel in pn)
-                {
-                    ControlPanel.Children.Add(panel);
-                }
+                ControlPanel.Children.Add(panel);
+            }
 
-                Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
-                ShootingParams.DataContext = ScreenViewData;
-                _CommandBarManager.ContentViewData = ScreenViewData;
-                ZoomElements.DataContext = ScreenViewData;
+            Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
+            ShootingParams.DataContext = ScreenViewData;
+            _CommandBarManager.ContentViewData = ScreenViewData;
+            ZoomElements.DataContext = ScreenViewData;
 
-                FramingGuideSurface.DataContext = new OptionalElementsViewData() { AppSetting = ApplicationSettings.GetInstance() };
-                UpdateShutterButton(target.Status);
+            FramingGuideSurface.DataContext = new OptionalElementsViewData() { AppSetting = ApplicationSettings.GetInstance() };
+            UpdateShutterButton(target.Status);
 
-                await SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);
-                _FocusFrameSurface.ClearFrames();
+            await SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);
+            _FocusFrameSurface.ClearFrames();
 
-                HideFrontScreen();
-            });
+            HistogramControl.Visibility = ApplicationSettings.GetInstance().IsHistogramDisplayed ? Visibility.Visible : Visibility.Collapsed;
+
+            HideFrontScreen();
 
             SetUIHandlers();
         }
