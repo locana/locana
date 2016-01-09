@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Locana.Utility;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -77,6 +78,13 @@ namespace Locana.Pages
             _displayInformation.OrientationChanged += _displayInformation_OrientationChanged;
 
             await InitializeCameraAsync();
+
+            if (_mediaCapture == null)
+            {
+                AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("LocalCameraUnavailable") });
+                AppShell.Current.AppFrame.GoBack();
+                return;
+            }
 
             CaptureTimer = new DispatcherTimer();
             CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
@@ -157,11 +165,10 @@ namespace Locana.Pages
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
             _displayInformation.OrientationChanged -= _displayInformation_OrientationChanged;
 
-            CaptureTimer.Stop();
-            FocusTimer.Stop();
+            CaptureTimer?.Stop();
+            FocusTimer?.Stop();
             await CleanupCameraAsync();
         }
 
@@ -292,7 +299,7 @@ namespace Locana.Pages
         private async Task StopPreviewAsync()
         {
             _isPreviewing = false;
-            await _mediaCapture.StopPreviewAsync();
+            await _mediaCapture?.StopPreviewAsync();
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

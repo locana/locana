@@ -1072,4 +1072,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="AppBar_Cancel" xml:space="preserve">
     <value>キャンセル</value>
   </data>
+  <data name="LocalCameraUnavailable" xml:space="preserve">
+    <value>カメラが使用できません</value>
+  </data>
 </root>
