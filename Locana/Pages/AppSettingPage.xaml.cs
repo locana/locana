@@ -36,7 +36,7 @@ namespace Locana.Pages
 
         void InitializeItems()
         {
-            var limited = false; // todo: (App.Current as App).IsFunctionLimited;
+            var limited = (Application.Current as App).IsFunctionLimited;
 
             var image_settings = new SettingSection(SystemUtil.GetStringResource("SettingSection_Image"));
 
@@ -130,7 +130,7 @@ namespace Locana.Pages
                         ApplicationSettings.GetInstance().GridType = (FramingGridTypes)(setting + 1);
                     },
                     SettingValueConverter.FromFramingGrid(EnumUtil<FramingGridTypes>.GetValueEnumerable())));
-            gridTypePanel.SetBinding(ComboBoxSetting.VisibilityProperty, new Binding
+            gridTypePanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
                 Path = new PropertyPath("FramingGridEnabled"),
@@ -147,7 +147,7 @@ namespace Locana.Pages
                         ApplicationSettings.GetInstance().GridColor = (FramingGridColors)setting;
                     },
                     SettingValueConverter.FromFramingGridColor(EnumUtil<FramingGridColors>.GetValueEnumerable())));
-            gridColorPanel.SetBinding(ComboBoxSetting.VisibilityProperty, new Binding
+            gridColorPanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
                 Path = new PropertyPath("FramingGridEnabled"),
@@ -164,7 +164,7 @@ namespace Locana.Pages
                     ApplicationSettings.GetInstance().FibonacciLineOrigin = (FibonacciLineOrigins)setting;
                 },
                 SettingValueConverter.FromFibonacciLineOrigin(EnumUtil<FibonacciLineOrigins>.GetValueEnumerable())));
-            fibonacciOriginPanel.SetBinding(ComboBoxSetting.VisibilityProperty, new Binding
+            fibonacciOriginPanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
                 Path = new PropertyPath("IsFibonacciSpiralEnabled"),

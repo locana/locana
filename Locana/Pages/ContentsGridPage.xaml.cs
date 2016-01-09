@@ -310,8 +310,6 @@ namespace Locana.Pages
             PhotoScreen.DataContext = PhotoData;
             SetStillDetailVisibility(false);
 
-            LoadContents();
-
             SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
 
             UpdateTopBar();
@@ -320,6 +318,16 @@ namespace Locana.Pages
             NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_CameraDiscovered;
             NetworkObserver.INSTANCE.DevicesCleared += NetworkObserver_DevicesCleared;
             NetworkObserver.INSTANCE.Start();
+
+            if (((Application.Current) as App).IsFunctionLimited && TargetStorageType != StorageType.Local)
+            {
+                CautionText.Text = SystemUtil.GetStringResource("TrialMessage");
+                CautionText.Visibility = Visibility.Visible;
+                MoreInfoButton.Visibility = Visibility.Visible;
+            }
+            else {
+                LoadContents();
+            }
         }
 
         private void NetworkObserver_DevicesCleared(object sender, EventArgs e)
@@ -599,7 +607,8 @@ namespace Locana.Pages
 
             if (Operator.ContentsCollection.Count == 0)
             {
-                NoContentsText.Visibility = Visibility.Visible;
+                CautionText.Text = SystemUtil.GetStringResource("Viewer_NoContents");
+                CautionText.Visibility = Visibility.Visible;
             }
         }
 
@@ -935,6 +944,11 @@ namespace Locana.Pages
                 // Fallback to large size image
                 MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
             }
+        }
+
+        private void MoreInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutPage));
         }
     }
 

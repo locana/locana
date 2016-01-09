@@ -1208,4 +1208,7 @@ Open gallary to browse contents in your camera device.</value>
   <data name="LocalCameraUnavailable" xml:space="preserve">
     <value>Camera device unavailable</value>
   </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>More information</value>
+  </data>
 </root>

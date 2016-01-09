@@ -1075,4 +1075,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="LocalCameraUnavailable" xml:space="preserve">
     <value>カメラが使用できません</value>
   </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>詳しく</value>
+  </data>
 </root>

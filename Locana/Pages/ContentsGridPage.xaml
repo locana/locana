@@ -255,14 +255,27 @@
                 </GridView>
             </SemanticZoom.ZoomedOutView>
         </SemanticZoom>
-        <TextBlock x:Name="NoContentsText"
-                   Grid.Row="1"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Style="{StaticResource SubheaderTextBlockStyle}"
-                   Text="{Binding [Viewer_NoContents],
-                                  Source={StaticResource LocalizedStrings}}"
-                   Visibility="Collapsed" />
+
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Border>
+                <TextBlock x:Name="CautionText"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource SubheaderTextBlockStyle}"
+                           Visibility="Collapsed" />
+            </Border>
+            <Border>
+                <Button x:Name="MoreInfoButton"
+                        Margin="0,48,0,0"
+                        HorizontalAlignment="Center"
+                        Click="MoreInfoButton_Click"
+                        Content="{Binding [MoreInfo],
+                                          Source={StaticResource LocalizedStrings}}"
+                        Visibility="Collapsed" />
+            </Border>
+        </StackPanel>
+
         <CommandBar Name="AppBarUnit"
                     Grid.Row="2"
                     Grid.RowSpan="1"
