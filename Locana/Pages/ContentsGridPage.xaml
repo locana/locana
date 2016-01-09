@@ -109,14 +109,6 @@
                                    SeekAvailable="{Binding SeekAvailable}" />
         </Border>
 
-        <c:Toast x:Name="Toast"
-                 Grid.RowSpan="2"
-                 MinHeight="48"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Top"
-                 Canvas.ZIndex="20"
-                 IsHitTestVisible="False" />
-
         <ProgressRing x:Name="ProgressCircle"
                       Grid.RowSpan="2"
                       Width="60"

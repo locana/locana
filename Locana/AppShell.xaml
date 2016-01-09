@@ -123,6 +123,13 @@
             </Frame>
         </SplitView>
 
+        <controls:Toast x:Name="MessageToast"
+                        MinHeight="48"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Canvas.ZIndex="20"
+                        IsHitTestVisible="False" />
+
         <!--  Declared last to have it rendered above everything else, but it needs to be the first item in the tab sequence.  -->
         <ToggleButton x:Name="TogglePaneButton"
                       AutomationProperties.Name="Menu"

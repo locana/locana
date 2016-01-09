@@ -68,6 +68,8 @@ namespace Locana
 
         private List<NavMenuItem> wholeList = new List<NavMenuItem>();
 
+        public Toast Toast { get { return MessageToast; } }
+
         public static AppShell Current = null;
 
         /// <summary>

@@ -689,7 +689,7 @@ namespace Locana.Pages
             DebugUtil.Log(message);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Toast.PushToast(new ToastContent() { Text = message });
+                AppShell.Current.Toast.PushToast(new ToastContent() { Text = message });
             });
         }
 
