@@ -1003,6 +1003,13 @@ namespace Locana.Pages
         {
             double imageHeight, imageWidth;
 
+            var bitmap = LiveviewImageBitmap;
+            if (bitmap == null)
+            {
+                // Maybe changing window size
+                return;
+            }
+
             imageHeight = LiveviewImageBitmap.SizeInPixels.Height * magnification;
             LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
             imageWidth = LiveviewImageBitmap.SizeInPixels.Width * magnification;
