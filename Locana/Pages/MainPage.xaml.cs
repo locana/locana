@@ -1,5 +1,3 @@
-#define WINDOWS_APP
-
 using Kazyx.ImageStream;
 using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
@@ -333,18 +331,6 @@ namespace Locana.Pages
             base.OnNavigatedTo(e);
             var target = e.Parameter as TargetDevice;
             SetupScreen(target);
-
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                Frame.CanGoBack
-                ? AppViewBackButtonVisibility.Visible
-                : AppViewBackButtonVisibility.Collapsed;
-
-            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
-        }
-
-        private void BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            Frame.Navigate(typeof(EntrancePage));
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -357,8 +343,6 @@ namespace Locana.Pages
             LiveviewFpsTimer.Stop();
 
             base.OnNavigatingFrom(e);
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         async void SetupScreen(TargetDevice target)

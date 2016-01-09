@@ -1,8 +1,6 @@
-﻿
-using Locana.Controls;
+﻿using Locana.Controls;
 using Locana.DataModel;
 using Locana.Utility;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -29,23 +27,11 @@ namespace Locana.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                    Frame.CanGoBack
-                    ? AppViewBackButtonVisibility.Visible
-                    : AppViewBackButtonVisibility.Collapsed;
-            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
-        }
-
-        private void BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         void InitializeItems()

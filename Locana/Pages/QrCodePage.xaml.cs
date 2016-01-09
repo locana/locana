@@ -95,13 +95,6 @@ namespace Locana.Pages
             CaptureTimer.Start();
             FocusTimer.Start();
 
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                Frame.CanGoBack
-                ? AppViewBackButtonVisibility.Visible
-                : AppViewBackButtonVisibility.Collapsed;
-
-            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
-
             await SetPreviewRotationAsync();
         }
 
@@ -162,15 +155,9 @@ namespace Locana.Pages
             }
         }
 
-        private void BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            Frame.Navigate(typeof(EntrancePage));
-        }
-
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
             _displayInformation.OrientationChanged -= _displayInformation_OrientationChanged;
 
             CaptureTimer.Stop();

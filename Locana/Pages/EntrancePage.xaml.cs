@@ -73,6 +73,11 @@ namespace Locana.Pages
                     DebugUtil.Log("QR data parse error: " + ex.Message);
                 }
             }
+
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                Frame.CanGoBack
+                ? AppViewBackButtonVisibility.Visible
+                : AppViewBackButtonVisibility.Collapsed;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
