@@ -330,6 +330,8 @@ namespace Locana.Pages
             HistogramCreator.Stop();
             LiveviewFpsTimer.Stop();
 
+            var task = SequentialOperation.TearDown(target, liveview);
+
             base.OnNavigatingFrom(e);
         }
 

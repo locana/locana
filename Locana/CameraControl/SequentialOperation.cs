@@ -80,6 +80,26 @@ namespace Locana.CameraControl
             }
         }
 
+        public static async Task TearDown(TargetDevice device, StreamProcessor liveview)
+        {
+            if (liveview != null)
+            {
+                if (device != null)
+                {
+                    await CloseLiveviewStream(device.Api, liveview);
+                }
+                else
+                {
+                    liveview.CloseConnection();
+                }
+            }
+
+            if (device != null)
+            {
+                device.Observer.Stop();
+            }
+        }
+
         public static async Task<bool> OpenLiveviewStream(DeviceApiHolder api, StreamProcessor liveview)
         {
             DebugUtil.Log("Open liveview stream");
