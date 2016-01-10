@@ -34,6 +34,7 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
+
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
@@ -208,7 +209,7 @@
                                     Width="40"
                                     Height="20"
                                     VerticalAlignment="Center"
-                                    Visibility="{Binding IsBatteryInfoAvalable,
+                                    Visibility="{Binding IsBatteryInfoAvailable,
                                                          FallbackValue=Collapsed,
                                                          Converter={StaticResource B2VConverter}}" />
             <Image Grid.Column="8"
@@ -218,8 +219,6 @@
                                         FallbackValue=Collapsed,
                                         Converter={StaticResource B2VConverter}}" />
         </Grid>
-
-
 
         <Grid x:Name="ControlPanelUnit"
               Grid.Column="2"
