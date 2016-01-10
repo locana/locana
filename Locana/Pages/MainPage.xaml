@@ -197,8 +197,8 @@
                        Text="{Binding RecordbaleAmount}" />
             <controls:BatteryStatus x:Name="BatteryStatusDisplay"
                                     Grid.Column="7"
-                                    Width="88"
-                                    Height="25"
+                                    Width="40"
+                                    Height="20"
                                     VerticalAlignment="Center" />
             <Image Grid.Column="8"
                    VerticalAlignment="Center"
