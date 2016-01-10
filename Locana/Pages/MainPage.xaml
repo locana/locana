@@ -43,11 +43,15 @@
                     <VisualState.Setters>
                         <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="LiveviewGrid.(Grid.Column)" Value="1" />
-                        <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="4" />
-                        <Setter Target="LiveviewGrid.(Grid.Row)" Value="0" />
+                        <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="3" />
+                        <Setter Target="LiveviewGrid.(Grid.Row)" Value="1" />
+                        <Setter Target="LiveviewGrid.Margin" Value="0,-24,0,0" />
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="Header.(Grid.Column)" Value="1" />
-                        <Setter Target="Header.Margin" Value="8,4" />
+                        <Setter Target="Header.Margin" Value="24,4,0,4" />
+                        <Setter Target="Header.Height" Value="32" />
+                        <Setter Target="RecordingCountText.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
+                        <Setter Target="StorageAmountText.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
                         <Setter Target="HistogramControl.(Grid.Row)" Value="0" />
                         <Setter Target="HistogramControl.(Grid.RowSpan)" Value="2" />
                         <Setter Target="HistogramControl.(Grid.Column)" Value="2" />
@@ -72,9 +76,13 @@
                         <Setter Target="LiveviewGrid.(Grid.Column)" Value="0" />
                         <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="5" />
                         <Setter Target="LiveviewGrid.(Grid.Row)" Value="0" />
+                        <Setter Target="LiveviewGrid.Margin" Value="0" />
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="3" />
                         <Setter Target="Header.(Grid.Column)" Value="0" />
-                        <Setter Target="Header.Margin" Value="48,4,8,4" />
+                        <Setter Target="Header.Margin" Value="48,12,8,4" />
+                        <Setter Target="Header.Height" Value="25" />
+                        <Setter Target="RecordingCountText.Style" Value="{StaticResource HeaderTextStyle}" />
+                        <Setter Target="StorageAmountText.Style" Value="{StaticResource HeaderTextStyle}" />
                         <Setter Target="HistogramControl.(Grid.Row)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.RowSpan)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0" />
@@ -154,10 +162,8 @@
 
         <Grid x:Name="Header"
               Grid.Column="1"
-              Height="25"
-              Margin="8,4"
               HorizontalAlignment="Stretch"
-              VerticalAlignment="Center"
+              VerticalAlignment="Top"
               Canvas.ZIndex="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -182,8 +188,9 @@
                    Visibility="{Binding IsRecording,
                                         FallbackValue=Collapsed,
                                         Converter={StaticResource B2VConverter}}" />
-            <TextBlock Grid.Column="3"
-                       Style="{StaticResource HeaderTextStyle}"
+            <TextBlock x:Name="RecordingCountText"
+                       Grid.Column="3"
+                       VerticalAlignment="Center"
                        Text="{Binding RecordingCount}"
                        Visibility="{Binding IsRecordingCountAvailable,
                                             FallbackValue=Collapsed,
@@ -191,15 +198,19 @@
             <Image Grid.Column="5"
                    Margin="3"
                    Source="{Binding MemoryCardStatusImage}" />
-            <TextBlock Grid.Column="6"
+            <TextBlock x:Name="StorageAmountText"
+                       Grid.Column="6"
                        HorizontalAlignment="Left"
-                       Style="{StaticResource HeaderTextStyle}"
+                       VerticalAlignment="Center"
                        Text="{Binding RecordbaleAmount}" />
             <controls:BatteryStatus x:Name="BatteryStatusDisplay"
                                     Grid.Column="7"
                                     Width="40"
                                     Height="20"
-                                    VerticalAlignment="Center" />
+                                    VerticalAlignment="Center"
+                                    Visibility="{Binding IsBatteryInfoAvalable,
+                                                         FallbackValue=Collapsed,
+                                                         Converter={StaticResource B2VConverter}}" />
             <Image Grid.Column="8"
                    VerticalAlignment="Center"
                    Source="{Binding GeopositionStatusImage}"

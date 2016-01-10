@@ -37,6 +37,7 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(IsAudioMode));
                 NotifyChangedOnUI(nameof(LiveviewImageDisplayed));
                 NotifyChangedOnUI(nameof(FramingGridDisplayed));
+                NotifyChangedOnUI(nameof(IsBatteryInfoAvailable));
             };
             Device.Api.AvailiableApisUpdated += (sender, e) =>
             {
@@ -483,6 +484,8 @@ namespace Locana.DataModel
         private bool IsShootingParamAvailable(string api) { return Device.Api != null && Device.Api.Capability.IsAvailable(api); }
 
         public bool IsProgramShiftAvailable { get { return Device.Api != null && Device.Api.Capability.IsAvailable("setProgramShift"); } }
+
+        public bool IsBatteryInfoAvailable { get { return Device.Status.BatteryInfo != null; } }
 
         private static readonly BitmapImage GeoInfoStatusImage_OK = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/GeoInfoStatus_OK.png", UriKind.Absolute));
         private static readonly BitmapImage GeoInfoStatusImage_NG = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/GeoInfoStatus_NG.png", UriKind.Absolute));
