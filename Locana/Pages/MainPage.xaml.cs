@@ -332,6 +332,11 @@ namespace Locana.Pages
             catch (Exception ex)
             {
                 Debug.WriteLine("Failed setup: " + ex.Message);
+                var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("ErrorMessage_CameraSetupFailure") });
+                    AppShell.Current.AppFrame.GoBack();
+                });
                 return;
             }
 

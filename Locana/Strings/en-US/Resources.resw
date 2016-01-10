@@ -1214,4 +1214,7 @@ Open gallary to browse contents in your camera device.</value>
   <data name="RemoteStorageOffline" xml:space="preserve">
     <value>{0} is offline</value>
   </data>
+  <data name="ErrorMessage_CameraSetupFailure" xml:space="preserve">
+    <value>Failed to setup connection</value>
+  </data>
 </root>
