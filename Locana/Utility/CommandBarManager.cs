@@ -18,18 +18,7 @@ namespace Locana.Utility
             EnabledItems.Add(AppBarItemType.Content, new SortedSet<AppBarItem>());
         }
 
-        private CommandBar bar = new CommandBar();
-
-        private LiveviewScreenViewData _ContenteViewData = null;
-        public LiveviewScreenViewData ContentViewData
-        {
-            get { return _ContenteViewData; }
-            set
-            {
-                _ContenteViewData = value;
-                this.bar.Content = BuildContentPanel(value, EnabledItems[AppBarItemType.Content]);
-            }
-        }
+        public LiveviewScreenViewData ShootingScreenBarData { get; set; }
 
         StackPanel BuildContentPanel(LiveviewScreenViewData data, SortedSet<AppBarItem> items)
         {
@@ -269,20 +258,6 @@ namespace Locana.Utility
             return this;
         }
 
-        public CommandBar CreateNew(double opacity)
-        {
-            bar = new CommandBar()
-            {
-                Opacity = opacity,
-                // ClosedDisplayMode = AppBarClosedDisplayMode.Minimal,
-                HorizontalContentAlignment = HorizontalAlignment.Right,
-                Background = null,
-            };
-
-            ApplyAll(bar);
-            return bar;
-        }
-
         public void ApplyCommands(CommandBar bar)
         {
             bar.PrimaryCommands.Clear();
@@ -308,12 +283,9 @@ namespace Locana.Utility
             }
         }
 
-        public void ApplyAll(CommandBar bar)
+        public void ApplyShootingScreenContents(CommandBar bar)
         {
-            ApplyCommands(bar);
-
-            bar.Content = null;
-            bar.Content = BuildContentPanel(ContentViewData, EnabledItems[AppBarItemType.Content]);
+            bar.Content = BuildContentPanel(ShootingScreenBarData, EnabledItems[AppBarItemType.Content]);
         }
 
         public bool IsEnabled(AppBarItemType type, AppBarItem item)

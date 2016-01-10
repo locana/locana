@@ -58,17 +58,13 @@ namespace Locana.Pages
                 });
             };
 
-            var bar = _CommandBarManager.Clear(). //
-                HiddenItem(AppBarItem.AppSetting). //
+            _CommandBarManager.Clear(). //
                 Content(AppBarItem.Zoom). //
                 Content(AppBarItem.FNumberSlider). //
                 Content(AppBarItem.ShutterSpeedSlider). //
                 Content(AppBarItem.IsoSlider). //
                 Content(AppBarItem.EvSlider). //
-                Content(AppBarItem.ProgramShiftSlider). //
-                CreateNew(1.0);
-            this.AppBarUnit.Children.Clear();
-            this.AppBarUnit.Children.Add(bar);
+                Content(AppBarItem.ProgramShiftSlider);
         }
 
         DispatcherTimer LiveviewFpsTimer = new DispatcherTimer();
@@ -292,14 +288,6 @@ namespace Locana.Pages
             }
         }
 
-        void HideCommandBar()
-        {
-            if (this.AppBarUnit.Children.Count > 0)
-            {
-                //                (this.AppBarUnit.Children[0] as CommandBar).ClosedDisplayMode = AppBarClosedDisplayMode.
-            }
-        }
-
         private HistogramCreator HistogramCreator;
 
         private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
@@ -368,7 +356,9 @@ namespace Locana.Pages
 
             Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
             ShootingParams.DataContext = ScreenViewData;
-            _CommandBarManager.ContentViewData = ScreenViewData;
+            _CommandBarManager.ShootingScreenBarData = ScreenViewData;
+            _CommandBarManager.ApplyShootingScreenContents(AppBarUnit);
+
             ZoomElements.DataContext = ScreenViewData;
 
             FramingGuideSurface.DataContext = new OptionalElementsViewData() { AppSetting = ApplicationSettings.GetInstance() };
@@ -493,16 +483,14 @@ namespace Locana.Pages
 
         private void HideCancelTouchAFButton()
         {
-            var bar = _CommandBarManager.Disable(AppBarItemType.Command, AppBarItem.CancelTouchAF).CreateNew(1.0);
-            this.AppBarUnit.Children.Clear();
-            this.AppBarUnit.Children.Add(bar);
+            _CommandBarManager.Disable(AppBarItemType.Command, AppBarItem.CancelTouchAF)
+                .ApplyCommands(AppBarUnit);
         }
 
         void ShowCancelTouchAFButton()
         {
-            var bar = _CommandBarManager.Command(AppBarItem.CancelTouchAF).CreateNew(1.0);
-            this.AppBarUnit.Children.Clear();
-            this.AppBarUnit.Children.Add(bar);
+            _CommandBarManager.Command(AppBarItem.CancelTouchAF)
+                .ApplyCommands(AppBarUnit);
         }
 
         private void UpdateTouchFocus(TouchFocusStatus status)

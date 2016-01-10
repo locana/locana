@@ -431,9 +431,11 @@
                 </Grid>
             </Grid>
 
-            <StackPanel Name="AppBarUnit"
+            <CommandBar Name="AppBarUnit"
                         Grid.RowSpan="4"
                         VerticalAlignment="Bottom"
+                        HorizontalContentAlignment="Right"
+                        Background="Transparent"
                         Canvas.ZIndex="40" />
 
             <Grid x:Name="ShootingParams"

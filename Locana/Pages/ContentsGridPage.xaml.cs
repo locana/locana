@@ -593,7 +593,7 @@ namespace Locana.Pages
                         CommandBarManager.Clear();
                         break;
                 }
-                CommandBarManager.ApplyAll(AppBarUnit);
+                CommandBarManager.ApplyCommands(AppBarUnit);
 
                 if (AppBarUnit.PrimaryCommands.Count == 0)
                 {
