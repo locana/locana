@@ -40,6 +40,11 @@
                         </Canvas.RenderTransform>
                         <Canvas.Resources />
                         <Path Data="F1 M24,24z M0,0z M9,2L7.17,4 4,4C2.9,4,2,4.9,2,6L2,18C2,19.1,2.9,20,4,20L20,20C21.1,20,22,19.1,22,18L22,6C22,4.9,21.1,4,20,4L16.83,4 15,2 9,2z M12,17C9.24,17 7,14.76 7,12 7,9.24 9.24,7 12,7 14.76,7 17,9.24 17,12 17,14.76 14.76,17 12,17z" Fill="#FFFFFFFF" />
+                        <Ellipse Canvas.Left="8.8"
+                                 Canvas.Top="8.8"
+                                 Width="6.4"
+                                 Height="6.4"
+                                 Fill="#FFFFFF" />
                     </Canvas>
                 </Viewbox>
             </DataTemplate>
@@ -51,7 +56,7 @@
                             <TranslateTransform X="0" Y="0" />
                         </Canvas.RenderTransform>
                         <Canvas.Resources />
-                        <Path Data="F1 M24,24z M0,0z M18,4L20,8 17,8 15,4 13,4 15,8 12,8 10,4 8,4 10,8 7,8 5,4 4,4C2.9,4,2.01,4.9,2.01,6L2,18C2,19.1,2.9,20,4,20L20,20C21.1,20,22,19.1,22,18L22,4 18,4z" Fill="#FFFFFFFF" />
+                        <Path Data="F1 M24,24z M0,0z M17,10.5L17,7C17,6.45,16.55,6,16,6L4,6C3.45,6,3,6.45,3,7L3,17C3,17.55,3.45,18,4,18L16,18C16.55,18,17,17.55,17,17L17,13.5 21,17.5 21,6.5 17,10.5z" Fill="#FFFFFFFF" />
                     </Canvas>
                 </Viewbox>
             </DataTemplate>
