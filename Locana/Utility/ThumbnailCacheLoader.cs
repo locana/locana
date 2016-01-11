@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Web.Http;
 
 namespace Locana.Utility
 {
@@ -210,12 +209,9 @@ namespace Locana.Utility
                 DebugUtil.Log("Start downloading: " + uri);
                 try
                 {
-                    var res = await client.GetAsync(uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
-                    if (res.StatusCode != HttpStatusCode.OK)
-                    {
-                        tcs.TrySetResult(null);
-                    }
-                    using (var stream = await res.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                    var res = await client.SendRequestAsync(new HttpRequestMessage(HttpMethod.Get, uri));
+
+                    using (var stream = (await res.Content.ReadAsInputStreamAsync()).AsStreamForRead())
                     {
                         DebugUtil.Log("Writing: " + filename);
                         var dst = await folder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
