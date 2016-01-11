@@ -61,17 +61,23 @@
         </c:PageHeader>
         <GridView x:Name="EntranceGrid"
                   Grid.Row="1"
+                  ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                   ItemsSource="{Binding Source={StaticResource PanelSources}}"
                   Loaded="EntranceGrid_Loaded"
                   Unloaded="EntranceGrid_Unloaded">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="PanelHolder" Tapped="PanelHolder_Tapped">
+                    <Grid x:Name="PanelHolder"
+                          Background="Transparent"
+                          Tapped="PanelHolder_Tapped">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="48" />
                         </Grid.RowDefinitions>
-                        <ContentControl Margin="8" ContentTemplate="{Binding Resource}" />
+                        <ContentControl Margin="8"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        ContentTemplate="{Binding Resource}" />
                         <TextBlock Grid.Row="1"
                                    HorizontalAlignment="Center"
                                    Text="{Binding PanelTitle}" />

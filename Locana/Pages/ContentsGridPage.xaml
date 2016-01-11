@@ -37,11 +37,6 @@
                            Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
-        <Style x:Key="GridViewItemStyle" TargetType="GridViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        </Style>
-
         <c:GridViewItemSelectivityBinder x:Key="GridViewItemSelectivityBinder" />
     </Page.Resources>
 
@@ -119,7 +114,7 @@
         <SemanticZoom x:Name="GridHolder" Grid.Row="1">
             <SemanticZoom.ZoomedInView>
                 <GridView x:Name="ContentsGrid"
-                          ItemContainerStyle="{StaticResource GridViewItemStyle}"
+                          ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                           ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
                           ItemsSource="{Binding Source={StaticResource GridSources}}"
                           Loaded="ContentsGrid_Loaded"
@@ -221,7 +216,7 @@
             <SemanticZoom.ZoomedOutView>
                 <GridView x:Name="GroupsGrid"
                           Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                          ItemContainerStyle="{StaticResource GridViewItemStyle}"
+                          ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                           ScrollViewer.IsVerticalScrollChainingEnabled="False">
                     <GridView.ItemTemplate>
                         <DataTemplate>

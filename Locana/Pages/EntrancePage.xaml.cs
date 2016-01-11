@@ -31,7 +31,7 @@ namespace Locana.Pages
             this.InitializeComponent();
 
             appMenuGroup.Add(new EntrancePanel("Find QR Code",
-                "ic_network_wifi_white", () =>
+                "qr_code", () =>
                 {
                     Frame.Navigate(typeof(QrCodePage));
                 }));
