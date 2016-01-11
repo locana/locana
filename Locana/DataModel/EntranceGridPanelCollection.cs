@@ -100,16 +100,16 @@ namespace Locana.DataModel
 
     public class EntrancePanel
     {
-        public EntrancePanel(string name, Symbol symbol, Action onClick)
+        public EntrancePanel(string name, string imageTemplateId, Action onClick)
         {
             PanelTitle = name;
             OnClick = onClick;
-            IconSymbol = symbol;
+            Resource = Application.Current.Resources[imageTemplateId] as DataTemplate;
         }
 
         public string PanelTitle { private set; get; }
 
-        public Symbol IconSymbol { private set; get; }
+        public DataTemplate Resource { private set; get; }
 
         public Action OnClick { private set; get; }
     }
@@ -118,7 +118,7 @@ namespace Locana.DataModel
     {
         public DevicePanel(TargetDevice device)
             : base(device.FriendlyName,
-                  Symbol.Camera, () =>
+                  "ic_linked_camera_white", () =>
              {
                  var shell = Window.Current.Content as AppShell;
                  var frame = shell.AppFrame as Frame;

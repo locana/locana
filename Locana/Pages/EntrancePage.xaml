@@ -71,11 +71,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="48" />
                         </Grid.RowDefinitions>
-                        <Viewbox Grid.Row="0"
-                                 MaxWidth="150"
-                                 MaxHeight="150">
-                            <SymbolIcon Margin="10" Symbol="{Binding IconSymbol}" />
-                        </Viewbox>
+                        <ContentControl Margin="8" ContentTemplate="{Binding Resource}" />
                         <TextBlock Grid.Row="1"
                                    HorizontalAlignment="Center"
                                    Text="{Binding PanelTitle}" />

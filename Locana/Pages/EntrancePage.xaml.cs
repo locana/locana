@@ -31,17 +31,17 @@ namespace Locana.Pages
             this.InitializeComponent();
 
             appMenuGroup.Add(new EntrancePanel("Find QR Code",
-                Symbol.WebCam, () =>
+                "ic_network_wifi_white", () =>
                 {
                     Frame.Navigate(typeof(QrCodePage));
                 }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("WifiSettingLauncherButtonText"),
-                Symbol.ThreeBars, async () =>
+                "ic_network_wifi_white", async () =>
                 {
                     await Launcher.LaunchUriAsync(new Uri("ms-settings-wifi:"));
                 }));
             appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("AppSettings"),
-                Symbol.Setting, () =>
+                "ic_settings_white", () =>
                 {
                     Frame.Navigate(typeof(AppSettingPage));
                 }));
