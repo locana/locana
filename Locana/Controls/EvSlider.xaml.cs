@@ -56,6 +56,7 @@ namespace Locana.Controls
         }
 
         public ImageSource IconSource { set { SettingImage.Source = value; } }
+        public DataTemplate IconDataTemplate { set { SettingContent.ContentTemplate = value; } }
 
         void UpdateDisplay(EvCapability parameter)
         {

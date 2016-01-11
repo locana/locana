@@ -17,6 +17,11 @@
         </Grid.ColumnDefinitions>
         <!--todo: find some way to mask this image with foreground brush-->
         <Image Name="SettingImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Height="40"/>
+        <ContentControl Name="SettingImageContent"
+                        Height="40"
+                        Margin="10"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" />
         <control:PullReleaseBar x:Name="Bar" Max="5" Min="-5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnRelease="Bar_OnRelease" Margin="0" />
         <TextBlock Name="MaxLabel" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Text="max" Margin="10" FontSize="14"/>
         <TextBlock Name="MinLabel" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="min" Margin="10" FontSize="14"/>
