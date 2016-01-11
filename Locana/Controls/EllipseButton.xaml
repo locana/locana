@@ -28,5 +28,10 @@
                HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch"
                Canvas.ZIndex="100" />
+        <ContentControl x:Name="IconContent"
+                        Margin="20"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Canvas.ZIndex="101" />
     </Grid>
 </UserControl>

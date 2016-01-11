@@ -517,7 +517,7 @@ namespace Locana.Pages
         private void UpdateShutterButton(CameraStatus status)
         {
             if (status == null || status.ShootMode == null || status.ShootMode.Candidates.Count == 0) { return; }
-            var icons = new Dictionary<string, BitmapImage>();
+            var icons = new Dictionary<string, DataTemplate>();
             foreach (var m in status.ShootMode.Candidates)
             {
                 icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
@@ -540,7 +540,7 @@ namespace Locana.Pages
                 {
                     ShutterButtonPressed();
                 },
-                Icons = icons,
+                IconTemplates = icons,
             };
         }
 

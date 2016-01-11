@@ -40,8 +40,23 @@ namespace Locana.Controls
         {
             if (e.NewValue == null) { return; }
             var image = e.NewValue as BitmapImage;
-            // (d as MultiModeShutterButton).CurrentModeButtonImage = image;
             (d as MultiModeShutterButton).UpdateCurrentModeButtonImage(image);
+        }
+
+        public DataTemplate CurrentModeButtonTemplate { get; set; }
+
+        public static readonly DependencyProperty CurrentModeButtonTemplateProperty = DependencyProperty.Register(
+            nameof(CurrentModeButtonTemplate),
+            typeof(DataTemplate),
+            typeof(MultiModeShutterButton),
+            new PropertyMetadata(null, new PropertyChangedCallback(MultiModeShutterButton.CurrentModeButtonTemplateUpdated)));
+
+        private static void CurrentModeButtonTemplateUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue == null) { return; }
+
+            var icon = e.NewValue as DataTemplate;
+            (d as MultiModeShutterButton).UpdateCurrentModeButtonImage(icon);
         }
 
         public bool ShutterButtonEnabled
@@ -175,26 +190,42 @@ namespace Locana.Controls
 
             foreach (var i in info.ShootModeCapability.Candidates)
             {
-                BitmapImage icon = null;
-
-                if (selectedIndex == currentIndex)
-                {
-                    icon = this.CurrentModeButtonImage;
-                }
-                else if (info.Icons != null && info.Icons.ContainsKey(i))
-                {
-                    icon = info.Icons[i];
-                }
 
                 var scale = i == targetShootMode ? 1.0 : 0.6;
                 double newX = (currentIndex - selectedIndex) * 50;
                 if (newX < 0) { newX -= 30; }
                 else if (newX > 0) { newX += 30; }
 
-                var button = CreateBaseButton(icon, scale);
-                Buttons.Children.Add(button);
-                (button.RenderTransform as CompositeTransform).TranslateX = newX;
 
+                EllipseButton button = null;
+
+                if (selectedIndex == currentIndex)
+                {
+                    if (this.CurrentModeButtonTemplate != null)
+                    {
+                        button = CreateBaseButton(this.CurrentModeButtonTemplate, scale);
+                    }
+                    else {
+                        button = CreateBaseButton(this.CurrentModeButtonImage, scale);
+                    }
+                }
+                else
+                {
+                    if (info.IconTemplates != null && info.IconTemplates.ContainsKey(i))
+                    {
+                        button = CreateBaseButton(info.IconTemplates[i], scale);
+                    }
+                    if (info.IconTemplates == null && info.Icons != null && info.Icons.ContainsKey(i))
+                    {
+                        button = CreateBaseButton(info.Icons[i], scale);
+                    }
+                }
+
+                if (button != null)
+                {
+                    Buttons.Children.Add(button);
+                    (button.RenderTransform as CompositeTransform).TranslateX = newX;
+                }
 
                 currentIndex++;
             }
@@ -209,13 +240,14 @@ namespace Locana.Controls
 
             foreach (var i in info.ShootModeCapability.Candidates)
             {
-                BitmapImage icon = null;
-                if (info.Icons != null && info.Icons.ContainsKey(i))
+                if (info.IconTemplates != null && info.IconTemplates.ContainsKey(i))
                 {
-                    icon = info.Icons[i];
+                    (Buttons.Children[currentIndex] as EllipseButton).IconTemplate = info.IconTemplates[i];
                 }
-
-                (Buttons.Children[currentIndex] as EllipseButton).Icon = icon;
+                if (info.IconTemplates == null && info.Icons != null && info.Icons.ContainsKey(i))
+                {
+                    (Buttons.Children[currentIndex] as EllipseButton).Icon = info.Icons[i];
+                }
 
                 var scale = i == targetShootMode ? 1.0 : 0.6;
                 double newX = (currentIndex - selectedIndex) * 50;
@@ -235,13 +267,20 @@ namespace Locana.Controls
             }
         }
 
-        void UpdateCurrentModeButtonImage(BitmapImage newIcon)
+        void UpdateCurrentModeButtonImage<T>(T newIcon)
         {
             if (this._ModeInfo?.ShootModeCapability == null) { return; }
             var button = FindButton(this._ModeInfo.ShootModeCapability.Current);
             if (button != null)
             {
-                button.Icon = newIcon;
+                if (typeof(T) == typeof(BitmapImage))
+                {
+                    button.Icon = newIcon as BitmapImage;
+                }
+                else if (typeof(T) == typeof(DataTemplate))
+                {
+                    button.IconTemplate = newIcon as DataTemplate;
+                }
             }
         }
 
@@ -285,7 +324,7 @@ namespace Locana.Controls
             return false;
         }
 
-        EllipseButton CreateBaseButton(BitmapImage icon, double scale)
+        EllipseButton CreateBaseButton<T>(T icon, double scale)
         {
             var button = new EllipseButton()
             {
@@ -294,7 +333,7 @@ namespace Locana.Controls
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Margin = new Thickness(0),
-                Icon = icon,
+                // Icon = icon,
                 RenderTransform = new CompositeTransform()
                 {
                     TranslateX = 0,
@@ -306,6 +345,15 @@ namespace Locana.Controls
                 },
                 Tapped = ElementTapped,
             };
+
+            if (typeof(T) == typeof(BitmapImage))
+            {
+                button.Icon = icon as BitmapImage;
+            }
+            else if (typeof(T) == typeof(DataTemplate))
+            {
+                button.IconTemplate = icon as DataTemplate;
+            }
 
             return button;
         }
@@ -348,6 +396,7 @@ namespace Locana.Controls
     {
         public Capability<string> ShootModeCapability { get; set; }
         public Dictionary<string, BitmapImage> Icons { get; set; }
+        public Dictionary<string, DataTemplate> IconTemplates { get; set; }
         public Action<string> ModeSelected { get; set; }
         public Action ButtonPressed { get; set; }
     }

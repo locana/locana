@@ -4,6 +4,7 @@ using Locana.CameraControl;
 using Locana.Utility;
 using System;
 using Windows.Devices.Geolocation;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 namespace Locana.DataModel
@@ -86,6 +87,15 @@ namespace Locana.DataModel
         private static readonly BitmapImage AudioModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/mode_audio.png", UriKind.Absolute));
         private static readonly BitmapImage LoopModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/mode_loop.png", UriKind.Absolute));
 
+        private static readonly DataTemplate StillIconTemplate = (DataTemplate)Application.Current.Resources["StillIcon"];
+        private static readonly DataTemplate MovieIconTemplate = (DataTemplate)Application.Current.Resources["MovieIcon"];
+        private static readonly DataTemplate AudioIconTemplate = (DataTemplate)Application.Current.Resources["AudioIcon"];
+        private static readonly DataTemplate IntervalStillIconTemplate = (DataTemplate)Application.Current.Resources["IntervalStillIcon"];
+        private static readonly DataTemplate ContinuousStillIconTemplate = (DataTemplate)Application.Current.Resources["ContShootingIcon"];
+        private static readonly DataTemplate LoopIconTemplate = (DataTemplate)Application.Current.Resources["LoopIcon"];
+
+        private static readonly DataTemplate StopIconTemplate = (DataTemplate)Application.Current.Resources["StopIcon"];
+
         private static readonly BitmapImage AModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_A.png", UriKind.Absolute));
         private static readonly BitmapImage IAModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_iA.png", UriKind.Absolute));
         private static readonly BitmapImage IAPlusModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_iAPlus.png", UriKind.Absolute));
@@ -97,39 +107,56 @@ namespace Locana.DataModel
         private static readonly BitmapImage AvailableMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/memory_card.png", UriKind.Absolute));
         private static readonly BitmapImage NoMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/no_memory_card.png", UriKind.Absolute));
 
-        public static BitmapImage GetShootModeIcon(string mode)
+        public static DataTemplate GetShootModeIcon(string mode)
         {
             switch (mode)
             {
                 case ShootModeParam.Still:
-                    return StillImage;
+                    return StillIconTemplate;
                 case ShootModeParam.Movie:
-                    return CamImage;
+                    return MovieIconTemplate;
                 case ShootModeParam.Audio:
-                    return AudioImage;
+                    return AudioIconTemplate;
                 case ShootModeParam.Interval:
-                    return IntervalStillImage;
+                    return IntervalStillIconTemplate;
                 case ShootModeParam.Loop:
-                    return LoopRecImage;
+                    return LoopIconTemplate;
                 default:
-                    return StillImage;
+                    return StillIconTemplate;
             }
         }
 
-        public BitmapImage ShutterButtonImage
+        public DataTemplate ShutterButtonImage
         {
             get
             {
                 if (Device.Status.ShootMode == null)
                 {
-                    return StillImage;
+                    return StillIconTemplate;
                 }
-                return CurrentModeImage();
+                return CurrentModeImage<DataTemplate>();
             }
         }
 
-        private BitmapImage CurrentModeImage()
+        private T CurrentModeImage<T>()
         {
+            var current = Device.Status.Status;
+
+            if (current == EventParam.MvRecording ||
+                current == EventParam.AuRecording ||
+                current == EventParam.LoopRecording ||
+                current == EventParam.ItvRecording)
+            {
+                if (typeof(T) == typeof(BitmapImage))
+                {
+                    return (T)(object)StopImage;
+                }
+                else if (typeof(T) == typeof(DataTemplate))
+                {
+                    return (T)(object)StopIconTemplate;
+                }
+            }
+
             switch (Device.Status.ShootMode.Current)
             {
                 case ShootModeParam.Still:
@@ -139,27 +166,82 @@ namespace Locana.DataModel
                         Device.Status.ContShootingMode.Current == ContinuousShootMode.Burst ||
                         Device.Status.ContShootingMode.Current == ContinuousShootMode.MotionShot))
                     {
-                        return ContShootingImage;
+                        if (typeof(T) == typeof(BitmapImage))
+                        {
+                            return (T)(object)ContShootingImage;
+                        }
+                        else if (typeof(T) == typeof(DataTemplate))
+                        {
+                            return (T)(object)ContinuousStillIconTemplate;
+                        }
                     }
                     if (ApplicationSettings.GetInstance().IsIntervalShootingEnabled)
                     {
-                        return IntervalStillImage;
+                        if (typeof(T) == typeof(BitmapImage))
+                        {
+                            return (T)(object)IntervalStillImage;
+                        }
+                        else if (typeof(T) == typeof(DataTemplate))
+                        {
+                            return (T)(object)IntervalStillIconTemplate;
+                        }
                     }
-                    return StillImage;
+                    if (typeof(T) == typeof(BitmapImage))
+                    {
+                        return (T)(object)StillImage;
+                    }
+                    else if (typeof(T) == typeof(DataTemplate))
+                    {
+                        return (T)(object)StillIconTemplate;
+                    }
+                    break;
                 case ShootModeParam.Movie:
-                    return CamImage;
+                    if (typeof(T) == typeof(BitmapImage))
+                    {
+                        return (T)(object)CamImage;
+                    }
+                    else if (typeof(T) == typeof(DataTemplate))
+                    {
+                        return (T)(object)MovieIconTemplate;
+                    }
+                    break;
                 case ShootModeParam.Audio:
-                    return AudioImage;
+                    if (typeof(T) == typeof(BitmapImage))
+                    {
+                        return (T)(object)AudioImage;
+                    }
+                    else if (typeof(T) == typeof(DataTemplate))
+                    {
+                        return (T)(object)AudioIconTemplate;
+                    }
+                    break;
                 case ShootModeParam.Interval:
-                    return IntervalStillImage;
+                    if (typeof(T) == typeof(BitmapImage))
+                    {
+                        return (T)(object)IntervalStillImage;
+                    }
+                    else if (typeof(T) == typeof(DataTemplate))
+                    {
+                        return (T)(object)IntervalStillIconTemplate;
+                    }
+                    break;
                 case ShootModeParam.Loop:
-                    return LoopRecImage;
+                    if (typeof(T) == typeof(BitmapImage))
+                    {
+                        return (T)(object)LoopRecImage;
+                    }
+                    else if (typeof(T) == typeof(DataTemplate))
+                    {
+                        return (T)(object)LoopIconTemplate;
+                    }
+                    break;
                 default:
-                    return null;
+                    return default(T);
             }
+            return default(T);
         }
 
-        public BitmapImage ShootModeImage
+        public DataTemplate ShootModeImage
         {
             get
             {
@@ -167,15 +249,15 @@ namespace Locana.DataModel
                 switch (Device.Status.ShootMode.Current)
                 {
                     case ShootModeParam.Still:
-                        return StillModeImage;
+                        return StillIconTemplate;
                     case ShootModeParam.Movie:
-                        return MovieModeImage;
+                        return MovieIconTemplate;
                     case ShootModeParam.Interval:
-                        return IntervalModeImage;
+                        return IntervalStillIconTemplate;
                     case ShootModeParam.Audio:
-                        return AudioImage;
+                        return AudioIconTemplate;
                     case ShootModeParam.Loop:
-                        return LoopModeImage;
+                        return LoopIconTemplate;
                 }
                 return null;
             }

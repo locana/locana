@@ -1,5 +1,6 @@
 ﻿using Locana.Utility;
 using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
@@ -16,6 +17,7 @@ namespace Locana.Controls
         }
 
         public BitmapImage Icon { set { this._Icon.Source = value; } }
+        public DataTemplate IconTemplate { set { this.IconContent.ContentTemplate = value; } }
         public Action<object> Tapped { get; set; }
 
         private bool _Enabled = true;
