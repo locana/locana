@@ -89,6 +89,10 @@ namespace Locana.DataModel
 
         public bool IsLocal { private set; get; }
 
+        public bool IsBroken { get; set; } = false;
+
+        public bool ThumbnailExists { get { return _ThumbnailImage != null || IsBroken; } }
+
         public ContentInfo Source { private set; get; }
 
         public virtual string OverlayText { get { return null; } }
@@ -171,6 +175,9 @@ namespace Locana.DataModel
 
                     if (ImageMode.Image == mode) { ThumbnailImage = bmp; }
                     else { LargeImage = bmp; }
+                    IsBroken = false;
+                    NotifyChanged(nameof(ThumbnailExists));
+                    NotifyChanged(nameof(IsBroken));
                 }
                 return;
             }
@@ -188,6 +195,9 @@ namespace Locana.DataModel
             else
             {
                 DebugUtil.Log("Failed to load thumbnail from file. Retry count exhausted.");
+                IsBroken = true;
+                NotifyChanged(nameof(ThumbnailExists));
+                NotifyChanged(nameof(IsBroken));
             }
         }
 
@@ -202,6 +212,7 @@ namespace Locana.DataModel
                 _ThumbnailImage = value;
                 NotifyChanged(nameof(ThumbnailImage));
                 NotifyChanged(nameof(LargeImage));
+                NotifyChanged(nameof(ThumbnailExists));
             }
             get { return GetImage(ImageMode.Image); }
         }
@@ -264,6 +275,9 @@ namespace Locana.DataModel
             {
                 DebugUtil.Log(e.StackTrace);
                 DebugUtil.Log("Failed to fetch thumbnail image: " + Source.ThumbnailUrl);
+                IsBroken = true;
+                NotifyChangedOnUI(nameof(ThumbnailExists));
+                NotifyChangedOnUI(nameof(IsBroken));
             }
         }
     }

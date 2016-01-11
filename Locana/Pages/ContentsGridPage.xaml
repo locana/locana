@@ -37,6 +37,11 @@
                            Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
+        <Style x:Key="GridViewItemStyle" TargetType="GridViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+
         <c:GridViewItemSelectivityBinder x:Key="GridViewItemSelectivityBinder" />
     </Page.Resources>
 
@@ -120,6 +125,7 @@
         <SemanticZoom x:Name="GridHolder" Grid.Row="1">
             <SemanticZoom.ZoomedInView>
                 <GridView x:Name="ContentsGrid"
+                          ItemContainerStyle="{StaticResource GridViewItemStyle}"
                           ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
                           ItemsSource="{Binding Source={StaticResource GridSources}}"
                           Loaded="ContentsGrid_Loaded"
@@ -129,15 +135,12 @@
                     <GridView.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="2,2"
-                                  Background="{ThemeResource ContentDialogBackgroundThemeBrush}"
                                   Holding="ContentsGrid_Holding"
                                   RightTapped="ContentsGrid_RightTapped"
                                   Tapped="ContentsGrid_Tapped">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="48" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="48" />
-                                </Grid.ColumnDefinitions>
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemBaseLowColor}" />
+                                </Grid.Background>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="48" />
@@ -162,12 +165,20 @@
 
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
+                                <ContentControl Grid.RowSpan="2"
+                                                Margin="36"
+                                                ContentTemplate="{StaticResource ic_collection_white}"
+                                                Visibility="{Binding Path=ThumbnailExists,
+                                                                     Converter={StaticResource B2VRConverter}}" />
+                                <ContentControl Grid.RowSpan="2"
+                                                Margin="36"
+                                                ContentTemplate="{StaticResource ic_broken_image_white}"
+                                                Visibility="{Binding Path=IsBroken,
+                                                                     Converter={StaticResource B2VConverter}}" />
                                 <Image Grid.RowSpan="2"
-                                       Grid.ColumnSpan="3"
                                        Source="{Binding ThumbnailImage}"
                                        Stretch="Uniform" />
                                 <TextBlock Grid.RowSpan="2"
-                                           Grid.ColumnSpan="3"
                                            Margin="8,8,0,0"
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"
@@ -176,30 +187,27 @@
                                            Text="{Binding OverlayText}"
                                            TextTrimming="None"
                                            TextWrapping="NoWrap" />
-                                <Border Grid.RowSpan="2"
-                                        Grid.ColumnSpan="3"
-                                        Visibility="{Binding IsSelectable,
-                                                             Converter={StaticResource B2VRConverter}}">
+                                <Border Grid.RowSpan="2" Visibility="{Binding IsSelectable, Converter={StaticResource B2VRConverter}}">
                                     <Border.Background>
                                         <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
                                     </Border.Background>
                                 </Border>
-                                <Image Grid.Row="1"
-                                       Grid.Column="0"
-                                       Margin="0,0,20,20"
-                                       CacheMode="BitmapCache"
-                                       IsHitTestVisible="False"
-                                       Source="/Assets/Screen/protected.png"
-                                       Visibility="{Binding Path=Source.Protected,
-                                                            Converter={StaticResource B2VConverter}}" />
-                                <Image Grid.Row="1"
-                                       Grid.Column="2"
-                                       Margin="0,0,20,20"
-                                       CacheMode="BitmapCache"
-                                       IsHitTestVisible="False"
-                                       Source="/Assets/Screen/mode_movie.png"
-                                       Visibility="{Binding IsMovie,
-                                                            Converter={StaticResource B2VConverter}}" />
+                                <StackPanel Grid.Row="1"
+                                            Margin="0,0,8,0"
+                                            HorizontalAlignment="Right"
+                                            IsHitTestVisible="False"
+                                            Orientation="Horizontal">
+                                    <ContentControl Height="36"
+                                                    ContentTemplate="{StaticResource ic_lock_white}"
+                                                    IsHitTestVisible="False"
+                                                    Visibility="{Binding Path=Source.Protected,
+                                                                         Converter={StaticResource B2VConverter}}" />
+                                    <ContentControl Height="36"
+                                                    ContentTemplate="{StaticResource ic_theaters_white}"
+                                                    IsHitTestVisible="False"
+                                                    Visibility="{Binding IsMovie,
+                                                                         Converter={StaticResource B2VConverter}}" />
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
@@ -219,6 +227,7 @@
             <SemanticZoom.ZoomedOutView>
                 <GridView x:Name="GroupsGrid"
                           Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                          ItemContainerStyle="{StaticResource GridViewItemStyle}"
                           ScrollViewer.IsVerticalScrollChainingEnabled="False">
                     <GridView.ItemTemplate>
                         <DataTemplate>

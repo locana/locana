@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Resources/VectorIcons/CommandBar.xaml" />
                 <ResourceDictionary Source="Resources/VectorIcons/AppShellIcons.xaml" />
                 <ResourceDictionary Source="Resources/VectorIcons/LiveviewIcons.xaml" />
+                <ResourceDictionary Source="Resources/VectorIcons/ContentsIcons.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
 

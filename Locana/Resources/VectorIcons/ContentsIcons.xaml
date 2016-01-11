@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:Locana">
+    <DataTemplate x:Key="ic_theaters_white">
+        <Viewbox Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+                <Path Data="F1 M24,24z M0,0z M18,3L18,5 16,5 16,3 8,3 8,5 6,5 6,3 4,3 4,21 6,21 6,19 8,19 8,21 16,21 16,19 18,19 18,21 20,21 20,3 18,3z M8,17L6,17 6,15 8,15 8,17z M8,13L6,13 6,11 8,11 8,13z M8,9L6,9 6,7 8,7 8,9z M18,17L16,17 16,15 18,15 18,17z M18,13L16,13 16,11 18,11 18,13z M18,9L16,9 16,7 18,7 18,9z" Fill="#FFFFFF" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+    <DataTemplate x:Key="ic_lock_white">
+        <Viewbox Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+                <Path Data="F1 M24,24z M0,0z M18,8L17,8 17,6C17,3.24 14.76,1 12,1 9.24,1 7,3.24 7,6L7,8 6,8C4.9,8,4,8.9,4,10L4,20C4,21.1,4.9,22,6,22L18,22C19.1,22,20,21.1,20,20L20,10C20,8.9,19.1,8,18,8z M12,17C10.9,17 10,16.1 10,15 10,13.9 10.9,13 12,13 13.1,13 14,13.9 14,15 14,16.1 13.1,17 12,17z M15.1,8L8.9,8 8.9,6C8.9,4.29 10.29,2.9 12,2.9 13.71,2.9 15.1,4.29 15.1,6L15.1,8z" Fill="#FFFFFF" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+    <DataTemplate x:Key="ic_broken_image_white">
+        <Viewbox Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+                <Path Data="F1 M24,24z M0,0z M21,5L21,11.59 18,8.58 14,12.59 10,8.59 6,12.59 3,9.58 3,5C3,3.9,3.9,3,5,3L19,3C20.1,3,21,3.9,21,5z M18,11.42L21,14.43 21,19C21,20.1,20.1,21,19,21L5,21C3.9,21,3,20.1,3,19L3,12.42 6,15.41 10,11.41 14,15.41 18,11.42z" Fill="#FFFFFF" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+    <DataTemplate x:Key="ic_phonelink_white">
+        <Viewbox Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+                <Path Data="F1 M24,24z M0,0z M4,6L22,6 22,4 4,4C2.9,4,2,4.9,2,6L2,17 0,17 0,20 14,20 14,17 4,17 4,6z M23,8L17,8C16.45,8,16,8.45,16,9L16,19C16,19.55,16.45,20,17,20L23,20C23.55,20,24,19.55,24,19L24,9C24,8.45,23.55,8,23,8z M22,17L18,17 18,10 22,10 22,17z" Fill="#FFFFFF" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+</ResourceDictionary>
