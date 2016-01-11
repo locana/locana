@@ -1084,4 +1084,22 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="ErrorMessage_CameraSetupFailure" xml:space="preserve">
     <value>カメラとの接続に失敗しました</value>
   </data>
+  <data name="CommandBar_EV" xml:space="preserve">
+    <value>EV補正</value>
+  </data>
+  <data name="CommandBar_Fnumber" xml:space="preserve">
+    <value>F値</value>
+  </data>
+  <data name="CommandBar_ISO" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="CommandBar_PShift" xml:space="preserve">
+    <value>プログラムシフト</value>
+  </data>
+  <data name="CommandBar_SS" xml:space="preserve">
+    <value>シャッタースピード</value>
+  </data>
+  <data name="CommandBar_Zoom" xml:space="preserve">
+    <value>ズーム</value>
+  </data>
 </root>

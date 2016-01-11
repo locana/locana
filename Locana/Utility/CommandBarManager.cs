@@ -153,20 +153,17 @@ namespace Locana.Utility
                 case AppBarItem.Refresh:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Refresh), Label = SystemUtil.GetStringResource("AppBar_Refresh") };
                 case AppBarItem.FNumberSlider:
-                    // return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/aperture.png") }, Label = "F number" };
-                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ApertureVectorIcon"] , Label = "F number" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ApertureIcon"] , Label = SystemUtil.GetStringResource("CommandBar_Fnumber") };
                 case AppBarItem.ShutterSpeedSlider:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ShutterSpeed.png") }, Label = "Shutter speed" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["SSIcon"], Label = SystemUtil.GetStringResource("CommandBar_SS") };
                 case AppBarItem.IsoSlider:
-                    // return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ISO.png") }, Label = "ISO" };
-                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["IsoIcon"], Label = "ISO " };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["IsoIcon"], Label = SystemUtil.GetStringResource("CommandBar_ISO") };
                 case AppBarItem.ProgramShiftSlider:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ProgramShift.png") }, Label = "ProgramShift" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ProgramShiftIcon"], Label = SystemUtil.GetStringResource("CommandBar_PShift") };
                 case AppBarItem.EvSlider:
-                    // return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/EVComp.png") }, Label = "EV" };
-                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["EvIcon"], Label = "EV" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["EvIcon"], Label = SystemUtil.GetStringResource("CommandBar_EV") };
                 case AppBarItem.Zoom:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Zoom), Label = "Zoom" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ZoomInIcon"], Label = SystemUtil.GetStringResource("CommandBar_Zoom") };
                 case AppBarItem.Resume:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Play), Label = SystemUtil.GetStringResource("AppBar_Play") };
                 case AppBarItem.Pause:
@@ -176,7 +173,7 @@ namespace Locana.Utility
                 case AppBarItem.RemoteStorage:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.MapDrive), Label = SystemUtil.GetStringResource("AppBar_RemoteStorage") };
                 case AppBarItem.Cancel:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_Cancel") };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["CancelIcon"], Label = SystemUtil.GetStringResource("AppBar_Cancel") };
                 default:
                     throw new NotImplementedException();
             }

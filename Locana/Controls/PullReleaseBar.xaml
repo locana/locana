@@ -8,14 +8,30 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
+    <UserControl.Resources>
+
+        <DataTemplate x:Key="ProgramShiftCursor">
+            <Viewbox Stretch="Uniform">
+                <Canvas Width="100" Height="100">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0" />
+                    </Canvas.RenderTransform>
+                    <Canvas.Resources />
+                    <Path Data="F1 M100,100z M0,0z M54.723,84.99A1.154,1.154,0,0,1,53.995,83.69L53.995,16.315A1.152,1.152,0,0,1,54.723,15.015L74.123,15.015C74.823,15.015 75.579,16.315 75.579,16.315 75.579,16.315 93.44,48.467 93.779,49.078A2.134,2.134,0,0,1,93.789,50.933C93.567,51.333 75.576,83.483 75.576,83.483 75.576,83.483 74.776,84.914 74.12,84.99L54.72,84.99z" Fill="#FFFFFF" />
+                    <Path Data="F1 M100,100z M0,0z M45.277,15.01A1.154,1.154,0,0,1,46.005,16.31L46.005,83.68A1.152,1.152,0,0,1,45.277,84.98L25.877,84.98C25.177,84.98 24.421,83.68 24.421,83.68 24.421,83.68 6.564,51.534 6.223,50.922A2.134,2.134,0,0,1,6.213,49.067C6.435,48.667 24.426,16.517 24.426,16.517 24.426,16.517 25.226,15.086 25.882,15.01L45.282,15.01z" Fill="#FFFFFF" />
+                </Canvas>
+            </Viewbox>
+        </DataTemplate>
+    </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" SizeChanged="LayoutRoot_SizeChanged">
         <Rectangle Name="BackgroundBar" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                    Margin="20" Height="10" />
         <Line Name="DynamicBar"   Stroke="{StaticResource SystemControlForegroundAccentBrush}" StrokeThickness="10" Margin="0"  />
 
-        <Image Name="Cursor" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25"
-                   Width="25" Source="/Assets/LiveviewScreen/ProgramShift_cursor.png"/>
+        <!--<Image Name="Cursor" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25"
+                   Width="25" Source="/Assets/LiveviewScreen/ProgramShift_cursor.png"/>-->
+        <ContentControl Name="Cursor" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="25" ContentTemplate="{StaticResource ProgramShiftCursor}"/>
         <Rectangle Name="TouchArea" HorizontalAlignment="Center" VerticalAlignment="Stretch" Fill="Transparent" Width="100" ManipulationMode="TranslateX"
                    ManipulationDelta="TouchArea_ManipulationDelta"  ManipulationCompleted="TouchArea_ManipulationCompleted" />
         <TextBlock Name="CurrentValueText" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Width="100" TextAlignment="Center" Height="30"

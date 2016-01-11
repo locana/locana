@@ -29,6 +29,7 @@ namespace Locana.Controls
         }
 
         public ImageSource IconSource { set { SettingImage.Source = value; } }
+        public DataTemplate IconDataTemplate { set { SettingImageContent.ContentTemplate = value; } }
 
         private void UpdateDisplay(ProgramShiftRange value)
         {
