@@ -291,6 +291,19 @@ namespace Locana.CameraControl
             return true;
         }
 
+        public bool IsPlaybackMode()
+        {
+            switch (status.Status ?? "")
+            {
+                case EventParam.ContentsTransfer:
+                case EventParam.StreamingMovie:
+                case EventParam.DeletingContents:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         private static int CompareStillSize(StillImageSize x, StillImageSize y)
         {
             if (x == null && y == null)

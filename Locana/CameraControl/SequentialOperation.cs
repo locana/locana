@@ -28,7 +28,7 @@ namespace Locana.CameraControl
                 await device.Observer.StartAsync().ConfigureAwait(false);
                 cancel.ThrowIfCancelled();
 
-                if (device.Api.AvContent != null)
+                if (device.Api.AvContent != null && device.Observer.IsPlaybackMode())
                 {
                     DebugUtil.Log("This device support ContentsTransfer mode. Turn on Shooting mode at first.");
                     if (!await PlaybackModeHelper.MoveToShootingModeAsync(device, cancel).ConfigureAwait(false))
