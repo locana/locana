@@ -814,14 +814,8 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
     <value>画像の取得に失敗しました</value>
   </data>
-  <data name="Viewer_FailedToRefreshContents" xml:space="preserve">
-    <value>カメラ内コンテンツ一覧の取得に失敗しました</value>
-  </data>
-  <data name="Viewer_Header_SelectingToDelete" xml:space="preserve">
-    <value>削除するアイテムの選択中</value>
-  </data>
-  <data name="Viewer_Header_SelectingToDownload" xml:space="preserve">
-    <value>転送するアイテムの選択中</value>
+  <data name="Viewer_FailedToLoadContents" xml:space="preserve">
+    <value>コンテンツ一覧の取得に失敗しました</value>
   </data>
   <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
     <value>ダウンロード</value>

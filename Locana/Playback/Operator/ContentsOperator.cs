@@ -53,16 +53,16 @@ namespace Locana.Playback.Operator
         public AlbumGroupCollection ContentsCollection { protected set; get; }
         public CancellationTokenSource Canceller { set; get; }
 
-        public event Action<string> ErrorMessageRaised;
-        protected void OnErrorMessage(string message)
+        public event Action<Func<string>> ErrorMessageRaised;
+        protected void OnErrorMessage(string messageId)
         {
-            ErrorMessageRaised?.Invoke(message);
+            ErrorMessageRaised?.Invoke(() => messageId);
         }
 
-        public event Action<string> ProgressMessageRaised;
+        public event Action<Func<string>> ProgressMessageRaised;
         protected void OnProgressMessage(string message)
         {
-            ProgressMessageRaised?.Invoke(message);
+            ProgressMessageRaised?.Invoke(() => message);
         }
 
         public event EventHandler<ContentsLoadedEventArgs> ChunkContentsLoaded;

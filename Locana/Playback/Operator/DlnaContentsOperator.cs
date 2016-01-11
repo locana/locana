@@ -97,7 +97,7 @@ namespace Locana.Playback.Operator
             catch (SoapException e)
             {
                 DebugUtil.Log("SoapException while loading: " + e.StatusCode);
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedToRefreshContents"));
+                OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally
             {
@@ -126,7 +126,7 @@ namespace Locana.Playback.Operator
             catch (Exception e)
             {
                 DebugUtil.Log(e.StackTrace);
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedToRefreshContents"));
+                OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally
             {

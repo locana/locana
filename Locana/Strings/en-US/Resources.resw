@@ -512,11 +512,8 @@ Please check internet connection status.</value>
   <data name="Progress_DeletingSelectedContents" xml:space="preserve">
     <value>Deleting selected contents...</value>
   </data>
-  <data name="Progress_FetchingContents" xml:space="preserve">
-    <value>Fetching remote contents...</value>
-  </data>
-  <data name="Progress_LoadingLocalContents" xml:space="preserve">
-    <value>Loading local images...</value>
+  <data name="Progress_LoadingContents" xml:space="preserve">
+    <value>Loading contents...</value>
   </data>
   <data name="Progress_OpeningDetailImage" xml:space="preserve">
     <value>Opening detail image...</value>
@@ -569,14 +566,8 @@ Please check internet connection status.</value>
   <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
     <value>Failed to open detail image</value>
   </data>
-  <data name="Viewer_FailedToRefreshContents" xml:space="preserve">
-    <value>Failed to refresh camera contents list</value>
-  </data>
-  <data name="Viewer_Header_SelectingToDelete" xml:space="preserve">
-    <value>Selecting to delete...</value>
-  </data>
-  <data name="Viewer_Header_SelectingToDownload" xml:space="preserve">
-    <value>Selecting to download...</value>
+  <data name="Viewer_FailedToLoadContents" xml:space="preserve">
+    <value>Failed to load contents list</value>
   </data>
   <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
     <value>Download</value>

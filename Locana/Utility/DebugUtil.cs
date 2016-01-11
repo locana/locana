@@ -45,6 +45,13 @@ namespace Locana.Utility
 #endif
         }
 
+        public static void Log(Func<string> s)
+        {
+#if DEBUG
+            Log(s?.Invoke());
+#endif
+        }
+
 #if DEBUG
         public static async Task Flush(bool crash = false)
         {

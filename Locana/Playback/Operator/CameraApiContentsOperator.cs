@@ -39,7 +39,7 @@ namespace Locana.Playback.Operator
                 case StreamStatusChangeFactor.FileError:
                 case StreamStatusChangeFactor.MediaError:
                 case StreamStatusChangeFactor.OtherError:
-                    OnErrorMessage(SystemUtil.GetStringResource("Viewer_StreamClosedByExternalCause"));
+                    OnErrorMessage("Viewer_StreamClosedByExternalCause");
                     OnMovieStreamError();
                     break;
                 default:
@@ -116,7 +116,7 @@ namespace Locana.Playback.Operator
             await TargetDevice.Observer.StartAsync();
             try
             {
-                OnProgressMessage(SystemUtil.GetStringResource("Progress_ChangingCameraState"));
+                OnProgressMessage("Progress_ChangingCameraState");
 
                 var StateChangeCanceller = new CancellationTokenSource(15000);
                 try
@@ -133,7 +133,7 @@ namespace Locana.Playback.Operator
                 }
                 DebugUtil.Log("ModeTransition successfully finished");
 
-                OnProgressMessage(SystemUtil.GetStringResource("Progress_FetchingContents"));
+                OnProgressMessage("Progress_FetchingContents");
                 loader.PartLoaded += RemoteContentsLoader_PartLoaded;
                 await loader.Load(ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
                 DebugUtil.Log("RemoteApiContentsLoader completed");
@@ -142,17 +142,17 @@ namespace Locana.Playback.Operator
             {
                 // This will never happen on camera devices.
                 DebugUtil.Log("storage scheme is not supported");
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_StorageAccessNotSupported"));
+                OnErrorMessage("Viewer_StorageAccessNotSupported");
             }
             catch (NoStorageException)
             {
                 DebugUtil.Log("No storages");
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_NoStorage"));
+                OnErrorMessage("Viewer_NoStorage");
             }
             catch (Exception e)
             {
                 DebugUtil.Log(e.StackTrace);
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedToRefreshContents"));
+                OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally
             {
@@ -174,7 +174,7 @@ namespace Locana.Playback.Operator
 
             if (TargetDevice.Api.AvContent == null)
             {
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_NoAvContentApi"));
+                OnErrorMessage("Viewer_NoAvContentApi");
                 throw new IOException();
             }
 
@@ -182,7 +182,7 @@ namespace Locana.Playback.Operator
 
             if (!item.RemotePlaybackAvailable)
             {
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_UnplayableContent"));
+                OnErrorMessage("Viewer_UnplayableContent");
                 throw new IOException();
             }
             var started = await MovieStreamHelper.INSTANCE.Start(TargetDevice.Api.AvContent, new PlaybackContent
@@ -192,7 +192,7 @@ namespace Locana.Playback.Operator
             }, content.Source.Name);
             if (!started)
             {
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedPlaybackMovie"));
+                OnErrorMessage("Viewer_FailedPlaybackMovie");
                 throw new IOException();
             }
 
@@ -210,7 +210,7 @@ namespace Locana.Playback.Operator
             catch (Exception e)
             {
                 DebugUtil.Log(e.StackTrace);
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedToRefreshContents"));
+                OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally
             {

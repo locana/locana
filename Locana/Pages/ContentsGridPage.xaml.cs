@@ -461,7 +461,7 @@ namespace Locana.Pages
             });
         }
 
-        private void Operator_ErrorMessageRaised(string obj)
+        private void Operator_ErrorMessageRaised(Func<string> obj)
         {
             ShowToast(obj);
         }
@@ -745,12 +745,12 @@ namespace Locana.Pages
             UpdateAppBar();
         }
 
-        private async void ShowToast(string message)
+        private async void ShowToast(Func<string> message)
         {
             DebugUtil.Log(message);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                AppShell.Current.Toast.PushToast(new ToastContent() { Text = message });
+                AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource(message.Invoke()) });
             });
         }
 
@@ -865,7 +865,7 @@ namespace Locana.Pages
             }
             catch
             {
-                ShowToast(SystemUtil.GetStringResource("Viewer_FailedToOpenDetail"));
+                ShowToast(() => "Viewer_FailedToOpenDetail");
             }
             finally
             {

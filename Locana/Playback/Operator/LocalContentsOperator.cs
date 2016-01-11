@@ -33,7 +33,7 @@ namespace Locana.Playback.Operator
         private void MovieScreen_LocalMediaFailed(object sender, string e)
         {
             DebugUtil.Log("LocalMoviePlayer MediaFailed: " + e);
-            OnErrorMessage(SystemUtil.GetStringResource("Viewer_FailedPlaybackMovie"));
+            OnErrorMessage("Viewer_FailedPlaybackMovie");
             OnMovieStreamError();
         }
 
@@ -57,11 +57,6 @@ namespace Locana.Playback.Operator
             try
             {
                 await loader.Load(ContentsSet.Images, Canceller);
-            }
-            catch
-            {
-                OnErrorMessage(SystemUtil.GetStringResource("Viewer_NoCameraRoll"));
-                throw;
             }
             finally
             {
