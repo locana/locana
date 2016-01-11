@@ -2,13 +2,13 @@
 using Naotaco.Jpeg.MetaData.Misc;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
+using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.Web.Http;
 
 namespace Locana.Utility
 {
@@ -123,27 +123,27 @@ namespace Locana.Utility
             {
                 var geoResult = GeotaggingResult.NotRequested;
 
-                var res = await HttpClient.GetAsync(req.Uri, HttpCompletionOption.ResponseContentRead).ConfigureAwait(false);
-                switch (res.StatusCode)
+                var task = HttpClient.GetAsync(req.Uri, HttpCompletionOption.ResponseContentRead);
+
+                HttpResponseMessage res;
+                try
                 {
-                    case HttpStatusCode.OK:
-                        break;
-                    case HttpStatusCode.Gone:
-                        req.Error?.Invoke(DownloaderError.Gone, geoResult);
-                        return;
-                    default:
-                        req.Error?.Invoke(DownloaderError.Network, geoResult);
-                        return;
+                    res = await task;
+                }
+                catch (Exception)
+                {
+                    req.Error?.Invoke(DownloaderError.Network, geoResult);
+                    return;
                 }
 
-                var imageStream = await res.Content.ReadAsStreamAsync().ConfigureAwait(false);
+                var imageStream = (await res.Content.ReadAsInputStreamAsync()).AsStreamForRead();
 
                 if (req.Mediatype == Mediatype.Image && req.GeoPosition != null)
                 {
                     try
                     {
                         imageStream = await MetaDataOperator.AddGeopositionAsync(imageStream, req.GeoPosition, false);
-                        geoResult = Utility.GeotaggingResult.OK;
+                        geoResult = GeotaggingResult.OK;
                     }
                     catch (GpsInformationAlreadyExistsException)
                     {
