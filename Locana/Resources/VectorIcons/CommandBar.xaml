@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:Locana.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:local="using:Locana">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="ApertureVectorIcon">
+                <Viewbox>
+                    <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            Name="svg2"
+                            Width="24"
+                            Height="24">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Canvas.RenderTransform>
+                        <Canvas.Resources />
+                        <!--  Unknown tag: metadata  -->
+                        <!--  Unknown tag: sodipodi:namedview  -->
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              Name="path4"
+                              Data="M0 0h24v24H0z" />
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              Name="path6"
+                              Data="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.85-6.32 2.25l3.66 6.35.06-.1zM21.54 9c-.92-2.92-3.15-5.26-6-6.34L11.88 9h9.66zm.26 1h-7.49l.29.5 4.76 8.25C21 16.97 22 14.61 22 12c0-.69-.07-1.35-.2-2zM8.54 12l-3.9-6.75C3.01 7.03 2 9.39 2 12c0 .69.07 1.35.2 2h7.49l-1.15-2zm-6.08 3c.92 2.92 3.15 5.26 6 6.34L12.12 15H2.46zm11.27 0l-3.9 6.76c.7.15 1.42.24 2.17.24 2.4 0 4.6-.85 6.32-2.25l-3.66-6.35-.93 1.6z"
+                              Fill="#FFFFFFFF" />
+                    </Canvas>
+                </Viewbox>
+            </DataTemplate>
+
+            <DataTemplate x:Key="EvIcon">
+                <Viewbox>
+                    <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            Name="svg2"
+                            Width="24"
+                            Height="24">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Canvas.RenderTransform>
+                        <Canvas.Resources />
+                        <!--  Unknown tag: metadata  -->
+                        <!--  Unknown tag: sodipodi:namedview  -->
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              Name="path4"
+                              Data="M0 0h24v24H0zm0 0h24v24H0z" />
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              Name="path6"
+                              Data="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5.5 7.5h2v-2H9v2h2V9H9v2H7.5V9h-2V7.5zM19 19H5L19 5v14zm-2-2v-1.5h-5V17h5z"
+                              Fill="#FFFFFFFF" />
+                    </Canvas>
+                </Viewbox>
+            </DataTemplate>
+
+            <DataTemplate x:Key="IsoIcon">
+                <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                    <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            Name="svg2"
+                            Width="200"
+                            Height="200">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Canvas.RenderTransform>
+                        <Canvas.Resources />
+                        <!--  Unknown tag: metadata  -->
+                        <!--  Unknown tag: sodipodi:namedview  -->
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              Name="ISO"
+                              Data="F1 M200,200z M0,0z M13.241,146L23.2,146 23.2,54.562 13.24,54.562 13.24,146z M93.519,57.562C90.039,55.402 83.439,53.242 74.8,53.242 58.121,53.242 46.841,63.442 46.841,77.361 46.841,89.961 56.201,98 70,103.161 81.879,107.961 86.8,113.481 86.8,122.48 86.8,132.32 79.6,138.92 67.361,138.92A37.279,37.279,0,0,1,47.682,133.28L44.922,141.56C49.482,144.8 58.482,147.319 66.761,147.319 86.439,147.318 97,136.159 97,121.64 97,108.56 89.44,101 74.681,94.761 62.44,89.6 56.921,85.041 56.921,76.041 56.921,69.441 61.721,61.641 74.44,61.641A31.063,31.063,0,0,1,90.519,65.841z M153.519,53.122C130.599,53.122 113.68,71.241 113.68,101 113.68,129.559 129.76,147.438 152.439,147.438 174.039,147.438 192.039,131.599 192.039,99.438 192.037,71.842 176.918,53.122 153.519,53.122z M153.039,61.402C172.6,61.4 181.6,81.561 181.6,99.92 181.6,120.8 171.641,139.159 152.8,139.159 134.2,139.159 124.121,120.2 124.121,100.759 124.121,81.318 132.879,61.4 153.039,61.4z"
+                              Fill="#FFFFFF" />
+                    </Canvas>
+
+                </Viewbox>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

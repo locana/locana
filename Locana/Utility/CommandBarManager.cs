@@ -153,15 +153,18 @@ namespace Locana.Utility
                 case AppBarItem.Refresh:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Refresh), Label = SystemUtil.GetStringResource("AppBar_Refresh") };
                 case AppBarItem.FNumberSlider:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/aperture.png") }, Label = "F number" };
+                    // return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/aperture.png") }, Label = "F number" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ApertureVectorIcon"] , Label = "F number" };
                 case AppBarItem.ShutterSpeedSlider:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ShutterSpeed.png") }, Label = "Shutter speed" };
                 case AppBarItem.IsoSlider:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ISO.png") }, Label = "ISO" };
+                    // return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ISO.png") }, Label = "ISO" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["IsoIcon"], Label = "ISO " };
                 case AppBarItem.ProgramShiftSlider:
                     return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/ProgramShift.png") }, Label = "ProgramShift" };
                 case AppBarItem.EvSlider:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/EVComp.png") }, Label = "EV" };
+                    // return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/LiveViewScreen/EVComp.png") }, Label = "EV" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["EvIcon"], Label = "EV" };
                 case AppBarItem.Zoom:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Zoom), Label = "Zoom" };
                 case AppBarItem.Resume:
