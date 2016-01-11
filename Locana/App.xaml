@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Resources/StyleResources.xaml" />
                 <ResourceDictionary Source="Resources/ShellStyles.xaml" />
                 <ResourceDictionary Source="Resources/VectorIcons/CommandBar.xaml" />
+                <ResourceDictionary Source="Resources/VectorIcons/AppShellIcons.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
 

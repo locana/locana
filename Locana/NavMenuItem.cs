@@ -1,5 +1,5 @@
 ﻿using System;
-using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace Locana
 {
@@ -9,16 +9,11 @@ namespace Locana
     public class NavMenuItem
     {
         public string Label { get; set; }
-        public Symbol Symbol { get; set; }
-        public char SymbolAsChar
-        {
-            get
-            {
-                return (char)this.Symbol;
-            }
-        }
 
         public Type DestPage { get; set; }
         public object Arguments { get; set; }
+
+        public string IconResId { set { Resource = Application.Current.Resources[value] as DataTemplate; } }
+        public DataTemplate Resource { get; set; }
     }
 }

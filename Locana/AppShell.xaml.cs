@@ -26,19 +26,19 @@ namespace Locana
             {
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Camera,
+                    IconResId = "ic_linked_camera_white",
                     Label = "EntrancePage [TBD]",
                     DestPage = typeof(EntrancePage)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Pictures,
+                    IconResId = "ic_collection_white",
                     Label = SystemUtil.GetStringResource("PhotoGallery"),
                     DestPage = typeof(ContentsGridPage)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.ThreeBars,
+                    IconResId = "ic_network_wifi_white",
                     Label = "WifiDirectPage [TBD]",
                     DestPage = typeof(WifiDirectPage)
                 },
@@ -48,19 +48,19 @@ namespace Locana
             {
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Setting,
+                    IconResId = "ic_settings_white",
                     Label = SystemUtil.GetStringResource("AppSettings"),
                     DestPage = typeof(AppSettingPage)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Like,
+                    IconResId = "ic_thumb_up_white",
                     Label = SystemUtil.GetStringResource("Donation"),
                     DestPage = typeof(DonationPage)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Important,
+                    IconResId = "ic_info_outline_white",
                     Label = SystemUtil.GetStringResource("About"),
                     DestPage = typeof(AboutPage)
                 }

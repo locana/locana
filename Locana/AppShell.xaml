@@ -31,12 +31,12 @@
                     value when the SplitView is 'Compact' while reducing the likelihood of showing
                     redundant information when the label is shown.
                 -->
-                <FontIcon x:Name="Glyph"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          FontSize="16"
-                          Glyph="{x:Bind SymbolAsChar}"
-                          ToolTipService.ToolTip="{x:Bind Label}" />
+                <ContentControl Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                ContentTemplate="{x:Bind Resource}"
+                                ToolTipService.ToolTip="{x:Bind Label}" />
                 <TextBlock x:Name="Text"
                            Grid.Column="1"
                            Text="{x:Bind Label}" />
