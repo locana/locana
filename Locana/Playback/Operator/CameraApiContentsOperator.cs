@@ -121,7 +121,7 @@ namespace Locana.Playback.Operator
                 var StateChangeCanceller = new CancellationTokenSource(15000);
                 try
                 {
-                    if (!await PlaybackModeHelper.MoveToContentTransferModeAsync(TargetDevice, StateChangeCanceller).ConfigureAwait(false))
+                    if (!await PlaybackModeHelper.MoveToContentTransferModeAsync(TargetDevice, StateChangeCanceller))
                     {
                         DebugUtil.Log("ModeTransition failed");
                         throw new Exception();
@@ -135,7 +135,7 @@ namespace Locana.Playback.Operator
 
                 OnProgressMessage(SystemUtil.GetStringResource("Progress_FetchingContents"));
                 loader.PartLoaded += RemoteContentsLoader_PartLoaded;
-                await loader.Load(ApplicationSettings.GetInstance().RemoteContentsSet, Canceller).ConfigureAwait(false);
+                await loader.Load(ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
                 DebugUtil.Log("RemoteApiContentsLoader completed");
             }
             catch (StorageNotSupportedException)
