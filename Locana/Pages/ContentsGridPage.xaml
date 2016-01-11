@@ -45,7 +45,7 @@
         <c:GridViewItemSelectivityBinder x:Key="GridViewItemSelectivityBinder" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
@@ -56,7 +56,6 @@
                         <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
                         <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource ExtraLargeGridItemTemplate}" />
                         <Setter Target="GridHolder.(Grid.RowSpan)" Value="1" />
-                        <Setter Target="AppBarUnit.Background" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -67,7 +66,6 @@
                         <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource SmallGridItemTemplate}" />
                         <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource LargeGridItemTemplate}" />
                         <Setter Target="GridHolder.(Grid.RowSpan)" Value="2" />
-                        <Setter Target="AppBarUnit.Background" Value="{ThemeResource SystemChromeBlackLowColor}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -96,23 +94,19 @@
                                Canvas.ZIndex="10"
                                Visibility="Collapsed" />
 
-        <Border x:Name="MoviePlayerWrapper"
-                Grid.RowSpan="2"
-                Margin="-20,-24,-20,-30"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Canvas.ZIndex="10"
-                Visibility="Collapsed">
-            <c:MoviePlaybackScreen x:Name="MoviePlayer"
-                                   Margin="10,0,10,10"
-                                   HorizontalAlignment="Stretch"
-                                   VerticalAlignment="Stretch"
-                                   CurrentPosition="{Binding CurrentPosition}"
-                                   Duration="{Binding Duration}"
-                                   MovieType="LocalMovie"
-                                   PlaybackStatus="{Binding StreamingStatus}"
-                                   SeekAvailable="{Binding SeekAvailable}" />
-        </Border>
+        <c:MoviePlaybackScreen x:Name="MoviePlayer"
+                               Grid.RowSpan="2"
+                               Canvas.ZIndex="10"
+                               CurrentPosition="{Binding CurrentPosition}"
+                               Duration="{Binding Duration}"
+                               MovieType="LocalMovie"
+                               PlaybackStatus="{Binding StreamingStatus}"
+                               SeekAvailable="{Binding SeekAvailable}"
+                               Visibility="Collapsed">
+            <c:MoviePlaybackScreen.Background>
+                <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+            </c:MoviePlaybackScreen.Background>
+        </c:MoviePlaybackScreen>
 
         <ProgressRing x:Name="ProgressCircle"
                       Grid.RowSpan="2"

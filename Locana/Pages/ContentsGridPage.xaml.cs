@@ -12,12 +12,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using Windows.System.Display;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -38,6 +40,7 @@ namespace Locana.Pages
         public ContentsGridPage()
         {
             this.InitializeComponent();
+            InitVisualStates();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -147,6 +150,44 @@ namespace Locana.Pages
             {
                 UpdateInnerState(ViewerState.Single);
             });
+        }
+
+        private const string WIDE_STATE = "WideState";
+        private const string NARROW_STATE = "NarrowState";
+
+        private Brush ChromeLowBrush;
+        private Brush AccentBrush;
+
+        private void InitVisualStates()
+        {
+            ChromeLowBrush = new SolidColorBrush((Color)Resources["SystemChromeBlackLowColor"]);
+            AccentBrush = Resources["SystemControlForegroundAccentBrush"] as Brush;
+
+            var groups = VisualStateManager.GetVisualStateGroups(LayoutRoot);
+
+            groups[0].CurrentStateChanged += (sender, e) =>
+            {
+                UpdateAppBarColor(e.NewState.Name);
+            };
+            UpdateAppBarColor();
+        }
+
+        private void UpdateAppBarColor(string name = null)
+        {
+            if (name == null)
+            {
+                name = VisualStateManager.GetVisualStateGroups(LayoutRoot)[0].CurrentState.Name;
+            }
+
+            switch (name)
+            {
+                case NARROW_STATE:
+                    AppBarUnit.Background = MoviePlayer.Visibility == Visibility.Visible ? AccentBrush : ChromeLowBrush;
+                    break;
+                default:
+                    AppBarUnit.Background = AccentBrush;
+                    break;
+            }
         }
 
         private MenuFlyout CreateRemoteDrivesMenuFlyout()
@@ -414,7 +455,8 @@ namespace Locana.Pages
 
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                MoviePlayerWrapper.Visibility = Visibility.Collapsed;
+                MoviePlayer.Visibility = Visibility.Collapsed;
+                UpdateAppBarColor();
                 HideProgress();
             });
         }
@@ -722,7 +764,7 @@ namespace Locana.Pages
                 e.Handled = true;
             }
 
-            if (MoviePlayerWrapper.Visibility == Visibility.Visible)
+            if (MoviePlayer.Visibility == Visibility.Visible)
             {
                 DebugUtil.Log("Close local movie stream.");
                 FinishMoviePlayback();
@@ -838,13 +880,15 @@ namespace Locana.Pages
 
             try
             {
-                MoviePlayerWrapper.Visibility = Visibility.Visible;
+                MoviePlayer.Visibility = Visibility.Visible;
+                UpdateAppBarColor();
                 await Operator.PlaybackMovie(content);
             }
             catch (Exception e)
             {
                 DebugUtil.Log(e.StackTrace);
-                MoviePlayerWrapper.Visibility = Visibility.Collapsed;
+                MoviePlayer.Visibility = Visibility.Collapsed;
+                UpdateAppBarColor();
                 UpdateInnerState(ViewerState.Single);
             }
             finally
@@ -860,7 +904,8 @@ namespace Locana.Pages
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 Operator?.FinishMoviePlayback();
-                MoviePlayerWrapper.Visibility = Visibility.Collapsed;
+                MoviePlayer.Visibility = Visibility.Collapsed;
+                UpdateAppBarColor();
             });
         }
 
