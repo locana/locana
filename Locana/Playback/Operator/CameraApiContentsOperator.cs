@@ -99,6 +99,7 @@ namespace Locana.Playback.Operator
         public override void Dispose()
         {
             HttpClient.Dispose();
+            TargetDevice.Observer.Stop();
 
             MovieStreamHelper.INSTANCE.StreamClosed -= StreamHelper_StreamClosed;
             MovieStreamHelper.INSTANCE.StatusChanged -= StreamHelper_StatusChanged;
@@ -112,6 +113,7 @@ namespace Locana.Playback.Operator
         public override async Task LoadContents()
         {
             var loader = new RemoteApiContentsLoader(TargetDevice);
+            await TargetDevice.Observer.StartAsync();
             try
             {
                 OnProgressMessage(SystemUtil.GetStringResource("Progress_ChangingCameraState"));
