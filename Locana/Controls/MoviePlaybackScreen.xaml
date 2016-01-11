@@ -8,46 +8,30 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot"
-          Margin="3,20"
-          VerticalAlignment="Stretch"
-          Background="Transparent">
-        <Grid x:Name="Background"
-              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-              Opacity="0.9" />
+    <Grid x:Name="LayoutRoot">
         <Grid x:Name="PlaybackSurface">
             <MediaElement x:Name="LocalMoviePlayer"
-                          Margin="8"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
                           IsLooping="False"
                           Stretch="Uniform"
                           Tapped="Screen_Tapped" />
             <Image Name="StreamingPlayer"
                    Grid.Row="0"
-                   Margin="8"
-                   HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch"
                    Source="{Binding Image}"
                    Tapped="Screen_Tapped" />
         </Grid>
 
-        <Grid x:Name="DetailInfoSurface"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch">
+        <Grid x:Name="DetailInfoSurface">
 
             <Grid x:Name="Header"
                   Height="50"
                   VerticalAlignment="Top">
-                <Rectangle x:Name="HeaderBackground"
-                           Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                           Opacity="0.7"
-                           Visibility="Visible" />
+                <Border x:Name="HeaderBackground" Visibility="Visible">
+                    <Border.Background>
+                        <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+                    </Border.Background>
+                </Border>
 
-                <Grid x:Name="HeaderForeground"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      Visibility="Visible">
+                <Grid x:Name="HeaderForeground" Visibility="Visible">
                     <TextBlock Name="FileNameText"
                                Margin="8,0"
                                HorizontalAlignment="Stretch"
@@ -62,20 +46,16 @@
 
 
             <Grid x:Name="Footer"
-                  Height="120"
+                  Height="48"
                   VerticalAlignment="Bottom">
-                <Rectangle x:Name="FooterBackground"
-                           Height="120"
-                           VerticalAlignment="top"
-                           Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                           Opacity="0.7"
-                           Visibility="Visible" />
+                <Border x:Name="FooterBackground" Visibility="Visible">
+                    <Border.Background>
+                        <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+                    </Border.Background>
+                </Border>
 
                 <Grid Name="FooterForeground"
-                      Height="120"
                       Margin="15,0"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="top"
                       Visibility="Visible">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -92,7 +72,6 @@
                                  Grid.ColumnSpan="4"
                                  Height="4"
                                  Margin="3,6"
-                                 HorizontalAlignment="Stretch"
                                  VerticalAlignment="Center"
                                  Maximum="1000"
                                  Minimum="0.0" />
@@ -100,7 +79,6 @@
                             Grid.ColumnSpan="4"
                             Height="30"
                             Margin="3,6"
-                            HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Maximum="1000"
                             Minimum="0.0"
@@ -108,14 +86,12 @@
                     <TextBlock Name="PositionText"
                                Grid.Row="1"
                                Grid.Column="1"
-                               HorizontalAlignment="Stretch"
                                VerticalAlignment="Center"
                                FontSize="16"
                                Foreground="{StaticResource ApplicationForegroundThemeBrush}" />
                     <TextBlock Name="TimeSeparator"
                                Grid.Row="1"
                                Grid.Column="2"
-                               HorizontalAlignment="Stretch"
                                VerticalAlignment="Center"
                                FontSize="16"
                                Foreground="{StaticResource ApplicationForegroundThemeBrush}"
@@ -123,7 +99,6 @@
                     <TextBlock Name="DurationText"
                                Grid.Row="1"
                                Grid.Column="3"
-                               HorizontalAlignment="Stretch"
                                VerticalAlignment="Center"
                                FontSize="16"
                                Foreground="{StaticResource ApplicationForegroundThemeBrush}" />

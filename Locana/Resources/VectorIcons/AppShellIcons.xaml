@@ -5,9 +5,6 @@
     <DataTemplate x:Key="ic_collection_white">
         <Viewbox Stretch="Uniform">
             <Canvas Width="24" Height="24">
-                <Canvas.RenderTransform>
-                    <TranslateTransform X="0" Y="0" />
-                </Canvas.RenderTransform>
                 <Path Data="F1 M24,24z M0,0z M22,16L22,4C22,2.9,21.1,2,20,2L8,2C6.9,2,6,2.9,6,4L6,16C6,17.1,6.9,18,8,18L20,18C21.1,18,22,17.1,22,16z M11,12L13.03,14.71 16,11 20,16 8,16 11,12z M2,6L2,20C2,21.1,2.9,22,4,22L18,22 18,20 4,20 4,6 2,6z" Fill="#FFFFFF" />
             </Canvas>
         </Viewbox>
@@ -15,9 +12,6 @@
     <DataTemplate x:Key="ic_info_outline_white">
         <Viewbox Stretch="Uniform">
             <Canvas Width="24" Height="24">
-                <Canvas.RenderTransform>
-                    <TranslateTransform X="0" Y="0" />
-                </Canvas.RenderTransform>
                 <Path Data="F1 M24,24z M0,0z M11,17L13,17 13,11 11,11 11,17z M12,2C6.48,2 2,6.48 2,12 2,17.52 6.48,22 12,22 17.52,22 22,17.52 22,12 22,6.48 17.52,2 12,2z M12,20C7.59,20 4,16.41 4,12 4,7.59 7.59,4 12,4 16.41,4 20,7.59 20,12 20,16.41 16.41,20 12,20z M11,9L13,9 13,7 11,7 11,9z" Fill="#FFFFFF" />
             </Canvas>
         </Viewbox>
@@ -25,9 +19,6 @@
     <DataTemplate x:Key="ic_network_wifi_white">
         <Viewbox Stretch="Uniform">
             <Canvas Width="24" Height="24">
-                <Canvas.RenderTransform>
-                    <TranslateTransform X="0" Y="0" />
-                </Canvas.RenderTransform>
                 <Path Data="F1 M24,24z M0,0z M12.01,21.49L23.64,7C23.19,6.66 18.71,3 12,3 5.28,3 0.81,6.66 0.36,7L11.99,21.49 12,21.5 12.01,21.49z"
                       Fill="#FFFFFF"
                       Opacity="0.3" />
@@ -38,9 +29,6 @@
     <DataTemplate x:Key="ic_settings_white">
         <Viewbox Stretch="Uniform">
             <Canvas Width="24" Height="24">
-                <Canvas.RenderTransform>
-                    <TranslateTransform X="0" Y="0" />
-                </Canvas.RenderTransform>
                 <Path Data="F1 M24,24z M0,0z M19.43,12.98C19.47,12.66 19.5,12.34 19.5,12 19.5,11.66 19.47,11.34 19.43,11.02L21.54,9.37C21.73,9.22,21.78,8.95,21.66,8.73L19.66,5.27C19.54,5.05,19.27,4.97,19.05,5.05L16.56,6.05C16.04,5.65,15.48,5.32,14.87,5.07L14.49,2.42C14.46,2.18,14.25,2,14,2L10,2C9.75,2,9.54,2.18,9.51,2.42L9.13,5.07C8.52,5.32,7.96,5.66,7.44,6.05L4.95,5.05C4.72,4.96,4.46,5.05,4.34,5.27L2.34,8.73C2.21,8.95,2.27,9.22,2.46,9.37L4.57,11.02C4.53,11.34 4.5,11.67 4.5,12 4.5,12.33 4.53,12.66 4.57,12.98L2.46,14.63C2.27,14.78,2.22,15.05,2.34,15.27L4.34,18.73C4.46,18.95,4.73,19.03,4.95,18.95L7.44,17.95C7.96,18.35,8.52,18.68,9.13,18.93L9.51,21.58C9.54,21.82,9.75,22,10,22L14,22C14.25,22,14.46,21.82,14.49,21.58L14.87,18.93C15.48,18.68,16.04,18.34,16.56,17.95L19.05,18.95C19.28,19.04,19.54,18.95,19.66,18.73L21.66,15.27C21.78,15.05,21.73,14.78,21.54,14.63L19.43,12.98z M12,15.5C10.07,15.5 8.5,13.93 8.5,12 8.5,10.07 10.07,8.5 12,8.5 13.93,8.5 15.5,10.07 15.5,12 15.5,13.93 13.93,15.5 12,15.5z" Fill="#FFFFFF" />
             </Canvas>
         </Viewbox>
@@ -48,9 +36,6 @@
     <DataTemplate x:Key="ic_thumb_up_white">
         <Viewbox Stretch="Uniform">
             <Canvas Width="24" Height="24">
-                <Canvas.RenderTransform>
-                    <TranslateTransform X="0" Y="0" />
-                </Canvas.RenderTransform>
                 <Path Data="F1 M24,24z M0,0z M1,21L5,21 5,9 1,9 1,21z M23,10C23,8.9,22.1,8,21,8L14.69,8 15.64,3.43 15.67,3.11C15.67,2.7,15.5,2.32,15.23,2.05L14.17,1 7.59,7.59C7.22,7.95,7,8.45,7,9L7,19C7,20.1,7.9,21,9,21L18,21C18.83,21,19.54,20.5,19.84,19.78L22.86,12.73C22.95,12.5,23,12.26,23,12L23,10.09 22.99,10.08 23,10z" Fill="#FFFFFF" />
             </Canvas>
         </Viewbox>
@@ -58,9 +43,6 @@
     <DataTemplate x:Key="ic_linked_camera_white">
         <Viewbox Stretch="Uniform">
             <Canvas Width="24" Height="24">
-                <Canvas.RenderTransform>
-                    <TranslateTransform X="0" Y="0" />
-                </Canvas.RenderTransform>
                 <Path Data="F1 M24,24z M0,0z M16,3.33C18.58,3.33,20.67,5.42,20.67,8L22,8C22,4.69,19.31,2,16,2L16,3.33 M16,6C17.11,6,18,6.89,18,8L19.33,8C19.33,6.16,17.84,4.67,16,4.67L16,6" Fill="#FFFFFF" />
                 <Path Data="F1 M24,24z M0,0z M17,9C17,7.89,16.11,7,15,7L15,4 9,4 7.17,6 4,6C2.9,6,2,6.9,2,8L2,20C2,21.1,2.9,22,4,22L20,22C21.1,22,22,21.1,22,20L22,9 17,9z M12,19C9.24,19 7,16.76 7,14 7,11.24 9.24,9 12,9 14.76,9 17,11.24 17,14 17,16.76 14.76,19 12,19z" Fill="#FFFFFF" />
                 <Ellipse Canvas.Left="8.8"

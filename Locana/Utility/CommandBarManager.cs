@@ -153,7 +153,7 @@ namespace Locana.Utility
                 case AppBarItem.Refresh:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Refresh), Label = SystemUtil.GetStringResource("AppBar_Refresh") };
                 case AppBarItem.FNumberSlider:
-                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ApertureIcon"] , Label = SystemUtil.GetStringResource("CommandBar_Fnumber") };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ApertureIcon"], Label = SystemUtil.GetStringResource("CommandBar_Fnumber") };
                 case AppBarItem.ShutterSpeedSlider:
                     return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["SSIcon"], Label = SystemUtil.GetStringResource("CommandBar_SS") };
                 case AppBarItem.IsoSlider:
@@ -169,7 +169,7 @@ namespace Locana.Utility
                 case AppBarItem.Pause:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Pause), Label = SystemUtil.GetStringResource("AppBar_Pause") };
                 case AppBarItem.LocalStorage:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.CellPhone), Label = SystemUtil.GetStringResource("AppBar_LocalStorage") }; // TODO desktop or tablet devices
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ic_phonelink_white"], Label = SystemUtil.GetStringResource("AppBar_LocalStorage") };
                 case AppBarItem.RemoteStorage:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.MapDrive), Label = SystemUtil.GetStringResource("AppBar_RemoteStorage") };
                 case AppBarItem.Cancel:
