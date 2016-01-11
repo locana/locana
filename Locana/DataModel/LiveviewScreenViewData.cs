@@ -107,6 +107,9 @@ namespace Locana.DataModel
         private static readonly BitmapImage AvailableMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/memory_card.png", UriKind.Absolute));
         private static readonly BitmapImage NoMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/no_memory_card.png", UriKind.Absolute));
 
+        private static readonly DataTemplate MediaIconTemplate = (DataTemplate)Application.Current.Resources["MemoryCardIcon"];
+        private static readonly DataTemplate NoMediaIconTemplate = (DataTemplate)Application.Current.Resources["NoMemoryCardIcon"];
+
         public static DataTemplate GetShootModeIcon(string mode)
         {
             switch (mode)
@@ -288,7 +291,7 @@ namespace Locana.DataModel
             }
         }
 
-        public BitmapImage MemoryCardStatusImage
+        public DataTemplate MemoryCardStatusImage
         {
             get
             {
@@ -300,14 +303,14 @@ namespace Locana.DataModel
                         switch (storage.StorageID)
                         {
                             case "No Media":
-                                return NoMediaImage;
+                                return NoMediaIconTemplate;
                             case "Memory Card 1":
                             default:
-                                return AvailableMediaImage;
+                                return MediaIconTemplate;
                         }
                     }
                 }
-                return NoMediaImage;
+                return NoMediaIconTemplate;
             }
         }
 

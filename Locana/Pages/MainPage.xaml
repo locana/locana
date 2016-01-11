@@ -198,7 +198,7 @@
                                             Converter={StaticResource B2VConverter}}" />
             <ContentControl Grid.Column="5"
                    Margin="3"
-                   ContentTemplate="{StaticResource MemoryCardIcon}"
+                   ContentTemplate="{Binding MemoryCardStatusImage}"
                             />
             <TextBlock x:Name="StorageAmountText"
                        Grid.Column="6"
