@@ -46,7 +46,7 @@ namespace Locana.Pages
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            CommandBarManager.SetEvent(AppBarItem.Ok, (s, args) =>
+            CommandBarManager.SetEvent(AppBarItem.Ok, async (s, args) =>
             {
                 DebugUtil.Log("Ok clicked");
                 switch (InnerState)
@@ -55,7 +55,7 @@ namespace Locana.Pages
                         switch (Operator.ContentsCollection.SelectivityFactor)
                         {
                             case SelectivityFactor.Delete:
-                                DeleteSelectedFiles();
+                                await DeleteSelectedFiles();
                                 break;
                             case SelectivityFactor.Download:
                                 FetchSelectedImages();
@@ -146,7 +146,7 @@ namespace Locana.Pages
                         break;
                 }
             });
-            CommandBarManager.SetEvent(AppBarItem.Cancel, (s, args) =>
+            CommandBarManager.SetEvent(AppBarItem.CancelSelection, (s, args) =>
             {
                 UpdateInnerState(ViewerState.Single);
             });
@@ -589,7 +589,7 @@ namespace Locana.Pages
                 {
                     case ViewerState.Multi:
                         CommandBarManager.Clear()
-                            .Command(AppBarItem.Cancel);
+                            .Command(AppBarItem.CancelSelection);
                         if (ContentsGrid.SelectedItems.Count != 0)
                         {
                             CommandBarManager.Command(AppBarItem.Ok);
@@ -730,19 +730,20 @@ namespace Locana.Pages
 
         private bool IsViewingDetail = false;
 
-        private async void DeleteSelectedFiles()
+        private async Task DeleteSelectedFiles()
         {
             DebugUtil.Log("DeleteSelectedFiles: " + ContentsGrid.SelectedItems.Count);
-            var items = ContentsGrid.SelectedItems;
+            var items = new List<object>(ContentsGrid.SelectedItems);
             if (items.Count == 0)
             {
                 HideProgress();
                 return;
             }
 
-            await Operator.DeleteSelectedFiles(items.Select(item => item as Thumbnail));
-
-            UpdateAppBar();
+            if (await DeleteDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                await Operator.DeleteSelectedFiles(items.Select(item => item as Thumbnail));
+            }
         }
 
         private async void ShowToast(Func<string> message)
@@ -926,7 +927,11 @@ namespace Locana.Pages
         {
             var item = sender as MenuFlyoutItem;
             var data = item.DataContext as Thumbnail;
-            await Operator.DeleteSelectedFile(data);
+
+            if (await DeleteDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                await Operator.DeleteSelectedFile(data);
+            }
         }
 
         private async void ContentsGrid_Tapped(object sender, TappedRoutedEventArgs e)

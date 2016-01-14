@@ -1226,4 +1226,10 @@ Open gallary to browse contents in your camera device.</value>
   <data name="CommandBar_Zoom" xml:space="preserve">
     <value>Zoom</value>
   </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete file(s)?</value>
+  </data>
+  <data name="DialogTitle_Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
 </root>

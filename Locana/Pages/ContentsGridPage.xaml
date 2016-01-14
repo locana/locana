@@ -6,6 +6,7 @@
       xmlns:local="using:Locana.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:util="using:Locana.Utility"
+      xmlns:xc="using:Windows.UI.Xaml.Controls"
       mc:Ignorable="d">
     <Page.Resources>
         <CollectionViewSource x:Name="GridSources" IsSourceGrouped="True" />
@@ -273,6 +274,24 @@
                         Visibility="Collapsed" />
             </Border>
         </StackPanel>
+
+        <xc:ContentDialog x:Name="DeleteDialog"
+                          Grid.Row="1"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          PrimaryButtonText="{Binding [AppBar_Delete],
+                                                      Source={StaticResource LocalizedStrings}}"
+                          SecondaryButtonText="{Binding [AppBar_Cancel],
+                                                        Source={StaticResource LocalizedStrings}}">
+            <Border>
+                <TextBlock Margin="0,24,0,0" Text="{Binding [DeleteConfirmation], Source={StaticResource LocalizedStrings}}" />
+            </Border>
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding [DialogTitle_Confirmation], Source={StaticResource LocalizedStrings}}" />
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+        </xc:ContentDialog>
 
         <CommandBar Name="AppBarUnit"
                     Grid.Row="2"

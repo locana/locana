@@ -142,8 +142,6 @@ namespace Locana.Utility
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.ClosePane) { RenderTransform = new ScaleTransform { ScaleX = -1 }, RenderTransformOrigin = new Point { X = 0.5, Y = 0.5 } }, Label = SystemUtil.GetStringResource("HideDetailInfo") };
                 case AppBarItem.Ok:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Accept), Label = SystemUtil.GetStringResource("AppBar_Exit") };
-                case AppBarItem.WifiSetting:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.ThreeBars), Label = SystemUtil.GetStringResource("WifiSettingLauncherButtonText") };
                 case AppBarItem.Donation:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Like), Label = SystemUtil.GetStringResource("Donation") };
                 case AppBarItem.RotateLeft:
@@ -172,8 +170,8 @@ namespace Locana.Utility
                     return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ic_phonelink_white"], Label = SystemUtil.GetStringResource("AppBar_LocalStorage") };
                 case AppBarItem.RemoteStorage:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.MapDrive), Label = SystemUtil.GetStringResource("AppBar_RemoteStorage") };
-                case AppBarItem.Cancel:
-                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["CancelIcon"], Label = SystemUtil.GetStringResource("AppBar_Cancel") };
+                case AppBarItem.CancelSelection:
+                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_Cancel") };
                 default:
                     throw new NotImplementedException();
             }
@@ -329,6 +327,6 @@ namespace Locana.Utility
         Zoom,
         LocalStorage,
         RemoteStorage,
-        Cancel,
+        CancelSelection,
     }
 }

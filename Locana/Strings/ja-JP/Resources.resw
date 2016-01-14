@@ -1096,4 +1096,10 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="CommandBar_Zoom" xml:space="preserve">
     <value>ズーム</value>
   </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>本当に削除しますか？</value>
+  </data>
+  <data name="DialogTitle_Confirmation" xml:space="preserve">
+    <value>確認</value>
+  </data>
 </root>
