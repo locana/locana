@@ -291,8 +291,6 @@
     <None Include="Locana_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\AppBar\appbar_cameraSetting.png" />
-    <Content Include="Assets\AppBar\ControlPanel.png" />
     <Content Include="Assets\Camera.png" />
     <Content Include="Assets\DarkGray.png" />
     <Content Include="Assets\License.txt" />

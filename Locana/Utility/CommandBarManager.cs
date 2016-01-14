@@ -124,8 +124,6 @@ namespace Locana.Utility
         {
             switch (item)
             {
-                case AppBarItem.ControlPanel:
-                    return new AppBarButton() { Icon = new BitmapIcon() { UriSource = new Uri("ms-appx:///Assets/AppBar/appbar_cameraSetting.png", UriKind.Absolute) }, Label = SystemUtil.GetStringResource("AppBar_ControlPanel") };
                 case AppBarItem.AppSetting:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Setting), Label = SystemUtil.GetStringResource("AppSetting") };
                 case AppBarItem.CancelTouchAF:
@@ -307,7 +305,6 @@ namespace Locana.Utility
         DownloadMultiple,
         DeleteMultiple,
         Ok,
-        WifiSetting,
         Donation,
         RotateRight,
         RotateLeft,
@@ -318,7 +315,6 @@ namespace Locana.Utility
         Close,
         Refresh,
         AppSetting,
-        ControlPanel,
         FNumberSlider,
         ShutterSpeedSlider,
         IsoSlider,
