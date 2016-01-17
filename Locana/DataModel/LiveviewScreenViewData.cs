@@ -81,12 +81,6 @@ namespace Locana.DataModel
         private static readonly BitmapImage ContShootingImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ContShootingButton.png", UriKind.Absolute));
         private static readonly BitmapImage LoopRecImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/LoopRecButton.png", UriKind.Absolute));
 
-        private static readonly BitmapImage StillModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/mode_photo.png", UriKind.Absolute));
-        private static readonly BitmapImage MovieModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/mode_movie.png", UriKind.Absolute));
-        private static readonly BitmapImage IntervalModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/mode_interval.png", UriKind.Absolute));
-        private static readonly BitmapImage AudioModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/mode_audio.png", UriKind.Absolute));
-        private static readonly BitmapImage LoopModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/mode_loop.png", UriKind.Absolute));
-
         private static readonly DataTemplate StillIconTemplate = (DataTemplate)Application.Current.Resources["StillIcon"];
         private static readonly DataTemplate MovieIconTemplate = (DataTemplate)Application.Current.Resources["MovieIcon"];
         private static readonly DataTemplate AudioIconTemplate = (DataTemplate)Application.Current.Resources["AudioIcon"];
@@ -96,14 +90,6 @@ namespace Locana.DataModel
 
         private static readonly DataTemplate StopIconTemplate = (DataTemplate)Application.Current.Resources["StopIcon"];
 
-        private static readonly BitmapImage AModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_A.png", UriKind.Absolute));
-        private static readonly BitmapImage IAModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_iA.png", UriKind.Absolute));
-        private static readonly BitmapImage IAPlusModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_iAPlus.png", UriKind.Absolute));
-        private static readonly BitmapImage MModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_M.png", UriKind.Absolute));
-        private static readonly BitmapImage SModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_S.png", UriKind.Absolute));
-        private static readonly BitmapImage PModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_P.png", UriKind.Absolute));
-        private static readonly BitmapImage PShiftModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_P_shift.png", UriKind.Absolute));
-
         private static readonly DataTemplate AModeTemplate = (DataTemplate)Application.Current.Resources["Mode_A"];
         private static readonly DataTemplate IAModeTemplate = (DataTemplate)Application.Current.Resources["Mode_IA"];
         private static readonly DataTemplate IAPlusModeTemplate = (DataTemplate)Application.Current.Resources["Mode_IAPlus"];
@@ -111,9 +97,6 @@ namespace Locana.DataModel
         private static readonly DataTemplate SModeTemplate = (DataTemplate)Application.Current.Resources["Mode_S"];
         private static readonly DataTemplate PModeTemplate = (DataTemplate)Application.Current.Resources["Mode_P"];
         private static readonly DataTemplate PShiftModeTemplate = (DataTemplate)Application.Current.Resources["Mode_PShift"];
-
-        private static readonly BitmapImage AvailableMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/memory_card.png", UriKind.Absolute));
-        private static readonly BitmapImage NoMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/no_memory_card.png", UriKind.Absolute));
 
         private static readonly DataTemplate MediaIconTemplate = (DataTemplate)Application.Current.Resources["MemoryCardIcon"];
         private static readonly DataTemplate NoMediaIconTemplate = (DataTemplate)Application.Current.Resources["NoMemoryCardIcon"];
