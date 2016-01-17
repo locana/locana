@@ -11,12 +11,15 @@ namespace Locana.Controls
         {
             var selectorItem = container as GridViewItem;
 
-            selectorItem.SetBinding(GridViewItem.IsEnabledProperty, new Binding
+            selectorItem.SetBinding(UIElement.IsHitTestVisibleProperty, new Binding
             {
                 Source = item as Thumbnail,
                 Path = new PropertyPath("IsSelectable"),
                 Mode = BindingMode.OneWay
             });
+
+            selectorItem.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            selectorItem.VerticalContentAlignment = VerticalAlignment.Stretch;
 
             return base.SelectStyleCore(item, container);
         }

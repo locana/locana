@@ -115,7 +115,6 @@
         <SemanticZoom x:Name="GridHolder" Grid.Row="1">
             <SemanticZoom.ZoomedInView>
                 <GridView x:Name="ContentsGrid"
-                          ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                           ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
                           ItemsSource="{Binding Source={StaticResource GridSources}}"
                           Loaded="ContentsGrid_Loaded"
