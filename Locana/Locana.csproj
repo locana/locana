@@ -311,7 +311,6 @@
     <Content Include="Assets\Screen\GeoInfoStatus_NG.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_OK.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_Updating.png" />
-    <Content Include="Assets\LiveviewScreen\OpenControlPanel.png" />
     <Content Include="Assets\PlaybackScreen\protected.png" />
     <Content Include="Assets\Toast\Locana_square_full.png" />
     <Content Include="Properties\Default.rd.xml" />

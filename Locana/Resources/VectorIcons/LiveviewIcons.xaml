@@ -309,7 +309,17 @@
                 </Viewbox>
             </DataTemplate>
 
-
+            <DataTemplate x:Key="OpenControlPanel">
+                <Viewbox>
+                    <Canvas Width="200" Height="200">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Canvas.RenderTransform>
+                        <Canvas.Resources />
+                        <Path Data="F1 M200,200z M0,0z M84.182,100L129,172.8 102,186 49,100 101,15 129,28.5z" Fill="#FFFFFFFF" Stroke="#FF000000" StrokeThickness="5" />
+                    </Canvas>
+                </Viewbox>
+            </DataTemplate>
 
 
             <!--
