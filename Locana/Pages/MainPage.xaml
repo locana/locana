@@ -178,10 +178,10 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <ContentControl ContentTemplate="{Binding ShootModeImage, Mode=OneWay}" />
-            <Image Grid.Column="1"
-                   Margin="3"
-                   Source="{Binding ExposureModeImage,
-                                    Mode=OneWay}" />
+            <ContentControl Grid.Column="1"
+                            Margin="3"
+                            ContentTemplate="{Binding ExposureModeImage,
+                                                      Mode=OneWay}" />
             <ContentControl Name="RecDisplay"
                             Grid.Column="2"
                             Margin="3"
@@ -197,9 +197,8 @@
                                             FallbackValue=Collapsed,
                                             Converter={StaticResource B2VConverter}}" />
             <ContentControl Grid.Column="5"
-                   Margin="3"
-                   ContentTemplate="{Binding MemoryCardStatusImage}"
-                            />
+                            Margin="3"
+                            ContentTemplate="{Binding MemoryCardStatusImage}" />
             <TextBlock x:Name="StorageAmountText"
                        Grid.Column="6"
                        HorizontalAlignment="Left"

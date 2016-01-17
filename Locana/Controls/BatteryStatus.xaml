@@ -1,26 +1,94 @@
-<UserControl
-    x:Class="Locana.Controls.BatteryStatus"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Locana.Controls"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="200"
-    d:DesignWidth="400">
+<UserControl x:Class="Locana.Controls.BatteryStatus"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:Locana.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="200"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
 
-    <Grid Name="LayoutRoot" Visibility="Visible" SizeChanged="LayoutRoot_SizeChanged">
-        <Rectangle Name="Background" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="24"  Width="315" Fill="{StaticResource ApplicationPageBackgroundThemeBrush}" />
-        <Rectangle Name="Amount" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="40" Fill="{StaticResource ApplicationForegroundThemeBrush}" Width="149"/>
-        <Image Name="Frame_normal" Source="/Assets/LiveviewScreen/battery_info.png"/>
-        <Image Name="Frame_NearEnd_Background" Source="/Assets/LiveviewScreen/battery_info_nearend_background.png"/>
-        <Image Name="Frame_Charging_Background" Source="/Assets/LiveviewScreen/battery_info_charging_background.png"/>
 
-        <Image Name="Frame_NearEnd_Foreground" Source="/Assets/LiveviewScreen/battery_info_nearend_foreground.png">
-            <!--todo: find some way to mask with accent color.-->
-        </Image>
-        <Image Name="Frame_Charging_Foreground" Source="/Assets/LiveviewScreen/battery_info_charging_foreground.png" >
-            <!--todo: find some way to mask with accent color.-->
-        </Image>
+    <UserControl.Resources>
+
+        <DataTemplate x:Key="Battery">
+            <Viewbox>
+                <Canvas Width="900" Height="450">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0" />
+                    </Canvas.RenderTransform>
+                    <Canvas.Resources />
+                    <Canvas>
+                        <Path Data="F1 M900,450z M0,0z M37,38L780,38 780,411 37,411 37,38z M68,65L744,65 744,384 68,384 68,65z M780,175L836,175 836,275 780,275 780,175z"
+                              Fill="#FFFFFFFF"
+                              Stroke="#FF000000"
+                              StrokeThickness="5" />
+                        <Path Data="F1 M68,65L744,65 744,384 68,384 68,65z " Fill="#FF000000" />
+                    </Canvas>
+                </Canvas>
+            </Viewbox>
+        </DataTemplate>
+
+        <DataTemplate x:Key="NearEnd">
+            <Viewbox>
+                <Canvas Width="900" Height="450">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0" />
+                    </Canvas.RenderTransform>
+                    <Canvas.Resources />
+                    <Canvas>
+                        <Path Data="F1 M900,450z M0,0z M364.641,80.743L380.5,333.126 447.478,333.126 467.859,80.743 364.641,80.743z M367.229,370.158L367.229,430.995 461.388,430.995 461.388,370.157 367.229,370.157z"
+                              Fill="{StaticResource SystemControlForegroundAccentBrush}"
+                              Stroke="#FF000000"
+                              StrokeThickness="5" />
+                    </Canvas>
+                </Canvas>
+            </Viewbox>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Charging">
+            <Viewbox>
+                <Canvas Width="900" Height="450">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0" />
+                    </Canvas.RenderTransform>
+                    <Canvas.Resources />
+                    <Canvas>
+                        <Path Data="F1 M900,450z M0,0z M310.527,273.365C339.603,237.865 473.827,56.187 469.644,66.433 465.461,76.679 416.061,223.312 416.061,223.312 430.68,224.554 503.261,229.612 506.975,230.112 497.287,243.278 351.011,439.493 351.011,439.493 356.302,420.67 403.205,280.66 403.205,280.66 388.243,279.615 313.97,275.112 312.985,274.838A4.353,4.353,0,0,1,310.527,273.365z"
+                              Fill="{StaticResource SystemControlForegroundAccentBrush}"
+                              Stroke="#FF000000"
+                              StrokeThickness="5" />
+                    </Canvas>
+                </Canvas>
+            </Viewbox>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Name="LayoutRoot"
+          SizeChanged="LayoutRoot_SizeChanged"
+          Visibility="Visible">
+        <ContentControl ContentTemplate="{StaticResource Battery}" />
+
+        <Rectangle Name="Amount"
+                   Width="280"
+                   Margin="40"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Stretch"
+                   Fill="{StaticResource ApplicationForegroundThemeBrush}" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="7*" />
+            </Grid.RowDefinitions>
+
+            <ContentControl x:Name="Camera"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            ContentTemplate="{StaticResource StillIcon}" />
+        </Grid>
+        <ContentControl x:Name="NearEnd" ContentTemplate="{StaticResource NearEnd}" />
+        <ContentControl x:Name="Charging" ContentTemplate="{StaticResource Charging}" />
     </Grid>
 </UserControl>

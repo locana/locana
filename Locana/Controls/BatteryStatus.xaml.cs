@@ -63,34 +63,28 @@ namespace Locana.Controls
                 Amount.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 double level = (double)batt.LevelNumerator / (double)batt.LevelDenominator;
                 Amount.Width = level * MAX_AMOUNT_WIDTH * w;
-                if (level == 0) { Background.Width = 0; }
-                else { Background.Width = level * MAX_AMOUNT_WIDTH * w + (bg_offset - offset) * 2; }
             }
             else
             {
                 Amount.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
 
-            Frame_normal.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            Frame_Charging_Background.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            Frame_Charging_Foreground.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            Frame_NearEnd_Background.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            Frame_NearEnd_Foreground.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            Camera.Visibility = Visibility.Collapsed;
+            NearEnd.Visibility = Visibility.Collapsed;
+            Charging.Visibility = Visibility.Collapsed;
 
             switch (batt.AdditionalStatus)
             {
                 case Kazyx.RemoteApi.Camera.BatteryStatus.NearEnd:
                     Amount.Fill = ResourceManager.SystemControlForegroundAccentBrush;
-                    Frame_NearEnd_Background.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                    Frame_NearEnd_Foreground.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    NearEnd.Visibility = Visibility.Visible;
                     break;
                 case Kazyx.RemoteApi.Camera.BatteryStatus.Charging:
                     Amount.Fill = ResourceManager.ForegroundBrush;
-                    Frame_Charging_Background.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                    Frame_Charging_Foreground.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    Charging.Visibility = Visibility.Visible;
                     break;
                 default:
-                    Frame_normal.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    Camera.Visibility = Visibility.Visible;
                     Amount.Fill = ResourceManager.ForegroundBrush;
                     break;
             }

@@ -104,6 +104,14 @@ namespace Locana.DataModel
         private static readonly BitmapImage PModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_P.png", UriKind.Absolute));
         private static readonly BitmapImage PShiftModeImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/ExposureMode_P_shift.png", UriKind.Absolute));
 
+        private static readonly DataTemplate AModeTemplate = (DataTemplate)Application.Current.Resources["Mode_A"];
+        private static readonly DataTemplate IAModeTemplate = (DataTemplate)Application.Current.Resources["Mode_IA"];
+        private static readonly DataTemplate IAPlusModeTemplate = (DataTemplate)Application.Current.Resources["Mode_IAPlus"];
+        private static readonly DataTemplate MModeTemplate = (DataTemplate)Application.Current.Resources["Mode_M"];
+        private static readonly DataTemplate SModeTemplate = (DataTemplate)Application.Current.Resources["Mode_S"];
+        private static readonly DataTemplate PModeTemplate = (DataTemplate)Application.Current.Resources["Mode_P"];
+        private static readonly DataTemplate PShiftModeTemplate = (DataTemplate)Application.Current.Resources["Mode_PShift"];
+
         private static readonly BitmapImage AvailableMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/memory_card.png", UriKind.Absolute));
         private static readonly BitmapImage NoMediaImage = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/no_memory_card.png", UriKind.Absolute));
 
@@ -266,7 +274,7 @@ namespace Locana.DataModel
             }
         }
 
-        public BitmapImage ExposureModeImage
+        public DataTemplate ExposureModeImage
         {
             get
             {
@@ -274,18 +282,18 @@ namespace Locana.DataModel
                 switch (Device.Status.ExposureMode.Current)
                 {
                     case ExposureMode.Intelligent:
-                        return IAModeImage;
+                        return IAModeTemplate;
                     case ExposureMode.Superior:
-                        return IAPlusModeImage;
+                        return IAPlusModeTemplate;
                     case ExposureMode.Program:
-                        if (Device.Status.ProgramShiftActivated) { return PShiftModeImage; }
-                        return PModeImage;
+                        if (Device.Status.ProgramShiftActivated) { return PShiftModeTemplate; }
+                        return PModeTemplate;
                     case ExposureMode.Aperture:
-                        return AModeImage;
+                        return AModeTemplate;
                     case ExposureMode.SS:
-                        return SModeImage;
+                        return SModeTemplate;
                     case ExposureMode.Manual:
-                        return MModeImage;
+                        return MModeTemplate;
                 }
                 return null;
             }
