@@ -66,6 +66,7 @@
                         <Setter Target="OpenControlPanelImage.Visibility" Value="Collapsed" />
                         <Setter Target="Bottom.(Grid.Column)" Value="1" />
                         <Setter Target="Bottom.(Grid.ColumnSpan)" Value="1" />
+                        <Setter Target="Sliders.Margin" Value="40,0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -97,6 +98,7 @@
                         <Setter Target="OpenControlPanelImage.Visibility" Value="Visible" />
                         <Setter Target="Bottom.(Grid.Column)" Value="0" />
                         <Setter Target="Bottom.(Grid.ColumnSpan)" Value="3" />
+                        <Setter Target="Sliders.Margin" Value="8,0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -367,9 +369,7 @@
                                              ShutterButtonEnabled="{Binding ShutterButtonEnabled,
                                                                             Mode=OneWay,
                                                                             FallbackValue=false}" />
-            <Grid x:Name="Sliders"
-                  MaxWidth="400"
-                  Margin="40,0">
+            <Grid x:Name="Sliders" MaxWidth="400">
                 <controls:ShootingParamSlider x:Name="FnumberSlider"
                                               IconDataTemplate="{StaticResource ApertureIcon}"
                                               Parameter="{Binding Status.FNumber}"
