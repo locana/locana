@@ -4,116 +4,148 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:local="using:Locana">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary>
+    <DataTemplate x:Key="ApertureIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="M0 0h24v24H0z" />
+                <Path Data="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.85-6.32 2.25l3.66 6.35.06-.1zM21.54 9c-.92-2.92-3.15-5.26-6-6.34L11.88 9h9.66zm.26 1h-7.49l.29.5 4.76 8.25C21 16.97 22 14.61 22 12c0-.69-.07-1.35-.2-2zM8.54 12l-3.9-6.75C3.01 7.03 2 9.39 2 12c0 .69.07 1.35.2 2h7.49l-1.15-2zm-6.08 3c.92 2.92 3.15 5.26 6 6.34L12.12 15H2.46zm11.27 0l-3.9 6.76c.7.15 1.42.24 2.17.24 2.4 0 4.6-.85 6.32-2.25l-3.66-6.35-.93 1.6z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
-            <DataTemplate x:Key="ApertureIcon">
-                <Viewbox MinWidth="28"
-                         MinHeight="28"
-                         Margin="-6">
-                    <Canvas Width="24" Height="24">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0" />
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources />
-                        <Path Data="M0 0h24v24H0z" />
-                        <Path Data="M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.85-6.32 2.25l3.66 6.35.06-.1zM21.54 9c-.92-2.92-3.15-5.26-6-6.34L11.88 9h9.66zm.26 1h-7.49l.29.5 4.76 8.25C21 16.97 22 14.61 22 12c0-.69-.07-1.35-.2-2zM8.54 12l-3.9-6.75C3.01 7.03 2 9.39 2 12c0 .69.07 1.35.2 2h7.49l-1.15-2zm-6.08 3c.92 2.92 3.15 5.26 6 6.34L12.12 15H2.46zm11.27 0l-3.9 6.76c.7.15 1.42.24 2.17.24 2.4 0 4.6-.85 6.32-2.25l-3.66-6.35-.93 1.6z"
-                              Fill="#FFFFFFFF"
-                              Stroke="#FF000000" />
-                    </Canvas>
-                </Viewbox>
-            </DataTemplate>
+    <DataTemplate x:Key="EvIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="M0 0h24v24H0zm0 0h24v24H0z" />
+                <Path Data="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5.5 7.5h2v-2H9v2h2V9H9v2H7.5V9h-2V7.5zM19 19H5L19 5v14zm-2-2v-1.5h-5V17h5z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
-            <DataTemplate x:Key="EvIcon">
-                <Viewbox MinWidth="28"
-                         MinHeight="28"
-                         Margin="-6">
-                    <Canvas Width="24" Height="24">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0" />
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources />
-                        <Path Data="M0 0h24v24H0zm0 0h24v24H0z" />
-                        <Path Data="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5.5 7.5h2v-2H9v2h2V9H9v2H7.5V9h-2V7.5zM19 19H5L19 5v14zm-2-2v-1.5h-5V17h5z"
-                              Fill="#FFFFFFFF"
-                              Stroke="#FF000000" />
-                    </Canvas>
-                </Viewbox>
-            </DataTemplate>
+    <DataTemplate x:Key="IsoIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="200" Height="200">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M200,200z M0,0z M16.191,145.66L35.551,145.66 35.551,60.63 16.191,60.63 16.191,145.66z M103.091,63.27A42.773,42.773,0,0,0,84.611,59.53C64.921,59.53 53.921,70.86 53.921,85.27 53.921,95.39 60.851,103.75 74.271,109.91 83.071,113.87 86.921,116.73 86.921,121.9 86.921,126.96 82.961,130.48 74.821,130.48A43.565,43.565,0,0,1,56.341,126.08L53.041,142.36C57.001,144.56 65.471,146.76 74.051,146.76 94.621,146.76 106.391,135.76 106.391,120.25 106.391,109.69 100.781,101.33 87.251,95.28 76.911,90.55 73.391,88.24 73.391,83.51 73.391,79.33 77.021,75.7 84.501,75.7A33.027,33.027,0,0,1,99.461,79.22z M155.231,59.42C132.35,59.42 119.15,79.33 119.15,103.311 119.15,126.631 130.59,146.871 154.021,146.871 175.471,146.871 189.881,131.581 189.881,101.991 189.88,81.31 179.98,59.42 155.23,59.42z M154.681,75.37C164.581,75.37 169.531,87.8 169.531,102.65 169.531,119.26 164.471,130.92 154.681,130.92 144.891,130.92 139.39,119.26 139.5,102.98 139.5,88.35 144.339,75.37 154.68,75.37z"
+                      Fill="#FFFFFF"
+                      Stroke="#FF000000"
+                      StrokeThickness="5" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
-            <DataTemplate x:Key="IsoIcon">
-                <Viewbox MinWidth="28"
-                         MinHeight="28"
-                         Margin="-6">
-                    <Canvas Width="200" Height="200">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0" />
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources />
-                        <Path Data="F1 M200,200z M0,0z M16.191,145.66L35.551,145.66 35.551,60.63 16.191,60.63 16.191,145.66z M103.091,63.27A42.773,42.773,0,0,0,84.611,59.53C64.921,59.53 53.921,70.86 53.921,85.27 53.921,95.39 60.851,103.75 74.271,109.91 83.071,113.87 86.921,116.73 86.921,121.9 86.921,126.96 82.961,130.48 74.821,130.48A43.565,43.565,0,0,1,56.341,126.08L53.041,142.36C57.001,144.56 65.471,146.76 74.051,146.76 94.621,146.76 106.391,135.76 106.391,120.25 106.391,109.69 100.781,101.33 87.251,95.28 76.911,90.55 73.391,88.24 73.391,83.51 73.391,79.33 77.021,75.7 84.501,75.7A33.027,33.027,0,0,1,99.461,79.22z M155.231,59.42C132.35,59.42 119.15,79.33 119.15,103.311 119.15,126.631 130.59,146.871 154.021,146.871 175.471,146.871 189.881,131.581 189.881,101.991 189.88,81.31 179.98,59.42 155.23,59.42z M154.681,75.37C164.581,75.37 169.531,87.8 169.531,102.65 169.531,119.26 164.471,130.92 154.681,130.92 144.891,130.92 139.39,119.26 139.5,102.98 139.5,88.35 144.339,75.37 154.68,75.37z"
-                              Fill="#FFFFFF"
-                              Stroke="#FF000000"
-                              StrokeThickness="5" />
-                    </Canvas>
-                </Viewbox>
-            </DataTemplate>
+    <DataTemplate x:Key="SSIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M24,24z M0,0z M11.99,2C6.47,2 2,6.48 2,12 2,17.52 6.47,22 11.99,22 17.52,22 22,17.52 22,12 22,6.48 17.52,2 11.99,2z M12,20C7.58,20 4,16.42 4,12 4,7.58 7.58,4 12,4 16.42,4 20,7.58 20,12 20,16.42 16.42,20 12,20z"
+                      Fill="#FFFFFF"
+                      Stroke="#FF000000" />
+                <Path Data="F1 M24,24z M0,0z M12.5,7L11,7 11,13 16.25,16.15 17,14.92 12.5,12.25z"
+                      Fill="#FFFFFF"
+                      Stroke="#FF000000" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
-            <DataTemplate x:Key="SSIcon">
-                <Viewbox MinWidth="28"
-                         MinHeight="28"
-                         Margin="-6">
-                    <Canvas Width="24" Height="24">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0" />
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources />
-                        <Path Data="F1 M24,24z M0,0z M11.99,2C6.47,2 2,6.48 2,12 2,17.52 6.47,22 11.99,22 17.52,22 22,17.52 22,12 22,6.48 17.52,2 11.99,2z M12,20C7.58,20 4,16.42 4,12 4,7.58 7.58,4 12,4 16.42,4 20,7.58 20,12 20,16.42 16.42,20 12,20z"
-                              Fill="#FFFFFF"
-                              Stroke="#FF000000" />
-                        <Path Data="F1 M24,24z M0,0z M12.5,7L11,7 11,13 16.25,16.15 17,14.92 12.5,12.25z"
-                              Fill="#FFFFFF"
-                              Stroke="#FF000000" />
-                    </Canvas>
-                </Viewbox>
-            </DataTemplate>
+    <DataTemplate x:Key="ProgramShiftIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="200" Height="200">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M200,200z M0,0z M43.8,173.318L62.2,173.318 62.2,125.318A51.824,51.824,0,0,0,72.6,126.118C94.678,126.118 118.357,115.879 118.357,86.118 118.357,74.918 114.197,65.64 107.317,59.718 99.958,53.159 88.599,49.959 73.56,49.959A172.139,172.139,0,0,0,43.802,52.359L43.802,173.318z M62.2,65.646A64.754,64.754,0,0,1,74.679,64.526C89.558,64.526 99.797,72.045 99.797,86.926 99.8,102.6 89.556,111.4 72.6,111.4 68.28,111.4 64.921,111.24 62.2,110.44L62.2,65.64z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000"
+                      StrokeThickness="5" />
+                <Path Data="F1 M200,200z M0,0z M180.553,28.279L150.934,46.824 152.076,11.844 136.168,11.844 137.311,46.825 107.692,28.279 99.692,42.166 130.543,58.6 99.782,74.861 107.692,88.836 137.223,70.291 136.08,105.271 151.989,105.271 150.846,70.291 180.553,88.836 188.463,74.861 157.7,58.6 188.55,42.164z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000"
+                      StrokeThickness="5" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
-            <DataTemplate x:Key="ProgramShiftIcon">
-                <Viewbox MinWidth="28"
-                         MinHeight="28"
-                         Margin="-6">
-                    <Canvas Width="200" Height="200">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0" />
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources />
-                        <Path Data="F1 M200,200z M0,0z M43.8,173.318L62.2,173.318 62.2,125.318A51.824,51.824,0,0,0,72.6,126.118C94.678,126.118 118.357,115.879 118.357,86.118 118.357,74.918 114.197,65.64 107.317,59.718 99.958,53.159 88.599,49.959 73.56,49.959A172.139,172.139,0,0,0,43.802,52.359L43.802,173.318z M62.2,65.646A64.754,64.754,0,0,1,74.679,64.526C89.558,64.526 99.797,72.045 99.797,86.926 99.8,102.6 89.556,111.4 72.6,111.4 68.28,111.4 64.921,111.24 62.2,110.44L62.2,65.64z"
-                              Fill="#FFFFFFFF"
-                              Stroke="#FF000000"
-                              StrokeThickness="5" />
-                        <Path Data="F1 M200,200z M0,0z M180.553,28.279L150.934,46.824 152.076,11.844 136.168,11.844 137.311,46.825 107.692,28.279 99.692,42.166 130.543,58.6 99.782,74.861 107.692,88.836 137.223,70.291 136.08,105.271 151.989,105.271 150.846,70.291 180.553,88.836 188.463,74.861 157.7,58.6 188.55,42.164z"
-                              Fill="#FFFFFFFF"
-                              Stroke="#FF000000"
-                              StrokeThickness="5" />
-                    </Canvas>
-                </Viewbox>
-            </DataTemplate>
+    <DataTemplate x:Key="CancelIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M24,24z M0,0z M12,2C6.47,2 2,6.47 2,12 2,17.53 6.47,22 12,22 17.53,22 22,17.53 22,12 22,6.47 17.53,2 12,2z M17,15.59L15.59,17 12,13.41 8.41,17 7,15.59 10.59,12 7,8.41 8.41,7 12,10.59 15.59,7 17,8.41 13.41,12 17,15.59z"
+                      Fill="#FFFFFF"
+                      Stroke="#FF000000" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
-            <DataTemplate x:Key="CancelIcon">
-                <Viewbox MinWidth="28"
-                         MinHeight="28"
-                         Margin="-6">
-                    <Canvas Width="24" Height="24">
-                        <Canvas.RenderTransform>
-                            <TranslateTransform X="0" Y="0" />
-                        </Canvas.RenderTransform>
-                        <Canvas.Resources />
-                        <Path Data="F1 M24,24z M0,0z M12,2C6.47,2 2,6.47 2,12 2,17.53 6.47,22 12,22 17.53,22 22,17.53 22,12 22,6.47 17.53,2 12,2z M17,15.59L15.59,17 12,13.41 8.41,17 7,15.59 10.59,12 7,8.41 8.41,7 12,10.59 15.59,7 17,8.41 13.41,12 17,15.59z"
-                              Fill="#FFFFFF"
-                              Stroke="#FF000000" />
-                    </Canvas>
-                </Viewbox>
-            </DataTemplate>
+    <DataTemplate x:Key="ZoomInIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M24,24z M0,0z M15.5,14L14.71,14 14.43,13.73C15.41,12.59 16,11.11 16,9.5 16,5.91 13.09,3 9.5,3 5.91,3 3,5.91 3,9.5 3,13.09 5.91,16 9.5,16 11.11,16 12.59,15.41 13.73,14.43L14,14.71 14,15.5 19,20.49 20.49,19 15.5,14z M9.5,14C7.01,14 5,11.99 5,9.5 5,7.01 7.01,5 9.5,5 11.99,5 14,7.01 14,9.5 14,11.99 11.99,14 9.5,14z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000"
+                      StrokeThickness="0.5" />
+                <Path Data="F1 M24,24z M0,0z M12,10L10,10 10,12 9,12 9,10 7,10 7,9 9,9 9,7 10,7 10,9 12,9 12,10z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000"
+                      StrokeThickness="0.5" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
-        </ResourceDictionary>
-    </ResourceDictionary.MergedDictionaries>
+    <DataTemplate x:Key="ZoomOutIcon">
+        <Viewbox MinWidth="28"
+                 MinHeight="28"
+                 Margin="-6">
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M24,24z M0,0z M15.5,14L14.71,14 14.43,13.73C15.41,12.59 16,11.11 16,9.5 16,5.91 13.09,3 9.5,3 5.91,3 3,5.91 3,9.5 3,13.09 5.91,16 9.5,16 11.11,16 12.59,15.41 13.73,14.43L14,14.71 14,15.5 19,20.49 20.49,19 15.5,14z M9.5,14C7.01,14 5,11.99 5,9.5 5,7.01 7.01,5 9.5,5 11.99,5 14,7.01 14,9.5 14,11.99 11.99,14 9.5,14z M7,9L12,9 12,10 7,10z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000"
+                      StrokeThickness="0.5" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 </ResourceDictionary>
