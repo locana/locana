@@ -1,8 +1,7 @@
 ﻿using Kazyx.RemoteApi;
 using Kazyx.RemoteApi.Camera;
-
-using Locana.Playback;
 using Locana.Controls;
+using Locana.Playback;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,7 +94,7 @@ namespace Locana.Utility
         private static string FromSelfTimer(int val)
         {
             if (val == 0) { return SystemUtil.GetStringResource("Off"); }
-            else { return val + SystemUtil.GetStringResource("Seconds"); }
+            else { return string.Format(SystemUtil.GetStringResource("Seconds"), val); }
         }
 
         public static Capability<string> FromPostViewSize(Capability<string> info)
@@ -105,7 +104,7 @@ namespace Locana.Utility
 
         private static string FromPostViewSize(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case PostviewSizeParam.Px2M:
                     return SystemUtil.GetStringResource("Size2M");
@@ -123,7 +122,7 @@ namespace Locana.Utility
 
         private static string FromShootMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case ShootModeParam.Movie:
                     return SystemUtil.GetStringResource("ShootModeMovie");
@@ -147,7 +146,7 @@ namespace Locana.Utility
 
         private static string FromExposureMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case ExposureMode.Aperture:
                     return SystemUtil.GetStringResource("ExposureMode_A");
@@ -173,7 +172,7 @@ namespace Locana.Utility
 
         private static string FromSteadyMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case SteadyMode.On:
                     return SystemUtil.GetStringResource("On");
@@ -191,7 +190,7 @@ namespace Locana.Utility
 
         private static string FromBeepMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case BeepMode.On:
                     return SystemUtil.GetStringResource("On");
@@ -257,7 +256,7 @@ namespace Locana.Utility
 
         private static string FromWhiteBalance(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case WhiteBalanceMode.Fluorescent_WarmWhite:
                     return SystemUtil.GetStringResource("WB_Fluorescent_WarmWhite");
@@ -336,7 +335,7 @@ namespace Locana.Utility
 
         private static string FromFlashMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case FlashMode.Auto:
                     return SystemUtil.GetStringResource("FlashMode_Auto");
@@ -361,7 +360,7 @@ namespace Locana.Utility
 
         private static string FromFocusMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case FocusMode.Continuous:
                     return SystemUtil.GetStringResource("FocusMode_AFC");
@@ -380,7 +379,7 @@ namespace Locana.Utility
 
         private static string FromZoomSetting(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case ZoomMode.ClearImageDigital:
                     return SystemUtil.GetStringResource("ZoomMode_ClearImageDigital");
@@ -397,7 +396,7 @@ namespace Locana.Utility
 
         private static string FromStillQuality(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case ImageQuality.RawAndJpeg:
                     return SystemUtil.GetStringResource("StillQuality_RawAndJpeg");
@@ -416,7 +415,7 @@ namespace Locana.Utility
 
         private static string FromContShootingMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case ContinuousShootMode.Single:
                     return SystemUtil.GetStringResource("ContinuousShootMode_Single");
@@ -439,7 +438,7 @@ namespace Locana.Utility
 
         private static string FromContShootingSpeed(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case ContinuousShootSpeed.FixedFrames_10_In_1_25Sec:
                     return SystemUtil.GetStringResource("ContinuousShootSpeed_FixedFrames_10_In_1_25Sec");
@@ -462,7 +461,7 @@ namespace Locana.Utility
 
         private static string FromFlipMode(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case FlipMode.On:
                     return SystemUtil.GetStringResource("On");
@@ -479,7 +478,7 @@ namespace Locana.Utility
 
         private static string FromSceneSelection(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case Scene.Normal:
                     return SystemUtil.GetStringResource("Scene_Normal");
@@ -496,7 +495,7 @@ namespace Locana.Utility
 
         private static string FromIntervalTime(string val)
         {
-            return val + " " + SystemUtil.GetStringResource("Seconds");
+            return string.Format(SystemUtil.GetStringResource("Seconds"), val);
         }
 
         internal static Capability<string> FromColorSetting(Capability<string> info)
@@ -506,7 +505,7 @@ namespace Locana.Utility
 
         private static string FromColorSetting(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case ColorMode.Neutral:
                     return SystemUtil.GetStringResource("ColorMode_Neutral");
@@ -523,7 +522,7 @@ namespace Locana.Utility
 
         private static string FromMovieFileFormat(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case MovieFormatMode.MP4:
                     return SystemUtil.GetStringResource("MovieFormatMode_MP4");
@@ -540,7 +539,7 @@ namespace Locana.Utility
 
         private static string FromInfraredRemoteControl(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case IrRemoteSetting.On:
                     return SystemUtil.GetStringResource("On");
@@ -557,7 +556,7 @@ namespace Locana.Utility
 
         private static string FromTvColorSystem(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case TvColorSystemMode.NTSC:
                     return SystemUtil.GetStringResource("TvColorSystemMode_NTSC");
@@ -574,7 +573,7 @@ namespace Locana.Utility
 
         private static string FromTrackingFocus(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case TrackingFocusMode.On:
                     return SystemUtil.GetStringResource("On");
@@ -592,7 +591,7 @@ namespace Locana.Utility
         private static string FromAutoPowerOff(int val)
         {
             if (val == 0) { return SystemUtil.GetStringResource("AutoPowerOff_Never"); }
-            return val + " " + SystemUtil.GetStringResource("Seconds");
+            return string.Format(SystemUtil.GetStringResource("Seconds"), val);
         }
 
         internal static Capability<string> FromLoopRecTime(Capability<string> info)
@@ -602,20 +601,13 @@ namespace Locana.Utility
 
         private static string FromLoopRecTime(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
-                case LoopTime.MIN_5:
-                    return "5" + SystemUtil.GetStringResource("Minute_Unit");
-                case LoopTime.MIN_20:
-                    return "20" + SystemUtil.GetStringResource("Minute_Unit");
-                case LoopTime.MIN_60:
-                    return "60" + SystemUtil.GetStringResource("Minute_Unit");
-                case LoopTime.MIN_120:
-                    return "120" + SystemUtil.GetStringResource("Minute_Unit");
                 case LoopTime.UNLIMITED:
                     return SystemUtil.GetStringResource("LoopTime_Unlimited");
+                default:
+                    return string.Format(SystemUtil.GetStringResource("Minutes"), val);
             }
-            return val;
         }
 
         internal static Capability<string> FromWindNoiseReduction(Capability<string> info)
@@ -625,7 +617,7 @@ namespace Locana.Utility
 
         private static string FromWindNoiseReduction(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case WindNoiseReductionMode.On:
                     return SystemUtil.GetStringResource("On");
@@ -642,7 +634,7 @@ namespace Locana.Utility
 
         private static string FromAudioRecording(string val)
         {
-            switch (val)
+            switch (val ?? "")
             {
                 case AudioRecordingMode.On:
                     return SystemUtil.GetStringResource("On");

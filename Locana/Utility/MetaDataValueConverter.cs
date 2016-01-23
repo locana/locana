@@ -172,11 +172,11 @@ namespace Locana.Utility
         {
             if (numerator == 1)
             {
-                return numerator + "/" + denominator + SystemUtil.GetStringResource("Seconds");
+                return string.Format(SystemUtil.GetStringResource("Seconds"), numerator + "/" + denominator);
             }
             else if (denominator == 1)
             {
-                return numerator + SystemUtil.GetStringResource("Seconds");
+                return string.Format(SystemUtil.GetStringResource("Seconds"), numerator);
             }
 
             // difficult cases,,
@@ -184,12 +184,12 @@ namespace Locana.Utility
             {
                 // longer than 1 sec.
                 double val = numerator / denominator;
-                return val.ToString() + SystemUtil.GetStringResource("Seconds");
+                return string.Format(SystemUtil.GetStringResource("Seconds"), val);
             }
 
             // reduction forcibly
             int newDenominator = (int)((double)denominator / (double)numerator);
-            return "1/" + newDenominator + SystemUtil.GetStringResource("Seconds");
+            return string.Format(SystemUtil.GetStringResource("Seconds"), "1/" + newDenominator);
         }
 
         public static List<string> Geoinfo(IfdData GpsIfd)

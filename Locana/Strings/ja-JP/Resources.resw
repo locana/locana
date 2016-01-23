@@ -653,8 +653,8 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="MetaData_Geotag_Exists" xml:space="preserve">
     <value>あり</value>
   </data>
-  <data name="Minute_Unit" xml:space="preserve">
-    <value>分</value>
+  <data name="Minutes" xml:space="preserve">
+    <value>{0}分</value>
   </data>
   <data name="MovieFileFormat" xml:space="preserve">
     <value>動画フォーマット</value>

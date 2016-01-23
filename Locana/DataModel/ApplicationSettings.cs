@@ -1,7 +1,7 @@
 ﻿
+using Locana.Controls;
 using Locana.Playback;
 using Locana.Utility;
-using Locana.Controls;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
@@ -114,7 +114,7 @@ namespace Locana.DataModel
             {
                 if (IsIntervalShootingEnabled)
                 {
-                    return _IntervalTime + SystemUtil.GetStringResource("Seconds");
+                    return string.Format(SystemUtil.GetStringResource("Seconds"), _IntervalTime);
                 }
                 else
                 {
