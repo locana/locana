@@ -5,8 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Locana.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      Loaded="Page_Loaded"
-      Unloaded="Page_Unloaded"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -16,7 +14,6 @@
                     HorizontalContentAlignment="Stretch"
                     BorderBrush="{ThemeResource ProgressBarForegroundThemeBrush}"
                     BorderThickness="0,0,0,1"
-                    Click="Button_Click"
                     Padding="0,0,0,0">
                 <Grid Margin="0,5" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>

@@ -24,6 +24,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="privateNetworkClientServer" />
+    <Capability Name="internetClient" />
     <uap:Capability Name="picturesLibrary" />
     <uap:Capability Name="videosLibrary" />
     <DeviceCapability Name="proximity" />

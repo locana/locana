@@ -224,6 +224,13 @@ namespace Locana.Network
         }
 
         /*
+        public void RegisterWifiDirectDevice(WiFiDirectDevice device)
+        {
+            discovery.TargetWifiDirectDevices = device.GetConnectionEndpointPairs();
+        }
+        */
+
+        /*
         public bool IsConnectedToCamera
         {
             get { return IsCameraAccessPoint(PreviousSsid); }

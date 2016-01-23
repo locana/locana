@@ -1,24 +1,11 @@
-﻿using Locana.Common;
-using Locana.Utility;
-using Locana.Network;
-using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Windows.Devices.Enumeration;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+﻿using Windows.UI.Xaml.Controls;
 
 namespace Locana.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class WifiDirectPage : Page
     {
+        /*
         public WifiDirectPage()
         {
             this.InitializeComponent();
@@ -50,7 +37,8 @@ namespace Locana.Pages
             try
             {
                 var wfdDevice = await WifiDirectUtil.ConnectAsync(data.Info);
-                DebugUtil.Log("Connected to: " + data.Title);
+                DebugUtil.Log("Connected to: " + data.Title + " - " + wfdDevice.ConnectionStatus);
+                NetworkObserver.INSTANCE.RegisterWifiDirectDevice(wfdDevice);
             }
             catch (Exception ex)
             {
@@ -113,8 +101,10 @@ namespace Locana.Pages
                 searchTask.AsAsyncAction().Cancel();
             }
         }
+        */
     }
 
+    /*
     public class PeerData
     {
         public DeviceInformation Info { set; get; }
@@ -127,4 +117,5 @@ namespace Locana.Pages
             }
         }
     }
+    */
 }

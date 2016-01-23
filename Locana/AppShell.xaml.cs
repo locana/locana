@@ -36,12 +36,14 @@ namespace Locana
                     Label = SystemUtil.GetStringResource("PhotoGallery"),
                     DestPage = typeof(ContentsGridPage)
                 },
+                /*
                 new NavMenuItem()
                 {
                     IconResId = "ic_network_wifi_white",
                     Label = "WifiDirectPage [TBD]",
                     DestPage = typeof(WifiDirectPage)
                 },
+                */
             });
         private List<NavMenuItem> navBottomlist = new List<NavMenuItem>(
             new[]

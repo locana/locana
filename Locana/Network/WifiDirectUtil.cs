@@ -1,12 +1,6 @@
-﻿using Locana.Utility;
-using System;
-using System.Threading.Tasks;
-using Windows.Devices.Enumeration;
-using Windows.Devices.WiFiDirect;
-using Windows.Networking.Proximity;
-
-namespace Locana.Network
+﻿namespace Locana.Network
 {
+    /*
     class WifiDirectUtil
     {
         public static Task<DeviceInformationCollection> FindWfdPeersAsync()
@@ -36,4 +30,5 @@ namespace Locana.Network
             return device;
         }
     }
+    */
 }
