@@ -681,7 +681,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>カメラが処理中のためスキップしました</value>
   </data>
   <data name="PeriodicalShooting_Status" xml:space="preserve">
-    <value>__INTERVAL__ 秒ごとに撮影中。 __PHOTO_NUM__ 枚撮影しました。</value>
+    <value>{0}秒ごとに撮影中。 {1}枚撮影しました。</value>
   </data>
   <data name="PeriodicalShooting_StoppedByUser" xml:space="preserve">
     <value>インターバル撮影を停止しました</value>
@@ -713,7 +713,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>水中</value>
   </data>
   <data name="Seconds" xml:space="preserve">
-    <value>秒</value>
+    <value>{0}秒</value>
   </data>
   <data name="SelfTimer" xml:space="preserve">
     <value>セルフタイマー</value>
@@ -911,7 +911,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>ホワイトバランス</value>
   </data>
   <data name="WifiSettingLauncherButtonText" xml:space="preserve">
-    <value>Wi-Fi</value>
+    <value>Wi-Fi設定</value>
   </data>
   <data name="ZoomMode_ClearImageDigital" xml:space="preserve">
     <value>超解像ズーム</value>
@@ -953,12 +953,12 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>Twitterのアカウントを開く</value>
   </data>
   <data name="WifiConnectionGuide" xml:space="preserve">
-    <value>&lt;ssid&gt; に接続中。
+    <value>{0} に接続中。
 
 カメラの検索処理を実行しています。</value>
   </data>
   <data name="FoundDlnaDeviceGuide" xml:space="preserve">
-    <value>&lt;ssid&gt; にメディアサーバを発見しました。
+    <value>{0} にメディアサーバを発見しました。
 
 ギャラリーを開くとカメラ内の画像が参照できます。</value>
   </data>
@@ -969,7 +969,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>コンテンツがありません</value>
   </data>
   <data name="Viewer_UnsupportedFileType" xml:space="preserve">
-    <value>&lt;file&gt; は、このデバイス上では取り扱えません。</value>
+    <value>{0} は、このデバイス上では取り扱えません。</value>
   </data>
   <data name="OpenGallery" xml:space="preserve">
     <value>ギャラリーを開いてカメラ内のコンテンツを転送しましょう！</value>

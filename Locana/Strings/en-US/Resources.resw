@@ -124,7 +124,7 @@
     <value>Navigation failed.</value>
   </data>
   <data name="WifiSettingLauncherButtonText" xml:space="preserve">
-    <value>Wi-Fi</value>
+    <value>Wi-Fi settings</value>
   </data>
   <data name="Guide_WiFiNotEnabled" xml:space="preserve">
     <value>Go to Wi-Fi settings and connect to your camera device.
@@ -194,7 +194,7 @@ Swipe left or right to start remote control.</value>
     <value>OFF</value>
   </data>
   <data name="Seconds" xml:space="preserve">
-    <value> seconds</value>
+    <value>{0} seconds</value>
   </data>
   <data name="ShootMode" xml:space="preserve">
     <value>Operation mode</value>
@@ -1040,7 +1040,7 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
     <value>Camera is under processing. Skipped.</value>
   </data>
   <data name="PeriodicalShooting_Status" xml:space="preserve">
-    <value>Taking photo every __INTERVAL__ sec. __PHOTO_NUM__ pics taken.</value>
+    <value>Taking photo every {0} sec. {1} pics taken.</value>
   </data>
   <data name="PeriodicalShooting_StoppedByUser" xml:space="preserve">
     <value>Stopped interval shooting.</value>
@@ -1082,12 +1082,12 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
     <value>https://twitter.com/locana_support</value>
   </data>
   <data name="WifiConnectionGuide" xml:space="preserve">
-    <value>Connected to &lt;ssid&gt;.
+    <value>Connected to {0}.
 
 Now detecting connected camera device...</value>
   </data>
   <data name="FoundDlnaDeviceGuide" xml:space="preserve">
-    <value>Media server is active on &lt;ssid&gt;.
+    <value>Media server is active on {0}.
 
 Open gallary to browse contents in your camera device.</value>
   </data>
@@ -1098,7 +1098,7 @@ Open gallary to browse contents in your camera device.</value>
     <value>Copy Wi-Fi password to clipboard</value>
   </data>
   <data name="Viewer_UnsupportedFileType" xml:space="preserve">
-    <value>&lt;file&gt; can't be supported on this device.</value>
+    <value>{0} can't be supported on this device.</value>
   </data>
   <data name="OpenGallery" xml:space="preserve">
     <value>Open gallary to browse contents in your camera device!</value>
