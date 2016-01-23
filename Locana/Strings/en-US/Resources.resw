@@ -237,7 +237,7 @@ Swipe left or right to start remote control.</value>
     <value>Interval</value>
   </data>
   <data name="Guide_NFC" xml:space="preserve">
-    <value>You can touch your NFC enabled camera to find Wi-Fi password.</value>
+    <value>Touch NFC enabled camera device to read Wi-Fi password!!</value>
   </data>
   <data name="ErrorMessage_cameraNotReady" xml:space="preserve">
     <value>Camera is under processing. Try again after a while.</value>

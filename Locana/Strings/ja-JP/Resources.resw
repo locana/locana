@@ -553,7 +553,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>RGBヒストグラムを解析して表示します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
   </data>
   <data name="Guide_NFC" xml:space="preserve">
-    <value>NFC対応のカメラなら、タッチしてWi-Fiのパスワードを確認することができます</value>
+    <value>NFC対応のカメラにタッチすれば Wi-Fiパスワードを読み取れます</value>
   </data>
   <data name="Guide_PrioritizeOriginalSize" xml:space="preserve">
     <value>デフォルトでは2Mサイズが優先されています。</value>

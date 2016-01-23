@@ -147,6 +147,16 @@ namespace Locana.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             InitializeProximityDevice();
+
+            if (_ProximityDevice == null)
+            {
+                NfcPanel.Visibility = Visibility.Collapsed;
+                NfcPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NfcPanel.Visibility = Visibility.Visible;
+            }
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

@@ -30,6 +30,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <VisualStateManager.VisualStateGroups>
@@ -120,5 +121,24 @@
                 </GroupStyle>
             </GridView.GroupStyle>
         </GridView>
+
+        <Grid x:Name="NfcPanel"
+              Grid.Row="3"
+              Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ContentControl Width="36"
+                            Height="36"
+                            Margin="12"
+                            ContentTemplate="{StaticResource ic_broken_image_white}" />
+            <TextBlock Grid.Column="1"
+                       Margin="0,0,12,0"
+                       VerticalAlignment="Center"
+                       Text="{Binding [Guide_NFC],
+                                      Source={StaticResource LocalizedStrings}}"
+                       TextWrapping="WrapWholeWords" />
+        </Grid>
     </Grid>
 </Page>
