@@ -1107,4 +1107,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>カメラとWi-Fiで接続されていますか？
 「DIRECT-」から始まるWi-Fiアクセスポイントに接続しましょう！</value>
   </data>
+  <data name="AppShell_RemoteShooting" xml:space="preserve">
+    <value>リモート撮影</value>
+  </data>
 </root>

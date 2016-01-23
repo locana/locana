@@ -1235,4 +1235,7 @@ password</value>
     <value>Lost Wi-Fi connection to the camera device?
 Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</value>
   </data>
+  <data name="AppShell_RemoteShooting" xml:space="preserve">
+    <value>Remote</value>
+  </data>
 </root>

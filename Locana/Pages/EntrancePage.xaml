@@ -60,7 +60,8 @@
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title"
                            Style="{ThemeResource PageTitleTextBlockStyle}"
-                           Text="Entrance Page [TBD]" />
+                           Text="{Binding [AppShell_RemoteShooting],
+                                          Source={StaticResource LocalizedStrings}}" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
         <Border x:Name="WifiHint"

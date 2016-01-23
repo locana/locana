@@ -27,7 +27,7 @@ namespace Locana
                 new NavMenuItem()
                 {
                     IconResId = "ic_linked_camera_white",
-                    Label = "EntrancePage [TBD]",
+                    Label = SystemUtil.GetStringResource("AppShell_RemoteShooting"),
                     DestPage = typeof(EntrancePage)
                 },
                 new NavMenuItem()
