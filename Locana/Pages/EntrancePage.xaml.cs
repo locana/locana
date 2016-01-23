@@ -127,14 +127,7 @@ namespace Locana.Pages
         private async void UpdateWifiHintPanel()
         {
             var connectedToCamera = await NetworkObserver.INSTANCE.IsConnectedToCameraApDirectly();
-            if (connectedToCamera || NetworkObserver.INSTANCE.CameraDevices.Count != 0)
-            {
-                WifiHint.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                WifiHint.Visibility = Visibility.Visible;
-            }
+            WifiHint.Visibility = (connectedToCamera || NetworkObserver.INSTANCE.CameraDevices.Count != 0).AsReverseVisibility();
         }
 
         private void PanelHolder_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
@@ -148,14 +141,7 @@ namespace Locana.Pages
         {
             InitializeProximityDevice();
 
-            if (_ProximityDevice == null)
-            {
-                NfcPanel.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                NfcPanel.Visibility = Visibility.Visible;
-            }
+            NfcPanel.Visibility = (_ProximityDevice == null).AsReverseVisibility();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

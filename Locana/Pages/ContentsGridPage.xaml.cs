@@ -637,14 +637,7 @@ namespace Locana.Pages
                 }
                 CommandBarManager.ApplyCommands(AppBarUnit);
 
-                if (AppBarUnit.PrimaryCommands.Count == 0)
-                {
-                    AppBarUnit.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    AppBarUnit.Visibility = Visibility.Visible;
-                }
+                AppBarUnit.Visibility = (AppBarUnit.PrimaryCommands.Count == 0).AsReverseVisibility();
             });
         }
 
@@ -706,17 +699,17 @@ namespace Locana.Pages
 
         private void SetStillDetailVisibility(bool visible)
         {
+            PhotoScreen.Visibility = visible.AsVisibility();
+
             if (visible)
             {
                 IsViewingDetail = true;
-                PhotoScreen.Visibility = Visibility.Visible;
                 ContentsGrid.IsEnabled = false;
                 UpdateInnerState(ViewerState.StillPlayback);
             }
             else
             {
                 IsViewingDetail = false;
-                PhotoScreen.Visibility = Visibility.Collapsed;
                 ContentsGrid.IsEnabled = true;
                 UpdateInnerState(ViewerState.Single);
             }

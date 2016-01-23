@@ -29,4 +29,31 @@ namespace Locana.Utility
             return (Visibility)value == Visibility.Visible ? false : true;
         }
     }
+
+    public static class BoolToVisibilityExtension
+    {
+        public static Visibility AsVisibility(this bool val)
+        {
+            if (val)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Collapsed;
+            }
+        }
+
+        public static Visibility AsReverseVisibility(this bool val)
+        {
+            if (val)
+            {
+                return Visibility.Collapsed;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+    }
 }

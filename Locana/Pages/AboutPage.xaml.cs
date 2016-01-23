@@ -59,27 +59,11 @@ namespace Locana.Pages
 
         private void UpdatePurchaseInformation()
         {
-            if ((Application.Current as App).IsFunctionLimited)
-            {
-                Unlimited.Visibility = Visibility.Collapsed;
-                Trial.Visibility = Visibility.Collapsed;
-                Limited.Visibility = Visibility.Visible;
-                TrialButton.Visibility = Visibility.Visible;
-            }
-            else if ((Application.Current as App).IsTrialVersion)
-            {
-                Unlimited.Visibility = Visibility.Collapsed;
-                Trial.Visibility = Visibility.Visible;
-                Limited.Visibility = Visibility.Collapsed;
-                TrialButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Unlimited.Visibility = Visibility.Visible;
-                Trial.Visibility = Visibility.Collapsed;
-                Limited.Visibility = Visibility.Collapsed;
-                TrialButton.Visibility = Visibility.Collapsed;
-            }
+            var app = Application.Current as App;
+            Unlimited.Visibility = (app.IsFunctionLimited || app.IsTrialVersion).AsReverseVisibility();
+            Trial.Visibility = (app.IsTrialVersion).AsVisibility();
+            Limited.Visibility = app.IsFunctionLimited.AsVisibility();
+            TrialButton.Visibility = (app.IsFunctionLimited || app.IsTrialVersion).AsVisibility();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
