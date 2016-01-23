@@ -305,7 +305,6 @@
     <Content Include="Assets\LiveviewScreen\mode_movie.png" />
     <Content Include="Assets\LiveviewScreen\mode_photo.png" />
     <Content Include="Assets\MediumGray.png" />
-    <Content Include="Assets\NFC_mark.png" />
     <Content Include="Assets\PlaybackScreen\new.png" />
     <Content Include="Assets\Screen\focused.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_NG.png" />

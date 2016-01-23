@@ -151,7 +151,6 @@ namespace Locana.Pages
             if (_ProximityDevice == null)
             {
                 NfcPanel.Visibility = Visibility.Collapsed;
-                NfcPanel.Visibility = Visibility.Visible;
             }
             else
             {

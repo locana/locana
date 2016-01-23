@@ -41,6 +41,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource WideGridItemTemplate}" />
+                        <Setter Target="NfcPanel.HorizontalAlignment" Value="Right" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -49,6 +50,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource NarrowGridItemTemplate}" />
+                        <Setter Target="NfcPanel.HorizontalAlignment" Value="Stretch" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -124,6 +126,7 @@
 
         <Grid x:Name="NfcPanel"
               Grid.Row="3"
+              Margin="0,4"
               Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -131,8 +134,9 @@
             </Grid.ColumnDefinitions>
             <ContentControl Width="36"
                             Height="36"
-                            Margin="12"
-                            ContentTemplate="{StaticResource ic_broken_image_white}" />
+                            Margin="12,12,12,6"
+                            VerticalAlignment="Center"
+                            ContentTemplate="{StaticResource n-mark}" />
             <TextBlock Grid.Column="1"
                        Margin="0,0,12,0"
                        VerticalAlignment="Center"
