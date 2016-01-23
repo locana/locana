@@ -122,9 +122,6 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Controls\AppBarContent.xaml.cs">
-      <DependentUpon>AppBarContent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\BatteryStatus.xaml.cs">
       <DependentUpon>BatteryStatus.xaml</DependentUpon>
     </Compile>
@@ -291,29 +288,17 @@
     <None Include="Locana_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Camera.png" />
-    <Content Include="Assets\DarkGray.png" />
     <Content Include="Assets\License.txt" />
-    <Content Include="Assets\LightGray.png" />
     <Content Include="Assets\LiveviewScreen\ContShootingButton.png" />
     <Content Include="Assets\LiveviewScreen\GeoInfoStatus_NG.png" />
     <Content Include="Assets\LiveviewScreen\GeoInfoStatus_OK.png" />
     <Content Include="Assets\LiveviewScreen\GeoInfoStatus_Updating.png" />
-    <Content Include="Assets\LiveviewScreen\mode_audio.png" />
-    <Content Include="Assets\LiveviewScreen\mode_interval.png" />
-    <Content Include="Assets\LiveviewScreen\mode_loop.png" />
-    <Content Include="Assets\LiveviewScreen\mode_movie.png" />
-    <Content Include="Assets\LiveviewScreen\mode_photo.png" />
-    <Content Include="Assets\MediumGray.png" />
-    <Content Include="Assets\PlaybackScreen\new.png" />
     <Content Include="Assets\Screen\focused.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_NG.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_OK.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_Updating.png" />
-    <Content Include="Assets\PlaybackScreen\protected.png" />
     <Content Include="Assets\Toast\Locana_square_full.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
@@ -327,10 +312,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="AppShell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\AppBarContent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
