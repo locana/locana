@@ -488,13 +488,13 @@ namespace Locana.Pages
         private void HideCancelTouchAFButton()
         {
             _CommandBarManager.Disable(AppBarItemType.Command, AppBarItem.CancelTouchAF)
-                .ApplyCommands(AppBarUnit);
+                .ApplyShootingScreenCommands(AppBarUnit);
         }
 
         void ShowCancelTouchAFButton()
         {
             _CommandBarManager.Command(AppBarItem.CancelTouchAF)
-                .ApplyCommands(AppBarUnit);
+                .ApplyShootingScreenCommands(AppBarUnit);
         }
 
         private void UpdateTouchFocus(TouchFocusStatus status)

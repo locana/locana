@@ -27,7 +27,7 @@ namespace Locana.Utility
                 case AppBarItem.AppSetting:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Setting), Label = SystemUtil.GetStringResource("AppSetting") };
                 case AppBarItem.CancelTouchAF:
-                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["CancelIcon"], Label = "" };
+                    return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["CancelIcon"], Label = SystemUtil.GetStringResource("AppBar_CancelTouchAf") };
                 case AppBarItem.Close:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Cancel), Label = SystemUtil.GetStringResource("AppBar_Close") };
                 case AppBarItem.DeleteMultiple:
