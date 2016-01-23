@@ -22,10 +22,8 @@
             <ColumnDefinition Width="90" />
         </Grid.ColumnDefinitions>
         <TextBlock Name="SettingName"
-                   Grid.Column="0"
-                   Margin="0"
                    VerticalAlignment="Center"
-                   FontSize="22"
+                   Style="{StaticResource SubtitleTextBlockStyle}"
                    Text="{Binding Title,
                                   Mode=OneWay}"
                    TextWrapping="Wrap"
@@ -41,7 +39,6 @@
                                           Mode=OneWay}"
                       IsOn="{Binding CurrentSetting,
                                      Mode=TwoWay}"
-                      Padding="0,0"
                       RenderTransformOrigin="0.5,0.5">
             <!--<ToggleSwitch.RenderTransform>
                 <CompositeTransform ScaleX="0.8"
@@ -63,9 +60,8 @@
         <TextBlock Name="SettingGuide"
                    Grid.Row="1"
                    Grid.ColumnSpan="2"
-                   Margin="5,-5,0,0"
-                   FontSize="18"
                    Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
+                   Style="{StaticResource BodyTextBlockStyle}"
                    Text="{Binding Guide,
                                   Mode=OneWay}"
                    TextWrapping="Wrap" />

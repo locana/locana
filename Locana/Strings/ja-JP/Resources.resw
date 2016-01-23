@@ -541,7 +541,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>フォーカス枠情報を送信するようカメラに要求します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
   </data>
   <data name="Guide_FramingGrids" xml:space="preserve">
-    <value>構図決めサポートする補助線を表示します</value>
+    <value>構図決めをサポートする補助線を表示します</value>
   </data>
   <data name="Guide_Histogram" xml:space="preserve">
     <value>RGBヒストグラムを解析して表示します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>

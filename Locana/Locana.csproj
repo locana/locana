@@ -125,9 +125,6 @@
     <Compile Include="Controls\BatteryStatus.xaml.cs">
       <DependentUpon>BatteryStatus.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CheckBoxSetting.xaml.cs">
-      <DependentUpon>CheckBoxSetting.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ComboBoxSetting.xaml.cs">
       <DependentUpon>ComboBoxSetting.xaml</DependentUpon>
     </Compile>
@@ -316,10 +313,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\BatteryStatus.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\CheckBoxSetting.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
