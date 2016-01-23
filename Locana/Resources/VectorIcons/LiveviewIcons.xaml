@@ -8,7 +8,9 @@
         <ResourceDictionary>
 
             <DataTemplate x:Key="ZoomInIcon">
-                <Viewbox>
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="24" Height="24">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />
@@ -27,7 +29,9 @@
             </DataTemplate>
 
             <DataTemplate x:Key="ZoomOutIcon">
-                <Viewbox>
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="24" Height="24">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />

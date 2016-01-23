@@ -234,14 +234,17 @@
                   ManipulationCompleted="Grid_ManipulationCompleted_1"
                   ManipulationMode="All"
                   Tapped="Grid_Tapped_1">
-                <!--To expand manipulatable area.-->
-                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"/>
+                <!--  To expand manipulatable area.  -->
+                <Rectangle HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           Fill="Transparent" />
                 <ContentControl x:Name="OpenControlPanelImage"
-                       Width="50"
-                                HorizontalAlignment="Right" VerticalAlignment="Center"
-                       Height="50"
-                       Margin="12,6,12,0"
-                       ContentTemplate="{StaticResource OpenControlPanel}" />
+                                Width="50"
+                                Height="50"
+                                Margin="12,6,12,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                ContentTemplate="{StaticResource OpenControlPanel}" />
             </Grid>
 
             <ScrollViewer x:Name="ControlPanelScroll"
@@ -408,7 +411,7 @@
                             Style="{StaticResource ZoomButtonStyle}"
                             Tapped="ZoomOutButton_Tapped">
                         <!--<Image Margin="0" Source="/Assets/LiveviewScreen/ZoomOut.png" />-->
-                        <ContentControl ContentTemplate="{StaticResource ZoomOutIcon}" />
+                        <ContentControl Margin="6" ContentTemplate="{StaticResource ZoomOutIcon}" />
                     </Button>
                     <controls:ZoomBar Grid.Column="1"
                                       Height="13"
@@ -430,14 +433,13 @@
                             Style="{StaticResource ZoomButtonStyle}"
                             Tapped="ZoomInButton_Tapped">
                         <!--<Image Margin="0" Source="/Assets/LiveviewScreen/ZoomIn.png" />-->
-                        <ContentControl ContentTemplate="{StaticResource ZoomInIcon}" />
+                        <ContentControl Margin="6" ContentTemplate="{StaticResource ZoomInIcon}" />
                     </Button>
                 </Grid>
             </Grid>
 
             <CommandBar Name="AppBarUnit"
                         Grid.RowSpan="4"
-                        VerticalAlignment="Bottom"
                         HorizontalContentAlignment="Right"
                         Background="Transparent"
                         Canvas.ZIndex="40" />

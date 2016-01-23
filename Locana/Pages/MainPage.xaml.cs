@@ -57,13 +57,13 @@ namespace Locana.Pages
                 });
             };
 
-            _CommandBarManager.Clear(). //
-                Content(AppBarItem.Zoom). //
-                Content(AppBarItem.FNumberSlider). //
-                Content(AppBarItem.ShutterSpeedSlider). //
-                Content(AppBarItem.IsoSlider). //
-                Content(AppBarItem.EvSlider). //
-                Content(AppBarItem.ProgramShiftSlider);
+            _CommandBarManager.Clear()
+                .DeviceDependent(AppBarItem.Zoom)
+                .DeviceDependent(AppBarItem.FNumberSlider)
+                .DeviceDependent(AppBarItem.ShutterSpeedSlider)
+                .DeviceDependent(AppBarItem.IsoSlider)
+                .DeviceDependent(AppBarItem.EvSlider)
+                .DeviceDependent(AppBarItem.ProgramShiftSlider);
         }
 
         DispatcherTimer LiveviewFpsTimer = new DispatcherTimer();
@@ -361,7 +361,7 @@ namespace Locana.Pages
             Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
             ShootingParams.DataContext = ScreenViewData;
             _CommandBarManager.ShootingScreenBarData = ScreenViewData;
-            _CommandBarManager.ApplyShootingScreenContents(AppBarUnit);
+            _CommandBarManager.ApplyShootingScreenCommands(AppBarUnit);
 
             ZoomElements.DataContext = ScreenViewData;
 

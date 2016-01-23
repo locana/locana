@@ -8,7 +8,9 @@
         <ResourceDictionary>
 
             <DataTemplate x:Key="ApertureIcon">
-                <Viewbox>
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="24" Height="24">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />
@@ -23,7 +25,9 @@
             </DataTemplate>
 
             <DataTemplate x:Key="EvIcon">
-                <Viewbox>
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="24" Height="24">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />
@@ -38,7 +42,9 @@
             </DataTemplate>
 
             <DataTemplate x:Key="IsoIcon">
-                <Viewbox Stretch="Uniform">
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="200" Height="200">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />
@@ -53,7 +59,9 @@
             </DataTemplate>
 
             <DataTemplate x:Key="SSIcon">
-                <Viewbox Stretch="Uniform">
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="24" Height="24">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />
@@ -70,7 +78,9 @@
             </DataTemplate>
 
             <DataTemplate x:Key="ProgramShiftIcon">
-                <Viewbox Stretch="Uniform">
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="200" Height="200">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />
@@ -89,7 +99,9 @@
             </DataTemplate>
 
             <DataTemplate x:Key="CancelIcon">
-                <Viewbox Stretch="Uniform">
+                <Viewbox MinWidth="28"
+                         MinHeight="28"
+                         Margin="-6">
                     <Canvas Width="24" Height="24">
                         <Canvas.RenderTransform>
                             <TranslateTransform X="0" Y="0" />

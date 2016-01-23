@@ -15,110 +15,10 @@ namespace Locana.Utility
         {
             EnabledItems.Add(AppBarItemType.Command, new SortedSet<AppBarItem>());
             EnabledItems.Add(AppBarItemType.Hidden, new SortedSet<AppBarItem>());
-            EnabledItems.Add(AppBarItemType.Content, new SortedSet<AppBarItem>());
+            EnabledItems.Add(AppBarItemType.DeviceDependent, new SortedSet<AppBarItem>());
         }
 
         public LiveviewScreenViewData ShootingScreenBarData { get; set; }
-
-        StackPanel BuildContentPanel(LiveviewScreenViewData data, SortedSet<AppBarItem> items)
-        {
-            var panel = new StackPanel()
-            {
-                Orientation = Orientation.Horizontal,
-                Height = 40,
-                Margin = new Thickness(24, 0, 0, 24),
-            };
-
-            if (data == null) { return panel; }
-
-            if (items.Contains(AppBarItem.FNumberSlider))
-            {
-                var FnumberButton = NewButtonWithHandler(AppBarItem.FNumberSlider);
-                FnumberButton.SetBinding(Button.VisibilityProperty, new Binding()
-                {
-                    Source = data,
-                    Path = new PropertyPath("IsSetFNumberAvailable"),
-                    Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter(),
-                    FallbackValue = Visibility.Collapsed
-                });
-                panel.Children.Add(FnumberButton);
-            }
-
-            if (items.Contains(AppBarItem.ShutterSpeedSlider))
-            {
-                var SSButton = NewButtonWithHandler(AppBarItem.ShutterSpeedSlider);
-                SSButton.SetBinding(Button.VisibilityProperty, new Binding()
-                {
-                    Source = data,
-                    Path = new PropertyPath("IsSetShutterSpeedAvailable"),
-                    Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter(),
-                    FallbackValue = Visibility.Collapsed
-                });
-                panel.Children.Add(SSButton);
-            }
-
-            if (items.Contains(AppBarItem.IsoSlider))
-            {
-                var IsoButton = NewButtonWithHandler(AppBarItem.IsoSlider);
-                IsoButton.SetBinding(Button.VisibilityProperty, new Binding()
-                {
-                    Source = data,
-                    Path = new PropertyPath("IsSetIsoSpeedRateAvailable"),
-                    Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter(),
-                    FallbackValue = Visibility.Collapsed
-                });
-                panel.Children.Add(IsoButton);
-            }
-
-            if (items.Contains(AppBarItem.EvSlider))
-            {
-                var EvButton = NewButtonWithHandler(AppBarItem.EvSlider);
-                EvButton.SetBinding(Button.VisibilityProperty, new Binding()
-                {
-                    Source = data,
-                    Path = new PropertyPath("IsSetEVAvailable"),
-                    Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter(),
-                    FallbackValue = Visibility.Collapsed
-                });
-                panel.Children.Add(EvButton);
-            }
-
-            if (items.Contains(AppBarItem.ProgramShiftSlider))
-            {
-                var ProgramShiftButton = NewButtonWithHandler(AppBarItem.ProgramShiftSlider);
-                ProgramShiftButton.SetBinding(Button.VisibilityProperty, new Binding()
-                {
-                    Source = data,
-                    Path = new PropertyPath("IsProgramShiftAvailable"),
-                    Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter(),
-                    FallbackValue = Visibility.Collapsed
-                });
-                panel.Children.Add(ProgramShiftButton);
-            }
-
-            if (items.Contains(AppBarItem.Zoom))
-            {
-                var ZoomButton = NewButtonWithHandler(AppBarItem.Zoom);
-                ZoomButton.SetBinding(Button.VisibilityProperty, new Binding()
-                {
-                    Source = data,
-                    Path = new PropertyPath("IsZoomAvailable"),
-                    Mode = BindingMode.OneWay,
-                    Converter = new BoolToVisibilityConverter(),
-                    FallbackValue = Visibility.Collapsed
-                });
-                panel.Children.Add(ZoomButton);
-            }
-
-            return panel;
-        }
-
-
 
         private static AppBarButton NewButton(AppBarItem item)
         {
@@ -231,9 +131,9 @@ namespace Locana.Utility
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public CommandBarManager Content(AppBarItem item)
+        public CommandBarManager DeviceDependent(AppBarItem item)
         {
-            return Enable(AppBarItemType.Content, item);
+            return Enable(AppBarItemType.DeviceDependent, item);
         }
 
         private CommandBarManager Enable(AppBarItemType type, AppBarItem item)
@@ -279,9 +179,96 @@ namespace Locana.Utility
             }
         }
 
-        public void ApplyShootingScreenContents(CommandBar bar)
+        public void ApplyShootingScreenCommands(CommandBar bar)
         {
-            bar.Content = BuildContentPanel(ShootingScreenBarData, EnabledItems[AppBarItemType.Content]);
+            bar.PrimaryCommands.Clear();
+            ApplyCommands(bar);
+
+            if (ShootingScreenBarData == null) { return; }
+
+            if (EnabledItems[AppBarItemType.DeviceDependent].Contains(AppBarItem.FNumberSlider))
+            {
+                var FnumberButton = NewButtonWithHandler(AppBarItem.FNumberSlider);
+                FnumberButton.SetBinding(UIElement.VisibilityProperty, new Binding()
+                {
+                    Source = ShootingScreenBarData,
+                    Path = new PropertyPath("IsSetFNumberAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
+                });
+                bar.PrimaryCommands.Add(FnumberButton);
+            }
+
+            if (EnabledItems[AppBarItemType.DeviceDependent].Contains(AppBarItem.ShutterSpeedSlider))
+            {
+                var SSButton = NewButtonWithHandler(AppBarItem.ShutterSpeedSlider);
+                SSButton.SetBinding(UIElement.VisibilityProperty, new Binding()
+                {
+                    Source = ShootingScreenBarData,
+                    Path = new PropertyPath("IsSetShutterSpeedAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
+                });
+                bar.PrimaryCommands.Add(SSButton);
+            }
+
+            if (EnabledItems[AppBarItemType.DeviceDependent].Contains(AppBarItem.IsoSlider))
+            {
+                var IsoButton = NewButtonWithHandler(AppBarItem.IsoSlider);
+                IsoButton.SetBinding(UIElement.VisibilityProperty, new Binding()
+                {
+                    Source = ShootingScreenBarData,
+                    Path = new PropertyPath("IsSetIsoSpeedRateAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
+                });
+                bar.PrimaryCommands.Add(IsoButton);
+            }
+
+            if (EnabledItems[AppBarItemType.DeviceDependent].Contains(AppBarItem.EvSlider))
+            {
+                var EvButton = NewButtonWithHandler(AppBarItem.EvSlider);
+                EvButton.SetBinding(UIElement.VisibilityProperty, new Binding()
+                {
+                    Source = ShootingScreenBarData,
+                    Path = new PropertyPath("IsSetEVAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
+                });
+                bar.PrimaryCommands.Add(EvButton);
+            }
+
+            if (EnabledItems[AppBarItemType.DeviceDependent].Contains(AppBarItem.ProgramShiftSlider))
+            {
+                var ProgramShiftButton = NewButtonWithHandler(AppBarItem.ProgramShiftSlider);
+                ProgramShiftButton.SetBinding(UIElement.VisibilityProperty, new Binding()
+                {
+                    Source = ShootingScreenBarData,
+                    Path = new PropertyPath("IsProgramShiftAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
+                });
+                bar.PrimaryCommands.Add(ProgramShiftButton);
+            }
+
+            if (EnabledItems[AppBarItemType.DeviceDependent].Contains(AppBarItem.Zoom))
+            {
+                var ZoomButton = NewButtonWithHandler(AppBarItem.Zoom);
+                ZoomButton.SetBinding(UIElement.VisibilityProperty, new Binding()
+                {
+                    Source = ShootingScreenBarData,
+                    Path = new PropertyPath("IsZoomAvailable"),
+                    Mode = BindingMode.OneWay,
+                    Converter = new BoolToVisibilityConverter(),
+                    FallbackValue = Visibility.Collapsed
+                });
+                bar.PrimaryCommands.Add(ZoomButton);
+            }
         }
 
         public bool IsEnabled(AppBarItemType type, AppBarItem item)
@@ -295,7 +282,7 @@ namespace Locana.Utility
     public enum AppBarItemType
     {
         Command,
-        Content,
+        DeviceDependent,
         Hidden,
     }
 
