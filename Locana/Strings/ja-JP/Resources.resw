@@ -151,9 +151,6 @@
   <data name="AppBar_Exit" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="ApplicationSettings" xml:space="preserve">
-    <value>アプリケーション設定</value>
-  </data>
   <data name="AutoPowerOff" xml:space="preserve">
     <value>自動電源オフ</value>
   </data>
@@ -190,9 +187,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="ColorSetting" xml:space="preserve">
     <value>色合い</value>
-  </data>
-  <data name="ConnectedDevice" xml:space="preserve">
-    <value>{0} に接続されています</value>
   </data>
   <data name="ContainsLicense" xml:space="preserve">
     <value>このアプリケーションは下記のオープンソースソフトウェアを使用しています。</value>
@@ -382,7 +376,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>Tungsten (Incandescent)</value>
   </data>
   <data name="ExifWBValue_Unknown" xml:space="preserve">
-    <value>Unknown</value>
+    <value>不明</value>
   </data>
   <data name="ExifWBValue_WarmWhiteFluorescent" xml:space="preserve">
     <value>蛍光灯: 温白色</value>
@@ -484,7 +478,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>プレミアムオート</value>
   </data>
   <data name="FibonacciSpiralOrigin" xml:space="preserve">
-    <value>フィボナッチ螺旋の出発点</value>
+    <value>フィボナッチ螺旋の開始点</value>
   </data>
   <data name="FlashMode" xml:space="preserve">
     <value>フラッシュモード</value>
@@ -561,11 +555,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="Guide_ReceiveCapturedImage" xml:space="preserve">
     <value>撮影後にカメラから画像を受信し、カメラロールに保存します。（インターバル撮影中は無効となります）</value>
   </data>
-  <data name="Guide_StartLiveView" xml:space="preserve">
-    <value>&lt;ssid&gt; のカメラを操作する準備が整いました。
-
-左右にスワイプしてリモコンを開始できます</value>
-  </data>
   <data name="HideDetailInfo" xml:space="preserve">
     <value>情報を隠す</value>
   </data>
@@ -577,15 +566,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="IntervalSetting" xml:space="preserve">
     <value>インターバル撮影</value>
-  </data>
-  <data name="IntervalTime" xml:space="preserve">
-    <value>インターバル間隔</value>
-  </data>
-  <data name="IntervalTime1" xml:space="preserve">
-    <value>インターバル間隔</value>
-  </data>
-  <data name="IntervalTimePrefix" xml:space="preserve">
-    <value>撮影間隔</value>
   </data>
   <data name="InvalidDuration" xml:space="preserve">
     <value>--:--:--</value>
@@ -800,7 +780,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>画角</value>
   </data>
   <data name="ViewAngleUnit" xml:space="preserve">
-    <value>°</value>
+    <value>{0}°</value>
   </data>
   <data name="Viewer_FailedPlaybackMovie" xml:space="preserve">
     <value>動画の再生に失敗しました</value>
@@ -925,9 +905,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="Message_ContinuousShootingGuide" xml:space="preserve">
     <value>連写するにはボタンを長押しするか本体のシャッターキーを使用してください</value>
   </data>
-  <data name="ProgressBar_Processing" xml:space="preserve">
-    <value>処理中...</value>
-  </data>
   <data name="Viewer_MenuFetchMore" xml:space="preserve">
     <value>さらに読み込む</value>
   </data>
@@ -948,16 +925,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="OpenSupportTwitter" xml:space="preserve">
     <value>Twitterのアカウントを開く</value>
-  </data>
-  <data name="WifiConnectionGuide" xml:space="preserve">
-    <value>{0} に接続中。
-
-カメラの検索処理を実行しています。</value>
-  </data>
-  <data name="FoundDlnaDeviceGuide" xml:space="preserve">
-    <value>{0} にメディアサーバを発見しました。
-
-ギャラリーを開くとカメラ内の画像が参照できます。</value>
   </data>
   <data name="AppBar_Refresh" xml:space="preserve">
     <value>再読み込み</value>
@@ -1109,5 +1076,8 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="AppShell_RemoteShooting" xml:space="preserve">
     <value>リモート撮影</value>
+  </data>
+  <data name="IntervalTime" xml:space="preserve">
+    <value>インターバル間隔</value>
   </data>
 </root>

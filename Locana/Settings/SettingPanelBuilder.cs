@@ -40,7 +40,7 @@ namespace Locana.Settings
             Panels.Add("setTrackingFocus", BuildComboBoxPanel("TrackingFocus", "TrackingFocusMode", OnTrackingFocusChanged));
             Panels.Add("setContShootingMode", BuildComboBoxPanel("ContShootingMode", "ContShootingMode", OnContShootingModeChanged));
             Panels.Add("setContShootingSpeed", BuildComboBoxPanel("ContShootingSpeed", "ContShootingSpeed", OnContShootingSpeedChanged));
-            Panels.Add("setIntervalTime", BuildComboBoxPanel("IntervalTime", "IntervalTime1", OnIntervalTimeChanged));
+            Panels.Add("setIntervalTime", BuildComboBoxPanel("IntervalTime", "IntervalTime", OnIntervalTimeChanged));
             Panels.Add("setFlashMode", BuildComboBoxPanel("FlashMode", "FlashMode", OnFlashModeChanged));
             Panels.Add("setLoopRecTime", BuildComboBoxPanel("LoopRecTime", "LoopRecTime", OnLoopRecTimeChanged));
 

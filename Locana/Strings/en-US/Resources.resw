@@ -171,11 +171,6 @@
   <data name="Setting_PostViewImageSize" xml:space="preserve">
     <value>Picture size to receive</value>
   </data>
-  <data name="Guide_StartLiveView" xml:space="preserve">
-    <value>A camera device has been detected on &lt;ssid&gt;.
-
-Swipe left or right to start remote control.</value>
-  </data>
   <data name="Switch" xml:space="preserve">
     <value>Switch</value>
   </data>
@@ -233,9 +228,6 @@ Swipe left or right to start remote control.</value>
   <data name="IntervalCountPrefix" xml:space="preserve">
     <value>Count</value>
   </data>
-  <data name="IntervalTimePrefix" xml:space="preserve">
-    <value>Interval</value>
-  </data>
   <data name="Guide_NFC" xml:space="preserve">
     <value>Touch NFC enabled camera device to read Wi-Fi password!!</value>
   </data>
@@ -263,17 +255,11 @@ Swipe left or right to start remote control.</value>
   <data name="Message_NFC_succeed" xml:space="preserve">
     <value>Wi-Fi password of your camera device is copyed on the clipboard! Find following SSID and connect it.</value>
   </data>
-  <data name="ConnectedDevice" xml:space="preserve">
-    <value>Connected to {0}</value>
-  </data>
   <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
     <value>Opened successfully!</value>
   </data>
   <data name="MessageCaption_error" xml:space="preserve">
     <value>Error</value>
-  </data>
-  <data name="ApplicationSettings" xml:space="preserve">
-    <value>Application settings</value>
   </data>
   <data name="DisplayTakeImageButtonSetting" xml:space="preserve">
     <value>Display shutter button</value>
@@ -282,7 +268,7 @@ Swipe left or right to start remote control.</value>
     <value>Your phone's hardware shutter key can be an alternative trigger of remote shutter.</value>
   </data>
   <data name="AppSettings" xml:space="preserve">
-    <value>Settings</value>
+    <value>App settings</value>
   </data>
   <data name="AppBar_CancelTouchAf" xml:space="preserve">
     <value>Unlock AF</value>
@@ -361,7 +347,7 @@ Please check internet connection status.</value>
     <value>View angle</value>
   </data>
   <data name="ViewAngleUnit" xml:space="preserve">
-    <value>deg.</value>
+    <value>{0} deg.</value>
   </data>
   <data name="MovieQuality" xml:space="preserve">
     <value>Movie quality</value>
@@ -488,12 +474,6 @@ Please check internet connection status.</value>
   </data>
   <data name="MovieFormatMode_XAVCS" xml:space="preserve">
     <value>XAVC S</value>
-  </data>
-  <data name="ProgressMessageConnecting" xml:space="preserve">
-    <value>Preparing connection...</value>
-  </data>
-  <data name="ProgressMessageDetectingDevice" xml:space="preserve">
-    <value>Detecting connected camera device...</value>
   </data>
   <data name="ProgressMessageFetching" xml:space="preserve">
     <value>Fetching... {0} images to complete.</value>
@@ -962,9 +942,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   <data name="InfraredRemoteControl" xml:space="preserve">
     <value>IR remote</value>
   </data>
-  <data name="IntervalTime1" xml:space="preserve">
-    <value>Interval</value>
-  </data>
   <data name="InvalidDuration" xml:space="preserve">
     <value>--:--:--</value>
   </data>
@@ -1046,9 +1023,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   <data name="Message_ContinuousShootingGuide" xml:space="preserve">
     <value>Long press the button or use hardware shutter button to operate continuous shooting.</value>
   </data>
-  <data name="ProgressBar_Processing" xml:space="preserve">
-    <value>Processing...</value>
-  </data>
   <data name="Viewer_MenuFetchMore" xml:space="preserve">
     <value>Load more contents</value>
   </data>
@@ -1075,16 +1049,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   </data>
   <data name="SupportTwitterURL" xml:space="preserve">
     <value>https://twitter.com/locana_support</value>
-  </data>
-  <data name="WifiConnectionGuide" xml:space="preserve">
-    <value>Connected to {0}.
-
-Now detecting connected camera device...</value>
-  </data>
-  <data name="FoundDlnaDeviceGuide" xml:space="preserve">
-    <value>Media server is active on {0}.
-
-Open gallary to browse contents in your camera device.</value>
   </data>
   <data name="Viewer_NoContents" xml:space="preserve">
     <value>No contents available</value>
@@ -1126,7 +1090,7 @@ Open gallary to browse contents in your camera device.</value>
     <value>Full features unlimited. Thanks for the purchase!!</value>
   </data>
   <data name="AudioRecording" xml:space="preserve">
-    <value>Audio rec. w/movie</value>
+    <value>Audio rec. w/ movie</value>
   </data>
   <data name="LoopRecTime" xml:space="preserve">
     <value>Loop rec. time</value>

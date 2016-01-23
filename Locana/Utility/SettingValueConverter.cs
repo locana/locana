@@ -210,7 +210,7 @@ namespace Locana.Utility
 
         private static string FromViewAngle(int val)
         {
-            return val + SystemUtil.GetStringResource("ViewAngleUnit");
+            return string.Format(SystemUtil.GetStringResource("ViewAngleUnit"), val);
         }
 
         public static Capability<string> FromMovieQuality(Capability<string> info)
