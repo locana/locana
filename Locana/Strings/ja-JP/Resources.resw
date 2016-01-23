@@ -192,7 +192,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>色合い</value>
   </data>
   <data name="ConnectedDevice" xml:space="preserve">
-    <value>_ssid_ に接続されています</value>
+    <value>{0} に接続されています</value>
   </data>
   <data name="ContainsLicense" xml:space="preserve">
     <value>このアプリケーションは下記のオープンソースソフトウェアを使用しています。</value>
@@ -565,9 +565,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>&lt;ssid&gt; のカメラを操作する準備が整いました。
 
 左右にスワイプしてリモコンを開始できます</value>
-  </data>
-  <data name="Guide_WiFiNotEnabled" xml:space="preserve">
-    <value>Wi-Fi設定から、対応したカメラ機器に接続してください</value>
   </data>
   <data name="HideDetailInfo" xml:space="preserve">
     <value>情報を隠す</value>
@@ -1101,5 +1098,13 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="DialogTitle_Confirmation" xml:space="preserve">
     <value>確認</value>
+  </data>
+  <data name="QrCodeTile" xml:space="preserve">
+    <value>Wi-Fiパスワード
+読み取り</value>
+  </data>
+  <data name="WifiHint" xml:space="preserve">
+    <value>カメラとWi-Fiで接続されていますか？
+「DIRECT-」から始まるWi-Fiアクセスポイントに接続しましょう！</value>
   </data>
 </root>

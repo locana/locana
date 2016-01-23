@@ -126,11 +126,6 @@
   <data name="WifiSettingLauncherButtonText" xml:space="preserve">
     <value>Wi-Fi settings</value>
   </data>
-  <data name="Guide_WiFiNotEnabled" xml:space="preserve">
-    <value>Go to Wi-Fi settings and connect to your camera device.
-
-Hint: Access point name of Sony camera devices starts from "DIRECT-".</value>
-  </data>
   <data name="OSSText" xml:space="preserve">
     <value>Open source licenses</value>
   </data>
@@ -269,7 +264,7 @@ Swipe left or right to start remote control.</value>
     <value>Wi-Fi password of your camera device is copyed on the clipboard! Find following SSID and connect it.</value>
   </data>
   <data name="ConnectedDevice" xml:space="preserve">
-    <value>Connected to _ssid_</value>
+    <value>Connected to {0}</value>
   </data>
   <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
     <value>Opened successfully!</value>
@@ -1231,5 +1226,13 @@ Open gallary to browse contents in your camera device.</value>
   </data>
   <data name="DialogTitle_Confirmation" xml:space="preserve">
     <value>Confirmation</value>
+  </data>
+  <data name="QrCodeTile" xml:space="preserve">
+    <value>Read Wi-Fi
+password</value>
+  </data>
+  <data name="WifiHint" xml:space="preserve">
+    <value>Lost Wi-Fi connection to the camera device?
+Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</value>
   </data>
 </root>

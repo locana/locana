@@ -5,6 +5,7 @@ using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -28,28 +29,6 @@ namespace Locana.Network
             discovery.SonyCameraDeviceDiscovered += discovery_SonyCameraDeviceDiscovered;
             discovery.DescriptionObtained += cdsDiscovery_DescriptionObtained;
         }
-
-        /*
-        public async Task Initialize()
-        {
-            var filter = new ConnectionProfileFilter
-            {
-                IsConnected = true,
-                IsWwanConnectionProfile = false,
-                IsWlanConnectionProfile = true,
-            };
-            var profiles = await NetworkInformation.FindConnectionProfilesAsync(filter);
-            foreach (var profile in profiles)
-            {
-                var ssid = profile.WlanConnectionProfileDetails.GetConnectedSsid();
-                if (IsCameraAccessPoint(ssid))
-                {
-                    PreviousSsid = ssid;
-                    return;
-                }
-            }
-        }
-        */
 
         // This collection is kept even if the device went offline.
         private Dictionary<string, string> DeviceNames = new Dictionary<string, string>();
@@ -211,7 +190,6 @@ namespace Locana.Network
 
         private void Clear()
         {
-            // PreviousSsid = null;
             RefreshDevices();
         }
 
@@ -230,19 +208,23 @@ namespace Locana.Network
         }
         */
 
-        /*
-        public bool IsConnectedToCamera
-        {
-            get { return IsCameraAccessPoint(PreviousSsid); }
-        }
+        private readonly Regex CameraApRegex = new Regex("^DIRECT-[a-z][a-z][A-Z]\\d:");
 
-        private bool IsCameraAccessPoint(string ssid)
+        public async Task<bool> IsConnectedToCameraApDirectly()
         {
-            return ssid?.StartsWith("direct-", StringComparison.OrdinalIgnoreCase) ?? false;
-        }
+            var filter = new ConnectionProfileFilter
+            {
+                IsConnected = true,
+                IsWwanConnectionProfile = false,
+                IsWlanConnectionProfile = true,
+            };
+            var profiles = await NetworkInformation.FindConnectionProfilesAsync(filter);
 
-        public string PreviousSsid { private set; get; }
-        */
+            var matched = profiles.Select(profile => profile.WlanConnectionProfileDetails.GetConnectedSsid())
+                .FirstOrDefault(ssid => { return ssid != null && CameraApRegex.IsMatch(ssid); });
+
+            return matched != null;
+        }
 
         private async Task checkConnection(CancellationTokenSource cancel)
         {
@@ -251,49 +233,10 @@ namespace Locana.Network
 
             while (!cancel.IsCancellationRequested)
             {
-                /*
-                var filter = new ConnectionProfileFilter
-                {
-                    IsConnected = true,
-                    IsWwanConnectionProfile = false,
-                    IsWlanConnectionProfile = true,
-                };
-                var profiles = await NetworkInformation.FindConnectionProfilesAsync(filter);
-
-                var wifiSsid = profiles.Select(profile => profile.WlanConnectionProfileDetails.GetConnectedSsid())
-                    .FirstOrDefault(ssid => IsCameraAccessPoint(ssid));
-
-                if (wifiSsid != null)
-                {
-                    var previous = PreviousSsid;
-                    PreviousSsid = wifiSsid;
-                    // Connected to Access Point and it is a camera device.
-                    if (wifiSsid == previous && devices.Count != 0)
-                    {
-                        // Keep searching even if CDS provider is discovered.
-                        DebugUtil.Log("Some devices discovered on the previous SSID. Finish auto discovery.");
-                        return;
-                    }
-
-                    if (wifiSsid != previous)
-                    {
-                        DebugUtil.Log("New access point detected. Refresh.");
-                        RefreshDevices();
-                    }
-                    else
-                    {
-                        DebugUtil.Log("No devices discovered yet. keep searching.");
-                    }
-                }
-                */
-
                 SearchCamera();
                 SearchCds();
                 await Task.Delay(5000).ConfigureAwait(false);
             }
-
-            // DebugUtil.Log("Not connected to camera device.");
-            // Clear();
         }
 
         CancellationTokenSource Canceller;

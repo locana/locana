@@ -30,7 +30,7 @@ namespace Locana.Pages
         {
             this.InitializeComponent();
 
-            appMenuGroup.Add(new EntrancePanel("Find QR Code",
+            appMenuGroup.Add(new EntrancePanel(SystemUtil.GetStringResource("QrCodeTile"),
                 "qr_code", () =>
                 {
                     Frame.Navigate(typeof(QrCodePage));
@@ -97,6 +97,8 @@ namespace Locana.Pages
             }
 
             PanelSources.Source = panelSource;
+
+            UpdateWifiHintPanel();
         }
 
         private void EntranceGrid_Unloaded(object sender, RoutedEventArgs e)
@@ -109,6 +111,7 @@ namespace Locana.Pages
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 devicesGroup.Add(new DevicePanel(e.CameraDevice));
+                WifiHint.Visibility = Visibility.Collapsed;
             });
         }
 
@@ -117,7 +120,21 @@ namespace Locana.Pages
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
                 devicesGroup.Clear();
+                UpdateWifiHintPanel();
             });
+        }
+
+        private async void UpdateWifiHintPanel()
+        {
+            var connectedToCamera = await NetworkObserver.INSTANCE.IsConnectedToCameraApDirectly();
+            if (connectedToCamera || NetworkObserver.INSTANCE.CameraDevices.Count != 0)
+            {
+                WifiHint.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                WifiHint.Visibility = Visibility.Visible;
+            }
         }
 
         private void PanelHolder_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

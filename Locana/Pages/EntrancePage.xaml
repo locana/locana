@@ -28,6 +28,7 @@
     <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -59,8 +60,18 @@
                            Text="Entrance Page [TBD]" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
+        <Border x:Name="WifiHint"
+                Grid.Row="1"
+                VerticalAlignment="Top"
+                Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                Visibility="Collapsed">
+            <TextBlock Margin="12,4"
+                       Style="{ThemeResource BaseTextBlockStyle}"
+                       Text="{Binding [WifiHint],
+                                      Source={StaticResource LocalizedStrings}}" />
+        </Border>
         <GridView x:Name="EntranceGrid"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                   ItemsSource="{Binding Source={StaticResource PanelSources}}"
                   Loaded="EntranceGrid_Loaded"
@@ -80,7 +91,8 @@
                                         ContentTemplate="{Binding Resource}" />
                         <TextBlock Grid.Row="1"
                                    HorizontalAlignment="Center"
-                                   Text="{Binding PanelTitle}" />
+                                   Text="{Binding PanelTitle}"
+                                   TextAlignment="Center" />
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
