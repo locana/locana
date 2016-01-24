@@ -293,6 +293,14 @@
     <Content Include="Assets\Logo\Square_44x44.scale-100.png" />
     <Content Include="Assets\Logo\Square_44x44.scale-200.png" />
     <Content Include="Assets\Logo\Square_44x44.scale-400.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-16.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-16_altform-unplated.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-24.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-256.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-256_altform-unplated.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-48.png" />
+    <Content Include="Assets\Logo\Square_44x44.targetsize-48_altform-unplated.png" />
     <Content Include="Assets\Logo\Square_71x71.scale-100.png" />
     <Content Include="Assets\Logo\Square_71x71.scale-200.png" />
     <Content Include="Assets\Logo\Square_71x71.scale-400.png" />
