@@ -181,3 +181,4 @@ FakesAssemblies/
 **/_pkginfo.txt
 **/Package.StoreAssociation.xml
 **/_language-*.appx
+**/_scale-*.appx

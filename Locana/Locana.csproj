@@ -286,18 +286,29 @@
     <Content Include="Assets\LiveviewScreen\GeoInfoStatus_NG.png" />
     <Content Include="Assets\LiveviewScreen\GeoInfoStatus_OK.png" />
     <Content Include="Assets\LiveviewScreen\GeoInfoStatus_Updating.png" />
+    <Content Include="Assets\Logo\Square_150x150.scale-100.png" />
+    <Content Include="Assets\Logo\Square_150x150.scale-200.png" />
+    <Content Include="Assets\Logo\Square_310x310.scale-100.png" />
+    <Content Include="Assets\Logo\Square_310x310.scale-200.png" />
+    <Content Include="Assets\Logo\Square_44x44.scale-100.png" />
+    <Content Include="Assets\Logo\Square_44x44.scale-200.png" />
+    <Content Include="Assets\Logo\Square_44x44.scale-400.png" />
+    <Content Include="Assets\Logo\Square_71x71.scale-100.png" />
+    <Content Include="Assets\Logo\Square_71x71.scale-200.png" />
+    <Content Include="Assets\Logo\Square_71x71.scale-400.png" />
+    <Content Include="Assets\Logo\Store.scale-100.png" />
+    <Content Include="Assets\Logo\Store.scale-125.png" />
+    <Content Include="Assets\Logo\Store.scale-150.png" />
+    <Content Include="Assets\Logo\Store.scale-200.png" />
+    <Content Include="Assets\Logo\Store.scale-400.png" />
+    <Content Include="Assets\Logo\Wide_310x150.scale-100.png" />
+    <Content Include="Assets\Logo\Wide_310x150.scale-200.png" />
     <Content Include="Assets\Screen\focused.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_NG.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_OK.png" />
     <Content Include="Assets\Screen\GeoInfoStatus_Updating.png" />
-    <Content Include="Assets\Toast\Locana_square_full.png" />
+    <Content Include="Assets\SplashScreen\SplashScreen.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
