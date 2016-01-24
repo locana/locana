@@ -175,3 +175,9 @@ FakesAssemblies/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+
+# UWP build results
+**/BundleArtifacts/
+**/_pkginfo.txt
+**/Package.StoreAssociation.xml
+**/_language-*.appx
