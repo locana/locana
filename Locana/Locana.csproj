@@ -118,10 +118,6 @@
     <Compile Include="CameraControl\ServerVersion.cs" />
     <Compile Include="CameraControl\StatusObserver.cs" />
     <Compile Include="CameraControl\TargetDevice.cs" />
-    <Compile Include="Common\NavigationHelper.cs" />
-    <Compile Include="Common\ObservableDictionary.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\BatteryStatus.xaml.cs">
       <DependentUpon>BatteryStatus.xaml</DependentUpon>
     </Compile>

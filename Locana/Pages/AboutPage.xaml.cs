@@ -1,5 +1,4 @@
-﻿using Locana.Common;
-using Locana.Controls;
+﻿using Locana.Controls;
 using Locana.Utility;
 using Newtonsoft.Json;
 using System;
@@ -18,42 +17,13 @@ namespace Locana.Pages
 {
     public sealed partial class AboutPage : Page
     {
-        private NavigationHelper navigationHelper;
-
         public AboutPage()
         {
             this.InitializeComponent();
-
-            this.navigationHelper = new NavigationHelper(this);
         }
 
-        /// <summary>
-        /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-        #region NavigationHelper registration
-
-        /// <summary>
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// <para>
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="NavigationHelper.LoadState"/>
-        /// and <see cref="NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-        /// </para>
-        /// </summary>
-        /// <param name="e">Provides data for navigation methods and event
-        /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
-
             UpdatePurchaseInformation();
         }
 
@@ -65,13 +35,6 @@ namespace Locana.Pages
             Limited.Visibility = app.IsFunctionLimited.AsVisibility();
             TrialButton.Visibility = (app.IsFunctionLimited || app.IsTrialVersion).AsVisibility();
         }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
 
         private static bool IsManifestLoaded = false;
         private static LicenseJson license;
