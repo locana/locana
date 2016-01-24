@@ -1,5 +1,4 @@
 ﻿#if DEBUG
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -8,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 #endif
+
+using System;
 
 namespace Locana.Utility
 {
