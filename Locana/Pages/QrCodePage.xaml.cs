@@ -301,7 +301,6 @@ namespace Locana.Pages
 
                 // Allow the device to sleep now that the preview is stopped
                 _displayRequest.RequestRelease();
-
             });
         }
 
@@ -332,7 +331,7 @@ namespace Locana.Pages
                         Debug.WriteLine(d);
                         sb.Append(d);
                     }
-                    DebugText.Text = sb.ToString();
+                    // DebugText.Text = sb.ToString();
                     await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
                         Frame.Navigate(typeof(EntrancePage), sb.ToString());

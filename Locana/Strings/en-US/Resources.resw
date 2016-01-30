@@ -1192,7 +1192,7 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
     <value>Confirmation</value>
   </data>
   <data name="QrCodeTile" xml:space="preserve">
-    <value>Read Wi-Fi
+    <value>Scan Wi-Fi
 password</value>
   </data>
   <data name="WifiHint" xml:space="preserve">
@@ -1201,5 +1201,11 @@ Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</valu
   </data>
   <data name="AppShell_RemoteShooting" xml:space="preserve">
     <value>Remote</value>
+  </data>
+  <data name="QrCodeMessage" xml:space="preserve">
+    <value>Place the QR code at the center of screen.</value>
+  </data>
+  <data name="QrCodePageTitle" xml:space="preserve">
+    <value>Scan Wi-Fi password</value>
   </data>
 </root>

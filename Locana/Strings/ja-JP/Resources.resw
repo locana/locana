@@ -1068,7 +1068,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="QrCodeTile" xml:space="preserve">
     <value>Wi-Fiパスワード
-読み取り</value>
+スキャン</value>
   </data>
   <data name="WifiHint" xml:space="preserve">
     <value>カメラとWi-Fiで接続されていますか？
@@ -1079,5 +1079,11 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   </data>
   <data name="IntervalTime" xml:space="preserve">
     <value>インターバル間隔</value>
+  </data>
+  <data name="QrCodeMessage" xml:space="preserve">
+    <value>QRコードを画面の中心に表示してください。</value>
+  </data>
+  <data name="QrCodePageTitle" xml:space="preserve">
+    <value>Wi-Fiパスワードスキャン</value>
   </data>
 </root>

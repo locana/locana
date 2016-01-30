@@ -10,25 +10,31 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <c:PageHeader x:Name="pageHeader">
             <c:PageHeader.HeaderContent>
                 <TextBlock x:Name="title"
                            Style="{ThemeResource PageTitleTextBlockStyle}"
-                           Text="QR Code Page [TBD]" />
+                           Text="{Binding [QrCodePageTitle],
+                                          Source={StaticResource LocalizedStrings}}" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
-        <Grid Grid.Row="1">
-            <StackPanel>
-                <TextBlock Margin="20"
-                           Text="Show me the QR code."
-                           TextAlignment="Center" />
-                <CaptureElement Name="PreviewControl"
-                                Stretch="Uniform"
-                                Tapped="PreviewControl_Tapped" />
-                <TextBlock x:Name="DebugText" />
-            </StackPanel>
-        </Grid>
+
+        <TextBlock Grid.Row="1"
+                   Margin="16"
+                   Style="{ThemeResource BodyTextBlockStyle}"
+                   Text="{Binding [QrCodeMessage],
+                                  Source={StaticResource LocalizedStrings}}" />
+
+        <CaptureElement Name="PreviewControl"
+                        Grid.Row="1"
+                        MaxWidth="1024"
+                        MaxHeight="1024"
+                        Margin="0,48"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Stretch="UniformToFill"
+                        Tapped="PreviewControl_Tapped" />
     </Grid>
 </Page>
