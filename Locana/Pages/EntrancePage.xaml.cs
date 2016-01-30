@@ -60,18 +60,10 @@ namespace Locana.Pages
             NetworkObserver.INSTANCE.DevicesCleared += NetworkObserver_DevicesCleared;
             NetworkObserver.INSTANCE.ForceRestart();
 
-            if (e.Parameter != null && (e.Parameter as string).Length > 1)
+            if (e.Parameter != null && e.Parameter is SonyQrData)
             {
-                DebugUtil.Log("found data from QR code: " + e.Parameter as string);
-                try
-                {
-                    var data = SonyQrDataParser.ParseData(e.Parameter as string);
-                    await OnConnectionInfoFound(data.SSID, data.Password);
-                }
-                catch (FormatException ex)
-                {
-                    DebugUtil.Log("QR data parse error: " + ex.Message);
-                }
+                var data = e.Parameter as SonyQrData;
+                await OnConnectionInfoFound(data.SSID, data.Password);
             }
         }
 

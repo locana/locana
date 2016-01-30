@@ -1086,4 +1086,7 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="QrCodePageTitle" xml:space="preserve">
     <value>Wi-Fiパスワードスキャン</value>
   </data>
+  <data name="QrCodeIncompatible" xml:space="preserve">
+    <value>このQRコードはWi-Fiの情報を含んでいません</value>
+  </data>
 </root>

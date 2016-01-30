@@ -1208,4 +1208,7 @@ Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</valu
   <data name="QrCodePageTitle" xml:space="preserve">
     <value>Scan Wi-Fi password</value>
   </data>
+  <data name="QrCodeIncompatible" xml:space="preserve">
+    <value>This QR code does not contain Wi-Fi information.</value>
+  </data>
 </root>

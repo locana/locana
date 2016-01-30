@@ -331,10 +331,27 @@ namespace Locana.Pages
                         Debug.WriteLine(d);
                         sb.Append(d);
                     }
+
+                    SonyQrData qrdata = null;
+                    try
+                    {
+                        qrdata = SonyQrDataParser.ParseData(sb.ToString());
+                    }
+                    catch (FormatException ex)
+                    {
+                        DebugUtil.Log("QR data parse error: " + ex.Message);
+                    }
                     // DebugText.Text = sb.ToString();
                     await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                     {
-                        Frame.Navigate(typeof(EntrancePage), sb.ToString());
+                        if (qrdata != null)
+                        {
+                            Frame.Navigate(typeof(EntrancePage), qrdata);
+                        }
+                        else
+                        {
+                            AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("QrCodeIncompatible") });
+                        }
                     });
                 }
             }
