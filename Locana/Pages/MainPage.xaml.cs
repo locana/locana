@@ -20,6 +20,7 @@ using Windows.Graphics.Imaging;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -66,6 +67,7 @@ namespace Locana.Pages
                 .DeviceDependent(AppBarItem.ProgramShiftSlider);
         }
 
+        DisplayRequest displayRequest = new DisplayRequest();
         DispatcherTimer LiveviewFpsTimer = new DispatcherTimer();
         const int FPS_INTERVAL = 5000;
         int LiveviewFrameCount = 0;
@@ -187,6 +189,8 @@ namespace Locana.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            displayRequest.RequestActive();
+
             InitializeVisualStates();
             DisplayInformation.GetForCurrentView().OrientationChanged += MainPage_OrientationChanged;
 
@@ -206,6 +210,8 @@ namespace Locana.Pages
                 HardwareButtons.CameraReleased -= HardwareButtons_CameraReleased;
                 HardwareButtons.CameraPressed -= HardwareButtons_CameraPressed;
             }
+
+            displayRequest.RequestRelease();
         }
 
         private void MainPage_OrientationChanged(DisplayInformation info, object args)
