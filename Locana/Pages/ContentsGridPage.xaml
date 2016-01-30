@@ -79,7 +79,7 @@
                     <c:PageHeader.HeaderContent>
                         <TextBlock x:Name="TitleBarText"
                                    Style="{ThemeResource PageTitleTextBlockStyle}"
-                                   TextWrapping="Wrap" />
+                                   TextTrimming="CharacterEllipsis" />
                     </c:PageHeader.HeaderContent>
                 </c:PageHeader>
             </CommandBar.Content>

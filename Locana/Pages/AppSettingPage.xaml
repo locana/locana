@@ -20,7 +20,8 @@
                 <TextBlock x:Name="title"
                            Style="{ThemeResource PageTitleTextBlockStyle}"
                            Text="{Binding [AppSettings],
-                                          Source={StaticResource LocalizedStrings}}" />
+                                          Source={StaticResource LocalizedStrings}}"
+                           TextTrimming="CharacterEllipsis" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">

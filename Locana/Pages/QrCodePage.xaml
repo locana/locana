@@ -17,7 +17,8 @@
                 <TextBlock x:Name="title"
                            Style="{ThemeResource PageTitleTextBlockStyle}"
                            Text="{Binding [QrCodePageTitle],
-                                          Source={StaticResource LocalizedStrings}}" />
+                                          Source={StaticResource LocalizedStrings}}"
+                           TextTrimming="CharacterEllipsis" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
 

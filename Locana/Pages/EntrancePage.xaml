@@ -61,7 +61,8 @@
                 <TextBlock x:Name="title"
                            Style="{ThemeResource PageTitleTextBlockStyle}"
                            Text="{Binding [AppShell_RemoteShooting],
-                                          Source={StaticResource LocalizedStrings}}" />
+                                          Source={StaticResource LocalizedStrings}}"
+                           TextTrimming="CharacterEllipsis" />
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
         <Border x:Name="WifiHint"
