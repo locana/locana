@@ -131,7 +131,7 @@ namespace Locana.Pages
                     })));
 
             var gridTypePanel = new ComboBoxSetting(
-                new AppSettingData<int>("Pattern", null,
+                new AppSettingData<int>(SystemUtil.GetStringResource("AssistPattern"), null,
                     () => { return (int)ApplicationSettings.GetInstance().GridType - 1; },
                     setting =>
                     {
@@ -142,7 +142,7 @@ namespace Locana.Pages
             gridTypePanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
-                Path = new PropertyPath("FramingGridEnabled"),
+                Path = new PropertyPath(nameof(ApplicationSettings.FramingGridEnabled)),
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });
@@ -159,7 +159,7 @@ namespace Locana.Pages
             gridColorPanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
-                Path = new PropertyPath("FramingGridEnabled"),
+                Path = new PropertyPath(nameof(ApplicationSettings.FramingGridEnabled)),
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });
@@ -176,7 +176,7 @@ namespace Locana.Pages
             fibonacciOriginPanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
-                Path = new PropertyPath("IsFibonacciSpiralEnabled"),
+                Path = new PropertyPath(nameof(ApplicationSettings.IsFibonacciSpiralEnabled)),
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });

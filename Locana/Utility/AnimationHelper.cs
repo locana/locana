@@ -27,7 +27,7 @@ namespace Locana.Utility
             if (request.WithFade)
             {
                 var fade = CreateFadeKeyframes(request.RequestFadeType, KeyframeTimes);
-                Storyboard.SetTargetProperty(fade, "Opacity");
+                Storyboard.SetTargetProperty(fade, nameof(UIElement.Opacity));
                 Storyboard.SetTarget(fade, request.Target);
                 sb.Children.Add(fade);
             }
@@ -43,22 +43,22 @@ namespace Locana.Utility
                     {
                         case FadeSide.Top:
                             _distance = requested_distance == 0 ? -request.Target.ActualHeight : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "Y");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.Y));
                             KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                         case FadeSide.Bottom:
                             _distance = requested_distance == 0 ? request.Target.ActualHeight : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "Y");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.Y));
                             KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                         case FadeSide.Left:
                             _distance = requested_distance == 0 ? -request.Target.ActualWidth : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "X");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.X));
                             KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                         case FadeSide.Right:
                             _distance = requested_distance == 0 ? request.Target.ActualWidth : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "X");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.X));
                             KeyframeDistance = new List<double>() { _distance, _distance * 0.5, 0 };
                             break;
                     }
@@ -68,22 +68,22 @@ namespace Locana.Utility
                     {
                         case FadeSide.Top:
                             _distance = requested_distance == 0 ? -request.Target.ActualHeight : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "Y");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.Y));
                             KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                         case FadeSide.Bottom:
                             _distance = requested_distance == 0 ? request.Target.ActualHeight : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "Y");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.Y));
                             KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                         case FadeSide.Left:
                             _distance = requested_distance == 0 ? -request.Target.ActualWidth : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "X");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.X));
                             KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                         case FadeSide.Right:
                             _distance = requested_distance == 0 ? request.Target.ActualWidth : requested_distance;
-                            Storyboard.SetTargetProperty(slide, "X");
+                            Storyboard.SetTargetProperty(slide, nameof(TranslateTransform.X));
                             KeyframeDistance = new List<double>() { 0, _distance * 0.2, _distance };
                             break;
                     }
@@ -127,9 +127,9 @@ namespace Locana.Utility
             var animation_x = _Animation(duration, transform.TranslateX, request.newX - transform.TranslateX);
             var animation_scale_x = _Animation(duration, transform.ScaleX, request.newScaleX - transform.ScaleX);
             var animation_scale_y = _Animation(duration, transform.ScaleY, request.newScaleY - transform.ScaleY);
-            Storyboard.SetTargetProperty(animation_x, "TranslateX");
-            Storyboard.SetTargetProperty(animation_scale_x, "ScaleX");
-            Storyboard.SetTargetProperty(animation_scale_y, "ScaleY");
+            Storyboard.SetTargetProperty(animation_x, nameof(CompositeTransform.TranslateX));
+            Storyboard.SetTargetProperty(animation_scale_x, nameof(CompositeTransform.ScaleX));
+            Storyboard.SetTargetProperty(animation_scale_y, nameof(CompositeTransform.ScaleY));
             Storyboard.SetTarget(animation_x, transform);
             Storyboard.SetTarget(animation_scale_x, transform);
             Storyboard.SetTarget(animation_scale_y, transform);
@@ -167,7 +167,7 @@ namespace Locana.Utility
             List<double> KeyframeDistance = new List<double>();
 
             var fade = CreateFadeKeyframes(request.RequestFadeType, KeyframeTimes);
-            Storyboard.SetTargetProperty(fade, "Opacity");
+            Storyboard.SetTargetProperty(fade, nameof(UIElement.Opacity));
             Storyboard.SetTarget(fade, request.Target);
             sb.Children.Add(fade);
 
@@ -229,7 +229,7 @@ namespace Locana.Utility
             var sb = new Storyboard() { Duration = duration };
 
             var animation = _Animation(duration, transform.Rotation, angle);
-            Storyboard.SetTargetProperty(animation, "Rotation");
+            Storyboard.SetTargetProperty(animation, nameof(CompositeTransform.Rotation));
             Storyboard.SetTarget(animation, transform);
 
             sb.Children.Add(animation);
@@ -276,17 +276,17 @@ namespace Locana.Utility
             var sb = new Storyboard() { Duration = duration };
 
             var animation = _Animation(duration, transform.Rotation, angle);
-            Storyboard.SetTargetProperty(animation, "Rotation");
+            Storyboard.SetTargetProperty(animation, nameof(CompositeTransform.Rotation));
             Storyboard.SetTarget(animation, transform);
             sb.Children.Add(animation);
 
             var scaleXAnimation = _Animation(duration, transform.ScaleX, scale - transform.ScaleX);
-            Storyboard.SetTargetProperty(scaleXAnimation, "ScaleX");
+            Storyboard.SetTargetProperty(scaleXAnimation, nameof(CompositeTransform.ScaleX));
             Storyboard.SetTarget(scaleXAnimation, transform);
             sb.Children.Add(scaleXAnimation);
 
             var scaleYAnimation = _Animation(duration, transform.ScaleY, scale - transform.ScaleY);
-            Storyboard.SetTargetProperty(scaleYAnimation, "ScaleY");
+            Storyboard.SetTargetProperty(scaleYAnimation, nameof(CompositeTransform.ScaleY));
             Storyboard.SetTarget(scaleYAnimation, transform);
             sb.Children.Add(scaleYAnimation);
 
@@ -313,7 +313,7 @@ namespace Locana.Utility
             var rt = new RotateTransform();
 
             Storyboard.SetTarget(da, rt);
-            Storyboard.SetTargetProperty(da, "Angle");
+            Storyboard.SetTargetProperty(da, nameof(RotateTransform.Angle));
             da.From = from;
             da.To = to;
 

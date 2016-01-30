@@ -14,7 +14,7 @@ namespace Locana.Controls
             selectorItem.SetBinding(UIElement.IsHitTestVisibleProperty, new Binding
             {
                 Source = item as Thumbnail,
-                Path = new PropertyPath("IsSelectable"),
+                Path = new PropertyPath(nameof(Thumbnail.IsSelectable)),
                 Mode = BindingMode.OneWay
             });
 

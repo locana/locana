@@ -192,7 +192,7 @@ namespace Locana.Utility
                 FnumberButton.SetBinding(UIElement.VisibilityProperty, new Binding()
                 {
                     Source = ShootingScreenBarData,
-                    Path = new PropertyPath("IsSetFNumberAvailable"),
+                    Path = new PropertyPath(nameof(LiveviewScreenViewData.IsSetFNumberAvailable)),
                     Mode = BindingMode.OneWay,
                     Converter = new BoolToVisibilityConverter(),
                     FallbackValue = Visibility.Collapsed
@@ -206,7 +206,7 @@ namespace Locana.Utility
                 SSButton.SetBinding(UIElement.VisibilityProperty, new Binding()
                 {
                     Source = ShootingScreenBarData,
-                    Path = new PropertyPath("IsSetShutterSpeedAvailable"),
+                    Path = new PropertyPath(nameof(LiveviewScreenViewData.IsSetShutterSpeedAvailable)),
                     Mode = BindingMode.OneWay,
                     Converter = new BoolToVisibilityConverter(),
                     FallbackValue = Visibility.Collapsed
@@ -220,7 +220,7 @@ namespace Locana.Utility
                 IsoButton.SetBinding(UIElement.VisibilityProperty, new Binding()
                 {
                     Source = ShootingScreenBarData,
-                    Path = new PropertyPath("IsSetIsoSpeedRateAvailable"),
+                    Path = new PropertyPath(nameof(LiveviewScreenViewData.IsSetIsoSpeedRateAvailable)),
                     Mode = BindingMode.OneWay,
                     Converter = new BoolToVisibilityConverter(),
                     FallbackValue = Visibility.Collapsed
@@ -234,7 +234,7 @@ namespace Locana.Utility
                 EvButton.SetBinding(UIElement.VisibilityProperty, new Binding()
                 {
                     Source = ShootingScreenBarData,
-                    Path = new PropertyPath("IsSetEVAvailable"),
+                    Path = new PropertyPath(nameof(LiveviewScreenViewData.IsSetEVAvailable)),
                     Mode = BindingMode.OneWay,
                     Converter = new BoolToVisibilityConverter(),
                     FallbackValue = Visibility.Collapsed
@@ -248,7 +248,7 @@ namespace Locana.Utility
                 ProgramShiftButton.SetBinding(UIElement.VisibilityProperty, new Binding()
                 {
                     Source = ShootingScreenBarData,
-                    Path = new PropertyPath("IsProgramShiftAvailable"),
+                    Path = new PropertyPath(nameof(LiveviewScreenViewData.IsProgramShiftAvailable)),
                     Mode = BindingMode.OneWay,
                     Converter = new BoolToVisibilityConverter(),
                     FallbackValue = Visibility.Collapsed
@@ -262,7 +262,7 @@ namespace Locana.Utility
                 ZoomButton.SetBinding(UIElement.VisibilityProperty, new Binding()
                 {
                     Source = ShootingScreenBarData,
-                    Path = new PropertyPath("IsZoomAvailable"),
+                    Path = new PropertyPath(nameof(LiveviewScreenViewData.IsZoomAvailable)),
                     Mode = BindingMode.OneWay,
                     Converter = new BoolToVisibilityConverter(),
                     FallbackValue = Visibility.Collapsed

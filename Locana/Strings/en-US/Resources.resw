@@ -253,7 +253,10 @@
     <value>Connection has been lost.</value>
   </data>
   <data name="Message_NFC_succeed" xml:space="preserve">
-    <value>Wi-Fi password of your camera device is copyed on the clipboard! Find following SSID and connect it.</value>
+    <value>Wi-Fi password is detected and stored in the clipboard!
+
+SSID: {0}
+Password: {1}</value>
   </data>
   <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
     <value>Opened successfully!</value>
@@ -1210,5 +1213,20 @@ Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</valu
   </data>
   <data name="QrCodeIncompatible" xml:space="preserve">
     <value>This QR code does not contain Wi-Fi information.</value>
+  </data>
+  <data name="Exif_NoData" xml:space="preserve">
+    <value>No EXIF data</value>
+  </data>
+  <data name="MilliMeter_NoTrans" xml:space="preserve">
+    <value>{0} mm</value>
+  </data>
+  <data name="Minutes_NoTrans" xml:space="preserve">
+    <value>{0} min.</value>
+  </data>
+  <data name="Pics_NoTrans" xml:space="preserve">
+    <value>{0} pics.</value>
+  </data>
+  <data name="x_by_x_NoTrans" xml:space="preserve">
+    <value>{0} x {1}</value>
   </data>
 </root>

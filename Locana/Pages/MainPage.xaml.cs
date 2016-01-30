@@ -354,7 +354,6 @@ namespace Locana.Pages
             LiveviewFpsTimer.Start();
 
             ScreenViewData = new LiveviewScreenViewData(target);
-            ScreenViewData.NotifyFriendlyNameUpdated();
             BatteryStatusDisplay.BatteryInfo = target.Status.BatteryInfo;
             LayoutRoot.DataContext = ScreenViewData;
             var panels = SettingPanelBuilder.CreateNew(target);
@@ -378,8 +377,6 @@ namespace Locana.Pages
             _FocusFrameSurface.ClearFrames();
 
             HistogramControl.Visibility = ApplicationSettings.GetInstance().IsHistogramDisplayed.AsVisibility();
-
-            HideFrontScreen();
 
             SetUIHandlers();
         }
@@ -439,36 +436,31 @@ namespace Locana.Pages
             };
         }
 
-        private void HideFrontScreen()
-        {
-            ScreenViewData.IsWaitingConnection = false;
-        }
-
         void Status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var status = sender as CameraStatus;
             switch (e.PropertyName)
             {
-                case "BatteryInfo":
+                case nameof(CameraStatus.BatteryInfo):
                     BatteryStatusDisplay.BatteryInfo = status.BatteryInfo;
                     break;
-                case "ContShootingResult":
+                case nameof(CameraStatus.ContShootingResult):
                     EnqueueContshootingResult(status.ContShootingResult);
                     break;
-                case "Status":
+                case nameof(CameraStatus.Status):
                     if (status.Status == EventParam.Idle)
                     {
                         // When recording is stopped, clear recording time.
                         status.RecordingTimeSec = 0;
                     }
                     break;
-                case "ShootMode":
+                case nameof(CameraStatus.ShootMode):
                     UpdateShutterButton(status);
                     break;
-                case "FocusStatus":
+                case nameof(CameraStatus.FocusStatus):
                     UpdateFocusStatus(status.FocusStatus);
                     break;
-                case "TouchFocusStatus":
+                case nameof(CameraStatus.TouchFocusStatus):
                     UpdateTouchFocus(status.TouchFocusStatus);
                     break;
                 default:
@@ -527,7 +519,7 @@ namespace Locana.Pages
             {
                 icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
             }
-            MultiShutterButton.ModeInfo = new Controls.ShootModeInfo()
+            MultiShutterButton.ModeInfo = new ShootModeInfo()
             {
                 ShootModeCapability = status.ShootMode,
                 ModeSelected = async (mode) =>

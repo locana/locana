@@ -35,7 +35,7 @@ namespace Locana.DataModel
 
         void Thumb_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "LargeImage")
+            if (e.PropertyName == nameof(Thumbnail.LargeImage))
             {
                 OnPropertyChanged(nameof(RandomThumbnail));
             }

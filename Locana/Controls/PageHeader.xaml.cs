@@ -1,5 +1,4 @@
-﻿using Locana;
-using Windows.Foundation;
+﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -33,6 +32,6 @@ namespace Locana.Controls
 
         // Using a DependencyProperty as the backing store for HeaderContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderContentProperty =
-            DependencyProperty.Register("HeaderContent", typeof(UIElement), typeof(PageHeader), new PropertyMetadata(DependencyProperty.UnsetValue));
+            DependencyProperty.Register(nameof(HeaderContent), typeof(UIElement), typeof(PageHeader), new PropertyMetadata(DependencyProperty.UnsetValue));
     }
 }

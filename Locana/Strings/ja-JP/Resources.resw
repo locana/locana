@@ -574,7 +574,10 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
     <value>エラー</value>
   </data>
   <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
-    <value>読みこみに成功しました</value>
+    <value>読み込んだWi-Fiパスワードをクリップボードに保存しました。
+
+SSID: {0}
+Password: {1}</value>
   </data>
   <data name="Message_Caution" xml:space="preserve">
     <value>※これらのアプリ内アイテムの購入によって何らかの隠し機能が解放されることはありません。ご注意ください。</value>

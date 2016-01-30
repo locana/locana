@@ -363,7 +363,7 @@ namespace Locana.DataModel
                             case ShootModeParam.Audio:
                             case ShootModeParam.Loop:
                                 if (storage.RecordableMovieLength == -1) { return ""; }
-                                return storage.RecordableMovieLength.ToString() + " min.";
+                                return string.Format(SystemUtil.GetStringResource("Minutes_NoTrans"), storage.RecordableMovieLength);
                             default:
                                 break;
                         }
@@ -389,7 +389,7 @@ namespace Locana.DataModel
                         return min.ToString("##00") + ":" + sec.ToString("00");
                     case ShootModeParam.Interval:
                         if (Device.Status.NumberOfShots < 0) { return ""; }
-                        return Device.Status.NumberOfShots + " pics.";
+                        return string.Format(SystemUtil.GetStringResource("Pics_NoTrans"), Device.Status.NumberOfShots);
                 }
                 return "";
             }
@@ -566,30 +566,6 @@ namespace Locana.DataModel
                     NotifyChangedOnUI(nameof(FramingGridDisplayed));
                 }
             }
-        }
-
-        private bool _IsWaitingConnection = true;
-        public bool IsWaitingConnection
-        {
-            get { return _IsWaitingConnection; }
-            set
-            {
-                if (value != _IsWaitingConnection)
-                {
-                    _IsWaitingConnection = value;
-                    NotifyChangedOnUI(nameof(IsWaitingConnection));
-                }
-            }
-        }
-
-        public string FriendlyName
-        {
-            get { return "Connected: " + Device.FriendlyName; }
-        }
-
-        public void NotifyFriendlyNameUpdated()
-        {
-            NotifyChangedOnUI(nameof(FriendlyName));
         }
     }
 }

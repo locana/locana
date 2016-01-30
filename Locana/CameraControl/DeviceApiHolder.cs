@@ -57,14 +57,14 @@ namespace Locana.CameraControl
         {
             switch (e.PropertyName)
             {
-                case "Version":
+                case nameof(ApiCapabilityContainer.Version):
                     OnServerVersionDetected();
                     OnAvailableApisUpdated();
                     break;
-                case "SupportedApis":
+                case nameof(ApiCapabilityContainer.SupportedApis):
                     OnSupportedApisUpdated();
                     break;
-                case "AvailableApis":
+                case nameof(ApiCapabilityContainer.AvailableApis):
                     OnAvailableApisUpdated();
                     break;
             }

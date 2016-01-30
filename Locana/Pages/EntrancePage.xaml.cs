@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Networking.Proximity;
@@ -226,20 +225,9 @@ namespace Locana.Pages
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                var sb = new StringBuilder();
-                sb.Append(SystemUtil.GetStringResource("Message_NFC_succeed"));
-                sb.Append(Environment.NewLine);
-                sb.Append(Environment.NewLine);
-                sb.Append("SSID: ");
-                sb.Append(SSID);
-                sb.Append(Environment.NewLine);
-                sb.Append("Password: ");
-                sb.Append(Password);
-                sb.Append(Environment.NewLine);
-
                 PutToClipBoard(Password);
 
-                var dialog = new MessageDialog(sb.ToString());
+                var dialog = new MessageDialog(string.Format(SystemUtil.GetStringResource("Message_NFC_succeed"), SSID, Password));
                 try
                 {
                     await dialog.ShowAsync();

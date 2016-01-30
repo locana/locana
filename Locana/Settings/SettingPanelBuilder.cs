@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
@@ -70,7 +71,7 @@ namespace Locana.Settings
             VisibilityBinding = new Binding()
             {
                 Source = DataSource,
-                Path = new PropertyPath("IsRestrictedApiAvailable"),
+                Path = new PropertyPath(nameof(ControlPanelDataSource.IsRestrictedApiAvailable)),
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
                 FallbackValue = Visibility.Collapsed
@@ -324,19 +325,19 @@ namespace Locana.Settings
                 BorderThickness = new Thickness(1),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
             };
-            box.SetBinding(ComboBox.IsEnabledProperty, new Binding
+            box.SetBinding(Control.IsEnabledProperty, new Binding
             {
                 Source = DataSource,
                 Path = new PropertyPath("IsAvailable" + key),
                 Mode = BindingMode.OneWay
             });
-            box.SetBinding(ComboBox.ItemsSourceProperty, new Binding
+            box.SetBinding(ItemsControl.ItemsSourceProperty, new Binding
             {
                 Source = DataSource,
                 Path = new PropertyPath("Candidates" + key),
                 Mode = BindingMode.OneWay
             });
-            box.SetBinding(ComboBox.SelectedIndexProperty, new Binding
+            box.SetBinding(Selector.SelectedIndexProperty, new Binding
             {
                 Source = DataSource,
                 Path = new PropertyPath("SelectedIndex" + key),
@@ -360,7 +361,7 @@ namespace Locana.Settings
             indicator.SetBinding(TextBlock.TextProperty, new Binding()
             {
                 Source = ApplicationSettings.GetInstance(),
-                Path = new PropertyPath("IntervalTimeDisplayString"),
+                Path = new PropertyPath(nameof(ApplicationSettings.IntervalTimeDisplayString)),
                 Mode = BindingMode.OneWay,
             });
 
@@ -370,16 +371,16 @@ namespace Locana.Settings
                 VerticalAlignment = VerticalAlignment.Center,
                 MinWidth = 30,
             };
-            checkbox.SetBinding(CheckBox.IsCheckedProperty, new Binding()
+            checkbox.SetBinding(ToggleButton.IsCheckedProperty, new Binding()
             {
                 Source = ApplicationSettings.GetInstance(),
-                Path = new PropertyPath("IsIntervalShootingEnabled"),
+                Path = new PropertyPath(nameof(ApplicationSettings.IsIntervalShootingEnabled)),
                 Mode = BindingMode.TwoWay,
             });
-            checkbox.SetBinding(CheckBox.IsEnabledProperty, new Binding()
+            checkbox.SetBinding(Control.IsEnabledProperty, new Binding()
             {
                 Source = DataSource,
-                Path = new PropertyPath("IsPeriodicalShootingAvailable"),
+                Path = new PropertyPath(nameof(ControlPanelDataSource.IsPeriodicalShootingAvailable)),
                 Mode = BindingMode.OneWay,
             });
 
@@ -399,16 +400,16 @@ namespace Locana.Settings
                 ApplicationSettings.GetInstance().IntervalTime = (int)(sender as Slider).Value;
                 DebugUtil.Log("Interval updated: " + (int)(sender as Slider).Value);
             };
-            slider.SetBinding(Slider.IsEnabledProperty, new Binding()
+            slider.SetBinding(Control.IsEnabledProperty, new Binding()
             {
                 Source = DataSource,
-                Path = new PropertyPath("IsPeriodicalShootingAvailable"),
+                Path = new PropertyPath(nameof(ControlPanelDataSource.IsPeriodicalShootingAvailable)),
                 Mode = BindingMode.OneWay,
             });
-            slider.SetBinding(Slider.VisibilityProperty, new Binding()
+            slider.SetBinding(UIElement.VisibilityProperty, new Binding()
             {
                 Source = checkbox,
-                Path = new PropertyPath("IsChecked"),
+                Path = new PropertyPath(nameof(ToggleButton.IsChecked)),
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });
@@ -455,14 +456,14 @@ namespace Locana.Settings
             indicator.SetBinding(TextBlock.TextProperty, new Binding()
             {
                 Source = Status,
-                Path = new PropertyPath("ColorTemperture"),
+                Path = new PropertyPath(nameof(CameraStatus.ColorTemperture)),
                 Mode = BindingMode.OneWay,
             });
 
-            slider.SetBinding(Slider.ValueProperty, new Binding()
+            slider.SetBinding(RangeBase.ValueProperty, new Binding()
             {
                 Source = Status,
-                Path = new PropertyPath("ColorTemperture"),
+                Path = new PropertyPath(nameof(CameraStatus.ColorTemperture)),
                 Mode = BindingMode.TwoWay
             });
 
@@ -471,10 +472,10 @@ namespace Locana.Settings
             var parent = BuildBasicPanel(SystemUtil.GetStringResource("WB_ColorTemperture"));
             (parent.Children[0] as StackPanel).Children.Add(indicator);
             parent.Children.Add(slider);
-            parent.SetBinding(StackPanel.VisibilityProperty, new Binding()
+            parent.SetBinding(UIElement.VisibilityProperty, new Binding()
             {
                 Source = DataSource,
-                Path = new PropertyPath("IsAvailableColorTemperture"),
+                Path = new PropertyPath(nameof(ControlPanelDataSource.IsAvailableColorTemperture)),
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter()
             });

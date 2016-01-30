@@ -51,7 +51,7 @@ namespace Locana.DataModel
         void ShowInvalidData()
         {
             EntryList.Clear();
-            EntryList.Add(CreateEntry("NO DATA"));
+            EntryList.Add(CreateEntry(SystemUtil.GetStringResource("Exif_NoData")));
         }
 
         private void UpdateEntryList(JpegMetaData metadata)
@@ -76,7 +76,7 @@ namespace Locana.DataModel
             if (focalLengthEntry != null)
             {
                 EntryList.Add(CreateEntry(MetaDataValueConverter.MetaDataEntryName(ExifKeys.FocalLength),
-                    GetStringValue(metadata, ExifKeys.FocalLength) + "mm"));
+                    string.Format(SystemUtil.GetStringResource("MilliMeter_NoTrans"), GetStringValue(metadata, ExifKeys.FocalLength))));
             }
 
             foreach (uint key in GeneralMetaDataKeys)
@@ -125,7 +125,7 @@ namespace Locana.DataModel
             if (heightEntry != null && widthEntry != null)
             {
                 EntryList.Add(CreateEntry(SystemUtil.GetStringResource("MetaDataName_ImageSize"),
-                    widthEntry.UIntValues[0] + " x " + heightEntry.UIntValues[0]));
+                    string.Format(SystemUtil.GetStringResource("x_by_x_NoTrans"), widthEntry.UIntValues[0], heightEntry.UIntValues[0])));
             }
 
             var makerEntry = FindFirstEntry(metadata, ExifKeys.CameraMaker);

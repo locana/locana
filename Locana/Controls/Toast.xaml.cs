@@ -71,7 +71,7 @@ namespace Locana.Controls
     public class ToastContent
     {
         public ToastContent() { }
-        public String Text { get; set; }
+        public string Text { get; set; }
         public BitmapImage Icon { get; set; }
         public TimeSpan Duration { get; set; }
     }

@@ -32,7 +32,7 @@ namespace Locana.Playback
             {
                 switch (e.PropertyName)
                 {
-                    case "Status":
+                    case nameof(CameraStatus.Status):
                         var current = (sender as CameraStatus).Status;
                         if (nextState == current)
                         {

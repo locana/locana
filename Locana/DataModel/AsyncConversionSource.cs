@@ -24,7 +24,6 @@ namespace Locana.DataModel
                     else if (t.IsFaulted)
                     {
                         NotifyChangedOnUI(nameof(IsFaulted));
-                        NotifyChangedOnUI("ErrorMessage");
                     }
                     else
                     {
