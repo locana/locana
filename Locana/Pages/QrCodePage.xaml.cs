@@ -51,7 +51,6 @@ namespace Locana.Pages
 
         // Receive notifications about rotation of the UI and apply any necessary rotation to the preview stream
         private readonly DisplayInformation _displayInformation = DisplayInformation.GetForCurrentView();
-        private DisplayOrientations _displayOrientation = DisplayOrientations.Portrait;
 
         // Rotation metadata to apply to the preview stream (MF_MT_VIDEO_ROTATION)
         // Reference: http://msdn.microsoft.com/en-us/library/windows/apps/xaml/hh868174.aspx
@@ -73,9 +72,8 @@ namespace Locana.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            // Populate orientation variables with the current state and register for future changes
-            _displayOrientation = _displayInformation.CurrentOrientation;
-            _displayInformation.OrientationChanged += _displayInformation_OrientationChanged;
+            DisplayInformation.AutoRotationPreferences =
+                AnalyticsInfo.VersionInfo.DeviceFamily == DEVICE_FAMILY_MOBILE ? DisplayOrientations.Portrait : DisplayOrientations.Landscape;
 
             await InitializeCameraAsync();
 
@@ -109,26 +107,19 @@ namespace Locana.Pages
             await SetPreviewRotationAsync();
         }
 
-        private async void _displayInformation_OrientationChanged(DisplayInformation sender, object args)
-        {
-            await SetPreviewRotationAsync();
-        }
-
-        private const string WINDOWS_DESKTOP = "Windows.Desktop";
+        private const string DEVCIE_FAMILY_DESKTOP = "Windows.Desktop";
+        private const string DEVICE_FAMILY_MOBILE = "Windows.Mobile";
 
         private async Task SetPreviewRotationAsync()
         {
-            // Populate orientation variables with the current state
-            _displayOrientation = _displayInformation.CurrentOrientation;
-
             // Calculate which way and how far to rotate the preview
-            int rotationDegrees = ConvertDisplayOrientationToDegrees(_displayOrientation);
+            int rotationDegrees = ConvertDisplayOrientationToDegrees(_displayInformation.CurrentOrientation);
 
             var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
             props.Properties.Add(RotationKey, rotationDegrees);
 
             // On Desktop, this setting may stop some of webcams.
-            if (AnalyticsInfo.VersionInfo.DeviceFamily != WINDOWS_DESKTOP)
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != DEVCIE_FAMILY_DESKTOP)
             {
                 await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
             }
@@ -168,7 +159,7 @@ namespace Locana.Pages
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            _displayInformation.OrientationChanged -= _displayInformation_OrientationChanged;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.None;
 
             CaptureTimer?.Stop();
             FocusTimer?.Stop();
@@ -218,7 +209,6 @@ namespace Locana.Pages
             Debug.WriteLine("MediaCapture_Failed: (0x{0:X}) {1}", errorEventArgs.Code, errorEventArgs.Message);
 
             await CleanupCameraAsync();
-
         }
 
 
