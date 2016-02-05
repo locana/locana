@@ -222,6 +222,7 @@ namespace Locana.Pages
 
             if (_mediaCapture == null)
             {
+
                 // Attempt to get the back camera if one is available, but use any camera device if not
                 var cameraDevice = await FindCameraDeviceByPanelAsync(Windows.Devices.Enumeration.Panel.Back);
 
@@ -252,6 +253,10 @@ namespace Locana.Pages
                 catch (UnauthorizedAccessException)
                 {
                     Debug.WriteLine("The app was denied access to the camera");
+                    _mediaCapture.Dispose();
+                    _mediaCapture = null;
+                    // TODO another toast to request permission?
+                    return;
                 }
 
                 // If initialization succeeded, start the preview
