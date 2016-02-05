@@ -207,7 +207,10 @@ namespace Locana.Pages
             if (err != "")
             {
                 DebugUtil.Log("Failed to read NFC: " + err);
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { PageHelper.ShowErrorToast(err); });
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = err });
+                });
                 return;
             }
 

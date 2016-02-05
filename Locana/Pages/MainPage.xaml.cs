@@ -19,12 +19,14 @@ using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 using Windows.Storage.Streams;
 using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -297,7 +299,22 @@ namespace Locana.Pages
 
         private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
         {
-            PageHelper.ShowToast("picture saved!", file);
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                var bmp = new BitmapImage();
+                using (var stream = await file.GetThumbnailAsync(ThumbnailMode.SingleItem))
+                {
+                    bmp.CreateOptions = BitmapCreateOptions.None;
+                    await bmp.SetSourceAsync(stream);
+                }
+
+                AppShell.Current.Toast.PushToast(new ToastContent
+                {
+                    Text = SystemUtil.GetStringResource("Message_ImageDL_Succeed"),
+                    Icon = bmp,
+                    MaxIconHeight = 64,
+                });
+            });
         }
 
         private TargetDevice target;
@@ -713,7 +730,10 @@ namespace Locana.Pages
 
         private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (CameraStatusUtility.IsContinuousShootingMode(target)) { PageHelper.ShowToast(SystemUtil.GetStringResource("Message_ContinuousShootingGuide")); }
+            if (CameraStatusUtility.IsContinuousShootingMode(target))
+            {
+                AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("Message_ContinuousShootingGuide") });
+            }
             else { ShutterButtonPressed(); }
         }
 
@@ -746,7 +766,7 @@ namespace Locana.Pages
                 catch (RemoteApiException ex)
                 {
                     DebugUtil.Log(ex.StackTrace);
-                    PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
+                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("ErrorMessage_shootingFailure") });
                 }
             }
         }
@@ -763,7 +783,7 @@ namespace Locana.Pages
                 catch (RemoteApiException ex)
                 {
                     DebugUtil.Log(ex.StackTrace);
-                    PageHelper.ShowErrorToast(SystemUtil.GetStringResource("Error_StopContinuousShooting"));
+                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("Error_StopContinuousShooting") });
                 }
             }
         }
@@ -785,7 +805,7 @@ namespace Locana.Pages
                             case SequentialOperation.ShootingResult.StillSucceed:
                                 if (!ApplicationSettings.GetInstance().IsPostviewTransferEnabled)
                                 {
-                                    PageHelper.ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
+                                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("Message_ImageCapture_Succeed") });
                                 }
                                 break;
                             case SequentialOperation.ShootingResult.StartSucceed:
@@ -793,10 +813,10 @@ namespace Locana.Pages
                                 break;
                             case SequentialOperation.ShootingResult.StillFailed:
                             case SequentialOperation.ShootingResult.StartFailed:
-                                PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_shootingFailure"));
+                                AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("ErrorMessage_shootingFailure") });
                                 break;
                             case SequentialOperation.ShootingResult.StopFailed:
-                                PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_fatal"));
+                                AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("ErrorMessage_fatal") });
                                 break;
                             default:
                                 break;
@@ -835,10 +855,10 @@ namespace Locana.Pages
                     switch (result)
                     {
                         case PeriodicalShootingTask.PeriodicalShootingResult.Skipped:
-                            PageHelper.ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_Skipped"));
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("PeriodicalShooting_Skipped") });
                             break;
                         case PeriodicalShootingTask.PeriodicalShootingResult.Succeed:
-                            PageHelper.ShowToast(SystemUtil.GetStringResource("Message_ImageCapture_Succeed"));
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("Message_ImageCapture_Succeed") });
                             break;
                     };
                 });
@@ -850,13 +870,13 @@ namespace Locana.Pages
                     switch (reason)
                     {
                         case PeriodicalShootingTask.StopReason.ShootingFailed:
-                            PageHelper.ShowErrorToast(SystemUtil.GetStringResource("ErrorMessage_Interval"));
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("ErrorMessage_Interval") });
                             break;
                         case PeriodicalShootingTask.StopReason.SkipLimitExceeded:
-                            PageHelper.ShowErrorToast(SystemUtil.GetStringResource("PeriodicalShooting_SkipLimitExceed"));
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("PeriodicalShooting_SkipLimitExceed") });
                             break;
                         case PeriodicalShootingTask.StopReason.RequestedByUser:
-                            PageHelper.ShowToast(SystemUtil.GetStringResource("PeriodicalShooting_StoppedByUser"));
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("PeriodicalShooting_StoppedByUser") });
                             break;
                     };
                 });

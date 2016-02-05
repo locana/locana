@@ -73,6 +73,7 @@ namespace Locana.Controls
         public ToastContent() { }
         public string Text { get; set; }
         public BitmapImage Icon { get; set; }
+        public double MaxIconHeight { get; set; } = double.PositiveInfinity;
         public TimeSpan Duration { get; set; }
     }
 }

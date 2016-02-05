@@ -8,30 +8,27 @@
              d:DesignWidth="480"
              mc:Ignorable="d">
 
-    <Grid Name="LayoutRoot" Background="Transparent">
-
-        <Grid Name="ToastGrid"
-              Background="{ThemeResource SystemControlForegroundAccentBrush}"
-              Opacity="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RenderTransform>
-                <TranslateTransform x:Name="SlideTransform" />
-            </Grid.RenderTransform>
-            <Image Grid.Column="0"
-                   MaxHeight="70"
-                   HorizontalAlignment="Left"
-                   Source="{Binding Icon}"
-                   Stretch="Fill" />
-            <TextBlock Grid.Column="1"
-                       Margin="6"
-                       VerticalAlignment="Center"
-                       FontSize="18"
-                       Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
-                       Text="{Binding Text}"
-                       TextWrapping="WrapWholeWords" />
-        </Grid>
+    <Grid Name="ToastGrid"
+          Background="{ThemeResource SystemControlForegroundAccentBrush}"
+          Opacity="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="SlideTransform" />
+        </Grid.RenderTransform>
+        <Image Grid.Column="0"
+               MaxHeight="{Binding MaxIconHeight}"
+               HorizontalAlignment="Left"
+               Source="{Binding Icon}"
+               Stretch="Fill" />
+        <TextBlock Grid.Column="1"
+                   Margin="6"
+                   VerticalAlignment="Center"
+                   Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                   Style="{StaticResource BaseTextBlockStyle}"
+                   Text="{Binding Text}"
+                   TextWrapping="WrapWholeWords" />
     </Grid>
 </UserControl>

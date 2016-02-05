@@ -586,13 +586,10 @@ Password: {1}</value>
     <value>今後もアップデートを継続するため、開発者への寄付をお願いします。</value>
   </data>
   <data name="Message_ImageCapture_Succeed" xml:space="preserve">
-    <value>写真が撮影されました！</value>
+    <value>写真を撮影しました！</value>
   </data>
   <data name="Message_ImageDL_Succeed" xml:space="preserve">
-    <value>スマートフォンに写真を保存しました！</value>
-  </data>
-  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
-    <value>位置情報を付加してカメラロールに画像を保存しました！</value>
+    <value>写真をダウンロードしました！</value>
   </data>
   <data name="Message_NFC_succeed" xml:space="preserve">
     <value>カメラのWi-Fiパスワードを読み取りしてクリップボードに保存しました。下記SSIDを確認のうえ接続してください。</value>
