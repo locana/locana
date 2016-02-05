@@ -253,8 +253,7 @@ namespace Locana.Pages
                 catch (UnauthorizedAccessException)
                 {
                     Debug.WriteLine("The app was denied access to the camera");
-                    _mediaCapture.Dispose();
-                    _mediaCapture = null;
+                    await CleanupCameraAsync();
                     // TODO another toast to request permission?
                     return;
                 }
