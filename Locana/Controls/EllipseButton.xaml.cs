@@ -18,7 +18,7 @@ namespace Locana.Controls
 
         public BitmapImage Icon { set { this._Icon.Source = value; } }
         public DataTemplate IconTemplate { set { this.IconContent.ContentTemplate = value; } }
-        public Action<object> Tapped { get; set; }
+        public event Action<object> Clicked;
 
         private bool _Enabled = true;
         public bool Enabled
@@ -40,7 +40,7 @@ namespace Locana.Controls
 
         private void LayoutRoot_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (Enabled) { Tapped?.Invoke(this); }
+            if (Enabled) { Clicked?.Invoke(this); }
         }
 
         private void LayoutRoot_PointerEntered(object sender, PointerRoutedEventArgs e)

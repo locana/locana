@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -254,17 +255,29 @@ namespace Locana.Controls
                 if (newX < 0) { newX -= 30; }
                 else if (newX > 0) { newX += 30; }
 
-                AnimationHelper.CreateMoveAndResizeAnimation(new MoveAndResizeAnimation()
+                var story = AnimationHelper.CreateMoveAndResizeAnimation(new MoveAndResizeAnimation()
                 {
                     Target = Buttons.Children[currentIndex] as EllipseButton,
                     Duration = TimeSpan.FromMilliseconds(300),
                     newX = newX,
                     newScaleX = scale,
                     newScaleY = scale,
-                }).Begin();
+                });
+                if (currentIndex == 0)
+                {
+                    story.Completed += Story_Completed;
+                }
+                story.Begin();
 
                 currentIndex++;
             }
+        }
+
+        private void Story_Completed(object sender, object e)
+        {
+            // Refresh button state when animation is completed.
+            (sender as Storyboard).Completed -= Story_Completed;
+            SetModeButtonsEnable(ModeButtonsEnabled);
         }
 
         void UpdateCurrentModeButtonImage<T>(T newIcon)
@@ -343,8 +356,8 @@ namespace Locana.Controls
                     CenterX = BUTTON_SIZE / 2,
                     CenterY = BUTTON_SIZE,
                 },
-                Tapped = ElementTapped,
             };
+            button.Clicked += ElementTapped;
 
             if (typeof(T) == typeof(BitmapImage))
             {
