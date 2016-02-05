@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
@@ -571,6 +572,8 @@ namespace Locana.Pages
 
         private bool IsDecoding = false;
 
+        private ReaderWriterLockSlim rwLock = new ReaderWriterLockSlim();
+
         CanvasBitmap LiveviewImageBitmap;
 
         private JpegPacket PendingPakcet;
@@ -594,7 +597,15 @@ namespace Locana.Pages
 
             if (HistogramCreator != null && ApplicationSettings.GetInstance().IsHistogramDisplayed && !HistogramCreator.IsRunning)
             {
-                HistogramCreator.CreateHistogram(LiveviewImageBitmap);
+                rwLock.EnterReadLock();
+                try
+                {
+                    HistogramCreator.CreateHistogram(LiveviewImageBitmap);
+                }
+                finally
+                {
+                    rwLock.ExitReadLock();
+                }
             }
 
         }
@@ -623,11 +634,20 @@ namespace Locana.Pages
             }
             else
             {
-                var toDelete = LiveviewImageBitmap;
-                trailingTask = () =>
+                rwLock.EnterWriteLock();
+                try
                 {
-                    toDelete.Dispose();
-                };
+                    var toDelete = LiveviewImageBitmap;
+                    LiveviewImageBitmap = null;
+                    trailingTask = () =>
+                    {
+                        toDelete.Dispose();
+                    };
+                }
+                finally
+                {
+                    rwLock.ExitWriteLock();
+                }
             }
 
             using (var stream = new InMemoryRandomAccessStream())
@@ -635,9 +655,20 @@ namespace Locana.Pages
                 await stream.WriteAsync(packet.ImageData.AsBuffer());
                 stream.Seek(0);
 
-                LiveviewImageBitmap = await CanvasBitmap.LoadAsync(LiveviewImageCanvas, stream, (float)dpi);
+                var bmp = await CanvasBitmap.LoadAsync(LiveviewImageCanvas, stream, (float)dpi);
+                var size = bmp.SizeInPixels;
 
-                if (!OriginalLvSize.Equals(LiveviewImageBitmap.SizeInPixels))
+                rwLock.EnterWriteLock();
+                try
+                {
+                    LiveviewImageBitmap = bmp;
+                }
+                finally
+                {
+                    rwLock.ExitWriteLock();
+                }
+
+                if (!OriginalLvSize.Equals(size))
                 {
                     DisposeLiveviewImageBitmap();
                     if (!retry)
@@ -670,8 +701,16 @@ namespace Locana.Pages
 
         void DisposeLiveviewImageBitmap()
         {
-            LiveviewImageBitmap?.Dispose();
-            LiveviewImageBitmap = null;
+            rwLock.EnterWriteLock();
+            try
+            {
+                LiveviewImageBitmap?.Dispose();
+                LiveviewImageBitmap = null;
+            }
+            finally
+            {
+                rwLock.ExitWriteLock();
+            }
         }
 
         void liveview_Closed(object sender, EventArgs e)
@@ -987,9 +1026,17 @@ namespace Locana.Pages
 
         void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            if (LiveviewImageBitmap == null) { return; }
+            rwLock.EnterReadLock();
+            try
+            {
+                if (LiveviewImageBitmap == null) { return; }
 
-            args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
+                args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
+            }
+            finally
+            {
+                rwLock.ExitReadLock();
+            }
             LiveviewFrameCount++;
         }
 
@@ -1002,16 +1049,24 @@ namespace Locana.Pages
         {
             double imageHeight, imageWidth;
 
-            var bitmap = LiveviewImageBitmap;
-            if (bitmap == null)
+            rwLock.EnterReadLock();
+            try
             {
-                // Maybe changing window size
-                return;
+                if (LiveviewImageBitmap == null)
+                {
+                    // Maybe changing window size
+                    return;
+                }
+
+                imageHeight = LiveviewImageBitmap.SizeInPixels.Height * magnification;
+                imageWidth = LiveviewImageBitmap.SizeInPixels.Width * magnification;
+            }
+            finally
+            {
+                rwLock.ExitReadLock();
             }
 
-            imageHeight = LiveviewImageBitmap.SizeInPixels.Height * magnification;
             LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
-            imageWidth = LiveviewImageBitmap.SizeInPixels.Width * magnification;
             LvOffsetH = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
 
             _FocusFrameSurface.Height = imageHeight;
