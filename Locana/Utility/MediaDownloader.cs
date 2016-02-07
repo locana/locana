@@ -28,17 +28,19 @@ namespace Locana.Utility
             get { return instance; }
         }
 
-        public Action<StorageFolder, StorageFile, GeotaggingResult> Fetched;
+        public Action<StorageFolder, StorageFile, GeotaggingResult.Result> Fetched;
 
-        public Action<DownloaderError, GeotaggingResult> Failed;
+        public Action<DownloaderError, GeotaggingResult.Result> Failed;
 
-        protected void OnFetched(StorageFolder folder, StorageFile file, GeotaggingResult geotaggingResult)
+        public Func<Stream, Task<GeotaggingResult>> ModifyMetadata;
+
+        protected void OnFetched(StorageFolder folder, StorageFile file, GeotaggingResult.Result geotaggingResult)
         {
             DebugUtil.Log("PictureSyncManager: OnFetched");
             Fetched?.Invoke(folder, file, geotaggingResult);
         }
 
-        protected void OnFailed(DownloaderError error, GeotaggingResult geotaggingResult)
+        protected void OnFailed(DownloaderError error, GeotaggingResult.Result geotaggingResult)
         {
             DebugUtil.Log("PictureSyncManager: OnFailed" + error);
             Failed?.Invoke(error, geotaggingResult);
@@ -46,20 +48,20 @@ namespace Locana.Utility
 
         public void EnqueueVideo(Uri uri, string nameBase, string extension = null)
         {
-            Enqueue(uri, nameBase, Mediatype.Video, null, extension);
+            Enqueue(uri, nameBase, Mediatype.Video, extension);
         }
 
-        public void EnqueueImage(Uri uri, string nameBase, string extension, Geoposition position = null)
+        public void EnqueueImage(Uri uri, string nameBase, string extension)
         {
-            Enqueue(uri, nameBase, Mediatype.Image, position, extension);
+            Enqueue(uri, nameBase, Mediatype.Image, extension);
         }
 
-        public void EnqueuePostViewImage(Uri uri, Geoposition position = null)
+        public void EnqueuePostViewImage(Uri uri)
         {
-            Enqueue(uri, DIRECTORY_NAME, Mediatype.Image, position, ".jpg");
+            Enqueue(uri, DIRECTORY_NAME, Mediatype.Image, ".jpg");
         }
 
-        private async void Enqueue(Uri uri, string namebase, Mediatype type, Geoposition position, string extension = null)
+        private async void Enqueue(Uri uri, string namebase, Mediatype type, string extension = null)
         {
             DebugUtil.Log("ContentsDownloader: Enqueue " + uri.AbsolutePath);
 
@@ -81,7 +83,6 @@ namespace Locana.Utility
                     NameBase = namebase,
                     Completed = OnFetched,
                     Error = OnFailed,
-                    GeoPosition = position,
                     Mediatype = type,
                     extension = extension
                 };
@@ -121,7 +122,7 @@ namespace Locana.Utility
             DebugUtil.Log("Download picture: " + req.Uri.OriginalString);
             try
             {
-                var geoResult = GeotaggingResult.NotRequested;
+                var geoResult = GeotaggingResult.Result.NotRequested;
 
                 var task = HttpClient.GetAsync(req.Uri, HttpCompletionOption.ResponseContentRead);
 
@@ -138,20 +139,13 @@ namespace Locana.Utility
 
                 var imageStream = (await res.Content.ReadAsInputStreamAsync()).AsStreamForRead();
 
-                if (req.Mediatype == Mediatype.Image && req.GeoPosition != null)
+                if (req.Mediatype == Mediatype.Image)
                 {
-                    try
+                    if (ModifyMetadata != null)
                     {
-                        imageStream = await MetaDataOperator.AddGeopositionAsync(imageStream, req.GeoPosition, false);
-                        geoResult = GeotaggingResult.OK;
-                    }
-                    catch (GpsInformationAlreadyExistsException)
-                    {
-                        geoResult = GeotaggingResult.GeotagAlreadyExists;
-                    }
-                    catch
-                    {
-                        geoResult = GeotaggingResult.UnExpectedError;
+                        var result = await ModifyMetadata(imageStream);
+                        imageStream = result.Image;
+                        geoResult = result.OperationResult;
                     }
                 }
 
@@ -175,18 +169,12 @@ namespace Locana.Utility
                     var folder = await rootFolder.CreateFolderAsync(DIRECTORY_NAME, CreationCollisionOption.OpenIfExists);
                     var filename = string.Format(req.NameBase + "_{0:yyyyMMdd_HHmmss}" + req.extension, DateTime.Now);
                     var file = await folder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
-                    using (var stream = await file.OpenAsync(FileAccessMode.ReadWrite))
+
+                    using (var outStream = await file.OpenStreamForWriteAsync())
                     {
-                        var buffer = new byte[BUFFER_SIZE];
-                        using (var os = stream.GetOutputStreamAt(0))
-                        {
-                            int read = 0;
-                            while ((read = imageStream.Read(buffer, 0, BUFFER_SIZE)) != 0)
-                            {
-                                await os.WriteAsync(buffer.AsBuffer(0, read));
-                            }
-                        }
+                        await imageStream.CopyToAsync(outStream);
                     }
+
                     req.Completed?.Invoke(folder, file, geoResult);
                     return;
                 }
@@ -195,7 +183,7 @@ namespace Locana.Utility
             {
                 DebugUtil.Log(e.Message);
                 DebugUtil.Log(e.StackTrace);
-                req.Error?.Invoke(DownloaderError.Unknown, GeotaggingResult.NotRequested); // TODO
+                req.Error?.Invoke(DownloaderError.Unknown, GeotaggingResult.Result.NotRequested); // TODO
             }
         }
     }
@@ -206,9 +194,8 @@ namespace Locana.Utility
         public string NameBase;
         public Mediatype Mediatype;
         public string extension;
-        public Geoposition GeoPosition;
-        public Action<StorageFolder, StorageFile, GeotaggingResult> Completed;
-        public Action<DownloaderError, GeotaggingResult> Error;
+        public Action<StorageFolder, StorageFile, GeotaggingResult.Result> Completed;
+        public Action<DownloaderError, GeotaggingResult.Result> Error;
     }
 
     public enum Mediatype
@@ -228,11 +215,17 @@ namespace Locana.Utility
         None,
     }
 
-    public enum GeotaggingResult
+    public class GeotaggingResult
     {
-        OK,
-        GeotagAlreadyExists,
-        UnExpectedError,
-        NotRequested,
+        public Stream Image { get; set; } = null;
+        public Result OperationResult { get; set; }
+
+        public enum Result
+        {
+            OK,
+            GeotagAlreadyExists,
+            UnExpectedError,
+            NotRequested,
+        }
     }
 }

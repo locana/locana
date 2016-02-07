@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
 using Windows.Graphics.Imaging;
@@ -29,6 +30,9 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using System.IO;
+using Naotaco.Jpeg.MetaData;
+using Naotaco.Jpeg.MetaData.Misc;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -40,10 +44,34 @@ namespace Locana.Pages
         {
             this.InitializeComponent();
             MediaDownloader.Instance.Fetched += OnFetchdImage;
+            MediaDownloader.Instance.ModifyMetadata = GeotagImage;
 
             InitializeCommandBar();
             InitializeUI();
             InitializeTimer();
+        }
+
+        private async Task<GeotaggingResult> GeotagImage(Stream image)
+        {
+            if (!ApplicationSettings.GetInstance().GeotagEnabled)
+            {
+                return new GeotaggingResult()
+                {
+                    OperationResult = GeotaggingResult.Result.NotRequested,
+                    Image = image,
+                };
+            }
+
+            if (LatestPosition == null)
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    LatestPosition = await geolocator?.GetGeopositionAsync();
+                    DebugUtil.Log(() => { return "Acquired location:" + LatestPosition.Coordinate.Latitude.ToString(); });
+                });
+            }
+
+            return await GeopositionUtil.AddGeotag(image, LatestPosition);
         }
 
         private void InitializeUI()
@@ -298,7 +326,7 @@ namespace Locana.Pages
 
         private HistogramCreator HistogramCreator;
 
-        private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult result)
+        private void OnFetchdImage(StorageFolder folder, StorageFile file, GeotaggingResult.Result result)
         {
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
@@ -309,9 +337,26 @@ namespace Locana.Pages
                     await bmp.SetSourceAsync(stream);
                 }
 
+                var text = "";
+                switch (result)
+                {
+                    case GeotaggingResult.Result.OK:
+                        text = SystemUtil.GetStringResource("Message_ImageDL_Succeed_withGeotag");
+                        break;
+                    case GeotaggingResult.Result.GeotagAlreadyExists:
+                        text = SystemUtil.GetStringResource("ErrorMessage_ImageDL_DuplicatedGeotag");
+                        break;
+                    case GeotaggingResult.Result.NotRequested:
+                        text = SystemUtil.GetStringResource("Message_ImageDL_Succeed");
+                        break;
+                    case GeotaggingResult.Result.UnExpectedError:
+                        text = SystemUtil.GetStringResource("ErrorMessage_ImageDL_Geotagging");
+                        break;
+                }
+
                 AppShell.Current.Toast.PushToast(new ToastContent
                 {
-                    Text = SystemUtil.GetStringResource("Message_ImageDL_Succeed"),
+                    Text = text,
                     Icon = bmp,
                     MaxIconHeight = 64,
                 });
@@ -330,6 +375,11 @@ namespace Locana.Pages
             base.OnNavigatedTo(e);
             var target = e.Parameter as TargetDevice;
             SetupScreen(target);
+
+            if (ApplicationSettings.GetInstance().GeotagEnabled)
+            {
+                InitializeGeolocator();
+            }
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -344,6 +394,29 @@ namespace Locana.Pages
             var task = SequentialOperation.TearDown(target, liveview);
 
             base.OnNavigatingFrom(e);
+        }
+
+        Geolocator geolocator = null;
+        Geoposition LatestPosition = null;
+
+        async void InitializeGeolocator()
+        {
+            var accessStatus = await Geolocator.RequestAccessAsync();
+
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
+                    geolocator = new Geolocator();
+                    geolocator.PositionChanged += Geolocator_PositionChanged;
+                    var pos = await geolocator.GetGeopositionAsync();
+                    LatestPosition = pos;
+                    break;
+            }
+        }
+
+        private void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            LatestPosition = args.Position;
         }
 
         async void SetupScreen(TargetDevice target)
@@ -559,13 +632,13 @@ namespace Locana.Pages
             };
         }
 
-        private static void EnqueueContshootingResult(List<ContShootingResult> ContShootingResult)
+        private void EnqueueContshootingResult(List<ContShootingResult> ContShootingResult)
         {
             if (ApplicationSettings.GetInstance().IsPostviewTransferEnabled)
             {
                 foreach (var result in ContShootingResult)
                 {
-                    MediaDownloader.Instance.EnqueuePostViewImage(new Uri(result.PostviewUrl, UriKind.Absolute), GeopositionManager.INSTANCE.LatestPosition);
+                    MediaDownloader.Instance.EnqueuePostViewImage(new Uri(result.PostviewUrl, UriKind.Absolute));
                 }
             }
         }

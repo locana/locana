@@ -1089,4 +1089,7 @@ Password: {1}</value>
   <data name="QrCodeIncompatible" xml:space="preserve">
     <value>このQRコードはWi-Fiの情報を含んでいません</value>
   </data>
+  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
+    <value>位置情報を付加してカメラロールに画像を保存しました！</value>
+  </data>
 </root>

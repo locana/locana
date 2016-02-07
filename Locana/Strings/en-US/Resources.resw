@@ -1226,4 +1226,7 @@ Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</valu
   <data name="x_by_x_NoTrans" xml:space="preserve">
     <value>{0} x {1}</value>
   </data>
+  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
+    <value>Saved with location info!</value>
+  </data>
 </root>

@@ -326,7 +326,7 @@ namespace Locana.DataModel
                     {
                         try
                         {
-                            MediaDownloader.Instance.EnqueuePostViewImage(new Uri(url, UriKind.Absolute), GeopositionManager.INSTANCE.LatestPosition);
+                            MediaDownloader.Instance.EnqueuePostViewImage(new Uri(url, UriKind.Absolute));
                         }
                         catch (Exception e)
                         {
