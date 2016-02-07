@@ -43,7 +43,6 @@ namespace Locana.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            MediaDownloader.Instance.Fetched += OnFetchdImage;
 
             InitializeCommandBar();
             InitializeUI();
@@ -355,6 +354,8 @@ namespace Locana.Pages
             var target = e.Parameter as TargetDevice;
             SetupScreen(target);
 
+            MediaDownloader.Instance.Fetched += OnFetchdImage;
+
             await SetupGeolocatorManager();
         }
 
@@ -395,6 +396,8 @@ namespace Locana.Pages
             liveview.Closed -= liveview_Closed;
             HistogramCreator.Stop();
             LiveviewFpsTimer.Stop();
+
+            MediaDownloader.Instance.Fetched -= OnFetchdImage;
 
             var task = SequentialOperation.TearDown(target, liveview);
 
