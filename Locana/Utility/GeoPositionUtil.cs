@@ -4,9 +4,6 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.Foundation;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
 
 namespace Locana.Utility
 {

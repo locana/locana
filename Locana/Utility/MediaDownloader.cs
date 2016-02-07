@@ -1,12 +1,8 @@
 ﻿using Locana.DataModel;
-using Naotaco.Jpeg.MetaData;
-using Naotaco.Jpeg.MetaData.Misc;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.Web.Http;
