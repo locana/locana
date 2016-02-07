@@ -1,4 +1,5 @@
-﻿using Locana.Controls;
+﻿using System;
+using Locana.Controls;
 using Locana.DataModel;
 using Locana.Playback;
 using Locana.Utility;
@@ -6,6 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
+using Windows.Devices.Geolocation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -63,9 +65,7 @@ namespace Locana.Pages
                 enabled =>
                 {
                     ApplicationSettings.GetInstance().GeotagEnabled = enabled;
-                    // todo: support geotagging
-                    //if (enabled) { EnableGeolocator(); }
-                    //else { DisableGeolocator(); }
+                    if (enabled) { RequestPermission(); }
                 });
             var geoToggle = new ToggleSetting(geoSetting);
 
@@ -77,6 +77,22 @@ namespace Locana.Pages
             section.Add(geoToggle);
 
             return section;
+        }
+
+        private static async void RequestPermission()
+        {
+            var accessStatus = await Geolocator.RequestAccessAsync();
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
+                    break;
+                case GeolocationAccessStatus.Denied:
+                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationDeclined") });
+                    break;
+                case GeolocationAccessStatus.Unspecified:
+                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationUnspecified") });
+                    break;
+            }
         }
 
         private static SettingSection BuildDisplaySection()

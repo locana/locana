@@ -144,12 +144,12 @@ namespace Locana.CameraControl
             return await OpenLiveviewStream(api, liveview).ConfigureAwait(false);
         }
 
-        public static async Task<bool> TakePicture(DeviceApiHolder api, Geoposition position)
+        public static async Task<bool> TakePicture(DeviceApiHolder api)
         {
-            return await TakePicture(api, position, false).ConfigureAwait(false);
+            return await TakePicture(api, false).ConfigureAwait(false);
         }
 
-        private static async Task<bool> TakePicture(DeviceApiHolder api, Geoposition position, bool awaiting = false)
+        private static async Task<bool> TakePicture(DeviceApiHolder api, bool awaiting = false)
         {
             DebugUtil.Log("Taking picture sequence");
             try
@@ -166,7 +166,7 @@ namespace Locana.CameraControl
                         try
                         {
                             var uri = new Uri(url);
-                            MediaDownloader.Instance.EnqueuePostViewImage(uri, position);
+                            MediaDownloader.Instance.EnqueuePostViewImage(uri);
                         }
                         catch (Exception e)
                         {
@@ -191,7 +191,7 @@ namespace Locana.CameraControl
                 }
             }
             DebugUtil.Log("Take picture timeout: await for completion");
-            return await TakePicture(api, position, true).ConfigureAwait(false);
+            return await TakePicture(api, true).ConfigureAwait(false);
         }
 
         public static async Task StopContinuousShooting(DeviceApiHolder api)
@@ -278,7 +278,7 @@ namespace Locana.CameraControl
                     case ShootModeParam.Still:
                         try
                         {
-                            await TakePicture(target.Api, GeopositionManager.INSTANCE.LatestPosition);
+                            await TakePicture(target.Api);
                             Finished?.Invoke(ShootingResult.StillSucceed);
                         }
                         catch (RemoteApiException e)

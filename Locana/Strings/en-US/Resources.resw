@@ -1226,4 +1226,13 @@ Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</valu
   <data name="x_by_x_NoTrans" xml:space="preserve">
     <value>{0} x {1}</value>
   </data>
+  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
+    <value>Saved with location info!</value>
+  </data>
+  <data name="UsingLocationDeclined" xml:space="preserve">
+    <value>It seems using location is not allowed to Locana. Please turn it on from Settings to use geotagging feature.</value>
+  </data>
+  <data name="UsingLocationUnspecified" xml:space="preserve">
+    <value>Unexpected error to acquire location. Make  sure the setting and try again.</value>
+  </data>
 </root>

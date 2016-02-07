@@ -257,7 +257,7 @@
     <Compile Include="Utility\CancellationTokenSourceExtensions.cs" />
     <Compile Include="Utility\DebugUtil.cs" />
     <Compile Include="Utility\EnumUtil.cs" />
-    <Compile Include="Utility\GeoPositionManager.cs" />
+    <Compile Include="Utility\GeoPositionUtil.cs" />
     <Compile Include="Utility\LiveviewUtil.cs" />
     <Compile Include="Utility\MediaDownloader.cs" />
     <Compile Include="Utility\MetaDataValueConverter.cs" />
