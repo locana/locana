@@ -1,4 +1,5 @@
-﻿using Naotaco.Jpeg.MetaData;
+﻿using Locana.DataModel;
+using Naotaco.Jpeg.MetaData;
 using Naotaco.Jpeg.MetaData.Misc;
 using System;
 using System.Collections.Generic;
@@ -31,8 +32,6 @@ namespace Locana.Utility
         public Action<StorageFolder, StorageFile, GeotaggingResult.Result> Fetched;
 
         public Action<DownloaderError, GeotaggingResult.Result> Failed;
-
-        public Func<Stream, Task<GeotaggingResult>> ModifyMetadata;
 
         protected void OnFetched(StorageFolder folder, StorageFile file, GeotaggingResult.Result geotaggingResult)
         {
@@ -141,11 +140,19 @@ namespace Locana.Utility
 
                 if (req.Mediatype == Mediatype.Image)
                 {
-                    if (ModifyMetadata != null)
+                    if (ApplicationSettings.GetInstance().GeotagEnabled)
                     {
-                        var result = await ModifyMetadata(imageStream);
-                        imageStream = result.Image;
-                        geoResult = result.OperationResult;
+                        var position = await GeolocatorManager.INSTANCE.GetLatestPosition();
+                        if (position == null)
+                        {
+                            geoResult = GeotaggingResult.Result.FailedToAcquireLocation;
+                        }
+                        else
+                        {
+                            var result = await GeopositionUtil.AddGeotag(imageStream, position);
+                            imageStream = result.Image;
+                            geoResult = result.OperationResult;
+                        }
                     }
                 }
 
@@ -226,6 +233,7 @@ namespace Locana.Utility
             GeotagAlreadyExists,
             UnExpectedError,
             NotRequested,
+            FailedToAcquireLocation,
         }
     }
 }

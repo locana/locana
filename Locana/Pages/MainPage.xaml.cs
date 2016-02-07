@@ -44,34 +44,10 @@ namespace Locana.Pages
         {
             this.InitializeComponent();
             MediaDownloader.Instance.Fetched += OnFetchdImage;
-            MediaDownloader.Instance.ModifyMetadata = GeotagImage;
 
             InitializeCommandBar();
             InitializeUI();
             InitializeTimer();
-        }
-
-        private async Task<GeotaggingResult> GeotagImage(Stream image)
-        {
-            if (!ApplicationSettings.GetInstance().GeotagEnabled)
-            {
-                return new GeotaggingResult()
-                {
-                    OperationResult = GeotaggingResult.Result.NotRequested,
-                    Image = image,
-                };
-            }
-
-            if (LatestPosition == null)
-            {
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                {
-                    LatestPosition = await geolocator?.GetGeopositionAsync();
-                    DebugUtil.Log(() => { return "Acquired location:" + LatestPosition.Coordinate.Latitude.ToString(); });
-                });
-            }
-
-            return await GeopositionUtil.AddGeotag(image, LatestPosition);
         }
 
         private void InitializeUI()
@@ -352,6 +328,9 @@ namespace Locana.Pages
                     case GeotaggingResult.Result.UnExpectedError:
                         text = SystemUtil.GetStringResource("ErrorMessage_ImageDL_Geotagging");
                         break;
+                    case GeotaggingResult.Result.FailedToAcquireLocation:
+                        text = SystemUtil.GetStringResource("ErrorMessage_FailedToGetGeoposition");
+                        break;
                 }
 
                 AppShell.Current.Toast.PushToast(new ToastContent
@@ -370,16 +349,42 @@ namespace Locana.Pages
 
         LiveviewScreenViewData ScreenViewData;
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             var target = e.Parameter as TargetDevice;
             SetupScreen(target);
 
-            if (ApplicationSettings.GetInstance().GeotagEnabled)
+            await SetupGeolocatorManager();
+        }
+
+        private async Task SetupGeolocatorManager()
+        {
+            if (!ApplicationSettings.GetInstance().GeotagEnabled) { return; }
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
-                InitializeGeolocator();
-            }
+                if (!GeolocatorManager.INSTANCE.IsRunning)
+                {
+                    var status = await GeolocatorManager.INSTANCE.Start();
+                    switch (status)
+                    {
+                        case GeolocationAccessStatus.Allowed:
+                            break;
+                        case GeolocationAccessStatus.Denied:
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationDeclined") });
+                            break;
+                        case GeolocationAccessStatus.Unspecified:
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationUnspecified") });
+                            break;
+                    }
+                }
+            });
+        }
+
+        private static void TearDownGeolocatorManager()
+        {
+            GeolocatorManager.INSTANCE.Stop();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -394,29 +399,8 @@ namespace Locana.Pages
             var task = SequentialOperation.TearDown(target, liveview);
 
             base.OnNavigatingFrom(e);
-        }
 
-        Geolocator geolocator = null;
-        Geoposition LatestPosition = null;
-
-        async void InitializeGeolocator()
-        {
-            var accessStatus = await Geolocator.RequestAccessAsync();
-
-            switch (accessStatus)
-            {
-                case GeolocationAccessStatus.Allowed:
-                    geolocator = new Geolocator();
-                    geolocator.PositionChanged += Geolocator_PositionChanged;
-                    var pos = await geolocator.GetGeopositionAsync();
-                    LatestPosition = pos;
-                    break;
-            }
-        }
-
-        private void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
-        {
-            LatestPosition = args.Position;
+            TearDownGeolocatorManager();
         }
 
         async void SetupScreen(TargetDevice target)

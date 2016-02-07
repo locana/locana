@@ -82,17 +82,15 @@ namespace Locana.Pages
         private static async void RequestPermission()
         {
             var accessStatus = await Geolocator.RequestAccessAsync();
-
             switch (accessStatus)
             {
                 case GeolocationAccessStatus.Allowed:
-                    // ok.
                     break;
                 case GeolocationAccessStatus.Denied:
-                    // todo: show error message;
+                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationDeclined") });
                     break;
                 case GeolocationAccessStatus.Unspecified:
-                    // todo: show error message;
+                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationUnspecified") });
                     break;
             }
         }
