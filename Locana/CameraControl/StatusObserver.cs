@@ -59,7 +59,7 @@ namespace Locana.CameraControl
             cancel = new CancellationTokenSource();
 
             IsProcessing = true;
-            PollingLoop();
+            StartPollingLoop();
             return true;
         }
 
@@ -205,38 +205,37 @@ namespace Locana.CameraControl
             }
         }
 
-        private async void PollingLoop()
+        private async void StartPollingLoop()
         {
-            if (!IsProcessing)
+            while (IsProcessing)
             {
-                return;
+                try
+                {
+                    var @event = await api.Camera.GetEventAsync(true, version, cancel).ConfigureAwait(false);
+                    await UpdateStatus(@event).ConfigureAwait(false);
+                    failure_count = 0;
+                }
+                catch (RemoteApiException e)
+                {
+                    if (e.code != StatusCode.Timeout)
+                    {
+                        OnError(e.code);
+                        break;
+                    }
+                }
             }
-
-            try
-            {
-                OnSuccess(await api.Camera.GetEventAsync(true, version, cancel).ConfigureAwait(false));
-            }
-            catch (RemoteApiException e)
-            {
-                OnError(e.code);
-            }
-        }
-
-        private async void OnSuccess(Event @event)
-        {
-            failure_count = 0;
-            await UpdateStatus(@event).ConfigureAwait(false);
-            PollingLoop();
         }
 
         private async void OnError(StatusCode code)
         {
             switch (code)
             {
+                /*
                 case StatusCode.Timeout:
                     DebugUtil.Log("GetEvent timeout without any event. Retry for the next event");
                     PollingLoop();
                     return;
+                */
                 case StatusCode.NotAcceptable:
                 case StatusCode.CameraNotReady:
                 case StatusCode.IllegalState:
@@ -246,7 +245,7 @@ namespace Locana.CameraControl
                     {
                         DebugUtil.Log("GetEvent failed - retry " + failure_count + ", status: " + code);
                         await Task.Delay(TimeSpan.FromSeconds(RETRY_INTERVAL_SEC)).ConfigureAwait(false);
-                        PollingLoop();
+                        StartPollingLoop();
                         return;
                     }
                     break;
