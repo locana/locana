@@ -125,7 +125,7 @@
   </data>
   <data name="AddGeotag_guide" xml:space="preserve">
     <value>カメラから取得した最新の写真に位置情報を付加します。
-モバイルネットワークが必要な場合があります。</value>
+スマートフォンの場合、モバイルネットワークが必要な場合があります。</value>
   </data>
   <data name="Aperture" xml:space="preserve">
     <value>絞り</value>
@@ -1093,9 +1093,11 @@ Password: {1}</value>
     <value>位置情報を付加してカメラロールに画像を保存しました！</value>
   </data>
   <data name="UsingLocationDeclined" xml:space="preserve">
-    <value>位置情報の使用が許可されていないようです。ジオタグ機能を使用するためには許可してください。</value>
+    <value>位置情報の使用が許可されていないようです。
+ジオタグ機能を使用するためにはプライバシー設定から位置情報を許可してください。</value>
   </data>
   <data name="UsingLocationUnspecified" xml:space="preserve">
-    <value>予期せぬエラーにより位置情報の取得が失敗しました。設定を見直し、再度試してください。</value>
+    <value>予期せぬエラーにより位置情報の取得に失敗しました。
+設定を見直して再度試してください。</value>
   </data>
 </root>

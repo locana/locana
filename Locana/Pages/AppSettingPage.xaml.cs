@@ -1,13 +1,13 @@
-﻿using System;
-using Locana.Controls;
+﻿using Locana.Controls;
 using Locana.DataModel;
 using Locana.Playback;
 using Locana.Utility;
+using System;
+using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Navigation;
-using Windows.Devices.Geolocation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -56,7 +56,8 @@ namespace Locana.Pages
             var limited = (Application.Current as App).IsFunctionLimited;
 
             var geoGuide = limited ? "TrialMessage" : "AddGeotag_guide";
-            var geoSetting = new AppSettingData<bool>(SystemUtil.GetStringResource("AddGeotag"), SystemUtil.GetStringResource(geoGuide),
+            AppSettingData<bool> geoSetting = null;
+            geoSetting = new AppSettingData<bool>(SystemUtil.GetStringResource("AddGeotag"), SystemUtil.GetStringResource(geoGuide),
                 () =>
                 {
                     if (limited) { return false; }
@@ -65,9 +66,14 @@ namespace Locana.Pages
                 enabled =>
                 {
                     ApplicationSettings.GetInstance().GeotagEnabled = enabled;
-                    if (enabled) { RequestPermission(); }
+                    if (enabled) { RequestPermission(geoSetting); }
                 });
             var geoToggle = new ToggleSetting(geoSetting);
+
+            if (ApplicationSettings.GetInstance().GeotagEnabled)
+            {
+                RequestPermission(geoSetting);
+            }
 
             if (limited)
             {
@@ -79,13 +85,13 @@ namespace Locana.Pages
             return section;
         }
 
-        private static async void RequestPermission()
+        private static async void RequestPermission(AppSettingData<bool> geoSetting)
         {
             var accessStatus = await Geolocator.RequestAccessAsync();
             switch (accessStatus)
             {
                 case GeolocationAccessStatus.Allowed:
-                    break;
+                    return;
                 case GeolocationAccessStatus.Denied:
                     AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationDeclined") });
                     break;
@@ -93,6 +99,8 @@ namespace Locana.Pages
                     AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationUnspecified") });
                     break;
             }
+            ApplicationSettings.GetInstance().GeotagEnabled = false;
+            geoSetting.CurrentSetting = false;
         }
 
         private static SettingSection BuildDisplaySection()
