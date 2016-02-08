@@ -79,11 +79,7 @@ namespace Locana.Pages
 
             if (_mediaCapture == null)
             {
-                AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("LocalCameraUnavailable") });
-                var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                {
-                    AppShell.Current.AppFrame.GoBack();
-                });
+                OnDetectCameraError();
                 return;
             }
 
@@ -91,20 +87,41 @@ namespace Locana.Pages
             CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
             CaptureTimer.Tick += async (sender, ev) =>
             {
-                await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
+                try
+                {
+                    await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
+                }
+                catch (Exception ex) { OnDetectCameraError(ex); }
             };
 
             FocusTimer = new DispatcherTimer();
             FocusTimer.Interval = TimeSpan.FromMilliseconds(2000);
             FocusTimer.Tick += (sender, ev) =>
             {
-                TryToFocus();
+                try
+                {
+                    TryToFocus();
+                }
+                catch (Exception ex) { OnDetectCameraError(ex); }
             };
 
             CaptureTimer.Start();
             FocusTimer.Start();
 
             await SetPreviewRotationAsync();
+        }
+
+        private void OnDetectCameraError(Exception ex = null)
+        {
+            DebugUtil.Log(ex?.StackTrace);
+            var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("LocalCameraUnavailable") });
+                if (AppShell.Current.AppFrame.CanGoBack)
+                {
+                    AppShell.Current.AppFrame.GoBack();
+                }
+            });
         }
 
         private const string DEVCIE_FAMILY_DESKTOP = "Windows.Desktop";
@@ -296,7 +313,11 @@ namespace Locana.Pages
         private async Task StopPreviewAsync()
         {
             _isPreviewing = false;
-            await _mediaCapture?.StopPreviewAsync();
+            try
+            {
+                await _mediaCapture?.StopPreviewAsync();
+            }
+            catch { }
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
