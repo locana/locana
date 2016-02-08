@@ -85,25 +85,11 @@ namespace Locana.Pages
 
             CaptureTimer = new DispatcherTimer();
             CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
-            CaptureTimer.Tick += async (sender, ev) =>
-            {
-                try
-                {
-                    await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
-                }
-                catch (Exception ex) { OnDetectCameraError(ex); }
-            };
+            CaptureTimer.Tick += FrameTick;
 
             FocusTimer = new DispatcherTimer();
             FocusTimer.Interval = TimeSpan.FromMilliseconds(2000);
-            FocusTimer.Tick += (sender, ev) =>
-            {
-                try
-                {
-                    TryToFocus();
-                }
-                catch (Exception ex) { OnDetectCameraError(ex); }
-            };
+            FocusTimer.Tick += FocusTick;
 
             CaptureTimer.Start();
             FocusTimer.Start();
@@ -122,6 +108,24 @@ namespace Locana.Pages
                     AppShell.Current.AppFrame.GoBack();
                 }
             });
+        }
+
+        private async void FrameTick(object sender, object e)
+        {
+            try
+            {
+                await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
+            }
+            catch (Exception ex) { OnDetectCameraError(ex); }
+        }
+
+        private void FocusTick(object sender, object e)
+        {
+            try
+            {
+                TryToFocus();
+            }
+            catch (Exception ex) { OnDetectCameraError(ex); }
         }
 
         private const string DEVCIE_FAMILY_DESKTOP = "Windows.Desktop";
@@ -178,8 +182,16 @@ namespace Locana.Pages
         {
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.None;
 
-            CaptureTimer?.Stop();
-            FocusTimer?.Stop();
+            if (CaptureTimer != null)
+            {
+                CaptureTimer.Tick -= FrameTick;
+                CaptureTimer.Stop();
+            }
+            if (FocusTimer != null)
+            {
+                FocusTimer.Tick -= FocusTick;
+                FocusTimer.Stop();
+            }
             await CleanupCameraAsync();
         }
 
