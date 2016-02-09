@@ -695,9 +695,9 @@ namespace Locana.Pages
                 try
                 {
                     var toDelete = LiveviewImageBitmap;
-                    LiveviewImageBitmap = null;
                     trailingTask = () =>
                     {
+                        // Dispose after it is drawn
                         toDelete.Dispose();
                     };
                 }
