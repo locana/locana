@@ -698,7 +698,7 @@ namespace Locana.Pages
                     trailingTask = () =>
                     {
                         // Dispose after it is drawn
-                        toDelete.Dispose();
+                        toDelete?.Dispose();
                     };
                 }
                 finally
