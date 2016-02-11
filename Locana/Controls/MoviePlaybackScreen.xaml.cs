@@ -298,6 +298,7 @@ namespace Locana.Controls
 
         bool DetailInfoDisplayed = true;
         bool AnimationRunning = false;
+
         private void Screen_Tapped(object sender, TappedRoutedEventArgs e)
         {
             RenewInfoTimer();
