@@ -312,6 +312,19 @@ namespace Locana.Controls
             {
                 StartToShowInfo();
             }
+
+            switch((DataContext as MoviePlaybackData).StreamingStatus)
+            {
+                case StreamStatus.Paused:
+                    Resume();
+                    break;
+                case StreamStatus.Started:
+                    Pause();
+                    break;
+                case StreamStatus.PausedByEdge:
+                    // todo: if seek is supported, seek to the beginning and start.
+                    break;
+            }
         }
 
         async void StartToHideInfo()
