@@ -13,7 +13,7 @@ namespace Locana.DataModel
             set
             {
                 _CurrentPosition = value;
-                NotifyChanged(nameof(CurrentPosition));
+                NotifyChangedOnUI(nameof(CurrentPosition));
             }
         }
 
@@ -24,7 +24,7 @@ namespace Locana.DataModel
             set
             {
                 _Duration = value;
-                NotifyChanged(nameof(Duration));
+                NotifyChangedOnUI(nameof(Duration));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Locana.DataModel
                 if (_FileName != value)
                 {
                     _FileName = value;
-                    NotifyChanged(nameof(FileName));
+                    NotifyChangedOnUI(nameof(FileName));
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace Locana.DataModel
                 if (_SeekAvailable != value)
                 {
                     _SeekAvailable = value;
-                    NotifyChanged(nameof(SeekAvailable));
+                    NotifyChangedOnUI(nameof(SeekAvailable));
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Locana.DataModel
                 if (_StreamingStatus != value)
                 {
                     _StreamingStatus = value;
-                    NotifyChanged(nameof(StreamingStatus));
+                    NotifyChangedOnUI(nameof(StreamingStatus));
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace Locana.DataModel
                 if (_StreamingStatusTransitionFactor != value)
                 {
                     _StreamingStatusTransitionFactor = value;
-                    NotifyChanged(nameof(StreamingStatusTransitionFactor));
+                    NotifyChangedOnUI(nameof(StreamingStatusTransitionFactor));
                 }
             }
         }

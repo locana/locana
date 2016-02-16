@@ -27,6 +27,7 @@ namespace Locana.Playback.Operator
                 ContentSortOrder = Album.SortOrder.NewOneFirst,
             };
             MovieScreen = movieScreen;
+            MovieScreen.MovieType = MovieFileType.LocalMovie;
             MovieScreen.LocalMediaFailed += MovieScreen_LocalMediaFailed;
         }
 

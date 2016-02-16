@@ -35,7 +35,7 @@ namespace Locana.CameraControl
             StreamProcessor.Closed += StreamProcessor_Closed;
         }
 
-        public async Task<bool> Start(AvContentApiClient api, PlaybackContent content, string name)
+        public async Task<bool> SetContentAndStart(AvContentApiClient api, PlaybackContent content, string name)
         {
             if (IsProcessing)
             {
@@ -68,6 +68,34 @@ namespace Locana.CameraControl
                 AvContent = null;
                 return false;
             }
+        }
+
+        public async Task<bool> Start(AvContentApiClient api)
+        {
+            try
+            {
+                await api.StartStreamingAsync().ConfigureAwait(false);
+            }
+            catch (RemoteApiException e)
+            {
+                DebugUtil.Log(() => { return e.StackTrace; });
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> Pause(AvContentApiClient api)
+        {
+            try
+            {
+                await api.PauseStreamingAsync().ConfigureAwait(false);
+            }
+            catch (RemoteApiException e)
+            {
+                DebugUtil.Log(() => { return e.StackTrace; });
+                return false;
+            }
+            return true;
         }
 
         public async void Finish()
@@ -142,7 +170,7 @@ namespace Locana.CameraControl
 
         async void StreamProcessor_PlaybackInfoRetrieved(object sender, PlaybackInfoEventArgs e)
         {
-            // DebugUtil.Log("playback info: " + MoviePlaybackData.FileName + " " + e.Packet.Duration.TotalSeconds);
+            // DebugUtil.Log("playback info: " + MoviePlaybackData.FileName + " " + e.Packet.CurrentPosition.TotalMilliseconds);
             await SystemUtil.GetCurrentDispatcher()?.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MoviePlaybackData.CurrentPosition = e.Packet.CurrentPosition;

@@ -23,12 +23,28 @@ namespace Locana.Playback.Operator
             TargetDevice = device;
             TitleText = TargetDevice.FriendlyName;
             MovieScreen = movieScreen;
+            MovieScreen.OnStreamingOperationRequested += MovieScreen_OnStreamingOperationRequested;
+            movieScreen.MovieType = MovieFileType.SimpleStreamingMovie;
             ContentsCollection = new AlbumGroupCollection();
 
             MovieStreamHelper.INSTANCE.MoviePlaybackData.SeekAvailable = TargetDevice.Api.Capability.IsSupported("seekStreamingPosition");
 
             MovieStreamHelper.INSTANCE.StreamClosed += StreamHelper_StreamClosed;
             MovieStreamHelper.INSTANCE.StatusChanged += StreamHelper_StatusChanged;
+        }
+
+        private async void MovieScreen_OnStreamingOperationRequested(object sender, PlaybackRequestArgs e)
+        {
+            switch (e.Request)
+            {
+                case PlaybackRequest.Start:
+                    await MovieStreamHelper.INSTANCE.Start(TargetDevice.Api.AvContent);
+                    break;
+                case PlaybackRequest.Pause:
+                    await MovieStreamHelper.INSTANCE.Pause(TargetDevice.Api.AvContent);
+                    break;
+            }
+
         }
 
         private void StreamHelper_StatusChanged(object sender, StreamingStatusEventArgs e)
@@ -172,6 +188,8 @@ namespace Locana.Playback.Operator
                 MovieStreamHelper.INSTANCE.Finish();
             }
 
+            MovieScreen.DataContext = MovieStreamHelper.INSTANCE.MoviePlaybackData;
+
             if (TargetDevice.Api.AvContent == null)
             {
                 OnErrorMessage("Viewer_NoAvContentApi");
@@ -185,10 +203,10 @@ namespace Locana.Playback.Operator
                 OnErrorMessage("Viewer_UnplayableContent");
                 throw new IOException();
             }
-            var started = await MovieStreamHelper.INSTANCE.Start(TargetDevice.Api.AvContent, new PlaybackContent
+            var started = await MovieStreamHelper.INSTANCE.SetContentAndStart(TargetDevice.Api.AvContent, new PlaybackContent
             {
                 Uri = (item as RemoteApiContentInfo).Uri,
-                RemotePlayType = RemotePlayMode.SimpleStreaming
+                RemotePlayType = RemotePlayMode.SimpleStreaming,
             }, content.Source.Name);
             if (!started)
             {
