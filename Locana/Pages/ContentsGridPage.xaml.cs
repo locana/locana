@@ -417,8 +417,17 @@ namespace Locana.Pages
             });
         }
 
+        private bool reloadLater = false;
+
         private void Operator_ErrorMessageRaised(Func<string> obj)
         {
+            if (InnerState == ViewerState.MoviePlayback)
+            {
+                // Playing movie streaming interrupts loading.
+                // Suppress error toast here and retry loading later.
+                reloadLater = true;
+                return;
+            }
             ShowToast(obj);
         }
 
@@ -533,6 +542,11 @@ namespace Locana.Pages
         {
             InnerState = state;
             UpdateAppBar();
+
+            if (reloadLater && state == ViewerState.Single)
+            {
+                LoadContents();
+            }
         }
 
         private void UpdateAppBar()
@@ -599,6 +613,7 @@ namespace Locana.Pages
 
         private async void LoadContents()
         {
+            reloadLater = false;
             ChangeProgressText(SystemUtil.GetStringResource("Progress_LoadingLocalContents"));
 
             await Operator.LoadContents();

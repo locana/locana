@@ -30,6 +30,37 @@ namespace Locana.DataModel
             IsPlayable = false;
         }
 
+        public override bool Equals(object obj)
+        {
+            var thumb = obj as RemainingContentsHolder;
+            return Equals(thumb);
+        }
+
+        public bool Equals(RemainingContentsHolder thumb)
+        {
+            if (thumb == null)
+            {
+                return false;
+            }
+
+            if (AlbumGroup != null)
+            {
+                return AlbumGroup.Title == thumb?.AlbumGroup?.Title && AlbumGroup.Uri == thumb?.AlbumGroup?.Uri;
+            }
+
+            if (CdsContainerId != null)
+            {
+                return CdsContainerId == thumb.CdsContainerId && GroupTitle == thumb.GroupTitle;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Source.GetHashCode();
+        }
+
         public int StartsFrom { private set; get; }
         public int RemainingCount { private set; get; }
         public DateInfo AlbumGroup { private set; get; }
@@ -85,6 +116,32 @@ namespace Locana.DataModel
             DeviceUuid = "localhost";
             IsRecent = false;
             IsLocal = true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var thumb = obj as Thumbnail;
+            return Equals(thumb);
+        }
+
+        public bool Equals(Thumbnail thumb)
+        {
+            if (thumb == null)
+            {
+                return false;
+            }
+
+            if (CacheFile != null && CacheFile.Equals(thumb.CacheFile))
+            {
+                return true;
+            }
+
+            return DeviceUuid == thumb.DeviceUuid && Source.Equals(thumb.Source);
+        }
+
+        public override int GetHashCode()
+        {
+            return Source.GetHashCode();
         }
 
         public bool IsLocal { private set; get; }
