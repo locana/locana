@@ -11,6 +11,16 @@
       "url": "https://zxingnet.codeplex.com/SourceControl/latest#trunk/COPYING"
     },
     {
+      "name": "Win2D",
+      "license": "The MIT License",
+      "url": "https://github.com/Microsoft/Win2D/blob/master/LICENSE.txt"
+    },
+    {
+      "name": "Application Insights",
+      "license": "The MIT License",
+      "url": "https://github.com/Microsoft/ApplicationInsights-Home/blob/master/LICENSE"
+    },
+    {
       "name": "kz-ssdp-discovery",
       "license": "The MIT License",
       "url": "https://github.com/kazyx/kz-ssdp-discovery/blob/master/LICENSE"
