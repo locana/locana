@@ -305,6 +305,7 @@ namespace Locana.Pages
 
             Operator.SingleContentLoaded += Operator_SingleContentLoaded;
             Operator.ChunkContentsLoaded += Operator_ChunkContentsLoaded;
+            Operator.LoadCancelled += Operator_LoadCancelled;
             Operator.ErrorMessageRaised += Operator_ErrorMessageRaised;
             Operator.MovieStreamError += Operator_MovieStreamError;
             Operator.Canceller = new CancellationTokenSource();
@@ -431,6 +432,11 @@ namespace Locana.Pages
             ShowToast(obj);
         }
 
+        private void Operator_LoadCancelled(object sender, EventArgs e)
+        {
+            reloadLater = true;
+        }
+
         private async void Operator_ChunkContentsLoaded(object sender, ContentsLoadedEventArgs e)
         {
             if (InnerState == ViewerState.OutOfPage) return;
@@ -520,6 +526,7 @@ namespace Locana.Pages
             {
                 Operator.SingleContentLoaded -= Operator_SingleContentLoaded;
                 Operator.ChunkContentsLoaded -= Operator_ChunkContentsLoaded;
+                Operator.LoadCancelled -= Operator_LoadCancelled;
                 Operator.ErrorMessageRaised -= Operator_ErrorMessageRaised;
                 Operator.MovieStreamError -= Operator_MovieStreamError;
                 Operator.Canceller.Cancel();
@@ -845,6 +852,8 @@ namespace Locana.Pages
             {
                 MoviePlayer.Visibility = Visibility.Visible;
                 UpdateAppBarColor();
+                Operator.Canceller?.Cancel();
+                Operator.Canceller = new CancellationTokenSource();
                 await Operator.PlaybackMovie(content);
             }
             catch (Exception e)

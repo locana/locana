@@ -130,6 +130,8 @@ namespace Locana.Playback.Operator
         {
             var loader = new RemoteApiContentsLoader(TargetDevice);
             await TargetDevice.Observer.StartAsync();
+            loader.PartLoaded += RemoteContentsLoader_PartLoaded;
+            loader.Cancelled += RemoteContentsLoader_Cancelled;
             try
             {
                 OnProgressMessage("Progress_ChangingCameraState");
@@ -150,7 +152,6 @@ namespace Locana.Playback.Operator
                 DebugUtil.Log("ModeTransition successfully finished");
 
                 OnProgressMessage("Progress_FetchingContents");
-                loader.PartLoaded += RemoteContentsLoader_PartLoaded;
                 await loader.Load(ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
                 DebugUtil.Log("RemoteApiContentsLoader completed");
             }
@@ -172,8 +173,14 @@ namespace Locana.Playback.Operator
             }
             finally
             {
+                loader.Cancelled -= RemoteContentsLoader_Cancelled;
                 loader.PartLoaded -= RemoteContentsLoader_PartLoaded;
             }
+        }
+
+        private void RemoteContentsLoader_Cancelled(object sender, EventArgs e)
+        {
+            OnLoadCancelled();
         }
 
         private void RemoteContentsLoader_PartLoaded(object sender, ContentsLoadedEventArgs e)

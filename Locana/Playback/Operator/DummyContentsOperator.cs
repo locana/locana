@@ -45,14 +45,21 @@ namespace Locana.Playback.Operator
         {
             var loader = new DummyContentsLoader();
             loader.PartLoaded += RemoteContentsLoader_PartLoaded;
+            loader.Cancelled += RemoteContentsLoader_Cancelled;
             try
             {
                 await loader.Load(ContentsSet.Images, Canceller).ConfigureAwait(false);
             }
             finally
             {
+                loader.Cancelled -= RemoteContentsLoader_Cancelled;
                 loader.PartLoaded -= RemoteContentsLoader_PartLoaded;
             }
+        }
+
+        private void RemoteContentsLoader_Cancelled(object sender, EventArgs e)
+        {
+            OnLoadCancelled();
         }
 
         public override async Task LoadRemainingContents(RemainingContentsHolder holder)

@@ -90,6 +90,7 @@ namespace Locana.Playback.Operator
         {
             var loader = new DlnaContentsLoader(UpnpDevice);
             loader.PartLoaded += RemoteContentsLoader_PartLoaded;
+            loader.Cancelled += RemoteContentsLoader_Cancelled;
             try
             {
                 await loader.Load(ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
@@ -101,8 +102,14 @@ namespace Locana.Playback.Operator
             }
             finally
             {
+                loader.Cancelled -= RemoteContentsLoader_Cancelled;
                 loader.PartLoaded -= RemoteContentsLoader_PartLoaded;
             }
+        }
+
+        private void RemoteContentsLoader_Cancelled(object sender, EventArgs e)
+        {
+            OnLoadCancelled();
         }
 
         private void RemoteContentsLoader_PartLoaded(object sender, ContentsLoadedEventArgs e)
