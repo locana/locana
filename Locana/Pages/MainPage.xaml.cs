@@ -68,6 +68,16 @@ namespace Locana.Pages
                 .DeviceDependent(AppBarItem.IsoSlider)
                 .DeviceDependent(AppBarItem.EvSlider)
                 .DeviceDependent(AppBarItem.ProgramShiftSlider);
+
+            LiveviewGrid.SizeChanged += LiveviewGrid_SizeChanged;
+        }
+
+        bool sizeChanged = false;
+
+        private void LiveviewGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            sizeChanged = true;
+            DisposeLiveviewImageBitmap();
         }
 
         DisplayRequest displayRequest = new DisplayRequest();
@@ -673,7 +683,7 @@ namespace Locana.Pages
         {
             Action trailingTask = null;
 
-            if (LiveviewImageBitmap == null)
+            if (LiveviewImageBitmap == null || sizeChanged)
             {
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
@@ -681,11 +691,13 @@ namespace Locana.Pages
                     OriginalLvSize = new BitmapSize { Width = (uint)writeable.PixelWidth, Height = (uint)writeable.PixelHeight };
 
                     var magnification = CalcLiveviewMagnification();
+                    DebugUtil.Log(() => { return "Decode: mag: " + magnification; });
                     dpi = DEFAULT_DPI / magnification;
 
                     trailingTask = () =>
                     {
                         RefreshOverlayControlParams(magnification);
+                        sizeChanged = false;
                     };
                 });
             }
