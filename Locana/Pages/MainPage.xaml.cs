@@ -77,6 +77,7 @@ namespace Locana.Pages
         private void LiveviewGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             sizeChanged = true;
+            DisposeLiveviewImageBitmap();
         }
 
         DisplayRequest displayRequest = new DisplayRequest();
