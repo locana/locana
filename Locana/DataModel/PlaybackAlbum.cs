@@ -76,6 +76,11 @@ namespace Locana.DataModel
         {
             lock (this)
             {
+                if (Contains(content))
+                {
+                    return; // Avoid duplication
+                }
+
                 var previous = Count;
                 int inserted = 0;
                 switch (Order)
