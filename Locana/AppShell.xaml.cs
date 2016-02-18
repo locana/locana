@@ -1,6 +1,7 @@
 ﻿using Locana.Controls;
 using Locana.Pages;
 using Locana.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation;
@@ -110,6 +111,8 @@ namespace Locana
 
         public Frame AppFrame { get { return this.frame; } }
 
+        public EventHandler<BackRequestedEventArgs> BackRequested;
+
         /// <summary>
         /// Default keyboard focus movement for any unhandled keyboarding
         /// </summary>
@@ -163,6 +166,8 @@ namespace Locana
 
         private void SystemNavigationManager_BackRequested(object sender, BackRequestedEventArgs e)
         {
+            BackRequested?.Invoke(sender, e);
+
             if (!e.Handled && this.AppFrame.CanGoBack)
             {
                 e.Handled = true;

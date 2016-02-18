@@ -314,7 +314,7 @@ namespace Locana.Pages
             PhotoScreen.DataContext = PhotoData;
             SetStillDetailVisibility(false);
 
-            SystemNavigationManager.GetForCurrentView().BackRequested += BackRequested;
+            AppShell.Current.BackRequested += BackRequested;
 
             UpdateTopBar();
 
@@ -510,7 +510,7 @@ namespace Locana.Pages
 
             ThumbnailCacheLoader.INSTANCE.CleanupRemainingTasks();
 
-            SystemNavigationManager.GetForCurrentView().BackRequested -= BackRequested;
+            AppShell.Current.BackRequested -= BackRequested;
 
             FinishMoviePlayback();
             ReleaseDetail();
