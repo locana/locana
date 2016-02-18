@@ -90,9 +90,25 @@ namespace Locana.Utility
 
         private readonly Dictionary<AppBarItem, RoutedEventHandler> EventHolder = new Dictionary<AppBarItem, RoutedEventHandler>();
 
+        private readonly List<AppBarItem> HeartBeater = new List<AppBarItem>();
+
+        private readonly List<AppBarItem> Accented = new List<AppBarItem>();
+
         public CommandBarManager SetEvent(AppBarItem item, RoutedEventHandler handler)
         {
             EventHolder.Add(item, handler);
+            return this;
+        }
+
+        public CommandBarManager SetHeartBeat(AppBarItem item)
+        {
+            HeartBeater.Add(item);
+            return this;
+        }
+
+        public CommandBarManager SetAccentColor(AppBarItem item)
+        {
+            Accented.Add(item);
             return this;
         }
 
@@ -167,6 +183,15 @@ namespace Locana.Utility
                     button.Click += EventHolder[item];
                 }
                 bar.PrimaryCommands.Add(button);
+
+                if (HeartBeater.Contains(item))
+                {
+                    ApplyHeartBeatAnimation(button);
+                }
+                if (Accented.Contains(item))
+                {
+                    button.Foreground = ResourceManager.SystemControlForegroundAccentBrush;
+                }
             }
             foreach (AppBarItem item in EnabledItems[AppBarItemType.Hidden])
             {
@@ -274,6 +299,14 @@ namespace Locana.Utility
         public bool IsEnabled(AppBarItemType type, AppBarItem item)
         {
             return EnabledItems[type].Contains(item);
+        }
+
+        private void ApplyHeartBeatAnimation(AppBarButton button)
+        {
+            AnimationHelper.CreateHeartBeatAnimation(new AnimationRequest
+            {
+                Target = button.Icon, // only icons are suppoted for now.
+            }, TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(500)).Begin();
         }
     }
 

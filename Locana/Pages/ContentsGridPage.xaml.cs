@@ -64,46 +64,46 @@ namespace Locana.Pages
                         DebugUtil.Log("Nothing to do for current InnerState: " + InnerState);
                         break;
                 }
-            });
-            CommandBarManager.SetEvent(AppBarItem.DeleteMultiple, (s, args) =>
+            })
+            .SetEvent(AppBarItem.DeleteMultiple, (s, args) =>
             {
                 UpdateSelectionMode(SelectivityFactor.Delete);
                 UpdateInnerState(ViewerState.Multi);
-            });
-            CommandBarManager.SetEvent(AppBarItem.DownloadMultiple, (s, args) =>
+            })
+            .SetEvent(AppBarItem.DownloadMultiple, (s, args) =>
             {
                 UpdateSelectionMode(SelectivityFactor.Download);
                 UpdateInnerState(ViewerState.Multi);
-            });
-            CommandBarManager.SetEvent(AppBarItem.RotateRight, (s, args) =>
+            })
+            .SetEvent(AppBarItem.RotateRight, (s, args) =>
             {
                 PhotoScreen.RotateImage(Rotation.Right);
-            });
-            CommandBarManager.SetEvent(AppBarItem.RotateLeft, (s, args) =>
+            })
+            .SetEvent(AppBarItem.RotateLeft, (s, args) =>
             {
                 PhotoScreen.RotateImage(Rotation.Left);
-            });
-            CommandBarManager.SetEvent(AppBarItem.ShowDetailInfo, async (s, args) =>
+            })
+            .SetEvent(AppBarItem.ShowDetailInfo, async (s, args) =>
             {
                 PhotoScreen.DetailInfoDisplayed = true;
                 await Task.Delay(500);
                 UpdateAppBar();
-            });
-            CommandBarManager.SetEvent(AppBarItem.HideDetailInfo, async (s, args) =>
+            })
+            .SetEvent(AppBarItem.HideDetailInfo, async (s, args) =>
             {
                 PhotoScreen.DetailInfoDisplayed = false;
                 await Task.Delay(500);
                 UpdateAppBar();
-            });
-            CommandBarManager.SetEvent(AppBarItem.Resume, (s, args) =>
+            })
+            .SetEvent(AppBarItem.Resume, (s, args) =>
             {
                 MoviePlayer.Resume();
-            });
-            CommandBarManager.SetEvent(AppBarItem.Pause, (s, args) =>
+            })
+            .SetEvent(AppBarItem.Pause, (s, args) =>
             {
                 MoviePlayer.Pause();
-            });
-            CommandBarManager.SetEvent(AppBarItem.Close, (s, args) =>
+            })
+            .SetEvent(AppBarItem.Close, (s, args) =>
             {
                 switch (InnerState)
                 {
@@ -115,13 +115,13 @@ namespace Locana.Pages
                         break;
                 }
                 UpdateInnerState(ViewerState.Single);
-            });
-            CommandBarManager.SetEvent(AppBarItem.LocalStorage, (s, args) =>
+            })
+            .SetEvent(AppBarItem.LocalStorage, (s, args) =>
             {
                 var tuple = Tuple.Create<string, string>(nameof(StorageType.Local), null);
                 Frame.Navigate(typeof(ContentsGridPage), tuple);
-            });
-            CommandBarManager.SetEvent(AppBarItem.RemoteStorage, (s, args) =>
+            })
+            .SetEvent(AppBarItem.RemoteStorage, (s, args) =>
             {
                 var menuFlyout = CreateRemoteDrivesMenuFlyout();
 
@@ -138,8 +138,10 @@ namespace Locana.Pages
                         FlyoutBase.ShowAttachedFlyout(s as FrameworkElement);
                         break;
                 }
-            });
-            CommandBarManager.SetEvent(AppBarItem.CancelSelection, (s, args) =>
+            })
+            .SetAccentColor(AppBarItem.RemoteStorage)
+            .SetHeartBeat(AppBarItem.RemoteStorage)
+            .SetEvent(AppBarItem.CancelSelection, (s, args) =>
             {
                 UpdateInnerState(ViewerState.Single);
             });

@@ -323,6 +323,27 @@ namespace Locana.Utility
             return sb;
         }
 
+        public static Storyboard CreateHeartBeatAnimation(AnimationRequest request, TimeSpan interval, TimeSpan duration)
+        {
+            var transform = new CompositeTransform();
+            request.Target.RenderTransform = transform;
+            request.Target.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            var sb = new Storyboard() { Duration = interval, RepeatBehavior = RepeatBehavior.Forever };
+
+            var sday = new DoubleAnimation { Duration = duration, AutoReverse = true, EasingFunction = new BounceEase(), From = 1.0, To = 1.5 };
+            Storyboard.SetTarget(sday, transform);
+            Storyboard.SetTargetProperty(sday, nameof(CompositeTransform.ScaleY));
+            sb.Children.Add(sday);
+
+            var sdax = new DoubleAnimation { Duration = duration, AutoReverse = true, EasingFunction = new BounceEase(), From = 1.0, To = 1.5 };
+            Storyboard.SetTarget(sdax, transform);
+            Storyboard.SetTargetProperty(sdax, nameof(CompositeTransform.ScaleX));
+            sb.Children.Add(sdax);
+
+            return sb;
+        }
+
     }
 
     public class AnimationRequest
