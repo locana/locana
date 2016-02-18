@@ -4,6 +4,7 @@ using Locana.Playback;
 using Locana.Utility;
 using System;
 using Windows.Devices.Geolocation;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -93,10 +94,20 @@ namespace Locana.Pages
                 case GeolocationAccessStatus.Allowed:
                     return;
                 case GeolocationAccessStatus.Denied:
-                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationDeclined") });
+                    AppShell.Current.Toast.PushToast(new ToastContent
+                    {
+                        Text = SystemUtil.GetStringResource("UsingLocationDeclined"),
+                        Duration = TimeSpan.FromSeconds(5),
+                        OnTapped = async () => { await Launcher.LaunchUriAsync(new Uri("ms-settings-location:")); }
+                    });
                     break;
                 case GeolocationAccessStatus.Unspecified:
-                    AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("UsingLocationUnspecified") });
+                    AppShell.Current.Toast.PushToast(new ToastContent
+                    {
+                        Text = SystemUtil.GetStringResource("UsingLocationUnspecified"),
+                        Duration = TimeSpan.FromSeconds(5),
+                        OnTapped = async () => { await Launcher.LaunchUriAsync(new Uri("ms-settings-location:")); }
+                    });
                     break;
             }
             ApplicationSettings.GetInstance().GeotagEnabled = false;

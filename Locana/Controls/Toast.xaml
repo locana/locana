@@ -10,7 +10,8 @@
 
     <Grid Name="ToastGrid"
           Background="{ThemeResource SystemControlForegroundAccentBrush}"
-          Opacity="0">
+          Opacity="0"
+          Tapped="ToastGrid_Tapped">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />

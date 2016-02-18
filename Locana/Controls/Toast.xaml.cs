@@ -29,9 +29,11 @@ namespace Locana.Controls
 
         async void DequeueToast()
         {
-            if (Contents.Count == 0) { return; }
-
-            var content = Contents.ElementAt(0);
+            var content = Contents.FirstOrDefault();
+            if (content == null)
+            {
+                return;
+            }
 
             ToastGrid.DataContext = content;
             DebugUtil.Log("Dequeue toast:" + content.Text);
@@ -66,6 +68,12 @@ namespace Locana.Controls
                 RequestFadeType = FadeType.FadeOut
             }).Begin();
         }
+
+        private void ToastGrid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            DebugUtil.Log("Toast tapped");
+            Contents.FirstOrDefault()?.OnTapped?.Invoke();
+        }
     }
 
     public class ToastContent
@@ -75,5 +83,6 @@ namespace Locana.Controls
         public BitmapImage Icon { get; set; }
         public double MaxIconHeight { get; set; } = double.PositiveInfinity;
         public TimeSpan Duration { get; set; }
+        public Action OnTapped { get; set; }
     }
 }
