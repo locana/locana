@@ -276,6 +276,7 @@
 
         <xc:ContentDialog x:Name="DeleteDialog"
                           Grid.Row="1"
+                          MinHeight="0"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           PrimaryButtonText="{Binding [AppBar_Delete],
