@@ -58,8 +58,8 @@
                                Margin="8,0"
                                HorizontalAlignment="Stretch"
                                VerticalAlignment="Center"
-                               FontSize="26"
                                Foreground="{StaticResource ApplicationForegroundThemeBrush}"
+                               Style="{StaticResource HeaderTextStyle}"
                                Text="{Binding FileName}"
                                TextAlignment="Left"
                                TextTrimming="CharacterEllipsis" />
