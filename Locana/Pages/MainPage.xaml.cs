@@ -399,8 +399,8 @@ namespace Locana.Pages
         {
             if (target != null)
             {
-                target.Status.PropertyChanged += Status_PropertyChanged;
-                target.Api.AvailiableApisUpdated += Api_AvailiableApisUpdated;
+                target.Status.PropertyChanged -= Status_PropertyChanged;
+                target.Api.AvailiableApisUpdated -= Api_AvailiableApisUpdated;
             }
 
             liveview.JpegRetrieved -= liveview_JpegRetrieved;
