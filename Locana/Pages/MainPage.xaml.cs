@@ -549,9 +549,13 @@ namespace Locana.Pages
                         // When recording is stopped, clear recording time.
                         status.RecordingTimeSec = 0;
                     }
-                    UpdateShutterButton(status);
-                    ControlPanel.SetChildrenControlHitTest(!status.IsRecording());
-                    ControlPanel.SetChildrenControlTabStop(!status.IsRecording());
+                    if (status.IsRecording() ^ recording)
+                    {
+                        recording = !recording;
+                        UpdateShutterButton(status);
+                        ControlPanel.SetChildrenControlHitTest(!status.IsRecording());
+                        ControlPanel.SetChildrenControlTabStop(!status.IsRecording());
+                    }
                     break;
                 case nameof(CameraStatus.ShootMode):
                     UpdateShutterButton(status);
@@ -567,13 +571,14 @@ namespace Locana.Pages
             }
         }
 
-        private bool showShootModeSelector;
+        private bool recording;
+        private bool setShootModeEnabled;
 
         private void Api_AvailiableApisUpdated(object sender, AvailableApiEventArgs e)
         {
-            if (e.AvailableApis.Contains("setShootMode") ^ showShootModeSelector)
+            if (e.AvailableApis.Contains("setShootMode") ^ setShootModeEnabled)
             {
-                showShootModeSelector = !showShootModeSelector;
+                setShootModeEnabled = !setShootModeEnabled;
                 var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     UpdateShutterButton(target.Status);
