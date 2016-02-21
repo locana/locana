@@ -397,6 +397,11 @@ namespace Locana.Pages
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            if (target != null)
+            {
+                target.Status.PropertyChanged += Status_PropertyChanged;
+                target.Api.AvailiableApisUpdated += Api_AvailiableApisUpdated;
+            }
 
             liveview.JpegRetrieved -= liveview_JpegRetrieved;
             liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
@@ -408,9 +413,11 @@ namespace Locana.Pages
 
             var task = SequentialOperation.TearDown(target, liveview);
 
+            TearDownCurrentTarget();
+            TearDownGeolocatorManager();
+
             base.OnNavigatingFrom(e);
 
-            TearDownGeolocatorManager();
         }
 
         async void SetupScreen(TargetDevice target)
@@ -431,22 +438,26 @@ namespace Locana.Pages
             }
 
             this.target = target;
+            ScreenViewData = new LiveviewScreenViewData(target);
+            LayoutRoot.DataContext = ScreenViewData;
+
             target.Status.PropertyChanged += Status_PropertyChanged;
+            target.Api.AvailiableApisUpdated += Api_AvailiableApisUpdated;
 
             liveview.JpegRetrieved += liveview_JpegRetrieved;
             liveview.FocusFrameRetrieved += Liveview_FocusFrameRetrieved;
             liveview.Closed += liveview_Closed;
             LiveviewFpsTimer.Start();
 
-            ScreenViewData = new LiveviewScreenViewData(target);
             BatteryStatusDisplay.BatteryInfo = target.Status.BatteryInfo;
-            LayoutRoot.DataContext = ScreenViewData;
             var panels = SettingPanelBuilder.CreateNew(target);
             var pn = panels.GetPanelsToShow();
             foreach (var panel in pn)
             {
                 ControlPanel.Children.Add(panel);
             }
+            ControlPanel.SetChildrenControlHitTest(!target.Status.IsRecording());
+            ControlPanel.SetChildrenControlTabStop(!target.Status.IsRecording());
 
             Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
             ShootingParams.DataContext = ScreenViewData;
@@ -538,6 +549,9 @@ namespace Locana.Pages
                         // When recording is stopped, clear recording time.
                         status.RecordingTimeSec = 0;
                     }
+                    UpdateShutterButton(status);
+                    ControlPanel.SetChildrenControlHitTest(!status.IsRecording());
+                    ControlPanel.SetChildrenControlTabStop(!status.IsRecording());
                     break;
                 case nameof(CameraStatus.ShootMode):
                     UpdateShutterButton(status);
@@ -550,6 +564,20 @@ namespace Locana.Pages
                     break;
                 default:
                     break;
+            }
+        }
+
+        private bool showShootModeSelector;
+
+        private void Api_AvailiableApisUpdated(object sender, AvailableApiEventArgs e)
+        {
+            if (e.AvailableApis.Contains("setShootMode") ^ showShootModeSelector)
+            {
+                showShootModeSelector = !showShootModeSelector;
+                var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    UpdateShutterButton(target.Status);
+                });
             }
         }
 
@@ -599,14 +627,30 @@ namespace Locana.Pages
         private void UpdateShutterButton(CameraStatus status)
         {
             if (status == null || status.ShootMode == null || status.ShootMode.Candidates.Count == 0) { return; }
+
             var icons = new Dictionary<string, DataTemplate>();
-            foreach (var m in status.ShootMode.Candidates)
+            Capability<string> capa;
+            if (target.Api.Capability.IsAvailable("setShootMode") && !status.IsRecording())
             {
-                icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
+                foreach (var m in status.ShootMode.Candidates)
+                {
+                    icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
+                }
+                capa = status.ShootMode;
             }
+            else
+            {
+                var m = status.ShootMode.Current;
+                DebugUtil.Log("Single shoot mode selector: " + m);
+                icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
+                var list = new List<string>();
+                list.Add(m);
+                capa = new Capability<string> { Current = m, Candidates = list };
+            }
+
             MultiShutterButton.ModeInfo = new ShootModeInfo()
             {
-                ShootModeCapability = status.ShootMode,
+                ShootModeCapability = capa,
                 ModeSelected = async (mode) =>
                 {
                     if (target != null)

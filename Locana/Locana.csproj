@@ -252,6 +252,7 @@
     <Compile Include="UPnP\UpnpService.cs" />
     <Compile Include="UPnP\ValueLessResponse.cs" />
     <Compile Include="Utility\AnimationHelper.cs" />
+    <Compile Include="Utility\CameraStatusExtension.cs" />
     <Compile Include="Utility\CommandBarManager.cs" />
     <Compile Include="Utility\BoolToVisibilityConverter.cs" />
     <Compile Include="Utility\CancellationTokenSourceExtensions.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Utility\SystemUtil.cs" />
     <Compile Include="Utility\TaskExtensions.cs" />
     <Compile Include="Utility\ThumbnailCacheLoader.cs" />
+    <Compile Include="Utility\UIElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

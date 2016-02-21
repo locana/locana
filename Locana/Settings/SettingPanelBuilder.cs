@@ -91,7 +91,7 @@ namespace Locana.Settings
                 }
                 if (Api.Capability.IsRestrictedApi(key))
                 {
-                    Panels[key].SetBinding(StackPanel.VisibilityProperty, VisibilityBinding);
+                    Panels[key].SetBinding(UIElement.VisibilityProperty, VisibilityBinding);
                 }
             }
 
