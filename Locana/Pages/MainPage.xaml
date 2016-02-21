@@ -87,7 +87,7 @@
                         <Setter Target="PeriodicalShootingStatus.Margin" Value="-48,0,-8,0" />
                         <Setter Target="RecordingCountText.Style" Value="{StaticResource HeaderTextStyle}" />
                         <Setter Target="StorageAmountText.Style" Value="{StaticResource HeaderTextStyle}" />
-                        <Setter Target="PeriodicalShootingStatusText.Style" Value="{StaticResource HeaderTextStyle}" />
+                        <Setter Target="PeriodicalShootingStatusText.Style" Value="{StaticResource BodyTextBlockStyle}" />
                         <Setter Target="HistogramControl.(Grid.Row)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.RowSpan)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0" />
