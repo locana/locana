@@ -9,9 +9,7 @@
              d:DesignWidth="200"
              mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot"
-          Background="Transparent"
-          SizeChanged="Grid_SizeChanged">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid x:Name="Buttons" Canvas.ZIndex="10" />
         <ProgressRing x:Name="ProgressRing"
                       Margin="10"

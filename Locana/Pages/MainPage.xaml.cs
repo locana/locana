@@ -456,6 +456,9 @@ namespace Locana.Pages
             {
                 ControlPanel.Children.Add(panel);
             }
+
+            recording = target.Status.IsRecording();
+            setShootModeEnabled = target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE);
             ControlPanel.SetChildrenControlHitTest(!target.Status.IsRecording());
             ControlPanel.SetChildrenControlTabStop(!target.Status.IsRecording());
 
@@ -571,12 +574,13 @@ namespace Locana.Pages
             }
         }
 
+        private const string API_SET_SHOOT_MODE = "setShootMode";
         private bool recording;
         private bool setShootModeEnabled;
 
         private void Api_AvailiableApisUpdated(object sender, AvailableApiEventArgs e)
         {
-            if (e.AvailableApis.Contains("setShootMode") ^ setShootModeEnabled)
+            if (e.AvailableApis.Contains(API_SET_SHOOT_MODE) ^ setShootModeEnabled)
             {
                 setShootModeEnabled = !setShootModeEnabled;
                 var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -635,7 +639,7 @@ namespace Locana.Pages
 
             var icons = new Dictionary<string, DataTemplate>();
             Capability<string> capa;
-            if (target.Api.Capability.IsAvailable("setShootMode") && !status.IsRecording())
+            if (target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE) && !status.IsRecording())
             {
                 foreach (var m in status.ShootMode.Candidates)
                 {
@@ -646,7 +650,6 @@ namespace Locana.Pages
             else
             {
                 var m = status.ShootMode.Current;
-                DebugUtil.Log("Single shoot mode selector: " + m);
                 icons.Add(m, LiveviewScreenViewData.GetShootModeIcon(m));
                 var list = new List<string>();
                 list.Add(m);

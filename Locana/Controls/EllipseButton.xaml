@@ -22,7 +22,7 @@
                  Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                  Opacity="0.6"
                  Stroke="{ThemeResource ApplicationForegroundThemeBrush}"
-                 StrokeThickness="1" />
+                 StrokeThickness="2" />
         <Image x:Name="_Icon"
                Margin="20"
                HorizontalAlignment="Stretch"

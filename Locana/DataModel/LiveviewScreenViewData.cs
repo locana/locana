@@ -108,7 +108,7 @@ namespace Locana.DataModel
                 case ShootModeParam.Loop:
                     return LoopIconTemplate;
                 default:
-                    return StillIconTemplate;
+                    return default(DataTemplate);
             }
         }
 
@@ -121,32 +121,27 @@ namespace Locana.DataModel
                     return StopIconTemplate;
                 }
 
-                switch (Device.Status?.ShootMode?.Current ?? "")
+                var mode = Device.Status?.ShootMode?.Current ?? "";
+
+                if (mode == ShootModeParam.Still)
                 {
-                    case ShootModeParam.Still:
-                        if (Device.Status.ContShootingMode != null &&
-                            (Device.Status.ContShootingMode.Current == ContinuousShootMode.Cont ||
-                            Device.Status.ContShootingMode.Current == ContinuousShootMode.SpeedPriority ||
-                            Device.Status.ContShootingMode.Current == ContinuousShootMode.Burst ||
-                            Device.Status.ContShootingMode.Current == ContinuousShootMode.MotionShot))
-                        {
-                            return ContinuousStillIconTemplate;
-                        }
-                        if (ApplicationSettings.GetInstance().IsIntervalShootingEnabled)
-                        {
-                            return IntervalStillIconTemplate;
-                        }
-                        return StillIconTemplate;
-                    case ShootModeParam.Movie:
-                        return MovieIconTemplate;
-                    case ShootModeParam.Audio:
-                        return AudioIconTemplate;
-                    case ShootModeParam.Interval:
+                    if (Device.Status.ContShootingMode != null &&
+                        (Device.Status.ContShootingMode.Current == ContinuousShootMode.Cont ||
+                        Device.Status.ContShootingMode.Current == ContinuousShootMode.SpeedPriority ||
+                        Device.Status.ContShootingMode.Current == ContinuousShootMode.Burst ||
+                        Device.Status.ContShootingMode.Current == ContinuousShootMode.MotionShot))
+                    {
+                        return ContinuousStillIconTemplate;
+                    }
+                    if (ApplicationSettings.GetInstance().IsIntervalShootingEnabled)
+                    {
                         return IntervalStillIconTemplate;
-                    case ShootModeParam.Loop:
-                        return LoopIconTemplate;
-                    default:
-                        return default(DataTemplate);
+                    }
+                    return StillIconTemplate;
+                }
+                else
+                {
+                    return GetShootModeIcon(mode);
                 }
             }
         }
