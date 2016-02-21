@@ -1044,6 +1044,9 @@ namespace Locana.Pages
             task.StatusUpdated += async (status) =>
             {
                 ScreenViewData.IsPeriodicalShootingRunning = status.IsRunning;
+                ControlPanel.SetChildrenControlHitTest(!status.IsRunning);
+                ControlPanel.SetChildrenControlTabStop(!status.IsRunning);
+
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     DebugUtil.Log("Status updated: " + status.Count);
