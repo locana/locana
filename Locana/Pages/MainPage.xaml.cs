@@ -850,6 +850,7 @@ namespace Locana.Pages
         private void TearDownCurrentTarget()
         {
             LayoutRoot.DataContext = null;
+            PeriodicalShootingTask?.Stop();
         }
 
         private async void ZoomOutButton_Click(object sender, RoutedEventArgs e)
