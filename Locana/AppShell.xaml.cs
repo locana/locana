@@ -186,6 +186,11 @@ namespace Locana
         /// <param name="listViewItem"></param>
         private void NavMenuList_ItemInvoked(object sender, ListViewItem listViewItem)
         {
+            if (listViewItem == null)
+            {
+                return;
+            }
+
             var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
 
             if (item != null)

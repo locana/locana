@@ -21,21 +21,15 @@ namespace Locana.Controls
 
         public BitmapImage CurrentModeButtonImage
         {
-            set
-            {
-                SetValue(CurrentModeButtonImageProperty, value);
-            }
-            get
-            {
-                return (BitmapImage)GetValue(CurrentModeButtonImageProperty);
-            }
+            set { SetValue(CurrentModeButtonImageProperty, value); }
+            get { return (BitmapImage)GetValue(CurrentModeButtonImageProperty); }
         }
 
         public static readonly DependencyProperty CurrentModeButtonImageProperty = DependencyProperty.Register(
             nameof(CurrentModeButtonImage),
             typeof(BitmapImage),
             typeof(MultiModeShutterButton),
-            new PropertyMetadata(null, new PropertyChangedCallback(MultiModeShutterButton.CurrentModeButtonImageUpdated)));
+            new PropertyMetadata(null, new PropertyChangedCallback(CurrentModeButtonImageUpdated)));
 
         private static void CurrentModeButtonImageUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -44,18 +38,21 @@ namespace Locana.Controls
             (d as MultiModeShutterButton).UpdateCurrentModeButtonImage(image);
         }
 
-        public DataTemplate CurrentModeButtonTemplate { get; set; }
+        public DataTemplate CurrentModeButtonTemplate
+        {
+            set { SetValue(CurrentModeButtonTemplateProperty, value); }
+            get { return (DataTemplate)GetValue(CurrentModeButtonTemplateProperty); }
+        }
 
         public static readonly DependencyProperty CurrentModeButtonTemplateProperty = DependencyProperty.Register(
             nameof(CurrentModeButtonTemplate),
             typeof(DataTemplate),
             typeof(MultiModeShutterButton),
-            new PropertyMetadata(null, new PropertyChangedCallback(MultiModeShutterButton.CurrentModeButtonTemplateUpdated)));
+            new PropertyMetadata(null, new PropertyChangedCallback(CurrentModeButtonTemplateUpdated)));
 
         private static void CurrentModeButtonTemplateUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue == null) { return; }
-
             var icon = e.NewValue as DataTemplate;
             (d as MultiModeShutterButton).UpdateCurrentModeButtonImage(icon);
         }
@@ -70,7 +67,7 @@ namespace Locana.Controls
             nameof(ShutterButtonEnabled),
             typeof(bool),
             typeof(MultiModeShutterButton),
-            new PropertyMetadata(false, new PropertyChangedCallback(MultiModeShutterButton.ShutterButtonEnabledUpdated)));
+            new PropertyMetadata(false, new PropertyChangedCallback(ShutterButtonEnabledUpdated)));
 
         private static void ShutterButtonEnabledUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -88,7 +85,7 @@ namespace Locana.Controls
             nameof(ModeButtonsEnabled),
             typeof(bool),
             typeof(MultiModeShutterButton),
-            new PropertyMetadata(false, new PropertyChangedCallback(MultiModeShutterButton.ModeButtonsEnabledUpdated)));
+            new PropertyMetadata(false, new PropertyChangedCallback(ModeButtonsEnabledUpdated)));
 
         private static void ModeButtonsEnabledUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -197,26 +194,26 @@ namespace Locana.Controls
                 if (newX < 0) { newX -= 30; }
                 else if (newX > 0) { newX += 30; }
 
-
                 EllipseButton button = null;
 
                 if (selectedIndex == currentIndex)
                 {
-                    if (this.CurrentModeButtonTemplate != null)
+                    if (CurrentModeButtonTemplate != null)
                     {
-                        button = CreateBaseButton(this.CurrentModeButtonTemplate, scale);
+                        button = CreateBaseButton(CurrentModeButtonTemplate, scale);
                     }
-                    else {
-                        button = CreateBaseButton(this.CurrentModeButtonImage, scale);
+                    else
+                    {
+                        button = CreateBaseButton(CurrentModeButtonImage, scale);
                     }
                 }
                 else
                 {
-                    if (info.IconTemplates != null && info.IconTemplates.ContainsKey(i))
+                    if (info.IconTemplates?.ContainsKey(i) ?? false)
                     {
                         button = CreateBaseButton(info.IconTemplates[i], scale);
                     }
-                    if (info.IconTemplates == null && info.Icons != null && info.Icons.ContainsKey(i))
+                    else if (info.Icons?.ContainsKey(i) ?? false)
                     {
                         button = CreateBaseButton(info.Icons[i], scale);
                     }
@@ -241,14 +238,7 @@ namespace Locana.Controls
 
             foreach (var i in info.ShootModeCapability.Candidates)
             {
-                if (info.IconTemplates != null && info.IconTemplates.ContainsKey(i))
-                {
-                    (Buttons.Children[currentIndex] as EllipseButton).IconTemplate = info.IconTemplates[i];
-                }
-                if (info.IconTemplates == null && info.Icons != null && info.Icons.ContainsKey(i))
-                {
-                    (Buttons.Children[currentIndex] as EllipseButton).Icon = info.Icons[i];
-                }
+                var button = Buttons.Children[currentIndex] as EllipseButton;
 
                 var scale = i == targetShootMode ? 1.0 : 0.6;
                 double newX = (currentIndex - selectedIndex) * 50;
@@ -257,7 +247,7 @@ namespace Locana.Controls
 
                 var story = AnimationHelper.CreateMoveAndResizeAnimation(new MoveAndResizeAnimation()
                 {
-                    Target = Buttons.Children[currentIndex] as EllipseButton,
+                    Target = button,
                     Duration = TimeSpan.FromMilliseconds(300),
                     newX = newX,
                     newScaleX = scale,
@@ -346,7 +336,6 @@ namespace Locana.Controls
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Margin = new Thickness(0),
-                // Icon = icon,
                 RenderTransform = new CompositeTransform()
                 {
                     TranslateX = 0,
@@ -397,11 +386,6 @@ namespace Locana.Controls
                 }
                 i++;
             }
-        }
-
-        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            ShiftButtons(this._ModeInfo, this._ModeInfo?.ShootModeCapability?.Current);
         }
     }
 

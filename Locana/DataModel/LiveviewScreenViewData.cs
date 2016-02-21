@@ -108,7 +108,7 @@ namespace Locana.DataModel
                 case ShootModeParam.Loop:
                     return LoopIconTemplate;
                 default:
-                    return StillIconTemplate;
+                    return default(DataTemplate);
             }
         }
 
@@ -116,29 +116,15 @@ namespace Locana.DataModel
         {
             get
             {
-                if (Device.Status.ShootMode == null)
+                if (IsRecording)
                 {
-                    return StillIconTemplate;
+                    return StopIconTemplate;
                 }
-                return CurrentModeImage();
-            }
-        }
 
-        private DataTemplate CurrentModeImage()
-        {
-            var current = Device.Status.Status;
+                var mode = Device.Status?.ShootMode?.Current ?? "";
 
-            if (current == EventParam.MvRecording ||
-                current == EventParam.AuRecording ||
-                current == EventParam.LoopRecording ||
-                current == EventParam.ItvRecording)
-            {
-                return StopIconTemplate;
-            }
-
-            switch (Device.Status.ShootMode.Current ?? "")
-            {
-                case ShootModeParam.Still:
+                if (mode == ShootModeParam.Still)
+                {
                     if (Device.Status.ContShootingMode != null &&
                         (Device.Status.ContShootingMode.Current == ContinuousShootMode.Cont ||
                         Device.Status.ContShootingMode.Current == ContinuousShootMode.SpeedPriority ||
@@ -152,16 +138,11 @@ namespace Locana.DataModel
                         return IntervalStillIconTemplate;
                     }
                     return StillIconTemplate;
-                case ShootModeParam.Movie:
-                    return MovieIconTemplate;
-                case ShootModeParam.Audio:
-                    return AudioIconTemplate;
-                case ShootModeParam.Interval:
-                    return IntervalStillIconTemplate;
-                case ShootModeParam.Loop:
-                    return LoopIconTemplate;
-                default:
-                    return default(DataTemplate);
+                }
+                else
+                {
+                    return GetShootModeIcon(mode);
+                }
             }
         }
 
@@ -285,16 +266,7 @@ namespace Locana.DataModel
         {
             get
             {
-                if (Device.Status == null) { return false; }
-                switch (Device.Status.Status ?? "")
-                {
-                    case EventParam.MvRecording:
-                    case EventParam.AuRecording:
-                    case EventParam.ItvRecording:
-                    case EventParam.LoopRecording:
-                        return true;
-                }
-                return false;
+                return Device.Status.IsRecording();
             }
         }
 
@@ -302,17 +274,7 @@ namespace Locana.DataModel
         {
             get
             {
-                if (Device.Status == null) { return true; }
-                switch (Device.Status.Status ?? "")
-                {
-                    case EventParam.Idle:
-                    case EventParam.MvRecording:
-                    case EventParam.AuRecording:
-                    case EventParam.ItvRecording:
-                    case EventParam.LoopRecording:
-                        return false;
-                }
-                return true;
+                return Device.Status.IsProcessing();
             }
         }
 
