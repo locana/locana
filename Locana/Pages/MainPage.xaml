@@ -49,9 +49,11 @@
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="Header.(Grid.Column)" Value="1" />
                         <Setter Target="Header.Margin" Value="24,4,0,4" />
-                        <Setter Target="Header.Height" Value="32" />
+                        <Setter Target="MainHeader.Height" Value="32" />
+                        <Setter Target="PeriodicalShootingStatus.Margin" Value="0,0,0,0" />
                         <Setter Target="RecordingCountText.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
                         <Setter Target="StorageAmountText.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
+                        <Setter Target="PeriodicalShootingStatusText.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
                         <Setter Target="HistogramControl.(Grid.Row)" Value="0" />
                         <Setter Target="HistogramControl.(Grid.RowSpan)" Value="2" />
                         <Setter Target="HistogramControl.(Grid.Column)" Value="2" />
@@ -81,9 +83,11 @@
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="3" />
                         <Setter Target="Header.(Grid.Column)" Value="0" />
                         <Setter Target="Header.Margin" Value="48,12,8,4" />
-                        <Setter Target="Header.Height" Value="25" />
+                        <Setter Target="MainHeader.Height" Value="25" />
+                        <Setter Target="PeriodicalShootingStatus.Margin" Value="-48,0,-8,0" />
                         <Setter Target="RecordingCountText.Style" Value="{StaticResource HeaderTextStyle}" />
                         <Setter Target="StorageAmountText.Style" Value="{StaticResource HeaderTextStyle}" />
+                        <Setter Target="PeriodicalShootingStatusText.Style" Value="{StaticResource HeaderTextStyle}" />
                         <Setter Target="HistogramControl.(Grid.Row)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.RowSpan)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0" />
@@ -167,58 +171,74 @@
               HorizontalAlignment="Stretch"
               VerticalAlignment="Top"
               Canvas.ZIndex="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            <ContentControl ContentTemplate="{Binding ShootModeImage, Mode=OneWay}" />
-            <ContentControl Grid.Column="1"
-                            Margin="3"
-                            ContentTemplate="{Binding ExposureModeImage,
-                                                      Mode=OneWay}" />
-            <ContentControl Name="RecDisplay"
-                            Grid.Column="2"
-                            Margin="3"
-                            ContentTemplate="{StaticResource RecIcon}"
-                            Visibility="{Binding IsRecording,
-                                                 FallbackValue=Collapsed,
-                                                 Converter={StaticResource B2VConverter}}" />
-            <TextBlock x:Name="RecordingCountText"
-                       Grid.Column="3"
-                       VerticalAlignment="Center"
-                       Text="{Binding RecordingCount}"
-                       Visibility="{Binding IsRecordingCountAvailable,
-                                            FallbackValue=Collapsed,
-                                            Converter={StaticResource B2VConverter}}" />
-            <ContentControl Grid.Column="5"
-                            Margin="3"
-                            ContentTemplate="{Binding MemoryCardStatusImage}" />
-            <TextBlock x:Name="StorageAmountText"
-                       Grid.Column="6"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Text="{Binding RecordbaleAmount}" />
-            <controls:BatteryStatus x:Name="BatteryStatusDisplay"
-                                    Grid.Column="7"
-                                    Width="40"
-                                    Height="20"
-                                    VerticalAlignment="Center"
-                                    Visibility="{Binding IsBatteryInfoAvailable,
+            <StackPanel Orientation="Vertical">
+                <Grid Name="PeriodicalShootingStatus"
+                      Height="25"
+                      HorizontalAlignment="Stretch"
+                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      Opacity="0.7"
+                      Visibility="Visible">
+                    <TextBlock Name="PeriodicalShootingStatusText"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="WrapWholeWords" />
+                </Grid>
+                <Grid x:Name="MainHeader" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl ContentTemplate="{Binding ShootModeImage, Mode=OneWay}" />
+                    <ContentControl Grid.Column="1"
+                                    Margin="3"
+                                    ContentTemplate="{Binding ExposureModeImage,
+                                                              Mode=OneWay}" />
+                    <ContentControl Name="RecDisplay"
+                                    Grid.Column="2"
+                                    Margin="3"
+                                    ContentTemplate="{StaticResource RecIcon}"
+                                    Visibility="{Binding IsRecording,
                                                          FallbackValue=Collapsed,
                                                          Converter={StaticResource B2VConverter}}" />
-            <Image Grid.Column="8"
-                   VerticalAlignment="Center"
-                   Source="{Binding GeopositionStatusImage}"
-                   Visibility="{Binding GeopositionEnabled,
-                                        FallbackValue=Collapsed,
-                                        Converter={StaticResource B2VConverter}}" />
+                    <TextBlock x:Name="RecordingCountText"
+                               Grid.Column="3"
+                               VerticalAlignment="Center"
+                               Text="{Binding RecordingCount}"
+                               Visibility="{Binding IsRecordingCountAvailable,
+                                                    FallbackValue=Collapsed,
+                                                    Converter={StaticResource B2VConverter}}" />
+                    <ContentControl Grid.Column="5"
+                                    Margin="3"
+                                    ContentTemplate="{Binding MemoryCardStatusImage}" />
+                    <TextBlock x:Name="StorageAmountText"
+                               Grid.Column="6"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Text="{Binding RecordbaleAmount}" />
+                    <controls:BatteryStatus x:Name="BatteryStatusDisplay"
+                                            Grid.Column="7"
+                                            Width="40"
+                                            Height="20"
+                                            VerticalAlignment="Center"
+                                            Visibility="{Binding IsBatteryInfoAvailable,
+                                                                 FallbackValue=Collapsed,
+                                                                 Converter={StaticResource B2VConverter}}" />
+                    <Image Grid.Column="8"
+                           VerticalAlignment="Center"
+                           Source="{Binding GeopositionStatusImage}"
+                           Visibility="{Binding GeopositionEnabled,
+                                                FallbackValue=Collapsed,
+                                                Converter={StaticResource B2VConverter}}" />
+                </Grid>
+            </StackPanel>
         </Grid>
 
         <Grid x:Name="ControlPanelUnit"

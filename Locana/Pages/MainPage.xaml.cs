@@ -1052,14 +1052,15 @@ namespace Locana.Pages
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     DebugUtil.Log("Status updated: " + status.Count);
-                    //if (status.IsRunning)
-                    //{
-                    //    PeriodicalShootingStatus.Visibility = Visibility.Visible;
-                    //    PeriodicalShootingStatusText.Text = SystemUtil.GetStringResource("PeriodicalShooting_Status")
-                    //        .Replace("__INTERVAL__", status.Interval.ToString())
-                    //        .Replace("__PHOTO_NUM__", status.Count.ToString());
-                    //}
-                    //else { PeriodicalShootingStatus.Visibility = Visibility.Collapsed; }
+                    if (status.IsRunning)
+                    {
+                        PeriodicalShootingStatus.Visibility = Visibility.Visible;
+                        PeriodicalShootingStatusText.Text = string.Format(
+                            SystemUtil.GetStringResource("PeriodicalShooting_Status"),
+                            status.Interval.ToString(),
+                            status.Count.ToString());
+                    }
+                    else { PeriodicalShootingStatus.Visibility = Visibility.Collapsed; }
                 });
             };
             return task;
