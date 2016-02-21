@@ -639,7 +639,7 @@ namespace Locana.Pages
 
             var icons = new Dictionary<string, DataTemplate>();
             Capability<string> capa;
-            if (target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE) && !status.IsRecording())
+            if (target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE) && !ScreenViewData.IsRecording)
             {
                 foreach (var m in status.ShootMode.Candidates)
                 {
@@ -1047,6 +1047,7 @@ namespace Locana.Pages
                 ScreenViewData.IsPeriodicalShootingRunning = status.IsRunning;
                 ControlPanel.SetChildrenControlHitTest(!status.IsRunning);
                 ControlPanel.SetChildrenControlTabStop(!status.IsRunning);
+                UpdateShutterButton(target.Status);
 
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
