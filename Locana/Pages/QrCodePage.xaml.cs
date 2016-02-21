@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,6 +15,7 @@ using Windows.Media;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage.FileProperties;
+using Windows.Storage.Streams;
 using Windows.System.Display;
 using Windows.System.Profile;
 using Windows.UI.Core;
@@ -70,6 +72,8 @@ namespace Locana.Pages
         private DispatcherTimer CaptureTimer;
         private DispatcherTimer FocusTimer;
 
+        private object CameraLock = new object();
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             DisplayInformation.AutoRotationPreferences =
@@ -84,7 +88,7 @@ namespace Locana.Pages
             }
 
             CaptureTimer = new DispatcherTimer();
-            CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
+            CaptureTimer.Interval = TimeSpan.FromMilliseconds(500);
             CaptureTimer.Tick += FrameTick;
 
             FocusTimer = new DispatcherTimer();
@@ -116,16 +120,26 @@ namespace Locana.Pages
             {
                 await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
             }
-            catch (Exception ex) { OnDetectCameraError(ex); }
+            catch (Exception ex)
+            {
+                // OnDetectCameraError(ex);
+                DebugUtil.Log(() => { return ex.Message; });
+            }
         }
 
-        private void FocusTick(object sender, object e)
+        private async void FocusTick(object sender, object e)
         {
+            if (isCapturing) { return; }
+
             try
             {
-                TryToFocus();
+                await TryToFocus();
             }
-            catch (Exception ex) { OnDetectCameraError(ex); }
+            catch (Exception ex)
+            {
+                // OnDetectCameraError(ex);
+                DebugUtil.Log(() => { return ex.Message; });
+            }
         }
 
         private const string DEVCIE_FAMILY_DESKTOP = "Windows.Desktop";
@@ -195,7 +209,7 @@ namespace Locana.Pages
             await CleanupCameraAsync();
         }
 
-        async void TryToFocus()
+        async Task TryToFocus()
         {
             if (_mediaCapture == null) { return; }
 
@@ -251,7 +265,6 @@ namespace Locana.Pages
 
             if (_mediaCapture == null)
             {
-
                 // Attempt to get the back camera if one is available, but use any camera device if not
                 var cameraDevice = await FindCameraDeviceByPanelAsync(Windows.Devices.Enumeration.Panel.Back);
 
@@ -271,6 +284,7 @@ namespace Locana.Pages
                 {
                     VideoDeviceId = cameraDevice.Id,
                     StreamingCaptureMode = StreamingCaptureMode.Video,
+                    PhotoCaptureSource = PhotoCaptureSource.Auto,
                 };
 
                 // Initialize MediaCapture
@@ -286,6 +300,9 @@ namespace Locana.Pages
                     // TODO another toast to request permission?
                     return;
                 }
+
+                await SetLargestResolution(_mediaCapture, MediaStreamType.VideoPreview);
+                await SetLargestResolution(_mediaCapture, MediaStreamType.Photo);
 
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
@@ -316,6 +333,9 @@ namespace Locana.Pages
             // Start the preview
             await _mediaCapture.StartPreviewAsync();
             _isPreviewing = true;
+            await Task.Delay(1000);
+
+            Progress.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -325,6 +345,8 @@ namespace Locana.Pages
         private async Task StopPreviewAsync()
         {
             _isPreviewing = false;
+            Progress.Visibility = Visibility.Visible;
+
             try
             {
                 await _mediaCapture?.StopPreviewAsync();
@@ -337,7 +359,7 @@ namespace Locana.Pages
                 PreviewControl.Source = null;
 
                 // Allow the device to sleep now that the preview is stopped
-                _displayRequest.RequestRelease();
+                _displayRequest?.RequestRelease();
             });
         }
 
@@ -348,49 +370,62 @@ namespace Locana.Pages
         /// <returns></returns>
         private async Task GetPreviewFrameAsSoftwareBitmapAsync()
         {
-            // Get information about the preview
-            var previewProperties = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview) as VideoEncodingProperties;
+            if (isCapturing) { return; }
 
-            // Create the video frame to request a SoftwareBitmap preview frame
-            var videoFrame = new VideoFrame(BitmapPixelFormat.Bgra8, (int)previewProperties.Width, (int)previewProperties.Height);
-
-            // Capture the preview frame
-            using (var currentFrame = await _mediaCapture.GetPreviewFrameAsync(videoFrame))
+            using (new CameraResource() { OnDispose = () => { isCapturing = false; } })
             {
-                // Collect the resulting frame
-                SoftwareBitmap previewFrame = currentFrame.SoftwareBitmap;
-                var data = Decode(previewFrame);
-                if (data.Count > 0)
-                {
-                    var sb = new StringBuilder();
-                    foreach (var d in data)
-                    {
-                        Debug.WriteLine(d);
-                        sb.Append(d);
-                    }
+                isCapturing = true;
 
-                    SonyQrData qrdata = null;
-                    try
-                    {
-                        qrdata = SonyQrDataParser.ParseData(sb.ToString());
-                    }
-                    catch (FormatException ex)
-                    {
-                        DebugUtil.Log("QR data parse error: " + ex.Message);
-                    }
-                    // DebugText.Text = sb.ToString();
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        if (qrdata != null)
-                        {
-                            Frame.Navigate(typeof(EntrancePage), qrdata);
-                        }
-                        else
-                        {
-                            AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("QrCodeIncompatible") });
-                        }
-                    });
+                // Get information about the preview
+                var previewProperties = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview) as VideoEncodingProperties;
+
+                // Create the video frame to request a SoftwareBitmap preview frame
+                var videoFrame = new VideoFrame(BitmapPixelFormat.Bgra8, (int)previewProperties.Width, (int)previewProperties.Height);
+                DebugUtil.Log(() => { return "Video frame: " + previewProperties.Width + " x " + previewProperties.Height; });
+
+                // Capture the preview frame
+                using (var currentFrame = await _mediaCapture.GetPreviewFrameAsync(videoFrame))
+                {
+                    // Collect the resulting frame
+                    SoftwareBitmap previewFrame = currentFrame.SoftwareBitmap;
+                    var data = Decode(previewFrame);
+                    await OnQrCodeDecoded(data);
                 }
+            }
+        }
+
+        private async Task OnQrCodeDecoded(IList<string> data)
+        {
+            if (data.Count > 0)
+            {
+                var sb = new StringBuilder();
+                foreach (var d in data)
+                {
+                    Debug.WriteLine(d);
+                    sb.Append(d);
+                }
+
+                SonyQrData qrdata = null;
+                try
+                {
+                    qrdata = SonyQrDataParser.ParseData(sb.ToString());
+                }
+                catch (FormatException ex)
+                {
+                    DebugUtil.Log("QR data parse error: " + ex.Message);
+                }
+                // DebugText.Text = sb.ToString();
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    if (qrdata != null)
+                    {
+                        Frame.Navigate(typeof(EntrancePage), qrdata);
+                    }
+                    else
+                    {
+                        AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("QrCodeIncompatible") });
+                    }
+                });
             }
         }
 
@@ -398,14 +433,21 @@ namespace Locana.Pages
 
         public IList<string> Decode(SoftwareBitmap image, bool tryMultipleBarcodes = false)
         {
-            IList<string> txtContent = new List<string>();
 
             WriteableBitmap bitmap = new WriteableBitmap(image.PixelWidth, image.PixelHeight);
 
             image.CopyToBuffer(bitmap.PixelBuffer);
 
+            return Decode(bitmap);
+        }
+
+        private IList<string> Decode(WriteableBitmap bitmap)
+        {
+            IList<string> txtContent = new List<string>();
+
             Result[] results = null;
             Result result = barcodeReader.Decode(bitmap);
+
             if (result != null)
             {
                 results = new[] { result };
@@ -471,9 +513,71 @@ namespace Locana.Pages
             await GetPreviewFrameAsSoftwareBitmapAsync();
         }
 
-        private void PreviewControl_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void PreviewControl_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            TryToFocus();
+            await TryToFocus();
+            await CapturePhoto();
+        }
+
+        bool isCapturing = false;
+
+        async Task CapturePhoto()
+        {
+            if (_mediaCapture == null || isCapturing) { return; }
+
+            using (new CameraResource() { OnDispose = () => { isCapturing = false; } })
+            {
+                isCapturing = true;
+                await StopPreviewAsync();
+
+
+                var image = new InMemoryRandomAccessStream();
+                await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateBmp(), image);
+                image.Seek(0);
+
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    var decoder = await BitmapDecoder.CreateAsync(image);
+                    var bitmap = new WriteableBitmap((int)decoder.PixelWidth, (int)decoder.PixelHeight);
+                    DebugUtil.Log(() => { return "Captured frame: " + decoder.PixelWidth + " x " + decoder.PixelHeight; });
+
+                    await bitmap.SetSourceAsync(image);
+
+                    var data = Decode(bitmap);
+                    await OnQrCodeDecoded(data);
+                });
+
+                await StartPreviewAsync();
+            }
+        }
+
+        private async Task SetLargestResolution(MediaCapture device, MediaStreamType type)
+        {
+            if (device == null) { return; }
+
+            var resolutions = device.VideoDeviceController.GetAvailableMediaStreamProperties(type).ToList();
+
+            if (resolutions.Count == 0) { return; }
+            var largest = resolutions[0] as VideoEncodingProperties;
+            foreach (VideoEncodingProperties r in resolutions)
+            {
+                if (largest.Width < r.Width)
+                {
+                    largest = r;
+                }
+            }
+
+            await device.VideoDeviceController.SetMediaStreamPropertiesAsync(type, largest);
+        }
+
+        private class CameraResource : IDisposable
+        {
+            public Action OnDispose { get; set; }
+
+            void IDisposable.Dispose()
+            {
+                OnDispose?.Invoke();
+            }
         }
     }
 }

@@ -145,12 +145,12 @@ namespace Locana.Controls
 
         private void SetModeButtonsEnable(bool enable)
         {
+
+            if (this._ModeInfo?.ShootModeCapability == null) { return; }
+            var SelectedModeButton = FindButton(this._ModeInfo.ShootModeCapability.Current);
+
             foreach (EllipseButton b in this.Buttons.Children)
             {
-
-                if (this._ModeInfo?.ShootModeCapability == null) { continue; }
-                var SelectedModeButton = FindButton(this._ModeInfo.ShootModeCapability.Current);
-
                 // set enable other than selected button
                 if (b != null && !b.Equals(SelectedModeButton)) { b.Enabled = enable; }
             }
