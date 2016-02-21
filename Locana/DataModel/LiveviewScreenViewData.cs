@@ -146,6 +146,29 @@ namespace Locana.DataModel
             }
         }
 
+        private bool _IsPeriodicalShootingRunning = false;
+        public bool IsPeriodicalShootingRunning
+        {
+            get { return _IsPeriodicalShootingRunning; }
+            set
+            {
+                if (_IsPeriodicalShootingRunning != value)
+                {
+                    _IsPeriodicalShootingRunning = value;
+                    NotifyChangedOnUI(nameof(IsRecording));
+                    NotifyChangedOnUI(nameof(ShutterButtonImage));
+                }
+            }
+        }
+
+        public bool IsRecording
+        {
+            get
+            {
+                return Device.Status.IsRecording() || IsPeriodicalShootingRunning;
+            }
+        }
+
         public DataTemplate ShootModeImage
         {
             get
@@ -261,14 +284,6 @@ namespace Locana.DataModel
         }
 
         public bool IsZoomAvailable { get { return Device.Api.Capability != null && Device.Api.Capability.IsAvailable("actZoom"); } }
-
-        public bool IsRecording
-        {
-            get
-            {
-                return Device.Status.IsRecording();
-            }
-        }
 
         public bool Processing
         {
