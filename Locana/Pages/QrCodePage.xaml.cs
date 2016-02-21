@@ -84,7 +84,7 @@ namespace Locana.Pages
             }
 
             CaptureTimer = new DispatcherTimer();
-            CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
+            CaptureTimer.Interval = TimeSpan.FromMilliseconds(500);
             CaptureTimer.Tick += FrameTick;
 
             FocusTimer = new DispatcherTimer();
@@ -287,6 +287,8 @@ namespace Locana.Pages
                     return;
                 }
 
+                await SetLargestResolution(_mediaCapture, MediaStreamType.VideoPreview);
+
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
                 {
@@ -474,6 +476,25 @@ namespace Locana.Pages
         private void PreviewControl_Tapped(object sender, TappedRoutedEventArgs e)
         {
             TryToFocus();
+        }
+
+        private async Task SetLargestResolution(MediaCapture device, MediaStreamType type)
+        {
+            if (device == null) { return; }
+
+            var resolutions = device.VideoDeviceController.GetAvailableMediaStreamProperties(type).ToList();
+
+            if (resolutions.Count == 0) { return; }
+            var largest = resolutions[0] as VideoEncodingProperties;
+            foreach (VideoEncodingProperties r in resolutions)
+            {
+                if (largest.Width < r.Width)
+                {
+                    largest = r;
+                }
+            }
+
+            await device.VideoDeviceController.SetMediaStreamPropertiesAsync(type, largest);
         }
     }
 }
