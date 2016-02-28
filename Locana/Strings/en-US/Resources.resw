@@ -1063,10 +1063,10 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
     <value>Open gallary to browse contents in your camera device!</value>
   </data>
   <data name="ContentTypes" xml:space="preserve">
-    <value>Filter by</value>
+    <value>Contents type filter</value>
   </data>
   <data name="ContentTypesGuide" xml:space="preserve">
-    <value>Contents to be displayed.</value>
+    <value>Type of the contents to be displayed in the grid.</value>
   </data>
   <data name="FullVersion" xml:space="preserve">
     <value>Upgrade to Full version</value>

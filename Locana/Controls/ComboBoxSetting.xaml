@@ -36,8 +36,8 @@
                                         Mode=OneWay}" />
         <ComboBox Name="Picker"
                   Grid.Row="2"
-                  Margin="40,5"
-                  HorizontalAlignment="Stretch"
+                  Margin="0,8"
+                  HorizontalAlignment="Left"
                   VerticalAlignment="Center"
                   BorderThickness="1"
                   IsEnabled="{Binding IsActive,
