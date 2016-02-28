@@ -210,8 +210,8 @@
     <Compile Include="Pages\EntrancePage.xaml.cs">
       <DependentUpon>EntrancePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Pages\ShootingPage.xaml.cs">
+      <DependentUpon>ShootingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\QrCodePage.xaml.cs">
       <DependentUpon>QrCodePage.xaml</DependentUpon>
@@ -421,7 +421,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\MainPage.xaml">
+    <Page Include="Pages\ShootingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
