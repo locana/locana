@@ -365,19 +365,21 @@ namespace Locana.Settings
                 Mode = BindingMode.OneWay,
             });
 
-            var checkbox = new CheckBox()
+            var toggle = new ToggleSwitch()
             {
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
                 MinWidth = 30,
+                OffContent = null,
+                OnContent = null,
             };
-            checkbox.SetBinding(ToggleButton.IsCheckedProperty, new Binding()
+            toggle.SetBinding(ToggleSwitch.IsOnProperty, new Binding()
             {
                 Source = ApplicationSettings.GetInstance(),
                 Path = new PropertyPath(nameof(ApplicationSettings.IsIntervalShootingEnabled)),
                 Mode = BindingMode.TwoWay,
             });
-            checkbox.SetBinding(Control.IsEnabledProperty, new Binding()
+            toggle.SetBinding(Control.IsEnabledProperty, new Binding()
             {
                 Source = DataSource,
                 Path = new PropertyPath(nameof(ControlPanelDataSource.IsPeriodicalShootingAvailable)),
@@ -390,7 +392,7 @@ namespace Locana.Settings
                 Margin = new Thickness(3, 2, 3, 2),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
             };
-            firstPanel.Children.Add(checkbox);
+            firstPanel.Children.Add(toggle);
             firstPanel.Children.Add(indicator);
 
             var slider = BuildSlider(2, 60);
@@ -408,8 +410,8 @@ namespace Locana.Settings
             });
             slider.SetBinding(UIElement.VisibilityProperty, new Binding()
             {
-                Source = checkbox,
-                Path = new PropertyPath(nameof(ToggleButton.IsChecked)),
+                Source = toggle,
+                Path = new PropertyPath(nameof(ToggleSwitch.IsOn)),
                 Mode = BindingMode.OneWay,
                 Converter = new BoolToVisibilityConverter(),
             });
