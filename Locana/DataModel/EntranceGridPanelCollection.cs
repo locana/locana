@@ -122,7 +122,7 @@ namespace Locana.DataModel
              {
                  var shell = Window.Current.Content as AppShell;
                  var frame = shell.AppFrame as Frame;
-                 frame.Navigate(typeof(MainPage), device);
+                 frame.Navigate(typeof(ShootingPage), device);
              })
         {
 

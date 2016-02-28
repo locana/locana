@@ -217,7 +217,7 @@ namespace Locana.Pages
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 // Only handle this event if this page is currently being displayed
-                if (args.Property == SystemMediaTransportControlsProperty.SoundLevel && Frame.CurrentSourcePageType == typeof(MainPage))
+                if (args.Property == SystemMediaTransportControlsProperty.SoundLevel && Frame.CurrentSourcePageType == typeof(ShootingPage))
                 {
                     // Check to see if the app is being muted. If so, it is being minimized.
                     // Otherwise if it is not initialized, it is being brought into focus.
