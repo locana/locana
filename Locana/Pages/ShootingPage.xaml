@@ -137,10 +137,11 @@
 
 
 
-        <Grid x:Name="LiveviewGrid" Canvas.ZIndex="3">
+        <Grid x:Name="LiveviewGrid" Canvas.ZIndex="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <canvas:CanvasControl x:Name="LiveviewImageCanvas"
                                   ClearColor="Transparent"
                                   Draw="CanvasControl_Draw"
+                                  
                                   SizeChanged="LiveviewImageCanvas_SizeChanged" />
 
             <controls:FramingGridsSurface x:Name="FramingGuideSurface"
