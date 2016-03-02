@@ -177,7 +177,7 @@
                       HorizontalAlignment="Stretch"
                       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                       Opacity="0.7"
-                      Visibility="Visible">
+                      Visibility="Collapsed">
                     <TextBlock Name="PeriodicalShootingStatusText"
                                HorizontalAlignment="Stretch"
                                VerticalAlignment="Center"
