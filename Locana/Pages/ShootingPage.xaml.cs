@@ -238,9 +238,6 @@ namespace Locana.Pages
 
         async void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
         {
-            target?.Status?.TestRotate();
-            return;
-
             if (CameraStatusUtility.IsContinuousShootingMode(target)) { await StartContShooting(); }
             else { ShutterButtonPressed(); }
         }
