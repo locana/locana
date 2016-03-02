@@ -214,6 +214,8 @@ namespace Locana.Pages
                 HardwareButtons.CameraReleased += HardwareButtons_CameraReleased;
                 HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
             }
+
+            RotateLiveviewImage(0);
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -236,6 +238,9 @@ namespace Locana.Pages
 
         async void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
         {
+            target?.Status?.TestRotate();
+            return;
+
             if (CameraStatusUtility.IsContinuousShootingMode(target)) { await StartContShooting(); }
             else { ShutterButtonPressed(); }
         }
