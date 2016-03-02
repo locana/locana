@@ -28,6 +28,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -213,6 +214,8 @@ namespace Locana.Pages
                 HardwareButtons.CameraReleased += HardwareButtons_CameraReleased;
                 HardwareButtons.CameraPressed += HardwareButtons_CameraPressed;
             }
+
+            RotateLiveviewImage(0);
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -569,6 +572,12 @@ namespace Locana.Pages
                 case nameof(CameraStatus.TouchFocusStatus):
                     UpdateTouchFocus(status.TouchFocusStatus);
                     break;
+                case nameof(CameraStatus.LiveviewOrientation):
+                    if (ApplicationSettings.GetInstance().LiveviewRotationEnabled)
+                    {
+                        RotateLiveviewImage(status.LiveviewOrientationAsDouble);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -748,7 +757,16 @@ namespace Locana.Pages
 
                     trailingTask = () =>
                     {
-                        RefreshOverlayControlParams(magnification);
+
+                        if (target?.Status != null)
+                        {
+                            RotateLiveviewImage(target.Status.LiveviewOrientationAsDouble, (sender, arg) =>
+                            {
+                                RefreshOverlayControlParams(magnification);
+
+                            });
+                        }
+
                         sizeChanged = false;
                     };
                 });
@@ -1199,11 +1217,77 @@ namespace Locana.Pages
 
             _FocusFrameSurface.Height = imageHeight;
             _FocusFrameSurface.Width = imageWidth;
-            _FocusFrameSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
             FramingGuideSurface.Height = imageHeight;
             FramingGuideSurface.Width = imageWidth;
+
+            _FocusFrameSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
             FramingGuideSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
         }
+
+
+        private void RotateLiveviewImage(double angle, EventHandler<object> Completed = null)
+        {
+            var scale = CalcRotatedLiveviewImageScale(angle);
+
+            angle = ToRelativeLiveviewAngle(angle);
+
+            AnimationHelper.CreateSmoothRotateScaleAnimation(new AnimationRequest()
+            {
+                Target = LiveviewGrid,
+                Completed = Completed,
+            }, angle, scale).Begin();
+        }
+
+        private double CalcRotatedLiveviewImageScale(double angle)
+        {
+            double scale_h = 1.0;
+            double scale_v = 1.0;
+            if (LiveviewImageCanvas == null || LiveviewGrid == null) { return 1.0; }
+
+            var screen_w = LiveviewGrid.ActualWidth;
+            var screen_h = LiveviewGrid.ActualHeight;
+
+            if (angle % 180 == 0)
+            {
+                scale_h = screen_w / LiveviewImageCanvas.RenderSize.Width;
+                scale_v = screen_h / LiveviewImageCanvas.RenderSize.Height;
+            }
+            else
+            {
+                scale_h = screen_w / LiveviewImageCanvas.RenderSize.Height;
+                scale_v = screen_h / LiveviewImageCanvas.RenderSize.Width;
+            }
+
+            if (LiveviewGrid.ActualHeight > LiveviewGrid.ActualWidth)
+            {
+                // portrait
+                return Math.Max(scale_h, scale_v);
+            }
+            else
+            {
+                return Math.Min(scale_h, scale_v);
+            }
+        }
+
+        private double ToRelativeLiveviewAngle(double angle)
+        {
+            var t = LiveviewGrid?.RenderTransform as CompositeTransform;
+            if (t != null)
+            {
+                angle = angle - t.Rotation;
+
+                if (angle > 180)
+                {
+                    angle = angle - ((int)(angle / 360) + 1) * 360;
+                }
+                else if (angle < -180)
+                {
+                    angle = angle + ((int)(-angle / 360) + 1) * 360;
+                }
+            }
+            return angle;
+        }
+
     }
 
 }
