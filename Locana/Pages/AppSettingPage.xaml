@@ -27,6 +27,7 @@
             <StackPanel x:Name="AppSettings"
                         MaxWidth="600"
                         Margin="16,10,16,40"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Stretch" />
         </ScrollViewer>
     </Grid>
