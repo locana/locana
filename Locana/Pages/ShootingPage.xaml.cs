@@ -1228,6 +1228,7 @@ namespace Locana.Pages
         private void RotateLiveviewImage(double angle, EventHandler<object> Completed = null)
         {
             var scale = CalcRotatedLiveviewImageScale(angle);
+            if (scale == double.NaN) { return; } // LiveviewGrid is already disappeared.
 
             angle = ToRelativeLiveviewAngle(angle);
 
