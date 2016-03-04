@@ -268,92 +268,6 @@
                     VerticalAlignment="Bottom"
                     Canvas.ZIndex="30">
 
-            <Grid Margin="0"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Bottom"
-                  Canvas.ZIndex="10">
-                <!--  Contains Shutter button and zoom buttons/bar here.  -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
-
-                <!--<Grid Name="ShutterButtonWrapper"
-                      Grid.RowSpan="4"
-                      Grid.Column="2"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Bottom"
-                      Visibility="{Binding ShootButtonVisibility}">
-                    <Button Name="ShutterButton"
-                            MinWidth="10"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Background="Black"
-                            BorderThickness="1"
-                            Click="ShutterButton_Click"
-                            Holding="ShutterButton_Holding"
-                            IsEnabled="{Binding ShutterButtonEnabled}"
-                            Opacity="0.8"
-                            Tapped="ShutterButton_Tapped">
-                        <Image Margin="8" Source="{Binding ShutterButtonImage}" />
-                    </Button>
-                </Grid>-->
-
-                <!--<controls:ZoomBar Grid.Row="0"
-                                  Grid.Column="0"
-                                  Width="140"
-                                  Height="13"
-                                  Margin="16,4,4,4"
-                                  VerticalAlignment="Bottom"
-                                  CurrentBoxIndex="{Binding ZoomBoxIndex,
-                                                            Mode=OneWay,
-                                                            FallbackValue=0}"
-                                  PositionInCurrentBox="{Binding ZoomPositionInCurrentBox,
-                                                                 Mode=OneWay,
-                                                                 FallbackValue=0}"
-                                  TotalBoxNum="{Binding ZoomBoxNum,
-                                                        Mode=OneWay,
-                                                        FallbackValue=1}"
-                                  Visibility="{Binding IsZoomAvailable,
-                                                       FallbackValue=Collapsed,
-                                                       Converter={StaticResource B2VConverter}}" />
-                <Grid Grid.Row="1"
-                      Grid.Column="0"
-                      Height="60"
-                      Margin="16,0,0,0"
-                      Visibility="{Binding IsZoomAvailable,
-                                           FallbackValue=Collapsed,
-                                           Converter={StaticResource B2VConverter}}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Name="ZoomOutButton"
-                            Grid.Column="0"
-                            Click="ZoomOutButton_Click"
-                            Holding="ZoomOutButton_Holding"
-                            Style="{StaticResource ZoomButtonStyle}"
-                            Tapped="ZoomOutButton_Tapped">
-                        <Image Margin="0" Source="/Assets/LiveviewScreen/ZoomOut.png" />
-                    </Button>
-                    <Button Name="ZoomInButton"
-                            Grid.Column="1"
-                            Click="ZoomInButton_Click"
-                            Holding="ZoomInButton_Holding"
-                            Style="{StaticResource ZoomButtonStyle}"
-                            Tapped="ZoomInButton_Tapped">
-                        <Image Margin="0" Source="/Assets/LiveviewScreen/ZoomIn.png" />
-                    </Button>
-                </Grid>-->
-            </Grid>
-
             <controls:MultiModeShutterButton x:Name="MultiShutterButton"
                                              Grid.Row="2"
                                              Grid.RowSpan="2"
@@ -410,7 +324,6 @@
                             Holding="ZoomOutButton_Holding"
                             Style="{StaticResource ZoomButtonStyle}"
                             Tapped="ZoomOutButton_Tapped">
-                        <!--<Image Margin="0" Source="/Assets/LiveviewScreen/ZoomOut.png" />-->
                         <ContentControl Margin="6" ContentTemplate="{StaticResource ZoomOutIcon}" />
                     </Button>
                     <controls:ZoomBar Grid.Column="1"
@@ -432,7 +345,6 @@
                             Holding="ZoomInButton_Holding"
                             Style="{StaticResource ZoomButtonStyle}"
                             Tapped="ZoomInButton_Tapped">
-                        <!--<Image Margin="0" Source="/Assets/LiveviewScreen/ZoomIn.png" />-->
                         <ContentControl Margin="6" ContentTemplate="{StaticResource ZoomInIcon}" />
                     </Button>
                 </Grid>
