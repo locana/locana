@@ -13,11 +13,15 @@
           Visibility="{Binding SettingVisibility,
                                Mode=OneWay,
                                FallbackValue=Visible}">
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
         <TextBlock Name="SettingName"
                    Margin="0,0,10,5"
                    VerticalAlignment="Center"
@@ -25,20 +29,12 @@
                    Text="{Binding Title,
                                   Mode=OneWay}"
                    TextWrapping="Wrap" />
-        <TextBlock Name="SettingGuide"
-                   Grid.Row="1"
-                   Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
-                   Style="{StaticResource BodyTextBlockStyle}"
-                   Text="{Binding Guide,
-                                  Mode=OneWay}"
-                   TextWrapping="Wrap"
-                   Visibility="{Binding GuideVisibility,
-                                        Mode=OneWay}" />
         <ComboBox Name="Picker"
-                  Grid.Row="2"
-                  Margin="0,8"
-                  HorizontalAlignment="Left"
+                  Grid.Column="1"
+                  Margin="0,0,10,0"
+                  HorizontalAlignment="Right"
                   VerticalAlignment="Center"
+                  HorizontalContentAlignment="Center"
                   BorderThickness="1"
                   IsEnabled="{Binding IsActive,
                                       Mode=OneWay}"
@@ -46,5 +42,15 @@
                                         Mode=OneWay}"
                   SelectedIndex="{Binding CurrentSetting,
                                           Mode=TwoWay}" />
+        <TextBlock Name="SettingGuide"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
+                   Style="{StaticResource BodyTextBlockStyle}"
+                   Text="{Binding Guide,
+                                  Mode=OneWay}"
+                   TextWrapping="Wrap"
+                   Visibility="{Binding GuideVisibility,
+                                        Mode=OneWay}" />
     </Grid>
 </UserControl>
