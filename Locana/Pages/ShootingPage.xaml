@@ -107,41 +107,21 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Grid x:Name="FrontScreen"
-              Grid.RowSpan="5"
+        <ProgressRing Grid.RowSpan="5"
+                      Grid.ColumnSpan="3"
+                      Width="64"
+                      Height="64"
+                      Canvas.ZIndex="100"
+                      IsActive="{Binding ShowProgressCircle,
+                                         FallbackValue=true}" />
+
+        <Grid x:Name="LiveviewGrid"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
-              Canvas.ZIndex="100"
-              Visibility="{Binding IsWaitingConnection,
-                                   FallbackValue=Collapsed,
-                                   Converter={StaticResource B2VConverter}}">
-            <StackPanel HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Background="{ThemeResource ApplicationForegroundThemeBrush}"
-                        Padding="0,30">
-                <TextBlock HorizontalAlignment="Center"
-                           Foreground="{ThemeResource SystemControlForegroundChromeHighBrush}"
-                           Text="Waiting connection..." />
-                <ProgressBar Height="20"
-                             Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
-                             IsIndeterminate="True" />
-            </StackPanel>
-            <Rectangle HorizontalAlignment="Stretch"
-                       VerticalAlignment="Stretch"
-                       Opacity="0.6">
-                <Rectangle.Fill>
-                    <SolidColorBrush Color="{ThemeResource ApplicationForegroundThemeBrush}" />
-                </Rectangle.Fill>
-            </Rectangle>
-        </Grid>
-
-
-
-        <Grid x:Name="LiveviewGrid" Canvas.ZIndex="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+              Canvas.ZIndex="3">
             <canvas:CanvasControl x:Name="LiveviewImageCanvas"
                                   ClearColor="Transparent"
                                   Draw="CanvasControl_Draw"
-                                  
                                   SizeChanged="LiveviewImageCanvas_SizeChanged" />
 
             <controls:FramingGridsSurface x:Name="FramingGuideSurface"

@@ -425,6 +425,10 @@ namespace Locana.Pages
 
         async Task SetupScreen(TargetDevice target)
         {
+            this.target = target;
+            ScreenViewData = new LiveviewScreenViewData(target);
+            LayoutRoot.DataContext = ScreenViewData;
+
             try
             {
                 await SequentialOperation.SetUp(target, liveview);
@@ -440,9 +444,7 @@ namespace Locana.Pages
                 return;
             }
 
-            this.target = target;
-            ScreenViewData = new LiveviewScreenViewData(target);
-            LayoutRoot.DataContext = ScreenViewData;
+            ScreenViewData.ConnectionEstablished = true;
 
             target.Status.PropertyChanged += Status_PropertyChanged;
             target.Api.AvailiableApisUpdated += Api_AvailiableApisUpdated;

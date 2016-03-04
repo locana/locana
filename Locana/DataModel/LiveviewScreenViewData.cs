@@ -247,7 +247,7 @@ namespace Locana.DataModel
                 {
                     return false;
                 }
-                switch (Device.Status.ShootMode.Current ?? "")
+                switch (Device.Status.ShootMode?.Current ?? "")
                 {
                     case ShootModeParam.Still:
                         if (Device.Status.Status == EventParam.Idle) { return true; }
@@ -525,6 +525,23 @@ namespace Locana.DataModel
         public bool LiveviewImageDisplayed
         {
             get { return !IsAudioMode; }
+        }
+
+        private bool _ConnectionEstablished;
+        public bool ConnectionEstablished
+        {
+            get { return _ConnectionEstablished; }
+            set
+            {
+                _ConnectionEstablished = value;
+                NotifyChangedOnUI(nameof(ConnectionEstablished));
+                NotifyChangedOnUI(nameof(ShowProgressCircle));
+            }
+        }
+
+        public bool ShowProgressCircle
+        {
+            get { return !ConnectionEstablished; }
         }
 
         private bool _FramingGridDisplayed = false;
