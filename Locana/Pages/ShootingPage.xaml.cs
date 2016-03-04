@@ -362,7 +362,7 @@ namespace Locana.Pages
         {
             base.OnNavigatedTo(e);
             var target = e.Parameter as TargetDevice;
-            SetupScreen(target);
+            await SetupScreen(target);
 
             MediaDownloader.Instance.Fetched += OnFetchdImage;
 
@@ -423,7 +423,7 @@ namespace Locana.Pages
 
         }
 
-        async void SetupScreen(TargetDevice target)
+        async Task SetupScreen(TargetDevice target)
         {
             try
             {
