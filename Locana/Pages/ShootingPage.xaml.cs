@@ -11,6 +11,7 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using Naotaco.Histogram.Win2d;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
@@ -32,15 +33,13 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace Locana.Pages
 {
     public sealed partial class ShootingPage : Page
     {
         public ShootingPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             InitializeCommandBar();
             InitializeUI();
@@ -73,7 +72,7 @@ namespace Locana.Pages
             LiveviewGrid.SizeChanged += LiveviewGrid_SizeChanged;
         }
 
-        bool sizeChanged = false;
+        private bool sizeChanged = false;
 
         private void LiveviewGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -81,59 +80,34 @@ namespace Locana.Pages
             DisposeLiveviewImageBitmap();
         }
 
-        DisplayRequest displayRequest = new DisplayRequest();
-        DispatcherTimer LiveviewFpsTimer = new DispatcherTimer();
-        const int FPS_INTERVAL = 5000;
-        int LiveviewFrameCount = 0;
+        private DisplayRequest displayRequest = new DisplayRequest();
+        private DispatcherTimer LiveviewFpsTimer = new DispatcherTimer();
+        private const int FPS_INTERVAL = 5000;
+        private int LiveviewFrameCount = 0;
 
-        void InitializeTimer()
+        private void InitializeTimer()
         {
             LiveviewFpsTimer.Interval = TimeSpan.FromMilliseconds(FPS_INTERVAL);
             LiveviewFpsTimer.Tick += (sender, arg) =>
             {
-                var fps = (double)LiveviewFrameCount * 1000 / (double)FPS_INTERVAL;
+                var fps = (double)LiveviewFrameCount * 1000 / FPS_INTERVAL;
                 DebugUtil.Log(string.Format("[LV CanvasBitmap] {0} fps", fps));
                 LiveviewFrameCount = 0;
             };
         }
 
-        CommandBarManager _CommandBarManager = new CommandBarManager();
+        private CommandBarManager _CommandBarManager = new CommandBarManager();
 
-        void InitializeCommandBar()
+        private void InitializeCommandBar()
         {
-            _CommandBarManager.SetEvent(AppBarItem.AppSetting, (s, args) =>
-            {
-                this.Frame.Navigate(typeof(AppSettingPage));
-            });
-            _CommandBarManager.SetEvent(AppBarItem.FNumberSlider, (s, args) =>
-            {
-                ToggleVisibility(FnumberSlider);
-            });
-            _CommandBarManager.SetEvent(AppBarItem.ShutterSpeedSlider, (s, args) =>
-            {
-                ToggleVisibility(SSSlider);
-            });
-            _CommandBarManager.SetEvent(AppBarItem.IsoSlider, (s, args) =>
-            {
-                ToggleVisibility(ISOSlider);
-            });
-            _CommandBarManager.SetEvent(AppBarItem.EvSlider, (s, args) =>
-            {
-                ToggleVisibility(EvSlider);
-            });
-            _CommandBarManager.SetEvent(AppBarItem.ProgramShiftSlider, (s, args) =>
-            {
-                ToggleVisibility(ProgramShiftSlider);
-            });
-            _CommandBarManager.SetEvent(AppBarItem.Zoom, (s, args) =>
-            {
-                ToggleVisibility(ZoomElements);
-            });
-            _CommandBarManager.SetEvent(AppBarItem.CancelTouchAF, async (s, args) =>
-            {
-                if (target == null || target.Api == null) { return; }
-                await target.Api.Camera.CancelTouchAFAsync();
-            });
+            _CommandBarManager.SetEvent(AppBarItem.AppSetting, (s, args) => { Frame.Navigate(typeof(AppSettingPage)); });
+            _CommandBarManager.SetEvent(AppBarItem.FNumberSlider, (s, args) => { ToggleVisibility(FnumberSlider); });
+            _CommandBarManager.SetEvent(AppBarItem.ShutterSpeedSlider, (s, args) => { ToggleVisibility(SSSlider); });
+            _CommandBarManager.SetEvent(AppBarItem.IsoSlider, (s, args) => { ToggleVisibility(ISOSlider); });
+            _CommandBarManager.SetEvent(AppBarItem.EvSlider, (s, args) => { ToggleVisibility(EvSlider); });
+            _CommandBarManager.SetEvent(AppBarItem.ProgramShiftSlider, (s, args) => { ToggleVisibility(ProgramShiftSlider); });
+            _CommandBarManager.SetEvent(AppBarItem.Zoom, (s, args) => { ToggleVisibility(ZoomElements); });
+            _CommandBarManager.SetEvent(AppBarItem.CancelTouchAF, async (s, args) => { await target?.Api?.Camera?.CancelTouchAFAsync(); });
 
             _FocusFrameSurface.OnTouchFocusOperated += async (obj, args) =>
             {
@@ -150,7 +124,7 @@ namespace Locana.Pages
             };
         }
 
-        void ToggleVisibility(FrameworkElement element)
+        private void ToggleVisibility(FrameworkElement element)
         {
             if (element.Visibility == Visibility.Visible)
             {
@@ -181,7 +155,7 @@ namespace Locana.Pages
             }
         }
 
-        void HideAllSliders()
+        private void HideAllSliders()
         {
             foreach (var s in Sliders.Children)
             {
@@ -236,13 +210,13 @@ namespace Locana.Pages
             Debug.WriteLine(LayoutRoot.ActualWidth + " x " + LayoutRoot.ActualHeight);
         }
 
-        async void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
+        private async void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
         {
             if (CameraStatusUtility.IsContinuousShootingMode(target)) { await StartContShooting(); }
             else { ShutterButtonPressed(); }
         }
 
-        async void HardwareButtons_CameraReleased(object sender, CameraEventArgs e)
+        private async void HardwareButtons_CameraReleased(object sender, CameraEventArgs e)
         {
             if (target == null || target.Api == null) { return; }
             if (target.Api.Capability.IsAvailable("cancelHalfPressShutter"))
@@ -256,7 +230,7 @@ namespace Locana.Pages
             await StopContShooting();
         }
 
-        async void HardwareButtons_CameraHalfPressed(object sender, CameraEventArgs e)
+        private async void HardwareButtons_CameraHalfPressed(object sender, CameraEventArgs e)
         {
             if (target == null || target.Api == null || !target.Api.Capability.IsAvailable("actHalfPressShutter")) { return; }
             try
@@ -266,10 +240,8 @@ namespace Locana.Pages
             catch (RemoteApiException) { }
         }
 
-        const string WIDE_STATE = "WideState";
-        const string NARROW_STATE = "NarrowState";
-        const string TALL_STATE = "TallState";
-        const string SHORT_STATE = "ShortState";
+        private const string WIDE_STATE = "WideState";
+        private const string NARROW_STATE = "NarrowState";
 
         private void InitializeVisualStates()
         {
@@ -356,7 +328,7 @@ namespace Locana.Pages
         private ImageDataSource liveview_data = new ImageDataSource();
         private ImageDataSource postview_data = new ImageDataSource();
 
-        LiveviewScreenViewData ScreenViewData;
+        private LiveviewScreenViewData ScreenViewData;
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -393,11 +365,6 @@ namespace Locana.Pages
             });
         }
 
-        private static void TearDownGeolocatorManager()
-        {
-            GeolocatorManager.INSTANCE.Stop();
-        }
-
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (target != null)
@@ -417,13 +384,13 @@ namespace Locana.Pages
             var task = SequentialOperation.TearDown(target, liveview);
 
             TearDownCurrentTarget();
-            TearDownGeolocatorManager();
+            GeolocatorManager.INSTANCE.Stop();
 
             base.OnNavigatingFrom(e);
 
         }
 
-        async Task SetupScreen(TargetDevice target)
+        private async Task SetupScreen(TargetDevice target)
         {
             this.target = target;
             ScreenViewData = new LiveviewScreenViewData(target);
@@ -540,7 +507,7 @@ namespace Locana.Pages
             };
         }
 
-        void Status_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Status_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var status = sender as CameraStatus;
             switch (e.PropertyName)
@@ -622,7 +589,7 @@ namespace Locana.Pages
                 .ApplyShootingScreenCommands(AppBarUnit);
         }
 
-        void ShowCancelTouchAFButton()
+        private void ShowCancelTouchAFButton()
         {
             _CommandBarManager.Command(AppBarItem.CancelTouchAF)
                 .ApplyShootingScreenCommands(AppBarUnit);
@@ -704,7 +671,7 @@ namespace Locana.Pages
 
         private ReaderWriterLockSlim rwLock = new ReaderWriterLockSlim();
 
-        CanvasBitmap LiveviewImageBitmap;
+        private CanvasBitmap LiveviewImageBitmap;
 
         private JpegPacket PendingPakcet;
 
@@ -833,14 +800,14 @@ namespace Locana.Pages
             }
         }
 
-        double CalcLiveviewMagnification()
+        private double CalcLiveviewMagnification()
         {
             var mag_h = LiveviewImageCanvas.ActualWidth / OriginalLvSize.Width;
             var mag_v = LiveviewImageCanvas.ActualHeight / OriginalLvSize.Height;
             return Math.Min(mag_h, mag_v);
         }
 
-        void DisposeLiveviewImageBitmap()
+        private void DisposeLiveviewImageBitmap()
         {
             rwLock.EnterWriteLock();
             try
@@ -854,7 +821,7 @@ namespace Locana.Pages
             }
         }
 
-        void liveview_Closed(object sender, EventArgs e)
+        private void liveview_Closed(object sender, EventArgs e)
         {
             Debug.WriteLine("Liveview connection closed");
         }
@@ -969,9 +936,9 @@ namespace Locana.Pages
             }
         }
 
-        PeriodicalShootingTask PeriodicalShootingTask;
+        private PeriodicalShootingTask PeriodicalShootingTask;
 
-        async void ShutterButtonPressed()
+        private async void ShutterButtonPressed()
         {
             var handled = StartStopPeriodicalShooting();
 
@@ -1090,7 +1057,7 @@ namespace Locana.Pages
             return task;
         }
 
-        DisplayState ControlPanelState = DisplayState.AlwaysVisible;
+        private DisplayState ControlPanelState = DisplayState.AlwaysVisible;
 
         enum DisplayState
         {
@@ -1098,14 +1065,11 @@ namespace Locana.Pages
             Collapsible,
         }
 
-        bool ControlPanelDisplayed = false;
+        private bool ControlPanelDisplayed = false;
 
-        private void OpenCloseControlPanel()
+        private void ToggleControlPanel()
         {
-            if (ControlPanelState == DisplayState.AlwaysVisible)
-            {
-                return;
-            }
+            if (ControlPanelState == DisplayState.AlwaysVisible) { return; }
 
             if (ControlPanelDisplayed)
             {
@@ -1166,17 +1130,17 @@ namespace Locana.Pages
             }).Begin();
         }
 
-        private void Grid_ManipulationCompleted_1(object sender, ManipulationCompletedRoutedEventArgs e)
+        private void ControlPanelArrow_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            OpenCloseControlPanel();
+            ToggleControlPanel();
         }
 
-        private void Grid_Tapped_1(object sender, TappedRoutedEventArgs e)
+        private void ControlPanelArrow_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            OpenCloseControlPanel();
+            ToggleControlPanel();
         }
 
-        void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             rwLock.EnterReadLock();
             try
@@ -1229,7 +1193,6 @@ namespace Locana.Pages
             _FocusFrameSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
             FramingGuideSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
         }
-
 
         private void RotateLiveviewImage(double angle, EventHandler<object> Completed = null)
         {

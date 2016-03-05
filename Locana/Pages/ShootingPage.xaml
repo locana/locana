@@ -233,9 +233,9 @@
             </Grid.ColumnDefinitions>
             <Grid HorizontalAlignment="Right"
                   VerticalAlignment="Center"
-                  ManipulationCompleted="Grid_ManipulationCompleted_1"
+                  ManipulationCompleted="ControlPanelArrow_ManipulationCompleted"
                   ManipulationMode="All"
-                  Tapped="Grid_Tapped_1">
+                  Tapped="ControlPanelArrow_Tapped">
                 <!--  To expand manipulatable area.  -->
                 <Rectangle HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
