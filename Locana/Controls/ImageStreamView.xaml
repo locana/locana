@@ -23,13 +23,13 @@
         <local:FramingGridsSurface x:Name="FramingGuideSurface"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
-                                   FibonacciOrigin="{Binding Path=AppSetting.FibonacciLineOrigin,
+                                   FibonacciOrigin="{Binding Path=FibonacciLineOrigin,
                                                              Mode=OneWay}"
-                                   Stroke="{Binding Path=AppSetting.GridColorBrush,
+                                   Stroke="{Binding Path=GridColorBrush,
                                                     Mode=OneWay}"
-                                   Type="{Binding Path=AppSetting.GridType,
+                                   Type="{Binding Path=GridType,
                                                   Mode=OneWay}"
-                                   Visibility="{Binding Path=AppSetting.FramingGridEnabled,
+                                   Visibility="{Binding Path=FramingGridEnabled,
                                                         FallbackValue=Collapsed,
                                                         Converter={StaticResource B2VConverter}}" />
 

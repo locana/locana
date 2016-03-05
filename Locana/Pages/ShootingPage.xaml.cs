@@ -381,14 +381,10 @@ namespace Locana.Pages
             ControlPanel.SetChildrenControlHitTest(!target.Status.IsRecording());
             ControlPanel.SetChildrenControlTabStop(!target.Status.IsRecording());
 
-            Sliders.DataContext = new ShootingParamViewData() { Status = target.Status, Liveview = ScreenViewData };
-            ShootingParams.DataContext = ScreenViewData;
             _CommandBarManager.ShootingScreenBarData = ScreenViewData;
             _CommandBarManager.ApplyShootingScreenCommands(AppBarUnit);
 
-            ZoomElements.DataContext = ScreenViewData;
-
-            LiveviewUnit.FramingGuideDataContext = new OptionalElementsViewData() { AppSetting = ApplicationSettings.GetInstance() };
+            LiveviewUnit.FramingGuideDataContext = ApplicationSettings.GetInstance();
             UpdateShutterButton(target.Status);
 
             await LiveviewUnit.SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);

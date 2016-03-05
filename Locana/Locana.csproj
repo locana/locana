@@ -180,9 +180,7 @@
     <Compile Include="DataModel\ApiCapabilityContainer.cs" />
     <Compile Include="DataModel\ApplicationSettings.cs" />
     <Compile Include="DataModel\AppSettingData.cs" />
-    <Compile Include="DataModel\AsyncConversionSource.cs" />
     <Compile Include="DataModel\CameraStatus.cs" />
-    <Compile Include="DataModel\CompositiveDataModel.cs" />
     <Compile Include="DataModel\ContentInfo.cs" />
     <Compile Include="DataModel\ControlPanelDataSource.cs" />
     <Compile Include="DataModel\EntranceGridPanelCollection.cs" />

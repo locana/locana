@@ -263,22 +263,22 @@
             <Grid x:Name="Sliders" MaxWidth="400">
                 <controls:ShootingParamSlider x:Name="FnumberSlider"
                                               IconDataTemplate="{StaticResource ApertureIcon}"
-                                              Parameter="{Binding Status.FNumber}"
+                                              Parameter="{Binding Device.Status.FNumber}"
                                               Style="{StaticResource ShootingParamSliderStyle}"
                                               Visibility="Collapsed" />
                 <controls:ShootingParamSlider x:Name="SSSlider"
                                               IconDataTemplate="{StaticResource SSIcon}"
-                                              Parameter="{Binding Status.ShutterSpeed}"
+                                              Parameter="{Binding Device.Status.ShutterSpeed}"
                                               Style="{StaticResource ShootingParamSliderStyle}"
                                               Visibility="Collapsed" />
                 <controls:ShootingParamSlider x:Name="ISOSlider"
                                               IconDataTemplate="{StaticResource IsoIcon}"
-                                              Parameter="{Binding Status.ISOSpeedRate}"
+                                              Parameter="{Binding Device.Status.ISOSpeedRate}"
                                               Style="{StaticResource ShootingParamSliderStyle}"
                                               Visibility="Collapsed" />
                 <controls:EvSlider x:Name="EvSlider"
                                    IconDataTemplate="{StaticResource EvIcon}"
-                                   Parameter="{Binding Status.EvInfo}"
+                                   Parameter="{Binding Device.Status.EvInfo}"
                                    Style="{StaticResource EvSliderStyle}"
                                    Visibility="Collapsed" />
 
@@ -336,7 +336,7 @@
             <Grid x:Name="ShootingParams"
                   Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                   Opacity="0.7"
-                  Visibility="{Binding IsShootingParamDisplayAvailable,
+                  Visibility="{Binding DisplayParamsArea,
                                        FallbackValue=Collapsed,
                                        Converter={StaticResource B2VConverter}}">
                 <Grid.ColumnDefinitions>

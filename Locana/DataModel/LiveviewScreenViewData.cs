@@ -11,7 +11,7 @@ namespace Locana.DataModel
 {
     public class LiveviewScreenViewData : ObservableBase
     {
-        readonly TargetDevice Device;
+        public TargetDevice Device { private set; get; }
 
         public LiveviewScreenViewData(TargetDevice d)
         {
@@ -39,6 +39,11 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(LiveviewImageDisplayed));
                 NotifyChangedOnUI(nameof(FramingGridDisplayed));
                 NotifyChangedOnUI(nameof(IsBatteryInfoAvailable));
+                NotifyChangedOnUI(nameof(IsAvailableGetShutterSpeed));
+                NotifyChangedOnUI(nameof(IsAvailableGetFNumber));
+                NotifyChangedOnUI(nameof(IsAvailableGetIsoSpeedRate));
+                NotifyChangedOnUI(nameof(IsAvailableGetEV));
+                NotifyChangedOnUI(nameof(DisplayParamsArea));
             };
             Device.Api.AvailiableApisUpdated += (sender, e) =>
             {
@@ -63,7 +68,7 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(IsShootingParamAvailable));
                 NotifyChangedOnUI(nameof(IsShootingParamSettingAvailable));
                 NotifyChangedOnUI(nameof(IsProgramShiftAvailable));
-                NotifyChangedOnUI(nameof(IsShootingParamDisplayAvailable));
+                NotifyChangedOnUI(nameof(DisplayParamsArea));
                 NotifyChangedOnUI(nameof(ShootModeChangingAvailable));
             };
 
@@ -125,19 +130,18 @@ namespace Locana.DataModel
 
                 if (mode == ShootModeParam.Still)
                 {
-                    if (Device.Status.ContShootingMode != null &&
-                        (Device.Status.ContShootingMode.Current == ContinuousShootMode.Cont ||
-                        Device.Status.ContShootingMode.Current == ContinuousShootMode.SpeedPriority ||
-                        Device.Status.ContShootingMode.Current == ContinuousShootMode.Burst ||
-                        Device.Status.ContShootingMode.Current == ContinuousShootMode.MotionShot))
+                    switch (Device.Status?.ContShootingMode?.Current ?? "")
                     {
-                        return ContinuousStillIconTemplate;
+                        case ContinuousShootMode.Cont:
+                        case ContinuousShootMode.SpeedPriority:
+                        case ContinuousShootMode.Burst:
+                        case ContinuousShootMode.MotionShot:
+                            return ContinuousStillIconTemplate;
+                        default:
+                            break;
                     }
-                    if (ApplicationSettings.GetInstance().IsIntervalShootingEnabled)
-                    {
-                        return IntervalStillIconTemplate;
-                    }
-                    return StillIconTemplate;
+
+                    return ApplicationSettings.GetInstance().IsIntervalShootingEnabled ? IntervalStillIconTemplate : StillIconTemplate;
                 }
                 else
                 {
@@ -161,13 +165,7 @@ namespace Locana.DataModel
             }
         }
 
-        public bool IsRecording
-        {
-            get
-            {
-                return Device.Status.IsRecording() || IsPeriodicalShootingRunning;
-            }
-        }
+        public bool IsRecording { get { return Device.Status.IsRecording() || IsPeriodicalShootingRunning; } }
 
         public DataTemplate ShootModeImage
         {
@@ -274,52 +272,17 @@ namespace Locana.DataModel
             }
         }
 
-        public bool ShootModeChangingAvailable
-        {
-            get
-            {
-                if (Device?.Api?.Capability == null) { return false; }
-                return Device.Api.Capability.IsAvailable("setShootMode");
-            }
-        }
+        public bool ShootModeChangingAvailable { get { return Device.Api.Capability?.IsAvailable("setShootMode") ?? false; } }
 
-        public bool IsZoomAvailable { get { return Device.Api.Capability != null && Device.Api.Capability.IsAvailable("actZoom"); } }
+        public bool IsZoomAvailable { get { return Device.Api.Capability?.IsAvailable("actZoom") ?? false; } }
 
-        public bool Processing
-        {
-            get
-            {
-                return Device.Status.IsProcessing();
-            }
-        }
+        public bool Processing { get { return Device.Status.IsProcessing(); } }
 
-        public int ZoomPositionInCurrentBox
-        {
-            get
-            {
-                if (Device.Status.ZoomInfo == null) { return 0; }
-                DebugUtil.Log("Zoom pos " + Device.Status.ZoomInfo.PositionInCurrentBox);
-                return Device.Status.ZoomInfo.PositionInCurrentBox;
-            }
-        }
+        public int ZoomPositionInCurrentBox { get { return Device.Status?.ZoomInfo?.PositionInCurrentBox ?? 0; } }
 
-        public int ZoomBoxIndex
-        {
-            get
-            {
-                if (Device.Status.ZoomInfo == null) { return 0; }
-                return Device.Status.ZoomInfo.CurrentBoxIndex;
-            }
-        }
+        public int ZoomBoxIndex { get { return Device.Status?.ZoomInfo?.CurrentBoxIndex ?? 0; } }
 
-        public int ZoomBoxNum
-        {
-            get
-            {
-                if (Device.Status.ZoomInfo == null) { return 0; }
-                return Device.Status.ZoomInfo.NumberOfBoxes;
-            }
-        }
+        public int ZoomBoxNum { get { return Device.Status?.ZoomInfo?.NumberOfBoxes ?? 0; } }
 
         public string RecordbaleAmount
         {
@@ -354,8 +317,7 @@ namespace Locana.DataModel
         {
             get
             {
-                if (Device.Status.ShootMode == null) { return ""; }
-                switch (Device.Status.ShootMode.Current ?? "")
+                switch (Device.Status?.ShootMode?.Current ?? "")
                 {
                     case ShootModeParam.Movie:
                     case ShootModeParam.Audio:
@@ -376,8 +338,7 @@ namespace Locana.DataModel
         {
             get
             {
-                if (Device.Status.ShootMode == null) { return false; }
-                switch (Device.Status.ShootMode.Current ?? "")
+                switch (Device.Status?.ShootMode?.Current ?? "")
                 {
                     case ShootModeParam.Movie:
                         return Device.Status.RecordingTimeSec > 0 && Device.Status.Status == EventParam.MvRecording;
@@ -392,26 +353,13 @@ namespace Locana.DataModel
             }
         }
 
-        public bool IsShootingParamDisplayAvailable { get { return IsAvailableGetEV || IsAvailableGetFNumber || IsAvailableGetIsoSpeedRate || IsAvailableGetShutterSpeed; } }
-        public bool IsAvailableGetShutterSpeed { get { return Device.Status != null && Device.Status.ShutterSpeed != null && Device.Status.ShutterSpeed.Current != null && Device.Api.Capability.IsAvailable("getShutterSpeed"); } }
-        public bool IsAvailableGetFNumber { get { return Device.Status != null && Device.Status.FNumber != null && Device.Status.FNumber.Current != null && Device.Api.Capability.IsAvailable("getFNumber"); } }
-        public bool IsAvailableGetIsoSpeedRate { get { return Device.Status != null && Device.Status.ISOSpeedRate != null && Device.Status.ISOSpeedRate.Current != null && Device.Api.Capability.IsAvailable("getIsoSpeedRate"); } }
-        public bool IsAvailableGetEV { get { return Device.Status != null && Device.Status.EvInfo != null && Device.Api.Capability.IsAvailable("getExposureCompensation"); } }
+        public bool DisplayParamsArea { get { return IsAvailableGetEV || IsAvailableGetFNumber || IsAvailableGetIsoSpeedRate || IsAvailableGetShutterSpeed; } }
+        public bool IsAvailableGetShutterSpeed { get { return Device.Status?.ShutterSpeed?.Current != null && Device.Api.Capability.IsAvailable("getShutterSpeed"); } }
+        public bool IsAvailableGetFNumber { get { return Device.Status?.FNumber?.Current != null && Device.Api.Capability.IsAvailable("getFNumber"); } }
+        public bool IsAvailableGetIsoSpeedRate { get { return Device.Status?.ISOSpeedRate?.Current != null && Device.Api.Capability.IsAvailable("getIsoSpeedRate"); } }
+        public bool IsAvailableGetEV { get { return Device.Status?.EvInfo != null && Device.Api.Capability.IsAvailable("getExposureCompensation"); } }
 
-        public string ShutterSpeedDisplayValue
-        {
-            get
-            {
-                if (Device.Status == null || Device.Status.ShutterSpeed == null || Device.Status.ShutterSpeed.Current == null)
-                {
-                    return "--";
-                }
-                else
-                {
-                    return Device.Status.ShutterSpeed.Current;
-                }
-            }
-        }
+        public string ShutterSpeedDisplayValue { get { return Device.Status?.ShutterSpeed?.Current ?? "--"; } }
 
         public string ISODisplayValue
         {
@@ -455,7 +403,7 @@ namespace Locana.DataModel
 
         private Brush ShootingParamBrush(string api)
         {
-            if (Device.Api == null || !Device.Api.Capability.IsAvailable(api)) { return ResourceManager.ForegroundBrush; }
+            if (!Device.Api.Capability.IsAvailable(api)) { return ResourceManager.ForegroundBrush; }
             else { return ResourceManager.SystemControlForegroundAccentBrush; }
         }
 
@@ -517,15 +465,9 @@ namespace Locana.DataModel
             }
         }
 
-        public bool IsAudioMode
-        {
-            get { return Device.Status.ShootMode.Current == ShootModeParam.Audio; }
-        }
+        public bool IsAudioMode { get { return Device.Status.ShootMode.Current == ShootModeParam.Audio; } }
 
-        public bool LiveviewImageDisplayed
-        {
-            get { return !IsAudioMode; }
-        }
+        public bool LiveviewImageDisplayed { get { return !IsAudioMode; } }
 
         private bool _ConnectionEstablished;
         public bool ConnectionEstablished
@@ -551,10 +493,7 @@ namespace Locana.DataModel
             }
         }
 
-        public bool ShowProgressCircle
-        {
-            get { return !ConnectionEstablished || Capturing; }
-        }
+        public bool ShowProgressCircle { get { return !ConnectionEstablished || Capturing; } }
 
         private bool _FramingGridDisplayed = false;
         public bool FramingGridDisplayed
