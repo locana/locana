@@ -258,7 +258,7 @@
                 <StackPanel x:Name="ControlPanel"
                             Grid.Row="1"
                             Margin="12"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Top" />
             </ScrollViewer>
         </Grid>
 
