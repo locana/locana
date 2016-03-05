@@ -539,9 +539,21 @@ namespace Locana.DataModel
             }
         }
 
+        public bool _Capturing;
+        public bool Capturing
+        {
+            get { return _Capturing; }
+            set
+            {
+                _Capturing = value;
+                NotifyChangedOnUI(nameof(Capturing));
+                NotifyChangedOnUI(nameof(ShowProgressCircle));
+            }
+        }
+
         public bool ShowProgressCircle
         {
-            get { return !ConnectionEstablished; }
+            get { return !ConnectionEstablished || Capturing; }
         }
 
         private bool _FramingGridDisplayed = false;

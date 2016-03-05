@@ -977,6 +977,8 @@ namespace Locana.Pages
 
             if (!handled)
             {
+                ScreenViewData.Capturing = true;
+
                 await SequentialOperation.StartStopRecording(
                     new List<TargetDevice> { target },
                     (result) =>
@@ -1003,6 +1005,8 @@ namespace Locana.Pages
                                 break;
                         }
                     });
+
+                ScreenViewData.Capturing = false;
             }
         }
 
