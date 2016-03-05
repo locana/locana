@@ -55,6 +55,8 @@
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
                         <Setter Target="RootSplitView.IsPaneOpen" Value="True" />
+                        <Setter Target="MessageToast.MinWidth" Value="640" />
+                        <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -63,6 +65,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
+                        <Setter Target="MessageToast.MinWidth" Value="480" />
+                        <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -71,6 +75,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="RootSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="MessageToast.HorizontalAlignment" Value="Stretch" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -125,7 +130,6 @@
 
         <controls:Toast x:Name="MessageToast"
                         MinHeight="48"
-                        HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
                         Canvas.ZIndex="20"
                         IsHitTestVisible="False" />
