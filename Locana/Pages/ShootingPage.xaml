@@ -41,11 +41,11 @@
                         <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="1" />
-                        <Setter Target="LiveviewGrid.(Grid.Column)" Value="1" />
-                        <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="3" />
-                        <Setter Target="LiveviewGrid.(Grid.Row)" Value="1" />
-                        <Setter Target="LiveviewGrid.Margin" Value="0,-24,0,0" />
+                        <Setter Target="LiveviewUnit.(Grid.ColumnSpan)" Value="1" />
+                        <Setter Target="LiveviewUnit.(Grid.Column)" Value="1" />
+                        <Setter Target="LiveviewUnit.(Grid.RowSpan)" Value="3" />
+                        <Setter Target="LiveviewUnit.(Grid.Row)" Value="1" />
+                        <Setter Target="LiveviewUnit.Margin" Value="0,-24,0,0" />
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="Header.(Grid.Column)" Value="1" />
                         <Setter Target="Header.Margin" Value="24,4,0,4" />
@@ -75,11 +75,11 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="LiveviewGrid.(Grid.ColumnSpan)" Value="3" />
-                        <Setter Target="LiveviewGrid.(Grid.Column)" Value="0" />
-                        <Setter Target="LiveviewGrid.(Grid.RowSpan)" Value="5" />
-                        <Setter Target="LiveviewGrid.(Grid.Row)" Value="0" />
-                        <Setter Target="LiveviewGrid.Margin" Value="0" />
+                        <Setter Target="LiveviewUnit.(Grid.ColumnSpan)" Value="3" />
+                        <Setter Target="LiveviewUnit.(Grid.Column)" Value="0" />
+                        <Setter Target="LiveviewUnit.(Grid.RowSpan)" Value="5" />
+                        <Setter Target="LiveviewUnit.(Grid.Row)" Value="0" />
+                        <Setter Target="LiveviewUnit.Margin" Value="0" />
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="3" />
                         <Setter Target="Header.(Grid.Column)" Value="0" />
                         <Setter Target="Header.Margin" Value="48,12,8,4" />
@@ -115,33 +115,10 @@
                       IsActive="{Binding ShowProgressCircle,
                                          FallbackValue=true}" />
 
-        <Grid x:Name="LiveviewGrid"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"
-              Canvas.ZIndex="3">
-            <canvas:CanvasControl x:Name="LiveviewImageCanvas"
-                                  ClearColor="Transparent"
-                                  Draw="CanvasControl_Draw"
-                                  SizeChanged="LiveviewImageCanvas_SizeChanged" />
-
-            <controls:FramingGridsSurface x:Name="FramingGuideSurface"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Top"
-                                          FibonacciOrigin="{Binding Path=AppSetting.FibonacciLineOrigin,
-                                                                    Mode=OneWay}"
-                                          Stroke="{Binding Path=AppSetting.GridColorBrush,
-                                                           Mode=OneWay}"
-                                          Type="{Binding Path=AppSetting.GridType,
-                                                         Mode=OneWay}"
-                                          Visibility="{Binding Path=AppSetting.FramingGridEnabled,
-                                                               FallbackValue=Collapsed,
-                                                               Converter={StaticResource B2VConverter}}" />
-
-            <controls:FocusFrameSurface x:Name="_FocusFrameSurface"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top" />
-
-        </Grid>
+        <controls:ImageStreamView x:Name="LiveviewUnit"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  Canvas.ZIndex="3" />
 
         <controls:Histogram x:Name="HistogramControl"
                             VerticalAlignment="Top"
