@@ -32,9 +32,6 @@ namespace Locana.Utility
 
         public static async Task<StorageFile> TryGetFileAsync(this StorageFolder folder, string filename)
         {
-#if WINDOWS_APP
-            return await folder.TryGetItemAsync(filename) as StorageFile;
-#else
             var tcs = new TaskCompletionSource<StorageFile>();
             await Task.Factory.StartNew(async () =>
             {
@@ -48,7 +45,6 @@ namespace Locana.Utility
                 }
             }).ConfigureAwait(false);
             return await tcs.Task.ConfigureAwait(false);
-#endif
         }
     }
 }

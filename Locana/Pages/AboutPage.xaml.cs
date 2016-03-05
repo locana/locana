@@ -30,7 +30,7 @@ namespace Locana.Pages
         private void UpdatePurchaseInformation()
         {
             var app = Application.Current as App;
-            Unlimited.Visibility = (app.IsFunctionLimited || app.IsTrialVersion).AsReverseVisibility();
+            Unlimited.Visibility = (!app.IsFunctionLimited && !app.IsTrialVersion).AsVisibility();
             Trial.Visibility = (app.IsTrialVersion).AsVisibility();
             Limited.Visibility = app.IsFunctionLimited.AsVisibility();
             TrialButton.Visibility = (app.IsFunctionLimited || app.IsTrialVersion).AsVisibility();

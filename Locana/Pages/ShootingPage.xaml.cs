@@ -107,14 +107,14 @@ namespace Locana.Pages
             _CommandBarManager.SetEvent(AppBarItem.EvSlider, (s, args) => { ToggleVisibility(EvSlider); });
             _CommandBarManager.SetEvent(AppBarItem.ProgramShiftSlider, (s, args) => { ToggleVisibility(ProgramShiftSlider); });
             _CommandBarManager.SetEvent(AppBarItem.Zoom, (s, args) => { ToggleVisibility(ZoomElements); });
-            _CommandBarManager.SetEvent(AppBarItem.CancelTouchAF, async (s, args) => { await target?.Api?.Camera?.CancelTouchAFAsync(); });
+            _CommandBarManager.SetEvent(AppBarItem.CancelTouchAF, (s, args) => { target?.Api?.Camera?.CancelTouchAFAsync().IgnoreExceptions(); });
 
             _FocusFrameSurface.OnTouchFocusOperated += (obj, args) => { target?.Api?.Camera?.SetAFPositionAsync(args.X, args.Y).IgnoreExceptions(); };
         }
 
         private void ToggleVisibility(FrameworkElement element)
         {
-            if (element.Visibility == Visibility.Visible)
+            if (element.Visibility.IsVisible())
             {
                 AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
                 {
@@ -147,17 +147,14 @@ namespace Locana.Pages
         {
             foreach (var s in Sliders.Children)
             {
-                if (s.Visibility == Visibility.Visible)
+                if (s.Visibility.IsVisible())
                 {
                     AnimationHelper.CreateFadeAnimation(new FadeAnimationRequest()
                     {
                         RequestFadeType = FadeType.FadeOut,
                         Target = s as FrameworkElement,
                         Duration = TimeSpan.FromMilliseconds(150),
-                        Completed = (sender, arg) =>
-                        {
-                            s.Visibility = Visibility.Collapsed;
-                        }
+                        Completed = (sender, arg) => { s.Visibility = Visibility.Collapsed; }
                     }).Begin();
                 }
             }
@@ -979,15 +976,15 @@ namespace Locana.Pages
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     DebugUtil.Log("Status updated: " + status.Count);
+
+                    PeriodicalShootingStatus.Visibility = status.IsRunning.AsVisibility();
                     if (status.IsRunning)
                     {
-                        PeriodicalShootingStatus.Visibility = Visibility.Visible;
                         PeriodicalShootingStatusText.Text = string.Format(
                             SystemUtil.GetStringResource("PeriodicalShooting_Status"),
                             status.Interval.ToString(),
                             status.Count.ToString());
                     }
-                    else { PeriodicalShootingStatus.Visibility = Visibility.Collapsed; }
                 });
             };
             return task;

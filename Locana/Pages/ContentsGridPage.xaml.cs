@@ -177,7 +177,7 @@ namespace Locana.Pages
             switch (name)
             {
                 case NARROW_STATE:
-                    AppBarUnit.Background = MoviePlayer.Visibility == Visibility.Visible ? AccentBrush : ChromeLowBrush;
+                    AppBarUnit.Background = MoviePlayer.Visibility.IsVisible() ? AccentBrush : ChromeLowBrush;
                     break;
                 default:
                     AppBarUnit.Background = AccentBrush;
@@ -607,7 +607,7 @@ namespace Locana.Pages
                 }
                 CommandBarManager.ApplyCommands(AppBarUnit);
 
-                AppBarUnit.Visibility = (AppBarUnit.PrimaryCommands.Count == 0).AsReverseVisibility();
+                AppBarUnit.Visibility = (AppBarUnit.PrimaryCommands.Count != 0).AsVisibility();
             });
         }
 
@@ -729,7 +729,7 @@ namespace Locana.Pages
                 e.Handled = true;
             }
 
-            if (MoviePlayer.Visibility == Visibility.Visible)
+            if (MoviePlayer.Visibility.IsVisible())
             {
                 DebugUtil.Log("Close local movie stream.");
                 FinishMoviePlayback();

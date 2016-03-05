@@ -44,16 +44,9 @@ namespace Locana.Utility
             }
         }
 
-        public static Visibility AsReverseVisibility(this bool val)
+        public static bool IsVisible(this Visibility visibility)
         {
-            if (val)
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
+            return visibility == Visibility.Visible;
         }
     }
 }
