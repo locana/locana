@@ -109,19 +109,7 @@ namespace Locana.Pages
             _CommandBarManager.SetEvent(AppBarItem.Zoom, (s, args) => { ToggleVisibility(ZoomElements); });
             _CommandBarManager.SetEvent(AppBarItem.CancelTouchAF, async (s, args) => { await target?.Api?.Camera?.CancelTouchAFAsync(); });
 
-            _FocusFrameSurface.OnTouchFocusOperated += async (obj, args) =>
-            {
-                DebugUtil.Log("Touch AF operated: " + args.X + " " + args.Y);
-                if (target == null || target.Api == null || !target.Api.Capability.IsAvailable("setTouchAFPosition")) { return; }
-                try
-                {
-                    await target.Api.Camera.SetAFPositionAsync(args.X, args.Y);
-                }
-                catch (RemoteApiException ex)
-                {
-                    DebugUtil.Log(ex.StackTrace);
-                }
-            };
+            _FocusFrameSurface.OnTouchFocusOperated += (obj, args) => { target?.Api?.Camera?.SetAFPositionAsync(args.X, args.Y).IgnoreExceptions(); };
         }
 
         private void ToggleVisibility(FrameworkElement element)
@@ -223,21 +211,17 @@ namespace Locana.Pages
             {
                 try
                 {
-                    await target.Api.Camera.CancelHalfPressShutterAsync();
+                    await target?.Api?.Camera?.CancelHalfPressShutterAsync();
                 }
                 catch (RemoteApiException) { }
             }
             await StopContShooting();
         }
 
-        private async void HardwareButtons_CameraHalfPressed(object sender, CameraEventArgs e)
+        private void HardwareButtons_CameraHalfPressed(object sender, CameraEventArgs e)
         {
-            if (target == null || target.Api == null || !target.Api.Capability.IsAvailable("actHalfPressShutter")) { return; }
-            try
-            {
-                await target.Api.Camera.ActHalfPressShutterAsync();
-            }
-            catch (RemoteApiException) { }
+            if (!target?.Api?.Capability?.IsAvailable("actHalfPressShutter") ?? true) { return; }
+            target?.Api?.Camera?.ActHalfPressShutterAsync().IgnoreExceptions();
         }
 
         private const string WIDE_STATE = "WideState";
@@ -387,7 +371,6 @@ namespace Locana.Pages
             GeolocatorManager.INSTANCE.Stop();
 
             base.OnNavigatingFrom(e);
-
         }
 
         private async Task SetupScreen(TargetDevice target)
@@ -461,7 +444,7 @@ namespace Locana.Pages
             }
             if (target.Api.Capability.IsAvailable("setLiveviewFrameInfo"))
             {
-                await target.Api.Camera.SetLiveviewFrameInfoAsync(new FrameInfoSetting() { TransferFrameInfo = RequestFocusFrameEnabled });
+                await target?.Api?.Camera?.SetLiveviewFrameInfoAsync(new FrameInfoSetting() { TransferFrameInfo = RequestFocusFrameEnabled });
             }
 
             if (RequestFocusFrameEnabled && !target.Api.Capability.IsSupported("setLiveviewFrameInfo") && target.Api.Capability.IsAvailable("setTouchAFPosition"))
@@ -475,36 +458,11 @@ namespace Locana.Pages
 
         private void SetUIHandlers()
         {
-            FnumberSlider.SliderOperated += async (s, arg) =>
-            {
-                DebugUtil.Log("Fnumber operated: " + arg.Selected);
-                try { await target.Api.Camera.SetFNumberAsync(arg.Selected); }
-                catch (RemoteApiException) { }
-            };
-            SSSlider.SliderOperated += async (s, arg) =>
-            {
-                DebugUtil.Log("SS operated: " + arg.Selected);
-                try { await target.Api.Camera.SetShutterSpeedAsync(arg.Selected); }
-                catch (RemoteApiException) { }
-            };
-            ISOSlider.SliderOperated += async (s, arg) =>
-            {
-                DebugUtil.Log("ISO operated: " + arg.Selected);
-                try { await target.Api.Camera.SetISOSpeedAsync(arg.Selected); }
-                catch (RemoteApiException) { }
-            };
-            EvSlider.SliderOperated += async (s, arg) =>
-            {
-                DebugUtil.Log("Ev operated: " + arg.Selected);
-                try { await target.Api.Camera.SetEvIndexAsync(arg.Selected); }
-                catch (RemoteApiException) { }
-            };
-            ProgramShiftSlider.SliderOperated += async (s, arg) =>
-            {
-                DebugUtil.Log("Program shift operated: " + arg.OperatedStep);
-                try { await target.Api.Camera.SetProgramShiftAsync(arg.OperatedStep); }
-                catch (RemoteApiException) { }
-            };
+            FnumberSlider.SliderOperated += (s, arg) => { target?.Api?.Camera?.SetFNumberAsync(arg.Selected).IgnoreExceptions(); };
+            SSSlider.SliderOperated += (s, arg) => { target?.Api?.Camera?.SetShutterSpeedAsync(arg.Selected).IgnoreExceptions(); };
+            ISOSlider.SliderOperated += (s, arg) => { target?.Api?.Camera?.SetISOSpeedAsync(arg.Selected).IgnoreExceptions(); };
+            EvSlider.SliderOperated += (s, arg) => { target?.Api?.Camera?.SetEvIndexAsync(arg.Selected).IgnoreExceptions(); };
+            ProgramShiftSlider.SliderOperated += (s, arg) => { target?.Api?.Camera?.SetProgramShiftAsync(arg.OperatedStep).IgnoreExceptions(); };
         }
 
         private void Status_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -617,7 +575,7 @@ namespace Locana.Pages
 
             var icons = new Dictionary<string, DataTemplate>();
             Capability<string> capa;
-            if (target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE) && !ScreenViewData.IsRecording)
+            if (target?.Api?.Capability?.IsAvailable(API_SET_SHOOT_MODE) ?? false && !ScreenViewData.IsRecording)
             {
                 foreach (var m in status.ShootMode.Candidates)
                 {
@@ -637,21 +595,8 @@ namespace Locana.Pages
             MultiShutterButton.ModeInfo = new ShootModeInfo()
             {
                 ShootModeCapability = capa,
-                ModeSelected = async (mode) =>
-                {
-                    if (target != null)
-                    {
-                        try
-                        {
-                            await target.Api.Camera.SetShootModeAsync(mode);
-                        }
-                        catch (RemoteApiException) { }
-                    }
-                },
-                ButtonPressed = () =>
-                {
-                    ShutterButtonPressed();
-                },
+                ModeSelected = (mode) => { target?.Api?.Camera?.SetShootModeAsync(mode).IgnoreExceptions(); },
+                ButtonPressed = () => { ShutterButtonPressed(); },
                 IconTemplates = icons,
             };
         }
@@ -704,7 +649,6 @@ namespace Locana.Pages
                     rwLock.ExitReadLock();
                 }
             }
-
         }
 
         private double dpi;
@@ -726,13 +670,11 @@ namespace Locana.Pages
 
                     trailingTask = () =>
                     {
-
                         if (target?.Status != null)
                         {
                             RotateLiveviewImage(target.Status.LiveviewOrientationAsDouble, (sender, arg) =>
                             {
                                 RefreshOverlayControlParams(magnification);
-
                             });
                         }
 
@@ -840,40 +782,34 @@ namespace Locana.Pages
             PeriodicalShootingTask?.Stop();
         }
 
-        private async void ZoomOutButton_Click(object sender, RoutedEventArgs e)
+        private void ZoomOutButton_Click(object sender, RoutedEventArgs e)
         {
-            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop); }
-            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop).IgnoreExceptions();
         }
 
-        private async void ZoomOutButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void ZoomOutButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.Action1Shot); }
-            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.Action1Shot).IgnoreExceptions();
         }
 
-        private async void ZoomOutButton_Holding(object sender, HoldingRoutedEventArgs e)
+        private void ZoomOutButton_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStart); }
-            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStart).IgnoreExceptions();
         }
 
-        private async void ZoomInButton_Click(object sender, RoutedEventArgs e)
+        private void ZoomInButton_Click(object sender, RoutedEventArgs e)
         {
-            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStop); }
-            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStop).IgnoreExceptions();
         }
 
-        private async void ZoomInButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void ZoomInButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.Action1Shot); }
-            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.Action1Shot).IgnoreExceptions();
         }
 
-        private async void ZoomInButton_Holding(object sender, HoldingRoutedEventArgs e)
+        private void ZoomInButton_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            try { await target.Api.Camera.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStart); }
-            catch (RemoteApiException ex) { DebugUtil.Log(ex.StackTrace); }
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStart).IgnoreExceptions();
         }
 
         private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -909,7 +845,7 @@ namespace Locana.Pages
             {
                 try
                 {
-                    await target.Api.Camera.StartContShootingAsync();
+                    await target?.Api?.Camera?.StartContShootingAsync();
                 }
                 catch (RemoteApiException ex)
                 {
@@ -979,7 +915,7 @@ namespace Locana.Pages
 
         private bool StartStopPeriodicalShooting()
         {
-            if (target != null && target.Status != null && target.Status.ShootMode != null && target.Status.ShootMode.Current == ShootModeParam.Still)
+            if (target?.Status?.ShootMode?.Current == ShootModeParam.Still)
             {
                 if (PeriodicalShootingTask != null && PeriodicalShootingTask.IsRunning)
                 {

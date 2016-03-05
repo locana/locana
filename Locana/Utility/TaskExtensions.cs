@@ -4,47 +4,22 @@ namespace Locana.Utility
 {
     public static class TaskExtensions
     {
-        public static Task<T> IgnoreExceptions<T>(this Task<T> task, LogOptions option = LogOptions.StackTrace)
+        public static void IgnoreExceptions<T>(this Task<T> task)
         {
             task.ContinueWith(t =>
             {
-                switch (option)
-                {
-                    case LogOptions.IgnoredType:
-                        DebugUtil.Log("Ignore " + t.Exception.GetType());
-                        break;
-                    case LogOptions.StackTrace:
-                        DebugUtil.Log("Ignore " + t.Exception.GetType());
-                        DebugUtil.Log(t.Exception.StackTrace);
-                        break;
-                }
-            }, TaskContinuationOptions.OnlyOnFaulted);
-            return task;
+                DebugUtil.Log("Ignore " + t?.Exception?.InnerException?.GetType());
+                DebugUtil.Log(t?.Exception?.InnerException?.StackTrace);
+            }, TaskContinuationOptions.NotOnRanToCompletion);
         }
 
-        public static Task IgnoreExceptions(this Task task, LogOptions option = LogOptions.StackTrace)
+        public static void IgnoreExceptions(this Task task)
         {
             task.ContinueWith(t =>
             {
-                switch (option)
-                {
-                    case LogOptions.IgnoredType:
-                        DebugUtil.Log("Ignore " + t.Exception.GetType());
-                        break;
-                    case LogOptions.StackTrace:
-                        DebugUtil.Log("Ignore " + t.Exception.GetType());
-                        DebugUtil.Log(t.Exception.StackTrace);
-                        break;
-                }
-            }, TaskContinuationOptions.OnlyOnFaulted);
-            return task;
-        }
-
-        public enum LogOptions
-        {
-            None,
-            IgnoredType,
-            StackTrace,
+                DebugUtil.Log("Ignore " + t?.Exception?.InnerException?.GetType());
+                DebugUtil.Log(t?.Exception?.InnerException?.StackTrace);
+            }, TaskContinuationOptions.NotOnRanToCompletion);
         }
     }
 }
