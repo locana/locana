@@ -153,6 +153,7 @@ namespace Locana.Controls
         }
 
         private double dpi;
+        bool decodedOnce = false;
 
         private async Task DecodeLiveviewFrame(JpegPacket packet, bool retry = false)
         {
@@ -166,8 +167,10 @@ namespace Locana.Controls
                     OriginalLvSize = new BitmapSize { Width = (uint)writeable.PixelWidth, Height = (uint)writeable.PixelHeight };
 
                     var magnification = CalcLiveviewMagnification();
-                    DebugUtil.Log(() => { return "Decode: mag: " + magnification; });
+                    DebugUtil.Log(() => { return "Decode: mag: " + magnification + " offsetV: " + LvOffsetV; });
                     dpi = DEFAULT_DPI / magnification;
+
+                    RefreshOverlayControlParams(magnification);
 
                     trailingTask = () =>
                     {
@@ -186,6 +189,7 @@ namespace Locana.Controls
             else
             {
                 rwLock.EnterWriteLock();
+
                 try
                 {
                     var toDelete = LiveviewImageBitmap;
@@ -266,11 +270,12 @@ namespace Locana.Controls
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
+            if (!decodedOnce) { return; }
+
             rwLock.EnterReadLock();
             try
             {
                 if (LiveviewImageBitmap == null) { return; }
-
                 args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
             }
             finally
@@ -330,6 +335,8 @@ namespace Locana.Controls
 
             LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
             LvOffsetH = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
+
+            decodedOnce = true;
 
             FocusMarkDrawer.Height = imageHeight;
             FocusMarkDrawer.Width = imageWidth;
