@@ -118,7 +118,7 @@ namespace Locana.Pages
         private async void UpdateWifiHintPanel()
         {
             var connectedToCamera = await NetworkObserver.INSTANCE.IsConnectedToCameraApDirectly();
-            WifiHint.Visibility = (!connectedToCamera & NetworkObserver.INSTANCE.CameraDevices.Count == 0).AsVisibility();
+            WifiHint.Visibility = (!connectedToCamera && NetworkObserver.INSTANCE.CameraDevices.Count == 0).AsVisibility();
         }
 
         private void PanelHolder_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
