@@ -1,6 +1,5 @@
 ﻿using Locana.Utility;
 using System;
-using System.Diagnostics;
 
 namespace Locana.CameraControl
 {
@@ -34,7 +33,7 @@ namespace Locana.CameraControl
                 Major = uint.Parse(sepa[0]);
                 Minor = uint.Parse(sepa[1]);
                 Release = uint.Parse(sepa[2]);
-                DebugUtil.Log("ServerVersion: " + version);
+                DebugUtil.Log(() => "ServerVersion: " + version);
                 if (IsLiberated)
                 {
                     DebugUtil.Log("This is liberated version!!");

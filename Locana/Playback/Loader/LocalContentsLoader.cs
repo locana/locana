@@ -32,7 +32,7 @@ namespace Locana.Playback
                     continue;
                 }
 
-                DebugUtil.Log("Load from local picture folder: " + folder.Name);
+                DebugUtil.Log(() => "Load from local picture folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
                 if (cancel?.IsCancellationRequested ?? false)
                 {
@@ -48,7 +48,7 @@ namespace Locana.Playback
                     continue;
                 }
 
-                DebugUtil.Log("Load from local picture folder: " + folder.Name);
+                DebugUtil.Log(() => "Load from local picture folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
                 if (cancel?.IsCancellationRequested ?? false)
                 {
@@ -71,7 +71,7 @@ namespace Locana.Playback
                     continue;
                 }
 
-                DebugUtil.Log("Load from local video folder: " + folder.Name);
+                DebugUtil.Log(() => "Load from local video folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
                 if (cancel?.IsCancellationRequested ?? false)
                 {
@@ -87,7 +87,7 @@ namespace Locana.Playback
                     continue;
                 }
 
-                DebugUtil.Log("Load from local video folder: " + folder.Name);
+                DebugUtil.Log(() => "Load from local video folder: " + folder.Name);
                 await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
                 if (cancel?.IsCancellationRequested ?? false)
                 {

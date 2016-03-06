@@ -37,7 +37,7 @@ namespace Locana.Utility
 
         protected void OnFailed(DownloaderError error, GeotaggingResult.Result geotaggingResult)
         {
-            DebugUtil.Log("PictureSyncManager: OnFailed" + error);
+            DebugUtil.Log(() => "PictureSyncManager: OnFailed" + error);
             Failed?.Invoke(error, geotaggingResult);
         }
 
@@ -58,7 +58,7 @@ namespace Locana.Utility
 
         private async void Enqueue(Uri uri, string namebase, Mediatype type, string extension = null)
         {
-            DebugUtil.Log("ContentsDownloader: Enqueue " + uri.AbsolutePath);
+            DebugUtil.Log(() => "ContentsDownloader: Enqueue " + uri.AbsolutePath);
 
             if (extension == null)
             {
@@ -66,7 +66,7 @@ namespace Locana.Utility
                 if (split.Length > 0)
                 {
                     extension = "." + split[split.Length - 1].ToLower();
-                    DebugUtil.Log("detected file extension: " + extension);
+                    DebugUtil.Log(() => "detected file extension: " + extension);
                 }
             }
 
@@ -101,7 +101,7 @@ namespace Locana.Utility
                 {
                     while (DownloadQueue.Count != 0)
                     {
-                        DebugUtil.Log("Dequeue - remaining " + DownloadQueue.Count);
+                        DebugUtil.Log(() => "Dequeue - remaining " + DownloadQueue.Count);
                         await DownloadToSave(DownloadQueue.Dequeue());
 
                         QueueStatusUpdated?.Invoke(DownloadQueue.Count);
@@ -114,7 +114,7 @@ namespace Locana.Utility
 
         private async Task DownloadToSave(DownloadRequest req)
         {
-            DebugUtil.Log("Download picture: " + req.Uri.OriginalString);
+            DebugUtil.Log(() => "Download picture: " + req.Uri.OriginalString);
             try
             {
                 var geoResult = GeotaggingResult.Result.NotRequested;
@@ -184,8 +184,8 @@ namespace Locana.Utility
             }
             catch (Exception e)
             {
-                DebugUtil.Log(e.Message);
-                DebugUtil.Log(e.StackTrace);
+                DebugUtil.Log(() => e.Message);
+                DebugUtil.Log(() => e.StackTrace);
                 req.Error?.Invoke(DownloaderError.Unknown, GeotaggingResult.Result.NotRequested); // TODO
             }
         }

@@ -55,7 +55,7 @@ namespace Locana.Controls
             FpsTimer.Tick += (sender, arg) =>
             {
                 var fps = (double)LiveviewFrameCount * 1000 / FPS_INTERVAL;
-                DebugUtil.Log(string.Format("[LV CanvasBitmap] {0} fps", fps));
+                DebugUtil.Log(() => string.Format("[LV CanvasBitmap] {0} fps", fps));
                 LiveviewFrameCount = 0;
             };
         }

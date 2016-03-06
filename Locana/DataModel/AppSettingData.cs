@@ -94,7 +94,7 @@ namespace Locana.DataModel
                 if (value != _SettingVisibility)
                 {
                     this._SettingVisibility = value;
-                    DebugUtil.Log("visibility changed: " + _SettingVisibility);
+                    DebugUtil.Log(() => "visibility changed: " + _SettingVisibility);
                     NotifyChangedOnUI(nameof(SettingVisibility));
                 }
             }

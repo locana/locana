@@ -23,7 +23,7 @@ namespace Locana.DataModel
         public RemainingContentsHolder(string containerId, string groupTitle, string uuid, int startsFrom, int count)
             : base(new ContentInfo { GroupName = groupTitle }, uuid)
         {
-            DebugUtil.Log("Creating remaining contents holder: " + startsFrom + " - " + count + " - " + containerId);
+            DebugUtil.Log(() => "Creating remaining contents holder: " + startsFrom + " - " + count + " - " + containerId);
             StartsFrom = startsFrom;
             RemainingCount = count;
             CdsContainerId = containerId;
@@ -243,7 +243,7 @@ namespace Locana.DataModel
             if (0 < RemainingRetryCount)
             {
                 var delay = 1000 * (3 - RemainingRetryCount--);
-                DebugUtil.Log("Failed to load thumbnail from file. Retry " + delay + " msec later.");
+                DebugUtil.Log(() => "Failed to load thumbnail from file. Retry " + delay + " msec later.");
 
                 await Task.Delay(delay);
                 NotifyChanged(nameof(ThumbnailImage));
@@ -330,8 +330,8 @@ namespace Locana.DataModel
             }
             catch (Exception e)
             {
-                DebugUtil.Log(e.StackTrace);
-                DebugUtil.Log("Failed to fetch thumbnail image: " + Source.ThumbnailUrl);
+                DebugUtil.Log(() => e.StackTrace);
+                DebugUtil.Log(() => "Failed to fetch thumbnail image: " + Source.ThumbnailUrl);
                 IsBroken = true;
                 NotifyChangedOnUI(nameof(ThumbnailExists));
                 NotifyChangedOnUI(nameof(IsBroken));

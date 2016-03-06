@@ -308,11 +308,11 @@ namespace Locana.Settings
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log("Failed to set parameter: " + e.code);
+                DebugUtil.Log(() => "Failed to set parameter: " + e.code);
             }
             catch (NullReferenceException e)
             {
-                DebugUtil.Log("Failed to set parameter: " + e.Message);
+                DebugUtil.Log(() => "Failed to set parameter: " + e.Message);
             }
             await DataSource.Device.Observer.Refresh();
         }
@@ -400,7 +400,7 @@ namespace Locana.Settings
             slider.ValueChanged += (sender, e) =>
             {
                 ApplicationSettings.GetInstance().IntervalTime = (int)(sender as Slider).Value;
-                DebugUtil.Log("Interval updated: " + (int)(sender as Slider).Value);
+                DebugUtil.Log(() => "Interval updated: " + (int)(sender as Slider).Value);
             };
             slider.SetBinding(Control.IsEnabledProperty, new Binding()
             {
@@ -440,11 +440,11 @@ namespace Locana.Settings
                 }
                 catch (RemoteApiException ex)
                 {
-                    DebugUtil.Log("Failed to set color temperture: " + ex.code);
+                    DebugUtil.Log(() => "Failed to set color temperture: " + ex.code);
                 }
                 catch (NullReferenceException ex)
                 {
-                    DebugUtil.Log("Failed to set color temperture: " + ex.Message);
+                    DebugUtil.Log(() => "Failed to set color temperture: " + ex.Message);
                 }
             };
 

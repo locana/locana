@@ -99,7 +99,7 @@ namespace Locana.Pages
 
         private void OnDetectCameraError(Exception ex = null)
         {
-            DebugUtil.Log(ex?.StackTrace);
+            DebugUtil.Log(() => ex?.StackTrace);
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("LocalCameraUnavailable") });
@@ -378,7 +378,7 @@ namespace Locana.Pages
                     }
                     catch (FormatException ex)
                     {
-                        DebugUtil.Log("QR data parse error: " + ex.Message);
+                        DebugUtil.Log(() => "QR data parse error: " + ex.Message);
                     }
                     // DebugText.Text = sb.ToString();
                     await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

@@ -22,7 +22,7 @@ namespace Locana.Controls
 
         public void PushToast(ToastContent content)
         {
-            DebugUtil.Log("Enqueue toast: " + content.Text);
+            DebugUtil.Log(() => "Enqueue toast: " + content.Text);
             Contents.Add(content);
             if (!Running) { DequeueToast(); }
         }
@@ -36,7 +36,7 @@ namespace Locana.Controls
             }
 
             ToastGrid.DataContext = content;
-            DebugUtil.Log("Dequeue toast:" + content.Text);
+            DebugUtil.Log(() => "Dequeue toast:" + content.Text);
             Running = true;
             AnimationHelper.CreateSlideAnimation(new SlideAnimationRequest()
             {

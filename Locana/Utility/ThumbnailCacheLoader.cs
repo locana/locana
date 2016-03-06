@@ -55,7 +55,7 @@ namespace Locana.Utility
             }
             else
             {
-                DebugUtil.Log("Delete thumbnail cache of " + uuid);
+                DebugUtil.Log(() => "Delete thumbnail cache of " + uuid);
 
                 await LoadCacheRoot().ConfigureAwait(false);
                 var uuidRoot = await CacheFolder.GetFolderAsync(uuid.Replace(":", "-"));
@@ -101,7 +101,7 @@ namespace Locana.Utility
                 filename = filename.Substring(0, filename.Length - 3) + "jpg";
             }
 
-            DebugUtil.Log("Loading " + content.ThumbnailUrl + " into " + directory);
+            DebugUtil.Log(() => "Loading " + content.ThumbnailUrl + " into " + directory);
 
             await LoadCacheRoot().ConfigureAwait(false);
             var folder = await CacheFolder.CreateFolderAsync(directory, CreationCollisionOption.OpenIfExists);
@@ -206,14 +206,14 @@ namespace Locana.Utility
                     return;
                 }
 
-                DebugUtil.Log("Start downloading: " + uri);
+                DebugUtil.Log(() => "Start downloading: " + uri);
                 try
                 {
                     var res = await client.SendRequestAsync(new HttpRequestMessage(HttpMethod.Get, uri));
 
                     using (var stream = (await res.Content.ReadAsInputStreamAsync()).AsStreamForRead())
                     {
-                        DebugUtil.Log("Writing: " + filename);
+                        DebugUtil.Log(() => "Writing: " + filename);
                         var dst = await folder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
                         using (var outStream = await dst.OpenStreamForWriteAsync().ConfigureAwait(false))
                         {
@@ -224,7 +224,7 @@ namespace Locana.Utility
                 }
                 catch (Exception e)
                 {
-                    DebugUtil.Log(e.StackTrace);
+                    DebugUtil.Log(() => e.StackTrace);
                     tcs.TrySetException(e);
                 }
             }

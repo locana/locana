@@ -177,7 +177,7 @@ namespace Locana.Pages
             catch (Exception e)
             {
                 _ProximityDevice = null;
-                DebugUtil.Log("Caught ununderstandable exception. " + e.Message + e.StackTrace);
+                DebugUtil.Log(() => "Caught ununderstandable exception. " + e.Message + e.StackTrace);
                 return;
             }
         }
@@ -206,7 +206,7 @@ namespace Locana.Pages
 
             if (err != "")
             {
-                DebugUtil.Log("Failed to read NFC: " + err);
+                DebugUtil.Log(() => "Failed to read NFC: " + err);
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = err });

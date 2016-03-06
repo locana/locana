@@ -64,7 +64,7 @@ namespace Locana.DataModel
 
         private void GenericPropertyChanged(string name)
         {
-            DebugUtil.Log("PropertyChanged: " + name);
+            DebugUtil.Log(() => "PropertyChanged: " + name);
             NotifyChanged("Candidates" + name);
             NotifyChanged("SelectedIndex" + name);
             NotifyChanged("IsAvailable" + name);

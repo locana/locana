@@ -49,7 +49,7 @@ namespace Locana.Playback.Operator
 
         private void StreamHelper_StatusChanged(object sender, StreamingStatusEventArgs e)
         {
-            DebugUtil.Log("StreamStatusChanged: " + e.Status.Status + " - " + e.Status.Factor);
+            DebugUtil.Log(() => "StreamStatusChanged: " + e.Status.Status + " - " + e.Status.Factor);
             switch (e.Status.Factor)
             {
                 case StreamStatusChangeFactor.FileError:
@@ -167,7 +167,7 @@ namespace Locana.Playback.Operator
             }
             catch (Exception e)
             {
-                DebugUtil.Log(e.StackTrace);
+                DebugUtil.Log(() => e.StackTrace);
                 OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally
@@ -227,7 +227,7 @@ namespace Locana.Playback.Operator
             }
             catch (Exception e)
             {
-                DebugUtil.Log(e.StackTrace);
+                DebugUtil.Log(() => e.StackTrace);
                 OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally

@@ -330,7 +330,7 @@ namespace Locana.DataModel
                         }
                         catch (Exception e)
                         {
-                            DebugUtil.Log(e.StackTrace);
+                            DebugUtil.Log(() => e.StackTrace);
                         }
                     }
                 }

@@ -64,7 +64,7 @@ namespace Locana.CameraControl
             }
             catch (Exception e)
             {
-                DebugUtil.Log(e.StackTrace);
+                DebugUtil.Log(() => e.StackTrace);
                 AvContent = null;
                 return false;
             }
@@ -145,7 +145,7 @@ namespace Locana.CameraControl
                             RunLoop();
                             return;
                         default:
-                            DebugUtil.Log("RequestToNotifyStreamingStatus finished with unexpected error: " + e.code);
+                            DebugUtil.Log(() => "RequestToNotifyStreamingStatus finished with unexpected error: " + e.code);
                             // Finish();
                             break;
                     }

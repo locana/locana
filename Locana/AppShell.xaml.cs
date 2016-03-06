@@ -245,7 +245,7 @@ namespace Locana
 
         private void OnNavigatedToPage(object sender, NavigationEventArgs e)
         {
-            DebugUtil.Log("Shell: OnNavigatedToPage: " + e.Content.GetType());
+            DebugUtil.Log(() => "Shell: OnNavigatedToPage: " + e.Content.GetType());
             // After a successful navigation set keyboard focus to the loaded page
             if (e.Content is Page && e.Content != null)
             {

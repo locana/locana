@@ -25,7 +25,7 @@ namespace Locana.Controls
         {
             var selected = (int)Math.Round((sender as Slider).Value);
             (sender as Slider).Value = selected;
-            DebugUtil.Log("Slider released: " + selected);
+            DebugUtil.Log(() => "Slider released: " + selected);
             if (Parameter == null || selected < 0 || selected >= Parameter.Candidates.Count) { return; }
             if (SliderOperated != null) { SliderOperated(this, new ShootingParameterChangedEventArgs() { Selected = Parameter.Candidates[selected] }); }
         }
@@ -50,7 +50,7 @@ namespace Locana.Controls
         {
             if (e.NewValue != null)
             {
-                DebugUtil.Log("Parameter updated: " + (e.NewValue as Capability<string>).Current);
+                DebugUtil.Log(() => "Parameter updated: " + (e.NewValue as Capability<string>).Current);
                 (d as ShootingParamSlider).UpdateDisplay<string>(e.NewValue as Capability<string>);
             }
         }

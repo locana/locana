@@ -49,7 +49,7 @@ namespace Locana.Controls
         {
             if (e.NewValue != null)
             {
-                DebugUtil.Log("Parameter updated: " + (e.NewValue as EvCapability).CurrentIndex);
+                DebugUtil.Log(() => "Parameter updated: " + (e.NewValue as EvCapability).CurrentIndex);
                 (d as ProgramShiftSlider).UpdateDisplay(e.NewValue as ProgramShiftRange);
             }
         }

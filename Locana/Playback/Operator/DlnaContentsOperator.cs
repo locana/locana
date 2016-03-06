@@ -73,7 +73,7 @@ namespace Locana.Playback.Operator
             }
             catch (SoapException e)
             {
-                DebugUtil.Log("Failed to delete " + e.StatusCode);
+                DebugUtil.Log(() => "Failed to delete " + e.StatusCode);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Locana.Playback.Operator
             }
             catch (SoapException e)
             {
-                DebugUtil.Log("SoapException while loading: " + e.StatusCode);
+                DebugUtil.Log(() => "SoapException while loading: " + e.StatusCode);
                 OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally
@@ -125,7 +125,7 @@ namespace Locana.Playback.Operator
             }
             catch (Exception e)
             {
-                DebugUtil.Log(e.StackTrace);
+                DebugUtil.Log(() => e.StackTrace);
                 OnErrorMessage("Viewer_FailedToLoadContents");
             }
             finally

@@ -82,7 +82,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log("StatusObserver: Refresh failed - " + e.code);
+                DebugUtil.Log(() => "StatusObserver: Refresh failed - " + e.code);
                 return false;
             }
             return true;
@@ -243,7 +243,7 @@ namespace Locana.CameraControl
                 case StatusCode.Any:
                     if (failure_count++ < RETRY_LIMIT)
                     {
-                        DebugUtil.Log("GetEvent failed - retry " + failure_count + ", status: " + code);
+                        DebugUtil.Log(() => "GetEvent failed - retry " + failure_count + ", status: " + code);
                         await Task.Delay(TimeSpan.FromSeconds(RETRY_INTERVAL_SEC)).ConfigureAwait(false);
                         StartPollingLoop();
                         return;
@@ -257,7 +257,7 @@ namespace Locana.CameraControl
                     DebugUtil.Log("GetEvent polling loop cancelled.");
                     return;
                 default:
-                    DebugUtil.Log("GetEvent failed with code: " + code);
+                    DebugUtil.Log(() => "GetEvent failed with code: " + code);
                     break;
             }
 

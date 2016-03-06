@@ -54,14 +54,14 @@ namespace Locana.Pages
                                 FetchSelectedImages();
                                 break;
                             default:
-                                DebugUtil.Log("Nothing to do for current SelectivityFactor: " + Operator.ContentsCollection.SelectivityFactor);
+                                DebugUtil.Log(() => "Nothing to do for current SelectivityFactor: " + Operator.ContentsCollection.SelectivityFactor);
                                 break;
                         }
                         UpdateSelectionMode(SelectivityFactor.None);
                         UpdateInnerState(ViewerState.Single);
                         break;
                     default:
-                        DebugUtil.Log("Nothing to do for current InnerState: " + InnerState);
+                        DebugUtil.Log(() => "Nothing to do for current InnerState: " + InnerState);
                         break;
                 }
             })
@@ -277,7 +277,7 @@ namespace Locana.Pages
 
             RemoteStorageId = tuple?.Item2;
 
-            DebugUtil.Log("OnNavigatedTo: " + tuple);
+            DebugUtil.Log(() => "OnNavigatedTo: " + tuple);
 
             UpdateInnerState(ViewerState.Single);
 
@@ -439,7 +439,7 @@ namespace Locana.Pages
 
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
-                DebugUtil.Log("Adding " + e.Contents.Count + " contents to RemoteGrid");
+                DebugUtil.Log(() => "Adding " + e.Contents.Count + " contents to RemoteGrid");
                 AddContentsToCollection(e.Contents);
             });
         }
@@ -653,7 +653,7 @@ namespace Locana.Pages
 
         private async void ChangeProgressText(string text)
         {
-            DebugUtil.Log("Show Progress: " + text);
+            DebugUtil.Log(() => "Show Progress: " + text);
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, async () =>
             {
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
@@ -696,7 +696,7 @@ namespace Locana.Pages
 
         private async Task DeleteSelectedFiles()
         {
-            DebugUtil.Log("DeleteSelectedFiles: " + ContentsGrid.SelectedItems.Count);
+            DebugUtil.Log(() => "DeleteSelectedFiles: " + ContentsGrid.SelectedItems.Count);
             var items = new List<object>(ContentsGrid.SelectedItems);
             if (items.Count == 0)
             {
@@ -758,7 +758,7 @@ namespace Locana.Pages
             {
                 DebugUtil.Log("SelectionChanged in multi mode");
                 var contents = selector.SelectedItems;
-                DebugUtil.Log("Selected Items: " + contents.Count);
+                DebugUtil.Log(() => "Selected Items: " + contents.Count);
 
                 UpdateInnerState(ViewerState.Multi);
             }
@@ -851,7 +851,7 @@ namespace Locana.Pages
             }
             catch (Exception e)
             {
-                DebugUtil.Log(e.StackTrace);
+                DebugUtil.Log(() => e.StackTrace);
                 MoviePlayer.Visibility = Visibility.Collapsed;
                 UpdateAppBarColor();
                 UpdateInnerState(ViewerState.Single);
@@ -883,7 +883,7 @@ namespace Locana.Pages
             }
             catch (Exception ex)
             {
-                DebugUtil.Log(ex.StackTrace);
+                DebugUtil.Log(() => ex.StackTrace);
             }
         }
 
@@ -937,7 +937,7 @@ namespace Locana.Pages
                 }
                 catch (Exception e)
                 {
-                    DebugUtil.Log(e.StackTrace);
+                    DebugUtil.Log(() => e.StackTrace);
                 }
             }
         }

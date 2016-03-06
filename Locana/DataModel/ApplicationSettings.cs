@@ -133,7 +133,7 @@ namespace Locana.DataModel
                     Preference.ShootButtonVisible = value;
                     _IsShootButtonDisplayed = value;
                     NotifyChangedOnUI(nameof(ShootButtonVisibility));
-                    DebugUtil.Log("ShootbuttonVisibility updated: " + value.ToString());
+                    DebugUtil.Log(() => "ShootbuttonVisibility updated: " + value.ToString());
                 }
             }
             get
@@ -213,7 +213,7 @@ namespace Locana.DataModel
             {
                 if (_GridType != value)
                 {
-                    DebugUtil.Log("GridType updated: " + value);
+                    DebugUtil.Log(() => "GridType updated: " + value);
                     Preference.FramingGridType = value;
                     _GridType = value;
                     NotifyChangedOnUI(nameof(GridType));

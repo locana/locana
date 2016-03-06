@@ -250,7 +250,7 @@ namespace Locana.Playback
             }
             foreach (var container in res.Reverse())
             {
-                DebugUtil.Log("Browse - " + container.Title);
+                DebugUtil.Log(() => "Browse - " + container.Title);
                 await RetrieveContentsByBrowse(container.Title, container.Id, cancel).ConfigureAwait(false);
             }
         }

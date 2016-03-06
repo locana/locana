@@ -466,14 +466,14 @@ namespace Locana.Pages
 
         private void UpdateFocusStatus(string FocusStatus)
         {
-            DebugUtil.Log("Focus status changed: " + FocusStatus);
+            DebugUtil.Log(() => "Focus status changed: " + FocusStatus);
             UpdateFocusStatus(FocusStatus == Kazyx.RemoteApi.Camera.FocusState.Focused);
         }
 
         private void UpdateTouchFocus(TouchFocusStatus status)
         {
             if (status == null) { return; }
-            DebugUtil.Log("TouchFocusStatus changed: " + status.Focused);
+            DebugUtil.Log(() => "TouchFocusStatus changed: " + status.Focused);
             UpdateFocusStatus(status.Focused);
         }
 
@@ -630,7 +630,7 @@ namespace Locana.Pages
                 }
                 catch (RemoteApiException ex)
                 {
-                    DebugUtil.Log(ex.StackTrace);
+                    DebugUtil.Log(() => ex.StackTrace);
                     AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("ErrorMessage_shootingFailure") });
                 }
             }
@@ -647,7 +647,7 @@ namespace Locana.Pages
                 }
                 catch (RemoteApiException ex)
                 {
-                    DebugUtil.Log(ex.StackTrace);
+                    DebugUtil.Log(() => ex.StackTrace);
                     AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("Error_StopContinuousShooting") });
                 }
             }
@@ -759,7 +759,7 @@ namespace Locana.Pages
 
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
-                    DebugUtil.Log("Status updated: " + status.Count);
+                    DebugUtil.Log(() => "Status updated: " + status.Count);
 
                     PeriodicalShootingStatus.Visibility = status.IsRunning.AsVisibility();
                     if (status.IsRunning)

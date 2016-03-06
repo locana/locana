@@ -8,8 +8,8 @@ namespace Locana.Utility
         {
             task.ContinueWith(t =>
             {
-                DebugUtil.Log("Ignore " + t?.Exception?.InnerException?.GetType());
-                DebugUtil.Log(t?.Exception?.InnerException?.StackTrace);
+                DebugUtil.Log(() => "Ignore " + t?.Exception?.InnerException?.GetType());
+                DebugUtil.Log(() => t?.Exception?.InnerException?.StackTrace);
             }, TaskContinuationOptions.NotOnRanToCompletion);
         }
 
@@ -17,8 +17,8 @@ namespace Locana.Utility
         {
             task.ContinueWith(t =>
             {
-                DebugUtil.Log("Ignore " + t?.Exception?.InnerException?.GetType());
-                DebugUtil.Log(t?.Exception?.InnerException?.StackTrace);
+                DebugUtil.Log(() => "Ignore " + t?.Exception?.InnerException?.GetType());
+                DebugUtil.Log(() => t?.Exception?.InnerException?.StackTrace);
             }, TaskContinuationOptions.NotOnRanToCompletion);
         }
     }

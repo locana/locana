@@ -65,7 +65,7 @@ namespace Locana
             var lastVersion = Preference.LastLaunchedVersion;
             if (lastVersion != AppVersion)
             {
-                DebugUtil.Log("Update detected!! from: " + lastVersion);
+                DebugUtil.Log(() => "Update detected!! from: " + lastVersion);
                 Preference.LastLaunchedVersion = AppVersion;
                 Preference.InitialLaunchedDateTime = DateTimeOffset.Now;
             }
@@ -107,7 +107,7 @@ namespace Locana
         public void UpdatePurchaseInfo()
         {
             var init = Preference.InitialLaunchedDateTime;
-            DebugUtil.Log("Initial launched datetime: " + init.ToString());
+            DebugUtil.Log(() => "Initial launched datetime: " + init.ToString());
 #if DEBUG
             IsTrialVersion = CurrentAppSimulator.LicenseInformation.IsTrial;
 #else

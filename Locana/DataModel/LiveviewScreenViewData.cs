@@ -427,7 +427,7 @@ namespace Locana.DataModel
             {
                 _GeopositionStatus = value;
                 NotifyChangedOnUI(nameof(GeopositionStatusImage));
-                DebugUtil.Log("Geoposition status: " + value);
+                DebugUtil.Log(() => "Geoposition status: " + value);
             }
         }
 

@@ -82,7 +82,7 @@ namespace Locana.Utility
             {
                 button.Click += EventHolder[item];
             }
-            DebugUtil.Log("Creating button: " + item + " " + button.Visibility);
+            DebugUtil.Log(() => "Creating button: " + item + " " + button.Visibility);
             return button;
         }
 

@@ -127,7 +127,7 @@ namespace Locana.Network
             catch (Exception ex)
             {
                 DebugUtil.Log("failed to parse upnp device description.");
-                DebugUtil.Log(ex.StackTrace);
+                DebugUtil.Log(() => ex.StackTrace);
             }
         }
 

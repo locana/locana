@@ -36,13 +36,13 @@ namespace Locana.Playback
                         var current = (sender as CameraStatus).Status;
                         if (nextState == current)
                         {
-                            DebugUtil.Log("Camera state changed to " + nextState + " successfully.");
+                            DebugUtil.Log(() => "Camera state changed to " + nextState + " successfully.");
                             tcs.TrySetResult(true);
                             return;
                         }
                         else if (EventParam.NotReady != current)
                         {
-                            DebugUtil.Log("Unfortunately camera state changed to " + current);
+                            DebugUtil.Log(() => "Unfortunately camera state changed to " + current);
                             tcs.TrySetResult(false);
                             return;
                         }
@@ -60,14 +60,14 @@ namespace Locana.Playback
                 var already = await CheckCurrentFunction(device.Api.Camera, nextFunction).ConfigureAwait(false);
                 if (already)
                 {
-                    DebugUtil.Log("Already in specified mode: " + nextFunction);
+                    DebugUtil.Log(() => "Already in specified mode: " + nextFunction);
                     return true;
                 }
                 cancel.ThrowIfCancelled();
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log("Failed to get current state: " + e.code);
+                DebugUtil.Log(() => "Failed to get current state: " + e.code);
                 if (isFirst)
                 {
                     getCurrentFailed = true;
@@ -106,7 +106,7 @@ namespace Locana.Playback
                     DebugUtil.Log("SetCameraFunction IllegalState: Already in specified mode");
                     return true;
                 }
-                DebugUtil.Log("Failed to change camera state: " + e.code);
+                DebugUtil.Log(() => "Failed to change camera state: " + e.code);
             }
             finally
             {
@@ -120,7 +120,7 @@ namespace Locana.Playback
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log("Failed to get current state: " + e.code);
+                DebugUtil.Log(() => "Failed to get current state: " + e.code);
                 return false;
             }
         }
@@ -128,7 +128,7 @@ namespace Locana.Playback
         private static async Task<bool> CheckCurrentFunction(CameraApiClient camera, string nextFunction)
         {
             var current = await camera.GetCameraFunctionAsync().ConfigureAwait(false);
-            DebugUtil.Log("Current state is : " + current);
+            DebugUtil.Log(() => "Current state is : " + current);
             return nextFunction == current;
         }
 

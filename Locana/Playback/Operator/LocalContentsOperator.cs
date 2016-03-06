@@ -33,7 +33,7 @@ namespace Locana.Playback.Operator
 
         private void MovieScreen_LocalMediaFailed(object sender, string e)
         {
-            DebugUtil.Log("LocalMoviePlayer MediaFailed: " + e);
+            DebugUtil.Log(() => "LocalMoviePlayer MediaFailed: " + e);
             OnErrorMessage("Viewer_FailedPlaybackMovie");
             OnMovieStreamError();
         }
@@ -117,13 +117,13 @@ namespace Locana.Playback.Operator
         {
             try
             {
-                DebugUtil.Log("Delete " + data.CacheFile?.DisplayName);
+                DebugUtil.Log(() => "Delete " + data.CacheFile?.DisplayName);
                 await data.CacheFile?.DeleteAsync();
                 ContentsCollection.Remove(data);
             }
             catch (Exception ex)
             {
-                DebugUtil.Log("Failed to delete file: " + ex.StackTrace);
+                DebugUtil.Log(() => "Failed to delete file: " + ex.StackTrace);
             }
         }
 

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
 
 namespace Locana.CameraControl
 {
@@ -68,7 +67,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log("Failed setup: " + e.code);
+                DebugUtil.Log(() => "Failed setup: " + e.code);
                 device.Observer.Stop();
                 throw;
             }
@@ -110,12 +109,12 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log("Failed to startLiveview: " + e.code);
+                DebugUtil.Log(() => "Failed to startLiveview: " + e.code);
                 return false;
             }
             catch (Exception e)
             {
-                DebugUtil.Log("Unknown error while opening liveview stream: " + e.StackTrace);
+                DebugUtil.Log(() => "Unknown error while opening liveview stream: " + e.StackTrace);
                 return false;
             }
         }
@@ -131,7 +130,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log("Failed to stopLiveview: " + e.code);
+                DebugUtil.Log(() => "Failed to stopLiveview: " + e.code);
                 return false;
             }
         }
@@ -170,8 +169,8 @@ namespace Locana.CameraControl
                         }
                         catch (Exception e)
                         {
-                            DebugUtil.Log(e.Message);
-                            DebugUtil.Log(e.StackTrace);
+                            DebugUtil.Log(() => e.Message);
+                            DebugUtil.Log(() => e.StackTrace);
                             return false;
                         }
                     }
@@ -186,7 +185,7 @@ namespace Locana.CameraControl
             {
                 if (e.code != StatusCode.StillCapturingNotFinished)
                 {
-                    DebugUtil.Log("Failed to take picture: " + e.code);
+                    DebugUtil.Log(() => "Failed to take picture: " + e.code);
                     throw e;
                 }
             }
@@ -205,7 +204,7 @@ namespace Locana.CameraControl
                     break;
                 }
                 catch (RemoteApiException) { }
-                DebugUtil.Log("failed to stop cont shooting. retry count: " + retry);
+                DebugUtil.Log(() => "failed to stop cont shooting. retry count: " + retry);
                 await Task.Delay(TimeSpan.FromMilliseconds(200));
             }
         }
@@ -239,7 +238,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException ex)
             {
-                DebugUtil.Log(ex.StackTrace);
+                DebugUtil.Log(() => ex.StackTrace);
                 Finished?.Invoke(ShootingResult.StartFailed);
             }
         }
@@ -253,7 +252,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException ex)
             {
-                DebugUtil.Log(ex.StackTrace);
+                DebugUtil.Log(() => ex.StackTrace);
                 Finished?.Invoke(ShootingResult.StopFailed);
 
             }
@@ -283,7 +282,7 @@ namespace Locana.CameraControl
                         }
                         catch (RemoteApiException e)
                         {
-                            DebugUtil.Log(e.StackTrace);
+                            DebugUtil.Log(() => e.StackTrace);
                             Finished?.Invoke(ShootingResult.StillFailed);
                         }
                         break;

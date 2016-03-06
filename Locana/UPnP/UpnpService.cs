@@ -30,7 +30,7 @@ namespace Locana.UPnP
             }
             else
             {
-                DebugUtil.Log("Http Status Error while getting SCPD: " + response.StatusCode);
+                DebugUtil.Log(() => "Http Status Error while getting SCPD: " + response.StatusCode);
             }
         }
 
@@ -57,7 +57,7 @@ namespace Locana.UPnP
             }
             else
             {
-                DebugUtil.Log("Http Status Error in SOAP request: " + response.StatusCode);
+                DebugUtil.Log(() => "Http Status Error in SOAP request: " + response.StatusCode);
                 var res = await response.Content.ReadAsStringAsync();
                 DebugUtil.Log(res);
                 Response.TryThrowErrorCode(res);

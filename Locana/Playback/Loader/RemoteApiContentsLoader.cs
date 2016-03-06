@@ -78,7 +78,7 @@ namespace Locana.Playback
                 Uri = uri,
             }).ConfigureAwait(false);
 
-            DebugUtil.Log(count.NumOfContents + " dates exist.");
+            DebugUtil.Log(() => count.NumOfContents + " dates exist.");
 
             if (cancel?.IsCancellationRequested ?? false)
             {
@@ -109,7 +109,7 @@ namespace Locana.Playback
 
         private async Task<IList<DateInfo>> GetDateListAsync(string uri, int startFrom, int count)
         {
-            DebugUtil.Log("Loading DateList: " + uri + " from " + startFrom);
+            DebugUtil.Log(() => "Loading DateList: " + uri + " from " + startFrom);
 
             var contents = await AvContentApi.GetContentListAsync(new ContentListTarget
             {
@@ -127,7 +127,7 @@ namespace Locana.Playback
 
         private async Task<int> GetContentsOfDaySeparatelyAsync(DateInfo date, ContentsSet contentsSet, CancellationTokenSource cancel, int sum)
         {
-            DebugUtil.Log("Loading: " + date.Title);
+            DebugUtil.Log(() => "Loading: " + date.Title);
 
             var count = await AvContentApi.GetContentCountAsync(new CountingTarget
             {
@@ -136,7 +136,7 @@ namespace Locana.Playback
                 Types = ContentsSetToTypes(contentsSet),
             }).ConfigureAwait(false);
 
-            DebugUtil.Log(count.NumOfContents + " contents exist.");
+            DebugUtil.Log(() => count.NumOfContents + " contents exist.");
 
             var loops = count.NumOfContents / CONTENT_LOOP_STEP + (count.NumOfContents % CONTENT_LOOP_STEP == 0 ? 0 : 1);
             var loaded = 0;
@@ -157,7 +157,7 @@ namespace Locana.Playback
                 }
 
                 loaded += contents.Count;
-                DebugUtil.Log(contents.Count + " contents fetched");
+                DebugUtil.Log(() => contents.Count + " contents fetched");
 
                 OnPartLoaded(contents.Select(content => new Thumbnail(content, Udn)).ToList());
             }
@@ -187,7 +187,7 @@ namespace Locana.Playback
                     break;
                 }
 
-                DebugUtil.Log(contents.Count + " contents fetched");
+                DebugUtil.Log(() => contents.Count + " contents fetched");
 
                 OnPartLoaded(contents.Select(content => new Thumbnail(content, Udn)).ToList());
             }
@@ -195,7 +195,7 @@ namespace Locana.Playback
 
         private async Task<IList<ContentInfo>> GetContentsOfDayAsync(DateInfo date, int startFrom, int count, ContentsSet contentsSet)
         {
-            DebugUtil.Log("Loading ContentsOfDay: " + date.Title + " from " + startFrom);
+            DebugUtil.Log(() => "Loading ContentsOfDay: " + date.Title + " from " + startFrom);
 
             var contents = await AvContentApi.GetContentListAsync(new ContentListTarget
             {
