@@ -41,11 +41,11 @@
                         <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="LiveviewUnit.(Grid.ColumnSpan)" Value="1" />
-                        <Setter Target="LiveviewUnit.(Grid.Column)" Value="1" />
-                        <Setter Target="LiveviewUnit.(Grid.RowSpan)" Value="3" />
-                        <Setter Target="LiveviewUnit.(Grid.Row)" Value="1" />
-                        <Setter Target="LiveviewUnit.Margin" Value="0,-24,0,0" />
+                        <Setter Target="CenterArea.(Grid.ColumnSpan)" Value="1" />
+                        <Setter Target="CenterArea.(Grid.Column)" Value="1" />
+                        <Setter Target="CenterArea.(Grid.RowSpan)" Value="3" />
+                        <Setter Target="CenterArea.(Grid.Row)" Value="1" />
+                        <Setter Target="CenterArea.Margin" Value="0,-24,0,0" />
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="1" />
                         <Setter Target="Header.(Grid.Column)" Value="1" />
                         <Setter Target="Header.Margin" Value="24,4,0,4" />
@@ -75,11 +75,11 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="LiveviewUnit.(Grid.ColumnSpan)" Value="3" />
-                        <Setter Target="LiveviewUnit.(Grid.Column)" Value="0" />
-                        <Setter Target="LiveviewUnit.(Grid.RowSpan)" Value="5" />
-                        <Setter Target="LiveviewUnit.(Grid.Row)" Value="0" />
-                        <Setter Target="LiveviewUnit.Margin" Value="0" />
+                        <Setter Target="CenterArea.(Grid.ColumnSpan)" Value="3" />
+                        <Setter Target="CenterArea.(Grid.Column)" Value="0" />
+                        <Setter Target="CenterArea.(Grid.RowSpan)" Value="5" />
+                        <Setter Target="CenterArea.(Grid.Row)" Value="0" />
+                        <Setter Target="CenterArea.Margin" Value="0" />
                         <Setter Target="Header.(Grid.ColumnSpan)" Value="3" />
                         <Setter Target="Header.(Grid.Column)" Value="0" />
                         <Setter Target="Header.Margin" Value="48,12,8,4" />
@@ -107,18 +107,16 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <ProgressRing Grid.RowSpan="5"
-                      Grid.ColumnSpan="3"
-                      Width="64"
-                      Height="64"
-                      Canvas.ZIndex="100"
-                      IsActive="{Binding ShowProgressCircle,
-                                         FallbackValue=true}" />
-
-        <controls:ImageStreamView x:Name="LiveviewUnit"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch"
-                                  Canvas.ZIndex="3" />
+        <Grid x:Name="CenterArea"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <ProgressRing Width="64"
+                          Height="64"
+                          Canvas.ZIndex="100"
+                          IsActive="{Binding ShowProgressCircle,
+                                             FallbackValue=true}" />
+            <controls:ImageStreamView x:Name="LiveviewUnit" Canvas.ZIndex="3" />
+        </Grid>
 
         <controls:Histogram x:Name="HistogramControl"
                             VerticalAlignment="Top"
