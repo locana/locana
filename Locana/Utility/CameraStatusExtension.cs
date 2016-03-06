@@ -18,19 +18,5 @@ namespace Locana.Utility
                     return false;
             }
         }
-
-        public static bool IsProcessing(this CameraStatus status)
-        {
-            switch (status.Status ?? "")
-            {
-                case EventParam.Idle:
-                case EventParam.MvRecording:
-                case EventParam.AuRecording:
-                case EventParam.ItvRecording:
-                case EventParam.LoopRecording:
-                    return false;
-            }
-            return true;
-        }
     }
 }

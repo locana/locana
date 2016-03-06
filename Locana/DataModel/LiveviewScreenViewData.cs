@@ -24,7 +24,6 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(ShutterButtonImage));
                 NotifyChangedOnUI(nameof(ShutterButtonEnabled));
                 NotifyChangedOnUI(nameof(IsRecording));
-                NotifyChangedOnUI(nameof(Processing));
                 NotifyChangedOnUI(nameof(ShootModeImage));
                 NotifyChangedOnUI(nameof(ExposureModeImage));
                 NotifyChangedOnUI(nameof(MemoryCardStatusImage));
@@ -275,8 +274,6 @@ namespace Locana.DataModel
         public bool ShootModeChangingAvailable { get { return Device.Api.Capability?.IsAvailable("setShootMode") ?? false; } }
 
         public bool IsZoomAvailable { get { return Device.Api.Capability?.IsAvailable("actZoom") ?? false; } }
-
-        public bool Processing { get { return Device.Status.IsProcessing(); } }
 
         public int ZoomPositionInCurrentBox { get { return Device.Status?.ZoomInfo?.PositionInCurrentBox ?? 0; } }
 
