@@ -82,7 +82,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log(() => "StatusObserver: Refresh failed - " + e.code);
+                DebugUtil.Log(() => "StatusObserver: Refresh failed - " + e.StatusCode);
                 return false;
             }
             return true;
@@ -217,9 +217,9 @@ namespace Locana.CameraControl
                 }
                 catch (RemoteApiException e)
                 {
-                    if (e.code != StatusCode.Timeout)
+                    if (e.StatusCode != StatusCode.Timeout)
                     {
-                        OnError(e.code);
+                        OnError(e.StatusCode);
                         break;
                     }
                 }

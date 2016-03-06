@@ -138,14 +138,14 @@ namespace Locana.CameraControl
                 }
                 catch (RemoteApiException e)
                 {
-                    switch (e.code)
+                    switch (e.StatusCode)
                     {
                         case StatusCode.Timeout:
                             DebugUtil.Log("RequestToNotifyStreamingStatus timeout without any event. Retry for the next event");
                             RunLoop();
                             return;
                         default:
-                            DebugUtil.Log(() => "RequestToNotifyStreamingStatus finished with unexpected error: " + e.code);
+                            DebugUtil.Log(() => "RequestToNotifyStreamingStatus finished with unexpected error: " + e.StatusCode);
                             // Finish();
                             break;
                     }

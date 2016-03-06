@@ -308,7 +308,7 @@ namespace Locana.Settings
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log(() => "Failed to set parameter: " + e.code);
+                DebugUtil.Log(() => "Failed to set parameter: " + e.StatusCode);
             }
             catch (NullReferenceException e)
             {
@@ -440,7 +440,7 @@ namespace Locana.Settings
                 }
                 catch (RemoteApiException ex)
                 {
-                    DebugUtil.Log(() => "Failed to set color temperture: " + ex.code);
+                    DebugUtil.Log(() => "Failed to set color temperture: " + ex.StatusCode);
                 }
                 catch (NullReferenceException ex)
                 {

@@ -67,7 +67,7 @@ namespace Locana.Playback
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log(() => "Failed to get current state: " + e.code);
+                DebugUtil.Log(() => "Failed to get current state: " + e.StatusCode);
                 if (isFirst)
                 {
                     getCurrentFailed = true;
@@ -101,12 +101,12 @@ namespace Locana.Playback
             }
             catch (RemoteApiException e)
             {
-                if (e.code == StatusCode.IllegalState)
+                if (e.StatusCode == StatusCode.IllegalState)
                 {
                     DebugUtil.Log("SetCameraFunction IllegalState: Already in specified mode");
                     return true;
                 }
-                DebugUtil.Log(() => "Failed to change camera state: " + e.code);
+                DebugUtil.Log(() => "Failed to change camera state: " + e.StatusCode);
             }
             finally
             {
@@ -120,7 +120,7 @@ namespace Locana.Playback
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log(() => "Failed to get current state: " + e.code);
+                DebugUtil.Log(() => "Failed to get current state: " + e.StatusCode);
                 return false;
             }
         }

@@ -67,7 +67,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log(() => "Failed setup: " + e.code);
+                DebugUtil.Log(() => "Failed setup: " + e.StatusCode);
                 device.Observer.Stop();
                 throw;
             }
@@ -109,7 +109,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log(() => "Failed to startLiveview: " + e.code);
+                DebugUtil.Log(() => "Failed to startLiveview: " + e.StatusCode);
                 return false;
             }
             catch (Exception e)
@@ -130,7 +130,7 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                DebugUtil.Log(() => "Failed to stopLiveview: " + e.code);
+                DebugUtil.Log(() => "Failed to stopLiveview: " + e.StatusCode);
                 return false;
             }
         }
@@ -183,9 +183,9 @@ namespace Locana.CameraControl
             }
             catch (RemoteApiException e)
             {
-                if (e.code != StatusCode.StillCapturingNotFinished)
+                if (e.StatusCode != StatusCode.StillCapturingNotFinished)
                 {
-                    DebugUtil.Log(() => "Failed to take picture: " + e.code);
+                    DebugUtil.Log(() => "Failed to take picture: " + e.StatusCode);
                     throw e;
                 }
             }
