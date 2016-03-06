@@ -8,6 +8,7 @@ using Microsoft.Graphics.Canvas.UI.Xaml;
 using Naotaco.Histogram.Win2d;
 using System;
 using System.ComponentModel;
+using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
@@ -267,6 +268,9 @@ namespace Locana.Controls
             return Math.Min(mag_h, mag_v);
         }
 
+        public bool HorizontalReflectionEnabled { set; get; } = false;
+        private Matrix3x2 HorizontalReflectionTransform = new Matrix3x2(-1, 0, 0, 1, 0, 0);
+
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (LvOffsetH == null || LvOffsetV == null) { return; }
@@ -275,6 +279,11 @@ namespace Locana.Controls
             try
             {
                 if (LiveviewImageBitmap == null) { return; }
+                if (HorizontalReflectionEnabled)
+                {
+                    HorizontalReflectionTransform.Translation = new Vector2((float)sender.ActualWidth, 0);
+                    args.DrawingSession.Transform = HorizontalReflectionTransform;
+                }
                 args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
             }
             finally
@@ -334,7 +343,7 @@ namespace Locana.Controls
 
             LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
             LvOffsetH = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
-            
+
             FocusMarkDrawer.Height = imageHeight;
             FocusMarkDrawer.Width = imageWidth;
             FramingGuideSurface.Height = imageHeight;
