@@ -41,7 +41,7 @@ namespace Locana.Controls
         private JpegPacket PendingPakcet;
 
         private BitmapSize OriginalLvSize;
-        private double LvOffsetV, LvOffsetH;
+        private double? LvOffsetV, LvOffsetH;
 
         private const double DEFAULT_DPI = 96.0;
         public DispatcherTimer FpsTimer { get; private set; } = new DispatcherTimer();
@@ -153,7 +153,6 @@ namespace Locana.Controls
         }
 
         private double dpi;
-        bool decodedOnce = false;
 
         private async Task DecodeLiveviewFrame(JpegPacket packet, bool retry = false)
         {
@@ -270,7 +269,7 @@ namespace Locana.Controls
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            if (!decodedOnce) { return; }
+            if (LvOffsetH == null || LvOffsetV == null) { return; }
 
             rwLock.EnterReadLock();
             try
@@ -335,16 +334,14 @@ namespace Locana.Controls
 
             LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
             LvOffsetH = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
-
-            decodedOnce = true;
-
+            
             FocusMarkDrawer.Height = imageHeight;
             FocusMarkDrawer.Width = imageWidth;
             FramingGuideSurface.Height = imageHeight;
             FramingGuideSurface.Width = imageWidth;
 
-            FocusMarkDrawer.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
-            FramingGuideSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
+            FocusMarkDrawer.Margin = new Thickness((double)LvOffsetH, (double)LvOffsetV, 0, 0);
+            FramingGuideSurface.Margin = new Thickness((double)LvOffsetH, (double)LvOffsetV, 0, 0);
         }
 
         private double CalcRotatedLiveviewImageScale(double angle)
