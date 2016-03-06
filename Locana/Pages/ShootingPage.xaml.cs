@@ -10,7 +10,6 @@ using Naotaco.Histogram.Win2d;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation.Metadata;
@@ -156,8 +155,8 @@ namespace Locana.Pages
 
         private void MainPage_OrientationChanged(DisplayInformation info, object args)
         {
-            Debug.WriteLine("orientation: " + info.CurrentOrientation);
-            Debug.WriteLine(LayoutRoot.ActualWidth + " x " + LayoutRoot.ActualHeight);
+            DebugUtil.Log(() => "orientation: " + info.CurrentOrientation);
+            DebugUtil.Log(() => LayoutRoot.ActualWidth + " x " + LayoutRoot.ActualHeight);
         }
 
         private async void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
@@ -193,10 +192,10 @@ namespace Locana.Pages
         {
             var groups = VisualStateManager.GetVisualStateGroups(LayoutRoot);
 
-            Debug.WriteLine("CurrentState: " + groups[0].CurrentState.Name);
+            DebugUtil.Log(() => "CurrentState: " + groups[0].CurrentState.Name);
             groups[0].CurrentStateChanged += (sender, e) =>
             {
-                Debug.WriteLine("Width state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
+                DebugUtil.Log(() => "Width state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
                 switch (e.NewState.Name)
                 {
                     case WIDE_STATE:
@@ -349,7 +348,7 @@ namespace Locana.Pages
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Failed setup: " + ex.Message);
+                DebugUtil.Log(() => "Failed setup: " + ex.Message);
                 var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("ErrorMessage_CameraSetupFailure") });
@@ -549,7 +548,7 @@ namespace Locana.Pages
 
         private void liveview_Closed(object sender, EventArgs e)
         {
-            Debug.WriteLine("Liveview connection closed");
+            DebugUtil.Log("Liveview connection closed");
         }
 
         private void Liveview_FocusFrameRetrieved(object sender, FocusFrameEventArgs e)

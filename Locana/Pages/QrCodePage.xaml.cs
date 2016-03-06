@@ -1,7 +1,6 @@
 ﻿using Locana.Utility;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -235,7 +234,7 @@ namespace Locana.Pages
 
         private async void MediaCapture_Failed(MediaCapture sender, MediaCaptureFailedEventArgs errorEventArgs)
         {
-            Debug.WriteLine("MediaCapture_Failed: (0x{0:X}) {1}", errorEventArgs.Code, errorEventArgs.Message);
+            DebugUtil.Log(() => string.Format("MediaCapture_Failed: (0x{0:X}) {1}", errorEventArgs.Code, errorEventArgs.Message));
 
             await CleanupCameraAsync();
         }
@@ -247,7 +246,7 @@ namespace Locana.Pages
         /// <returns></returns>
         private async Task InitializeCameraAsync()
         {
-            Debug.WriteLine("InitializeCameraAsync");
+            DebugUtil.Log("InitializeCameraAsync");
 
             if (_mediaCapture == null)
             {
@@ -257,7 +256,7 @@ namespace Locana.Pages
 
                 if (cameraDevice == null)
                 {
-                    Debug.WriteLine("No camera device found!");
+                    DebugUtil.Log("No camera device found!");
                     return;
                 }
 
@@ -281,7 +280,7 @@ namespace Locana.Pages
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    Debug.WriteLine("The app was denied access to the camera");
+                    DebugUtil.Log("The app was denied access to the camera");
                     await CleanupCameraAsync();
                     // TODO another toast to request permission?
                     return;
@@ -303,7 +302,7 @@ namespace Locana.Pages
         /// <returns></returns>
         private async Task StartPreviewAsync()
         {
-            Debug.WriteLine("StartPreviewAsync");
+            DebugUtil.Log("StartPreviewAsync");
 
             // Prevent the device from sleeping while the preview is running
             _displayRequest.RequestActive();
@@ -367,7 +366,7 @@ namespace Locana.Pages
                     var sb = new StringBuilder();
                     foreach (var d in data)
                     {
-                        Debug.WriteLine(d);
+                        DebugUtil.Log(d);
                         sb.Append(d);
                     }
 
