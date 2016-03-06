@@ -41,7 +41,7 @@ namespace Locana.Controls
         private JpegPacket PendingPakcet;
 
         private BitmapSize OriginalLvSize;
-        private double LvOffsetV, LvOffsetH;
+        private double? LvOffsetV, LvOffsetH;
 
         private const double DEFAULT_DPI = 96.0;
         public DispatcherTimer FpsTimer { get; private set; } = new DispatcherTimer();
@@ -166,8 +166,10 @@ namespace Locana.Controls
                     OriginalLvSize = new BitmapSize { Width = (uint)writeable.PixelWidth, Height = (uint)writeable.PixelHeight };
 
                     var magnification = CalcLiveviewMagnification();
-                    DebugUtil.Log(() => { return "Decode: mag: " + magnification; });
+                    DebugUtil.Log(() => { return "Decode: mag: " + magnification + " offsetV: " + LvOffsetV; });
                     dpi = DEFAULT_DPI / magnification;
+
+                    RefreshOverlayControlParams(magnification);
 
                     trailingTask = () =>
                     {
@@ -186,6 +188,7 @@ namespace Locana.Controls
             else
             {
                 rwLock.EnterWriteLock();
+
                 try
                 {
                     var toDelete = LiveviewImageBitmap;
@@ -266,11 +269,12 @@ namespace Locana.Controls
 
         private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
+            if (LvOffsetH == null || LvOffsetV == null) { return; }
+
             rwLock.EnterReadLock();
             try
             {
                 if (LiveviewImageBitmap == null) { return; }
-
                 args.DrawingSession.DrawImage(LiveviewImageBitmap, (float)LvOffsetH, (float)LvOffsetV);
             }
             finally
@@ -330,14 +334,14 @@ namespace Locana.Controls
 
             LvOffsetV = (LiveviewImageCanvas.ActualHeight - imageHeight) / 2;
             LvOffsetH = (LiveviewImageCanvas.ActualWidth - imageWidth) / 2;
-
+            
             FocusMarkDrawer.Height = imageHeight;
             FocusMarkDrawer.Width = imageWidth;
             FramingGuideSurface.Height = imageHeight;
             FramingGuideSurface.Width = imageWidth;
 
-            FocusMarkDrawer.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
-            FramingGuideSurface.Margin = new Thickness(LvOffsetH, LvOffsetV, 0, 0);
+            FocusMarkDrawer.Margin = new Thickness((double)LvOffsetH, (double)LvOffsetV, 0, 0);
+            FramingGuideSurface.Margin = new Thickness((double)LvOffsetH, (double)LvOffsetV, 0, 0);
         }
 
         private double CalcRotatedLiveviewImageScale(double angle)
