@@ -462,7 +462,7 @@ namespace Locana.DataModel
             }
         }
 
-        public bool IsAudioMode { get { return Device.Status.ShootMode.Current == ShootModeParam.Audio; } }
+        public bool IsAudioMode { get { return Device.Status?.ShootMode?.Current == ShootModeParam.Audio; } }
 
         public bool LiveviewImageDisplayed { get { return !IsAudioMode; } }
 

@@ -115,7 +115,11 @@
                           Canvas.ZIndex="100"
                           IsActive="{Binding ShowProgressCircle,
                                              FallbackValue=true}" />
-            <controls:ImageStreamView x:Name="LiveviewUnit" Canvas.ZIndex="3" />
+            <controls:ImageStreamView x:Name="LiveviewUnit"
+                                      Canvas.ZIndex="3"
+                                      Visibility="{Binding LiveviewImageDisplayed,
+                                                           FallbackValue=Collapsed,
+                                                           Converter={StaticResource B2VConverter}}" />
         </Grid>
 
         <controls:Histogram x:Name="HistogramControl"
