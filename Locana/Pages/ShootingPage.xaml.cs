@@ -388,8 +388,6 @@ namespace Locana.Pages
 
             await LiveviewUnit.SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);
 
-            HistogramControl.Visibility = ApplicationSettings.GetInstance().IsHistogramDisplayed.AsVisibility();
-
             SetUIHandlers();
         }
 

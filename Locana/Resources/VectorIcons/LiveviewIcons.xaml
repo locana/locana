@@ -280,7 +280,34 @@
         </Viewbox>
     </DataTemplate>
 
+    <DataTemplate x:Key="MicIcon">
+        <Viewbox>
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M12,13C13.66,13,14.99,11.66,14.99,10L15,4C15,2.34 13.66,1 12,1 10.34,1 9,2.34 9,4L9,10C9,11.66,10.34,13,12,13z M19,10L17.3,10C17.3,13 14.76,15.1 12,15.1 9.24,15.1 6.7,13 6.7,10L5,10C5,13.41,7.72,16.23,11,16.72L11,20 13,20 13,16.72C16.28,16.23,19,13.41,19,10z"
+                      Fill="#FFFFFFFF"
+                      Stroke="#FF000000" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
 
+    <DataTemplate x:Key="RecordingMicIcon">
+        <Viewbox>
+            <Canvas Width="24" Height="24">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0" />
+                </Canvas.RenderTransform>
+                <Canvas.Resources />
+                <Path Data="F1 M12,13C13.66,13,14.99,11.66,14.99,10L15,4C15,2.34 13.66,1 12,1 10.34,1 9,2.34 9,4L9,10C9,11.66,10.34,13,12,13z M19,10L17.3,10C17.3,13 14.76,15.1 12,15.1 9.24,15.1 6.7,13 6.7,10L5,10C5,13.41,7.72,16.23,11,16.72L11,20 13,20 13,16.72C16.28,16.23,19,13.41,19,10z"
+                      Fill="{StaticResource SystemControlForegroundAccentBrush}"
+                      Stroke="#FF000000" />
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+    
     <!--
             <DataTemplate x:Key="somethingKey">
                 <Viewbox>

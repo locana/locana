@@ -43,6 +43,7 @@ namespace Locana.DataModel
                 NotifyChangedOnUI(nameof(IsAvailableGetIsoSpeedRate));
                 NotifyChangedOnUI(nameof(IsAvailableGetEV));
                 NotifyChangedOnUI(nameof(DisplayParamsArea));
+                NotifyChangedOnUI(nameof(HistogramDisplayed));
             };
             Device.Api.AvailiableApisUpdated += (sender, e) =>
             {
@@ -74,6 +75,7 @@ namespace Locana.DataModel
             ApplicationSettings.GetInstance().PropertyChanged += (sender, args) =>
             {
                 NotifyChangedOnUI(nameof(ShutterButtonImage));
+                NotifyChangedOnUI(nameof(HistogramDisplayed));
             };
         }
 
@@ -180,7 +182,8 @@ namespace Locana.DataModel
                     case ShootModeParam.Interval:
                         return IntervalStillIconTemplate;
                     case ShootModeParam.Audio:
-                        return AudioIconTemplate;
+                        // Not to show small mode icon on audio mode.
+                        return null;
                     case ShootModeParam.Loop:
                         return LoopIconTemplate;
                 }
@@ -465,6 +468,11 @@ namespace Locana.DataModel
         public bool IsAudioMode { get { return Device.Status?.ShootMode?.Current == ShootModeParam.Audio; } }
 
         public bool LiveviewImageDisplayed { get { return !IsAudioMode; } }
+
+        public bool HistogramDisplayed
+        {
+            get { return ApplicationSettings.GetInstance().IsHistogramDisplayed && LiveviewImageDisplayed; }
+        }
 
         private bool _ConnectionEstablished;
         public bool ConnectionEstablished
