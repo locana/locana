@@ -224,7 +224,7 @@ namespace Locana.DataModel
 
             try
             {
-                using (var stream = await file.GetThumbnailAsync(ThumbnailMode.ListView))
+                using (var stream = await file.GetThumbnailAsync(ThumbnailMode.ListView, 150)) // size of large grid
                 {
                     var bmp = new BitmapImage();
                     bmp.CreateOptions = BitmapCreateOptions.None;
