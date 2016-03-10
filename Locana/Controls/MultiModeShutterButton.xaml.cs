@@ -2,6 +2,7 @@
 using Locana.Utility;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -270,9 +271,10 @@ namespace Locana.Controls
             SetModeButtonsEnable(ModeButtonsEnabled);
         }
 
-        void UpdateCurrentModeButtonImage<T>(T newIcon)
+        async void UpdateCurrentModeButtonImage<T>(T newIcon)
         {
             if (this._ModeInfo?.ShootModeCapability == null) { return; }
+            await Task.Delay(TimeSpan.FromMilliseconds(500));
             var button = FindButton(this._ModeInfo.ShootModeCapability.Current);
             if (button != null)
             {
