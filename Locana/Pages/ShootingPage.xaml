@@ -115,12 +115,27 @@
                           Canvas.ZIndex="100"
                           IsActive="{Binding ShowProgressCircle,
                                              FallbackValue=true}" />
-            <controls:ImageStreamView x:Name="LiveviewUnit" Canvas.ZIndex="3" />
+            <ContentControl Margin="70"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Canvas.ZIndex="2"
+                            ContentTemplate="{StaticResource MicIcon}"
+                            Visibility="{Binding LiveviewImageDisplayed,
+                                                 FallbackValue=Collapsed,
+                                                 Converter={StaticResource B2VRConverter}}" />
+            <controls:ImageStreamView x:Name="LiveviewUnit"
+                                      Canvas.ZIndex="3"
+                                      Visibility="{Binding LiveviewImageDisplayed,
+                                                           FallbackValue=Collapsed,
+                                                           Converter={StaticResource B2VConverter}}" />
         </Grid>
 
         <controls:Histogram x:Name="HistogramControl"
                             VerticalAlignment="Top"
-                            Canvas.ZIndex="20" />
+                            Canvas.ZIndex="20"
+                            Visibility="{Binding HistogramDisplayed,
+                                                 FallbackValue=Collapsed,
+                                                 Converter={StaticResource B2VConverter}}" />
 
         <Grid x:Name="Header"
               Grid.Column="1"
