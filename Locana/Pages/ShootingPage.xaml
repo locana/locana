@@ -115,7 +115,8 @@
                           Canvas.ZIndex="100"
                           IsActive="{Binding ShowProgressCircle,
                                              FallbackValue=true}" />
-            <ContentControl Margin="70"
+            <ContentControl x:Name="CenterMicIcon"
+                            Margin="70"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Canvas.ZIndex="2"

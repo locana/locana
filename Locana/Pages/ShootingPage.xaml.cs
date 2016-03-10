@@ -22,6 +22,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -417,18 +418,7 @@ namespace Locana.Pages
                     EnqueueContshootingResult(status.ContShootingResult);
                     break;
                 case nameof(CameraStatus.Status):
-                    if (status.Status == EventParam.Idle)
-                    {
-                        // When recording is stopped, clear recording time.
-                        status.RecordingTimeSec = 0;
-                    }
-                    if (status.IsRecording() ^ recording)
-                    {
-                        recording = !recording;
-                        UpdateShutterButton(status);
-                        ControlPanel.SetChildrenControlHitTest(!status.IsRecording());
-                        ControlPanel.SetChildrenControlTabStop(!status.IsRecording());
-                    }
+                    OnCameraStatusChanged(status);
                     break;
                 case nameof(CameraStatus.ShootMode):
                     UpdateShutterButton(status);
@@ -464,6 +454,38 @@ namespace Locana.Pages
                 {
                     UpdateShutterButton(target.Status);
                 });
+            }
+        }
+        private Storyboard heartbeatStory;
+
+        private void OnCameraStatusChanged(CameraStatus status)
+        {
+            if (status.Status == EventParam.Idle)
+            {
+                // When recording is stopped, clear recording time.
+                status.RecordingTimeSec = 0;
+            }
+            if (status.IsRecording() ^ recording)
+            {
+                recording = !recording;
+                UpdateShutterButton(status);
+                ControlPanel.SetChildrenControlHitTest(!status.IsRecording());
+                ControlPanel.SetChildrenControlTabStop(!status.IsRecording());
+
+                if (ScreenViewData?.IsAudioMode ?? false && recording)
+                {
+                    CenterMicIcon.ContentTemplate = (DataTemplate)Application.Current.Resources["RecordingMicIcon"];
+                    heartbeatStory = AnimationHelper.CreateHeartBeatAnimation(new AnimationRequest
+                    {
+                        Target = CenterMicIcon
+                    }, TimeSpan.FromSeconds(5), TimeSpan.FromMilliseconds(500));
+                    heartbeatStory.Begin();
+                }
+                else
+                {
+                    CenterMicIcon.ContentTemplate = (DataTemplate)Application.Current.Resources["MicIcon"];
+                    heartbeatStory?.Stop();
+                }
             }
         }
 
