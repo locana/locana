@@ -389,6 +389,11 @@ namespace Locana.Pages
             await LiveviewUnit.SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);
 
             SetUIHandlers();
+
+            if (target.Status.ShootMode?.Current == ShootModeParam.Audio)
+            {
+                liveviewDisabledByAudioMode = true;
+            }
         }
 
         private void SetUIHandlers()
@@ -427,6 +432,7 @@ namespace Locana.Pages
                     break;
                 case nameof(CameraStatus.ShootMode):
                     UpdateShutterButton(status);
+                    RevaluateLiveviewState(status);
                     break;
                 case nameof(CameraStatus.FocusStatus):
                     UpdateFocusStatus(status.FocusStatus);
@@ -458,6 +464,22 @@ namespace Locana.Pages
                 {
                     UpdateShutterButton(target.Status);
                 });
+            }
+        }
+
+        private bool liveviewDisabledByAudioMode = false;
+
+        private void RevaluateLiveviewState(CameraStatus status)
+        {
+            if (liveviewDisabledByAudioMode && status.ShootMode?.Current != ShootModeParam.Audio && liveview?.ConnectionState == ConnectionState.Closed)
+            {
+                SequentialOperation.OpenLiveviewStream(target.Api, liveview).IgnoreExceptions();
+                liveviewDisabledByAudioMode = false;
+            }
+            else if (!liveviewDisabledByAudioMode && status.ShootMode?.Current == ShootModeParam.Audio)
+            {
+                SequentialOperation.CloseLiveviewStream(target.Api, liveview).IgnoreExceptions();
+                liveviewDisabledByAudioMode = true;
             }
         }
 

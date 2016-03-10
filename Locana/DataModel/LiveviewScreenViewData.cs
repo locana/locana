@@ -182,8 +182,7 @@ namespace Locana.DataModel
                     case ShootModeParam.Interval:
                         return IntervalStillIconTemplate;
                     case ShootModeParam.Audio:
-                        // Not to show small mode icon on audio mode.
-                        return null;
+                        return AudioIconTemplate;
                     case ShootModeParam.Loop:
                         return LoopIconTemplate;
                 }
