@@ -50,8 +50,6 @@
                         <Setter Target="Header.Margin" Value="24,4,0,4" />
                         <Setter Target="ShootModeImage.Margin" Value="0" />
                         <Setter Target="MainHeader.Height" Value="32" />
-                        <Setter Target="RecordingCountText.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
-                        <Setter Target="StorageAmountText.Style" Value="{StaticResource SubtitleTextBlockStyle}" />
                         <Setter Target="HistogramControl.(Grid.Row)" Value="0" />
                         <Setter Target="HistogramControl.(Grid.RowSpan)" Value="2" />
                         <Setter Target="HistogramControl.(Grid.Column)" Value="2" />
@@ -81,9 +79,7 @@
                         <Setter Target="Header.(Grid.Column)" Value="0" />
                         <Setter Target="Header.Margin" Value="0" />
                         <Setter Target="ShootModeImage.Margin" Value="48,0,0,0" />
-                        <Setter Target="MainHeader.Height" Value="24" />
-                        <Setter Target="RecordingCountText.Style" Value="{StaticResource HeaderTextStyle}" />
-                        <Setter Target="StorageAmountText.Style" Value="{StaticResource HeaderTextStyle}" />
+                        <Setter Target="MainHeader.Height" Value="28" />
                         <Setter Target="HistogramControl.(Grid.Row)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.RowSpan)" Value="1" />
                         <Setter Target="HistogramControl.(Grid.Column)" Value="0" />
@@ -182,6 +178,7 @@
                                 Grid.Column="2"
                                 Margin="3"
                                 HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
                                 ContentTemplate="{StaticResource RecIcon}"
                                 Visibility="{Binding IsRecording,
                                                      FallbackValue=Collapsed,
@@ -190,6 +187,7 @@
                            Grid.Column="3"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
                            Text="{Binding RecordingCount}"
                            Visibility="{Binding IsRecordingCountAvailable,
                                                 FallbackValue=Collapsed,
@@ -197,11 +195,13 @@
                 <ContentControl Grid.Column="5"
                                 Margin="3"
                                 HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
                                 ContentTemplate="{Binding MemoryCardStatusImage}" />
                 <TextBlock x:Name="StorageAmountText"
                            Grid.Column="6"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
+                           Style="{StaticResource SubtitleTextBlockStyle}"
                            Text="{Binding RecordbaleAmount}" />
                 <controls:BatteryStatus x:Name="BatteryStatusDisplay"
                                         Grid.Column="7"
@@ -228,16 +228,19 @@
                 </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Foreground="{x:Null}"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text=" " />
                 <TextBlock Name="ShutterSpeed"
-                           Grid.Column="0"
+                           Grid.Column="1"
+                           Margin="16,0,0,0"
+                           HorizontalAlignment="Right"
                            Foreground="{Binding ShutterSpeedBrush}"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding ShutterSpeedDisplayValue}"
@@ -245,7 +248,9 @@
                                                 FallbackValue=Collapsed,
                                                 Converter={StaticResource B2VConverter}}" />
                 <TextBlock Name="Fnumber"
-                           Grid.Column="1"
+                           Grid.Column="2"
+                           Margin="16,0,0,0"
+                           HorizontalAlignment="Right"
                            Foreground="{Binding FNumberBrush}"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding FnumberDisplayValue}"
@@ -253,7 +258,9 @@
                                                 FallbackValue=Collapsed,
                                                 Converter={StaticResource B2VConverter}}" />
                 <TextBlock Name="Ev"
-                           Grid.Column="2"
+                           Grid.Column="3"
+                           Margin="16,0,0,0"
+                           HorizontalAlignment="Right"
                            Foreground="{Binding EvBrush}"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding EvDisplayValue}"
@@ -261,7 +268,9 @@
                                                 FallbackValue=Collapsed,
                                                 Converter={StaticResource B2VConverter}}" />
                 <TextBlock Name="ISO"
-                           Grid.Column="3"
+                           Grid.Column="4"
+                           Margin="16,0,0,0"
+                           HorizontalAlignment="Right"
                            Foreground="{Binding IsoBrush}"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding ISODisplayValue}"
