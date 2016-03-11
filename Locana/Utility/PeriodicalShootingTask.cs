@@ -10,11 +10,11 @@ namespace Locana.Utility
     public class PeriodicalShootingTask
     {
         private List<TargetDevice> TargetDevices = new List<TargetDevice>();
-        private int Interval = 1;
+        public int Interval { private set; get; } = 1;
         private DispatcherTimer Timer = new DispatcherTimer();
         private int SkipCount = 0;
         private const int SKIP_LIMIT = 5;
-        private int Count = 0;
+        public int Count { private set; get; } = 0;
 
         public Action<PeriodicalShootingResult> Tick;
         public Action<StopReason> Stopped;

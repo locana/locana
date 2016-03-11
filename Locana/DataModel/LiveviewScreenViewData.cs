@@ -196,6 +196,8 @@ namespace Locana.DataModel
             get
             {
                 if (Device.Status.ExposureMode == null) { return null; }
+                if (Device.Status?.ShootMode?.Current != ShootModeParam.Still) { return null; }
+
                 switch (Device.Status.ExposureMode.Current ?? "")
                 {
                     case ExposureMode.Intelligent:

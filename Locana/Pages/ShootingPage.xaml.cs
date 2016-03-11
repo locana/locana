@@ -794,7 +794,12 @@ namespace Locana.Pages
                             AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("PeriodicalShooting_Skipped") });
                             break;
                         case PeriodicalShootingTask.PeriodicalShootingResult.Succeed:
-                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("Message_ImageCapture_Succeed") });
+                            AppShell.Current.Toast.PushToast(new ToastContent
+                            {
+                                Text = string.Format(SystemUtil.GetStringResource("PeriodicalShooting_Status"),
+                                                    PeriodicalShootingTask.Interval.ToString(),
+                                                    PeriodicalShootingTask.Count.ToString())
+                            });
                             break;
                     };
                 });
@@ -817,13 +822,14 @@ namespace Locana.Pages
                     };
                 });
             };
-            task.StatusUpdated += async (status) =>
+            task.StatusUpdated += (status) =>
             {
                 ScreenViewData.IsPeriodicalShootingRunning = status.IsRunning;
                 ControlPanel.SetChildrenControlHitTest(!status.IsRunning);
                 ControlPanel.SetChildrenControlTabStop(!status.IsRunning);
                 UpdateShutterButton(target.Status);
 
+                /*
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     DebugUtil.Log(() => "Status updated: " + status.Count);
@@ -837,6 +843,7 @@ namespace Locana.Pages
                             status.Count.ToString());
                     }
                 });
+                */
             };
             return task;
         }
