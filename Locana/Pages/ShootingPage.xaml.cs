@@ -319,6 +319,11 @@ namespace Locana.Pages
                 target.Api.AvailiableApisUpdated -= Api_AvailiableApisUpdated;
             }
 
+            if (ScreenViewData != null)
+            {
+                ScreenViewData.PropertyChanged -= ScreenViewData_PropertyChanged;
+            }
+
             liveview.JpegRetrieved -= liveview_JpegRetrieved;
             liveview.FocusFrameRetrieved -= Liveview_FocusFrameRetrieved;
             liveview.Closed -= liveview_Closed;
@@ -339,6 +344,7 @@ namespace Locana.Pages
         {
             this.target = target;
             ScreenViewData = new LiveviewScreenViewData(target);
+            ScreenViewData.PropertyChanged += ScreenViewData_PropertyChanged;
             LiveviewContext = new LiveviewContext(target, HistogramCreator);
             LiveviewUnit.Context = LiveviewContext;
             LayoutRoot.DataContext = ScreenViewData;
@@ -394,6 +400,26 @@ namespace Locana.Pages
             if (target.Status.ShootMode?.Current == ShootModeParam.Audio)
             {
                 liveviewDisabledByAudioMode = true;
+            }
+        }
+
+        private void ScreenViewData_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var data = sender as LiveviewScreenViewData;
+            switch (e.PropertyName)
+            {
+                case nameof(LiveviewScreenViewData.IsSetEVAvailable):
+                    if (EvSlider.Visibility.IsVisible() && !data.IsSetEVAvailable) { ToggleVisibility(EvSlider); }
+                    break;
+                case nameof(LiveviewScreenViewData.IsSetFNumberAvailable):
+                    if (FnumberSlider.Visibility.IsVisible() && !data.IsSetFNumberAvailable) { ToggleVisibility(FnumberSlider); }
+                    break;
+                case nameof(LiveviewScreenViewData.IsSetIsoSpeedRateAvailable):
+                    if (ISOSlider.Visibility.IsVisible() && !data.IsSetIsoSpeedRateAvailable) { ToggleVisibility(ISOSlider); }
+                    break;
+                case nameof(LiveviewScreenViewData.IsSetShutterSpeedAvailable):
+                    if (SSSlider.Visibility.IsVisible() && !data.IsSetShutterSpeedAvailable) { ToggleVisibility(SSSlider); }
+                    break;
             }
         }
 
