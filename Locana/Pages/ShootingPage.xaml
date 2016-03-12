@@ -344,7 +344,9 @@
                                                                           FallbackValue=false}"
                                              ShutterButtonEnabled="{Binding ShutterButtonEnabled,
                                                                             Mode=OneWay,
-                                                                            FallbackValue=false}" />
+                                                                            FallbackValue=false}"
+                                             Visibility="{Binding ShootButtonDisplayed,
+                                                                  Converter={StaticResource B2VConverter}}" />
             <Grid x:Name="Sliders" MaxWidth="400">
                 <controls:ShootingParamSlider x:Name="FnumberSlider"
                                               IconDataTemplate="{StaticResource ApertureIcon}"

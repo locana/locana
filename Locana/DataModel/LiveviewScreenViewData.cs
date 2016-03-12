@@ -74,8 +74,18 @@ namespace Locana.DataModel
 
             ApplicationSettings.GetInstance().PropertyChanged += (sender, args) =>
             {
-                NotifyChangedOnUI(nameof(ShutterButtonImage));
-                NotifyChangedOnUI(nameof(HistogramDisplayed));
+                switch (args.PropertyName)
+                {
+                    case nameof(ApplicationSettings.IsIntervalShootingEnabled):
+                        NotifyChangedOnUI(nameof(ShutterButtonImage));
+                        break;
+                    case nameof(ApplicationSettings.IsHistogramDisplayed):
+                        NotifyChangedOnUI(nameof(HistogramDisplayed));
+                        break;
+                    case nameof(ApplicationSettings.IsShootButtonDisplayed):
+                        NotifyChangedOnUI(nameof(ShootButtonDisplayed));
+                        break;
+                }
             };
         }
 
@@ -116,6 +126,11 @@ namespace Locana.DataModel
                 default:
                     return default(DataTemplate);
             }
+        }
+
+        public bool ShootButtonDisplayed
+        {
+            get { return ApplicationSettings.GetInstance().IsShootButtonDisplayed; }
         }
 
         public DataTemplate ShutterButtonImage
