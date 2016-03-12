@@ -381,8 +381,7 @@ namespace Locana.Pages
             {
                 ControlPanel.Children.Add(panel);
             }
-
-            recording = target.Status.IsRecording();
+            
             setShootModeEnabled = target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE);
             ControlPanel.SetChildrenControlHitTest(!target.Status.IsRecording());
             ControlPanel.SetChildrenControlTabStop(!target.Status.IsRecording());
@@ -392,6 +391,8 @@ namespace Locana.Pages
 
             LiveviewUnit.FramingGuideDataContext = ApplicationSettings.GetInstance();
             UpdateShutterButton(target.Status);
+
+            OnCameraStatusChanged(target.Status);
 
             await LiveviewUnit.SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);
 
@@ -468,7 +469,7 @@ namespace Locana.Pages
         }
 
         private const string API_SET_SHOOT_MODE = "setShootMode";
-        private bool recording;
+        private bool recording = false;
         private bool setShootModeEnabled;
 
         private void Api_AvailiableApisUpdated(object sender, AvailableApiEventArgs e)
@@ -498,7 +499,7 @@ namespace Locana.Pages
                 ControlPanel.SetChildrenControlHitTest(!status.IsRecording());
                 ControlPanel.SetChildrenControlTabStop(!status.IsRecording());
 
-                if (ScreenViewData?.IsAudioMode ?? false && recording)
+                if ((ScreenViewData?.IsAudioMode ?? false) && recording)
                 {
                     CenterMicIcon.ContentTemplate = (DataTemplate)Application.Current.Resources["RecordingMicIcon"];
                     heartbeatStory = AnimationHelper.CreateHeartBeatAnimation(new AnimationRequest
