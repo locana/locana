@@ -56,8 +56,8 @@ namespace Locana.Pages
                 .DeviceDependent(AppBarItem.Zoom)
                 .DeviceDependent(AppBarItem.FNumberSlider)
                 .DeviceDependent(AppBarItem.ShutterSpeedSlider)
-                .DeviceDependent(AppBarItem.IsoSlider)
                 .DeviceDependent(AppBarItem.EvSlider)
+                .DeviceDependent(AppBarItem.IsoSlider)
                 .DeviceDependent(AppBarItem.ProgramShiftSlider);
         }
 
@@ -381,7 +381,7 @@ namespace Locana.Pages
             {
                 ControlPanel.Children.Add(panel);
             }
-            
+
             setShootModeEnabled = target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE);
             ControlPanel.SetChildrenControlHitTest(!target.Status.IsRecording());
             ControlPanel.SetChildrenControlTabStop(!target.Status.IsRecording());
