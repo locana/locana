@@ -3,7 +3,6 @@ using Locana.Controls;
 using Locana.Playback;
 using Locana.Utility;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace Locana.DataModel
@@ -132,8 +131,8 @@ namespace Locana.DataModel
                 {
                     Preference.ShootButtonVisible = value;
                     _IsShootButtonDisplayed = value;
-                    NotifyChangedOnUI(nameof(ShootButtonVisibility));
                     DebugUtil.Log(() => "ShootbuttonVisibility updated: " + value.ToString());
+                    NotifyChangedOnUI(nameof(IsShootButtonDisplayed));
                 }
             }
             get
@@ -286,35 +285,6 @@ namespace Locana.DataModel
                     Preference.FibonacciOrigin = value;
                     this._FibonacciLineOrigin = value;
                     NotifyChangedOnUI(nameof(FibonacciLineOrigin));
-                }
-            }
-        }
-
-        public Visibility ShootButtonVisibility
-        {
-            get
-            {
-                if (_IsShootButtonDisplayed && !ShootButtonTemporaryCollapsed)
-                {
-                    return Visibility.Visible;
-                }
-                else
-                {
-                    return Visibility.Collapsed;
-                }
-            }
-        }
-
-        private bool _ShootButtonTemporaryCollapsed = false;
-        public bool ShootButtonTemporaryCollapsed
-        {
-            get { return _ShootButtonTemporaryCollapsed; }
-            set
-            {
-                if (value != _ShootButtonTemporaryCollapsed)
-                {
-                    _ShootButtonTemporaryCollapsed = value;
-                    NotifyChangedOnUI(nameof(ShootButtonVisibility));
                 }
             }
         }
