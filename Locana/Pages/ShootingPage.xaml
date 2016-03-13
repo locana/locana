@@ -239,7 +239,7 @@
                            Text=" " />
                 <TextBlock Name="Fnumber"
                            Grid.Column="1"
-                           MinWidth="72"
+                           MinWidth="80"
                            Margin="8,0,0,0"
                            HorizontalAlignment="Right"
                            Foreground="{Binding FNumberBrush}"
@@ -250,7 +250,7 @@
                                                 Converter={StaticResource B2VConverter}}" />
                 <TextBlock Name="ShutterSpeed"
                            Grid.Column="2"
-                           MinWidth="96"
+                           MinWidth="80"
                            Margin="8,0,0,0"
                            HorizontalAlignment="Right"
                            Foreground="{Binding ShutterSpeedBrush}"
@@ -272,7 +272,7 @@
                                                 Converter={StaticResource B2VConverter}}" />
                 <TextBlock Name="Ev"
                            Grid.Column="4"
-                           MinWidth="64"
+                           MinWidth="80"
                            Margin="8,0,0,0"
                            HorizontalAlignment="Right"
                            Foreground="{Binding EvBrush}"
