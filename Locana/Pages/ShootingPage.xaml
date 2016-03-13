@@ -161,7 +161,6 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <ContentControl x:Name="ShootModeImage"
                                 Grid.Column="0"
@@ -212,13 +211,6 @@
                                         Visibility="{Binding IsBatteryInfoAvailable,
                                                              FallbackValue=Collapsed,
                                                              Converter={StaticResource B2VConverter}}" />
-                <Image Grid.Column="8"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       Source="{Binding GeopositionStatusImage}"
-                       Visibility="{Binding GeopositionEnabled,
-                                            FallbackValue=Collapsed,
-                                            Converter={StaticResource B2VConverter}}" />
             </Grid>
             <Grid x:Name="ShootingParams"
                   Grid.Row="1"

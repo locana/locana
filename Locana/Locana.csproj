@@ -284,10 +284,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\License.txt" />
-    <Content Include="Assets\LiveviewScreen\ContShootingButton.png" />
-    <Content Include="Assets\LiveviewScreen\GeoInfoStatus_NG.png" />
-    <Content Include="Assets\LiveviewScreen\GeoInfoStatus_OK.png" />
-    <Content Include="Assets\LiveviewScreen\GeoInfoStatus_Updating.png" />
     <Content Include="Assets\Logo\Square_150x150.scale-100.png" />
     <Content Include="Assets\Logo\Square_150x150.scale-200.png" />
     <Content Include="Assets\Logo\Square_150x150.scale-400.png" />
@@ -312,12 +308,7 @@
     <Content Include="Assets\Logo\Wide_310x150.scale-100.png" />
     <Content Include="Assets\Logo\Wide_310x150.scale-200.png" />
     <Content Include="Assets\Logo\Wide_310x150.scale-400.png" />
-    <Content Include="Assets\Screen\focused.png" />
-    <Content Include="Assets\Screen\GeoInfoStatus_NG.png" />
-    <Content Include="Assets\Screen\GeoInfoStatus_OK.png" />
-    <Content Include="Assets\Screen\GeoInfoStatus_Updating.png" />
     <Content Include="Assets\SplashScreen\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Toast\Locana_square_full.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -3,10 +3,8 @@ using Kazyx.RemoteApi.Camera;
 using Locana.CameraControl;
 using Locana.Utility;
 using System;
-using Windows.Devices.Geolocation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 namespace Locana.DataModel
 {
     public class LiveviewScreenViewData : ObservableBase
@@ -434,53 +432,6 @@ namespace Locana.DataModel
         public bool IsProgramShiftAvailable { get { return Device.Api != null && Device.Api.Capability.IsAvailable("setProgramShift"); } }
 
         public bool IsBatteryInfoAvailable { get { return Device.Status.BatteryInfo != null; } }
-
-        private static readonly BitmapImage GeoInfoStatusImage_OK = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/GeoInfoStatus_OK.png", UriKind.Absolute));
-        private static readonly BitmapImage GeoInfoStatusImage_NG = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/GeoInfoStatus_NG.png", UriKind.Absolute));
-        private static readonly BitmapImage GeoInfoStatusImage_Updating = new BitmapImage(new Uri("ms-appx:///Assets/LiveviewScreen/GeoInfoStatus_Updating.png", UriKind.Absolute));
-
-        private PositionStatus _GeopositionStatus = PositionStatus.Disabled;
-        public PositionStatus GeopositionStatus
-        {
-            get { return _GeopositionStatus; }
-            set
-            {
-                _GeopositionStatus = value;
-                NotifyChangedOnUI(nameof(GeopositionStatusImage));
-                DebugUtil.Log(() => "Geoposition status: " + value);
-            }
-        }
-
-        public BitmapImage GeopositionStatusImage
-        {
-            get
-            {
-                switch (GeopositionStatus)
-                {
-                    case PositionStatus.Disabled:
-                    case PositionStatus.NotAvailable:
-                    case PositionStatus.NotInitialized:
-                        return GeoInfoStatusImage_NG;
-                    case PositionStatus.Initializing:
-                    case PositionStatus.NoData:
-                        return GeoInfoStatusImage_Updating;
-                    case PositionStatus.Ready:
-                        return GeoInfoStatusImage_OK;
-                }
-                return null;
-            }
-        }
-
-        private bool _GeopositionEnabled;
-        public bool GeopositionEnabled
-        {
-            get { return _GeopositionEnabled; }
-            set
-            {
-                _GeopositionEnabled = value;
-                NotifyChangedOnUI(nameof(GeopositionEnabled));
-            }
-        }
 
         public bool IsAudioMode { get { return Device.Status?.ShootMode?.Current == ShootModeParam.Audio; } }
 
