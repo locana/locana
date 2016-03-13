@@ -59,7 +59,7 @@
                                HorizontalAlignment="Stretch"
                                VerticalAlignment="Center"
                                Foreground="{StaticResource ApplicationForegroundThemeBrush}"
-                               Style="{StaticResource HeaderTextStyle}"
+                               Style="{StaticResource SubtitleTextBlockStyle}"
                                Text="{Binding FileName}"
                                TextAlignment="Left"
                                TextTrimming="CharacterEllipsis" />

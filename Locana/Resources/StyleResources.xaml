@@ -3,12 +3,6 @@
                     xmlns:controls="using:Locana.Controls"
                     xmlns:local="using:Locana">
 
-    <Style x:Key="ShootingParamStyle" TargetType="TextBlock">
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="6,3" />
-        <Setter Property="FontSize" Value="16" />
-    </Style>
     <Style x:Key="ShootingParamSliderStyle" TargetType="controls:ShootingParamSlider">
         <Setter Property="MaxWidth" Value="500" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -32,12 +26,6 @@
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Opacity" Value="0.8" />
-    </Style>
-    <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="3,6,3,3" />
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{StaticResource ApplicationForegroundThemeBrush}" />
     </Style>
     <Style x:Key="GridViewItemStretchStyle" TargetType="GridViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

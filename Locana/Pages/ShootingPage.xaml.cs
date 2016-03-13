@@ -56,8 +56,8 @@ namespace Locana.Pages
                 .DeviceDependent(AppBarItem.Zoom)
                 .DeviceDependent(AppBarItem.FNumberSlider)
                 .DeviceDependent(AppBarItem.ShutterSpeedSlider)
-                .DeviceDependent(AppBarItem.IsoSlider)
                 .DeviceDependent(AppBarItem.EvSlider)
+                .DeviceDependent(AppBarItem.IsoSlider)
                 .DeviceDependent(AppBarItem.ProgramShiftSlider);
         }
 
@@ -381,7 +381,7 @@ namespace Locana.Pages
             {
                 ControlPanel.Children.Add(panel);
             }
-            
+
             setShootModeEnabled = target.Api.Capability.IsAvailable(API_SET_SHOOT_MODE);
             ControlPanel.SetChildrenControlHitTest(!target.Status.IsRecording());
             ControlPanel.SetChildrenControlTabStop(!target.Status.IsRecording());
@@ -795,7 +795,12 @@ namespace Locana.Pages
                             AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("PeriodicalShooting_Skipped") });
                             break;
                         case PeriodicalShootingTask.PeriodicalShootingResult.Succeed:
-                            AppShell.Current.Toast.PushToast(new ToastContent { Text = SystemUtil.GetStringResource("Message_ImageCapture_Succeed") });
+                            AppShell.Current.Toast.PushToast(new ToastContent
+                            {
+                                Text = string.Format(SystemUtil.GetStringResource("PeriodicalShooting_Status"),
+                                                    PeriodicalShootingTask.Interval.ToString(),
+                                                    PeriodicalShootingTask.Count.ToString())
+                            });
                             break;
                     };
                 });
@@ -818,13 +823,14 @@ namespace Locana.Pages
                     };
                 });
             };
-            task.StatusUpdated += async (status) =>
+            task.StatusUpdated += (status) =>
             {
                 ScreenViewData.IsPeriodicalShootingRunning = status.IsRunning;
                 ControlPanel.SetChildrenControlHitTest(!status.IsRunning);
                 ControlPanel.SetChildrenControlTabStop(!status.IsRunning);
                 UpdateShutterButton(target.Status);
 
+                /*
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     DebugUtil.Log(() => "Status updated: " + status.Count);
@@ -838,6 +844,7 @@ namespace Locana.Pages
                             status.Count.ToString());
                     }
                 });
+                */
             };
             return task;
         }
