@@ -224,7 +224,7 @@ namespace Locana.DataModel
 
             try
             {
-                using (var stream = await file.GetThumbnailAsync(ThumbnailMode.ListView, 150)) // size of large grid
+                using (var stream = await file.GetThumbnailAsync(ThumbnailMode.ListView, 90)) // 90 pix seems to be the best balance between speed and quality
                 {
                     var bmp = new BitmapImage();
                     bmp.CreateOptions = BitmapCreateOptions.None;
