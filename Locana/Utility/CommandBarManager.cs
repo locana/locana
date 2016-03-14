@@ -24,8 +24,6 @@ namespace Locana.Utility
         {
             switch (item)
             {
-                case AppBarItem.AppSetting:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Setting), Label = SystemUtil.GetStringResource("AppSetting") };
                 case AppBarItem.CancelTouchAF:
                     return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["CancelIcon"], Label = SystemUtil.GetStringResource("AppBar_CancelTouchAf") };
                 case AppBarItem.Close:
@@ -46,8 +44,6 @@ namespace Locana.Utility
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Rotate) { RenderTransform = new ScaleTransform { ScaleX = -1 }, RenderTransformOrigin = new Point { X = 0.5, Y = 0.5 } }, Label = SystemUtil.GetStringResource("RotateLeft") };
                 case AppBarItem.RotateRight:
                     return new AppBarButton() { Icon = new SymbolIcon(Symbol.Rotate), Label = SystemUtil.GetStringResource("RotateRight") };
-                case AppBarItem.Refresh:
-                    return new AppBarButton() { Icon = new SymbolIcon(Symbol.Refresh), Label = SystemUtil.GetStringResource("AppBar_Refresh") };
                 case AppBarItem.FNumberSlider:
                     return new AppBarButton() { ContentTemplate = (DataTemplate)Application.Current.Resources["ApertureIcon"], Label = SystemUtil.GetStringResource("CommandBar_Fnumber") };
                 case AppBarItem.ShutterSpeedSlider:
@@ -333,8 +329,6 @@ namespace Locana.Utility
         Resume,
         Pause,
         Close,
-        Refresh,
-        AppSetting,
         FNumberSlider,
         ShutterSpeedSlider,
         IsoSlider,

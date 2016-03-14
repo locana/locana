@@ -139,9 +139,6 @@
   <data name="AppBar_CancelTouchAf" xml:space="preserve">
     <value>AF解除</value>
   </data>
-  <data name="AppBar_ControlPanel" xml:space="preserve">
-    <value>設定パネル</value>
-  </data>
   <data name="AppBar_Delete" xml:space="preserve">
     <value>削除</value>
   </data>
@@ -163,21 +160,11 @@
   <data name="BeepModeShutterOnly" xml:space="preserve">
     <value>シャッター音のみ</value>
   </data>
-  <data name="Black" xml:space="preserve">
-    <value>黒</value>
-  </data>
-  <data name="Blue" xml:space="preserve">
-    <value>青</value>
-  </data>
   <data name="BottomLeft" xml:space="preserve">
     <value>左下</value>
   </data>
   <data name="BottomRight" xml:space="preserve">
     <value>右下</value>
-  </data>
-  <data name="BuiltInSRNotSupported" xml:space="preserve">
-    <value>プリインストール版のスマートリモコンアプリはサードパーティ製アプリからのコントロールに対応していません。
-PlayMemories Camera Appsストアで最新版にアップデートしてください。</value>
   </data>
   <data name="ColorMode_Neutral" xml:space="preserve">
     <value>ニュートラル</value>
@@ -221,9 +208,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="ContinuousShootSpeed_Low" xml:space="preserve">
     <value>低速</value>
   </data>
-  <data name="ControlPanel" xml:space="preserve">
-    <value>設定パネル</value>
-  </data>
   <data name="ContShootingMode" xml:space="preserve">
     <value>ドライブモード</value>
   </data>
@@ -242,14 +226,8 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="Donation" xml:space="preserve">
     <value>ドネーション</value>
   </data>
-  <data name="ErrorMessage_cameraNotReady" xml:space="preserve">
-    <value>カメラが処理中です。しばらくまって再度お試しください。</value>
-  </data>
   <data name="ErrorMessage_CantFindSonyRecord" xml:space="preserve">
     <value>NFCタグからSSIDおよびパスワードを読み取れませんでした。</value>
-  </data>
-  <data name="ErrorMessage_Dsconnected" xml:space="preserve">
-    <value>接続が途絶しました。</value>
   </data>
   <data name="ErrorMessage_FailedToGetGeoposition" xml:space="preserve">
     <value>位置情報の取得に失敗しました。元の画像がカメラロールに保存されました。</value>
@@ -266,35 +244,14 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="ErrorMessage_ImageDL_Gone" xml:space="preserve">
     <value>一部の連写画像の取得に失敗しました。</value>
   </data>
-  <data name="ErrorMessage_ImageDL_Network" xml:space="preserve">
-    <value>ネットワークエラーが発生しました</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_Other" xml:space="preserve">
-    <value>予期せぬエラーが発生しました。</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_OtherOriginal" xml:space="preserve">
-    <value>予期せぬエラーが発生しました。転送画像サイズを小さくして再度お試しください。</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_Saving" xml:space="preserve">
-    <value>画像の保存に失敗しました</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_SavingOriginal" xml:space="preserve">
-    <value>画像の保存に失敗しました。転送画像サイズを小さくして再度お試しください。</value>
-  </data>
   <data name="ErrorMessage_Interval" xml:space="preserve">
     <value>エラーが発生したため、インターバル撮影を停止しました</value>
-  </data>
-  <data name="ErrorMessage_LocationAccessUnauthorized" xml:space="preserve">
-    <value>有効にするには、システム設定の位置情報サービスをオンにしてください。</value>
   </data>
   <data name="ErrorMessage_ParseNFC" xml:space="preserve">
     <value>NFCタグの読み取りに失敗しました。</value>
   </data>
   <data name="ErrorMessage_shootingFailure" xml:space="preserve">
     <value>撮影/記録開始できませんでした。カメラの状態を確認して下さい。</value>
-  </data>
-  <data name="ErrorMessage_timeout" xml:space="preserve">
-    <value>通信に失敗しました。接続を確認してください。</value>
   </data>
   <data name="Error_Message_FailedToGetInfo" xml:space="preserve">
     <value>情報が取得できませんでした。
@@ -510,12 +467,6 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="FramingGrids" xml:space="preserve">
     <value>撮影補助線</value>
   </data>
-  <data name="GiveUsFeedback" xml:space="preserve">
-    <value>ご意見や不具合報告は、Twitterのサポートアカウントまでお願いします</value>
-  </data>
-  <data name="Green" xml:space="preserve">
-    <value>緑</value>
-  </data>
   <data name="Grid_Crosshairs" xml:space="preserve">
     <value>十字</value>
   </data>
@@ -561,26 +512,8 @@ PlayMemories Camera Appsストアで最新版にアップデートしてくだ�
   <data name="InfraredRemoteControl" xml:space="preserve">
     <value>赤外線リモコン</value>
   </data>
-  <data name="IntervalCountPrefix" xml:space="preserve">
-    <value>撮影枚数</value>
-  </data>
   <data name="IntervalSetting" xml:space="preserve">
     <value>インターバル撮影</value>
-  </data>
-  <data name="InvalidDuration" xml:space="preserve">
-    <value>--:--:--</value>
-  </data>
-  <data name="MessageCaption_error" xml:space="preserve">
-    <value>エラー</value>
-  </data>
-  <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
-    <value>読み込んだWi-Fiパスワードをクリップボードに保存しました。
-
-SSID: {0}
-Password: {1}</value>
-  </data>
-  <data name="Message_Caution" xml:space="preserve">
-    <value>※これらのアプリ内アイテムの購入によって何らかの隠し機能が解放されることはありません。ご注意ください。</value>
   </data>
   <data name="Message_Encourage" xml:space="preserve">
     <value>今後もアップデートを継続するため、開発者への寄付をお願いします。</value>
@@ -592,7 +525,10 @@ Password: {1}</value>
     <value>写真をダウンロードしました！</value>
   </data>
   <data name="Message_NFC_succeed" xml:space="preserve">
-    <value>カメラのWi-Fiパスワードを読み取りしてクリップボードに保存しました。下記SSIDを確認のうえ接続してください。</value>
+    <value>読み取ったカメラのWi-Fiパスワードをクリップボードに保存しました。下記SSIDを確認のうえ接続してください。
+
+SSID: {0}
+パスワード: {1}</value>
   </data>
   <data name="MetaDataName_CameraModel" xml:space="preserve">
     <value>カメラ</value>
@@ -630,9 +566,6 @@ Password: {1}</value>
   <data name="MetaData_Geotag" xml:space="preserve">
     <value>位置情報</value>
   </data>
-  <data name="MetaData_Geotag_Exists" xml:space="preserve">
-    <value>あり</value>
-  </data>
   <data name="Minutes" xml:space="preserve">
     <value>{0}分</value>
   </data>
@@ -665,9 +598,6 @@ Password: {1}</value>
   </data>
   <data name="PostviewTransferSetting" xml:space="preserve">
     <value>撮影画像を受信する</value>
-  </data>
-  <data name="Red" xml:space="preserve">
-    <value>赤</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
@@ -750,7 +680,7 @@ Password: {1}</value>
     <value>ファイン</value>
   </data>
   <data name="StillQuality_RawAndJpeg" xml:space="preserve">
-    <value>RAW+Jpeg</value>
+    <value>RAW+JPEG</value>
   </data>
   <data name="StillQuality_Standard" xml:space="preserve">
     <value>スタンダード</value>
@@ -785,9 +715,6 @@ Password: {1}</value>
   <data name="Viewer_FailedPlaybackMovie" xml:space="preserve">
     <value>動画の再生に失敗しました</value>
   </data>
-  <data name="Viewer_FailedToDeleteContents" xml:space="preserve">
-    <value>コンテンツの削除に失敗しました</value>
-  </data>
   <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
     <value>画像の取得に失敗しました</value>
   </data>
@@ -806,23 +733,11 @@ Password: {1}</value>
   <data name="Viewer_NoAvContentApi" xml:space="preserve">
     <value>この機能は現在使用できません。一度撮影画面に戻ってから再度お試しください。</value>
   </data>
-  <data name="Viewer_NoCameraRoll" xml:space="preserve">
-    <value>ローカルコンテンツのロードに失敗しました</value>
-  </data>
   <data name="Viewer_NoStorage" xml:space="preserve">
     <value>メモリカードがセットされていないようです</value>
   </data>
-  <data name="Viewer_RefreshAutomatically" xml:space="preserve">
-    <value>コンテンツを更新しています</value>
-  </data>
   <data name="Viewer_StorageAccessNotSupported" xml:space="preserve">
     <value>接続中のカメラでは、コンテンツへのアクセスがサポートされていません</value>
-  </data>
-  <data name="Viewer_StorageCamera" xml:space="preserve">
-    <value>カメラ内コンテンツ</value>
-  </data>
-  <data name="Viewer_StorageDetached" xml:space="preserve">
-    <value>メモリカードの取り外しを検知しました</value>
   </data>
   <data name="Viewer_StoragePhone" xml:space="preserve">
     <value>ローカル コンテンツ</value>
@@ -832,9 +747,6 @@ Password: {1}</value>
   </data>
   <data name="Viewer_UnplayableContent" xml:space="preserve">
     <value>このコンテンツは再生することができません</value>
-  </data>
-  <data name="WaitingGeoposition" xml:space="preserve">
-    <value>位置情報を取得しています...</value>
   </data>
   <data name="WB_Auto" xml:space="preserve">
     <value>オート</value>
@@ -881,9 +793,6 @@ Password: {1}</value>
   <data name="WB_Shade" xml:space="preserve">
     <value>日陰</value>
   </data>
-  <data name="White" xml:space="preserve">
-    <value>白</value>
-  </data>
   <data name="WhiteBalance" xml:space="preserve">
     <value>ホワイトバランス</value>
   </data>
@@ -905,9 +814,6 @@ Password: {1}</value>
   <data name="Message_ContinuousShootingGuide" xml:space="preserve">
     <value>連写するにはボタンを長押しするか本体のシャッターキーを使用してください</value>
   </data>
-  <data name="Viewer_MenuFetchMore" xml:space="preserve">
-    <value>さらに読み込む</value>
-  </data>
   <data name="RotateLeft" xml:space="preserve">
     <value>左回転</value>
   </data>
@@ -926,23 +832,14 @@ Password: {1}</value>
   <data name="OpenSupportTwitter" xml:space="preserve">
     <value>Twitterのアカウントを開く</value>
   </data>
-  <data name="AppBar_Refresh" xml:space="preserve">
-    <value>再読み込み</value>
-  </data>
   <data name="Viewer_NoContents" xml:space="preserve">
     <value>コンテンツがありません</value>
-  </data>
-  <data name="Viewer_UnsupportedFileType" xml:space="preserve">
-    <value>{0} は、このデバイス上では取り扱えません。</value>
-  </data>
-  <data name="OpenGallery" xml:space="preserve">
-    <value>ギャラリーを開いてカメラ内のコンテンツを転送しましょう！</value>
   </data>
   <data name="Constraint" xml:space="preserve">
     <value>プレミアム機能</value>
   </data>
   <data name="Constraint_limited" xml:space="preserve">
-    <value>一部機能が制限されています。トライアル期間が終了しました。</value>
+    <value>トライアル期間が終了しました。一部機能が制限されています。</value>
   </data>
   <data name="Constraint_trial" xml:space="preserve">
     <value>トライアル期間中はすべての機能が使用可能です。</value>
@@ -1077,9 +974,6 @@ Password: {1}</value>
   <data name="AppShell_RemoteShooting" xml:space="preserve">
     <value>リモート撮影</value>
   </data>
-  <data name="IntervalTime" xml:space="preserve">
-    <value>インターバル間隔</value>
-  </data>
   <data name="QrCodeMessage" xml:space="preserve">
     <value>QRコードを画面の中心に表示してください。</value>
   </data>
@@ -1099,5 +993,20 @@ Password: {1}</value>
   <data name="UsingLocationUnspecified" xml:space="preserve">
     <value>予期せぬエラーにより位置情報の取得に失敗しました。
 設定を見直して再度試してください。</value>
+  </data>
+  <data name="Color_Black" xml:space="preserve">
+    <value>黒</value>
+  </data>
+  <data name="Color_Blue" xml:space="preserve">
+    <value>青</value>
+  </data>
+  <data name="Color_Green" xml:space="preserve">
+    <value>緑</value>
+  </data>
+  <data name="Color_Red" xml:space="preserve">
+    <value>赤</value>
+  </data>
+  <data name="Color_White" xml:space="preserve">
+    <value>白</value>
   </data>
 </root>

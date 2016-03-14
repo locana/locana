@@ -67,7 +67,6 @@ namespace Locana.Pages
 
         private void InitializeCommandBar()
         {
-            _CommandBarManager.SetEvent(AppBarItem.AppSetting, (s, args) => { Frame.Navigate(typeof(AppSettingPage)); });
             _CommandBarManager.SetEvent(AppBarItem.FNumberSlider, (s, args) => { ToggleVisibility(FnumberSlider); });
             _CommandBarManager.SetEvent(AppBarItem.ShutterSpeedSlider, (s, args) => { ToggleVisibility(SSSlider); });
             _CommandBarManager.SetEvent(AppBarItem.IsoSlider, (s, args) => { ToggleVisibility(ISOSlider); });

@@ -677,15 +677,15 @@ namespace Locana.Utility
                 switch (key)
                 {
                     case FramingGridColors.White:
-                        return SystemUtil.GetStringResource("White");
+                        return SystemUtil.GetStringResource("Color_White");
                     case FramingGridColors.Black:
-                        return SystemUtil.GetStringResource("Black");
+                        return SystemUtil.GetStringResource("Color_Black");
                     case FramingGridColors.Red:
-                        return SystemUtil.GetStringResource("Red");
+                        return SystemUtil.GetStringResource("Color_Red");
                     case FramingGridColors.Green:
-                        return SystemUtil.GetStringResource("Green");
+                        return SystemUtil.GetStringResource("Color_Green");
                     case FramingGridColors.Blue:
-                        return SystemUtil.GetStringResource("Blue");
+                        return SystemUtil.GetStringResource("Color_Blue");
                     default:
                         throw new NotImplementedException();
                 }

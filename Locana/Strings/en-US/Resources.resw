@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DescriptionHeader.Text" xml:space="preserve">
-    <value>Description text:</value>
-  </data>
-  <data name="NavigationFailedExceptionMessage" xml:space="preserve">
-    <value>Navigation failed.</value>
-  </data>
   <data name="WifiSettingLauncherButtonText" xml:space="preserve">
     <value>Wi-Fi settings</value>
   </data>
@@ -150,21 +144,6 @@
   <data name="DevelopedBy" xml:space="preserve">
     <value>Developed by</value>
   </data>
-  <data name="ErrorMessage_ImageDL_Network" xml:space="preserve">
-    <value>Network error has occured while downloading your picture.</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_Other" xml:space="preserve">
-    <value>Unexpected error has occured.</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_Saving" xml:space="preserve">
-    <value>Failed to save the picture.</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_OtherOriginal" xml:space="preserve">
-    <value>Unexpected error has occured. Please try again with smaller picture size setting.</value>
-  </data>
-  <data name="ErrorMessage_ImageDL_SavingOriginal" xml:space="preserve">
-    <value>Failed to save the picture. Please try again with smaller picture size setting.</value>
-  </data>
   <data name="Message_ImageDL_Succeed" xml:space="preserve">
     <value>Picture downloaded!</value>
   </data>
@@ -176,9 +155,6 @@
   </data>
   <data name="SelfTimer" xml:space="preserve">
     <value>Self timer</value>
-  </data>
-  <data name="ControlPanel" xml:space="preserve">
-    <value>Control panel</value>
   </data>
   <data name="Off" xml:space="preserve">
     <value>OFF</value>
@@ -219,20 +195,11 @@
   <data name="IntervalSetting" xml:space="preserve">
     <value>Interval shooting</value>
   </data>
-  <data name="IntervalTime" xml:space="preserve">
-    <value>Interval time</value>
-  </data>
   <data name="ErrorMessage_Interval" xml:space="preserve">
     <value>An error has occured. Stopped interval shooting.</value>
   </data>
-  <data name="IntervalCountPrefix" xml:space="preserve">
-    <value>Count</value>
-  </data>
   <data name="Guide_NFC" xml:space="preserve">
     <value>Touch NFC enabled camera device to read Wi-Fi password!!</value>
-  </data>
-  <data name="ErrorMessage_cameraNotReady" xml:space="preserve">
-    <value>Camera is under processing. Try again after a while.</value>
   </data>
   <data name="ErrorMessage_fatal" xml:space="preserve">
     <value>Unexpected error has occured.</value>
@@ -240,29 +207,17 @@
   <data name="ErrorMessage_shootingFailure" xml:space="preserve">
     <value>Failed to shoot or start recording. Make sure of the camera device's status.</value>
   </data>
-  <data name="ErrorMessage_timeout" xml:space="preserve">
-    <value>Request timeout. Make sure of the Wi-Fi connection and try again.</value>
-  </data>
   <data name="ErrorMessage_CantFindSonyRecord" xml:space="preserve">
     <value>Couldn't find SSID or Password from the NFC tag.</value>
   </data>
   <data name="ErrorMessage_ParseNFC" xml:space="preserve">
     <value>Failed to read data from the NFC tag.</value>
   </data>
-  <data name="ErrorMessage_Dsconnected" xml:space="preserve">
-    <value>Connection has been lost.</value>
-  </data>
   <data name="Message_NFC_succeed" xml:space="preserve">
     <value>Wi-Fi password is detected and stored in the clipboard!
 
 SSID: {0}
 Password: {1}</value>
-  </data>
-  <data name="MessageCaption_NFC_Succeed" xml:space="preserve">
-    <value>Opened successfully!</value>
-  </data>
-  <data name="MessageCaption_error" xml:space="preserve">
-    <value>Error</value>
   </data>
   <data name="DisplayTakeImageButtonSetting" xml:space="preserve">
     <value>Display shutter button</value>
@@ -283,9 +238,6 @@ Password: {1}</value>
     <value>Failed to retrieve information.
 Please check internet connection status.</value>
   </data>
-  <data name="Message_Caution" xml:space="preserve">
-    <value>Please acknowledge that NO secret function is unlocked by purchasing these in-app items.</value>
-  </data>
   <data name="Message_Encourage" xml:space="preserve">
     <value>Donation will encourage our development for continuous update!</value>
   </data>
@@ -300,9 +252,6 @@ Please check internet connection status.</value>
   </data>
   <data name="Guide_ReceiveCapturedImage" xml:space="preserve">
     <value>Download fresh pictures to "Pictures" folder. This option is inactive while interval rec is going on.</value>
-  </data>
-  <data name="AppBar_ControlPanel" xml:space="preserve">
-    <value>Ctrl Panel</value>
   </data>
   <data name="ExposureMode" xml:space="preserve">
     <value>Exposure mode</value>
@@ -460,9 +409,6 @@ Please check internet connection status.</value>
   <data name="MetaData_Geotag" xml:space="preserve">
     <value>Geotag</value>
   </data>
-  <data name="MetaData_Geotag_Exists" xml:space="preserve">
-    <value>Recorded</value>
-  </data>
   <data name="Minutes" xml:space="preserve">
     <value>{0} min.</value>
   </data>
@@ -475,20 +421,8 @@ Please check internet connection status.</value>
   <data name="MovieFormatMode_XAVCS" xml:space="preserve">
     <value>XAVC S</value>
   </data>
-  <data name="ProgressMessageFetching" xml:space="preserve">
-    <value>Fetching... {0} images to complete.</value>
-  </data>
   <data name="Progress_ChangingCameraState" xml:space="preserve">
     <value>Changing camera state...</value>
-  </data>
-  <data name="Progress_CheckingStorage" xml:space="preserve">
-    <value>Checking storage information...</value>
-  </data>
-  <data name="Progress_DeletingSelectedContents" xml:space="preserve">
-    <value>Deleting selected contents...</value>
-  </data>
-  <data name="Progress_LoadingContents" xml:space="preserve">
-    <value>Loading contents...</value>
   </data>
   <data name="Progress_OpeningDetailImage" xml:space="preserve">
     <value>Opening detail image...</value>
@@ -506,7 +440,7 @@ Please check internet connection status.</value>
     <value>Fine</value>
   </data>
   <data name="StillQuality_RawAndJpeg" xml:space="preserve">
-    <value>RAW+Jpeg</value>
+    <value>RAW+JPEG</value>
   </data>
   <data name="StillQuality_Standard" xml:space="preserve">
     <value>Standard</value>
@@ -535,9 +469,6 @@ Please check internet connection status.</value>
   <data name="Viewer_FailedPlaybackMovie" xml:space="preserve">
     <value>Failed to playback movie content</value>
   </data>
-  <data name="Viewer_FailedToDeleteContents" xml:space="preserve">
-    <value>Failed to delete contents</value>
-  </data>
   <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
     <value>Failed to open detail image</value>
   </data>
@@ -556,23 +487,11 @@ Please check internet connection status.</value>
   <data name="Viewer_NoAvContentApi" xml:space="preserve">
     <value>Unavailable to access the function now. Please restart from shooting screen again.</value>
   </data>
-  <data name="Viewer_NoCameraRoll" xml:space="preserve">
-    <value>Failed to load local contents</value>
-  </data>
   <data name="Viewer_NoStorage" xml:space="preserve">
     <value>No storage seems to be attached</value>
   </data>
-  <data name="Viewer_RefreshAutomatically" xml:space="preserve">
-    <value>Loading contents from new storage</value>
-  </data>
   <data name="Viewer_StorageAccessNotSupported" xml:space="preserve">
     <value>Storage access is not supported by your camera device</value>
-  </data>
-  <data name="Viewer_StorageCamera" xml:space="preserve">
-    <value>Camera storage</value>
-  </data>
-  <data name="Viewer_StorageDetached" xml:space="preserve">
-    <value>Memory card storage seems to be detached</value>
   </data>
   <data name="AddGeotag" xml:space="preserve">
     <value>Enable geotagging</value>
@@ -586,9 +505,6 @@ On some devices, cellular network is additionally required to obtain location in
   </data>
   <data name="AppBar_Download" xml:space="preserve">
     <value>Download</value>
-  </data>
-  <data name="AppBar_Refresh" xml:space="preserve">
-    <value>Refresh</value>
   </data>
   <data name="AutoPowerOff" xml:space="preserve">
     <value>Auto power off</value>
@@ -607,10 +523,6 @@ On some devices, cellular network is additionally required to obtain location in
   </data>
   <data name="BottomRight" xml:space="preserve">
     <value>Bottom right corner</value>
-  </data>
-  <data name="BuiltInSRNotSupported" xml:space="preserve">
-    <value>Built-in version of Smart Remote Control app could not be supported by 3rd party applications.
-Please update to the latest at PlayMemories Camera Apps store.</value>
   </data>
   <data name="ColorMode_Neutral" xml:space="preserve">
     <value>Neutral</value>
@@ -671,9 +583,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   </data>
   <data name="ErrorMessage_ImageDL_Gone" xml:space="preserve">
     <value>Failed to fetch some pictures by limitation of continuous shooting.</value>
-  </data>
-  <data name="ErrorMessage_LocationAccessUnauthorized" xml:space="preserve">
-    <value>Please turn on location service at system settings for geotagging feature.</value>
   </data>
   <data name="ExifExposureProgram_A" xml:space="preserve">
     <value>A</value>
@@ -864,9 +773,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   <data name="FramingGrids" xml:space="preserve">
     <value>Composition assist</value>
   </data>
-  <data name="GiveUsFeedback" xml:space="preserve">
-    <value>Any question or feedback? Ask our support account on Twitter!</value>
-  </data>
   <data name="Color_Green" xml:space="preserve">
     <value>Green</value>
   </data>
@@ -893,9 +799,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   </data>
   <data name="Viewer_UnplayableContent" xml:space="preserve">
     <value>This content is not playable</value>
-  </data>
-  <data name="WaitingGeoposition" xml:space="preserve">
-    <value>Waiting for location info...</value>
   </data>
   <data name="WB_Custom" xml:space="preserve">
     <value>Custom</value>
@@ -942,9 +845,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   <data name="InfraredRemoteControl" xml:space="preserve">
     <value>IR remote</value>
   </data>
-  <data name="InvalidDuration" xml:space="preserve">
-    <value>--:--:--</value>
-  </data>
   <data name="IrRemoteSetting_Off" xml:space="preserve">
     <value>Off</value>
   </data>
@@ -987,21 +887,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   <data name="Viewer_StoragePhone" xml:space="preserve">
     <value>Local storage</value>
   </data>
-  <data name="Black" xml:space="preserve">
-    <value>Black</value>
-  </data>
-  <data name="Blue" xml:space="preserve">
-    <value>Blue</value>
-  </data>
-  <data name="Green" xml:space="preserve">
-    <value>Green</value>
-  </data>
-  <data name="Red" xml:space="preserve">
-    <value>Red</value>
-  </data>
-  <data name="White" xml:space="preserve">
-    <value>White</value>
-  </data>
   <data name="Viewer_Header_GroupView" xml:space="preserve">
     <value>Albums</value>
   </data>
@@ -1023,9 +908,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   <data name="Message_ContinuousShootingGuide" xml:space="preserve">
     <value>Long press the button or use hardware shutter button to operate continuous shooting.</value>
   </data>
-  <data name="Viewer_MenuFetchMore" xml:space="preserve">
-    <value>Load more contents</value>
-  </data>
   <data name="RotateLeft" xml:space="preserve">
     <value>Rotate Left</value>
   </data>
@@ -1042,7 +924,7 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
     <value>Open FAQ page</value>
   </data>
   <data name="OpenGithub" xml:space="preserve">
-    <value>Open GitHub</value>
+    <value>Open GitHub repository</value>
   </data>
   <data name="OpenSupportTwitter" xml:space="preserve">
     <value>Open support account on Twitter</value>
@@ -1052,15 +934,6 @@ Please update to the latest at PlayMemories Camera Apps store.</value>
   </data>
   <data name="Viewer_NoContents" xml:space="preserve">
     <value>No contents available</value>
-  </data>
-  <data name="Nfc_Result" xml:space="preserve">
-    <value>Copy Wi-Fi password to clipboard</value>
-  </data>
-  <data name="Viewer_UnsupportedFileType" xml:space="preserve">
-    <value>{0} can't be supported on this device.</value>
-  </data>
-  <data name="OpenGallery" xml:space="preserve">
-    <value>Open gallary to browse contents in your camera device!</value>
   </data>
   <data name="ContentTypes" xml:space="preserve">
     <value>Contents type filter</value>
