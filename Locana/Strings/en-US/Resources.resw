@@ -150,9 +150,6 @@
   <data name="Setting_PostViewImageSize" xml:space="preserve">
     <value>Picture size to receive</value>
   </data>
-  <data name="Switch" xml:space="preserve">
-    <value>Switch</value>
-  </data>
   <data name="SelfTimer" xml:space="preserve">
     <value>Self timer</value>
   </data>
@@ -444,9 +441,6 @@ Please check internet connection status.</value>
   </data>
   <data name="StillQuality_Standard" xml:space="preserve">
     <value>Standard</value>
-  </data>
-  <data name="Support" xml:space="preserve">
-    <value>Support</value>
   </data>
   <data name="TrackingFocusMode" xml:space="preserve">
     <value>Tracking focus</value>

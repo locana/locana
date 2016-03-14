@@ -685,12 +685,6 @@ SSID: {0}
   <data name="StillQuality_Standard" xml:space="preserve">
     <value>スタンダード</value>
   </data>
-  <data name="Support" xml:space="preserve">
-    <value>サポート</value>
-  </data>
-  <data name="Switch" xml:space="preserve">
-    <value>切り替え</value>
-  </data>
   <data name="TrackingFocusMode" xml:space="preserve">
     <value>追尾フォーカス</value>
   </data>
