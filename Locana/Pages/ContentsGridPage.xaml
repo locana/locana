@@ -86,7 +86,7 @@
         </CommandBar>
 
         <c:PhotoPlaybackScreen x:Name="PhotoScreen"
-                               Grid.RowSpan="2"
+                               Grid.RowSpan="3"
                                Canvas.ZIndex="10"
                                Visibility="Collapsed" />
 
