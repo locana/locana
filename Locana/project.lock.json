@@ -3,12 +3,33 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "Microsoft.ApplicationInsights/1.2.3": {
+      "Microsoft.ApplicationInsights/2.0.0": {
+        "dependencies": {
+          "System.Collections": "[4.0.10, )",
+          "System.Diagnostics.Debug": "[4.0.10, )",
+          "System.Diagnostics.Tools": "[4.0.0, )",
+          "System.Diagnostics.Tracing": "[4.0.20, )",
+          "System.Globalization": "[4.0.10, )",
+          "System.IO": "[4.0.10, )",
+          "System.IO.Compression": "[4.0.0, )",
+          "System.Linq": "[4.0.0, )",
+          "System.Net.Http": "[4.0.0, )",
+          "System.Reflection": "[4.0.10, )",
+          "System.Reflection.Extensions": "[4.0.0, )",
+          "System.Runtime": "[4.0.20, )",
+          "System.Runtime.Extensions": "[4.0.10, )",
+          "System.Text.Encoding": "[4.0.10, )",
+          "System.Text.Encoding.Extensions": "[4.0.10, )",
+          "System.Text.RegularExpressions": "[4.0.10, )",
+          "System.Threading": "[4.0.10, )",
+          "System.Threading.Tasks": "[4.0.10, )",
+          "System.Xml.XDocument": "[4.0.10, )"
+        },
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         }
       },
       "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -1583,12 +1604,33 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "Microsoft.ApplicationInsights/1.2.3": {
+      "Microsoft.ApplicationInsights/2.0.0": {
+        "dependencies": {
+          "System.Collections": "[4.0.10, )",
+          "System.Diagnostics.Debug": "[4.0.10, )",
+          "System.Diagnostics.Tools": "[4.0.0, )",
+          "System.Diagnostics.Tracing": "[4.0.20, )",
+          "System.Globalization": "[4.0.10, )",
+          "System.IO": "[4.0.10, )",
+          "System.IO.Compression": "[4.0.0, )",
+          "System.Linq": "[4.0.0, )",
+          "System.Net.Http": "[4.0.0, )",
+          "System.Reflection": "[4.0.10, )",
+          "System.Reflection.Extensions": "[4.0.0, )",
+          "System.Runtime": "[4.0.20, )",
+          "System.Runtime.Extensions": "[4.0.10, )",
+          "System.Text.Encoding": "[4.0.10, )",
+          "System.Text.Encoding.Extensions": "[4.0.10, )",
+          "System.Text.RegularExpressions": "[4.0.10, )",
+          "System.Threading": "[4.0.10, )",
+          "System.Threading.Tasks": "[4.0.10, )",
+          "System.Xml.XDocument": "[4.0.10, )"
+        },
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         }
       },
       "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -3263,12 +3305,33 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "Microsoft.ApplicationInsights/1.2.3": {
+      "Microsoft.ApplicationInsights/2.0.0": {
+        "dependencies": {
+          "System.Collections": "[4.0.10, )",
+          "System.Diagnostics.Debug": "[4.0.10, )",
+          "System.Diagnostics.Tools": "[4.0.0, )",
+          "System.Diagnostics.Tracing": "[4.0.20, )",
+          "System.Globalization": "[4.0.10, )",
+          "System.IO": "[4.0.10, )",
+          "System.IO.Compression": "[4.0.0, )",
+          "System.Linq": "[4.0.0, )",
+          "System.Net.Http": "[4.0.0, )",
+          "System.Reflection": "[4.0.10, )",
+          "System.Reflection.Extensions": "[4.0.0, )",
+          "System.Runtime": "[4.0.20, )",
+          "System.Runtime.Extensions": "[4.0.10, )",
+          "System.Text.Encoding": "[4.0.10, )",
+          "System.Text.Encoding.Extensions": "[4.0.10, )",
+          "System.Text.RegularExpressions": "[4.0.10, )",
+          "System.Threading": "[4.0.10, )",
+          "System.Threading.Tasks": "[4.0.10, )",
+          "System.Xml.XDocument": "[4.0.10, )"
+        },
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         }
       },
       "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -4911,12 +4974,33 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "Microsoft.ApplicationInsights/1.2.3": {
+      "Microsoft.ApplicationInsights/2.0.0": {
+        "dependencies": {
+          "System.Collections": "[4.0.10, )",
+          "System.Diagnostics.Debug": "[4.0.10, )",
+          "System.Diagnostics.Tools": "[4.0.0, )",
+          "System.Diagnostics.Tracing": "[4.0.20, )",
+          "System.Globalization": "[4.0.10, )",
+          "System.IO": "[4.0.10, )",
+          "System.IO.Compression": "[4.0.0, )",
+          "System.Linq": "[4.0.0, )",
+          "System.Net.Http": "[4.0.0, )",
+          "System.Reflection": "[4.0.10, )",
+          "System.Reflection.Extensions": "[4.0.0, )",
+          "System.Runtime": "[4.0.20, )",
+          "System.Runtime.Extensions": "[4.0.10, )",
+          "System.Text.Encoding": "[4.0.10, )",
+          "System.Text.Encoding.Extensions": "[4.0.10, )",
+          "System.Text.RegularExpressions": "[4.0.10, )",
+          "System.Threading": "[4.0.10, )",
+          "System.Threading.Tasks": "[4.0.10, )",
+          "System.Xml.XDocument": "[4.0.10, )"
+        },
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         }
       },
       "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -6599,12 +6683,33 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "Microsoft.ApplicationInsights/1.2.3": {
+      "Microsoft.ApplicationInsights/2.0.0": {
+        "dependencies": {
+          "System.Collections": "[4.0.10, )",
+          "System.Diagnostics.Debug": "[4.0.10, )",
+          "System.Diagnostics.Tools": "[4.0.0, )",
+          "System.Diagnostics.Tracing": "[4.0.20, )",
+          "System.Globalization": "[4.0.10, )",
+          "System.IO": "[4.0.10, )",
+          "System.IO.Compression": "[4.0.0, )",
+          "System.Linq": "[4.0.0, )",
+          "System.Net.Http": "[4.0.0, )",
+          "System.Reflection": "[4.0.10, )",
+          "System.Reflection.Extensions": "[4.0.0, )",
+          "System.Runtime": "[4.0.20, )",
+          "System.Runtime.Extensions": "[4.0.10, )",
+          "System.Text.Encoding": "[4.0.10, )",
+          "System.Text.Encoding.Extensions": "[4.0.10, )",
+          "System.Text.RegularExpressions": "[4.0.10, )",
+          "System.Threading": "[4.0.10, )",
+          "System.Threading.Tasks": "[4.0.10, )",
+          "System.Xml.XDocument": "[4.0.10, )"
+        },
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         }
       },
       "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -8247,12 +8352,33 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "Microsoft.ApplicationInsights/1.2.3": {
+      "Microsoft.ApplicationInsights/2.0.0": {
+        "dependencies": {
+          "System.Collections": "[4.0.10, )",
+          "System.Diagnostics.Debug": "[4.0.10, )",
+          "System.Diagnostics.Tools": "[4.0.0, )",
+          "System.Diagnostics.Tracing": "[4.0.20, )",
+          "System.Globalization": "[4.0.10, )",
+          "System.IO": "[4.0.10, )",
+          "System.IO.Compression": "[4.0.0, )",
+          "System.Linq": "[4.0.0, )",
+          "System.Net.Http": "[4.0.0, )",
+          "System.Reflection": "[4.0.10, )",
+          "System.Reflection.Extensions": "[4.0.0, )",
+          "System.Runtime": "[4.0.20, )",
+          "System.Runtime.Extensions": "[4.0.10, )",
+          "System.Text.Encoding": "[4.0.10, )",
+          "System.Text.Encoding.Extensions": "[4.0.10, )",
+          "System.Text.RegularExpressions": "[4.0.10, )",
+          "System.Threading": "[4.0.10, )",
+          "System.Threading.Tasks": "[4.0.10, )",
+          "System.Xml.XDocument": "[4.0.10, )"
+        },
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         }
       },
       "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -9935,12 +10061,33 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "Microsoft.ApplicationInsights/1.2.3": {
+      "Microsoft.ApplicationInsights/2.0.0": {
+        "dependencies": {
+          "System.Collections": "[4.0.10, )",
+          "System.Diagnostics.Debug": "[4.0.10, )",
+          "System.Diagnostics.Tools": "[4.0.0, )",
+          "System.Diagnostics.Tracing": "[4.0.20, )",
+          "System.Globalization": "[4.0.10, )",
+          "System.IO": "[4.0.10, )",
+          "System.IO.Compression": "[4.0.0, )",
+          "System.Linq": "[4.0.0, )",
+          "System.Net.Http": "[4.0.0, )",
+          "System.Reflection": "[4.0.10, )",
+          "System.Reflection.Extensions": "[4.0.0, )",
+          "System.Runtime": "[4.0.20, )",
+          "System.Runtime.Extensions": "[4.0.10, )",
+          "System.Text.Encoding": "[4.0.10, )",
+          "System.Text.Encoding.Extensions": "[4.0.10, )",
+          "System.Text.RegularExpressions": "[4.0.10, )",
+          "System.Threading": "[4.0.10, )",
+          "System.Threading.Tasks": "[4.0.10, )",
+          "System.Xml.XDocument": "[4.0.10, )"
+        },
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/dotnet5.4/Microsoft.ApplicationInsights.dll": {}
         }
       },
       "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -11584,22 +11731,22 @@
     }
   },
   "libraries": {
-    "Microsoft.ApplicationInsights/1.2.3": {
-      "sha512": "a34atobxpucCTTX9VCD7aIu6Ydzry+Va7TxK2tTQcfaMvefGW4kUKtg9GHKIn19IaXe+A4oZt/GBqsOt5vQrBA==",
+    "Microsoft.ApplicationInsights/2.0.0": {
+      "sha512": "xz5CN3ZxR4LEiFctDuZu47MKtGig+yfR6XsZc1aUz4puV6GhlLR7HDYRfDRQH+q2XXYGvh+BThdHbaF5RiXE/w==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
         "_rels/.rels",
+        "lib/dotnet5.4/Microsoft.ApplicationInsights.dll",
+        "lib/dotnet5.4/Microsoft.ApplicationInsights.XML",
         "lib/net40/Microsoft.ApplicationInsights.dll",
         "lib/net40/Microsoft.ApplicationInsights.XML",
         "lib/net45/Microsoft.ApplicationInsights.dll",
         "lib/net45/Microsoft.ApplicationInsights.XML",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.XML",
-        "lib/wp8/Microsoft.ApplicationInsights.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.XML",
+        "lib/net46/Microsoft.ApplicationInsights.dll",
+        "lib/net46/Microsoft.ApplicationInsights.XML",
         "Microsoft.ApplicationInsights.nuspec",
-        "package/services/metadata/core-properties/3b36eef276524f5d883c618d5fd8c500.psmdcp"
+        "package/services/metadata/core-properties/fc991380f147454190a499a70e9b0afa.psmdcp"
       ]
     },
     "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -15229,7 +15376,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.ApplicationInsights >= 1.2.3",
+      "Microsoft.ApplicationInsights >= 2.0.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.2.3",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.1.1",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0",
