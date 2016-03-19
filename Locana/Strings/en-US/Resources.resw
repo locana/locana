@@ -1101,4 +1101,7 @@ Please turn it on at privacy settings to use geotagging feature.</value>
     <value>Unexpected error while acquiring location.
 Make sure the setting and try again.</value>
   </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>Contributors</value>
+  </data>
 </root>

@@ -283,6 +283,7 @@
     <None Include="Locana_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Contributors.txt" />
     <Content Include="Assets\License.txt" />
     <Content Include="Assets\Logo\Square_150x150.scale-100.png" />
     <Content Include="Assets\Logo\Square_150x150.scale-200.png" />

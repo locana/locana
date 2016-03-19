@@ -1,0 +1,8 @@
+{
+  "contributors": [
+    {
+      "name": "",
+      "url": ""
+    }
+  ]
+}

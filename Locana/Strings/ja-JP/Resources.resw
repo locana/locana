@@ -1000,4 +1000,7 @@ SSID: {0}
   <data name="Color_White" xml:space="preserve">
     <value>白</value>
   </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>コントリビューター</value>
+  </data>
 </root>
