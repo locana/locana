@@ -862,9 +862,6 @@ SSID: {0}
   <data name="LoopRec" xml:space="preserve">
     <value>ループ記録</value>
   </data>
-  <data name="FullVersion_before" xml:space="preserve">
-    <value>Wi-Fi をインターネットに切り替えて、</value>
-  </data>
   <data name="ContentsSet_Movie" xml:space="preserve">
     <value>動画</value>
   </data>

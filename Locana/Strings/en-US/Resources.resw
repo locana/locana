@@ -971,9 +971,6 @@ On some devices, cellular network is additionally required to obtain location in
   <data name="LoopRec" xml:space="preserve">
     <value>Loop recording</value>
   </data>
-  <data name="FullVersion_before" xml:space="preserve">
-    <value>Switch Wi-Fi to the Internet to</value>
-  </data>
   <data name="ContentsSet_Movie" xml:space="preserve">
     <value>Movies</value>
   </data>
