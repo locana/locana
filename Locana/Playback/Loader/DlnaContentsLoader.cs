@@ -80,7 +80,8 @@ namespace Locana.Playback
             }
 
             var original = GetOriginalResource(source);
-            var mime = original?.ProtocolInfo?.MimeType;
+            var large = GetLargeImageResource(source);
+            var mime = original != null ? original.ProtocolInfo?.MimeType : large?.ProtocolInfo?.MimeType;
 
             return new DlnaContentInfo
             {
@@ -89,8 +90,8 @@ namespace Locana.Playback
                 CreatedTime = source.Date,
                 Name = WithoutExtension(source.Title),
                 Protected = source.Restricted,
-                OriginalUrl = original == null ? null : original.ResourceUrl,
-                LargeUrl = GetLargeImageResource(source),
+                OriginalUrl = original?.ResourceUrl,
+                LargeUrl = large?.ResourceUrl,
                 ThumbnailUrl = GetThumbnailResource(source),
                 GroupName = containerName,
                 RemotePlaybackAvailable = mime == MimeType.Jpeg,
@@ -137,7 +138,7 @@ namespace Locana.Playback
             return sepa[0] + "-" + sepa[1] + "-" + sepa[2];
         }
 
-        private static string GetLargeImageResource(Item item)
+        private static Resource GetLargeImageResource(Item item)
         {
             var matched = item.Resources
                 .FirstOrDefault(res => res.ProtocolInfo != null
@@ -145,12 +146,12 @@ namespace Locana.Playback
 
             if (matched != null)
             {
-                return matched.ResourceUrl;
+                return matched;
             }
 
             if (item.Class.StartsWith(Class.ImageItem))
             {
-                return item.Resources[0].ResourceUrl;
+                return item.Resources[0];
             }
             return null;
         }
