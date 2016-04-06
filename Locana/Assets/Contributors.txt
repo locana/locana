@@ -1,8 +1,9 @@
 {
   "contributors": [
     {
-      "name": "",
-      "url": ""
+      "name": "Johannes Twittmann",
+      "url": "https://deryo.de",
+      "contribution": "German translation"
     }
   ]
 }
