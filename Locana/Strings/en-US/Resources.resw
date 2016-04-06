@@ -1119,4 +1119,7 @@ Make sure location setting and try again.</value>
   <data name="Liveview_Flip_Vertical" xml:space="preserve">
     <value>Vertical</value>
   </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
 </root>

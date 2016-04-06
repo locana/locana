@@ -1018,4 +1018,7 @@ SSID: {0}
   <data name="Liveview_Flip_Vertical" xml:space="preserve">
     <value>垂直方向</value>
   </data>
+  <data name="Support" xml:space="preserve">
+    <value>サポート</value>
+  </data>
 </root>
