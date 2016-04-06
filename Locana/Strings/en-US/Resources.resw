@@ -202,13 +202,13 @@
     <value>Unexpected error has occured.</value>
   </data>
   <data name="ErrorMessage_shootingFailure" xml:space="preserve">
-    <value>Failed to shoot or start recording. Make sure of the camera device's status.</value>
+    <value>Failed to shoot or start recording. Make sure of the camera device's status.  (Maybe no memory card?)"</value>
   </data>
   <data name="ErrorMessage_CantFindSonyRecord" xml:space="preserve">
-    <value>Couldn't find SSID or Password from the NFC tag.</value>
+    <value>NFC data did not contain network ID and/or password.</value>
   </data>
   <data name="ErrorMessage_ParseNFC" xml:space="preserve">
-    <value>Failed to read data from the NFC tag.</value>
+    <value>Failed to read NFC data.</value>
   </data>
   <data name="Message_NFC_succeed" xml:space="preserve">
     <value>Wi-Fi password is detected and stored in the clipboard!
@@ -1061,7 +1061,7 @@ password</value>
   </data>
   <data name="WifiHint" xml:space="preserve">
     <value>Lost Wi-Fi connection to the camera device?
-Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</value>
+Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-".</value>
   </data>
   <data name="AppShell_RemoteShooting" xml:space="preserve">
     <value>Remote</value>
@@ -1098,10 +1098,25 @@ Let's connect to the Wi-Fi Access Point whose name starts from "DIRECT-"!!</valu
 Please turn it on at privacy settings to use geotagging feature.</value>
   </data>
   <data name="UsingLocationUnspecified" xml:space="preserve">
-    <value>Unexpected error while acquiring location.
-Make sure the setting and try again.</value>
+    <value>Unexpected error has occurred while acquiring location.
+Make sure location setting and try again.</value>
   </data>
   <data name="Contributors" xml:space="preserve">
     <value>Contributors</value>
+  </data>
+  <data name="Gallery_Transferring" xml:space="preserve">
+    <value>Transferring...</value>
+  </data>
+  <data name="Liveview_Flip" xml:space="preserve">
+    <value>Flip liveview</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal" xml:space="preserve">
+    <value>Horizontal</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal_Vertical" xml:space="preserve">
+    <value>Horizontal and vertical</value>
+  </data>
+  <data name="Liveview_Flip_Vertical" xml:space="preserve">
+    <value>Vertical</value>
   </data>
 </root>

@@ -1003,4 +1003,19 @@ SSID: {0}
   <data name="Contributors" xml:space="preserve">
     <value>コントリビューター</value>
   </data>
+  <data name="Gallery_Transferring" xml:space="preserve">
+    <value>転送中...</value>
+  </data>
+  <data name="Liveview_Flip" xml:space="preserve">
+    <value>ライブビュー反転</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal" xml:space="preserve">
+    <value>水平方向</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal_Vertical" xml:space="preserve">
+    <value>水平＆垂直</value>
+  </data>
+  <data name="Liveview_Flip_Vertical" xml:space="preserve">
+    <value>垂直方向</value>
+  </data>
 </root>
