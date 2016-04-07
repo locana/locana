@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Locana
+namespace Locana.DataModel
 {
     public class LicenseJson
     {
@@ -19,5 +19,23 @@ namespace Locana
 
         [JsonProperty("url")]
         public string Url { set; get; }
+    }
+
+    public class ContributorJson
+    {
+        [JsonProperty("contributors")]
+        public List<Contributor> Contributors { set; get; }
+    }
+
+    public class Contributor
+    {
+        [JsonProperty("name")]
+        public string Name { set; get; }
+
+        [JsonProperty("url")]
+        public string Url { set; get; }
+
+        [JsonProperty("contribution")]
+        public string Contribution { set; get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Locana.Controls;
+using Locana.DataModel;
 using Locana.Utility;
 using Newtonsoft.Json;
 using System;
@@ -60,6 +61,8 @@ namespace Locana.Pages
             SupportLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenSupportTwitter"), SystemUtil.GetStringResource("SupportTwitterURL")));
             RepoLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenGithub"), SystemUtil.GetStringResource("RepoURL")));
 
+            LoadContributors();
+
             LoadLicenseFile();
         }
 
@@ -72,6 +75,25 @@ namespace Locana.Pages
                 {
                     copyright = attr.ConstructorArguments[0].Value.ToString();
                     break;
+                }
+            }
+        }
+
+        private async void LoadContributors()
+        {
+            var installedFolder = Package.Current.InstalledLocation;
+            var folder = await installedFolder.GetFolderAsync("Assets");
+            var file = await folder.GetFileAsync("Contributors.txt");
+            using (var stream = await file.OpenReadAsync())
+            {
+                using (var reader = new StreamReader(stream.AsStreamForRead()))
+                {
+                    var contributors = JsonConvert.DeserializeObject<ContributorJson>(reader.ReadToEnd()).Contributors;
+
+                    foreach (var contributor in contributors)
+                    {
+                        Contributors.Inlines.Add(GetAsLink(contributor.Name, contributor.Url));
+                    }
                 }
             }
         }

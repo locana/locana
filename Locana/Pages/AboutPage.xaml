@@ -78,14 +78,6 @@
                         <TextBlock x:Name="COPYRIGHT"
                                    Margin="20,4,0,4"
                                    Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}" />
-                        <TextBlock Margin="0,15,0,0"
-                                   Style="{StaticResource SubtitleTextBlockStyle}"
-                                   Text="{Binding [DevelopedBy],
-                                                  Source={StaticResource LocalizedStrings}}"
-                                   TextWrapping="Wrap" />
-                        <RichTextBlock Margin="20,4,0,4" HorizontalAlignment="Left">
-                            <Paragraph x:Name="DEV_BY" />
-                        </RichTextBlock>
                         <TextBlock Margin="0,12,0,0"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
                                    Text="{Binding [FAQ],
@@ -101,6 +93,22 @@
                                    TextWrapping="Wrap" />
                         <RichTextBlock Margin="20,4,0,4" HorizontalAlignment="Left">
                             <Paragraph x:Name="SupportLink" />
+                        </RichTextBlock>
+                        <TextBlock Margin="0,15,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [DevelopedBy],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <RichTextBlock Margin="20,4,0,4" HorizontalAlignment="Left">
+                            <Paragraph x:Name="DEV_BY" />
+                        </RichTextBlock>
+                        <TextBlock Margin="0,12,0,0"
+                                   Style="{StaticResource SubtitleTextBlockStyle}"
+                                   Text="{Binding [Contributors],
+                                                  Source={StaticResource LocalizedStrings}}"
+                                   TextWrapping="Wrap" />
+                        <RichTextBlock Margin="20,4,0,4" HorizontalAlignment="Left">
+                            <Paragraph x:Name="Contributors" />
                         </RichTextBlock>
                         <TextBlock Margin="0,12,0,0"
                                    Style="{StaticResource SubtitleTextBlockStyle}"
