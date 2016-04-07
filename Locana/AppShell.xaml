@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:controls="using:Locana.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:data="using:Locana.DataModel"
       xmlns:local="using:Locana"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       x:Name="Root"
@@ -19,7 +20,7 @@
     -->
 
     <Page.Resources>
-        <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="local:NavMenuItem">
+        <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="data:NavMenuItem">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48" />

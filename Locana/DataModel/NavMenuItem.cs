@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
 
-namespace Locana
+namespace Locana.DataModel
 {
     /// <summary>
     /// Data to represent an item in the nav menu.

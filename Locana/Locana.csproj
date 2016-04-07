@@ -192,8 +192,8 @@
     <Compile Include="DataModel\PlaybackAlbum.cs" />
     <Compile Include="DataModel\PlaybackAlbumCollection.cs" />
     <Compile Include="DataModel\PlaybackThumbnail.cs" />
-    <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="NavMenuItem.cs" />
+    <Compile Include="Utility\LocalizedStrings.cs" />
+    <Compile Include="DataModel\NavMenuItem.cs" />
     <Compile Include="Network\WifiDirectUtil.cs" />
     <Compile Include="DataModel\AboutPageData.cs" />
     <Compile Include="Pages\AboutPage.xaml.cs">
