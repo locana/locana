@@ -54,7 +54,7 @@ namespace Locana.Pages
             COPYRIGHT.Text = copyright;
 
             DEV_BY.Inlines.Add(GetAsLink("kazyx", "https://github.com/kazyx"));
-            DEV_BY.Inlines.Add(new Run() { Text = " and ", Foreground = (Brush)Resources["ApplicationSecondaryForegroundThemeBrush"] });
+            DEV_BY.Inlines.Add(new Run() { Text = "\n" });
             DEV_BY.Inlines.Add(GetAsLink("naotaco", "https://twitter.com/naotaco_dev"));
 
             FaqLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenFAQ"), SystemUtil.GetStringResource("FAQURL")));
@@ -90,8 +90,13 @@ namespace Locana.Pages
                 {
                     var contributors = JsonConvert.DeserializeObject<ContributorJson>(reader.ReadToEnd()).Contributors;
 
+                    bool first = true;
                     foreach (var contributor in contributors)
                     {
+                        if (!first)
+                        {
+                            Contributors.Inlines.Add(new Run() { Text = "\n" });
+                        }
                         Contributors.Inlines.Add(GetAsLink(contributor.Name, contributor.Url));
                     }
                 }
