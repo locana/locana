@@ -1021,4 +1021,7 @@ SSID: {0}
   <data name="Support" xml:space="preserve">
     <value>サポート</value>
   </data>
+  <data name="DevelopedBy" xml:space="preserve">
+    <value>開発者</value>
+  </data>
 </root>
