@@ -4,6 +4,7 @@ namespace Locana.UPnP
     public class URN
     {
         public const string ContentDirectory = "urn:schemas-upnp-org:service:ContentDirectory:1";
+        public const string XPushList = "urn:schemas-sony-com:service:XPushList:1";
     }
 
     public class Class

@@ -1,5 +1,6 @@
 ﻿using Kazyx.DeviceDiscovery;
 using Locana.CameraControl;
+using Locana.Playback.Push;
 using Locana.UPnP;
 using Locana.Utility;
 using System;
@@ -121,6 +122,12 @@ namespace Locana.Network
                         DebugUtil.Log("CDS found. Notify discovered.");
                         cdsDevices.Add(device.UDN, device);
                         OnDiscovered(device);
+                    }
+
+                    if (device.Services.Any(service => service.Key == URN.XPushList))
+                    {
+                        DebugUtil.Log("Contents push detected");
+                        ContentsPushHandler.HandlePushedContents(device);
                     }
                 }
             }

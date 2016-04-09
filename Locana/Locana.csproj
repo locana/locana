@@ -233,6 +233,7 @@
     <Compile Include="Playback\MimeType.cs" />
     <Compile Include="Playback\PlaybackModeHelper.cs" />
     <Compile Include="Playback\Loader\RemoteApiContentsLoader.cs" />
+    <Compile Include="Playback\Push\ContentsPushHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\SettingPanelBuilder.cs" />
     <Compile Include="UPnP\ContentDirectory\BrowseRequest.cs" />
@@ -252,6 +253,8 @@
     <Compile Include="UPnP\UpnpError.cs" />
     <Compile Include="UPnP\UpnpService.cs" />
     <Compile Include="UPnP\ValueLessResponse.cs" />
+    <Compile Include="UPnP\XPushList\GetListRequest.cs" />
+    <Compile Include="UPnP\XPushList\XPushList.cs" />
     <Compile Include="Utility\AnimationHelper.cs" />
     <Compile Include="Utility\CameraStatusExtension.cs" />
     <Compile Include="Utility\CommandBarManager.cs" />
