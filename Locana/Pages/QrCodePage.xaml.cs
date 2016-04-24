@@ -83,7 +83,7 @@ namespace Locana.Pages
             }
 
             CaptureTimer = new DispatcherTimer();
-            CaptureTimer.Interval = TimeSpan.FromMilliseconds(500);
+            CaptureTimer.Interval = TimeSpan.FromMilliseconds(300);
             CaptureTimer.Tick += FrameTick;
 
             FocusTimer = new DispatcherTimer();
@@ -113,7 +113,8 @@ namespace Locana.Pages
         {
             try
             {
-                await GetPreviewFrameAsSoftwareBitmapAsync(); // capture a frame and find QR code
+                var frame = await GetPreviewFrameAsSoftwareBitmapAsync();
+                await FindQrCode(frame);
             }
             catch (Exception ex) { OnDetectCameraError(ex); }
         }
@@ -342,12 +343,15 @@ namespace Locana.Pages
             });
         }
 
+        int FailureCount = 0;
+        const int FAILURE_LIMIT = 10;
+
         /// <summary>
         /// Gets the current preview frame as a SoftwareBitmap, displays its properties in a TextBlock, and can optionally display the image
         /// in the UI and/or save it to disk as a jpg
         /// </summary>
         /// <returns></returns>
-        private async Task GetPreviewFrameAsSoftwareBitmapAsync()
+        private async Task<VideoFrame> GetPreviewFrameAsSoftwareBitmapAsync()
         {
             // Get information about the preview
             var previewProperties = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview) as VideoEncodingProperties;
@@ -356,42 +360,60 @@ namespace Locana.Pages
             var videoFrame = new VideoFrame(BitmapPixelFormat.Bgra8, (int)previewProperties.Width, (int)previewProperties.Height);
 
             // Capture the preview frame
-            using (var currentFrame = await _mediaCapture.GetPreviewFrameAsync(videoFrame))
+            VideoFrame currentFrame = null;
+            try
             {
-                // Collect the resulting frame
-                SoftwareBitmap previewFrame = currentFrame.SoftwareBitmap;
-                var data = Decode(previewFrame);
-                if (data.Count > 0)
-                {
-                    var sb = new StringBuilder();
-                    foreach (var d in data)
-                    {
-                        DebugUtil.Log(d);
-                        sb.Append(d);
-                    }
+                currentFrame = await _mediaCapture.GetPreviewFrameAsync(videoFrame);
+            }
+            catch (Exception ex)
+            {
+                DebugUtil.Log(() => "Caught exception during reading current frame. Maybe device is busy or not initialized yet ... [" + FailureCount + "]");
+                DebugUtil.Log(() => ex.Message);
+                FailureCount++;
+                if (FailureCount > FAILURE_LIMIT) { throw new Exception("Failure limit exceeded."); }
+                return null;
+            }
 
-                    SonyQrData qrdata = null;
-                    try
-                    {
-                        qrdata = SonyQrDataParser.ParseData(sb.ToString());
-                    }
-                    catch (FormatException ex)
-                    {
-                        DebugUtil.Log(() => "QR data parse error: " + ex.Message);
-                    }
-                    // DebugText.Text = sb.ToString();
-                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        if (qrdata != null)
-                        {
-                            Frame.Navigate(typeof(EntrancePage), qrdata);
-                        }
-                        else
-                        {
-                            AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("QrCodeIncompatible") });
-                        }
-                    });
+            return currentFrame;
+        }
+
+        private async Task FindQrCode(VideoFrame currentFrame)
+        {
+            if (currentFrame == null) { return; }
+
+            // Collect the resulting frame
+            SoftwareBitmap previewFrame = currentFrame.SoftwareBitmap;
+            var data = Decode(previewFrame);
+            if (data.Count > 0)
+            {
+                var sb = new StringBuilder();
+                foreach (var d in data)
+                {
+                    DebugUtil.Log(d);
+                    sb.Append(d);
                 }
+
+                SonyQrData qrdata = null;
+                try
+                {
+                    qrdata = SonyQrDataParser.ParseData(sb.ToString());
+                }
+                catch (FormatException ex)
+                {
+                    DebugUtil.Log(() => "QR data parse error: " + ex.Message);
+                }
+                // DebugText.Text = sb.ToString();
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    if (qrdata != null)
+                    {
+                        Frame.Navigate(typeof(EntrancePage), qrdata);
+                    }
+                    else
+                    {
+                        AppShell.Current.Toast.PushToast(new Controls.ToastContent { Text = SystemUtil.GetStringResource("QrCodeIncompatible") });
+                    }
+                });
             }
         }
 
