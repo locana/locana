@@ -7,17 +7,12 @@ namespace Locana.UPnP.ContentDirectory
     {
         public override string ActionName { get { return "Browse"; } }
 
-        public BrowseRequest()
-        {
-            Filter = "*";
-        }
-
         public string ObjectID { get; set; }
-        public BrowseFlag BrowseFlag { get; set; }
-        public string Filter { get; set; }
+        public BrowseFlag BrowseFlag { get; set; } = BrowseFlag.BrowseDirectChildren;
+        public string Filter { get; set; } = "*";
         public int StartingIndex { get; set; }
         public int RequestedCount { get; set; }
-        public string SortCriteria { get { return ""; } }
+        public string SortCriteria { get; set; } = "";
 
         protected override void AppendSpecificMessage(StringBuilder builder)
         {

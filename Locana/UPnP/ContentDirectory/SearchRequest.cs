@@ -7,14 +7,9 @@ namespace Locana.UPnP.ContentDirectory
     {
         public override string ActionName { get { return "Search"; } }
 
-        public SearchRequest()
-        {
-            Filter = "*";
-        }
-
         public string ContainerID { get; set; }
         public string SearchCriteria { get; set; }
-        public string Filter { get; set; }
+        public string Filter { get; set; } = "*";
         public int StartingIndex { get; set; }
         public int RequestedCount { get; set; }
         public string SortCriteria { get { return ""; } }

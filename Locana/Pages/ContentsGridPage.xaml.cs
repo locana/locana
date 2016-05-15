@@ -331,7 +331,8 @@ namespace Locana.Pages
                 CautionText.Visibility = Visibility.Visible;
                 MoreInfoButton.Visibility = Visibility.Visible;
             }
-            else {
+            else
+            {
                 LoadContents();
             }
         }
@@ -345,7 +346,8 @@ namespace Locana.Pages
                     var tuple = Tuple.Create<string, string>(nameof(StorageType.Local), null);
                     Frame.Navigate(typeof(ContentsGridPage), tuple);
                 }
-                else {
+                else
+                {
                     UpdateTopBar();
                 }
             });
@@ -879,7 +881,7 @@ namespace Locana.Pages
             var item = sender as MenuFlyoutItem;
             try
             {
-                EnqueueDownload(item.DataContext as Thumbnail);
+                DownloadHelper.EnqueueDownload(item.DataContext as Thumbnail);
             }
             catch (Exception ex)
             {
@@ -933,40 +935,12 @@ namespace Locana.Pages
             {
                 try
                 {
-                    EnqueueDownload(item as Thumbnail);
+                    DownloadHelper.EnqueueDownload(item as Thumbnail);
                 }
                 catch (Exception e)
                 {
                     DebugUtil.Log(() => e.StackTrace);
                 }
-            }
-        }
-
-        private void EnqueueDownload(Thumbnail source)
-        {
-            if (source.IsMovie)
-            {
-                string ext;
-                switch (source.Source.MimeType)
-                {
-                    case MimeType.Mp4:
-                        ext = ".mp4";
-                        break;
-                    default:
-                        ext = null;
-                        break;
-                }
-                MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
-            }
-            else if (ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents && source.Source.OriginalUrl != null)
-            {
-                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
-                    source.Source.MimeType == MimeType.Jpeg ? ".jpg" : null);
-            }
-            else
-            {
-                // Fallback to large size image
-                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
             }
         }
 

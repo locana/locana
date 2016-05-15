@@ -220,6 +220,7 @@
     <Compile Include="Pages\WifiDirectPage.xaml.cs">
       <DependentUpon>WifiDirectPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Playback\DownloadHelper.cs" />
     <Compile Include="Playback\Loader\ContentsLoader.cs" />
     <Compile Include="Playback\Operator\CameraApiContentsOperator.cs" />
     <Compile Include="Playback\Operator\ContentsOperator.cs" />
@@ -240,10 +241,12 @@
     <Compile Include="UPnP\ContentDirectory\ContentDirectory.cs" />
     <Compile Include="UPnP\ContentDirectory\DestroyObjectRequest.cs" />
     <Compile Include="UPnP\ContentDirectory\GetSearchCapabilitiesRequest.cs" />
+    <Compile Include="UPnP\ContentDirectory\GetSortCapabilitiesRequest.cs" />
     <Compile Include="UPnP\ContentDirectory\Params.cs" />
     <Compile Include="UPnP\ContentDirectory\RetrievedContents.cs" />
     <Compile Include="UPnP\ContentDirectory\SearchCapabilities.cs" />
     <Compile Include="UPnP\ContentDirectory\SearchRequest.cs" />
+    <Compile Include="UPnP\ContentDirectory\SortCapabilities.cs" />
     <Compile Include="UPnP\ConversionHelper.cs" />
     <Compile Include="UPnP\SoapBase.cs" />
     <Compile Include="UPnP\SoapException.cs" />
@@ -253,7 +256,11 @@
     <Compile Include="UPnP\UpnpError.cs" />
     <Compile Include="UPnP\UpnpService.cs" />
     <Compile Include="UPnP\ValueLessResponse.cs" />
-    <Compile Include="UPnP\XPushList\GetListRequest.cs" />
+    <Compile Include="UPnP\XPushList\GetPushRootRequest.cs" />
+    <Compile Include="UPnP\XPushList\PushRoot.cs" />
+    <Compile Include="UPnP\XPushList\TransferEndRequest.cs" />
+    <Compile Include="UPnP\XPushList\TransferProgressRequest.cs" />
+    <Compile Include="UPnP\XPushList\TransferStartRequest.cs" />
     <Compile Include="UPnP\XPushList\XPushList.cs" />
     <Compile Include="Utility\AnimationHelper.cs" />
     <Compile Include="Utility\CameraStatusExtension.cs" />

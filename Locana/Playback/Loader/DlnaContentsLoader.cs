@@ -45,7 +45,7 @@ namespace Locana.Playback
 
             var contents = res as RetrievedContents;
             // TODO
-            OnPartLoaded(Translate("Image files", contents.Result.Items));
+            OnPartLoaded(Translate("Image files", contents.Result.Items, UpnpDevice));
 
             if (contents.TotalMatches > (start + 1) * CONTENT_LOOP_STEP)
             {
@@ -57,14 +57,14 @@ namespace Locana.Playback
             }
         }
 
-        private IList<Thumbnail> Translate(string containerName, IList<Item> source)
+        public static IList<Thumbnail> Translate(string containerName, IList<Item> source, UpnpDevice device)
         {
             var group = FormatDateTitle(containerName);
             return source.Where(item => item.Resources.Count != 0)
                 .Select(item =>
                 {
                     var content = Translate(group, item);
-                    return new Thumbnail(content, UpnpDevice.UDN)
+                    return new Thumbnail(content, device.UDN)
                     {
                         IsPlayable = content.MimeType == MimeType.Jpeg,
                     };
@@ -72,7 +72,7 @@ namespace Locana.Playback
                 .ToList();
         }
 
-        private static DlnaContentInfo Translate(string containerName, Item source)
+        public static DlnaContentInfo Translate(string containerName, Item source)
         {
             if (source.Resources.Count == 0)
             {
@@ -273,7 +273,7 @@ namespace Locana.Playback
             }
 
             var contents = res as RetrievedContents;
-            OnPartLoaded(Translate(containerName, contents.Result.Items));
+            OnPartLoaded(Translate(containerName, contents.Result.Items, UpnpDevice));
 
             loadedForLayer += contents.NumberReturned;
             sum += contents.Result.Items.Count;
@@ -325,7 +325,7 @@ namespace Locana.Playback
             }
 
             var contents = res as RetrievedContents;
-            OnPartLoaded(Translate(containerName, contents.Result.Items));
+            OnPartLoaded(Translate(containerName, contents.Result.Items, UpnpDevice));
 
             var nextIndex = start + contents.NumberReturned;
             remainingCount -= contents.NumberReturned;
