@@ -13,14 +13,30 @@ namespace Locana.Playback.Push
             try
             {
                 var root = await device.Services[URN.XPushList].Control(new GetPushRootRequest()).ConfigureAwait(false) as PushRoot;
+
+                // Check total number of pushed contents
+                var checker = await device.Services[URN.ContentDirectory].Control(new BrowseRequest
+                {
+                    ObjectID = root.ObjectID,
+                    BrowseFlag = BrowseFlag.BrowseDirectChildren,
+                    Filter = "*",
+                    StartingIndex = 0,
+                    RequestedCount = 1
+                }).ConfigureAwait(false) as RetrievedContents;
+                var estTotal = checker.TotalMatches;
+                DebugUtil.Log(() => "Total size of pushed contents list: " + estTotal);
+
+                // Notify start of download
                 await device.Services[URN.XPushList].Control(new TransferStartRequest()).ConfigureAwait(false);
+
+                // Retlieve total list of the pushed contents
                 var contents = await device.Services[URN.ContentDirectory].Control(new BrowseRequest
                 {
                     ObjectID = root.ObjectID,
                     BrowseFlag = BrowseFlag.BrowseDirectChildren,
                     Filter = "*",
                     StartingIndex = 0,
-                    RequestedCount = 4
+                    RequestedCount = estTotal
                 }).ConfigureAwait(false) as RetrievedContents;
 
                 var total = contents.Result.Items.Count;
@@ -28,10 +44,12 @@ namespace Locana.Playback.Push
 
                 foreach (var thumb in DlnaContentsLoader.Translate("Root", contents.Result.Items, device))
                 {
+                    // Notify progress of download
                     await device.Services[URN.XPushList].Control(new TransferProgressRequest { NumTotal = total, NumTransferred = completed }).ConfigureAwait(false);
                     try
                     {
                         await DownloadHelper.EnqueueDownload(thumb);
+                        completed++;
                     }
                     catch (Exception e)
                     {
@@ -39,6 +57,7 @@ namespace Locana.Playback.Push
                     }
                 }
 
+                // Notify complete of download
                 await device.Services[URN.XPushList].Control(new TransferEndRequest { ErrorCode = 0 }).ConfigureAwait(false); // TODO error code
             }
             catch (Exception e)
