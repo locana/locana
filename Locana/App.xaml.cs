@@ -102,6 +102,8 @@ namespace Locana
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            var md = MediaDownloader.Instance; // initialize static instance on the main thread.
         }
 
         public void UpdatePurchaseInfo()
