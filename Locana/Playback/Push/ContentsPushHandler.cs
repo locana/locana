@@ -29,7 +29,7 @@ namespace Locana.Playback.Push
                 // Notify start of download
                 await device.Services[URN.XPushList].Control(new TransferStartRequest()).ConfigureAwait(false);
 
-                // Retlieve total list of the pushed contents
+                // Retrieve total list of the pushed contents
                 var contents = await device.Services[URN.ContentDirectory].Control(new BrowseRequest
                 {
                     ObjectID = root.ObjectID,
