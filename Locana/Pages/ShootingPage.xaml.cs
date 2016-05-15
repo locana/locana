@@ -393,7 +393,7 @@ namespace Locana.Pages
 
             OnCameraStatusChanged(target.Status);
 
-            await LiveviewUnit.SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo);
+            LiveviewUnit.SetupFocusFrame(ApplicationSettings.GetInstance().RequestFocusFrameInfo).IgnoreExceptions();
 
             SetUIHandlers();
 
