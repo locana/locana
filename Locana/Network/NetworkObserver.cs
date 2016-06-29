@@ -110,6 +110,14 @@ namespace Locana.Network
 
                 UpdateDeviceNameDictionary(device.UDN, device.FriendlyName, device.ModelName);
 
+                if (device.Services.Any(service => service.Key == URN.XPushList))
+                {
+                    // TODO need to avoid duplicated handling...
+                    DebugUtil.Log("Contents push detected");
+                    ContentsPushHandler.HandlePushedContents(device);
+                    return;
+                }
+
                 lock (cdsDevices)
                 {
                     if (cdsDevices.ContainsKey(device.UDN))
@@ -122,12 +130,6 @@ namespace Locana.Network
                         DebugUtil.Log("CDS found. Notify discovered.");
                         cdsDevices.Add(device.UDN, device);
                         OnDiscovered(device);
-                    }
-
-                    if (device.Services.Any(service => service.Key == URN.XPushList))
-                    {
-                        DebugUtil.Log("Contents push detected");
-                        ContentsPushHandler.HandlePushedContents(device);
                     }
                 }
             }
