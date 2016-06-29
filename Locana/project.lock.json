@@ -3,7 +3,7 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "Microsoft.ApplicationInsights/2.0.1": {
+      "Microsoft.ApplicationInsights/2.1.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
@@ -1870,7 +1870,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "Microsoft.ApplicationInsights/2.0.1": {
+      "Microsoft.ApplicationInsights/2.1.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
@@ -3587,7 +3587,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "Microsoft.ApplicationInsights/2.0.1": {
+      "Microsoft.ApplicationInsights/2.1.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
@@ -5262,7 +5262,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "Microsoft.ApplicationInsights/2.0.1": {
+      "Microsoft.ApplicationInsights/2.1.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
@@ -6987,7 +6987,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "Microsoft.ApplicationInsights/2.0.1": {
+      "Microsoft.ApplicationInsights/2.1.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
@@ -8662,7 +8662,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "Microsoft.ApplicationInsights/2.0.1": {
+      "Microsoft.ApplicationInsights/2.1.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
@@ -10387,7 +10387,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "Microsoft.ApplicationInsights/2.0.1": {
+      "Microsoft.ApplicationInsights/2.1.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
           "System.Diagnostics.Debug": "4.0.10",
@@ -12063,13 +12063,12 @@
     }
   },
   "libraries": {
-    "Microsoft.ApplicationInsights/2.0.1": {
-      "sha512": "iZjOx8ysupwITjhCl6suEOBQ+yTUBlJhQ2lfXBJkpS66gjB5TDJxIPrqKJ17/v4QqiFw//eHTGtMUCtoMN6WDQ==",
-      "type": "Package",
+    "Microsoft.ApplicationInsights/2.1.0": {
+      "sha512": "mviO8PLQd3r22Pmv8JfjYzTCQ9ByhkU9wdC4fwd6WmAARwAMgMw9HEbHeYS3r+8pB3w+fZMi7p4LKijzgNybRQ==",
+      "type": "package",
       "files": [
+        "Microsoft.ApplicationInsights.2.1.0.nupkg.sha512",
         "Microsoft.ApplicationInsights.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "lib/dotnet5.4/Microsoft.ApplicationInsights.XML",
         "lib/dotnet5.4/Microsoft.ApplicationInsights.dll",
         "lib/net40/Microsoft.ApplicationInsights.XML",
@@ -12080,8 +12079,7 @@
         "lib/net46/Microsoft.ApplicationInsights.dll",
         "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll",
         "lib/uap10.0/Microsoft.ApplicationInsights.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.dll",
-        "package/services/metadata/core-properties/312640b031884ea79d940dd9faa4155a.psmdcp"
+        "lib/wp8/Microsoft.ApplicationInsights.dll"
       ]
     },
     "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
@@ -15709,7 +15707,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.ApplicationInsights >= 2.0.1",
+      "Microsoft.ApplicationInsights >= 2.1.0",
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.2.3",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.1.1",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0",
