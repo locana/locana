@@ -45,7 +45,7 @@ namespace Locana.UPnP
 
             var uri = new Uri(RootAddress + ControlUrl);
 
-            // DebugUtil.Log("Access to " + uri.ToString());
+            // DebugUtil.Log(() => "Access to " + uri.ToString());
             var response = await HttpClient.PostAsync(uri, content);
 
             if (response.IsSuccessStatusCode)
@@ -59,7 +59,7 @@ namespace Locana.UPnP
             {
                 DebugUtil.Log(() => "Http Status Error in SOAP request: " + response.StatusCode);
                 var res = await response.Content.ReadAsStringAsync();
-                DebugUtil.Log(res);
+                DebugUtil.Log(() => res);
                 Response.TryThrowErrorCode(res);
                 throw new SoapException((int)response.StatusCode, "Http status code");
             }

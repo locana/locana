@@ -30,21 +30,21 @@ namespace Locana.Playback
         {
             if (!await IsStorageSupportedAsync().ConfigureAwait(false))
             {
-                DebugUtil.Log("Storage scheme is not available on this device");
+                DebugUtil.Log(() => "Storage scheme is not available on this device");
                 throw new StorageNotSupportedException();
             }
 
             var storages = await GetStoragesUriAsync().ConfigureAwait(false);
             if (cancel?.IsCancellationRequested ?? false)
             {
-                DebugUtil.Log("Loading task cancelled");
+                DebugUtil.Log(() => "Loading task cancelled");
                 OnCancelled();
                 return;
             }
 
             if (storages.Count == 0)
             {
-                DebugUtil.Log("No storage is available on this device");
+                DebugUtil.Log(() => "No storage is available on this device");
                 throw new NoStorageException();
             }
 
@@ -70,7 +70,7 @@ namespace Locana.Playback
 
         private async Task GetContentsByDateSeparatelyAsync(string uri, ContentsSet contentsSet, CancellationTokenSource cancel)
         {
-            DebugUtil.Log("Loading number of Dates");
+            DebugUtil.Log(() => "Loading number of Dates");
 
             var count = await AvContentApi.GetContentCountAsync(new CountingTarget
             {
@@ -82,7 +82,7 @@ namespace Locana.Playback
 
             if (cancel?.IsCancellationRequested ?? false)
             {
-                DebugUtil.Log("Loading task cancelled");
+                DebugUtil.Log(() => "Loading task cancelled");
                 OnCancelled();
                 return;
             }
@@ -94,7 +94,7 @@ namespace Locana.Playback
                 var dates = await GetDateListAsync(uri, i * CONTENT_LOOP_STEP, CONTENT_LOOP_STEP).ConfigureAwait(false);
                 if (cancel?.IsCancellationRequested ?? false)
                 {
-                    DebugUtil.Log("Loading task cancelled");
+                    DebugUtil.Log(() => "Loading task cancelled");
                     OnCancelled();
                     break;
                 }
@@ -151,7 +151,7 @@ namespace Locana.Playback
                 var contents = await GetContentsOfDayAsync(date, i * CONTENT_LOOP_STEP, CONTENT_LOOP_STEP, contentsSet).ConfigureAwait(false);
                 if (cancel?.IsCancellationRequested ?? false)
                 {
-                    DebugUtil.Log("Loading task cancelled");
+                    DebugUtil.Log(() => "Loading task cancelled");
                     OnCancelled();
                     break;
                 }
@@ -182,7 +182,7 @@ namespace Locana.Playback
                 var contents = await GetContentsOfDayAsync(holder.AlbumGroup, i * CONTENT_LOOP_STEP, CONTENT_LOOP_STEP, contentsSet).ConfigureAwait(false);
                 if (cancel?.IsCancellationRequested ?? false)
                 {
-                    DebugUtil.Log("Loading task cancelled");
+                    DebugUtil.Log(() => "Loading task cancelled");
                     OnCancelled();
                     break;
                 }

@@ -41,7 +41,7 @@ namespace Locana.Controls
             ScaleFactor = BarsGrid.ActualHeight / (double)maxFrequency * 6;
             HorizontalResolution = BarsGrid.ActualWidth / X_SKIP_ORDER;
             MaxHistogramLevel = BarsGrid.ActualHeight - HISTOGRAM_PADDING_TOP;
-            // DebugUtil.Log("Freq: " + MaxFrequency + " maxLevel: " + MaxHistogramLevel);
+            // DebugUtil.Log(() => "Freq: " + MaxFrequency + " maxLevel: " + MaxHistogramLevel);
         }
 
         private void InitColorBar(ColorType type)

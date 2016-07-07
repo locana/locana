@@ -49,27 +49,37 @@ namespace Locana.Pages
         {
             var section = new SettingSection(SystemUtil.GetStringResource("SettingSection_Image"));
 
-            section.Add(new ToggleSetting(
-                new AppSettingData<bool>(SystemUtil.GetStringResource("PostviewTransferSetting"), SystemUtil.GetStringResource("Guide_ReceiveCapturedImage"),
-                () => { return ApplicationSettings.GetInstance().IsPostviewTransferEnabled; },
-                enabled => { ApplicationSettings.GetInstance().IsPostviewTransferEnabled = enabled; })));
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("PostviewTransferSetting"),
+                    Guide = SystemUtil.GetStringResource("Guide_ReceiveCapturedImage"),
+                    StateProvider = () => ApplicationSettings.GetInstance().IsPostviewTransferEnabled,
+                    StateObserver = enabled => ApplicationSettings.GetInstance().IsPostviewTransferEnabled = enabled
+                }
+            });
 
             var limited = (Application.Current as App).IsFunctionLimited;
 
             var geoGuide = limited ? "TrialMessage" : "AddGeotag_guide";
             AppSettingData<bool> geoSetting = null;
-            geoSetting = new AppSettingData<bool>(SystemUtil.GetStringResource("AddGeotag"), SystemUtil.GetStringResource(geoGuide),
-                () =>
+            geoSetting = new AppSettingData<bool>()
+            {
+                Title = SystemUtil.GetStringResource("AddGeotag"),
+                Guide = SystemUtil.GetStringResource(geoGuide),
+                StateProvider = () =>
                 {
                     if (limited) { return false; }
                     else { return ApplicationSettings.GetInstance().GeotagEnabled; }
                 },
-                enabled =>
+                StateObserver = enabled =>
                 {
                     ApplicationSettings.GetInstance().GeotagEnabled = enabled;
                     if (enabled) { RequestPermission(geoSetting); }
-                });
-            var geoToggle = new ToggleSetting(geoSetting);
+                }
+            };
+            var geoToggle = new ToggleSetting { SettingData = geoSetting };
 
             if (ApplicationSettings.GetInstance().GeotagEnabled)
             {
@@ -118,31 +128,51 @@ namespace Locana.Pages
         {
             var section = new SettingSection(SystemUtil.GetStringResource("SettingSection_Display"));
 
-            section.Add(new ToggleSetting(
-                new AppSettingData<bool>(SystemUtil.GetStringResource("DisplayTakeImageButtonSetting"), SystemUtil.GetStringResource("Guide_DisplayTakeImageButtonSetting"),
-                () => { return ApplicationSettings.GetInstance().IsShootButtonDisplayed; },
-                enabled => { ApplicationSettings.GetInstance().IsShootButtonDisplayed = enabled; })));
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("DisplayTakeImageButtonSetting"),
+                    Guide = SystemUtil.GetStringResource("Guide_DisplayTakeImageButtonSetting"),
+                    StateProvider = () => ApplicationSettings.GetInstance().IsShootButtonDisplayed,
+                    StateObserver = enabled => ApplicationSettings.GetInstance().IsShootButtonDisplayed = enabled
+                }
+            });
 
-            section.Add(new ToggleSetting(
-                new AppSettingData<bool>(SystemUtil.GetStringResource("DisplayHistogram"), SystemUtil.GetStringResource("Guide_Histogram"),
-                () => { return ApplicationSettings.GetInstance().IsHistogramDisplayed; },
-                enabled => { ApplicationSettings.GetInstance().IsHistogramDisplayed = enabled; })));
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("DisplayHistogram"),
+                    Guide = SystemUtil.GetStringResource("Guide_Histogram"),
+                    StateProvider = () => ApplicationSettings.GetInstance().IsHistogramDisplayed,
+                    StateObserver = enabled => ApplicationSettings.GetInstance().IsHistogramDisplayed = enabled
+                }
+            });
 
-            var FocusFrameSetting = new AppSettingData<bool>(SystemUtil.GetStringResource("FocusFrameDisplay"), SystemUtil.GetStringResource("Guide_FocusFrameDisplay"),
-                () => { return ApplicationSettings.GetInstance().RequestFocusFrameInfo; },
-                enabled =>
+            var FocusFrameSetting = new AppSettingData<bool>()
+            {
+                Title = SystemUtil.GetStringResource("FocusFrameDisplay"),
+                Guide = SystemUtil.GetStringResource("Guide_FocusFrameDisplay"),
+                StateProvider = () => ApplicationSettings.GetInstance().RequestFocusFrameInfo,
+                StateObserver = enabled =>
                 {
                     ApplicationSettings.GetInstance().RequestFocusFrameInfo = enabled;
                     // todo: support to show focus frames
                     //await SetupFocusFrame(enabled);
                     //if (!enabled) { _FocusFrameSurface.ClearFrames(); }
-                });
-            section.Add(new ToggleSetting(FocusFrameSetting));
+                }
+            };
+            section.Add(new ToggleSetting { SettingData = FocusFrameSetting });
 
-            section.Add(new ToggleSetting(
-                new AppSettingData<bool>(SystemUtil.GetStringResource("LiveviewRotation"), SystemUtil.GetStringResource("LiveviewRotation_guide"),
-                    () => { return ApplicationSettings.GetInstance().LiveviewRotationEnabled; },
-                    enabled =>
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("LiveviewRotation"),
+                    Guide = SystemUtil.GetStringResource("LiveviewRotation_guide"),
+                    StateProvider = () => ApplicationSettings.GetInstance().LiveviewRotationEnabled,
+                    StateObserver = enabled =>
                     {
                         ApplicationSettings.GetInstance().LiveviewRotationEnabled = enabled;
                         // todo: support to rotate liveview image
@@ -154,26 +184,36 @@ namespace Locana.Pages
                         //{
                         //    RotateLiveviewImage(0);
                         //}
-                    })));
+                    }
+                }
+            });
 
-            section.Add(new ToggleSetting(
-                new AppSettingData<bool>(SystemUtil.GetStringResource("FramingGrids"), SystemUtil.GetStringResource("Guide_FramingGrids"),
-                    () => { return ApplicationSettings.GetInstance().FramingGridEnabled; },
-                    enabled =>
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("FramingGrids"),
+                    Guide = SystemUtil.GetStringResource("Guide_FramingGrids"),
+                    StateProvider = () => ApplicationSettings.GetInstance().FramingGridEnabled,
+                    StateObserver = enabled =>
                     {
                         ApplicationSettings.GetInstance().FramingGridEnabled = enabled;
                         // screen_view_data.FramingGridDisplayed = enabled;
-                    })));
+                    }
+                }
+            });
 
-            var gridTypePanel = new ComboBoxSetting(
-                new AppSettingData<int>(SystemUtil.GetStringResource("AssistPattern"), null,
-                    () => { return (int)ApplicationSettings.GetInstance().GridType - 1; },
-                    setting =>
-                    {
-                        if (setting < 0) { return; }
-                        ApplicationSettings.GetInstance().GridType = (FramingGridTypes)(setting + 1);
-                    },
-                    SettingValueConverter.FromFramingGrid(EnumUtil<FramingGridTypes>.GetValueEnumerable())));
+            var gridTypePanel = new ComboBoxSetting(new AppSettingData<int>()
+            {
+                Title = SystemUtil.GetStringResource("AssistPattern"),
+                StateProvider = () => (int)ApplicationSettings.GetInstance().GridType - 1,
+                StateObserver = setting =>
+                {
+                    if (setting < 0) { return; }
+                    ApplicationSettings.GetInstance().GridType = (FramingGridTypes)(setting + 1);
+                },
+                Candidates = SettingValueConverter.FromFramingGrid(EnumUtil<FramingGridTypes>.GetValueEnumerable())
+            });
             gridTypePanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
@@ -183,14 +223,17 @@ namespace Locana.Pages
             });
             section.Add(gridTypePanel);
 
-            var gridColorPanel = new ComboBoxSetting(new AppSettingData<int>(SystemUtil.GetStringResource("FramingGridColor"), null,
-                    () => { return (int)ApplicationSettings.GetInstance().GridColor; },
-                    setting =>
-                    {
-                        if (setting < 0) { return; }
-                        ApplicationSettings.GetInstance().GridColor = (FramingGridColors)setting;
-                    },
-                    SettingValueConverter.FromFramingGridColor(EnumUtil<FramingGridColors>.GetValueEnumerable())));
+            var gridColorPanel = new ComboBoxSetting(new AppSettingData<int>()
+            {
+                Title = SystemUtil.GetStringResource("FramingGridColor"),
+                StateProvider = () => (int)ApplicationSettings.GetInstance().GridColor,
+                StateObserver = setting =>
+                 {
+                     if (setting < 0) { return; }
+                     ApplicationSettings.GetInstance().GridColor = (FramingGridColors)setting;
+                 },
+                Candidates = SettingValueConverter.FromFramingGridColor(EnumUtil<FramingGridColors>.GetValueEnumerable())
+            });
             gridColorPanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
@@ -200,14 +243,17 @@ namespace Locana.Pages
             });
             section.Add(gridColorPanel);
 
-            var fibonacciOriginPanel = new ComboBoxSetting(new AppSettingData<int>(SystemUtil.GetStringResource("FibonacciSpiralOrigin"), null,
-                () => { return (int)ApplicationSettings.GetInstance().FibonacciLineOrigin; },
-                setting =>
+            var fibonacciOriginPanel = new ComboBoxSetting(new AppSettingData<int>()
+            {
+                Title = SystemUtil.GetStringResource("FibonacciSpiralOrigin"),
+                StateProvider = () => (int)ApplicationSettings.GetInstance().FibonacciLineOrigin,
+                StateObserver = setting =>
                 {
                     if (setting < 0) { return; }
                     ApplicationSettings.GetInstance().FibonacciLineOrigin = (FibonacciLineOrigins)setting;
                 },
-                SettingValueConverter.FromFibonacciLineOrigin(EnumUtil<FibonacciLineOrigins>.GetValueEnumerable())));
+                Candidates = SettingValueConverter.FromFibonacciLineOrigin(EnumUtil<FibonacciLineOrigins>.GetValueEnumerable())
+            });
             fibonacciOriginPanel.SetBinding(VisibilityProperty, new Binding
             {
                 Source = ApplicationSettings.GetInstance(),
@@ -224,22 +270,31 @@ namespace Locana.Pages
         {
             var section = new SettingSection(SystemUtil.GetStringResource("SettingSection_ContentsSync"));
 
-            section.Add(new ToggleSetting(
-                new AppSettingData<bool>(SystemUtil.GetStringResource("Setting_PrioritizeOriginalSize"), SystemUtil.GetStringResource("Guide_PrioritizeOriginalSize"),
-                    () => { return ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents; },
-                    enabled => { ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents = enabled; })));
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("Setting_PrioritizeOriginalSize"),
+                    Guide = SystemUtil.GetStringResource("Guide_PrioritizeOriginalSize"),
+                    StateProvider = () => ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents,
+                    StateObserver = enabled => ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents = enabled
+                }
+            });
 
-            section.Add(new ComboBoxSetting(
-                new AppSettingData<int>(SystemUtil.GetStringResource("ContentTypes"), SystemUtil.GetStringResource("ContentTypesGuide"),
-                    () => { return (int)ApplicationSettings.GetInstance().RemoteContentsSet; },
-                    newValue =>
-                    {
-                        if (newValue != -1)
-                        {
-                            ApplicationSettings.GetInstance().RemoteContentsSet = (ContentsSet)newValue;
-                        }
-                    },
-                    SettingValueConverter.FromContentsSet(EnumUtil<ContentsSet>.GetValueEnumerable()))));
+            section.Add(new ComboBoxSetting(new AppSettingData<int>()
+            {
+                Title = SystemUtil.GetStringResource("ContentTypes"),
+                Guide = SystemUtil.GetStringResource("ContentTypesGuide"),
+                StateProvider = () => (int)ApplicationSettings.GetInstance().RemoteContentsSet,
+                StateObserver = newValue =>
+                 {
+                     if (newValue != -1)
+                     {
+                         ApplicationSettings.GetInstance().RemoteContentsSet = (ContentsSet)newValue;
+                     }
+                 },
+                Candidates = SettingValueConverter.FromContentsSet(EnumUtil<ContentsSet>.GetValueEnumerable())
+            }));
 
             return section;
         }

@@ -71,7 +71,7 @@ namespace Locana.Controls
 
         private void ToastGrid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            DebugUtil.Log("Toast tapped");
+            DebugUtil.Log(() => "Toast tapped");
             Contents.FirstOrDefault()?.OnTapped?.Invoke();
         }
     }

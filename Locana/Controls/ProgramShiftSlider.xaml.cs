@@ -56,7 +56,7 @@ namespace Locana.Controls
 
         private void Bar_OnRelease(object sender, OnReleaseArgs e)
         {
-            //DebugUtil.Log("Slider released: " + selected);
+            //DebugUtil.Log(() => "Slider released: " + selected);
             //if (Parameter == null || e.Value < Parameter.Min || e.Value > Parameter.Max) { return; }
             if (SliderOperated != null) { SliderOperated(this, new ProgramShiftChangedEventArgs() { OperatedStep = e.Value }); }
         }

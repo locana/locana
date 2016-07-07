@@ -37,10 +37,10 @@ namespace Locana.CameraControl
 
         public async Task<bool> StartAsync()
         {
-            DebugUtil.Log("StatusObserver: Start");
+            DebugUtil.Log(() => "StatusObserver: Start");
             if (IsProcessing)
             {
-                DebugUtil.Log("StatusObserver: Already processing");
+                DebugUtil.Log(() => "StatusObserver: Already processing");
                 return false;
             }
 
@@ -52,7 +52,7 @@ namespace Locana.CameraControl
             failure_count = 0;
             if (!await Refresh().ConfigureAwait(false))
             {
-                DebugUtil.Log("StatusObserver: Failed to start");
+                DebugUtil.Log(() => "StatusObserver: Failed to start");
                 return false;
             }
 
@@ -65,7 +65,7 @@ namespace Locana.CameraControl
 
         public void Stop()
         {
-            DebugUtil.Log("StatusObserver: Stop");
+            DebugUtil.Log(() => "StatusObserver: Stop");
             if (cancel != null)
             {
                 cancel.Cancel();
@@ -75,7 +75,7 @@ namespace Locana.CameraControl
 
         public async Task<bool> Refresh()
         {
-            DebugUtil.Log("StatusObserver: Refresh");
+            DebugUtil.Log(() => "StatusObserver: Refresh");
             try
             {
                 await UpdateStatus(await api.Camera.GetEventAsync(false, version)).ConfigureAwait(false);
@@ -152,7 +152,7 @@ namespace Locana.CameraControl
                     }
                     catch (RemoteApiException)
                     {
-                        DebugUtil.Log("Failed to get still image size capability");
+                        DebugUtil.Log(() => "Failed to get still image size capability");
                     }
                 }
                 else
@@ -191,7 +191,7 @@ namespace Locana.CameraControl
                     }
                     catch (RemoteApiException)
                     {
-                        DebugUtil.Log("Failed to get white balance capability");
+                        DebugUtil.Log(() => "Failed to get white balance capability");
                     }
                 }
                 else
@@ -232,7 +232,7 @@ namespace Locana.CameraControl
             {
                 /*
                 case StatusCode.Timeout:
-                    DebugUtil.Log("GetEvent timeout without any event. Retry for the next event");
+                    DebugUtil.Log(() => "GetEvent timeout without any event. Retry for the next event");
                     PollingLoop();
                     return;
                 */
@@ -250,18 +250,18 @@ namespace Locana.CameraControl
                     }
                     break;
                 case StatusCode.DuplicatePolling:
-                    DebugUtil.Log("GetEvent failed duplicate polling");
+                    DebugUtil.Log(() => "GetEvent failed duplicate polling");
                     // Long polling is now cancellable. Duplicated polling should not happen.
                     break;
                 case StatusCode.Cancelled:
-                    DebugUtil.Log("GetEvent polling loop cancelled.");
+                    DebugUtil.Log(() => "GetEvent polling loop cancelled.");
                     return;
                 default:
                     DebugUtil.Log(() => "GetEvent failed with code: " + code);
                     break;
             }
 
-            DebugUtil.Log("StatusObserver Error limit");
+            DebugUtil.Log(() => "StatusObserver Error limit");
 
             if (IsProcessing)
             {

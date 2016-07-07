@@ -31,7 +31,7 @@ namespace Locana.Utility
 
         protected void OnFetched(StorageFolder folder, StorageFile file, GeotaggingResult.Result geotaggingResult)
         {
-            DebugUtil.Log("PictureSyncManager: OnFetched");
+            DebugUtil.Log(() => "PictureSyncManager: OnFetched");
             Fetched?.Invoke(folder, file, geotaggingResult);
         }
 
@@ -96,7 +96,7 @@ namespace Locana.Utility
         {
             if (task == null)
             {
-                DebugUtil.Log("Create new task");
+                DebugUtil.Log(() => "Create new task");
                 task = Task.Factory.StartNew(async () =>
                 {
                     while (DownloadQueue.Count != 0)
@@ -106,7 +106,7 @@ namespace Locana.Utility
 
                         QueueStatusUpdated?.Invoke(DownloadQueue.Count);
                     }
-                    DebugUtil.Log("Queue end. Kill task");
+                    DebugUtil.Log(() => "Queue end. Kill task");
                     task = null;
                 });
             }

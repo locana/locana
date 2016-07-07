@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Locana"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:xc="using:Windows.UI.Xaml.Controls"
       Loaded="Page_Loaded"
       mc:Ignorable="d">
 
@@ -25,7 +26,27 @@
             </c:PageHeader.HeaderContent>
         </c:PageHeader>
 
-        <Pivot Grid.Row="1" Grid.RowSpan="2">
+        <xc:ContentDialog x:Name="DebugLogDialog"
+                          Grid.Row="0"
+                          Grid.RowSpan="3"
+                          MinHeight="0"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          PrimaryButtonText="Attach"
+                          SecondaryButtonText="Delete and create new file">
+            <Border>
+                <TextBlock Margin="0,24,0,0" Text="Attach previous log file to the e-mail?" />
+            </Border>
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="Previous log file detected" />
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+        </xc:ContentDialog>
+
+        <Pivot Grid.Row="1"
+               Grid.RowSpan="2"
+               SelectionChanged="Pivot_SelectionChanged">
             <PivotItem Margin="12,14,0,0">
                 <PivotItem.Header>
                     <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding [About], Source={StaticResource LocalizedStrings}}" />
@@ -129,6 +150,24 @@
                             <Paragraph x:Name="Contents" />
                         </RichTextBlock>
                     </ScrollViewer>
+                </Grid>
+            </PivotItem>
+
+            <PivotItem Margin="12,14,0,0">
+                <PivotItem.Header>
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="Debug" />
+                </PivotItem.Header>
+                <Grid Margin="9,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <c:ToggleSetting x:Name="DebugLogToggle" Loaded="DebugLogToggle_Loaded" />
+                    <ListView x:Name="LogFiles"
+                              Grid.Row="1"
+                              Grid.ColumnSpan="2"
+                              Margin="4,12,4,0"
+                              Loaded="LogFiles_Loaded" />
                 </Grid>
             </PivotItem>
         </Pivot>

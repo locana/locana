@@ -96,7 +96,7 @@ namespace Locana.DataModel
                 {
                     Preference.IntervalTime = value;
                     _IntervalTime = value;
-                    // DebugUtil.Log("IntervalTime changed: " + value);
+                    // DebugUtil.Log(() => "IntervalTime changed: " + value);
                     NotifyChangedOnUI(nameof(IntervalTime));
                     NotifyChangedOnUI(nameof(IntervalTimeDisplayString));
                 }
@@ -315,6 +315,17 @@ namespace Locana.DataModel
                     _LiveviewRotationEnabled = value;
                     NotifyChangedOnUI(nameof(LiveviewRotationEnabled));
                 }
+            }
+        }
+
+        private bool _EnableDebugLogging = false;
+        public bool EnableDebugLogging
+        {
+            get { return _EnableDebugLogging; }
+            set
+            {
+                _EnableDebugLogging = value;
+                NotifyChangedOnUI(nameof(EnableDebugLogging));
             }
         }
     }

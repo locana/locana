@@ -36,11 +36,11 @@ namespace Locana.CameraControl
                 DebugUtil.Log(() => "ServerVersion: " + version);
                 if (IsLiberated)
                 {
-                    DebugUtil.Log("This is liberated version!!");
+                    DebugUtil.Log(() => "This is liberated version!!");
                 }
                 else
                 {
-                    DebugUtil.Log("This is restricted version...");
+                    DebugUtil.Log(() => "This is restricted version...");
                 }
             }
             catch (Exception)

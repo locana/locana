@@ -48,7 +48,7 @@ namespace Locana.Utility
             var root = ApplicationData.Current.TemporaryFolder;
             if (uuid == null)
             {
-                DebugUtil.Log("Delete all of thumbnail cache.");
+                DebugUtil.Log(() => "Delete all of thumbnail cache.");
 
                 await LoadCacheRoot().ConfigureAwait(false);
                 await CacheFolder.DeleteDirectoryRecursiveAsync(false).ConfigureAwait(false);
@@ -166,7 +166,7 @@ namespace Locana.Utility
                 {
                     return;
                 }
-                DebugUtil.Log("Create new download loop.");
+                DebugUtil.Log(() => "Create new download loop.");
                 DownloadLoop = Task.Factory.StartNew(async () =>
                 {
                     while (Queue.Count != 0 || Stack.Count != 0)
@@ -180,7 +180,7 @@ namespace Locana.Utility
                         }
                         await source.DownloadAsync(HttpClient);
                     }
-                    DebugUtil.Log("Download loop end.");
+                    DebugUtil.Log(() => "Download loop end.");
                     lock (LoopLock)
                     {
                         DownloadLoop = null;

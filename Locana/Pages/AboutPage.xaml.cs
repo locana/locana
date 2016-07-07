@@ -1,11 +1,16 @@
 ﻿using Locana.Controls;
+using Locana.DataModel;
 using Locana.Utility;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Store;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -121,6 +126,22 @@ namespace Locana.Pages
             return hl;
         }
 
+        private ObservableCollection<string> logDisplayList = new ObservableCollection<string>();
+        private IReadOnlyList<StorageFile> logFiles;
+
+        private async void LoadLogFiles()
+        {
+            logFiles = await DebugUtil.LogFiles();
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                foreach (var file in logFiles)
+                {
+                    logDisplayList.Add(string.Format("{0}: {1} Bytes", file.Name, (await file.GetBasicPropertiesAsync()).Size));
+                }
+            });
+        }
+
         private async void TrialButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -143,11 +164,89 @@ namespace Locana.Pages
 
         private async void ShowToast(string message)
         {
-            DebugUtil.Log(message);
+            DebugUtil.Log(() => message);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AppShell.Current.Toast.PushToast(new ToastContent() { Text = message });
             });
+        }
+
+        private void LogFiles_Loaded(object sender, RoutedEventArgs e)
+        {
+            LogFiles.ItemsSource = logDisplayList;
+        }
+
+        private void DebugLogToggle_Loaded(object sender, RoutedEventArgs e)
+        {
+            var data = new AppSettingData<bool>()
+            {
+                Title = "Save debug log file",
+                Guide = "Turn on to start writing log file, turn off to stop and attach file to the email."
+            };
+            data.StateProvider = () => ApplicationSettings.GetInstance().EnableDebugLogging;
+            data.StateObserver = async (enabled) =>
+            {
+                ApplicationSettings.GetInstance().EnableDebugLogging = enabled;
+                if (enabled)
+                {
+
+                    if (logDisplayList.Count != 0)
+                    {
+                        var res = await DebugLogDialog.ShowAsync();
+                        switch (res)
+                        {
+                            case ContentDialogResult.Primary:
+                                ApplicationSettings.GetInstance().EnableDebugLogging = false;
+                                data.CurrentSetting = false;
+                                AppShell.Current.Toast.PushToast(new ToastContent { Text = "Email attatchment not implemented" });
+                                return;
+                            case ContentDialogResult.Secondary:
+                                foreach (var file in logFiles)
+                                {
+                                    await file.DeleteAsync();
+                                }
+                                break;
+                            default:
+                                ApplicationSettings.GetInstance().EnableDebugLogging = false;
+                                data.CurrentSetting = false;
+                                return;
+                        }
+                    }
+                    await DebugUtil.GrubFile();
+                    logDisplayList.Clear();
+                    LoadLogFiles();
+                }
+                else
+                {
+                    if (!DebugUtil.ReleaseFile())
+                    {
+                        return;
+                    }
+                    var task = Task.Run(async () =>
+                    {
+                        await DebugUtil.ZipLogFileDir();
+                        foreach (var file in logFiles)
+                        {
+                            await file.DeleteAsync();
+                        }
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            AppShell.Current.Toast.PushToast(new ToastContent { Text = "Email attatchment not implemented" });
+                        });
+                    });
+                }
+            };
+            DebugLogToggle.SettingData = data;
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var pivot = sender as Pivot;
+            if (pivot.SelectedIndex == 2)
+            {
+                logDisplayList.Clear();
+                LoadLogFiles();
+            }
         }
     }
 }

@@ -7,11 +7,11 @@
         {
             if (((PeerFinder.SupportedDiscoveryTypes & PeerDiscoveryTypes.Browse) == PeerDiscoveryTypes.Browse))
             {
-                DebugUtil.Log("Wi-Fi direct supported");
+                DebugUtil.Log(() => "Wi-Fi direct supported");
             }
             else
             {
-                DebugUtil.Log("Wi-Fi direct not supported");
+                DebugUtil.Log(() => "Wi-Fi direct not supported");
             }
 
             return DeviceInformation.FindAllAsync(WiFiDirectDevice.GetDeviceSelector(WiFiDirectDeviceSelectorType.AssociationEndpoint)).AsTask();
@@ -25,7 +25,7 @@
             var device = await WiFiDirectDevice.FromIdAsync(info.Id, param);
             device.ConnectionStatusChanged += (sender, args) =>
             {
-                DebugUtil.Log("WiFi Direct disconnected: " + info.Name);
+                DebugUtil.Log(() => "WiFi Direct disconnected: " + info.Name);
             };
             return device;
         }

@@ -247,7 +247,7 @@ namespace Locana.Pages
         /// <returns></returns>
         private async Task InitializeCameraAsync()
         {
-            DebugUtil.Log("InitializeCameraAsync");
+            DebugUtil.Log(() => "InitializeCameraAsync");
 
             if (_mediaCapture == null)
             {
@@ -257,7 +257,7 @@ namespace Locana.Pages
 
                 if (cameraDevice == null)
                 {
-                    DebugUtil.Log("No camera device found!");
+                    DebugUtil.Log(() => "No camera device found!");
                     return;
                 }
 
@@ -281,7 +281,7 @@ namespace Locana.Pages
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    DebugUtil.Log("The app was denied access to the camera");
+                    DebugUtil.Log(() => "The app was denied access to the camera");
                     await CleanupCameraAsync();
                     // TODO another toast to request permission?
                     return;
@@ -303,7 +303,7 @@ namespace Locana.Pages
         /// <returns></returns>
         private async Task StartPreviewAsync()
         {
-            DebugUtil.Log("StartPreviewAsync");
+            DebugUtil.Log(() => "StartPreviewAsync");
 
             // Prevent the device from sleeping while the preview is running
             _displayRequest.RequestActive();
@@ -389,7 +389,7 @@ namespace Locana.Pages
                 var sb = new StringBuilder();
                 foreach (var d in data)
                 {
-                    DebugUtil.Log(d);
+                    DebugUtil.Log(() => d);
                     sb.Append(d);
                 }
 

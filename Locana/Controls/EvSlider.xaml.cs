@@ -25,7 +25,7 @@ namespace Locana.Controls
         {
             var selected = (int)Math.Round((sender as Slider).Value);
             (sender as Slider).Value = selected;
-            //DebugUtil.Log("Slider released: " + selected);
+            //DebugUtil.Log(() => "Slider released: " + selected);
             if (Parameter == null || selected < Parameter.Candidate.MinIndex || selected > Parameter.Candidate.MaxIndex) { return; }
             if (SliderOperated != null) { SliderOperated(this, new EvChangedEventArgs() { Selected = selected }); }
         }
@@ -50,7 +50,7 @@ namespace Locana.Controls
         {
             if (e.NewValue != null)
             {
-                //DebugUtil.Log("Parameter updated: " + (e.NewValue as EvCapability).CurrentIndex);
+                //DebugUtil.Log(() => "Parameter updated: " + (e.NewValue as EvCapability).CurrentIndex);
                 (d as EvSlider).UpdateDisplay(e.NewValue as EvCapability);
             }
         }

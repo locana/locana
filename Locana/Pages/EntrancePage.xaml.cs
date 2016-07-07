@@ -154,19 +154,19 @@ namespace Locana.Pages
             catch (FileNotFoundException)
             {
                 _ProximityDevice = null;
-                DebugUtil.Log("Caught ununderstandable exception. ");
+                DebugUtil.Log(() => "Caught ununderstandable exception. ");
                 return;
             }
             catch (COMException)
             {
                 _ProximityDevice = null;
-                DebugUtil.Log("Caught ununderstandable exception. ");
+                DebugUtil.Log(() => "Caught ununderstandable exception. ");
                 return;
             }
 
             if (_ProximityDevice == null)
             {
-                DebugUtil.Log("It seems this is not NFC available device");
+                DebugUtil.Log(() => "It seems this is not NFC available device");
                 return;
             }
 

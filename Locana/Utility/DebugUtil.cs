@@ -1,110 +1,125 @@
-﻿#if DEBUG
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
+using System.IO.Compression;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
-#endif
-
-using System;
+using Windows.Storage.Streams;
 
 namespace Locana.Utility
 {
     public class DebugUtil
     {
-#if DEBUG
-        private static StringBuilder LogBuilder = new StringBuilder();
-
         private const string LOG_ROOT = "log_store";
 
-        private const string LOG_EXTENSION = ".txt";
-
-        private const int MaxLength = 48 * 1024; // Byte
-
-        private static readonly object Lock = new object();
-#endif
+        private const string LOG_FILE_TEMPLATE = "locana-debug-{0}.log";
 
         /// <summary>
-        /// Show given string on Debug log and keep to local instance.
+        /// Show given string on the console, but never save to the storage.
         /// </summary>
         /// <param name="s">Log mesage</param>
-        public static void Log(string s)
+        public static void LogSensitive(Func<string> s)
         {
 #if DEBUG
-            lock (Lock)
-            {
-                Debug.WriteLine(s);
-                LogBuilder.Append(s);
-                LogBuilder.Append("\n");
-                if (LogBuilder.Length > MaxLength)
-                {
-                    var task = Flush();
-                }
-            }
+            Debug.WriteLine(s);
 #endif
         }
 
+        /// <summary>
+        /// Show given string on the console and save to the storage for debugging if it is enabled.
+        /// </summary>
+        /// <param name="s">Log mesage</param>
         public static void Log(Func<string> s)
         {
 #if DEBUG
-            Log(s?.Invoke());
+            Debug.WriteLine(s.Invoke());
 #endif
+            WriteLogAsync(s);
         }
 
-#if DEBUG
-        public static async Task Flush(bool crash = false)
+        public static async Task<bool> CheckRemainingFile()
         {
-            Debug.WriteLine("Flush");
+            foreach (var file in await LogFiles())
+            {
+                Debug.WriteLine(file.DisplayName + ": " + (await file.GetBasicPropertiesAsync()).Size);
+            }
+            return false;
+        }
+
+        public static async Task GrubFile()
+        {
+            if (file != null)
+            {
+                throw new InvalidOperationException("Already grubed");
+            }
+
             var root = ApplicationData.Current.TemporaryFolder;
             var folder = await root.CreateFolderAsync(LOG_ROOT, CreationCollisionOption.OpenIfExists);
             var time = DateTimeOffset.Now.ToLocalTime().ToString("yyyyMMdd-HHmmss");
-            var filename = time + (crash ? "_crash" : "") + LOG_EXTENSION;
-            var file = await folder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
+            var filename = string.Format(LOG_FILE_TEMPLATE, time);
+            file = await folder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
 
-            Debug.WriteLine("\n\nFlush log file: {0}\n\n", filename);
-
-            using (var str = await file.OpenStreamForWriteAsync())
-            {
-                using (var writer = new StreamWriter(str))
-                {
-                    writer.Write(LogBuilder.ToString());
-                }
-            }
-            LogBuilder.Clear();
+            Debug.WriteLine("Log file created");
         }
 
-        public static async Task<IList<string>> LogFiles()
+        public static bool ReleaseFile()
         {
-            Debug.WriteLine("LogFiles");
-            var root = ApplicationData.Current.TemporaryFolder;
-            var folder = await root.CreateFolderAsync(LOG_ROOT, CreationCollisionOption.OpenIfExists);
-            var files = await folder.GetFilesAsync();
-
-            return files.Select(file => file.Name).ToList();
+            if (file != null)
+            {
+                file = null;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public static async Task<string> GetFile(string filename)
+        private static StorageFile file;
+
+        private static SemaphoreSlim mut = new SemaphoreSlim(1);
+
+        private static async void WriteLogAsync(Func<string> s)
         {
-            Debug.WriteLine("GetFile");
-            var root = ApplicationData.Current.TemporaryFolder;
-            var folder = await root.CreateFolderAsync(LOG_ROOT, CreationCollisionOption.OpenIfExists);
-
-            var file = await folder.GetFileAsync(filename);
-            if (file == null)
+            var scopedFile = file;
+            if (scopedFile == null)
             {
-                return "";
+                return;
             }
 
-            using (var stream = await file.OpenStreamForReadAsync())
+            await mut.WaitAsync();
+            try
             {
-                using (var reader = new StreamReader(stream))
-                {
-                    return await reader.ReadToEndAsync();
-                }
+                await FileIO.AppendTextAsync(scopedFile, s.Invoke() + "\n", UnicodeEncoding.Utf8);
+            }
+            finally
+            {
+                mut.Release();
             }
         }
-#endif
+
+        public static async Task<IReadOnlyList<StorageFile>> LogFiles()
+        {
+            var root = ApplicationData.Current.TemporaryFolder;
+            Debug.WriteLine(root.Path);
+            var folder = await root.CreateFolderAsync(LOG_ROOT, CreationCollisionOption.OpenIfExists);
+            return await folder.GetFilesAsync();
+        }
+
+        private const string ARCHIVE_NAME = "latest-logs.zip";
+
+        public static async Task ZipLogFileDir()
+        {
+            var current = await ApplicationData.Current.TemporaryFolder.TryGetFileAsync(ARCHIVE_NAME);
+            if (current != null)
+            {
+                await current.DeleteAsync();
+            }
+            var root = ApplicationData.Current.TemporaryFolder.Path;
+            ZipFile.CreateFromDirectory(root + "\\" + LOG_ROOT, root + "\\" + ARCHIVE_NAME);
+
+            Debug.WriteLine(string.Format("Created zip archive: {0}/{1}", ApplicationData.Current.TemporaryFolder.Path, ARCHIVE_NAME));
+        }
     }
 }

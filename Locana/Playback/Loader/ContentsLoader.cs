@@ -26,7 +26,7 @@ namespace Locana.Playback
 
         protected void OnCompleted()
         {
-            DebugUtil.Log("ContentsLoader OnCompleted");
+            DebugUtil.Log(() => "ContentsLoader OnCompleted");
             Completed?.Invoke(this, null);
         }
 
@@ -34,7 +34,7 @@ namespace Locana.Playback
 
         protected void OnCancelled()
         {
-            DebugUtil.Log("ContentsLoader OnCancelled");
+            DebugUtil.Log(() => "ContentsLoader OnCancelled");
             Cancelled?.Invoke(this, null);
         }
 

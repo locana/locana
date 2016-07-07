@@ -49,7 +49,7 @@ namespace Locana.DataModel
                 var group = GetGroup(content.GroupTitle);
                 if (group == null)
                 {
-                    DebugUtil.Log("Remove: group does not exist");
+                    DebugUtil.Log(() => "Remove: group does not exist");
                     return false;
                 }
                 var res = group.Remove(content);

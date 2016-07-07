@@ -15,7 +15,7 @@ namespace Locana.CameraControl
     {
         public static async Task SetUp(TargetDevice device, StreamProcessor liveview, CancellationTokenSource cancel = null)
         {
-            DebugUtil.Log("Set up control");
+            DebugUtil.Log(() => "Set up control");
             try
             {
                 await device.Api.RetrieveApiList();
@@ -29,7 +29,7 @@ namespace Locana.CameraControl
 
                 if (device.Api.AvContent != null && device.Observer.IsPlaybackMode())
                 {
-                    DebugUtil.Log("This device support ContentsTransfer mode. Turn on Shooting mode at first.");
+                    DebugUtil.Log(() => "This device support ContentsTransfer mode. Turn on Shooting mode at first.");
                     if (!await PlaybackModeHelper.MoveToShootingModeAsync(device, cancel).ConfigureAwait(false))
                     {
                         throw new Exception();
@@ -48,7 +48,7 @@ namespace Locana.CameraControl
                 {
                     if (!await OpenLiveviewStream(device.Api, liveview).ConfigureAwait(false))
                     {
-                        DebugUtil.Log("Failed to open liveview connection.");
+                        DebugUtil.Log(() => "Failed to open liveview connection.");
                         throw new Exception("Failed to open liveview connection.");
                     }
                     cancel.ThrowIfCancelled();
@@ -73,7 +73,7 @@ namespace Locana.CameraControl
             }
             catch (OperationCanceledException)
             {
-                DebugUtil.Log("Operation cancelled");
+                DebugUtil.Log(() => "Operation cancelled");
                 device.Observer.Stop();
                 throw;
             }
@@ -101,7 +101,7 @@ namespace Locana.CameraControl
 
         public static async Task<bool> OpenLiveviewStream(DeviceApiHolder api, StreamProcessor liveview)
         {
-            DebugUtil.Log("Open liveview stream");
+            DebugUtil.Log(() => "Open liveview stream");
             try
             {
                 var url = await api.Camera.StartLiveviewAsync().ConfigureAwait(false);
@@ -121,7 +121,7 @@ namespace Locana.CameraControl
 
         public static async Task<bool> CloseLiveviewStream(DeviceApiHolder api, StreamProcessor liveview)
         {
-            DebugUtil.Log("Close liveview stream");
+            DebugUtil.Log(() => "Close liveview stream");
             try
             {
                 liveview.CloseConnection();
@@ -137,7 +137,7 @@ namespace Locana.CameraControl
 
         public static async Task<bool> ReOpenLiveviewStream(DeviceApiHolder api, StreamProcessor liveview)
         {
-            DebugUtil.Log("Reopen liveview stream");
+            DebugUtil.Log(() => "Reopen liveview stream");
             liveview.CloseConnection();
             await Task.Delay(2000).ConfigureAwait(false);
             return await OpenLiveviewStream(api, liveview).ConfigureAwait(false);
@@ -150,13 +150,13 @@ namespace Locana.CameraControl
 
         private static async Task<bool> TakePicture(DeviceApiHolder api, bool awaiting = false)
         {
-            DebugUtil.Log("Taking picture sequence");
+            DebugUtil.Log(() => "Taking picture sequence");
             try
             {
                 var urls = awaiting //
                     ? await api.Camera.AwaitTakePictureAsync().ConfigureAwait(false) //
                     : await api.Camera.ActTakePictureAsync().ConfigureAwait(false);
-                DebugUtil.Log("Success taking picture");
+                DebugUtil.Log(() => "Success taking picture");
 
                 if (ApplicationSettings.GetInstance().IsPostviewTransferEnabled)
                 {
@@ -189,7 +189,7 @@ namespace Locana.CameraControl
                     throw e;
                 }
             }
-            DebugUtil.Log("Take picture timeout: await for completion");
+            DebugUtil.Log(() => "Take picture timeout: await for completion");
             return await TakePicture(api, true).ConfigureAwait(false);
         }
 
