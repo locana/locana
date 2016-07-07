@@ -88,10 +88,12 @@ namespace Locana.Utility
                 return;
             }
 
+            var time = DateTimeOffset.Now.ToLocalTime();
+
             await mut.WaitAsync();
             try
             {
-                await FileIO.AppendTextAsync(scopedFile, s.Invoke() + "\n", UnicodeEncoding.Utf8);
+                await FileIO.AppendTextAsync(scopedFile, string.Format("[{0}] {1}\n", time.ToString("HH:mm:ss.fff"), s.Invoke()), UnicodeEncoding.Utf8);
             }
             finally
             {
