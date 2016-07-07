@@ -9,8 +9,10 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -198,7 +200,7 @@ namespace Locana.Pages
                             case ContentDialogResult.Primary:
                                 ApplicationSettings.GetInstance().EnableDebugLogging = false;
                                 data.CurrentSetting = false;
-                                AppShell.Current.Toast.PushToast(new ToastContent { Text = "Email attatchment not implemented" });
+                                await SendLogFile(await DebugUtil.LatestLogFile());
                                 return;
                             case ContentDialogResult.Secondary:
                                 foreach (var file in logFiles)
@@ -229,14 +231,29 @@ namespace Locana.Pages
                         {
                             await file.DeleteAsync();
                         }
-                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                         {
-                            AppShell.Current.Toast.PushToast(new ToastContent { Text = "Email attatchment not implemented" });
+                            await SendLogFile(await DebugUtil.LatestLogFile());
                         });
                     });
                 }
             };
             DebugLogToggle.SettingData = data;
+        }
+
+        private static async Task SendLogFile(StorageFile attachment)
+        {
+            if (attachment == null) { return; }
+
+            EmailMessage email = new EmailMessage();
+            email.To.Add(new EmailRecipient("naotaco@gmail.com"));
+            email.Subject = "Log file from Locana";
+            email.Body = "See attachment.";
+            using (var data = await attachment.OpenReadAsync())
+            {
+                email.Attachments.Add(new EmailAttachment("log_file.zip", RandomAccessStreamReference.CreateFromFile(attachment)));
+            }
+            await EmailManager.ShowComposeNewEmailAsync(email);
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
