@@ -1021,4 +1021,42 @@ SSID: {0}
   <data name="Support" xml:space="preserve">
     <value>サポート</value>
   </data>
+  <data name="DebugLog_DetectPreviousDialog_Accept" xml:space="preserve">
+    <value>はい</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Deny" xml:space="preserve">
+    <value>削除する</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Description" xml:space="preserve">
+    <value>未送信のログファイルがあります。
+Eメールに添付して開発者に送信しますか？</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Accept" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Deny" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Description" xml:space="preserve">
+    <value>停止するまで、操作ログがファイルに保存されます</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Accept" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Deny" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Description" xml:space="preserve">
+    <value>開発者に送信するため、Eメールアプリを起動します</value>
+  </data>
+  <data name="DebugLog_Setting_Guide" xml:space="preserve">
+    <value>有効にするとファイルへの出力を開始します。有効にした状態で不具合を再現させてください。
+作成したファイルはEメールに添付して開発者に送信することができます。自動で送信されることはありません。</value>
+  </data>
+  <data name="DebugLog_Setting_Title" xml:space="preserve">
+    <value>不具合レポートのためにログをファイルに保存する</value>
+  </data>
+  <data name="PivotTitle_Advanced" xml:space="preserve">
+    <value>高度な設定</value>
+  </data>
 </root>

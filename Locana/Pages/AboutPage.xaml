@@ -32,16 +32,12 @@
                           MinHeight="0"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
-                          PrimaryButtonText="Attach"
-                          SecondaryButtonText="Delete and create new file">
+                          Loaded="DebugLogDialog_Loaded"
+                          PrimaryButtonText="{Binding PrimaryText}"
+                          SecondaryButtonText="{Binding SecondaryText}">
             <Border>
-                <TextBlock Margin="0,24,0,0" Text="Attach previous log file to the e-mail?" />
+                <TextBlock Margin="0,24,0,0" Text="{Binding Description}" />
             </Border>
-            <ContentDialog.TitleTemplate>
-                <DataTemplate>
-                    <TextBlock Text="Previous log file detected" />
-                </DataTemplate>
-            </ContentDialog.TitleTemplate>
         </xc:ContentDialog>
 
         <Pivot Grid.Row="1"
@@ -155,19 +151,13 @@
 
             <PivotItem Margin="12,14,0,0">
                 <PivotItem.Header>
-                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="Debug" />
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Text="{Binding [PivotTitle_Advanced], Source={StaticResource LocalizedStrings}}" />
                 </PivotItem.Header>
                 <Grid Margin="9,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <c:ToggleSetting x:Name="DebugLogToggle" Loaded="DebugLogToggle_Loaded" />
-                    <ListView x:Name="LogFiles"
-                              Grid.Row="1"
-                              Grid.ColumnSpan="2"
-                              Margin="4,12,4,0"
-                              Loaded="LogFiles_Loaded" />
                 </Grid>
             </PivotItem>
         </Pivot>

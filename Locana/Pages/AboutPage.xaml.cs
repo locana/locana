@@ -1,18 +1,12 @@
 ﻿using Locana.Controls;
-using Locana.DataModel;
+using Locana.Pages.Segment;
 using Locana.Utility;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Store;
-using Windows.Storage;
-using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -68,6 +62,8 @@ namespace Locana.Pages
             RepoLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenGithub"), SystemUtil.GetStringResource("RepoURL")));
 
             LoadLicenseFile();
+
+            logReport.Setup(Dispatcher);
         }
 
         private static void LoadAssemblyInformation()
@@ -128,22 +124,6 @@ namespace Locana.Pages
             return hl;
         }
 
-        private ObservableCollection<string> logDisplayList = new ObservableCollection<string>();
-        private IReadOnlyList<StorageFile> logFiles;
-
-        private async void LoadLogFiles()
-        {
-            logFiles = await DebugUtil.LogFiles();
-
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-            {
-                foreach (var file in logFiles)
-                {
-                    logDisplayList.Add(string.Format("{0}: {1} Bytes", file.Name, (await file.GetBasicPropertiesAsync()).Size));
-                }
-            });
-        }
-
         private async void TrialButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -173,87 +153,11 @@ namespace Locana.Pages
             });
         }
 
-        private void LogFiles_Loaded(object sender, RoutedEventArgs e)
-        {
-            LogFiles.ItemsSource = logDisplayList;
-        }
+        private LogReport logReport = new LogReport();
 
         private void DebugLogToggle_Loaded(object sender, RoutedEventArgs e)
         {
-            var data = new AppSettingData<bool>()
-            {
-                Title = "Save debug log file",
-                Guide = "Turn on to start writing log file, turn off to stop and attach file to the email."
-            };
-            data.StateProvider = () => ApplicationSettings.GetInstance().EnableDebugLogging;
-            data.StateObserver = async (enabled) =>
-            {
-                ApplicationSettings.GetInstance().EnableDebugLogging = enabled;
-                if (enabled)
-                {
-
-                    if (logDisplayList.Count != 0)
-                    {
-                        var res = await DebugLogDialog.ShowAsync();
-                        switch (res)
-                        {
-                            case ContentDialogResult.Primary:
-                                ApplicationSettings.GetInstance().EnableDebugLogging = false;
-                                data.CurrentSetting = false;
-                                await SendLogFile(await DebugUtil.LatestLogFile());
-                                return;
-                            case ContentDialogResult.Secondary:
-                                foreach (var file in logFiles)
-                                {
-                                    await file.DeleteAsync();
-                                }
-                                break;
-                            default:
-                                ApplicationSettings.GetInstance().EnableDebugLogging = false;
-                                data.CurrentSetting = false;
-                                return;
-                        }
-                    }
-                    await DebugUtil.GrubFile();
-                    logDisplayList.Clear();
-                    LoadLogFiles();
-                }
-                else
-                {
-                    if (!DebugUtil.ReleaseFile())
-                    {
-                        return;
-                    }
-                    var task = Task.Run(async () =>
-                    {
-                        await DebugUtil.ZipLogFileDir();
-                        foreach (var file in logFiles)
-                        {
-                            await file.DeleteAsync();
-                        }
-                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                        {
-                            await SendLogFile(await DebugUtil.LatestLogFile());
-                        });
-                    });
-                }
-            };
-            DebugLogToggle.SettingData = data;
-        }
-
-        private static async Task SendLogFile(StorageFile attachment)
-        {
-            if (attachment == null) { return; }
-
-            EmailMessage email = new EmailMessage();
-            email.To.Add(new EmailRecipient("naotaco@gmail.com"));
-            email.Subject = "Log file from Locana";
-            email.Body = "See attachment.";
-            using (var data = await attachment.OpenReadAsync())
-            {
-                email.Attachments.Add(new EmailAttachment("log_file.zip", RandomAccessStreamReference.CreateFromFile(attachment)));
-            }
-            await EmailManager.ShowComposeNewEmailAsync(email);
+            logReport.DebugLogToggle_Loaded(sender, e);
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -261,9 +165,13 @@ namespace Locana.Pages
             var pivot = sender as Pivot;
             if (pivot.SelectedIndex == 2)
             {
-                logDisplayList.Clear();
-                LoadLogFiles();
+                logReport.LoadLogFiles();
             }
+        }
+
+        private void DebugLogDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            logReport.DebugLogDialog_Loaded(sender, e);
         }
     }
 }
