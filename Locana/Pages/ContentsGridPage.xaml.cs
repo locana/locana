@@ -714,7 +714,6 @@ namespace Locana.Pages
 
         private async void ShowToast(Func<string> message)
         {
-            DebugUtil.Log(message);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource(message.Invoke()) });

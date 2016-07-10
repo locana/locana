@@ -58,7 +58,7 @@ namespace Locana.Utility
 
         private async void Enqueue(Uri uri, string namebase, Mediatype type, string extension = null)
         {
-            DebugUtil.Log(() => "ContentsDownloader: Enqueue " + uri.AbsolutePath);
+            DebugUtil.LogSensitive(() => "ContentsDownloader: Enqueue {0}", uri.AbsolutePath);
 
             if (extension == null)
             {
@@ -114,7 +114,7 @@ namespace Locana.Utility
 
         private async Task DownloadToSave(DownloadRequest req)
         {
-            DebugUtil.Log(() => "Download picture: " + req.Uri.OriginalString);
+            DebugUtil.LogSensitive(() => "Download picture: {0}", req.Uri.OriginalString);
             try
             {
                 var geoResult = GeotaggingResult.Result.NotRequested;

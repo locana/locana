@@ -109,7 +109,7 @@ namespace Locana.Playback
 
         private async Task<IList<DateInfo>> GetDateListAsync(string uri, int startFrom, int count)
         {
-            DebugUtil.Log(() => "Loading DateList: " + uri + " from " + startFrom);
+            DebugUtil.LogSensitive(() => "Loading DateList: {0} from {1}", uri, startFrom);
 
             var contents = await AvContentApi.GetContentListAsync(new ContentListTarget
             {
@@ -127,7 +127,7 @@ namespace Locana.Playback
 
         private async Task<int> GetContentsOfDaySeparatelyAsync(DateInfo date, ContentsSet contentsSet, CancellationTokenSource cancel, int sum)
         {
-            DebugUtil.Log(() => "Loading: " + date.Title);
+            DebugUtil.LogSensitive(() => "Loading: {0}", date.Title);
 
             var count = await AvContentApi.GetContentCountAsync(new CountingTarget
             {
@@ -195,7 +195,7 @@ namespace Locana.Playback
 
         private async Task<IList<ContentInfo>> GetContentsOfDayAsync(DateInfo date, int startFrom, int count, ContentsSet contentsSet)
         {
-            DebugUtil.Log(() => "Loading ContentsOfDay: " + date.Title + " from " + startFrom);
+            DebugUtil.LogSensitive(() => "Loading ContentsOfDay: {0} from {1}", date.Title, startFrom);
 
             var contents = await AvContentApi.GetContentListAsync(new ContentListTarget
             {

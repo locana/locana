@@ -117,7 +117,7 @@ namespace Locana.Playback.Operator
         {
             try
             {
-                DebugUtil.Log(() => "Delete " + data.CacheFile?.DisplayName);
+                DebugUtil.LogSensitive(() => "Delete {0}", data.CacheFile?.DisplayName);
                 await data.CacheFile?.DeleteAsync();
                 ContentsCollection.Remove(data);
             }

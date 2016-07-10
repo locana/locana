@@ -331,7 +331,7 @@ namespace Locana.DataModel
             catch (Exception e)
             {
                 DebugUtil.Log(() => e.StackTrace);
-                DebugUtil.Log(() => "Failed to fetch thumbnail image: " + Source.ThumbnailUrl);
+                DebugUtil.LogSensitive(() => "Failed to fetch thumbnail image: {0}", Source.ThumbnailUrl);
                 IsBroken = true;
                 NotifyChangedOnUI(nameof(ThumbnailExists));
                 NotifyChangedOnUI(nameof(IsBroken));

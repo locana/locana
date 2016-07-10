@@ -55,7 +55,7 @@ namespace Locana.DataModel
                 var res = group.Remove(content);
                 if (deleteGroupIfEmpty && group.Count == 0)
                 {
-                    DebugUtil.Log(() => "Remove no item group: " + group.Key);
+                    DebugUtil.LogSensitive(() => "Remove no item group: {0}", group.Key);
                     var index = IndexOf(group);
                     var removed = Remove(group);
                     if (removed)
