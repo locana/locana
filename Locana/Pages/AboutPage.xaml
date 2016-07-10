@@ -36,7 +36,9 @@
                           PrimaryButtonText="{Binding PrimaryText}"
                           SecondaryButtonText="{Binding SecondaryText}">
             <Border>
-                <TextBlock Margin="0,24,0,0" Text="{Binding Description}" />
+                <TextBlock Margin="0,24,0,0"
+                           Text="{Binding Description}"
+                           TextWrapping="WrapWholeWords" />
             </Border>
         </xc:ContentDialog>
 

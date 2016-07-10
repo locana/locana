@@ -158,9 +158,9 @@ namespace Locana.Pages.Segment
             var appVer = $"{pv.Major}.{pv.Minor}.{pv.Build}.{pv.Revision}";
 
             var email = new EmailMessage();
-            email.To.Add(new EmailRecipient("locana.dev@gmail.com"));
-            email.Subject = "Locana log reoprt";
-            email.Body = string.Format("[System information]\nSystem family: {0}\nOS build number: {1}\nArchitecture: {2}\nManufacturer: {3}\nDevice model: {4}\nApp version: {5}",
+            email.To.Add(new EmailRecipient(SystemUtil.GetStringResource("DebugLog_EmailTo")));
+            email.Subject = SystemUtil.GetStringResource("DebugLog_EmailSubject");
+            email.Body = string.Format(SystemUtil.GetStringResource("DebugLog_EmailBody"),
                 AnalyticsInfo.VersionInfo.DeviceFamily,
                 svs,
                 Package.Current.Id.Architecture.ToString(),

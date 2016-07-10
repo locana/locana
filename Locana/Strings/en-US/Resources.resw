@@ -1122,4 +1122,57 @@ Make sure location setting and try again.</value>
   <data name="Support" xml:space="preserve">
     <value>Support</value>
   </data>
+  <data name="DebugLog_DetectPreviousDialog_Accept" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Deny" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Description" xml:space="preserve">
+    <value>An unsent log file is detected.
+Attach and email to the developer?</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Accept" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Deny" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Description" xml:space="preserve">
+    <value>Debug log will be written into a file while this setting is enabled.</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Accept" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Deny" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Description" xml:space="preserve">
+    <value>Launch email app to send debug log report.</value>
+  </data>
+  <data name="DebugLog_Setting_Guide" xml:space="preserve">
+    <value>Enable to start writing debug log file. Please reproduce defect while this setting is enabled.
+Generated log file can be sent to the developer via email. Locana never send it automatically.</value>
+  </data>
+  <data name="DebugLog_Setting_Title" xml:space="preserve">
+    <value>Debug logging mode</value>
+  </data>
+  <data name="DebugLog_EmailBody" xml:space="preserve">
+    <value>[System information]
+System family: {0}
+OS build number: {1}
+Architecture: {2}
+Manufacturer: {3}
+Device model: {4}
+App version: {5}</value>
+  </data>
+  <data name="DebugLog_EmailSubject" xml:space="preserve">
+    <value>Locana debug log report</value>
+  </data>
+  <data name="DebugLog_EmailTo" xml:space="preserve">
+    <value>locana.dev@gmail.com</value>
+  </data>
+  <data name="PivotTitle_Advanced" xml:space="preserve">
+    <value>Advanced settings</value>
+  </data>
 </root>

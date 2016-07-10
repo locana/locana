@@ -64,6 +64,8 @@ namespace Locana.Pages
             LoadLicenseFile();
 
             logReport.Setup(Dispatcher);
+
+            DebugLogDialog.MaxWidth = ActualWidth;
         }
 
         private static void LoadAssemblyInformation()
