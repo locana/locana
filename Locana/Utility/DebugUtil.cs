@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Compression;
@@ -136,7 +136,7 @@ namespace Locana.Utility
 
             Debug.WriteLine(string.Format("Created zip archive: {0}/{1}", ApplicationData.Current.TemporaryFolder.Path, ARCHIVE_NAME));
         }
-        
+
         public static async Task<StorageFile> LatestLogFile()
         {
             var dir = ApplicationData.Current.TemporaryFolder;
