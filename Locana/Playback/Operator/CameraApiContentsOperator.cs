@@ -104,11 +104,11 @@ namespace Locana.Playback.Operator
             if (av != null && contents != null)
             {
                 await av.DeleteContentAsync(contents).ConfigureAwait(false);
-                DebugUtil.Log("Delete contents completed");
+                DebugUtil.Log(() => "Delete contents completed");
             }
             else
             {
-                DebugUtil.Log("Not ready to delete contents");
+                DebugUtil.Log(() => "Not ready to delete contents");
             }
         }
 
@@ -139,7 +139,7 @@ namespace Locana.Playback.Operator
                 {
                     if (!await PlaybackModeHelper.MoveToContentTransferModeAsync(TargetDevice, StateChangeCanceller))
                     {
-                        DebugUtil.Log("ModeTransition failed");
+                        DebugUtil.Log(() => "ModeTransition failed");
                         throw new Exception();
                     }
                 }
@@ -147,22 +147,22 @@ namespace Locana.Playback.Operator
                 {
                     StateChangeCanceller = null;
                 }
-                DebugUtil.Log("ModeTransition successfully finished");
+                DebugUtil.Log(() => "ModeTransition successfully finished");
 
                 OnProgressMessage("Progress_FetchingContents");
                 loader.PartLoaded += RemoteContentsLoader_PartLoaded;
                 await loader.Load(ApplicationSettings.GetInstance().RemoteContentsSet, Canceller);
-                DebugUtil.Log("RemoteApiContentsLoader completed");
+                DebugUtil.Log(() => "RemoteApiContentsLoader completed");
             }
             catch (StorageNotSupportedException)
             {
                 // This will never happen on camera devices.
-                DebugUtil.Log("storage scheme is not supported");
+                DebugUtil.Log(() => "storage scheme is not supported");
                 OnErrorMessage("Viewer_StorageAccessNotSupported");
             }
             catch (NoStorageException)
             {
-                DebugUtil.Log("No storages");
+                DebugUtil.Log(() => "No storages");
                 OnErrorMessage("Viewer_NoStorage");
             }
             catch (Exception e)

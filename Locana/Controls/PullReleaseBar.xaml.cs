@@ -1,4 +1,3 @@
-using Locana.Utility;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -43,13 +42,13 @@ namespace Locana.Controls
 
         private static void OnMaxValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            // DebugUtil.Log("max updated: " + (int)e.NewValue);
+            // DebugUtil.Log(() => "max updated: " + (int)e.NewValue);
             (d as PullReleaseBar).Max = (int)e.NewValue;
         }
 
         private static void OnMinValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            // DebugUtil.Log("min updated: " + (int)e.NewValue);
+            // DebugUtil.Log(() => "min updated: " + (int)e.NewValue);
             (d as PullReleaseBar).Min = (int)e.NewValue;
         }
 
@@ -65,24 +64,24 @@ namespace Locana.Controls
             {
                 InitialCursorMargin = new Thickness(LayoutRoot.ActualWidth / 2 - Cursor.ActualWidth / 2, 0, 0, 0);
                 InitialLabelMargin = new Thickness(LayoutRoot.ActualWidth / 2 - CurrentValueText.Width / 2, 0, 0, 0);
-                //DebugUtil.Log("initial X: " + (LayoutRoot.ActualWidth / 2 - Cursor.ActualWidth / 2));
-                //DebugUtil.Log("initial label X: " + (LayoutRoot.ActualWidth / 2 - CurrentValueText.ActualWidth / 2));
+                //DebugUtil.Log(() => "initial X: " + (LayoutRoot.ActualWidth / 2 - Cursor.ActualWidth / 2));
+                //DebugUtil.Log(() => "initial label X: " + (LayoutRoot.ActualWidth / 2 - CurrentValueText.ActualWidth / 2));
                 Cursor.Margin = InitialCursorMargin;
                 CurrentValueText.Margin = InitialLabelMargin;
                 DynamicBar.Y2 = DynamicBar.Y1 = LayoutRoot.ActualHeight / 2;
                 DynamicBar.X2 = DynamicBar.X1 = LayoutRoot.ActualWidth / 2;
-                //DebugUtil.Log("Max: " + Max + " Min: " + Min);
+                //DebugUtil.Log(() => "Max: " + Max + " Min: " + Min);
             }
         }
 
         private void TouchArea_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var accm = e.Cumulative;
-            //DebugUtil.Log("accm: " + accm.Translation.X);
+            //DebugUtil.Log(() => "accm: " + accm.Translation.X);
             var vel = e.Velocities;
             var margin = 10;
             var transX = Math.Max(-(LayoutRoot.ActualWidth / 2 - margin), accm.Translation.X);
-            //DebugUtil.Log("pull " + LayoutRoot.ActualWidth + " " + accm.Translation.X +" "+transX);
+            //DebugUtil.Log(() => "pull " + LayoutRoot.ActualWidth + " " + accm.Translation.X +" "+transX);
             transX = Math.Min(LayoutRoot.ActualWidth / 2 - margin, transX);
 
             Cursor.Margin = new Thickness(InitialCursorMargin.Left + transX, 0, 0, 0); ;

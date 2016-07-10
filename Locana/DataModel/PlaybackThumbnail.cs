@@ -218,7 +218,7 @@ namespace Locana.DataModel
             var file = CacheFile;
             if (file == null)
             {
-                DebugUtil.Log("CacheFile is null");
+                DebugUtil.Log(() => "CacheFile is null");
                 return;
             }
 
@@ -251,7 +251,7 @@ namespace Locana.DataModel
             }
             else
             {
-                DebugUtil.Log("Failed to load thumbnail from file. Retry count exhausted.");
+                DebugUtil.Log(() => "Failed to load thumbnail from file. Retry count exhausted.");
                 IsBroken = true;
                 NotifyChanged(nameof(ThumbnailExists));
                 NotifyChanged(nameof(IsBroken));
@@ -331,7 +331,7 @@ namespace Locana.DataModel
             catch (Exception e)
             {
                 DebugUtil.Log(() => e.StackTrace);
-                DebugUtil.Log(() => "Failed to fetch thumbnail image: " + Source.ThumbnailUrl);
+                DebugUtil.LogSensitive(() => "Failed to fetch thumbnail image: {0}", Source.ThumbnailUrl);
                 IsBroken = true;
                 NotifyChangedOnUI(nameof(ThumbnailExists));
                 NotifyChangedOnUI(nameof(IsBroken));

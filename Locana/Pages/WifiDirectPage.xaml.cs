@@ -37,12 +37,12 @@ namespace Locana.Pages
             try
             {
                 var wfdDevice = await WifiDirectUtil.ConnectAsync(data.Info);
-                DebugUtil.Log("Connected to: " + data.Title + " - " + wfdDevice.ConnectionStatus);
+                DebugUtil.Log(() => "Connected to: " + data.Title + " - " + wfdDevice.ConnectionStatus);
                 NetworkObserver.INSTANCE.RegisterWifiDirectDevice(wfdDevice);
             }
             catch (Exception ex)
             {
-                DebugUtil.Log("Wi-Fi direct connection failed: " + ex.StackTrace);
+                DebugUtil.Log(() => "Wi-Fi direct connection failed: " + ex.StackTrace);
             }
         }
 
@@ -54,11 +54,11 @@ namespace Locana.Pages
             {
                 while (searchTask != null && !searchTask.IsCanceled)
                 {
-                    DebugUtil.Log("Find peers async");
+                    DebugUtil.Log(() => "Find peers async");
                     var devices = await WifiDirectUtil.FindWfdPeersAsync();
                     try
                     {
-                        DebugUtil.Log("Peers discovered: " + devices.Count);
+                        DebugUtil.Log(() => "Peers discovered: " + devices.Count);
                         await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
                             foreach (var device in devices)
@@ -82,7 +82,7 @@ namespace Locana.Pages
                     }
                     catch (Exception ex)
                     {
-                        DebugUtil.Log("failed find peers: " + ex.StackTrace);
+                        DebugUtil.Log(() => "failed find peers: " + ex.StackTrace);
                     }
 
                     await Task.Delay(10000);
@@ -97,7 +97,7 @@ namespace Locana.Pages
             PeersList.ItemsSource = peers;
             if (searchTask != null)
             {
-                DebugUtil.Log("Cancel P2P discovery");
+                DebugUtil.Log(() => "Cancel P2P discovery");
                 searchTask.AsAsyncAction().Cancel();
             }
         }

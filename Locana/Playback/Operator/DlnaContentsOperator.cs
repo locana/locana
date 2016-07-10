@@ -32,7 +32,7 @@ namespace Locana.Playback.Operator
 
         public override async Task DeleteSelectedFiles(IEnumerable<Thumbnail> items)
         {
-            DebugUtil.Log("DeleteSelectedImages");
+            DebugUtil.Log(() => "DeleteSelectedImages");
 
             var dlna = items
                 .Select(item => item.Source as DlnaContentInfo)

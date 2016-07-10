@@ -25,6 +25,10 @@ namespace Locana
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            Kazyx.DeviceDiscovery.SsdpDiscovery.Logger = (msg) => DebugUtil.Log(() => msg);
+            Kazyx.ImageStream.StreamProcessor.Logger = (msg) => DebugUtil.Log(() => msg);
+            Kazyx.RemoteApi.Util.RemoteApiLogger.Logger = (msg) => DebugUtil.Log(() => msg);
         }
 
         public bool IsFunctionLimited

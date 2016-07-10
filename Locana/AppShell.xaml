@@ -8,6 +8,7 @@
       x:Name="Root"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       KeyDown="AppShell_KeyDown"
+      Loaded="Page_Loaded"
       TabNavigation="Cycle"
       mc:Ignorable="d">
 
@@ -45,42 +46,6 @@
     </Page.Resources>
 
     <Grid>
-        <!--  Adaptive triggers  -->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1024" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
-                        <Setter Target="RootSplitView.IsPaneOpen" Value="True" />
-                        <Setter Target="MessageToast.MinWidth" Value="640" />
-                        <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
-                        <Setter Target="MessageToast.MinWidth" Value="480" />
-                        <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="RootSplitView.DisplayMode" Value="Overlay" />
-                        <Setter Target="MessageToast.HorizontalAlignment" Value="Stretch" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
         <!--  Top-level navigation menu + app content  -->
         <SplitView x:Name="RootSplitView"
                    DisplayMode="Inline"
@@ -144,5 +109,40 @@
                       TabIndex="1"
                       ToolTipService.ToolTip="Menu"
                       Unchecked="TogglePaneButton_Checked" />
+        <!--  Adaptive triggers  -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
+                        <Setter Target="RootSplitView.IsPaneOpen" Value="True" />
+                        <Setter Target="MessageToast.MinWidth" Value="640" />
+                        <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
+                        <Setter Target="MessageToast.MinWidth" Value="480" />
+                        <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="MessageToast.HorizontalAlignment" Value="Stretch" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

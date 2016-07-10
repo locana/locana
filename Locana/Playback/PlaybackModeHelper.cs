@@ -46,14 +46,14 @@ namespace Locana.Playback
                             tcs.TrySetResult(false);
                             return;
                         }
-                        DebugUtil.Log("It might be in transitioning state...");
+                        DebugUtil.Log(() => "It might be in transitioning state...");
                         break;
                     default:
                         break;
                 }
             };
 
-            DebugUtil.Log("Check current function at first...");
+            DebugUtil.Log(() => "Check current function at first...");
             var getCurrentFailed = false;
             try
             {
@@ -74,22 +74,22 @@ namespace Locana.Playback
                 }
                 else
                 {
-                    DebugUtil.Log("No recovery for second trial");
+                    DebugUtil.Log(() => "No recovery for second trial");
                     return false;
                 }
             }
 
             if (getCurrentFailed)
             {
-                DebugUtil.Log("Maybe in movie streaming mode...");
+                DebugUtil.Log(() => "Maybe in movie streaming mode...");
                 try
                 {
                     await device.Api.AvContent.StopStreamingAsync().ConfigureAwait(false);
-                    DebugUtil.Log("Successfully stopped movie streaming mode");
+                    DebugUtil.Log(() => "Successfully stopped movie streaming mode");
                 }
                 catch { }
                 cancel.ThrowIfCancelled();
-                DebugUtil.Log("Let's retry state transition");
+                DebugUtil.Log(() => "Let's retry state transition");
                 return await MoveToSpecifiedModeAsync(device, cancel, nextFunction, nextState, false);
             }
 
@@ -103,7 +103,7 @@ namespace Locana.Playback
             {
                 if (e.StatusCode == StatusCode.IllegalState)
                 {
-                    DebugUtil.Log("SetCameraFunction IllegalState: Already in specified mode");
+                    DebugUtil.Log(() => "SetCameraFunction IllegalState: Already in specified mode");
                     return true;
                 }
                 DebugUtil.Log(() => "Failed to change camera state: " + e.StatusCode);
@@ -113,7 +113,7 @@ namespace Locana.Playback
                 device.Status.PropertyChanged -= status_observer;
             }
 
-            DebugUtil.Log("Check current function again...");
+            DebugUtil.Log(() => "Check current function again...");
             try
             {
                 return await CheckCurrentFunction(device.Api.Camera, nextFunction).ConfigureAwait(false); ;

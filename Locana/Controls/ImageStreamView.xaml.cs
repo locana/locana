@@ -70,7 +70,7 @@ namespace Locana.Controls
         {
             if (Context?.Target == null)
             {
-                DebugUtil.Log("No target to set up focus frame is available.");
+                DebugUtil.Log(() => "No target to set up focus frame is available.");
                 FocusMarkDrawer.ClearFrames();
                 return false;
             }

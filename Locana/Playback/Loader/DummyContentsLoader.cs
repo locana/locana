@@ -77,7 +77,7 @@ namespace Locana.Playback
             foreach (var content in contents)
             {
                 content.GroupName = holder.AlbumGroup.Title;
-                DebugUtil.Log(() => "Add content for " + content.GroupName);
+                DebugUtil.LogSensitive(() => "Add content for {0}", content.GroupName);
                 list.Add(new Thumbnail(content, CurrentUuid));
             }
 

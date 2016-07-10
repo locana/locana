@@ -616,7 +616,7 @@ namespace Locana.Pages
 
         private void liveview_Closed(object sender, EventArgs e)
         {
-            DebugUtil.Log("Liveview connection closed");
+            DebugUtil.Log(() => "Liveview connection closed");
         }
 
         private void Liveview_FocusFrameRetrieved(object sender, FocusFrameEventArgs e)

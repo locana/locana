@@ -6,19 +6,6 @@ namespace Locana.DataModel
 {
     public class AppSettingData<T> : ObservableBase
     {
-        public AppSettingData(string title, string guide, Func<T> StateChecker, Action<T> StateChanger, string[] candidates = null)
-        {
-            if (StateChecker == null || StateChanger == null)
-            {
-                throw new ArgumentNullException("StateChecker must not be null");
-            }
-            Title = title;
-            Guide = guide;
-            Candidates = candidates;
-            this.StateChecker = StateChecker;
-            this.StateChanger = StateChanger;
-        }
-
         private string _Title = null;
         public string Title
         {
@@ -58,15 +45,19 @@ namespace Locana.DataModel
             get { return Guide == null ? Visibility.Collapsed : Visibility.Visible; }
         }
 
-        private readonly Func<T> StateChecker;
-        private readonly Action<T> StateChanger;
+        public Func<T> StateProvider;
+        public Action<T> StateObserver;
 
         public T CurrentSetting
         {
-            get { return StateChecker(); }
+            get
+            {
+                if (StateProvider != null) { return StateProvider.Invoke(); }
+                else { return default(T); }
+            }
             set
             {
-                StateChanger.Invoke(value);
+                StateObserver?.Invoke(value);
                 NotifyChangedOnUI(nameof(CurrentSetting));
             }
         }

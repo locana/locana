@@ -64,7 +64,7 @@ namespace Locana.Controls
 
         Rectangle AddFrame(double X1, double X2, double Y1, double Y2, Brush StrokeBrush, double StrokeThickness, bool DottedBorder = false)
         {
-            // DebugUtil.Log("[FocusFrames] " + X1 + " " + X2 + " " + Y1 + " " + Y2);
+            // DebugUtil.Log(() => "[FocusFrames] " + X1 + " " + X2 + " " + Y1 + " " + Y2);
             var r = new Rectangle()
             {
                 VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top,

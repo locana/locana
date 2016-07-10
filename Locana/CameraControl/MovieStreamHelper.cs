@@ -118,7 +118,7 @@ namespace Locana.CameraControl
             }
             catch (Exception)
             {
-                DebugUtil.Log("Failed to stop movie stream");
+                DebugUtil.Log(() => "Failed to stop movie stream");
             }
             finally
             {
@@ -141,7 +141,7 @@ namespace Locana.CameraControl
                     switch (e.StatusCode)
                     {
                         case StatusCode.Timeout:
-                            DebugUtil.Log("RequestToNotifyStreamingStatus timeout without any event. Retry for the next event");
+                            DebugUtil.Log(() => "RequestToNotifyStreamingStatus timeout without any event. Retry for the next event");
                             RunLoop();
                             return;
                         default:
@@ -163,14 +163,14 @@ namespace Locana.CameraControl
 
         void StreamProcessor_Closed(object sender, EventArgs e)
         {
-            DebugUtil.Log("StreamClosed. Finish MovieStreamHelper");
+            DebugUtil.Log(() => "StreamClosed. Finish MovieStreamHelper");
             Finish();
             StreamClosed?.Invoke(sender, e);
         }
 
         async void StreamProcessor_PlaybackInfoRetrieved(object sender, PlaybackInfoEventArgs e)
         {
-            // DebugUtil.Log("playback info: " + MoviePlaybackData.FileName + " " + e.Packet.CurrentPosition.TotalMilliseconds);
+            // DebugUtil.Log(() => "playback info: " + MoviePlaybackData.FileName + " " + e.Packet.CurrentPosition.TotalMilliseconds);
             await SystemUtil.GetCurrentDispatcher()?.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 MoviePlaybackData.CurrentPosition = e.Packet.CurrentPosition;

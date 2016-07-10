@@ -48,14 +48,14 @@ namespace Locana.Utility
             var root = ApplicationData.Current.TemporaryFolder;
             if (uuid == null)
             {
-                DebugUtil.Log("Delete all of thumbnail cache.");
+                DebugUtil.Log(() => "Delete all of thumbnail cache.");
 
                 await LoadCacheRoot().ConfigureAwait(false);
                 await CacheFolder.DeleteDirectoryRecursiveAsync(false).ConfigureAwait(false);
             }
             else
             {
-                DebugUtil.Log(() => "Delete thumbnail cache of " + uuid);
+                DebugUtil.LogSensitive(() => "Delete thumbnail cache of {0}", uuid);
 
                 await LoadCacheRoot().ConfigureAwait(false);
                 var uuidRoot = await CacheFolder.GetFolderAsync(uuid.Replace(":", "-"));
@@ -101,7 +101,7 @@ namespace Locana.Utility
                 filename = filename.Substring(0, filename.Length - 3) + "jpg";
             }
 
-            DebugUtil.Log(() => "Loading " + content.ThumbnailUrl + " into " + directory);
+            DebugUtil.LogSensitive(() => "Loading {0} into {1}", content.ThumbnailUrl, directory);
 
             await LoadCacheRoot().ConfigureAwait(false);
             var folder = await CacheFolder.CreateFolderAsync(directory, CreationCollisionOption.OpenIfExists);
@@ -166,7 +166,7 @@ namespace Locana.Utility
                 {
                     return;
                 }
-                DebugUtil.Log("Create new download loop.");
+                DebugUtil.Log(() => "Create new download loop.");
                 DownloadLoop = Task.Factory.StartNew(async () =>
                 {
                     while (Queue.Count != 0 || Stack.Count != 0)
@@ -180,7 +180,7 @@ namespace Locana.Utility
                         }
                         await source.DownloadAsync(HttpClient);
                     }
-                    DebugUtil.Log("Download loop end.");
+                    DebugUtil.Log(() => "Download loop end.");
                     lock (LoopLock)
                     {
                         DownloadLoop = null;
@@ -206,14 +206,14 @@ namespace Locana.Utility
                     return;
                 }
 
-                DebugUtil.Log(() => "Start downloading: " + uri);
+                DebugUtil.LogSensitive(() => "Start downloading: {0}", uri);
                 try
                 {
                     var res = await client.SendRequestAsync(new HttpRequestMessage(HttpMethod.Get, uri));
 
                     using (var stream = (await res.Content.ReadAsInputStreamAsync()).AsStreamForRead())
                     {
-                        DebugUtil.Log(() => "Writing: " + filename);
+                        DebugUtil.LogSensitive(() => "Writing: {0}", filename);
                         var dst = await folder.CreateFileAsync(filename, CreationCollisionOption.OpenIfExists);
                         using (var outStream = await dst.OpenStreamForWriteAsync().ConfigureAwait(false))
                         {

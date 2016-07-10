@@ -41,7 +41,7 @@ namespace Locana.Pages
 
             CommandBarManager.SetEvent(AppBarItem.Ok, async (s, args) =>
             {
-                DebugUtil.Log("Ok clicked");
+                DebugUtil.Log(() => "Ok clicked");
                 switch (InnerState)
                 {
                     case ViewerState.Multi:
@@ -285,7 +285,7 @@ namespace Locana.Pages
 
             if (Operator == null)
             {
-                DebugUtil.Log("Specified device is invalidated");
+                DebugUtil.Log(() => "Specified device is invalidated");
 
                 string name = null;
                 if (!NetworkObserver.INSTANCE.TryGetDeviceName(RemoteStorageId, out name))
@@ -331,7 +331,8 @@ namespace Locana.Pages
                 CautionText.Visibility = Visibility.Visible;
                 MoreInfoButton.Visibility = Visibility.Visible;
             }
-            else {
+            else
+            {
                 LoadContents();
             }
         }
@@ -345,7 +346,8 @@ namespace Locana.Pages
                     var tuple = Tuple.Create<string, string>(nameof(StorageType.Local), null);
                     Frame.Navigate(typeof(ContentsGridPage), tuple);
                 }
-                else {
+                else
+                {
                     UpdateTopBar();
                 }
             });
@@ -630,7 +632,7 @@ namespace Locana.Pages
 
         private async void InitializeContentsGridContents()
         {
-            DebugUtil.Log("InitializeContentsGridContents");
+            DebugUtil.Log(() => "InitializeContentsGridContents");
             await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
                 Operator.ContentsCollection.Clear();
@@ -639,7 +641,7 @@ namespace Locana.Pages
 
         private async void HideProgress()
         {
-            DebugUtil.Log("Hide Progress");
+            DebugUtil.Log(() => "Hide Progress");
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
@@ -712,7 +714,6 @@ namespace Locana.Pages
 
         private async void ShowToast(Func<string> message)
         {
-            DebugUtil.Log(message);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource(message.Invoke()) });
@@ -721,24 +722,24 @@ namespace Locana.Pages
 
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {
-            DebugUtil.Log("Backkey pressed.");
+            DebugUtil.Log(() => "Backkey pressed.");
             if (IsViewingDetail)
             {
-                DebugUtil.Log("Release detail.");
+                DebugUtil.Log(() => "Release detail.");
                 ReleaseDetail();
                 e.Handled = true;
             }
 
             if (MoviePlayer.Visibility.IsVisible())
             {
-                DebugUtil.Log("Close local movie stream.");
+                DebugUtil.Log(() => "Close local movie stream.");
                 FinishMoviePlayback();
                 e.Handled = true;
             }
 
             if (ContentsGrid.SelectionMode == ListViewSelectionMode.Multiple)
             {
-                DebugUtil.Log("Set selection mode none.");
+                DebugUtil.Log(() => "Set selection mode none.");
                 UpdateInnerState(ViewerState.Single);
                 e.Handled = true;
             }
@@ -756,7 +757,7 @@ namespace Locana.Pages
             var selector = sender as GridView;
             if (selector.SelectionMode == ListViewSelectionMode.Multiple)
             {
-                DebugUtil.Log("SelectionChanged in multi mode");
+                DebugUtil.Log(() => "SelectionChanged in multi mode");
                 var contents = selector.SelectedItems;
                 DebugUtil.Log(() => "Selected Items: " + contents.Count);
 

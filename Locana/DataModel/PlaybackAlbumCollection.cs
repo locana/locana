@@ -49,13 +49,13 @@ namespace Locana.DataModel
                 var group = GetGroup(content.GroupTitle);
                 if (group == null)
                 {
-                    DebugUtil.Log("Remove: group does not exist");
+                    DebugUtil.Log(() => "Remove: group does not exist");
                     return false;
                 }
                 var res = group.Remove(content);
                 if (deleteGroupIfEmpty && group.Count == 0)
                 {
-                    DebugUtil.Log(() => "Remove no item group: " + group.Key);
+                    DebugUtil.LogSensitive(() => "Remove no item group: {0}", group.Key);
                     var index = IndexOf(group);
                     var removed = Remove(group);
                     if (removed)

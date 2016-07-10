@@ -118,7 +118,7 @@ namespace Locana.Network
 
                     if (device.Services.Any(service => service.Key == URN.ContentDirectory))
                     {
-                        DebugUtil.Log("CDS found. Notify discovered.");
+                        DebugUtil.Log(() => "CDS found. Notify discovered.");
                         cdsDevices.Add(device.UDN, device);
                         OnDiscovered(device);
                     }
@@ -126,7 +126,7 @@ namespace Locana.Network
             }
             catch (Exception ex)
             {
-                DebugUtil.Log("failed to parse upnp device description.");
+                DebugUtil.Log(() => "failed to parse upnp device description.");
                 DebugUtil.Log(() => ex.StackTrace);
             }
         }
@@ -243,7 +243,7 @@ namespace Locana.Network
 
         void NetworkInformation_NetworkStatusChanged(object sender)
         {
-            DebugUtil.Log("NetworkInformation NetworkStatusChanged");
+            DebugUtil.Log(() => "NetworkInformation NetworkStatusChanged");
             RefreshDevices();
             startTask();
         }

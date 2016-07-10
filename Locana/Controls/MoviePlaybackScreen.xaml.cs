@@ -119,7 +119,7 @@ namespace Locana.Controls
 
         private static void OnCurrentPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //DebugUtil.Log("Current position updated: " + ((TimeSpan)e.NewValue).TotalSeconds);
+            //DebugUtil.Log(() => "Current position updated: " + ((TimeSpan)e.NewValue).TotalSeconds);
             (d as MoviePlaybackScreen).UpdatePlaybackPosition((TimeSpan)e.NewValue, (d as MoviePlaybackScreen).Duration);
         }
 
@@ -156,7 +156,7 @@ namespace Locana.Controls
 
         private static void OnDurationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //DebugUtil.Log("Duration updated: " + ((TimeSpan)e.NewValue).TotalSeconds);
+            //DebugUtil.Log(() => "Duration updated: " + ((TimeSpan)e.NewValue).TotalSeconds);
             (d as MoviePlaybackScreen).UpdateDurationDisplay((TimeSpan)e.NewValue);
         }
 
@@ -195,7 +195,7 @@ namespace Locana.Controls
 
         private static void OnSeekAvailabilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //DebugUtil.Log("Seek availability changed: " + (bool)(e.NewValue));
+            //DebugUtil.Log(() => "Seek availability changed: " + (bool)(e.NewValue));
             (d as MoviePlaybackScreen).UpdateBarDisplay((bool)(e.NewValue));
         }
 
@@ -313,7 +313,7 @@ namespace Locana.Controls
                 StartToShowInfo();
             }
 
-            switch((DataContext as MoviePlaybackData).StreamingStatus)
+            switch ((DataContext as MoviePlaybackData).StreamingStatus)
             {
                 case StreamStatus.Paused:
                     Resume();

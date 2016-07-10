@@ -269,7 +269,7 @@ namespace Locana
 
             var container = (ListViewItem)view.ContainerFromItem(item);
 
-            if (container == null) DebugUtil.Log("Nothing selected");
+            if (container == null) DebugUtil.Log(() => "Nothing selected");
 
             if (container != null) container.IsTabStop = false;
             view.SetSelectedItem(container);

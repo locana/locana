@@ -66,7 +66,7 @@ namespace Locana.Utility
 
         private void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            DebugUtil.Log(() => { return "Location updated: " + args.Position.Coordinate.Longitude + " , " + args.Position.Coordinate.Latitude; });
+            DebugUtil.LogSensitive(() => "Location updated: {0}, {1}", args.Position.Coordinate.Point.Position.Longitude, args.Position.Coordinate.Point.Position.Latitude);
             LatestPosition = args.Position;
         }
 
@@ -76,7 +76,7 @@ namespace Locana.Utility
             {
                 geolocator.PositionChanged -= Geolocator_PositionChanged;
             }
-            
+
             LatestPosition = null;
             geolocator = null;
         }

@@ -297,7 +297,7 @@ namespace Locana.Settings
 
             if (selected < 0 || param.Candidates.Count <= selected)
             {
-                DebugUtil.Log("ignore out of range");
+                DebugUtil.Log(() => "ignore out of range");
                 return;
             }
 

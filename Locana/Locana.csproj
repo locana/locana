@@ -181,6 +181,7 @@
     <Compile Include="DataModel\ApplicationSettings.cs" />
     <Compile Include="DataModel\AppSettingData.cs" />
     <Compile Include="DataModel\CameraStatus.cs" />
+    <Compile Include="DataModel\ContentDialogInfo.cs" />
     <Compile Include="DataModel\ContentInfo.cs" />
     <Compile Include="DataModel\ControlPanelDataSource.cs" />
     <Compile Include="DataModel\EntranceGridPanelCollection.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Pages\EntrancePage.xaml.cs">
       <DependentUpon>EntrancePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Segment\LogReport.cs" />
     <Compile Include="Pages\ShootingPage.xaml.cs">
       <DependentUpon>ShootingPage.xaml</DependentUpon>
     </Compile>

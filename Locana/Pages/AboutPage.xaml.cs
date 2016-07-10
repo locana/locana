@@ -1,4 +1,5 @@
 ﻿using Locana.Controls;
+using Locana.Pages.Segment;
 using Locana.Utility;
 using Newtonsoft.Json;
 using System;
@@ -61,6 +62,10 @@ namespace Locana.Pages
             RepoLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenGithub"), SystemUtil.GetStringResource("RepoURL")));
 
             LoadLicenseFile();
+
+            logReport.Setup(Dispatcher);
+
+            DebugLogDialog.MaxWidth = ActualWidth;
         }
 
         private static void LoadAssemblyInformation()
@@ -143,11 +148,31 @@ namespace Locana.Pages
 
         private async void ShowToast(string message)
         {
-            DebugUtil.Log(message);
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AppShell.Current.Toast.PushToast(new ToastContent() { Text = message });
             });
+        }
+
+        private LogReport logReport = new LogReport();
+
+        private void DebugLogToggle_Loaded(object sender, RoutedEventArgs e)
+        {
+            logReport.DebugLogToggle_Loaded(sender, e);
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var pivot = sender as Pivot;
+            if (pivot.SelectedIndex == 2)
+            {
+                logReport.LoadLogFiles();
+            }
+        }
+
+        private void DebugLogDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            logReport.DebugLogDialog_Loaded(sender, e);
         }
     }
 }
