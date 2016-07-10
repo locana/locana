@@ -4,9 +4,12 @@ using Locana.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Email;
+using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -143,10 +146,28 @@ namespace Locana.Pages.Segment
         {
             if (attachment == null) { return; }
 
+            var sv = ulong.Parse(AnalyticsInfo.VersionInfo.DeviceFamilyVersion);
+            var v1 = (sv & 0xFFFF000000000000L) >> 48;
+            var v2 = (sv & 0x0000FFFF00000000L) >> 32;
+            var v3 = (sv & 0x00000000FFFF0000L) >> 16;
+            var v4 = (sv & 0x000000000000FFFFL);
+            var svs = $"{v1}.{v2}.{v3}.{v4}";
+            var eas = new EasClientDeviceInformation();
+
+            var pv = Package.Current.Id.Version;
+            var appVer = $"{pv.Major}.{pv.Minor}.{pv.Build}.{pv.Revision}";
+
             var email = new EmailMessage();
-            email.To.Add(new EmailRecipient("naotaco@gmail.com"));
-            email.Subject = "Log file from Locana";
-            email.Body = "See attachment.";
+            email.To.Add(new EmailRecipient("locana.dev@gmail.com"));
+            email.Subject = "Locana log reoprt";
+            email.Body = string.Format("[System information]\nSystem family: {0}\nOS build number: {1}\nArchitecture: {2}\nManufacturer: {3}\nDevice model: {4}\nApp version: {5}",
+                AnalyticsInfo.VersionInfo.DeviceFamily,
+                svs,
+                Package.Current.Id.Architecture.ToString(),
+                eas.SystemManufacturer,
+                eas.SystemProductName,
+                appVer);
+
             using (var data = await attachment.OpenReadAsync())
             {
                 email.Attachments.Add(new EmailAttachment("log_file.zip", RandomAccessStreamReference.CreateFromFile(attachment)));
