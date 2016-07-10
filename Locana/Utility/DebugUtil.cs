@@ -27,6 +27,19 @@ namespace Locana.Utility
         }
 
         /// <summary>
+        /// Show given string with sensitive text on the console and save to the storage without sensitive text.
+        /// </summary>
+        /// <param name="format">Function to return format</param>
+        /// <param name="sensitiveText"></param>
+        public static void LogSensitive(Func<string> format, params object[] sensitiveText)
+        {
+#if DEBUG
+            Debug.WriteLine(string.Format(format.Invoke(), sensitiveText));
+#endif
+            WriteLogAsync(format);
+        }
+
+        /// <summary>
         /// Show given string on the console and save to the storage for debugging if it is enabled.
         /// </summary>
         /// <param name="s">Log mesage</param>
