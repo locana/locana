@@ -57,6 +57,7 @@ namespace Locana.DataModel
             }
             set
             {
+                DebugUtil.Log(() => string.Format("{0} is changing from {1} to {2}", Title, CurrentSetting, value));
                 StateObserver?.Invoke(value);
                 NotifyChangedOnUI(nameof(CurrentSetting));
             }
