@@ -29,7 +29,7 @@ namespace Locana
             Kazyx.DeviceDiscovery.SsdpDiscovery.Logger = (msg) => DebugUtil.Log(() => msg);
             Kazyx.ImageStream.StreamProcessor.Logger = (msg) => DebugUtil.Log(() => msg);
             Kazyx.RemoteApi.Util.RemoteApiLogger.Logger = (msg) => DebugUtil.Log(() => msg);
-            // Kazyx.RemoteApi.Util.RemoteApiLogger.VerboseLogger = (msg) => DebugUtil.Log(() => msg);
+            Kazyx.RemoteApi.Util.RemoteApiLogger.VerboseLogger = (msg) => DebugUtil.Log(() => msg);
         }
 
         public bool IsFunctionLimited
