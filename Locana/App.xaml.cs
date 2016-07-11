@@ -133,6 +133,9 @@ namespace Locana
             {
                 IsFunctionLimited = false;
             }
+
+            DebugUtil.Log(() => string.Format("Trial version: {0}", IsTrialVersion));
+            DebugUtil.Log(() => string.Format("Function limited: {0}", IsFunctionLimited));
         }
 
         /// <summary>

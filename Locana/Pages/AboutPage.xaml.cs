@@ -128,6 +128,7 @@ namespace Locana.Pages
 
         private async void TrialButton_Click(object sender, RoutedEventArgs e)
         {
+            DebugUtil.Log(() => "Purchase button clicked");
             try
             {
 #if DEBUG
