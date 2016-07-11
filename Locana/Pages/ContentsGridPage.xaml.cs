@@ -277,7 +277,7 @@ namespace Locana.Pages
 
             RemoteStorageId = tuple?.Item2;
 
-            DebugUtil.Log(() => "OnNavigatedTo: " + tuple);
+            DebugUtil.Log(() => "OnNavigatedTo: " + TargetStorageType);
 
             UpdateInnerState(ViewerState.Single);
 
@@ -327,6 +327,7 @@ namespace Locana.Pages
 
             if (((Application.Current) as App).IsFunctionLimited && TargetStorageType != StorageType.Local)
             {
+                DebugUtil.Log(() => "Showing end of trial message");
                 CautionText.Text = SystemUtil.GetStringResource("TrialMessage");
                 CautionText.Visibility = Visibility.Visible;
                 MoreInfoButton.Visibility = Visibility.Visible;
@@ -617,6 +618,7 @@ namespace Locana.Pages
 
         private async void LoadContents()
         {
+            DebugUtil.Log(() => "Start loading contents");
             reloadLater = false;
             ChangeProgressText(SystemUtil.GetStringResource("Progress_LoadingLocalContents"));
 
@@ -625,6 +627,7 @@ namespace Locana.Pages
 
             if (Operator.ContentsCollection.Count == 0)
             {
+                DebugUtil.Log(() => "No content detected");
                 CautionText.Text = SystemUtil.GetStringResource("Viewer_NoContents");
                 CautionText.Visibility = Visibility.Visible;
             }
@@ -957,16 +960,18 @@ namespace Locana.Pages
                         ext = null;
                         break;
                 }
+                DebugUtil.Log(() => "Download movie content");
                 MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
             }
             else if (ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents && source.Source.OriginalUrl != null)
             {
+                DebugUtil.Log(() => "Download original size image");
                 MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
                     source.Source.MimeType == MimeType.Jpeg ? ".jpg" : null);
             }
             else
             {
-                // Fallback to large size image
+                DebugUtil.Log(() => "Fallback to large size image");
                 MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
             }
         }
