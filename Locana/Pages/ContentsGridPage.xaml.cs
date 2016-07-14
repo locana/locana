@@ -924,7 +924,7 @@ namespace Locana.Pages
             }
         }
 
-        private void FetchSelectedImages()
+        private async void FetchSelectedImages()
         {
             var items = ContentsGrid.SelectedItems;
             if (items.Count == 0)
@@ -933,20 +933,37 @@ namespace Locana.Pages
                 return;
             }
 
+            var sum = items.Count;
+
+            AppShell.Current.Toast.PushToast(new ToastContent() { Text = string.Format("[TMP] 0 of {0} images downloaded", sum) });
+            // Show foreground progress dialog with message '0 of <items.Count> images downloaded'
+            // Lock UI navigation
+            // If back key is pressed while navigation is locked, ask whether to cancel download or not.
+
+            var completed = 0;
+
             foreach (var item in new List<object>(items))
             {
                 try
                 {
-                    EnqueueDownload(item as Thumbnail);
+                    await EnqueueDownload(item as Thumbnail);
+                    AppShell.Current.Toast.PushToast(new ToastContent() { Text = string.Format("[TMP] {0} of {1} images downloaded", ++completed, sum) });
+                    // Count up completion count.
                 }
                 catch (Exception e)
                 {
                     DebugUtil.Log(() => e.StackTrace);
+                    AppShell.Current.Toast.PushToast(new ToastContent() { Text = "[TMP] Failed to download an image" });
                 }
             }
+
+            // Unlock UI navigation
+            // Hide progress dialog and show completion toast
+            // Re-select failed images?
+            AppShell.Current.Toast.PushToast(new ToastContent() { Text = string.Format("[TMP] Download completed", ++completed, sum) });
         }
 
-        private void EnqueueDownload(Thumbnail source)
+        private async Task EnqueueDownload(Thumbnail source)
         {
             if (source.IsMovie)
             {
@@ -961,18 +978,18 @@ namespace Locana.Pages
                         break;
                 }
                 DebugUtil.Log(() => "Download movie content");
-                MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
+                await MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
             }
             else if (ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents && source.Source.OriginalUrl != null)
             {
                 DebugUtil.Log(() => "Download original size image");
-                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
+                await MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
                     source.Source.MimeType == MimeType.Jpeg ? ".jpg" : null);
             }
             else
             {
                 DebugUtil.Log(() => "Fallback to large size image");
-                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
+                await MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
             }
         }
 

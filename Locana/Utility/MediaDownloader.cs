@@ -41,22 +41,22 @@ namespace Locana.Utility
             Failed?.Invoke(error, geotaggingResult);
         }
 
-        public void EnqueueVideo(Uri uri, string nameBase, string extension = null)
+        public Task EnqueueVideo(Uri uri, string nameBase, string extension = null)
         {
-            Enqueue(uri, nameBase, Mediatype.Video, extension);
+            return Enqueue(uri, nameBase, Mediatype.Video, extension);
         }
 
-        public void EnqueueImage(Uri uri, string nameBase, string extension)
+        public Task EnqueueImage(Uri uri, string nameBase, string extension)
         {
-            Enqueue(uri, nameBase, Mediatype.Image, extension);
+            return Enqueue(uri, nameBase, Mediatype.Image, extension);
         }
 
-        public void EnqueuePostViewImage(Uri uri)
+        public Task EnqueuePostViewImage(Uri uri)
         {
-            Enqueue(uri, DIRECTORY_NAME, Mediatype.Image, ".jpg");
+            return Enqueue(uri, DIRECTORY_NAME, Mediatype.Image, ".jpg");
         }
 
-        private async void Enqueue(Uri uri, string namebase, Mediatype type, string extension = null)
+        private async Task Enqueue(Uri uri, string namebase, Mediatype type, string extension = null)
         {
             DebugUtil.LogSensitive(() => "ContentsDownloader: Enqueue {0}", uri.AbsolutePath);
 
@@ -70,6 +70,8 @@ namespace Locana.Utility
                 }
             }
 
+            var tcs = new TaskCompletionSource<bool>();
+
             await SystemUtil.GetCurrentDispatcher().RunAsync(CoreDispatcherPriority.Low, () =>
             {
                 var req = new DownloadRequest
@@ -79,12 +81,15 @@ namespace Locana.Utility
                     Completed = OnFetched,
                     Error = OnFailed,
                     Mediatype = type,
-                    extension = extension
+                    FileExtension = extension,
+                    CompletionSource = tcs,
                 };
                 DownloadQueue.Enqueue(req);
                 QueueStatusUpdated?.Invoke(DownloadQueue.Count);
                 ProcessQueueSequentially();
             });
+
+            await tcs.Task;
         }
 
         private Task task;
@@ -129,6 +134,7 @@ namespace Locana.Utility
                 catch (Exception)
                 {
                     req.Error?.Invoke(DownloaderError.Network, geoResult);
+                    req.CompletionSource?.TrySetResult(false);
                     return;
                 }
 
@@ -166,11 +172,12 @@ namespace Locana.Utility
                             // rootFolder = KnownFolders.VideosLibrary;
                             break;
                         default:
+                            req.CompletionSource?.TrySetResult(false);
                             return;
                     }
 
                     var folder = await rootFolder.CreateFolderAsync(DIRECTORY_NAME, CreationCollisionOption.OpenIfExists);
-                    var filename = string.Format(req.NameBase + "_{0:yyyyMMdd_HHmmss}" + req.extension, DateTime.Now);
+                    var filename = string.Format(req.NameBase + "_{0:yyyyMMdd_HHmmss}" + req.FileExtension, DateTime.Now);
                     var file = await folder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
 
                     using (var outStream = await file.OpenStreamForWriteAsync())
@@ -179,6 +186,7 @@ namespace Locana.Utility
                     }
 
                     req.Completed?.Invoke(folder, file, geoResult);
+                    req.CompletionSource?.TrySetResult(true);
                     return;
                 }
             }
@@ -187,18 +195,20 @@ namespace Locana.Utility
                 DebugUtil.Log(() => e.Message);
                 DebugUtil.Log(() => e.StackTrace);
                 req.Error?.Invoke(DownloaderError.Unknown, GeotaggingResult.Result.NotRequested); // TODO
+                req.CompletionSource?.TrySetResult(false);
             }
         }
     }
 
     public class DownloadRequest
     {
-        public Uri Uri;
-        public string NameBase;
-        public Mediatype Mediatype;
-        public string extension;
-        public Action<StorageFolder, StorageFile, GeotaggingResult.Result> Completed;
-        public Action<DownloaderError, GeotaggingResult.Result> Error;
+        public Uri Uri { set; get; }
+        public string NameBase { set; get; }
+        public Mediatype Mediatype { set; get; }
+        public string FileExtension { set; get; }
+        public Action<StorageFolder, StorageFile, GeotaggingResult.Result> Completed { set; get; }
+        public Action<DownloaderError, GeotaggingResult.Result> Error { set; get; }
+        public TaskCompletionSource<bool> CompletionSource { set; get; }
     }
 
     public enum Mediatype
