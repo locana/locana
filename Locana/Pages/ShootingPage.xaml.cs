@@ -192,23 +192,6 @@ namespace Locana.Pages
         {
             var groups = VisualStateManager.GetVisualStateGroups(LayoutRoot);
 
-            foreach (var g in groups)
-            {
-                if (g != null)
-                {
-                    if (g.CurrentState != null)
-                    {
-                        DebugUtil.Log(() => "CurrentState: " + g.CurrentState.Name);
-                    }else
-                    {
-                        DebugUtil.Log(() => "current state is null.");
-                    }
-                }else
-                {
-                    DebugUtil.Log(() => "g is null/");
-                }
-            }
-
             groups[0].CurrentStateChanged += (sender, e) =>
             {
                 DebugUtil.Log(() => "Width state changed: " + e.OldState?.Name + " -> " + e.NewState?.Name);
