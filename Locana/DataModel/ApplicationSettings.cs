@@ -2,6 +2,7 @@
 using Locana.Controls;
 using Locana.Playback;
 using Locana.Utility;
+using System;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
@@ -26,6 +27,7 @@ namespace Locana.DataModel
             PrioritizeOriginalSizeContents = Preference.OriginalSizeContentsPrioritized;
             RemoteContentsSet = Preference.RemoteContentsSet;
             LiveviewRotationEnabled = Preference.LiveviewRotationEnabled;
+            ForcePhoneView = Preference.ForcePhoneView;
         }
 
         public static ApplicationSettings GetInstance()
@@ -326,6 +328,19 @@ namespace Locana.DataModel
             {
                 _EnableDebugLogging = value;
                 NotifyChangedOnUI(nameof(EnableDebugLogging));
+            }
+        }
+
+        public Action<bool> ForcePhoneViewChanged;
+        private bool _ForcePhoneView = false;
+        public bool ForcePhoneView
+        {
+            get { return _ForcePhoneView; }
+            set
+            {
+                _ForcePhoneView = value;
+                NotifyChangedOnUI(nameof(ForcePhoneView));
+                if (ForcePhoneViewChanged != null) { ForcePhoneViewChanged(value); }
             }
         }
     }

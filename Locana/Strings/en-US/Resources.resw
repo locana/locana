@@ -1175,4 +1175,10 @@ App version: {5}</value>
   <data name="PivotTitle_Advanced" xml:space="preserve">
     <value>Advanced settings</value>
   </data>
+  <data name="ForcePhoneView" xml:space="preserve">
+    <value>Force layout to phone mode</value>
+  </data>
+  <data name="ForcePhoneView_Guide" xml:space="preserve">
+    <value>Use layout that optimized for smatphone regardless of screen width or UI size settings.</value>
+  </data>
 </root>

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Locana.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:util="using:Locana.Utility"
       Loaded="Page_Loaded"
       Unloaded="Page_Unloaded"
       mc:Ignorable="d">
@@ -37,7 +38,8 @@
             <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
+                        <util:LocanaStateTrigger LocanaState="ExtraWide" />
+                        <util:LocanaStateTrigger LocanaState="Wide" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource WideGridItemTemplate}" />
@@ -46,7 +48,7 @@
                 </VisualState>
                 <VisualState x:Name="NarrowState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
+                        <util:LocanaStateTrigger LocanaState="Narrow" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource NarrowGridItemTemplate}" />

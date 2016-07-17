@@ -22,6 +22,7 @@ namespace Locana.Utility
         private const string prioritize_original_contents = "prioritize_original_contents";
         private const string remote_contents_set = "remote_contents_set";
         private const string rotate_liveview = "lotate_liveview";
+        private const string force_phone_view = "force_phone_view";
 
         private const string init_launched_datetime = "init_datetime";
         private const string last_version = "last_version";
@@ -162,6 +163,12 @@ namespace Locana.Utility
         {
             get { return GetProperty(rotate_liveview, true); }
             set { SetProperty(rotate_liveview, value); }
+        }
+
+        public static bool ForcePhoneView
+        {
+            get { return GetProperty(force_phone_view, false); }
+            set { SetProperty(force_phone_view, value); }
         }
     }
 }

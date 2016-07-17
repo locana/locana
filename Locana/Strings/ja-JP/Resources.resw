@@ -1059,4 +1059,10 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="PivotTitle_Advanced" xml:space="preserve">
     <value>高度な設定</value>
   </data>
+  <data name="ForcePhoneView" xml:space="preserve">
+    <value>常にスマートフォン用レイアウトを使用する</value>
+  </data>
+  <data name="ForcePhoneView_Guide" xml:space="preserve">
+    <value>画面の幅やUIの表示倍率設定にかかわらずスマートフォン用のUIを使用します。</value>
+  </data>
 </root>

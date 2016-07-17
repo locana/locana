@@ -192,11 +192,27 @@ namespace Locana.Pages
         {
             var groups = VisualStateManager.GetVisualStateGroups(LayoutRoot);
 
-            DebugUtil.Log(() => "CurrentState: " + groups[0].CurrentState.Name);
+            foreach (var g in groups)
+            {
+                if (g != null)
+                {
+                    if (g.CurrentState != null)
+                    {
+                        DebugUtil.Log(() => "CurrentState: " + g.CurrentState.Name);
+                    }else
+                    {
+                        DebugUtil.Log(() => "current state is null.");
+                    }
+                }else
+                {
+                    DebugUtil.Log(() => "g is null/");
+                }
+            }
+
             groups[0].CurrentStateChanged += (sender, e) =>
             {
-                DebugUtil.Log(() => "Width state changed: " + e.OldState.Name + " -> " + e.NewState.Name);
-                switch (e.NewState.Name)
+                DebugUtil.Log(() => "Width state changed: " + e.OldState?.Name + " -> " + e.NewState?.Name);
+                switch (e.NewState?.Name)
                 {
                     case WIDE_STATE:
                         ControlPanelState = DisplayState.AlwaysVisible;
@@ -212,8 +228,8 @@ namespace Locana.Pages
                 }
             };
 
-            // initialize UI according to current state
-            switch (groups[0].CurrentState.Name)
+            //// initialize UI according to current state
+            switch (groups[0].CurrentState?.Name)
             {
                 case WIDE_STATE:
                     ControlPanelState = DisplayState.AlwaysVisible;
