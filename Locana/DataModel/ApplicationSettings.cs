@@ -331,7 +331,6 @@ namespace Locana.DataModel
             }
         }
 
-        public Action<bool> ForcePhoneViewChanged;
         private bool _ForcePhoneView = false;
         public bool ForcePhoneView
         {
@@ -340,7 +339,6 @@ namespace Locana.DataModel
             {
                 _ForcePhoneView = value;
                 NotifyChangedOnUI(nameof(ForcePhoneView));
-                if (ForcePhoneViewChanged != null) { ForcePhoneViewChanged(value); }
             }
         }
     }

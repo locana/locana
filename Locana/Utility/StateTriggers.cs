@@ -19,12 +19,15 @@ namespace Locana.Utility
         public LocanaStateTrigger()
         {
             Window.Current.SizeChanged += Current_SizeChanged;
-            ApplicationSettings.GetInstance().ForcePhoneViewChanged += ForcePhoneViewSettingChanged;
+            ApplicationSettings.GetInstance().PropertyChanged += LocanaStateTrigger_PropertyChanged;
         }
 
-        private void ForcePhoneViewSettingChanged(bool force)
+        private void LocanaStateTrigger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            SetActive(ShouldTriggerBeActive(LocanaState));
+            if (e.PropertyName == nameof(ApplicationSettings.ForcePhoneView))
+            {
+                SetActive(ShouldTriggerBeActive(LocanaState));
+            }
         }
 
         private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
