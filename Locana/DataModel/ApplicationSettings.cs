@@ -1,8 +1,6 @@
-﻿
-using Locana.Controls;
+﻿using Locana.Controls;
 using Locana.Playback;
 using Locana.Utility;
-using System;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
