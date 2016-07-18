@@ -19,7 +19,13 @@ namespace Locana.Utility
         public LocanaStateTrigger()
         {
             Window.Current.SizeChanged += Current_SizeChanged;
+            Window.Current.Activated += Current_Activated;
             ApplicationSettings.GetInstance().PropertyChanged += LocanaStateTrigger_PropertyChanged;
+        }
+
+        private void Current_Activated(object sender, Windows.UI.Core.WindowActivatedEventArgs e)
+        {
+            SetActive(ShouldTriggerBeActive(LocanaState));
         }
 
         private void LocanaStateTrigger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
