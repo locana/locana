@@ -16,10 +16,22 @@ namespace Locana.Utility
         const double NARROW_STATE_MAX_WIDTH = 720;
         const double WIDE_STATE_MAX_WIDTH = 1024;
 
+        DispatcherTimer timer = new DispatcherTimer();
+
         public LocanaStateTrigger()
         {
             Window.Current.SizeChanged += Current_SizeChanged;
             ApplicationSettings.GetInstance().PropertyChanged += LocanaStateTrigger_PropertyChanged;
+
+            timer.Interval = System.TimeSpan.FromMilliseconds(10);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            SetActive(ShouldTriggerBeActive(LocanaState));
+            timer.Stop();
         }
 
         private void LocanaStateTrigger_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
