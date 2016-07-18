@@ -33,12 +33,12 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
+                        <util:LocanaStateTrigger LocanaState="ExtraWide" />
+                        <util:LocanaStateTrigger LocanaState="Wide" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="CenterArea.(Grid.ColumnSpan)" Value="1" />
@@ -68,7 +68,7 @@
                 </VisualState>
                 <VisualState x:Name="NarrowState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
+                        <util:LocanaStateTrigger LocanaState="Narrow" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="CenterArea.(Grid.ColumnSpan)" Value="3" />

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:Locana.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:util="using:Locana.Utility"
       Loaded="Page_Loaded"
       Unloaded="Page_Unloaded"
       mc:Ignorable="d">
@@ -32,29 +33,6 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowWidthStates">
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource WideGridItemTemplate}" />
-                        <Setter Target="NfcPanel.HorizontalAlignment" Value="Right" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NarrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource NarrowGridItemTemplate}" />
-                        <Setter Target="NfcPanel.HorizontalAlignment" Value="Stretch" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
 
         <c:PageHeader x:Name="pageHeader">
             <c:PageHeader.HeaderContent>
@@ -146,5 +124,29 @@
                                       Source={StaticResource LocalizedStrings}}"
                        TextWrapping="WrapWholeWords" />
         </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowWidthStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <util:LocanaStateTrigger LocanaState="ExtraWide" />
+                        <util:LocanaStateTrigger LocanaState="Wide" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource WideGridItemTemplate}" />
+                        <Setter Target="NfcPanel.HorizontalAlignment" Value="Right" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <util:LocanaStateTrigger LocanaState="Narrow" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="EntranceGrid.ItemsPanel" Value="{StaticResource NarrowGridItemTemplate}" />
+                        <Setter Target="NfcPanel.HorizontalAlignment" Value="Stretch" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

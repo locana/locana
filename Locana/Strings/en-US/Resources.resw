@@ -1175,4 +1175,10 @@ App version: {5}</value>
   <data name="PivotTitle_Advanced" xml:space="preserve">
     <value>Advanced settings</value>
   </data>
+  <data name="ForcePhoneView" xml:space="preserve">
+    <value>Force phone layout</value>
+  </data>
+  <data name="ForcePhoneView_Guide" xml:space="preserve">
+    <value>Use layout optimized for smartphones regardless of screen density settings or window width.</value>
+  </data>
 </root>
