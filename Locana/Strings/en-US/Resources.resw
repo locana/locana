@@ -1176,9 +1176,9 @@ App version: {5}</value>
     <value>Advanced settings</value>
   </data>
   <data name="ForcePhoneView" xml:space="preserve">
-    <value>Force layout to phone mode</value>
+    <value>Force phone layout</value>
   </data>
   <data name="ForcePhoneView_Guide" xml:space="preserve">
-    <value>Use layout that optimized for smatphone regardless of screen width or UI size settings.</value>
+    <value>Use layout optimized for smartphones regardless of screen density settings or window width.</value>
   </data>
 </root>

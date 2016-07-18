@@ -1063,6 +1063,6 @@ Eメールに添付して開発者に送信しますか？</value>
     <value>常にスマートフォン用レイアウトを使用する</value>
   </data>
   <data name="ForcePhoneView_Guide" xml:space="preserve">
-    <value>画面の幅やUIの表示倍率設定にかかわらずスマートフォン用のUIを使用します。</value>
+    <value>ウィンドウ幅や画面表示倍率設定にかかわらず、スマートフォン用の画面レイアウトを使用します。</value>
   </data>
 </root>
