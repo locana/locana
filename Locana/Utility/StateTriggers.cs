@@ -13,7 +13,7 @@ namespace Locana.Utility
 
     public class LocanaStateTrigger : StateTriggerBase
     {
-        const double NARROW_STATE_MAX_WIDTH = 640;
+        const double NARROW_STATE_MAX_WIDTH = 720;
         const double WIDE_STATE_MAX_WIDTH = 1024;
 
         public LocanaStateTrigger()
