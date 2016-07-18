@@ -1,5 +1,5 @@
-﻿using Locana.Playback;
-using Locana.Controls;
+﻿using Locana.Controls;
+using Locana.Playback;
 using System;
 using Windows.Storage;
 
