@@ -313,6 +313,7 @@ namespace Locana.DataModel
                 if (value != _LiveviewRotationEnabled)
                 {
                     _LiveviewRotationEnabled = value;
+                    Preference.LiveviewRotationEnabled = value;
                     NotifyChangedOnUI(nameof(LiveviewRotationEnabled));
                 }
             }
@@ -336,6 +337,7 @@ namespace Locana.DataModel
             set
             {
                 _ForcePhoneView = value;
+                Preference.ForcePhoneView = value;
                 NotifyChangedOnUI(nameof(ForcePhoneView));
             }
         }
