@@ -276,6 +276,7 @@
     <Compile Include="Utility\ResourceManager.cs" />
     <Compile Include="Utility\SettingValueConverter.cs" />
     <Compile Include="Utility\SonyQrDataParser.cs" />
+    <Compile Include="Utility\StateTriggers.cs" />
     <Compile Include="Utility\StorageExtensions.cs" />
     <Compile Include="Utility\SystemUtil.cs" />
     <Compile Include="Utility\TaskExtensions.cs" />

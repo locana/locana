@@ -91,7 +91,7 @@
                           VerticalAlignment="Stretch"
                           Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <ListBox x:Name="DetailInfoList"
-                         Margin="0,28,0,22"
+                         Margin="0,28,0,44"
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
                          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"

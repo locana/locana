@@ -263,6 +263,17 @@ namespace Locana.Pages
             });
             section.Add(fibonacciOriginPanel);
 
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("ForcePhoneView"),
+                    Guide = SystemUtil.GetStringResource("ForcePhoneView_Guide"),
+                    StateProvider = () => ApplicationSettings.GetInstance().ForcePhoneView,
+                    StateObserver = enabled => ApplicationSettings.GetInstance().ForcePhoneView = enabled
+                }
+            });
+
             return section;
         }
 
