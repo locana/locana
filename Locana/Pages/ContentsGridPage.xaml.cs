@@ -147,6 +147,14 @@ namespace Locana.Pages
             });
         }
 
+        private ContentDialogSource DeleteConfirmationSource = new ContentDialogSource
+        {
+            PrimaryButtonTextRes = "AppBar_Delete",
+            SecondaryButtonTextRes = "AppBar_Cancel",
+            DialogMessageTextRes = "DeleteConfirmation",
+            DialogTitleTextRes = "DialogTitle_Confirmation",
+        };
+
         private const string WIDE_STATE = "WideState";
         private const string NARROW_STATE = "NarrowState";
 
@@ -324,7 +332,6 @@ namespace Locana.Pages
             NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_CameraDiscovered;
             NetworkObserver.INSTANCE.DevicesCleared += NetworkObserver_DevicesCleared;
             NetworkObserver.INSTANCE.Start();
-
             if (((Application.Current) as App).IsFunctionLimited && TargetStorageType != StorageType.Local)
             {
                 DebugUtil.Log(() => "Showing end of trial message");
@@ -709,6 +716,7 @@ namespace Locana.Pages
                 return;
             }
 
+            DeleteDialog.DataContext = DeleteConfirmationSource;
             if (await DeleteDialog.ShowAsync() == ContentDialogResult.Primary)
             {
                 await Operator.DeleteSelectedFiles(items.Select(item => item as Thumbnail));
@@ -726,6 +734,14 @@ namespace Locana.Pages
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {
             DebugUtil.Log(() => "Backkey pressed.");
+            if (DownloadDialog.Visibility == Visibility.Visible)
+            {
+                DownloadDialog.Visibility = Visibility.Collapsed;
+                MediaDownloader.Instance.Purge();
+                e.Handled = true;
+                return;
+            }
+
             if (IsViewingDetail)
             {
                 DebugUtil.Log(() => "Release detail.");
@@ -878,12 +894,12 @@ namespace Locana.Pages
             });
         }
 
-        private void Download_Click(object sender, RoutedEventArgs e)
+        private async void Download_Click(object sender, RoutedEventArgs e)
         {
             var item = sender as MenuFlyoutItem;
             try
             {
-                EnqueueDownload(item.DataContext as Thumbnail);
+                await EnqueueDownload(item.DataContext as Thumbnail);
             }
             catch (Exception ex)
             {
@@ -896,6 +912,7 @@ namespace Locana.Pages
             var item = sender as MenuFlyoutItem;
             var data = item.DataContext as Thumbnail;
 
+            DeleteDialog.DataContext = DeleteConfirmationSource;
             if (await DeleteDialog.ShowAsync() == ContentDialogResult.Primary)
             {
                 await Operator.DeleteSelectedFile(data);
@@ -934,11 +951,11 @@ namespace Locana.Pages
             }
 
             var sum = items.Count;
+            var msgTemplate = SystemUtil.GetStringResource("Download_DialogMessage");
 
-            AppShell.Current.Toast.PushToast(new ToastContent() { Text = string.Format("[TMP] 0 of {0} images downloaded", sum) });
-            // Show foreground progress dialog with message '0 of <items.Count> images downloaded'
-            // Lock UI navigation
-            // If back key is pressed while navigation is locked, ask whether to cancel download or not.
+            DownloadDialog.ProgressMessage = string.Format(msgTemplate, 0, sum);
+            DownloadDialog.Visibility = Visibility.Visible;
+            LayoutRoot.IsHitTestVisible = false;
 
             var completed = 0;
 
@@ -947,20 +964,20 @@ namespace Locana.Pages
                 try
                 {
                     await EnqueueDownload(item as Thumbnail);
-                    AppShell.Current.Toast.PushToast(new ToastContent() { Text = string.Format("[TMP] {0} of {1} images downloaded", ++completed, sum) });
+                    DownloadDialog.ProgressMessage = string.Format(msgTemplate, ++completed, sum);
                     // Count up completion count.
                 }
                 catch (Exception e)
                 {
                     DebugUtil.Log(() => e.StackTrace);
-                    AppShell.Current.Toast.PushToast(new ToastContent() { Text = "[TMP] Failed to download an image" });
+                    AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource("Download_Failure") });
                 }
             }
 
-            // Unlock UI navigation
-            // Hide progress dialog and show completion toast
-            // Re-select failed images?
-            AppShell.Current.Toast.PushToast(new ToastContent() { Text = string.Format("[TMP] Download completed", ++completed, sum) });
+            LayoutRoot.IsHitTestVisible = true;
+            DownloadDialog.Visibility = Visibility.Collapsed;
+            // TODO Re-select failed images?
+            AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource("Download_Completion") });
         }
 
         private async Task EnqueueDownload(Thumbnail source)

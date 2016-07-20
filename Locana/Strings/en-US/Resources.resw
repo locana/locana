@@ -1175,4 +1175,13 @@ App version: {5}</value>
   <data name="PivotTitle_Advanced" xml:space="preserve">
     <value>Advanced settings</value>
   </data>
+  <data name="Download_Completion" xml:space="preserve">
+    <value>Download completed</value>
+  </data>
+  <data name="Download_DialogMessage" xml:space="preserve">
+    <value>{0} of {1} contents downloaded.</value>
+  </data>
+  <data name="Download_Failure" xml:space="preserve">
+    <value>Download failure</value>
+  </data>
 </root>

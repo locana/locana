@@ -92,6 +92,12 @@ namespace Locana.Utility
             await tcs.Task;
         }
 
+        public void Purge()
+        {
+            DownloadQueue.Clear();
+            // Cancel ongoing download
+        }
+
         private Task task;
 
         private readonly Queue<DownloadRequest> DownloadQueue = new Queue<DownloadRequest>();

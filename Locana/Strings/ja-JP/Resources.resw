@@ -1059,4 +1059,13 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="PivotTitle_Advanced" xml:space="preserve">
     <value>高度な設定</value>
   </data>
+  <data name="Download_Completion" xml:space="preserve">
+    <value>ダウンロードが完了しました</value>
+  </data>
+  <data name="Download_DialogMessage" xml:space="preserve">
+    <value>{0} / {1} のコンテンツをダウンロード完了</value>
+  </data>
+  <data name="Download_Failure" xml:space="preserve">
+    <value>ダウンロードエラー</value>
+  </data>
 </root>

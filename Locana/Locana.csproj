@@ -159,6 +159,9 @@
     <Compile Include="Controls\ProgramShiftSlider.xaml.cs">
       <DependentUpon>ProgramShiftSlider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProgressDialog.xaml.cs">
+      <DependentUpon>ProgressDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PullReleaseBar.xaml.cs">
       <DependentUpon>PullReleaseBar.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,7 @@
     <Compile Include="DataModel\AppSettingData.cs" />
     <Compile Include="DataModel\CameraStatus.cs" />
     <Compile Include="DataModel\ContentDialogInfo.cs" />
+    <Compile Include="DataModel\ContentDialogSource.cs" />
     <Compile Include="DataModel\ContentInfo.cs" />
     <Compile Include="DataModel\ControlPanelDataSource.cs" />
     <Compile Include="DataModel\EntranceGridPanelCollection.cs" />
@@ -374,6 +378,10 @@
     <Page Include="Controls\ProgramShiftSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ProgressDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PullReleaseBar.xaml">
       <Generator>MSBuild:Compile</Generator>
