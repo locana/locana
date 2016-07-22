@@ -1175,6 +1175,15 @@ App version: {5}</value>
   <data name="PivotTitle_Advanced" xml:space="preserve">
     <value>Advanced settings</value>
   </data>
+  <data name="Download_Completion" xml:space="preserve">
+    <value>Download completed</value>
+  </data>
+  <data name="Download_DialogMessage" xml:space="preserve">
+    <value>Downloading: {0}/{1}</value>
+  </data>
+  <data name="Download_Failure" xml:space="preserve">
+    <value>Download failure</value>
+  </data>
   <data name="ForcePhoneView" xml:space="preserve">
     <value>Force phone layout</value>
   </data>

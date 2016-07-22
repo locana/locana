@@ -80,6 +80,12 @@
             </c:MoviePlaybackScreen.Background>
         </c:MoviePlaybackScreen>
 
+        <c:ProgressDialog x:Name="DownloadDialog"
+                          Grid.RowSpan="3"
+                          VerticalAlignment="Center"
+                          Canvas.ZIndex="40"
+                          Visibility="Collapsed" />
+
         <ProgressRing x:Name="ProgressCircle"
                       Grid.RowSpan="2"
                       Width="60"
@@ -255,19 +261,16 @@
                           MinHeight="0"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
-                          PrimaryButtonText="{Binding [AppBar_Delete],
-                                                      Source={StaticResource LocalizedStrings}}"
-                          SecondaryButtonText="{Binding [AppBar_Cancel],
-                                                        Source={StaticResource LocalizedStrings}}">
+                          PrimaryButtonText="{Binding PrimaryButtonText}"
+                          SecondaryButtonText="{Binding SecondaryButtonText}">
             <Border>
                 <TextBlock Margin="0,24,0,0"
-                           Text="{Binding [DeleteConfirmation],
-                                          Source={StaticResource LocalizedStrings}}"
+                           Text="{Binding DialogMessageText}"
                            TextWrapping="WrapWholeWords" />
             </Border>
             <ContentDialog.TitleTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding [DialogTitle_Confirmation], Source={StaticResource LocalizedStrings}}" />
+                    <TextBlock Text="{Binding DialogTitleText}" />
                 </DataTemplate>
             </ContentDialog.TitleTemplate>
         </xc:ContentDialog>

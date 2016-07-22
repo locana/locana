@@ -147,6 +147,14 @@ namespace Locana.Pages
             });
         }
 
+        private ContentDialogSource DeleteConfirmationSource = new ContentDialogSource
+        {
+            PrimaryButtonTextRes = "AppBar_Delete",
+            SecondaryButtonTextRes = "AppBar_Cancel",
+            DialogMessageTextRes = "DeleteConfirmation",
+            DialogTitleTextRes = "DialogTitle_Confirmation",
+        };
+
         private const string WIDE_STATE = "WideState";
         private const string NARROW_STATE = "NarrowState";
 
@@ -324,7 +332,6 @@ namespace Locana.Pages
             NetworkObserver.INSTANCE.CameraDiscovered += NetworkObserver_CameraDiscovered;
             NetworkObserver.INSTANCE.DevicesCleared += NetworkObserver_DevicesCleared;
             NetworkObserver.INSTANCE.Start();
-
             if (((Application.Current) as App).IsFunctionLimited && TargetStorageType != StorageType.Local)
             {
                 DebugUtil.Log(() => "Showing end of trial message");
@@ -709,6 +716,7 @@ namespace Locana.Pages
                 return;
             }
 
+            DeleteDialog.DataContext = DeleteConfirmationSource;
             if (await DeleteDialog.ShowAsync() == ContentDialogResult.Primary)
             {
                 await Operator.DeleteSelectedFiles(items.Select(item => item as Thumbnail));
@@ -726,6 +734,14 @@ namespace Locana.Pages
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {
             DebugUtil.Log(() => "Backkey pressed.");
+            if (DownloadDialog.Visibility == Visibility.Visible)
+            {
+                DownloadDialog.Visibility = Visibility.Collapsed;
+                MediaDownloader.Instance.Purge();
+                e.Handled = true;
+                return;
+            }
+
             if (IsViewingDetail)
             {
                 DebugUtil.Log(() => "Release detail.");
@@ -878,12 +894,12 @@ namespace Locana.Pages
             });
         }
 
-        private void Download_Click(object sender, RoutedEventArgs e)
+        private async void Download_Click(object sender, RoutedEventArgs e)
         {
             var item = sender as MenuFlyoutItem;
             try
             {
-                EnqueueDownload(item.DataContext as Thumbnail);
+                await EnqueueDownload(item.DataContext as Thumbnail);
             }
             catch (Exception ex)
             {
@@ -896,6 +912,7 @@ namespace Locana.Pages
             var item = sender as MenuFlyoutItem;
             var data = item.DataContext as Thumbnail;
 
+            DeleteDialog.DataContext = DeleteConfirmationSource;
             if (await DeleteDialog.ShowAsync() == ContentDialogResult.Primary)
             {
                 await Operator.DeleteSelectedFile(data);
@@ -924,7 +941,7 @@ namespace Locana.Pages
             }
         }
 
-        private void FetchSelectedImages()
+        private async void FetchSelectedImages()
         {
             var items = ContentsGrid.SelectedItems;
             if (items.Count == 0)
@@ -933,20 +950,37 @@ namespace Locana.Pages
                 return;
             }
 
+            var sum = items.Count;
+            var msgTemplate = SystemUtil.GetStringResource("Download_DialogMessage");
+
+            DownloadDialog.ProgressMessage = string.Format(msgTemplate, 0, sum);
+            DownloadDialog.Visibility = Visibility.Visible;
+            LayoutRoot.IsHitTestVisible = false;
+
+            var completed = 0;
+
             foreach (var item in new List<object>(items))
             {
                 try
                 {
-                    EnqueueDownload(item as Thumbnail);
+                    await EnqueueDownload(item as Thumbnail);
+                    DownloadDialog.ProgressMessage = string.Format(msgTemplate, ++completed, sum);
+                    // Count up completion count.
                 }
                 catch (Exception e)
                 {
                     DebugUtil.Log(() => e.StackTrace);
+                    AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource("Download_Failure") });
                 }
             }
+
+            LayoutRoot.IsHitTestVisible = true;
+            DownloadDialog.Visibility = Visibility.Collapsed;
+            // TODO Re-select failed images?
+            AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource("Download_Completion") });
         }
 
-        private void EnqueueDownload(Thumbnail source)
+        private async Task EnqueueDownload(Thumbnail source)
         {
             if (source.IsMovie)
             {
@@ -961,18 +995,18 @@ namespace Locana.Pages
                         break;
                 }
                 DebugUtil.Log(() => "Download movie content");
-                MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
+                await MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
             }
             else if (ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents && source.Source.OriginalUrl != null)
             {
                 DebugUtil.Log(() => "Download original size image");
-                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
+                await MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
                     source.Source.MimeType == MimeType.Jpeg ? ".jpg" : null);
             }
             else
             {
                 DebugUtil.Log(() => "Fallback to large size image");
-                MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
+                await MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
             }
         }
 
