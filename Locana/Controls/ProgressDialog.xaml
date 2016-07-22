@@ -8,23 +8,28 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
 
-    <Grid Margin="36,24" Background="{ThemeResource ContentDialogBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="ProgressText"
-                   Margin="24,48,24,0"
-                   HorizontalAlignment="Center"
-                   Foreground="{ThemeResource ContentDialogContentForegroundBrush}"
-                   Style="{StaticResource TitleTextBlockStyle}" />
-        <ProgressRing x:Name="ProgressCircle"
-                      Grid.Row="1"
-                      Width="60"
-                      Height="60"
-                      Margin="24,24,24,48"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+        </Grid.Background>
+        <Grid VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="ProgressText"
+                       Margin="24,48,24,0"
+                       HorizontalAlignment="Center"
+                       Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                       Style="{StaticResource TitleTextBlockStyle}" />
+            <ProgressRing x:Name="ProgressCircle"
+                          Grid.Row="1"
+                          Width="60"
+                          Height="60"
+                          Margin="24,24,24,48"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+        </Grid>
     </Grid>
 </UserControl>

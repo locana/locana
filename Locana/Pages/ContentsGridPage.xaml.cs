@@ -734,9 +734,10 @@ namespace Locana.Pages
         private void BackRequested(object sender, BackRequestedEventArgs e)
         {
             DebugUtil.Log(() => "Backkey pressed.");
-            if (DownloadDialog.Visibility == Visibility.Visible)
+            if (AppShell.Current.ProgressDialogVisibility == Visibility.Visible)
             {
-                DownloadDialog.Visibility = Visibility.Collapsed;
+                AppShell.Current.HideProgressDialog();
+                DownloadCancellationTokenSource?.Cancel();
                 MediaDownloader.Instance.Purge();
                 e.Handled = true;
                 return;
@@ -941,6 +942,8 @@ namespace Locana.Pages
             }
         }
 
+        private CancellationTokenSource DownloadCancellationTokenSource;
+
         private async void FetchSelectedImages()
         {
             var items = ContentsGrid.SelectedItems;
@@ -953,34 +956,41 @@ namespace Locana.Pages
             var sum = items.Count;
             var msgTemplate = SystemUtil.GetStringResource("Download_DialogMessage");
 
-            DownloadDialog.ProgressMessage = string.Format(msgTemplate, 0, sum);
-            DownloadDialog.Visibility = Visibility.Visible;
-            LayoutRoot.IsHitTestVisible = false;
+            AppShell.Current.ShowProgressDialog(string.Format(msgTemplate, 0, sum));
 
             var completed = 0;
+            DownloadCancellationTokenSource = new CancellationTokenSource();
 
             foreach (var item in new List<object>(items))
             {
                 try
                 {
-                    await EnqueueDownload(item as Thumbnail);
-                    DownloadDialog.ProgressMessage = string.Format(msgTemplate, ++completed, sum);
+                    await EnqueueDownload(item as Thumbnail, DownloadCancellationTokenSource);
+                    AppShell.Current.ShowProgressDialog(string.Format(msgTemplate, ++completed, sum));
                     // Count up completion count.
+                }
+                catch (TaskCanceledException)
+                {
+                    DebugUtil.Log(() => "Bulk download cancelled");
                 }
                 catch (Exception e)
                 {
                     DebugUtil.Log(() => e.StackTrace);
                     AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource("Download_Failure") });
                 }
+                if (DownloadCancellationTokenSource?.IsCancellationRequested ?? false)
+                {
+                    AppShell.Current.HideProgressDialog();
+                    return;
+                }
             }
 
-            LayoutRoot.IsHitTestVisible = true;
-            DownloadDialog.Visibility = Visibility.Collapsed;
+            AppShell.Current.HideProgressDialog();
             // TODO Re-select failed images?
             AppShell.Current.Toast.PushToast(new ToastContent() { Text = SystemUtil.GetStringResource("Download_Completion") });
         }
 
-        private async Task EnqueueDownload(Thumbnail source)
+        private async Task EnqueueDownload(Thumbnail source, CancellationTokenSource cts = null)
         {
             if (source.IsMovie)
             {
@@ -995,18 +1005,18 @@ namespace Locana.Pages
                         break;
                 }
                 DebugUtil.Log(() => "Download movie content");
-                await MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext);
+                await MediaDownloader.Instance.EnqueueVideo(new Uri(source.Source.OriginalUrl), source.Source.Name, ext, cts);
             }
             else if (ApplicationSettings.GetInstance().PrioritizeOriginalSizeContents && source.Source.OriginalUrl != null)
             {
                 DebugUtil.Log(() => "Download original size image");
                 await MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.OriginalUrl), source.Source.Name,
-                    source.Source.MimeType == MimeType.Jpeg ? ".jpg" : null);
+                    source.Source.MimeType == MimeType.Jpeg ? ".jpg" : null, cts);
             }
             else
             {
                 DebugUtil.Log(() => "Fallback to large size image");
-                await MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg");
+                await MediaDownloader.Instance.EnqueueImage(new Uri(source.Source.LargeUrl), source.Source.Name, ".jpg", cts);
             }
         }
 

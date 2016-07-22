@@ -46,7 +46,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid>
+    <Grid x:Name="LayoutRoot">
         <!--  Top-level navigation menu + app content  -->
         <SplitView x:Name="RootSplitView"
                    DisplayMode="Inline"
@@ -93,6 +93,11 @@
                 </Frame.ContentTransitions>
             </Frame>
         </SplitView>
+
+        <controls:ProgressDialog x:Name="DownloadDialog"
+                                 Grid.RowSpan="3"
+                                 Canvas.ZIndex="10"
+                                 Visibility="Collapsed" />
 
         <controls:Toast x:Name="MessageToast"
                         MinHeight="48"

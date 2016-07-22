@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -43,20 +44,25 @@ namespace Locana.Utility
 
         public Task EnqueueVideo(Uri uri, string nameBase, string extension = null)
         {
-            return Enqueue(uri, nameBase, Mediatype.Video, extension);
+            return Enqueue(uri, nameBase, Mediatype.Video, null, extension);
         }
 
-        public Task EnqueueImage(Uri uri, string nameBase, string extension)
+        public Task EnqueueVideo(Uri uri, string nameBase, string extension, CancellationTokenSource cts = null)
         {
-            return Enqueue(uri, nameBase, Mediatype.Image, extension);
+            return Enqueue(uri, nameBase, Mediatype.Video, cts, extension);
+        }
+
+        public Task EnqueueImage(Uri uri, string nameBase, string extension, CancellationTokenSource cts = null)
+        {
+            return Enqueue(uri, nameBase, Mediatype.Image, cts, extension);
         }
 
         public Task EnqueuePostViewImage(Uri uri)
         {
-            return Enqueue(uri, DIRECTORY_NAME, Mediatype.Image, ".jpg");
+            return Enqueue(uri, DIRECTORY_NAME, Mediatype.Image, null, ".jpg");
         }
 
-        private async Task Enqueue(Uri uri, string namebase, Mediatype type, string extension = null)
+        private async Task Enqueue(Uri uri, string namebase, Mediatype type, CancellationTokenSource cts, string extension = null)
         {
             DebugUtil.LogSensitive(() => "ContentsDownloader: Enqueue {0}", uri.AbsolutePath);
 
@@ -83,6 +89,7 @@ namespace Locana.Utility
                     Mediatype = type,
                     FileExtension = extension,
                     CompletionSource = tcs,
+                    CancellationTokenSource = cts,
                 };
                 DownloadQueue.Enqueue(req);
                 QueueStatusUpdated?.Invoke(DownloadQueue.Count);
@@ -137,10 +144,17 @@ namespace Locana.Utility
                 {
                     res = await task;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     req.Error?.Invoke(DownloaderError.Network, geoResult);
-                    req.CompletionSource?.TrySetResult(false);
+                    req.CompletionSource?.TrySetException(e);
+                    return;
+                }
+
+                if (req.CancellationTokenSource?.IsCancellationRequested ?? false)
+                {
+                    req.CompletionSource?.TrySetCanceled(req.CancellationTokenSource.Token);
+                    req.Error?.Invoke(DownloaderError.Cancelled, geoResult);
                     return;
                 }
 
@@ -164,6 +178,13 @@ namespace Locana.Utility
                     }
                 }
 
+                if (req.CancellationTokenSource?.IsCancellationRequested ?? false)
+                {
+                    req.CompletionSource?.TrySetCanceled(req.CancellationTokenSource.Token);
+                    req.Error?.Invoke(DownloaderError.Cancelled, geoResult);
+                    return;
+                }
+
                 using (imageStream)
                 {
                     StorageFolder rootFolder;
@@ -178,7 +199,7 @@ namespace Locana.Utility
                             // rootFolder = KnownFolders.VideosLibrary;
                             break;
                         default:
-                            req.CompletionSource?.TrySetResult(false);
+                            req.CompletionSource?.TrySetException(new NotSupportedException(req.Mediatype + " is not supported"));
                             return;
                     }
 
@@ -188,7 +209,8 @@ namespace Locana.Utility
 
                     using (var outStream = await file.OpenStreamForWriteAsync())
                     {
-                        await imageStream.CopyToAsync(outStream);
+                        if (req.CancellationTokenSource == null) { await imageStream.CopyToAsync(outStream); }
+                        else { await imageStream.CopyToAsync(outStream, 81920, req.CancellationTokenSource.Token); }
                     }
 
                     req.Completed?.Invoke(folder, file, geoResult);
@@ -201,7 +223,7 @@ namespace Locana.Utility
                 DebugUtil.Log(() => e.Message);
                 DebugUtil.Log(() => e.StackTrace);
                 req.Error?.Invoke(DownloaderError.Unknown, GeotaggingResult.Result.NotRequested); // TODO
-                req.CompletionSource?.TrySetResult(false);
+                req.CompletionSource?.TrySetException(e);
             }
         }
     }
@@ -215,6 +237,7 @@ namespace Locana.Utility
         public Action<StorageFolder, StorageFile, GeotaggingResult.Result> Completed { set; get; }
         public Action<DownloaderError, GeotaggingResult.Result> Error { set; get; }
         public TaskCompletionSource<bool> CompletionSource { set; get; }
+        public CancellationTokenSource CancellationTokenSource { set; get; }
     }
 
     public enum Mediatype
@@ -232,6 +255,7 @@ namespace Locana.Utility
         Gone,
         Unknown,
         None,
+        Cancelled,
     }
 
     public class GeotaggingResult

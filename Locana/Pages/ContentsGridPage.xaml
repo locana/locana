@@ -80,12 +80,6 @@
             </c:MoviePlaybackScreen.Background>
         </c:MoviePlaybackScreen>
 
-        <c:ProgressDialog x:Name="DownloadDialog"
-                          Grid.RowSpan="3"
-                          VerticalAlignment="Center"
-                          Canvas.ZIndex="40"
-                          Visibility="Collapsed" />
-
         <ProgressRing x:Name="ProgressCircle"
                       Grid.RowSpan="2"
                       Width="60"

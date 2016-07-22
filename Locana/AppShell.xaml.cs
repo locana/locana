@@ -73,6 +73,21 @@ namespace Locana
 
         public Toast Toast { get { return MessageToast; } }
 
+        public void ShowProgressDialog(string text)
+        {
+            LayoutRoot.IsHitTestVisible = false;
+            DownloadDialog.ProgressMessage = text;
+            DownloadDialog.Visibility = Visibility.Visible;
+        }
+
+        public void HideProgressDialog()
+        {
+            DownloadDialog.Visibility = Visibility.Collapsed;
+            LayoutRoot.IsHitTestVisible = true;
+        }
+
+        public Visibility ProgressDialogVisibility { get { return DownloadDialog.Visibility; } }
+
         public static AppShell Current = null;
 
         /// <summary>
