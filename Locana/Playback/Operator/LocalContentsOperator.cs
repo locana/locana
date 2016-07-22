@@ -79,7 +79,7 @@ namespace Locana.Playback.Operator
             };
             EventHandler<string> failed = (sender, e) =>
             {
-                tcs.SetException(new IOException());
+                tcs.TrySetException(new IOException());
             };
             MovieScreen.LocalMediaOpened += opened;
             MovieScreen.LocalMediaFailed += failed;
