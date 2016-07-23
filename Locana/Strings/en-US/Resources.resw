@@ -1179,7 +1179,8 @@ App version: {5}</value>
     <value>Download completed</value>
   </data>
   <data name="Download_DialogMessage" xml:space="preserve">
-    <value>Downloading: {0}/{1}</value>
+    <value>Downloading
+{0}/{1}</value>
   </data>
   <data name="Download_Failure" xml:space="preserve">
     <value>Download failure</value>

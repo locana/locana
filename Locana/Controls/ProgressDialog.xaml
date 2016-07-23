@@ -21,7 +21,8 @@
                        Margin="24,48,24,0"
                        HorizontalAlignment="Center"
                        Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                       Style="{StaticResource TitleTextBlockStyle}" />
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       TextAlignment="Center" />
             <ProgressRing x:Name="ProgressCircle"
                           Grid.Row="1"
                           Width="60"
