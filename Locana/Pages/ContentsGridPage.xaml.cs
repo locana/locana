@@ -145,6 +145,8 @@ namespace Locana.Pages
             {
                 UpdateInnerState(ViewerState.Single);
             });
+
+            PhotoScreen.DetailInfoDisplayStatusUpdated += () => { UpdateAppBar(); };
         }
 
         private ContentDialogSource DeleteConfirmationSource = new ContentDialogSource
@@ -186,9 +188,11 @@ namespace Locana.Pages
             {
                 case NARROW_STATE:
                     AppBarUnit.Background = MoviePlayer.Visibility.IsVisible() ? AccentBrush : ChromeLowBrush;
+                    PhotoScreen.AlwaysShowDetailInfo = false;
                     break;
                 default:
                     AppBarUnit.Background = AccentBrush;
+                    PhotoScreen.AlwaysShowDetailInfo = true;
                     break;
             }
         }
@@ -588,21 +592,31 @@ namespace Locana.Pages
                         }
                         break;
                     case ViewerState.StillPlayback:
-                        if (PhotoScreen.DetailInfoDisplayed)
+                        if (PhotoScreen.AlwaysShowDetailInfo)
                         {
                             CommandBarManager.Clear()
                                 .Command(AppBarItem.RotateRight)
                                 .Command(AppBarItem.RotateLeft)
-                                .Command(AppBarItem.HideDetailInfo)
                                 .Command(AppBarItem.Close);
                         }
                         else
                         {
-                            CommandBarManager.Clear()
-                                .Command(AppBarItem.RotateRight)
-                                .Command(AppBarItem.RotateLeft)
-                                .Command(AppBarItem.ShowDetailInfo)
-                                .Command(AppBarItem.Close);
+                            if (PhotoScreen.DetailInfoDisplayed)
+                            {
+                                CommandBarManager.Clear()
+                                    .Command(AppBarItem.RotateRight)
+                                    .Command(AppBarItem.RotateLeft)
+                                    .Command(AppBarItem.HideDetailInfo)
+                                    .Command(AppBarItem.Close);
+                            }
+                            else
+                            {
+                                CommandBarManager.Clear()
+                                    .Command(AppBarItem.RotateRight)
+                                    .Command(AppBarItem.RotateLeft)
+                                    .Command(AppBarItem.ShowDetailInfo)
+                                    .Command(AppBarItem.Close);
+                            }
                         }
                         break;
                     case ViewerState.MoviePlayback:
@@ -839,7 +853,7 @@ namespace Locana.Pages
                 var res = await Operator.PlaybackStillImage(content);
 
                 PhotoScreen.SourceBitmap = res.Item1;
-                PhotoScreen.Init();
+                PhotoScreen.InitImageTransform();
                 PhotoScreen.SetBitmap();
 
                 PhotoData.MetaData = res.Item2;
