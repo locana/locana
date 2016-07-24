@@ -99,8 +99,6 @@ namespace Locana.Playback
             };
         }
 
-        // readonly string[] IMAGE_MIME_TYPES = { "image/jpeg", "image/png", "image/bmp", "image/gif", "video/mp4" };
-
         private async Task LoadFilesRecursively(List<StorageFile> into, StorageFolder folder, CancellationTokenSource cancel)
         {
             var files = await folder.GetFilesAsync();
@@ -110,10 +108,9 @@ namespace Locana.Playback
                 return;
             }
 
-            // into.AddRange(files.Where(file => IMAGE_MIME_TYPES.Any(type => file.ContentType.Equals(type, StringComparison.OrdinalIgnoreCase))));
-            into.AddRange(files.Where(file =>
-                file.ContentType.StartsWith(MimeType.Image, StringComparison.OrdinalIgnoreCase)
-                || file.ContentType.StartsWith(MimeType.Video, StringComparison.OrdinalIgnoreCase)));
+            // Add any files discovered in the directory without ContentType filtering.
+            // Sometimes accurate ContentType is not obtained with StorageFile.ContentType.
+            into.AddRange(files);
 
             foreach (var child in await folder.GetFoldersAsync())
             {
