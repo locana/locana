@@ -47,6 +47,32 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowWidthStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <util:LocanaStateTrigger LocanaState="ExtraWide" />
+                        <util:LocanaStateTrigger LocanaState="Wide" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
+                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource ExtraLargeGridItemTemplate}" />
+                        <Setter Target="GridHolder.(Grid.RowSpan)" Value="1" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <util:LocanaStateTrigger LocanaState="Narrow" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource SmallGridItemTemplate}" />
+                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource LargeGridItemTemplate}" />
+                        <Setter Target="GridHolder.(Grid.RowSpan)" Value="2" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <CommandBar x:Name="TitleBar"
                     VerticalAlignment="Top"
                     HorizontalContentAlignment="Stretch">
@@ -273,29 +299,5 @@
                     Grid.Row="2"
                     Grid.RowSpan="1"
                     Canvas.ZIndex="40" />
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowWidthStates">
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource MediumGridItemTemplate}" />
-                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource ExtraLargeGridItemTemplate}" />
-                        <Setter Target="GridHolder.(Grid.RowSpan)" Value="1" />
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="NarrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="ContentsGrid.ItemsPanel" Value="{StaticResource SmallGridItemTemplate}" />
-                        <Setter Target="GroupsGrid.ItemsPanel" Value="{StaticResource LargeGridItemTemplate}" />
-                        <Setter Target="GridHolder.(Grid.RowSpan)" Value="2" />
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

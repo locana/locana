@@ -170,7 +170,7 @@ namespace Locana.Pages
 
             groups[0].CurrentStateChanged += (sender, e) =>
             {
-                UpdateAppBarColor(e.NewState.Name);
+                UpdateAppBarColor(e.NewState?.Name);
             };
             UpdateAppBarColor();
         }
