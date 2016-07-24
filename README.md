@@ -28,7 +28,7 @@ you can join our [beta test program](http://locana.github.io/win10_uwp.html).
 
 ## Feedbacks
 
-We welcome your questions, feature requests and bug reports.  
+We welcome your questions, feature requests and bug reports.
 Don't hesitate to report at [Issues page](https://github.com/locana/locana/issues).
 
 Please don't forget to read [FAQ page](http://locana.github.io/locana_faq.html) at once.
@@ -42,9 +42,9 @@ if you can speak other languages and contribute them for additional localization
 
 ## Sony Camera Remote API
 
-Camera Remote API beta is officially provided by Sony.  
+Camera Remote API beta is officially provided by Sony.
 For detail, please refer to the official site: <https://developer.sony.com/develop/cameras/>
 
-## Lincense
+## License
 
 This software is published under the [MIT License](http://opensource.org/licenses/mit-license.php).
