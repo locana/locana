@@ -352,11 +352,6 @@ namespace Locana.Pages
             }
         }
 
-        void UpdateDetailInfoCommandDisplay(bool DetailInfoDisplayed, bool AlwaysDisplayDetailInfo)
-        {
-
-        }
-
         private void NetworkObserver_DevicesCleared(object sender, EventArgs e)
         {
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
