@@ -40,22 +40,6 @@ namespace Locana.Playback
                     break;
                 }
             }
-
-            foreach (var folder in folders)
-            {
-                if (folder.Name == Album.LOCANA_DIRECTORY)
-                {
-                    continue;
-                }
-
-                DebugUtil.LogSensitive(() => "Load from local picture folder: {0}", folder.Name);
-                await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
-                if (cancel?.IsCancellationRequested ?? false)
-                {
-                    OnCancelled();
-                    break;
-                }
-            }
         }
 
         private async Task LoadVideos(CancellationTokenSource cancel)
@@ -67,22 +51,6 @@ namespace Locana.Playback
             foreach (var folder in folders)
             {
                 if (folder.Name != Album.LOCANA_DIRECTORY)
-                {
-                    continue;
-                }
-
-                DebugUtil.LogSensitive(() => "Load from local video folder: {0}", folder.Name);
-                await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
-                if (cancel?.IsCancellationRequested ?? false)
-                {
-                    OnCancelled();
-                    break;
-                }
-            }
-
-            foreach (var folder in folders)
-            {
-                if (folder.Name == Album.LOCANA_DIRECTORY)
                 {
                     continue;
                 }
