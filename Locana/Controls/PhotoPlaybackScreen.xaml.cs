@@ -27,9 +27,51 @@ namespace Locana.Controls
             {
                 if (_DetailInfoDisplayed != value)
                 {
-                    StartSlideAnimation(value);
+                    if (AlwaysShowDetailInfo)
+                    {
+                        DebugUtil.Log(() => "AlwaysShowDetailInfo is true. Ignore setting DetailInfoDisplayed.");
+                    }
+                    else
+                    {
+                        _DetailInfoDisplayed = value;
+                        DetailInfoDisplayStatusUpdated?.Invoke(value, AlwaysShowDetailInfo);
+                        StartSlideAnimation(value);
+                    }
                 }
             }
+        }
+
+        private bool _AlwaysShowDetailInfo = false;
+        public bool AlwaysShowDetailInfo
+        {
+            get { return _AlwaysShowDetailInfo; }
+            set
+            {
+                DetailInfoDisplayed = value;
+                if (_AlwaysShowDetailInfo != value)
+                {
+                    _AlwaysShowDetailInfo = value;
+                    DetailInfoDisplayStatusUpdated?.Invoke(DetailInfoDisplayed, value);
+                    UpdateLayout(value);
+                }
+            }
+        }
+
+        public Action<bool, bool> DetailInfoDisplayStatusUpdated;
+
+        void UpdateLayout(bool always_show)
+        {
+            if (always_show)
+            {
+                // for wide view
+                Grid.SetColumnSpan(Image, 1);
+            }
+            else
+            {
+                Grid.SetColumnSpan(Image, 2);
+            }
+
+            InitImageTransform();
         }
 
         void StartSlideAnimation(bool displayed)
@@ -130,7 +172,7 @@ namespace Locana.Controls
             Image.Source = _SourceBitmap;
         }
 
-        public void Init()
+        public void InitImageTransform()
         {
             var transform = Image.RenderTransform as CompositeTransform;
             if (transform != null)
@@ -165,7 +207,7 @@ namespace Locana.Controls
 
         private void Image_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Init();
+            InitImageTransform();
         }
 
         private void Image_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
@@ -180,7 +222,7 @@ namespace Locana.Controls
 
         private void TransformImage(double scale, double translationX, double translationY)
         {
-            var parent = Image.Parent as Border;
+            var parent = Image.Parent as Grid;
             var transform = Image.RenderTransform as CompositeTransform;
 
             transform.ScaleX = LimitToRange(transform.ScaleX * scale, MIN_SCALE, MAX_SCALE);
@@ -201,6 +243,12 @@ namespace Locana.Controls
             var translateLimitY = (parent.ActualHeight + v_size) / 2 - IMAGE_CLEARANCE;
             transform.TranslateX = LimitToRange(transform.TranslateX + translationX, -translateLimitX, translateLimitX);
             transform.TranslateY = LimitToRange(transform.TranslateY + translationY, -translateLimitY, translateLimitY);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartSlideAnimation(DetailInfoDisplayed);
+            UpdateLayout(AlwaysShowDetailInfo);
         }
     }
 

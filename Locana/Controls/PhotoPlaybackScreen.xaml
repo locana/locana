@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="400"
+             Loaded="UserControl_Loaded"
              mc:Ignorable="d">
 
 
@@ -47,32 +48,44 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Image Name="Image"
+               Grid.ColumnSpan="2"
+               CacheMode="BitmapCache"
+               Canvas.ZIndex="2"
+               DoubleTapped="Image_DoubleTapped"
+               ManipulationDelta="Image_ManipulationDelta"
+               ManipulationMode="All"
+               PointerWheelChanged="Image_PointerWheelChanged"
+               RenderTransformOrigin="0.5, 0.5">
+            <Image.RenderTransform>
+                <CompositeTransform />
+            </Image.RenderTransform>
+        </Image>
+
         <Border x:Name="background"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                Canvas.ZIndex="1"
                 DoubleTapped="Image_DoubleTapped"
                 Padding="0,24"
                 PointerWheelChanged="Image_PointerWheelChanged">
             <Border.Background>
                 <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
             </Border.Background>
-            <Image Name="Image"
-                   CacheMode="BitmapCache"
-                   DoubleTapped="Image_DoubleTapped"
-                   ManipulationDelta="Image_ManipulationDelta"
-                   ManipulationMode="All"
-                   PointerWheelChanged="Image_PointerWheelChanged"
-                   RenderTransformOrigin="0.5, 0.5">
-                <Image.RenderTransform>
-                    <CompositeTransform />
-                </Image.RenderTransform>
-            </Image>
-        </Border>
 
+        </Border>
         <Grid Name="DetailInfoPanel"
+              Grid.Column="1"
               Width="230"
               HorizontalAlignment="Right"
-              VerticalAlignment="Stretch">
+              VerticalAlignment="Stretch"
+              Canvas.ZIndex="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="auto" />
