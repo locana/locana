@@ -146,10 +146,7 @@ namespace Locana.Pages
                 UpdateInnerState(ViewerState.Single);
             });
 
-            PhotoScreen.DetailInfoDisplayStatusUpdated += (displayed, always_displayed) =>
-            {
-                UpdateAppBar();
-            };
+            PhotoScreen.DetailInfoDisplayStatusUpdated += () => { UpdateAppBar(); };
         }
 
         private ContentDialogSource DeleteConfirmationSource = new ContentDialogSource

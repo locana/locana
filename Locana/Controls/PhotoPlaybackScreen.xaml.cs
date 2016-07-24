@@ -34,7 +34,7 @@ namespace Locana.Controls
                     else
                     {
                         _DetailInfoDisplayed = value;
-                        DetailInfoDisplayStatusUpdated?.Invoke(value, AlwaysShowDetailInfo);
+                        DetailInfoDisplayStatusUpdated?.Invoke();
                         StartSlideAnimation(value);
                     }
                 }
@@ -51,13 +51,13 @@ namespace Locana.Controls
                 if (_AlwaysShowDetailInfo != value)
                 {
                     _AlwaysShowDetailInfo = value;
-                    DetailInfoDisplayStatusUpdated?.Invoke(DetailInfoDisplayed, value);
+                    DetailInfoDisplayStatusUpdated?.Invoke();
                     UpdateLayout(value);
                 }
             }
         }
 
-        public Action<bool, bool> DetailInfoDisplayStatusUpdated;
+        public Action DetailInfoDisplayStatusUpdated;
 
         void UpdateLayout(bool always_show)
         {
