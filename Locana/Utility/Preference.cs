@@ -27,6 +27,8 @@ namespace Locana.Utility
         private const string init_launched_datetime = "init_datetime";
         private const string last_version = "last_version";
 
+        private const string last_control_udn = "last_control_udn";
+
         public static T GetProperty<T>(string key, T defaultValue)
         {
             var settings = ApplicationData.Current.LocalSettings;
@@ -85,6 +87,12 @@ namespace Locana.Utility
                 }
             }
             set { SetProperty(last_version, value); }
+        }
+
+        public static string LastControlUdn
+        {
+            get { return GetProperty<string>(last_control_udn, null); }
+            set { SetProperty(last_control_udn, value); }
         }
 
         public static bool PostviewSyncEnabled
