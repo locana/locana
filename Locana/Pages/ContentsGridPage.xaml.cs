@@ -226,18 +226,20 @@ namespace Locana.Pages
                 menu.Items.Add(item);
             });
 
-            NetworkObserver.INSTANCE.CdsDevices.Where(upnp =>
-            {
-                return upnp.UDN != RemoteStorageId;
-            }).ToList().ForEach(upnp =>
-            {
-                var item = new RemoteStorageMenuFlyoutItem(upnp.UDN, StorageType.Dlna)
+            NetworkObserver.INSTANCE.CdsDevices
+                .Where(upnp => upnp.UDN != RemoteStorageId)
+                .Where(upnp => upnp.FriendlyName != "DSC-QX10")
+                .Where(upnp => upnp.FriendlyName != "DSC-QX100")
+                .ToList()
+                .ForEach(upnp =>
                 {
-                    Text = upnp.FriendlyName,
-                };
-                item.Tapped += RemoteStorage_Tapped;
-                menu.Items.Add(item);
-            });
+                    var item = new RemoteStorageMenuFlyoutItem(upnp.UDN, StorageType.Dlna)
+                    {
+                        Text = upnp.FriendlyName,
+                    };
+                    item.Tapped += RemoteStorage_Tapped;
+                    menu.Items.Add(item);
+                });
 
             return menu;
         }
