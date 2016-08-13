@@ -51,6 +51,11 @@ namespace Locana.Pages
 
         private EntrancePanelGroupCollection panelSource = new EntrancePanelGroupCollection();
 
+        public void OnResumed()
+        {
+            NetworkObserver.INSTANCE.ForceRestart();
+        }
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);

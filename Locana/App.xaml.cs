@@ -1,4 +1,5 @@
-﻿using Locana.Utility;
+﻿using Locana.Pages;
+using Locana.Utility;
 using System;
 using System.Reflection;
 using Windows.ApplicationModel;
@@ -167,6 +168,12 @@ namespace Locana
         private void OnResuming(object sender, object e)
         {
             AutoConnectionEnabled = true;
+
+            var frame = AppShell.Current.AppFrame;
+            if (frame.CurrentSourcePageType == typeof(EntrancePage))
+            {
+                (frame.Content as EntrancePage).OnResumed();
+            }
         }
 
         public bool AutoConnectionEnabled { set; get; } = true;
