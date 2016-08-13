@@ -51,6 +51,11 @@ namespace Locana.Pages
 
         private EntrancePanelGroupCollection panelSource = new EntrancePanelGroupCollection();
 
+        public void OnResumed()
+        {
+            NetworkObserver.INSTANCE.ForceRestart();
+        }
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -84,6 +89,12 @@ namespace Locana.Pages
             devicesGroup.Clear();
             foreach (var device in NetworkObserver.INSTANCE.CameraDevices)
             {
+                var panel = new DevicePanel(device);
+                if (TryAutoConnect(panel))
+                {
+                    break;
+                }
+
                 devicesGroup.Add(new DevicePanel(device));
             }
 
@@ -101,9 +112,25 @@ namespace Locana.Pages
         {
             var task = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                devicesGroup.Add(new DevicePanel(e.CameraDevice));
+                var panel = new DevicePanel(e.CameraDevice);
+                if (TryAutoConnect(panel))
+                {
+                    return;
+                }
+
+                devicesGroup.Add(panel);
                 WifiHint.Visibility = Visibility.Collapsed;
             });
+        }
+
+        private bool TryAutoConnect(DevicePanel panel)
+        {
+            if ((Application.Current as App).AutoConnectionEnabled && Preference.LastControlUdn == panel.Device.Udn)
+            {
+                panel.Transit();
+                return true;
+            }
+            return false;
         }
 
         private void NetworkObserver_DevicesCleared(object sender, EventArgs e)
@@ -125,7 +152,7 @@ namespace Locana.Pages
         {
             var grid = sender as Grid;
             var content = grid.DataContext as EntrancePanel;
-            content.OnClick();
+            content.Transit();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

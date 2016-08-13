@@ -1,4 +1,5 @@
-﻿using Locana.Utility;
+﻿using Locana.Pages;
+using Locana.Utility;
 using System;
 using System.Reflection;
 using Windows.ApplicationModel;
@@ -25,6 +26,7 @@ namespace Locana
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.Resuming += OnResuming;
 
             Kazyx.DeviceDiscovery.SsdpDiscovery.Logger = (msg) => DebugUtil.Log(() => msg);
             Kazyx.ImageStream.StreamProcessor.Logger = (msg) => DebugUtil.Log(() => msg);
@@ -162,5 +164,18 @@ namespace Locana
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        private void OnResuming(object sender, object e)
+        {
+            AutoConnectionEnabled = true;
+
+            var frame = AppShell.Current.AppFrame;
+            if (frame.CurrentSourcePageType == typeof(EntrancePage))
+            {
+                (frame.Content as EntrancePage).OnResumed();
+            }
+        }
+
+        public bool AutoConnectionEnabled { set; get; } = true;
     }
 }

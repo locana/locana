@@ -103,7 +103,7 @@ namespace Locana.DataModel
         public EntrancePanel(string name, string imageTemplateId, Action onClick)
         {
             PanelTitle = name;
-            OnClick = onClick;
+            Transit = onClick;
             Resource = Application.Current.Resources[imageTemplateId] as DataTemplate;
         }
 
@@ -111,7 +111,7 @@ namespace Locana.DataModel
 
         public DataTemplate Resource { private set; get; }
 
-        public Action OnClick { private set; get; }
+        public Action Transit { private set; get; }
     }
 
     public class DevicePanel : EntrancePanel
@@ -125,7 +125,12 @@ namespace Locana.DataModel
                  frame.Navigate(typeof(ShootingPage), device);
              })
         {
+            Device = device;
+        }
 
+        public TargetDevice Device
+        {
+            private set; get;
         }
     }
 

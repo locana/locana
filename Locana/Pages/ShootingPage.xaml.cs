@@ -278,11 +278,18 @@ namespace Locana.Pages
         {
             base.OnNavigatedTo(e);
             var target = e.Parameter as TargetDevice;
+
             await SetupScreen(target);
 
             MediaDownloader.Instance.Fetched += OnFetchdImage;
 
             await SetupGeolocatorManager();
+
+            if (target != null)
+            {
+                Preference.LastControlUdn = target.Udn;
+                (Application.Current as App).AutoConnectionEnabled = false;
+            }
         }
 
         private async Task SetupGeolocatorManager()
