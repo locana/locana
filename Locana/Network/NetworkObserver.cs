@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Windows.Devices.WiFiDirect;
 using Windows.Networking.Connectivity;
 
 namespace Locana.Network
@@ -201,12 +202,19 @@ namespace Locana.Network
             OnDevicesCleared();
         }
 
-        /*
         public void RegisterWifiDirectDevice(WiFiDirectDevice device)
         {
-            discovery.TargetWifiDirectDevices = device.GetConnectionEndpointPairs();
+            DebugUtil.Log(() => "Register WFD device: " + device.DeviceId);
+            ConnectedWfdDevices.Add(device);
         }
-        */
+
+        public void UnregisterWfdDevice(WiFiDirectDevice device)
+        {
+            DebugUtil.Log(() => "Unregister WFD device: " + device.DeviceId);
+            ConnectedWfdDevices.Remove(device);
+        }
+
+        private HashSet<WiFiDirectDevice> ConnectedWfdDevices = new HashSet<WiFiDirectDevice>();
 
         private readonly Regex CameraApRegex = new Regex("^DIRECT-[a-z][a-z][A-Z]\\d:");
 
@@ -229,6 +237,13 @@ namespace Locana.Network
         private async Task checkConnection(CancellationTokenSource cancel)
         {
             var adapters = await SsdpDiscovery.GetActiveAdaptersAsync();
+            foreach (var wfd in ConnectedWfdDevices)
+            {
+                foreach (var pair in wfd.GetConnectionEndpointPairs())
+                {
+                    adapters.Add(pair.LocalHostName.IPInformation.NetworkAdapter);
+                }
+            }
             discovery.TargetNetworkAdapters = adapters;
 
             while (!cancel.IsCancellationRequested)

@@ -199,7 +199,6 @@
     <Compile Include="DataModel\PlaybackThumbnail.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="NavMenuItem.cs" />
-    <Compile Include="Network\WifiDirectUtil.cs" />
     <Compile Include="OssLicense.cs" />
     <Compile Include="Pages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
