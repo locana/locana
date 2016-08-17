@@ -98,7 +98,7 @@ namespace Locana.Pages
                     if (!Connecting)
                     {
                         DebugUtil.Log(() => "Find peers async");
-                        var devices = await DeviceInformation.FindAllAsync(WiFiDirectDevice.GetDeviceSelector(WiFiDirectDeviceSelectorType.DeviceInterface));
+                        var devices = await DeviceInformation.FindAllAsync(WiFiDirectDevice.GetDeviceSelector(WiFiDirectDeviceSelectorType.AssociationEndpoint));
                         if (cancellationToken.IsCancellationRequested)
                         {
                             break;
