@@ -19,8 +19,7 @@
     <Grid x:Name="LayoutRoot"
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch"
-          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          IsTapEnabled="False">
+          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -61,7 +60,7 @@
         <controls:Histogram x:Name="HistogramControl"
                             VerticalAlignment="Top"
                             Canvas.ZIndex="20"
-                            IsTapEnabled="False"
+                            IsTabStop="False"
                             Visibility="{Binding HistogramDisplayed,
                                                  FallbackValue=Collapsed,
                                                  Converter={StaticResource B2VConverter}}" />
@@ -70,8 +69,7 @@
               Grid.Column="1"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Top"
-              Canvas.ZIndex="20"
-              IsTapEnabled="False">
+              Canvas.ZIndex="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
@@ -85,8 +83,7 @@
             <Grid x:Name="MainHeader"
                   Grid.Row="0"
                   Grid.ColumnSpan="3"
-                  HorizontalAlignment="Stretch"
-                  IsTapEnabled="False">
+                  HorizontalAlignment="Stretch">
                 <Grid.Background>
                     <SolidColorBrush Color="{ThemeResource SystemChromeBlackLowColor}" />
                 </Grid.Background>
@@ -105,13 +102,13 @@
                                 VerticalAlignment="Center"
                                 ContentTemplate="{Binding ShootModeImage,
                                                           Mode=OneWay}"
-                                IsTapEnabled="False" />
+                                IsTabStop="False" />
                 <ContentControl Grid.Column="1"
                                 Margin="3"
                                 VerticalAlignment="Center"
                                 ContentTemplate="{Binding ExposureModeImage,
                                                           Mode=OneWay}"
-                                IsTapEnabled="False" />
+                                IsTabStop="False" />
 
                 <ContentControl Name="RecDisplay"
                                 Grid.Column="2"
@@ -119,7 +116,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
                                 ContentTemplate="{StaticResource RecIcon}"
-                                IsTapEnabled="False"
+                                IsTabStop="False"
                                 Visibility="{Binding IsRecording,
                                                      FallbackValue=Collapsed,
                                                      Converter={StaticResource B2VConverter}}" />
@@ -127,7 +124,6 @@
                            Grid.Column="3"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
-                           IsTapEnabled="False"
                            Style="{StaticResource SubtitleTextBlockStyle}"
                            Text="{Binding RecordingCount}"
                            Visibility="{Binding IsRecordingCountAvailable,
@@ -138,12 +134,11 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 ContentTemplate="{Binding MemoryCardStatusImage}"
-                                IsTapEnabled="False" />
+                                IsTabStop="False" />
                 <TextBlock x:Name="StorageAmountText"
                            Grid.Column="6"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
-                           IsTapEnabled="False"
                            Style="{StaticResource SubtitleTextBlockStyle}"
                            Text="{Binding RecordbaleAmount}" />
                 <controls:BatteryStatus x:Name="BatteryStatusDisplay"
@@ -152,15 +147,14 @@
                                         Height="20"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        IsTapEnabled="False"
+                                        IsTabStop="False"
                                         Visibility="{Binding IsBatteryInfoAvailable,
                                                              FallbackValue=Collapsed,
                                                              Converter={StaticResource B2VConverter}}" />
             </Grid>
             <Grid x:Name="ShootingParams"
                   Grid.Row="1"
-                  Grid.ColumnSpan="3"
-                  IsTapEnabled="False">
+                  Grid.ColumnSpan="3">
                 <Grid.Background>
                     <SolidColorBrush Color="{ThemeResource SystemChromeBlackLowColor}" />
                 </Grid.Background>
@@ -173,7 +167,6 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Foreground="{x:Null}"
-                           IsTapEnabled="False"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text=" " />
                 <TextBlock Name="Fnumber"
@@ -182,7 +175,6 @@
                            Margin="8,0,0,0"
                            HorizontalAlignment="Center"
                            Foreground="{Binding FNumberBrush}"
-                           IsTapEnabled="False"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding FnumberDisplayValue}"
                            TextAlignment="Center"
@@ -195,7 +187,6 @@
                            Margin="8,0,0,0"
                            HorizontalAlignment="Center"
                            Foreground="{Binding ShutterSpeedBrush}"
-                           IsTapEnabled="False"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding ShutterSpeedDisplayValue}"
                            TextAlignment="Center"
@@ -208,7 +199,6 @@
                            Margin="8,0,0,0"
                            HorizontalAlignment="Center"
                            Foreground="{Binding IsoBrush}"
-                           IsTapEnabled="False"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding ISODisplayValue}"
                            TextAlignment="Center"
@@ -221,7 +211,6 @@
                            Margin="8,0,0,0"
                            HorizontalAlignment="Center"
                            Foreground="{Binding EvBrush}"
-                           IsTapEnabled="False"
                            Style="{StaticResource BaseTextBlockStyle}"
                            Text="{Binding EvDisplayValue}"
                            TextAlignment="Center"
@@ -235,23 +224,20 @@
               Grid.Column="2"
               HorizontalAlignment="Right"
               VerticalAlignment="Stretch"
-              Canvas.ZIndex="50"
-              IsTapEnabled="False">
+              Canvas.ZIndex="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="224" />
             </Grid.ColumnDefinitions>
             <Grid HorizontalAlignment="Right"
                   VerticalAlignment="Center"
-                  IsTapEnabled="False"
                   ManipulationCompleted="ControlPanelArrow_ManipulationCompleted"
                   ManipulationMode="All"
                   Tapped="ControlPanelArrow_Tapped">
                 <!--  To expand manipulatable area.  -->
                 <Rectangle HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
-                           Fill="Transparent"
-                           IsTapEnabled="False" />
+                           Fill="Transparent" />
                 <ContentControl x:Name="OpenControlPanelImage"
                                 Width="50"
                                 Height="50"
@@ -259,8 +245,7 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 ContentTemplate="{StaticResource OpenControlPanel}"
-                                IsTabStop="False"
-                                IsTapEnabled="False" />
+                                IsTabStop="False" />
             </Grid>
 
             <ScrollViewer x:Name="ControlPanelScroll"
@@ -272,8 +257,7 @@
                 <StackPanel x:Name="ControlPanel"
                             Grid.Row="1"
                             Margin="12"
-                            VerticalAlignment="Top"
-                            IsTapEnabled="False" />
+                            VerticalAlignment="Top" />
             </ScrollViewer>
         </Grid>
 
@@ -281,8 +265,7 @@
                     Grid.Row="1"
                     Grid.RowSpan="4"
                     VerticalAlignment="Bottom"
-                    Canvas.ZIndex="30"
-                    IsTapEnabled="False">
+                    Canvas.ZIndex="30">
 
             <controls:MultiModeShutterButton x:Name="MultiShutterButton"
                                              Grid.Row="2"
@@ -293,7 +276,7 @@
                                              Canvas.ZIndex="100"
                                              CurrentModeButtonTemplate="{Binding ShutterButtonImage,
                                                                                  Mode=OneWay}"
-                                             IsTapEnabled="False"
+                                             IsTabStop="False"
                                              ModeButtonsEnabled="{Binding ShootModeChangingAvailable,
                                                                           Mode=OneWay,
                                                                           FallbackValue=false}"
@@ -302,44 +285,41 @@
                                                                             FallbackValue=false}"
                                              Visibility="{Binding ShootButtonDisplayed,
                                                                   Converter={StaticResource B2VConverter}}" />
-            <Grid x:Name="Sliders"
-                  MaxWidth="400"
-                  IsTapEnabled="False">
+            <Grid x:Name="Sliders" MaxWidth="400">
                 <controls:ShootingParamSlider x:Name="FnumberSlider"
                                               IconDataTemplate="{StaticResource ApertureIcon}"
-                                              IsTapEnabled="False"
+                                              IsTabStop="False"
                                               Parameter="{Binding Device.Status.FNumber}"
                                               Style="{StaticResource ShootingParamSliderStyle}"
                                               Visibility="Collapsed" />
                 <controls:ShootingParamSlider x:Name="SSSlider"
                                               IconDataTemplate="{StaticResource SSIcon}"
-                                              IsTapEnabled="False"
+                                              IsTabStop="False"
                                               Parameter="{Binding Device.Status.ShutterSpeed}"
                                               Style="{StaticResource ShootingParamSliderStyle}"
                                               Visibility="Collapsed" />
                 <controls:ShootingParamSlider x:Name="ISOSlider"
                                               IconDataTemplate="{StaticResource IsoIcon}"
-                                              IsTapEnabled="False"
+                                              IsTabStop="False"
                                               Parameter="{Binding Device.Status.ISOSpeedRate}"
                                               Style="{StaticResource ShootingParamSliderStyle}"
                                               Visibility="Collapsed" />
                 <controls:EvSlider x:Name="EvSlider"
                                    IconDataTemplate="{StaticResource EvIcon}"
-                                   IsTapEnabled="False"
+                                   IsTabStop="False"
                                    Parameter="{Binding Device.Status.EvInfo}"
                                    Style="{StaticResource EvSliderStyle}"
                                    Visibility="Collapsed" />
 
                 <controls:ProgramShiftSlider x:Name="ProgramShiftSlider"
                                              IconDataTemplate="{StaticResource ProgramShiftIcon}"
-                                             IsTapEnabled="False"
+                                             IsTabStop="False"
                                              Style="{StaticResource ProgramShiftSliderStyle}"
                                              Visibility="Collapsed" />
 
                 <Grid x:Name="ZoomElements"
                       Height="80"
                       HorizontalAlignment="Stretch"
-                      IsTapEnabled="False"
                       Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
@@ -361,7 +341,7 @@
                                       CurrentBoxIndex="{Binding ZoomBoxIndex,
                                                                 Mode=OneWay,
                                                                 FallbackValue=0}"
-                                      IsTapEnabled="False"
+                                      IsTabStop="False"
                                       PositionInCurrentBox="{Binding ZoomPositionInCurrentBox,
                                                                      Mode=OneWay,
                                                                      FallbackValue=0}"
