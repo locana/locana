@@ -17,6 +17,7 @@ using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.FileProperties;
+using Windows.System;
 using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -36,6 +37,107 @@ namespace Locana.Pages
 
             InitializeCommandBar();
             InitializeUI();
+        }
+
+        protected override void OnKeyDown(KeyRoutedEventArgs e)
+        {
+            if (e.KeyStatus.RepeatCount == 1)
+            {
+                switch (e.Key)
+                {
+                    case VirtualKey.Control:
+                        IsCtlKeyPressed = true;
+                        break;
+                    case VirtualKey.Shift:
+                        IsShiftKeyPressed = true;
+                        break;
+                    case VirtualKey.Menu:
+                        IsAltKeyPressed = true;
+                        break;
+                    case VirtualKey.Space:
+                        if (IsAltKeyPressed) { /* Tick shooting mode */}
+                        else { ShutterButtonPressed(); }
+                        break;
+                    case VirtualKey.Back:
+                        AppShell.Current.AppFrame.GoBack();
+                        break;
+                    case VirtualKey.Left:
+                        if (IsAltKeyPressed && !ControlPanelDisplayed) { ToggleControlPanel(); }
+                        break;
+                    case VirtualKey.Right:
+                        if (IsAltKeyPressed && ControlPanelDisplayed) { ToggleControlPanel(); }
+                        break;
+                    case VirtualKey.PageDown:
+                    case VirtualKey.Home:
+                        if (ZoomElements.Visibility.IsVisible()) { ZoomOutTick(); }
+                        else if (ISOSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                        else if (EvSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                        else if (FnumberSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                        else if (SSSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                        else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                        break;
+                    case VirtualKey.PageUp:
+                    case VirtualKey.End:
+                        if (ZoomElements.Visibility == Visibility.Visible) { ZoomInTick(); }
+                        else if (ISOSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                        else if (EvSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                        else if (FnumberSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                        else if (SSSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                        else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                        break;
+                    case VirtualKey.Up:
+                        if (IsAltKeyPressed && !AppBarUnit.IsOpen) { AppBarUnit.IsOpen = true; }
+                        break;
+                    case VirtualKey.Down:
+                        if (IsAltKeyPressed && AppBarUnit.IsOpen) { AppBarUnit.IsOpen = false; }
+                        break;
+                    case VirtualKey.Z:
+                        _CommandBarManager.FireTapEvent(AppBarItem.Zoom, this);
+                        break;
+                    case VirtualKey.I:
+                        _CommandBarManager.FireTapEvent(AppBarItem.IsoSlider, this);
+                        break;
+                    case VirtualKey.E:
+                        _CommandBarManager.FireTapEvent(AppBarItem.EvSlider, this);
+                        break;
+                    case VirtualKey.F:
+                        _CommandBarManager.FireTapEvent(AppBarItem.FNumberSlider, this);
+                        break;
+                    case VirtualKey.S:
+                        _CommandBarManager.FireTapEvent(AppBarItem.ShutterSpeedSlider, this);
+                        break;
+                    case VirtualKey.P:
+                        _CommandBarManager.FireTapEvent(AppBarItem.ProgramShiftSlider, this);
+                        break;
+                    case VirtualKey.C:
+                        _CommandBarManager.FireTapEvent(AppBarItem.CancelTouchAF, this);
+                        break;
+
+                }
+            }
+        }
+
+        private bool IsCtlKeyPressed = false;
+        private bool IsShiftKeyPressed = false;
+        private bool IsAltKeyPressed = false;
+
+        protected override void OnKeyUp(KeyRoutedEventArgs e)
+        {
+            if (e.KeyStatus.IsKeyReleased)
+            {
+                switch (e.Key)
+                {
+                    case VirtualKey.Control:
+                        IsCtlKeyPressed = false;
+                        break;
+                    case VirtualKey.Shift:
+                        IsShiftKeyPressed = false;
+                        break;
+                    case VirtualKey.Menu:
+                        IsAltKeyPressed = false;
+                        break;
+                }
+            }
         }
 
         private void InitializeUI()
@@ -643,6 +745,11 @@ namespace Locana.Pages
 
         private void ZoomOutButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            ZoomOutTick();
+        }
+
+        private void ZoomOutTick()
+        {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.Action1Shot).IgnoreExceptions();
         }
 
@@ -657,6 +764,11 @@ namespace Locana.Pages
         }
 
         private void ZoomInButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ZoomInTick();
+        }
+
+        private void ZoomInTick()
         {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.Action1Shot).IgnoreExceptions();
         }
