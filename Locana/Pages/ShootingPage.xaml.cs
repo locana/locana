@@ -67,18 +67,30 @@ namespace Locana.Pages
                     case VirtualKey.Right:
                         if (IsAltKeyPressed && ControlPanelDisplayed) { ToggleControlPanel(); }
                         break;
-                    case VirtualKey.PageDown:
                     case VirtualKey.Home:
-                        if (ZoomElements.Visibility.IsVisible()) { ZoomOutTick(); }
+                        if (ZoomElements.Visibility.IsVisible())
+                        {
+                            if (!IsBarLeftOn)
+                            {
+                                if (IsShiftKeyPressed) { IsBarLeftOn = true; ZoomOutStart(); }
+                                else { ZoomOutTick(); }
+                            }
+                        }
                         else if (ISOSlider.Visibility.IsVisible()) { /* Tick slider left */}
                         else if (EvSlider.Visibility.IsVisible()) { /* Tick slider left */}
                         else if (FnumberSlider.Visibility.IsVisible()) { /* Tick slider left */}
                         else if (SSSlider.Visibility.IsVisible()) { /* Tick slider left */}
                         else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider left */}
                         break;
-                    case VirtualKey.PageUp:
                     case VirtualKey.End:
-                        if (ZoomElements.Visibility == Visibility.Visible) { ZoomInTick(); }
+                        if (ZoomElements.Visibility.IsVisible())
+                        {
+                            if (!IsBarRightOn)
+                            {
+                                if (IsShiftKeyPressed) { IsBarRightOn = true; ZoomInStart(); }
+                                else { ZoomInTick(); }
+                            }
+                        }
                         else if (ISOSlider.Visibility.IsVisible()) { /* Tick slider right */}
                         else if (EvSlider.Visibility.IsVisible()) { /* Tick slider right */}
                         else if (FnumberSlider.Visibility.IsVisible()) { /* Tick slider right */}
@@ -117,6 +129,9 @@ namespace Locana.Pages
             }
         }
 
+        private bool IsBarRightOn = false;
+        private bool IsBarLeftOn = false;
+
         private bool IsCtlKeyPressed = false;
         private bool IsShiftKeyPressed = false;
         private bool IsAltKeyPressed = false;
@@ -132,6 +147,16 @@ namespace Locana.Pages
                         break;
                     case VirtualKey.Shift:
                         IsShiftKeyPressed = false;
+                        if (IsBarRightOn)
+                        {
+                            IsBarRightOn = false;
+                            if (ZoomElements.Visibility.IsVisible()) { ZoomInStop(); }
+                        }
+                        else if (IsBarLeftOn)
+                        {
+                            IsBarLeftOn = false;
+                            if (ZoomElements.Visibility.IsVisible()) { ZoomOutStop(); }
+                        }
                         break;
                     case VirtualKey.Menu:
                         IsAltKeyPressed = false;
@@ -740,7 +765,7 @@ namespace Locana.Pages
 
         private void ZoomOutButton_Click(object sender, RoutedEventArgs e)
         {
-            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop).IgnoreExceptions();
+            ZoomOutStop();
         }
 
         private void ZoomOutButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -748,19 +773,29 @@ namespace Locana.Pages
             ZoomOutTick();
         }
 
+        private void ZoomOutButton_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            ZoomOutStart();
+        }
+
         private void ZoomOutTick()
         {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.Action1Shot).IgnoreExceptions();
         }
 
-        private void ZoomOutButton_Holding(object sender, HoldingRoutedEventArgs e)
+        private void ZoomOutStart()
         {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStart).IgnoreExceptions();
         }
 
+        private void ZoomOutStop()
+        {
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop).IgnoreExceptions();
+        }
+
         private void ZoomInButton_Click(object sender, RoutedEventArgs e)
         {
-            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStop).IgnoreExceptions();
+            ZoomInStop();
         }
 
         private void ZoomInButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -768,14 +803,24 @@ namespace Locana.Pages
             ZoomInTick();
         }
 
+        private void ZoomInButton_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            ZoomInStart();
+        }
+
         private void ZoomInTick()
         {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.Action1Shot).IgnoreExceptions();
         }
 
-        private void ZoomInButton_Holding(object sender, HoldingRoutedEventArgs e)
+        private void ZoomInStart()
         {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStart).IgnoreExceptions();
+        }
+
+        private void ZoomInStop()
+        {
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStop).IgnoreExceptions();
         }
 
         private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)
