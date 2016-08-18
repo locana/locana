@@ -39,11 +39,18 @@ namespace Locana.Pages
             InitializeUI();
         }
 
-        protected override void OnKeyDown(KeyRoutedEventArgs e)
+        private bool IsBarRightOn = false;
+        private bool IsBarLeftOn = false;
+
+        private bool IsCtlKeyPressed = false;
+        private bool IsShiftKeyPressed = false;
+        private bool IsAltKeyPressed = false;
+
+        private void Global_KeyDown(CoreWindow sender, KeyEventArgs args)
         {
-            if (e.KeyStatus.RepeatCount == 1)
+            if (args.KeyStatus.RepeatCount == 1)
             {
-                switch (e.Key)
+                switch (args.VirtualKey)
                 {
                     case VirtualKey.Control:
                         IsCtlKeyPressed = true;
@@ -57,9 +64,6 @@ namespace Locana.Pages
                     case VirtualKey.Space:
                         if (IsAltKeyPressed) { /* Tick shooting mode */}
                         else { ShutterButtonPressed(); }
-                        break;
-                    case VirtualKey.Back:
-                        AppShell.Current.AppFrame.GoBack();
                         break;
                     case VirtualKey.Left:
                         if (IsAltKeyPressed && !ControlPanelDisplayed) { ToggleControlPanel(); }
@@ -129,18 +133,11 @@ namespace Locana.Pages
             }
         }
 
-        private bool IsBarRightOn = false;
-        private bool IsBarLeftOn = false;
-
-        private bool IsCtlKeyPressed = false;
-        private bool IsShiftKeyPressed = false;
-        private bool IsAltKeyPressed = false;
-
-        protected override void OnKeyUp(KeyRoutedEventArgs e)
+        private void Global_KeyUp(CoreWindow sender, KeyEventArgs args)
         {
-            if (e.KeyStatus.IsKeyReleased)
+            if (args.KeyStatus.IsKeyReleased)
             {
-                switch (e.Key)
+                switch (args.VirtualKey)
                 {
                     case VirtualKey.Control:
                         IsCtlKeyPressed = false;
@@ -417,6 +414,9 @@ namespace Locana.Pages
                 Preference.LastControlUdn = target.Udn;
                 (Application.Current as App).AutoConnectionEnabled = false;
             }
+
+            CoreWindow.GetForCurrentThread().KeyDown += Global_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyUp += Global_KeyUp;
         }
 
         private async Task SetupGeolocatorManager()
@@ -445,6 +445,9 @@ namespace Locana.Pages
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            CoreWindow.GetForCurrentThread().KeyDown -= Global_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyUp -= Global_KeyUp;
+
             if (target != null)
             {
                 target.Status.PropertyChanged -= Status_PropertyChanged;

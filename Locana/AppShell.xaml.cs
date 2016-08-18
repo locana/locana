@@ -122,6 +122,22 @@ namespace Locana
 
             NavMenuList.ItemsSource = navlist;
             NavMenuListBottom.ItemsSource = navBottomlist;
+
+            CoreWindow.GetForCurrentThread().KeyDown += Global_KeyDown;
+        }
+
+        private void Global_KeyDown(CoreWindow sender, KeyEventArgs args)
+        {
+            if (args.KeyStatus.RepeatCount == 1)
+            {
+                switch (args.VirtualKey)
+                {
+                    case VirtualKey.Back:
+                        AppFrame.GoBack();
+                        args.Handled = true;
+                        break;
+                }
+            }
         }
 
         public Frame AppFrame { get { return this.frame; } }
