@@ -77,6 +77,12 @@ namespace Locana.Playback.Operator
             SingleContentLoaded?.Invoke(this, e);
         }
 
+        public event EventHandler<EventArgs> LoadCancelled;
+        protected void OnLoadCancelled()
+        {
+            LoadCancelled?.Invoke(this, new EventArgs());
+        }
+
         public event Action MovieStreamError;
         protected void OnMovieStreamError()
         {

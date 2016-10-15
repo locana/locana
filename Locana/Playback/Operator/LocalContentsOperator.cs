@@ -55,14 +55,21 @@ namespace Locana.Playback.Operator
         {
             var loader = new LocalContentsLoader();
             loader.SingleContentLoaded += Loader_SingleContentLoaded;
+            loader.Cancelled += Loader_Cancelled;
             try
             {
                 await loader.Load(ContentsSet.Images, Canceller);
             }
             finally
             {
+                loader.Cancelled -= Loader_Cancelled;
                 loader.SingleContentLoaded -= Loader_SingleContentLoaded;
             }
+        }
+
+        private void Loader_Cancelled(object sender, EventArgs e)
+        {
+            OnLoadCancelled();
         }
 
         private void Loader_SingleContentLoaded(object sender, SingleContentEventArgs e)
