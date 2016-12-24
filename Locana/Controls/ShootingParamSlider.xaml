@@ -30,7 +30,9 @@
                         VerticalAlignment="Stretch" />
         <Slider Name="Slider"
                 Grid.Column="1"
-                VerticalAlignment="Center" />
+                TickPlacement="Inline"
+                TickFrequency="1"
+                VerticalAlignment="Center"/>
         <TextBlock Name="MaxLabel"
                    Grid.Column="1"
                    Margin="10"

@@ -72,34 +72,40 @@ namespace Locana.Pages
                         if (IsAltKeyPressed && ControlPanelDisplayed) { ToggleControlPanel(); }
                         break;
                     case VirtualKey.Home:
-                        if (ZoomElements.Visibility.IsVisible())
+                        if (IsCtlKeyPressed)
                         {
-                            if (!IsBarLeftOn)
+                            if (ZoomElements.Visibility.IsVisible())
                             {
-                                if (IsShiftKeyPressed) { IsBarLeftOn = true; ZoomOutStart(); }
-                                else { ZoomOutTick(); }
+                                if (!IsBarLeftOn)
+                                {
+                                    if (IsShiftKeyPressed) { IsBarLeftOn = true; ZoomOutStart(); }
+                                    else { ZoomOutTick(); }
+                                }
                             }
+                            else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(1); }
+                            else if (EvSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                            else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(1); }
+                            else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(1); }
+                            else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider left */}
                         }
-                        else if (ISOSlider.Visibility.IsVisible()) { /* Tick slider left */}
-                        else if (EvSlider.Visibility.IsVisible()) { /* Tick slider left */}
-                        else if (FnumberSlider.Visibility.IsVisible()) { /* Tick slider left */}
-                        else if (SSSlider.Visibility.IsVisible()) { /* Tick slider left */}
-                        else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider left */}
                         break;
                     case VirtualKey.End:
-                        if (ZoomElements.Visibility.IsVisible())
+                        if (IsCtlKeyPressed)
                         {
-                            if (!IsBarRightOn)
+                            if (ZoomElements.Visibility.IsVisible())
                             {
-                                if (IsShiftKeyPressed) { IsBarRightOn = true; ZoomInStart(); }
-                                else { ZoomInTick(); }
+                                if (!IsBarRightOn)
+                                {
+                                    if (IsShiftKeyPressed) { IsBarRightOn = true; ZoomInStart(); }
+                                    else { ZoomInTick(); }
+                                }
                             }
+                            else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(-1); }
+                            else if (EvSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                            else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(-1); }
+                            else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(-1); }
+                            else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider right */}
                         }
-                        else if (ISOSlider.Visibility.IsVisible()) { /* Tick slider right */}
-                        else if (EvSlider.Visibility.IsVisible()) { /* Tick slider right */}
-                        else if (FnumberSlider.Visibility.IsVisible()) { /* Tick slider right */}
-                        else if (SSSlider.Visibility.IsVisible()) { /* Tick slider right */}
-                        else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider right */}
                         break;
                     case VirtualKey.Up:
                         if (IsAltKeyPressed && !AppBarUnit.IsOpen) { AppBarUnit.IsOpen = true; }
@@ -141,6 +147,12 @@ namespace Locana.Pages
                 {
                     case VirtualKey.Control:
                         IsCtlKeyPressed = false;
+
+                        if (ISOSlider.Visibility.IsVisible()) { ISOSlider.FixShootingParam(); }
+                        if (EvSlider.Visibility.IsVisible()) { }
+                        if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.FixShootingParam(); }
+                        if (SSSlider.Visibility.IsVisible()) { SSSlider.FixShootingParam(); }
+                        if (ProgramShiftSlider.Visibility.IsVisible()) { }
                         break;
                     case VirtualKey.Shift:
                         IsShiftKeyPressed = false;

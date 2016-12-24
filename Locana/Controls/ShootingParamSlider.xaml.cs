@@ -24,7 +24,12 @@ namespace Locana.Controls
         private void Slider_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             var selected = (int)Math.Round((sender as Slider).Value);
-            (sender as Slider).Value = selected;
+            ReflectNewValue(sender as Slider, selected);
+        }
+
+        private void ReflectNewValue(Slider slider, int selected)
+        {
+            slider.Value = selected;
             DebugUtil.Log(() => "Slider released: " + selected);
             if (Parameter == null || selected < 0 || selected >= Parameter.Candidates.Count) { return; }
             if (SliderOperated != null) { SliderOperated(this, new ShootingParameterChangedEventArgs() { Selected = Parameter.Candidates[selected] }); }
@@ -80,6 +85,28 @@ namespace Locana.Controls
                 labels.Add(value.ToString());
             }
             Slider.ThumbToolTipValueConverter = new SliderValueConverter() { Labels = labels };
+            
+        }
+
+        /// <summary>
+        /// Tick slider by given amount.
+        /// </summary>
+        /// <param name="amount">Positive value moves slider right.</param>
+        /// <returns>true if succeed</returns>
+        public bool TickSlider(int amount)
+        {
+            if ((amount < 0 && Slider.Value == Slider.Minimum) || (amount > 0 && Slider.Value == Slider.Maximum)) { return false; }
+            Slider.Value = (int)Math.Round(Slider.Value) + amount;
+            
+            // todo: show tooltip
+            //var tt = ToolTipService.GetToolTip(Slider) as UIElement;
+                        
+            return true;
+        }
+
+        public void FixShootingParam()
+        {
+            ReflectNewValue(Slider, (int)Math.Round(Slider.Value));
         }
     }
 
