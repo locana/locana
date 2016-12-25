@@ -195,6 +195,7 @@ namespace Locana.Pages
                 .DeviceDependent(AppBarItem.EvSlider)
                 .DeviceDependent(AppBarItem.IsoSlider)
                 .DeviceDependent(AppBarItem.ProgramShiftSlider);
+
         }
 
         private DisplayRequest displayRequest = new DisplayRequest();

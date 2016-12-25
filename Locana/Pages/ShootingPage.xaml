@@ -285,7 +285,7 @@
                                                                             FallbackValue=false}"
                                              Visibility="{Binding ShootButtonDisplayed,
                                                                   Converter={StaticResource B2VConverter}}" />
-            <Grid x:Name="Sliders" MaxWidth="400">
+            <Grid x:Name="Sliders" MaxWidth="500">
                 <controls:ShootingParamSlider x:Name="FnumberSlider"
                                               IconDataTemplate="{StaticResource ApertureIcon}"
                                               IsTabStop="False"

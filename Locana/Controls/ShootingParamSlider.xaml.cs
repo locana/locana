@@ -14,10 +14,22 @@ namespace Locana.Controls
 {
     public sealed partial class ShootingParamSlider : UserControl
     {
+        private SliderValueConverter ToolTipConverter = null;
+        DispatcherTimer ToolTipTimer = new DispatcherTimer();
+
         public ShootingParamSlider()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Slider.AddHandler(PointerReleasedEvent, new PointerEventHandler(Slider_PointerReleased), true);
+
+            ToolTipTimer.Tick += CloserTooltipTimer_Tick;
+            ToolTipTimer.Interval = TimeSpan.FromSeconds(3);
+        }
+
+        private void CloserTooltipTimer_Tick(object sender, object e)
+        {
+            MyToolTipFrame.Visibility = Visibility.Collapsed;
+            ToolTipTimer.Stop();
         }
 
         public event EventHandler<ShootingParameterChangedEventArgs> SliderOperated;
@@ -25,6 +37,7 @@ namespace Locana.Controls
         {
             var selected = (int)Math.Round((sender as Slider).Value);
             ReflectNewValue(sender as Slider, selected);
+            MyToolTipFrame.Visibility = Visibility.Collapsed;
         }
 
         private void ReflectNewValue(Slider slider, int selected)
@@ -32,7 +45,7 @@ namespace Locana.Controls
             slider.Value = selected;
             DebugUtil.Log(() => "Slider released: " + selected);
             if (Parameter == null || selected < 0 || selected >= Parameter.Candidates.Count) { return; }
-            if (SliderOperated != null) { SliderOperated(this, new ShootingParameterChangedEventArgs() { Selected = Parameter.Candidates[selected] }); }
+            SliderOperated?.Invoke(this, new ShootingParameterChangedEventArgs() { Selected = Parameter.Candidates[selected] });
         }
 
         public Capability<string> Parameter
@@ -40,7 +53,7 @@ namespace Locana.Controls
             set
             {
                 SetValue(ParameterProperty, value);
-                UpdateDisplay<string>(value);
+                UpdateDisplay(value);
             }
             get { return (Capability<string>)GetValue(ParameterProperty); }
         }
@@ -84,8 +97,7 @@ namespace Locana.Controls
             {
                 labels.Add(value.ToString());
             }
-            Slider.ThumbToolTipValueConverter = new SliderValueConverter() { Labels = labels };
-            
+            ToolTipConverter = new SliderValueConverter() { Labels = labels };
         }
 
         /// <summary>
@@ -96,17 +108,56 @@ namespace Locana.Controls
         public bool TickSlider(int amount)
         {
             if ((amount < 0 && Slider.Value == Slider.Minimum) || (amount > 0 && Slider.Value == Slider.Maximum)) { return false; }
-            Slider.Value = (int)Math.Round(Slider.Value) + amount;
-            
-            // todo: show tooltip
-            //var tt = ToolTipService.GetToolTip(Slider) as UIElement;
-                        
+
+            if (Slider.Value + amount > Slider.Maximum)
+            {
+                Slider.Value = Slider.Maximum;
+            }
+            else if (Slider.Value + amount < Slider.Minimum)
+            {
+                Slider.Value = Slider.Minimum;
+            }
+            else
+            {
+                Slider.Value = (int)Math.Round(Slider.Value) + amount;
+            }
+
+            ShowToolTip(true);
+
             return true;
+        }
+
+        private void ShowToolTip(bool CloseByTimer = false)
+        {
+            if (Slider == null || ToolTipConverter == null) { return; }
+            var text = (string)ToolTipConverter.Convert(Slider.Value, typeof(string), null, null);
+
+            MyToolTip.Text = text;
+            var xOffset = (Slider.ActualWidth / Slider.Maximum * Slider.Value) + 10;
+            double yOffset = 0;
+            MyToolTipFrame.Margin = new Thickness(xOffset, yOffset, 0, 0);
+            MyToolTipFrame.Visibility = Visibility.Visible;
+
+            if (CloseByTimer)
+            {
+                if (ToolTipTimer.IsEnabled) { ToolTipTimer.Stop(); }
+                ToolTipTimer.Start();
+            }
         }
 
         public void FixShootingParam()
         {
             ReflectNewValue(Slider, (int)Math.Round(Slider.Value));
+        }
+
+        private void Slider_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            ShowToolTip();
+        }
+
+        private void Slider_ValueChanged(object sender, Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+            ShowToolTip();
         }
     }
 
@@ -133,4 +184,6 @@ namespace Locana.Controls
     {
         public string Selected { get; set; }
     }
+
+
 }
