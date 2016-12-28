@@ -22,7 +22,7 @@
         <Image
             Name="SettingImage"
             Height="40"
-            Margin="60,20,10,10"
+            Margin="0,20,10,10"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" />
         <ContentControl
@@ -32,16 +32,15 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" />
 
-        <Grid Grid.Column="1" Margin="0,20,80,0">
+        <Grid Grid.Column="1" Margin="0,0,0,0">
             <Slider
                 Name="Slider"
                 VerticalAlignment="Center"
                 IsTabStop="False"
                 IsThumbToolTipEnabled="False"
-                ManipulationStarted="Slider_ManipulationStarted"
                 TickFrequency="1"
                 TickPlacement="Inline"
-                ValueChanged="Slider_ValueChanged" />
+/>
             <TextBlock
                 Name="MaxLabel"
                 Margin="4"
@@ -62,7 +61,8 @@
             Grid.Column="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Visibility="Collapsed">
+            Margin="-10"
+            Visibility="Visible">
             <Rectangle
                 Canvas.ZIndex="10"
                 Fill="{StaticResource SystemControlBackgroundChromeMediumLowBrush}"
