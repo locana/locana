@@ -1070,9 +1070,9 @@ Eメールに添付して開発者に送信しますか？</value>
     <value>ダウンロードエラー</value>
   </data>
   <data name="ForcePhoneView" xml:space="preserve">
-    <value>常にスマートフォン用レイアウトを使用する</value>
+    <value>常にコンパクトレイアウトを使用する</value>
   </data>
   <data name="ForcePhoneView_Guide" xml:space="preserve">
-    <value>ウィンドウ幅や画面表示倍率設定にかかわらず、スマートフォン用の画面レイアウトを使用します。</value>
+    <value>ウィンドウ幅や画面表示倍率設定にかかわらず、コンパクトな画面レイアウトを使用します。</value>
   </data>
 </root>
