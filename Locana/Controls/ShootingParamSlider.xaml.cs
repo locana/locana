@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -55,7 +54,7 @@ namespace Locana.Controls
 
         public ImageSource IconSource { set { SettingImage.Source = value; } }
         public DataTemplate IconDataTemplate { set { SettingImageContent.ContentTemplate = value; } }
-        
+
         public string TooltipPrefix
         {
             get { return (string)GetValue(TooltipPrefixProperty); }
@@ -138,7 +137,7 @@ namespace Locana.Controls
 
             if (Labels == null || selected >= Labels.Count) { return value.ToString(); }
 
-            return Prefix+Labels[selected]+Postfix;
+            return Prefix + Labels[selected] + Postfix;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

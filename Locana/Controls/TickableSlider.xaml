@@ -10,19 +10,6 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
 
-    <!--<UserControl.Resources>
-        <Style x:Key="FlyoutPresenterStyle" TargetType="FlyoutPresenter">
-            <Setter Property="MaxWidth" Value="NaN" />
-            <Setter Property="MaxHeight" Value="NaN" />
-            <Setter Property="MinWidth" Value="0" />
-            <Setter Property="MinHeight" Value="0" />
-            <Setter Property="Padding" Value="0" />
-    -->
-    <!--<Setter Property="Margin" Value="100"/>-->
-    <!--
-        </Style>
-    </UserControl.Resources>-->
-
     <Grid>
         <Slider
             x:Name="Slider"
@@ -47,8 +34,8 @@
             StepFrequency="{Binding StepFrequency, ElementName=root}"
             TickFrequency="{Binding TickFrequency, ElementName=root}"
             TickPlacement="{Binding TickPlacement, ElementName=root}"
-            Value="{Binding Value, ElementName=root}"
-            ValueChanged="Slider_ValueChanged" />
+            ValueChanged="Slider_ValueChanged"
+            Value="{Binding Value, ElementName=root}" />
         <Rectangle
             x:Name="FlyoutAnchor"
             Width="1"

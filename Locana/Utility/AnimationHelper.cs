@@ -200,6 +200,7 @@ namespace Locana.Utility
 
         private static DoubleAnimationUsingKeyFrames _Animation(Duration duration, double origin, double diff)
         {
+            if (diff == Double.NaN) { diff = 0; }
             var animation = new DoubleAnimationUsingKeyFrames();
             animation.KeyFrames.Add(new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)), Value = origin });
             animation.KeyFrames.Add(new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(duration.TimeSpan.Milliseconds / 3)), Value = origin + diff * 0.7 });

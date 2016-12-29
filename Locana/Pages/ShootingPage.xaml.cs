@@ -83,7 +83,7 @@ namespace Locana.Pages
                                 }
                             }
                             else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(1); }
-                            else if (EvSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                            else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(1); }
                             else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(1); }
                             else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(1); }
                             else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider left */}
@@ -101,7 +101,7 @@ namespace Locana.Pages
                                 }
                             }
                             else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(-1); }
-                            else if (EvSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                            else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(-1); }
                             else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(-1); }
                             else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(-1); }
                             else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider right */}
@@ -148,11 +148,11 @@ namespace Locana.Pages
                     case VirtualKey.Control:
                         IsCtlKeyPressed = false;
 
-                        if (ISOSlider.Visibility.IsVisible()) { ISOSlider.FixShootingParam(); }
-                        if (EvSlider.Visibility.IsVisible()) { }
-                        if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.FixShootingParam(); }
-                        if (SSSlider.Visibility.IsVisible()) { SSSlider.FixShootingParam(); }
-                        if (ProgramShiftSlider.Visibility.IsVisible()) { }
+                        ISOSlider.FixShootingParam();
+                        EvSlider.FixShootingParam();
+                        FnumberSlider.FixShootingParam();
+                        SSSlider.FixShootingParam();
+                        // fix program shift value
                         break;
                     case VirtualKey.Shift:
                         IsShiftKeyPressed = false;

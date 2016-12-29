@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -48,7 +47,7 @@ namespace Locana.Controls
             ValueFixed?.Invoke(this, new TickableSliderValueChangedArgs() { NewValue = selected });
             Debug.WriteLine("Save new value: " + selected);
         }
-        
+
         public object Header
         {
             get { return (object)GetValue(HeaderProperty); }

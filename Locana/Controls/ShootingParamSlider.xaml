@@ -36,8 +36,8 @@
             <local:TickableSlider
                 x:Name="Slider"
                 VerticalAlignment="Center"
-                ManipulationMode="All"
                 IsTabStop="False"
+                ManipulationMode="All"
                 TickFrequency="1"
                 TickPlacement="Inline" />
             <TextBlock
