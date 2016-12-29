@@ -20,11 +20,11 @@ namespace Locana.Controls
             Slider.AddHandler(PointerReleasedEvent, new PointerEventHandler(Slider_PointerReleased), true);
             ToolTipTimer.Tick += TooltipTimer_Tick;
             ToolTipTimer.Interval = TimeSpan.FromSeconds(1);
+            ToolTipFlyout.Hide();
         }
 
         private void TooltipTimer_Tick(object sender, object e)
         {
-            // MyToolTipFrame.Visibility = Visibility.Collapsed;
             ToolTipFlyout.Hide();
             ToolTipTimer.Stop();
         }
@@ -39,7 +39,6 @@ namespace Locana.Controls
             var selected = (int)Math.Round((sender as Slider).Value);
             ReflectNewValue(sender as Slider, selected);
             Debug.WriteLine("Released");
-            // MyToolTipFrame.Visibility = Visibility.Collapsed;
             ToolTipFlyout.Hide();
         }
 
@@ -49,23 +48,248 @@ namespace Locana.Controls
             ValueFixed?.Invoke(this, new TickableSliderValueChangedArgs() { NewValue = selected });
             Debug.WriteLine("Save new value: " + selected);
         }
+        
+        public object Header
+        {
+            get { return (object)GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
+        }
 
-        public object Header { get; set; }
-        public DataTemplate HeaderTemplate { get; set; }
-        public double IntermediateValue { get; set; } = 0;
-        public bool IsDirectionReversed { get; set; } = false;
-        public Orientation Orientation { get; set; } = Orientation.Horizontal;
-        public SliderSnapsTo SnapsTo { get; set; } = SliderSnapsTo.StepValues;
-        public double StepFrequency { get; set; } = 1;
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+            nameof(Header),
+            typeof(object),
+            typeof(TickableSlider),
+            new PropertyMetadata(null, new PropertyChangedCallback(OnHeaderChanged)));
 
-        public string ToolTipText { get; set; } = "hoge";
+        private static void OnHeaderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).Header = e.NewValue;
+        }
 
-        public IValueConverter ThumbToolTipValueConverter { get; set; } // not to pass through to original Slider.
+        public DataTemplate HeaderTemplate
+        {
+            get { return (DataTemplate)GetValue(HeaderTemplateProperty); }
+            set { SetValue(HeaderTemplateProperty, value); }
+        }
 
-        public double Maximum { get; set; }
-        public double Minimum { get; set; }
-        public TickPlacement TickPlacement { get; set; }
-        public double TickFrequency { get; set; }
+        public static readonly DependencyProperty HeaderTemplateProperty = DependencyProperty.Register(
+            nameof(HeaderTemplate),
+            typeof(DataTemplate),
+            typeof(TickableSlider),
+            new PropertyMetadata(null, new PropertyChangedCallback(OnHeaderTemplateChanged)));
+
+        private static void OnHeaderTemplateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).HeaderTemplate = (DataTemplate)e.NewValue;
+        }
+
+        public double IntermediateValue
+        {
+            get { return (double)GetValue(IntermediateValueProperty); }
+            set { SetValue(IntermediateValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty IntermediateValueProperty = DependencyProperty.Register(
+            nameof(IntermediateValue),
+            typeof(double),
+            typeof(TickableSlider),
+            new PropertyMetadata(0, new PropertyChangedCallback(OnIntermediateValueChanged)));
+
+        private static void OnIntermediateValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).IntermediateValue = (double)e.NewValue;
+        }
+
+        public bool IsDirectionReversed
+        {
+            get { return (bool)GetValue(IsDirectionReversedProperty); }
+            set { SetValue(IsDirectionReversedProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsDirectionReversedProperty = DependencyProperty.Register(
+            nameof(IsDirectionReversed),
+            typeof(bool),
+            typeof(TickableSlider),
+            new PropertyMetadata(false, new PropertyChangedCallback(OnIsDirectionReversedChanged)));
+
+        private static void OnIsDirectionReversedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).IsDirectionReversed = (bool)e.NewValue;
+        }
+
+        public Orientation Orientation
+        {
+            get { return (Orientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+
+        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
+            nameof(Orientation),
+            typeof(Orientation),
+            typeof(TickableSlider),
+            new PropertyMetadata(Orientation.Horizontal, new PropertyChangedCallback(OnOrientationChanged)));
+
+        private static void OnOrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).Orientation = (Orientation)e.NewValue;
+        }
+
+        public SliderSnapsTo SnapsTo
+        {
+            get { return (SliderSnapsTo)GetValue(SnapsToProperty); }
+            set { SetValue(SnapsToProperty, value); }
+        }
+
+        public static readonly DependencyProperty SnapsToProperty = DependencyProperty.Register(
+            nameof(SnapsTo),
+            typeof(SliderSnapsTo),
+            typeof(TickableSlider),
+            new PropertyMetadata(SliderSnapsTo.Ticks, new PropertyChangedCallback(OnSnapsToChanged)));
+
+        private static void OnSnapsToChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).SnapsTo = (SliderSnapsTo)e.NewValue;
+        }
+
+        public double StepFrequency
+        {
+            get { return (double)GetValue(StepFrequencyProperty); }
+            set { SetValue(StepFrequencyProperty, value); }
+        }
+
+        public static readonly DependencyProperty StepFrequencyProperty = DependencyProperty.Register(
+            nameof(StepFrequency),
+            typeof(double),
+            typeof(TickableSlider),
+            new PropertyMetadata(0, new PropertyChangedCallback(OnStepFrequencyChanged)));
+
+        private static void OnStepFrequencyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).StepFrequency = (double)e.NewValue;
+        }
+
+
+        public string ToolTipText
+        {
+            get { return (string)GetValue(ToolTipTextProperty); }
+            set { SetValue(ToolTipTextProperty, value); }
+        }
+
+        public static readonly DependencyProperty ToolTipTextProperty = DependencyProperty.Register(
+            nameof(ToolTipText),
+            typeof(string),
+            typeof(TickableSlider),
+            new PropertyMetadata("tooltip", new PropertyChangedCallback(OnToolTipTextChanged)));
+
+        private static void OnToolTipTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).ToolTipText = (string)e.NewValue;
+        }
+
+
+        public IValueConverter ThumbToolTipValueConverter
+        {
+            get { return (IValueConverter)GetValue(ThumbToolTipValueConverterProperty); }
+            set { SetValue(ThumbToolTipValueConverterProperty, value); }
+        }
+
+        public static readonly DependencyProperty ThumbToolTipValueConverterProperty = DependencyProperty.Register(
+            nameof(ThumbToolTipValueConverter),
+            typeof(IValueConverter),
+            typeof(TickableSlider),
+            new PropertyMetadata(null, new PropertyChangedCallback(OnThumbToolTipValueConverterChanged)));
+
+        private static void OnThumbToolTipValueConverterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).ThumbToolTipValueConverter = (IValueConverter)e.NewValue;
+        }
+
+        public double Maximum
+        {
+            get { return (double)GetValue(MaximumProperty); }
+            set { SetValue(MaximumProperty, value); }
+        }
+
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
+            nameof(Maximum),
+            typeof(double),
+            typeof(TickableSlider),
+            new PropertyMetadata(0, new PropertyChangedCallback(OnMaximumChanged)));
+
+        private static void OnMaximumChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).Maximum = (double)e.NewValue;
+        }
+
+        public double Minimum
+        {
+            get { return (double)GetValue(MinimumProperty); }
+            set { SetValue(MinimumProperty, value); }
+        }
+
+        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
+            nameof(Minimum),
+            typeof(double),
+            typeof(TickableSlider),
+            new PropertyMetadata(0, new PropertyChangedCallback(OnMinimumChanged)));
+
+        private static void OnMinimumChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).Minimum = (double)e.NewValue;
+        }
+
+
+
+        public TickPlacement TickPlacement
+        {
+            get { return (TickPlacement)GetValue(TickPlacementProperty); }
+            set { SetValue(TickPlacementProperty, value); }
+        }
+
+        public static readonly DependencyProperty TickPlacementProperty = DependencyProperty.Register(
+            nameof(TickPlacement),
+            typeof(TickPlacement),
+            typeof(TickableSlider),
+            new PropertyMetadata(TickPlacement.TopLeft, new PropertyChangedCallback(OnTickPlacementChanged)));
+
+        private static void OnTickPlacementChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).TickPlacement = (TickPlacement)e.NewValue;
+        }
+
+        public double TickFrequency
+        {
+            get { return (double)GetValue(TickFrequencyProperty); }
+            set { SetValue(TickFrequencyProperty, value); }
+        }
+
+        public static readonly DependencyProperty TickFrequencyProperty = DependencyProperty.Register(
+            nameof(TickFrequency),
+            typeof(double),
+            typeof(TickableSlider),
+            new PropertyMetadata(0, new PropertyChangedCallback(OnTickFrequencyChanged)));
+
+        private static void OnTickFrequencyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).TickFrequency = (double)e.NewValue;
+        }
+
+        public double Value
+        {
+            get { return (double)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
+            nameof(Value),
+            typeof(double),
+            typeof(TickableSlider),
+            new PropertyMetadata(0, new PropertyChangedCallback(OnValueChanged)));
+
+        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as TickableSlider).Value = (double)e.NewValue;
+        }
 
         DispatcherTimer ToolTipTimer = new DispatcherTimer();
 

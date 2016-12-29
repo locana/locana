@@ -47,6 +47,7 @@
             StepFrequency="{Binding StepFrequency, ElementName=root}"
             TickFrequency="{Binding TickFrequency, ElementName=root}"
             TickPlacement="{Binding TickPlacement, ElementName=root}"
+            Value="{Binding Value, ElementName=root}"
             ValueChanged="Slider_ValueChanged" />
         <Rectangle
             x:Name="FlyoutAnchor"
