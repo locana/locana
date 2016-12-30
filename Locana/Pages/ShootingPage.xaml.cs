@@ -86,7 +86,7 @@ namespace Locana.Pages
                             else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(1); }
                             else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(1); }
                             else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(1); }
-                            else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider left */}
+                            else if (ProgramShiftSlider.Visibility.IsVisible()) { ProgramShiftSlider.TickSlider(1); }
                         }
                         break;
                     case VirtualKey.End:
@@ -104,7 +104,7 @@ namespace Locana.Pages
                             else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(-1); }
                             else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(-1); }
                             else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(-1); }
-                            else if (ProgramShiftSlider.Visibility.IsVisible()) { /* Tick slider right */}
+                            else if (ProgramShiftSlider.Visibility.IsVisible()) { ProgramShiftSlider.TickSlider(-1); }
                         }
                         break;
                     case VirtualKey.Up:
@@ -152,7 +152,7 @@ namespace Locana.Pages
                         EvSlider.FixShootingParam();
                         FnumberSlider.FixShootingParam();
                         SSSlider.FixShootingParam();
-                        // fix program shift value
+                        ProgramShiftSlider.ReleaseSlider();
                         break;
                     case VirtualKey.Shift:
                         IsShiftKeyPressed = false;
