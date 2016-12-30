@@ -210,6 +210,7 @@
     <Compile Include="Pages\ContentsGridPage.xaml.cs">
       <DependentUpon>ContentsGridPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ContentsGridPageGlobalKeyHandler.cs" />
     <Compile Include="Pages\DonationPage.xaml.cs">
       <DependentUpon>DonationPage.xaml</DependentUpon>
     </Compile>
