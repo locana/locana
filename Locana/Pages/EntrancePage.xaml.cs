@@ -14,6 +14,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -153,6 +154,21 @@ namespace Locana.Pages
             var grid = sender as Grid;
             var content = grid.DataContext as EntrancePanel;
             content.Transit();
+        }
+
+        private void PanelHolder_KeyDown(object sender, KeyRoutedEventArgs args)
+        {
+            if (args.KeyStatus.RepeatCount == 1)
+            {
+                switch (args.Key)
+                {
+                    case VirtualKey.Space:
+                        var content = EntranceGrid.SelectedItem as EntrancePanel;
+                        content?.Transit();
+                        args.Handled = true;
+                        break;
+                }
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
