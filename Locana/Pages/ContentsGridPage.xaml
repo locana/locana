@@ -19,7 +19,6 @@
             <ItemsWrapGrid
                 ItemHeight="210"
                 ItemWidth="210"
-                KeyDown="ItemsWrapGrid_KeyDown"
                 Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
@@ -27,7 +26,6 @@
             <ItemsWrapGrid
                 ItemHeight="180"
                 ItemWidth="180"
-                KeyDown="ItemsWrapGrid_KeyDown"
                 Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
@@ -35,7 +33,6 @@
             <ItemsWrapGrid
                 ItemHeight="150"
                 ItemWidth="150"
-                KeyDown="ItemsWrapGrid_KeyDown"
                 Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
@@ -43,7 +40,6 @@
             <ItemsWrapGrid
                 ItemHeight="120"
                 ItemWidth="120"
-                KeyDown="ItemsWrapGrid_KeyDown"
                 Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
@@ -107,6 +103,8 @@
             <SemanticZoom.ZoomedInView>
                 <GridView
                     x:Name="ContentsGrid"
+                    IsItemClickEnabled="True"
+                    ItemClick="ContentsGrid_ItemClick"
                     ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
                     ItemsSource="{Binding Source={StaticResource GridSources}}"
                     Loaded="ContentsGrid_Loaded"
@@ -118,8 +116,7 @@
                             <Grid
                                 Margin="2,2"
                                 Holding="ContentsGrid_Holding"
-                                RightTapped="ContentsGrid_RightTapped"
-                                Tapped="ContentsGrid_Tapped">
+                                RightTapped="ContentsGrid_RightTapped">
                                 <Grid.Background>
                                     <SolidColorBrush Color="{ThemeResource SystemBaseLowColor}" />
                                 </Grid.Background>
@@ -215,6 +212,7 @@
                 <GridView
                     x:Name="GroupsGrid"
                     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                    IsItemClickEnabled="True"
                     ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                     ScrollViewer.IsVerticalScrollChainingEnabled="False">
                     <GridView.ItemTemplate>

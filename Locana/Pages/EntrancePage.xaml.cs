@@ -14,7 +14,6 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -149,26 +148,9 @@ namespace Locana.Pages
             WifiHint.Visibility = (!connectedToCamera && NetworkObserver.INSTANCE.CameraDevices.Count == 0).AsVisibility();
         }
 
-        private void PanelHolder_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private void EntranceGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var grid = sender as Grid;
-            var content = grid.DataContext as EntrancePanel;
-            content.Transit();
-        }
-
-        private void PanelHolder_KeyDown(object sender, KeyRoutedEventArgs args)
-        {
-            if (args.KeyStatus.RepeatCount == 1)
-            {
-                switch (args.Key)
-                {
-                    case VirtualKey.Space:
-                        var content = EntranceGrid.SelectedItem as EntrancePanel;
-                        content?.Transit();
-                        args.Handled = true;
-                        break;
-                }
-            }
+            (e.ClickedItem as EntrancePanel).Transit();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

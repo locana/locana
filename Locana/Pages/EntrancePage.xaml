@@ -18,7 +18,6 @@
             <ItemsWrapGrid
                 ItemHeight="150"
                 ItemWidth="150"
-                KeyDown="PanelHolder_KeyDown"
                 Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
@@ -26,7 +25,6 @@
             <ItemsWrapGrid
                 ItemHeight="120"
                 ItemWidth="120"
-                KeyDown="PanelHolder_KeyDown"
                 Orientation="Horizontal" />
         </ItemsPanelTemplate>
     </Page.Resources>
@@ -62,17 +60,16 @@
         <GridView
             x:Name="EntranceGrid"
             Grid.Row="2"
+            IsItemClickEnabled="True"
             IsTabStop="False"
+            ItemClick="EntranceGrid_ItemClick"
             ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
             ItemsSource="{Binding Source={StaticResource PanelSources}}"
             Loaded="EntranceGrid_Loaded"
             Unloaded="EntranceGrid_Unloaded">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid
-                        x:Name="PanelHolder"
-                        Background="Transparent"
-                        Tapped="PanelHolder_Tapped">
+                    <Grid x:Name="PanelHolder" Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="48" />

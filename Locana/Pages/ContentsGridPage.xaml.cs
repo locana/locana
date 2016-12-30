@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
-using Windows.System;
 using Windows.System.Display;
 using Windows.UI;
 using Windows.UI.Core;
@@ -1013,46 +1012,14 @@ namespace Locana.Pages
             }
         }
 
-        private void ContentsGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        private void ContentsGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (ContentsGrid.SelectionMode == ListViewSelectionMode.Multiple)
             {
                 return;
             }
 
-            ThumbnailGridSelected((sender as Grid).DataContext as Thumbnail);
-        }
-
-        private void ItemsWrapGrid_KeyDown(object sender, KeyRoutedEventArgs args)
-        {
-            if (args.KeyStatus.RepeatCount == 1)
-            {
-                var grid = sender as ItemsWrapGrid;
-                var selected = grid.Children.FirstOrDefault(elm => (elm as GridViewItem)?.FocusState == FocusState.Keyboard) as GridViewItem;
-                if (selected == null)
-                {
-                    return;
-                }
-
-                switch (args.Key)
-                {
-                    case VirtualKey.Space:
-                        if (GridHolder.IsZoomedInViewActive)
-                        {
-                            ThumbnailGridSelected(selected.Content as Thumbnail);
-                        }
-                        else
-                        {
-                            // TODO group grid selected. Raise virtual click event?
-                        }
-                        args.Handled = true;
-                        break;
-                    case VirtualKey.M:
-                        FlyoutBase.ShowAttachedFlyout(selected.ContentTemplateRoot as FrameworkElement);
-                        args.Handled = true;
-                        break;
-                }
-            }
+            ThumbnailGridSelected(e.ClickedItem as Thumbnail);
         }
 
         private async void ThumbnailGridSelected(Thumbnail content)
