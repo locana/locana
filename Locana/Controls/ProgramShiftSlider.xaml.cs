@@ -58,8 +58,19 @@ namespace Locana.Controls
         {
             //DebugUtil.Log(() => "Slider released: " + selected);
             //if (Parameter == null || e.Value < Parameter.Min || e.Value > Parameter.Max) { return; }
-            if (SliderOperated != null) { SliderOperated(this, new ProgramShiftChangedEventArgs() { OperatedStep = e.Value }); }
+            SliderOperated?.Invoke(this, new ProgramShiftChangedEventArgs() { OperatedStep = e.Value });
         }
+
+        public bool TickSlider(int amount)
+        {
+            return Bar.TickSlider(amount);
+        }
+
+        public void ReleaseSlider()
+        {
+            Bar.ReleaseSlider();
+        }
+
     }
 
     public class ProgramShiftChangedEventArgs

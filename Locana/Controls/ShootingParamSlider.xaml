@@ -22,7 +22,7 @@
         <Image
             Name="SettingImage"
             Height="40"
-            Margin="60,20,10,10"
+            Margin="0,20,10,10"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" />
         <ContentControl
@@ -32,48 +32,28 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" />
 
-        <Grid Grid.Column="1" Margin="0,20,80,0">
-            <Slider
-                Name="Slider"
+        <Grid Grid.Column="1" Margin="0">
+            <local:TickableSlider
+                x:Name="Slider"
                 VerticalAlignment="Center"
                 IsTabStop="False"
-                IsThumbToolTipEnabled="False"
-                ManipulationStarted="Slider_ManipulationStarted"
+                ManipulationMode="All"
                 TickFrequency="1"
-                TickPlacement="Inline"
-                ValueChanged="Slider_ValueChanged" />
+                TickPlacement="Inline" />
             <TextBlock
                 Name="MaxLabel"
-                Margin="4"
+                Margin="8,4"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 FontSize="14"
                 Text="max" />
             <TextBlock
                 Name="MinLabel"
-                Margin="4"
+                Margin="8,4"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 FontSize="14"
                 Text="min" />
         </Grid>
-        <Grid
-            Name="MyToolTipFrame"
-            Grid.Column="1"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Visibility="Collapsed">
-            <Rectangle
-                Canvas.ZIndex="10"
-                Fill="{StaticResource SystemControlBackgroundChromeMediumLowBrush}"
-                Stroke="{StaticResource SystemControlForegroundChromeHighBrush}" />
-            <TextBlock
-                Name="MyToolTip"
-                Margin="8,4"
-                Canvas.ZIndex="20"
-                Foreground="{StaticResource SystemControlForegroundBaseHighBrush}"
-                Text="tooltip" />
-        </Grid>
-
     </Grid>
 </UserControl>

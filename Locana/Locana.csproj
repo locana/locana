@@ -171,6 +171,9 @@
     <Compile Include="Controls\ShootingParamSlider.xaml.cs">
       <DependentUpon>ShootingParamSlider.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TickableSlider.xaml.cs">
+      <DependentUpon>TickableSlider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
@@ -396,6 +399,10 @@
     <Page Include="Controls\ShootingParamSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TickableSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Toast.xaml">
       <Generator>MSBuild:Compile</Generator>
