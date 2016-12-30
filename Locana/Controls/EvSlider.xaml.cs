@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -16,19 +15,18 @@ namespace Locana.Controls
         public EvSlider()
         {
             this.InitializeComponent();
-            Slider.AddHandler(PointerReleasedEvent, new PointerEventHandler(Slider_PointerReleased), true);
+            Slider.ValueFixed += Slider_ValueFixed;
         }
 
-
-        public event EventHandler<EvChangedEventArgs> SliderOperated;
-        private void Slider_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void Slider_ValueFixed(object sender, TickableSliderValueChangedArgs e)
         {
-            var selected = (int)Math.Round((sender as Slider).Value);
-            (sender as Slider).Value = selected;
+            var selected = e.NewValue;
             //DebugUtil.Log(() => "Slider released: " + selected);
             if (Parameter == null || selected < Parameter.Candidate.MinIndex || selected > Parameter.Candidate.MaxIndex) { return; }
-            if (SliderOperated != null) { SliderOperated(this, new EvChangedEventArgs() { Selected = selected }); }
+            SliderOperated?.Invoke(this, new EvChangedEventArgs() { Selected = selected });
         }
+
+        public event EventHandler<EvChangedEventArgs> SliderOperated;
 
         public EvCapability Parameter
         {
@@ -90,6 +88,16 @@ namespace Locana.Controls
             }
 
             Slider.ThumbToolTipValueConverter = new EvValueConverter() { Labels = labels };
+        }
+
+        public void TickSlider(int amount)
+        {
+            Slider.TickSlider(amount);
+        }
+
+        public void FixShootingParam()
+        {
+            Slider.FixNewValue();
         }
     }
 
