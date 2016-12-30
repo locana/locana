@@ -30,8 +30,11 @@ namespace Locana.Pages
                     case VirtualKey.Z:
                         if (IsCtlKeyPressed) // Control+Z (Switch semantic zoom)
                         {
-                            GridHolder.IsZoomedInViewActive = !GridHolder.IsZoomedInViewActive;
-                            args.Handled = true;
+                            if (InnerState == ViewerState.Single || InnerState == ViewerState.Multi)
+                            {
+                                GridHolder.IsZoomedInViewActive = !GridHolder.IsZoomedInViewActive;
+                                args.Handled = true;
+                            }
                         }
                         break;
                     case VirtualKey.R:
