@@ -46,7 +46,7 @@ namespace Locana.Pages
         private bool IsShiftKeyPressed = false;
         private bool IsAltKeyPressed = false;
 
-        private void Global_KeyDown(CoreWindow sender, KeyEventArgs args)
+        private async void Global_KeyDown(CoreWindow sender, KeyEventArgs args)
         {
             if (args.KeyStatus.RepeatCount == 1)
             {
@@ -62,8 +62,7 @@ namespace Locana.Pages
                         IsAltKeyPressed = true;
                         break;
                     case VirtualKey.Space:
-                        if (IsAltKeyPressed) { /* Tick shooting mode */}
-                        else { ShutterButtonPressed(); }
+                        ShutterButtonPressed();
                         break;
                     case VirtualKey.Left:
                         if (IsAltKeyPressed && !ControlPanelDisplayed) { ToggleControlPanel(); }
@@ -133,6 +132,9 @@ namespace Locana.Pages
                         break;
                     case VirtualKey.C:
                         _CommandBarManager.FireTapEvent(AppBarItem.CancelTouchAF, this);
+                        break;
+                    case VirtualKey.M:
+                        await SequentialOperation.ToggleExposureMode(this.target);
                         break;
 
                 }

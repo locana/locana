@@ -254,7 +254,6 @@ namespace Locana.CameraControl
             {
                 DebugUtil.Log(() => ex.StackTrace);
                 Finished?.Invoke(ShootingResult.StopFailed);
-
             }
         }
 
@@ -327,6 +326,35 @@ namespace Locana.CameraControl
                         }
                         break;
                 }
+            }
+        }
+
+        internal static async Task ToggleExposureMode(TargetDevice device)
+        {
+            if (device?.Status?.ExposureMode?.Candidates == null) { return; }
+            if (!device.Api.Capability.IsAvailable("setExposureMode"))
+            {
+                DebugUtil.Log(() => { return "SetExposureMode is not available."; });
+                return;
+            }
+            var modes = new List<string>(device.Status.ExposureMode.Candidates); // make clone.
+            if (modes.Count < 2)
+            {
+                DebugUtil.Log(() => { return "two or more modes required to toggle."; });
+                return;
+            }
+            modes.Sort();
+            var currentIndex = modes.FindIndex(s => s == device.Status.ExposureMode.Current);
+            if (currentIndex == -1) { return; }
+            var nextIndex = (currentIndex >= (modes.Count - 1)) ? 0 : currentIndex + 1;
+
+            try
+            {
+                await device.Api.Camera.SetExposureModeAsync(modes[nextIndex]);
+            }
+            catch (RemoteApiException e)
+            {
+                DebugUtil.Log(() => { return "Caught RemoteApiException. " + e.Message; });
             }
         }
     }
