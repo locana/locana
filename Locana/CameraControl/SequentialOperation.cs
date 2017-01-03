@@ -337,13 +337,7 @@ namespace Locana.CameraControl
                 DebugUtil.Log(() => { return "SetExposureMode is not available."; });
                 return;
             }
-            var modes = new List<string>(device.Status.ExposureMode.Candidates); // make clone.
-            if (modes.Count < 2)
-            {
-                DebugUtil.Log(() => { return "two or more modes required to toggle."; });
-                return;
-            }
-            modes.Sort();
+            var modes = device.Status.ExposureMode.Candidates;
             var currentIndex = modes.FindIndex(s => s == device.Status.ExposureMode.Current);
             if (currentIndex == -1) { return; }
             var nextIndex = (currentIndex >= (modes.Count - 1)) ? 0 : currentIndex + 1;
