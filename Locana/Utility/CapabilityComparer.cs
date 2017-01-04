@@ -11,7 +11,8 @@ namespace Locana.Utility
     public class ExposureModeComparer : IComparer<string>
     {
         private ExposureModeComparer() { }
-        public static ExposureModeComparer INSTANCE { get { return new ExposureModeComparer(); } }
+        private static readonly ExposureModeComparer instance = new ExposureModeComparer();
+        public static ExposureModeComparer INSTANCE { get { return instance; } }
 
         readonly Dictionary<string, int> Priority = new Dictionary<string, int>() {
             {ExposureMode.Program,1 },
@@ -24,15 +25,20 @@ namespace Locana.Utility
 
         public int Compare(string x, string y)
         {
-            if (Priority.ContainsKey(x) && Priority.ContainsKey(y))
+            int xOrder = 0;
+            int yOrder = 0;
+            var xIsValid = Priority.TryGetValue(x, out xOrder);
+            var yIsValid = Priority.TryGetValue(y, out yOrder);
+
+            if (xIsValid && yIsValid)
             {
-                return Priority[x] - Priority[y];
+                return xOrder - yOrder;
             }
-            else if (Priority.ContainsKey(x))
+            else if (xIsValid)
             {
                 return -1;
             }
-            else if (Priority.ContainsKey(y))
+            else if (yIsValid)
             {
                 return 1;
             }

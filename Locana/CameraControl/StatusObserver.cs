@@ -79,7 +79,6 @@ namespace Locana.CameraControl
             try
             {
                 await UpdateStatus(await api.Camera.GetEventAsync(false, version)).ConfigureAwait(false);
-                SortCapabilityCandidates(status);
             }
             catch (RemoteApiException e)
             {
@@ -204,6 +203,8 @@ namespace Locana.CameraControl
                     status.ColorTemperture = @event.WhiteBalance.Current.ColorTemperature;
                 }
             }
+
+            SortCapabilityCandidates(status);
         }
 
         private void SortCapabilityCandidates(CameraStatus status)
