@@ -14,7 +14,11 @@ namespace Locana.Utility
         private static readonly ExposureModeComparer instance = new ExposureModeComparer();
         public static ExposureModeComparer INSTANCE { get { return instance; } }
 
-        readonly Dictionary<string, int> Priority = new Dictionary<string, int>() {
+        /// <summary>
+        /// Defines order of sorted modes.
+        /// P/A/S/M should be first for expert users.
+        /// </summary>
+        private readonly Dictionary<string, int> Priority = new Dictionary<string, int>() {
             {ExposureMode.Program,1 },
             {ExposureMode.Aperture,2 },
             {ExposureMode.SS,3 },

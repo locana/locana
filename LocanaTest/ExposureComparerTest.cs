@@ -63,9 +63,39 @@ namespace LocanaTest
                 var orig = t.Item1;
                 var expect = t.Item2;
                 Assert.IsFalse(orig.Equals(expect));
+                Assert.IsTrue(orig != expect);
+                Assert.IsFalse(orig == expect);
                 orig.Candidates.Sort(ExposureModeComparer.INSTANCE);
                 Assert.IsTrue(orig.Equals(expect));
+                Assert.IsTrue(orig == expect);
+                Assert.IsFalse(orig != expect);
             }
+        }
+
+        [TestMethod]
+        public void TestCapabilityOperators()
+        {
+            var c1 = new Capability<string>
+            {
+                Current = "a",
+                Candidates = new List<string>() { "a", "b", "c" }
+            };
+            var c2 = new Capability<string>()
+            {
+                Current = "a",
+                Candidates = new List<string>() { "a", "b", "c", "d" }
+            };
+
+            Assert.IsTrue(c1 != null);
+            Assert.IsFalse(c1 == null);
+            Assert.IsTrue(null != c1);
+            Assert.IsFalse(null == c1);
+            Assert.IsTrue(c1 == c1);
+            Assert.IsFalse(c1 != c1);
+            Assert.IsFalse(c1 == c2);
+            Assert.IsTrue(c1 != c2);
+
+            Assert.IsFalse(c1.Equals(null));
         }
     }
 }
