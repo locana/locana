@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locana", "Locana\Locana.csproj", "{8D63CF1F-B858-4BB0-BA5D-916C783F7F0E}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtHistogramWin2d", "modules\nt-histogram\NtHistogramWin2d\NtHistogramWin2d.csproj", "{6EC75E53-268A-4252-B88B-FCCE96919CD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NtJpegMetadata", "modules\nt-jpeg-metadata-editor\NtJpegMetadata\NtJpegMetadata.csproj", "{F60B6857-9718-4491-9799-D94F51229BE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocanaTest", "LocanaTest\LocanaTest.csproj", "{677E099D-85BB-4976-B1E0-B92E045E7D23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,26 @@ Global
 		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x64.Build.0 = Release|x64
 		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x86.ActiveCfg = Release|x86
 		{F60B6857-9718-4491-9799-D94F51229BE2}.Release|x86.Build.0 = Release|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|ARM.ActiveCfg = Debug|ARM
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|ARM.Build.0 = Debug|ARM
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|ARM.Deploy.0 = Debug|ARM
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|x64.ActiveCfg = Debug|x64
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|x64.Build.0 = Debug|x64
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|x64.Deploy.0 = Debug|x64
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|x86.ActiveCfg = Debug|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|x86.Build.0 = Debug|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Debug|x86.Deploy.0 = Debug|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|Any CPU.ActiveCfg = Release|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|ARM.ActiveCfg = Release|ARM
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|ARM.Build.0 = Release|ARM
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|ARM.Deploy.0 = Release|ARM
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|x64.ActiveCfg = Release|x64
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|x64.Build.0 = Release|x64
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|x64.Deploy.0 = Release|x64
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|x86.ActiveCfg = Release|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|x86.Build.0 = Release|x86
+		{677E099D-85BB-4976-B1E0-B92E045E7D23}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

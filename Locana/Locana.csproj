@@ -264,6 +264,7 @@
     <Compile Include="UPnP\ValueLessResponse.cs" />
     <Compile Include="Utility\AnimationHelper.cs" />
     <Compile Include="Utility\CameraStatusExtension.cs" />
+    <Compile Include="Utility\CapabilityComparer.cs" />
     <Compile Include="Utility\CommandBarManager.cs" />
     <Compile Include="Utility\BoolToVisibilityConverter.cs" />
     <Compile Include="Utility\CancellationTokenSourceExtensions.cs" />
