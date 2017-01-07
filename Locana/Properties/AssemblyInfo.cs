@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Locana")]
-[assembly: AssemblyCopyright("Copyright © kazyx 2013-2016")]
+[assembly: AssemblyCopyright("Copyright © kazyx 2013-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
