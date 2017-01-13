@@ -143,6 +143,9 @@
     <Compile Include="Controls\ImageStreamView.xaml.cs">
       <DependentUpon>ImageStreamView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\KeyAssignmentCollectionView.xaml.cs">
+      <DependentUpon>KeyAssignmentCollectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MoviePlaybackScreen.xaml.cs">
       <DependentUpon>MoviePlaybackScreen.xaml</DependentUpon>
     </Compile>
@@ -362,6 +365,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ImageStreamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\KeyAssignmentCollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

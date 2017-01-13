@@ -1075,4 +1075,7 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="ForcePhoneView_Guide" xml:space="preserve">
     <value>ウィンドウ幅や画面表示倍率設定にかかわらず、スマートフォン用の画面レイアウトを使用します。</value>
   </data>
+  <data name="KeyAssignmentsTitle" xml:space="preserve">
+    <value>キー割り当て</value>
+  </data>
 </root>

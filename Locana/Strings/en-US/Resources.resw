@@ -1191,4 +1191,7 @@ App version: {5}</value>
   <data name="ForcePhoneView_Guide" xml:space="preserve">
     <value>Use layout optimized for smartphones regardless of screen density settings or window width.</value>
   </data>
+  <data name="KeyAssignmentsTitle" xml:space="preserve">
+    <value>Key assignments</value>
+  </data>
 </root>
