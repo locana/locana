@@ -6,34 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Locana"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:util="using:Locana.Utility"
     x:Name="Root"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    KeyDown="AppShell_KeyDown"
     Loaded="Page_Loaded"
     TabNavigation="Cycle"
     mc:Ignorable="d">
 
-    <!--
-        Using a Page as the root for the app provides a design time experience as well as ensures that
-        when it runs on Mobile the app content won't appear under the system's StatusBar which is visible
-        by default with a transparent background.  It will also take into account the presence of software
-        navigation buttons if they appear on a device.  An app can opt-out by switching to UseCoreWindow.
-    -->
-
     <Page.Resources>
-        <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="local:NavMenuItem">
-            <Grid>
+        <DataTemplate x:Key="MenuItemTemplate" x:DataType="local:NavMenuItem">
+            <Grid Width="240" Height="48">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <!--
-                    Showing a ToolTip and the Label is redundant.  We put the ToolTip on the icon.
-                    It appears when the user hovers over the icon, but not the label which provides
-                    value when the SplitView is 'Compact' while reducing the likelihood of showing
-                    redundant information when the label is shown.
-                -->
                 <ContentControl
                     Width="24"
                     Height="24"
@@ -42,64 +29,40 @@
                     ContentTemplate="{x:Bind Resource}"
                     ToolTipService.ToolTip="{x:Bind Label}" />
                 <TextBlock
-                    x:Name="Text"
                     Grid.Column="1"
-                    Text="{x:Bind Label}" />
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="White"
+                    Text="{x:Bind Label, Mode=OneWay}" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <!--  Top-level navigation menu + app content  -->
-        <SplitView
-            x:Name="RootSplitView"
-            DisplayMode="Inline"
-            IsTabStop="False"
-            OpenPaneLength="256">
-            <SplitView.Pane>
-                <Grid>
-                    <!--  A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event.  -->
-                    <controls:NavMenuListView
-                        x:Name="NavMenuList"
-                        Margin="0,48,0,0"
-                        ContainerContentChanging="NavMenuItemContainerContentChanging"
-                        ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                        ItemInvoked="NavMenuList_ItemInvoked"
-                        ItemTemplate="{StaticResource NavMenuItemTemplate}"
-                        Loaded="NavMenuList_Loaded"
-                        TabIndex="3" />
-
-                    <controls:NavMenuListView
-                        x:Name="NavMenuListBottom"
-                        VerticalAlignment="Bottom"
-                        ContainerContentChanging="NavMenuItemContainerContentChanging"
-                        ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                        ItemInvoked="NavMenuList_ItemInvoked"
-                        ItemTemplate="{StaticResource NavMenuItemTemplate}"
-                        Loaded="NavMenuList_Loaded"
-                        TabIndex="4" />
-                </Grid>
-            </SplitView.Pane>
-
-            <!--
-                OnNavigatingToPage we synchronize the selected item in the nav menu with the current page.
-                OnNavigatedToPage we move keyboard focus to the first item on the page after it's loaded and update the Back button.
-            -->
-            <Frame
-                x:Name="frame"
-                Navigated="OnNavigatedToPage"
-                Navigating="OnNavigatingToPage">
-                <Frame.ContentTransitions>
-                    <TransitionCollection>
-                        <NavigationThemeTransition>
-                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                                <EntranceNavigationTransitionInfo />
-                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                        </NavigationThemeTransition>
-                    </TransitionCollection>
-                </Frame.ContentTransitions>
-            </Frame>
-        </SplitView>
+        <Grid>
+            <toolkit:HamburgerMenu
+                x:Name="MenuControl"
+                Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+                Foreground="{StaticResource ApplicationForegroundThemeBrush}"
+                ItemClick="OnMenuItemClick"
+                ItemTemplate="{StaticResource MenuItemTemplate}"
+                Loaded="MenuControl_Loaded"
+                OptionsItemClick="OnMenuItemClick"
+                OptionsItemTemplate="{StaticResource MenuItemTemplate}"
+                PaneBackground="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+                <Frame x:Name="frame" Navigated="OnNavigatedToPage">
+                    <Frame.ContentTransitions>
+                        <TransitionCollection>
+                            <NavigationThemeTransition>
+                                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                    <EntranceNavigationTransitionInfo />
+                                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            </NavigationThemeTransition>
+                        </TransitionCollection>
+                    </Frame.ContentTransitions>
+                </Frame>
+            </toolkit:HamburgerMenu>
+        </Grid>
 
         <controls:ProgressDialog
             x:Name="DownloadDialog"
@@ -122,26 +85,16 @@
             Canvas.ZIndex="20"
             IsHitTestVisible="False" />
 
-        <!--  Declared last to have it rendered above everything else, but it needs to be the first item in the tab sequence.  -->
-        <ToggleButton
-            x:Name="TogglePaneButton"
-            AutomationProperties.Name="Menu"
-            IsChecked="{Binding IsPaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
-            Style="{StaticResource SplitViewTogglePaneButtonStyle}"
-            TabIndex="1"
-            ToolTipService.ToolTip="Menu"
-            Unchecked="TogglePaneButton_Checked" />
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
                         <util:LocanaStateTrigger LocanaState="ExtraWide" />
-
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
-                        <Setter Target="RootSplitView.IsPaneOpen" Value="True" />
+                        <Setter Target="MenuControl.DisplayMode" Value="CompactInline" />
+                        <Setter Target="MenuControl.IsPaneOpen" Value="True" />
                         <Setter Target="MessageToast.MinWidth" Value="640" />
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
                     </VisualState.Setters>
@@ -151,7 +104,7 @@
                         <util:LocanaStateTrigger LocanaState="Wide" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="RootSplitView.DisplayMode" Value="CompactInline" />
+                        <Setter Target="MenuControl.DisplayMode" Value="CompactInline" />
                         <Setter Target="MessageToast.MinWidth" Value="480" />
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
                     </VisualState.Setters>
@@ -161,7 +114,7 @@
                         <util:LocanaStateTrigger LocanaState="Narrow" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="RootSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="MenuControl.DisplayMode" Value="Overlay" />
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Stretch" />
                     </VisualState.Setters>
                 </VisualState>
