@@ -10,8 +10,13 @@ namespace Locana.Controls
         protected override Style SelectStyleCore(object item, DependencyObject container)
         {
             var selectorItem = container as GridViewItem;
-
             selectorItem.SetBinding(UIElement.IsHitTestVisibleProperty, new Binding
+            {
+                Source = item as Thumbnail,
+                Path = new PropertyPath(nameof(Thumbnail.IsSelectable)),
+                Mode = BindingMode.OneWay
+            });
+            selectorItem.SetBinding(Control.IsTabStopProperty, new Binding
             {
                 Source = item as Thumbnail,
                 Path = new PropertyPath(nameof(Thumbnail.IsSelectable)),

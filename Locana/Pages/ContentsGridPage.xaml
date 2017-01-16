@@ -103,7 +103,6 @@
             <SemanticZoom.ZoomedInView>
                 <GridView
                     x:Name="ContentsGrid"
-                    IsItemClickEnabled="True"
                     ItemClick="ContentsGrid_ItemClick"
                     ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
                     ItemsSource="{Binding Source={StaticResource GridSources}}"

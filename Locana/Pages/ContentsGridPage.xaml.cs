@@ -584,10 +584,12 @@ namespace Locana.Pages
             {
                 case SelectivityFactor.None:
                     ContentsGrid.SelectionMode = ListViewSelectionMode.None;
+                    ContentsGrid.IsItemClickEnabled = true;
                     break;
                 case SelectivityFactor.Delete:
                 case SelectivityFactor.Download:
                     ContentsGrid.SelectionMode = ListViewSelectionMode.Multiple;
+                    ContentsGrid.IsItemClickEnabled = false;
                     break;
             }
         }
@@ -855,24 +857,14 @@ namespace Locana.Pages
                 UpdateInnerState(ViewerState.Single);
                 e.Handled = true;
             }
-
-            // Frame.Navigate(typeof(MainPage));
         }
 
         private void ContentsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GridSelectionChanged(sender, e);
-        }
-
-        private void GridSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
             var selector = sender as GridView;
             if (selector.SelectionMode == ListViewSelectionMode.Multiple)
             {
-                DebugUtil.Log(() => "SelectionChanged in multi mode");
                 var contents = selector.SelectedItems;
-                DebugUtil.Log(() => "Selected Items: " + contents.Count);
-
                 UpdateInnerState(ViewerState.Multi);
             }
         }
@@ -1014,12 +1006,12 @@ namespace Locana.Pages
 
         private void ContentsGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (ContentsGrid.SelectionMode == ListViewSelectionMode.Multiple)
+            switch (ContentsGrid.SelectionMode)
             {
-                return;
+                case ListViewSelectionMode.None:
+                    ThumbnailGridSelected(e.ClickedItem as Thumbnail);
+                    break;
             }
-
-            ThumbnailGridSelected(e.ClickedItem as Thumbnail);
         }
 
         private async void ThumbnailGridSelected(Thumbnail content)
