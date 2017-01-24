@@ -41,7 +41,7 @@
             Unloaded="KeyAssignmentsGrid_Unloaded">
             <GridView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid HorizontalAlignment="Left" ItemWidth="240" />
+                    <ItemsWrapGrid HorizontalAlignment="Left" ItemWidth="360t st" />
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
             <GridView.ItemContainerStyle>

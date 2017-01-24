@@ -243,5 +243,47 @@ namespace Locana
         }
 
         #endregion
+
+        private void Root_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.KeyStatus.WasKeyDown)
+            {
+                switch (e.Key)
+                {
+                    case VirtualKey.Control:
+                        ShowKeyAssignmentView();
+                        break;
+                }
+            }
+        }
+
+        private void Root_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case VirtualKey.Control:
+                    KeyAssignmentsView.Visibility = Visibility.Collapsed;
+                    break;
+            }
+        }
+
+        private void ShowKeyAssignmentView()
+        {
+            if (KeyAssignmentsView.Visibility.IsVisible())
+            {
+                return;
+            }
+
+            var page = AppFrame.Content as IKeyHandlerPage;
+            if (page != null)
+            {
+                KeyAssignmentsView.KeyAssignmentCollection.Clear();
+                foreach (var key in page.KeyAssignments)
+                {
+                    KeyAssignmentsView.KeyAssignmentCollection.Add(key);
+                }
+                KeyAssignmentsView.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

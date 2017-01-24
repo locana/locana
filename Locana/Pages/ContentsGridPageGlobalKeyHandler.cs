@@ -1,16 +1,42 @@
 ﻿using Locana.Controls;
 using Locana.DataModel;
+using System.Collections.Generic;
 using Windows.System;
 using Windows.UI.Core;
 
 namespace Locana.Pages
 {
-    public sealed partial class ContentsGridPage
+    public sealed partial class ContentsGridPage : IKeyHandlerPage
     {
 
         private bool IsCtlKeyPressed = false;
         private bool IsShiftKeyPressed = false;
         private bool IsAltKeyPressed = false;
+
+        private List<KeyAssignmentData> keyAssignments;
+
+        public IEnumerable<KeyAssignmentData> KeyAssignments
+        {
+            get
+            {
+                if (keyAssignments == null)
+                {
+                    keyAssignments = new List<KeyAssignmentData>();
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Z", Description = "Semantic Zoom" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + R", Description = "Select files to remove/Cancel" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + L", Description = "Select files to download/Cancel" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + C", Description = "Close/Cancel" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + X", Description = "Execute removal or download" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + P", Description = "Play/Pause opened movie file" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + I", Description = "Show/Hide EXIF information" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Left", Description = "Rotete picture left" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Right", Description = "Rotate picture right" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = "Select focused content" });
+                }
+
+                return keyAssignments;
+            }
+        }
 
         private void Global_KeyDown(CoreWindow sender, KeyEventArgs args)
         {

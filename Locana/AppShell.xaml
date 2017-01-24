@@ -10,6 +10,8 @@
     xmlns:util="using:Locana.Utility"
     x:Name="Root"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    KeyDown="Root_KeyDown"
+    KeyUp="Root_KeyUp"
     Loaded="Page_Loaded"
     TabNavigation="Cycle"
     mc:Ignorable="d">
@@ -72,8 +74,10 @@
 
         <controls:KeyAssignmentCollectionView
             x:Name="KeyAssignmentsView"
+            MinWidth="420"
             Margin="24"
-            HorizontalContentAlignment="Stretch"
+            Padding="48,0"
+            HorizontalAlignment="Center"
             VerticalContentAlignment="Stretch"
             Canvas.ZIndex="15"
             Visibility="Collapsed" />

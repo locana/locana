@@ -222,6 +222,7 @@
     <Compile Include="Pages\EntrancePage.xaml.cs">
       <DependentUpon>EntrancePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\IKeyHandlerPage.cs" />
     <Compile Include="Pages\Segment\LogReport.cs" />
     <Compile Include="Pages\ShootingPage.xaml.cs">
       <DependentUpon>ShootingPage.xaml</DependentUpon>
@@ -229,6 +230,7 @@
     <Compile Include="Pages\QrCodePage.xaml.cs">
       <DependentUpon>QrCodePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ShootingPageKeyGlobalHandler.cs" />
     <Compile Include="Pages\WifiDirectPage.xaml.cs">
       <DependentUpon>WifiDirectPage.xaml</DependentUpon>
     </Compile>

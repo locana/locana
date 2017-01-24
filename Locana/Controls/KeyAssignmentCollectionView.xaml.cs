@@ -11,10 +11,6 @@ namespace Locana.Controls
         public KeyAssignmentCollectionView()
         {
             this.InitializeComponent();
-            KeyAssignmentCollection.Add(new KeyAssignmentData { AssignedKey = "Ctrl + x", Description = "Execute" });
-            KeyAssignmentCollection.Add(new KeyAssignmentData { AssignedKey = "Ctrl + a", Description = "Execute aaaaaaaaaa aaaaaaa aaaaaaa" });
-            KeyAssignmentCollection.Add(new KeyAssignmentData { AssignedKey = "Ctrl + b", Description = "gjlakgj  galgjakgas" });
-            KeyAssignmentCollection.Add(new KeyAssignmentData { AssignedKey = "Ctrl + c", Description = "Execute" });
         }
 
         private void KeyAssignmentsGrid_Loaded(object sender, RoutedEventArgs e)
@@ -28,11 +24,11 @@ namespace Locana.Controls
         }
 
         public readonly ObservableCollection<KeyAssignmentData> KeyAssignmentCollection = new ObservableCollection<KeyAssignmentData>();
+    }
 
-        public class KeyAssignmentData
-        {
-            public string AssignedKey { set; get; }
-            public string Description { set; get; }
-        }
+    public class KeyAssignmentData
+    {
+        public string AssignedKey { set; get; }
+        public string Description { set; get; }
     }
 }
