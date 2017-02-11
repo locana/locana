@@ -247,25 +247,35 @@ namespace Locana
 
         private void Root_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            if (e.KeyStatus.WasKeyDown)
+            switch (e.Key)
             {
-                switch (e.Key)
-                {
-                    case VirtualKey.Control:
+                case VirtualKey.Control:
+                    if (e.KeyStatus.WasKeyDown)
+                    {
                         if (ApplicationSettings.GetInstance().ShowKeyCheatSheet)
                         {
                             ShowKeyAssignmentView();
                         }
-                        break;
-                }
+                    }
+                    break;
+                default:
+                    if (KeyAssignmentsView.Visibility.IsVisible())
+                    {
+                        keyCheatSheetHiddenByOtherKey = true;
+                        KeyAssignmentsView.Visibility = Visibility.Collapsed;
+                    }
+                    break;
             }
         }
+
+        private bool keyCheatSheetHiddenByOtherKey = false;
 
         private void Root_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             switch (e.Key)
             {
                 case VirtualKey.Control:
+                    keyCheatSheetHiddenByOtherKey = false;
                     KeyAssignmentsView.Visibility = Visibility.Collapsed;
                     break;
             }
@@ -273,7 +283,7 @@ namespace Locana
 
         private void ShowKeyAssignmentView()
         {
-            if (KeyAssignmentsView.Visibility.IsVisible())
+            if (KeyAssignmentsView.Visibility.IsVisible() || keyCheatSheetHiddenByOtherKey)
             {
                 return;
             }
