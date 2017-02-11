@@ -1,5 +1,6 @@
 ﻿using Locana.Controls;
 using Locana.DataModel;
+using Locana.Utility;
 using System.Collections.Generic;
 using Windows.System;
 using Windows.UI.Core;
@@ -22,16 +23,16 @@ namespace Locana.Pages
                 if (keyAssignments == null)
                 {
                     keyAssignments = new List<KeyAssignmentData>();
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Z", Description = "Semantic Zoom" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + R", Description = "Select files to remove/Cancel" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + L", Description = "Select files to download/Cancel" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + C", Description = "Close/Cancel" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + X", Description = "Execute removal or download" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + P", Description = "Play/Pause opened movie file" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + I", Description = "Show/Hide EXIF information" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Left", Description = "Rotete picture left" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Right", Description = "Rotate picture right" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = "Select focused content" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Z", Description = SystemUtil.GetStringResource("KeyDesc_SemanticZoom") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + R", Description = SystemUtil.GetStringResource("KeyDesc_RmMode") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + L", Description = SystemUtil.GetStringResource("KeyDesc_DlMode") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + C", Description = SystemUtil.GetStringResource("KeyDesc_CloseCancel") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + X", Description = SystemUtil.GetStringResource("KeyDesc_Exec") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + P", Description = SystemUtil.GetStringResource("KeyDesc_PlayPause") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + I", Description = SystemUtil.GetStringResource("KeyDesc_ExifInfo") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Left", Description = SystemUtil.GetStringResource("KeyDesc_RotateLeft") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Right", Description = SystemUtil.GetStringResource("KeyDesc_RotateRight") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = SystemUtil.GetStringResource("KeyDesc_SelectContent") });
                 }
 
                 return keyAssignments;

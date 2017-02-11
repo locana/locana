@@ -1078,4 +1078,79 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="KeyAssignmentsTitle" xml:space="preserve">
     <value>キー割り当て</value>
   </data>
+  <data name="KeyDesc_CancelTouchAF" xml:space="preserve">
+    <value>タッチAFの解除</value>
+  </data>
+  <data name="KeyDesc_CloseBottomBar" xml:space="preserve">
+    <value>ボトムバーを閉じる</value>
+  </data>
+  <data name="KeyDesc_CloseCancel" xml:space="preserve">
+    <value>閉じる・キャンセル</value>
+  </data>
+  <data name="KeyDesc_DlMode" xml:space="preserve">
+    <value>ダウンロードモードへの切り替え</value>
+  </data>
+  <data name="KeyDesc_EV" xml:space="preserve">
+    <value>EVコントロール</value>
+  </data>
+  <data name="KeyDesc_Exec" xml:space="preserve">
+    <value>ファイル削除またはダウンロードの実行</value>
+  </data>
+  <data name="KeyDesc_ExifInfo" xml:space="preserve">
+    <value>EXIF情報の表示</value>
+  </data>
+  <data name="KeyDesc_ExposureMode" xml:space="preserve">
+    <value>露出モードの切り替え</value>
+  </data>
+  <data name="KeyDesc_FNum" xml:space="preserve">
+    <value>F値コントロール</value>
+  </data>
+  <data name="KeyDesc_HideCtrlPanel" xml:space="preserve">
+    <value>コントロールパネルを隠す</value>
+  </data>
+  <data name="KeyDesc_ISO" xml:space="preserve">
+    <value>ISOコントロール</value>
+  </data>
+  <data name="KeyDesc_OpenBottomBar" xml:space="preserve">
+    <value>ボトムバーを開く</value>
+  </data>
+  <data name="KeyDesc_PlayPause" xml:space="preserve">
+    <value>動画コンテンツの再生・一時停止</value>
+  </data>
+  <data name="KeyDesc_PShift" xml:space="preserve">
+    <value>プログラムシフトコントロール</value>
+  </data>
+  <data name="KeyDesc_RmMode" xml:space="preserve">
+    <value>ファイル削除モードへの切り替え</value>
+  </data>
+  <data name="KeyDesc_RotateLeft" xml:space="preserve">
+    <value>画像を左に回転</value>
+  </data>
+  <data name="KeyDesc_RotateRight" xml:space="preserve">
+    <value>画像を右に回転</value>
+  </data>
+  <data name="KeyDesc_SelectContent" xml:space="preserve">
+    <value>フォーカスされたコンテンツを選択</value>
+  </data>
+  <data name="KeyDesc_SemanticZoom" xml:space="preserve">
+    <value>アルバム表示への切り替え</value>
+  </data>
+  <data name="KeyDesc_ShowCtrlPanel" xml:space="preserve">
+    <value>コントロールパネルを表示する</value>
+  </data>
+  <data name="KeyDesc_SS" xml:space="preserve">
+    <value>シャッタースピードコントロール</value>
+  </data>
+  <data name="KeyDesc_TakePicture" xml:space="preserve">
+    <value>写真撮影/録画開始・停止</value>
+  </data>
+  <data name="KeyDesc_TickLeft" xml:space="preserve">
+    <value>スライダーを左に1つ動かす</value>
+  </data>
+  <data name="KeyDesc_TickRight" xml:space="preserve">
+    <value>スライダーを右に1つ動かす</value>
+  </data>
+  <data name="KeyDesc_Zoom" xml:space="preserve">
+    <value>ズームコントロール</value>
+  </data>
 </root>

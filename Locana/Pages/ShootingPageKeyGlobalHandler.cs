@@ -26,21 +26,21 @@ namespace Locana.Pages
                 if (keyAssignments == null)
                 {
                     keyAssignments = new List<KeyAssignmentData>();
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = "Take picture or Start/Stop recording" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Left", Description = "Show control panel" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Right", Description = "Hide control panel" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Up", Description = "Open bottom bar" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Down", Description = "Close bottom bar" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Home", Description = "Tick slider right" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + End", Description = "Tick slider left" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Z", Description = "Zoom slider" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "I", Description = "ISO slider" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "E", Description = "EV slider" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "F", Description = "F-number slider" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "S", Description = "Shutter speed slider" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "P", Description = "Program shift slider" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "C", Description = "Cancel touch focus" });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "M", Description = "Exposure mode" });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = SystemUtil.GetStringResource("KeyDesc_TakePicture") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Left", Description = SystemUtil.GetStringResource("KeyDesc_ShowCtrlPanel") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Right", Description = SystemUtil.GetStringResource("KeyDesc_HideCtrlPanel") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Up", Description = SystemUtil.GetStringResource("KeyDesc_OpenBottomBar") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Home", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + End", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Z", Description = SystemUtil.GetStringResource("KeyDesc_Zoom") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "I", Description = SystemUtil.GetStringResource("KeyDesc_ISO") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "E", Description = SystemUtil.GetStringResource("KeyDesc_EV") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "F", Description = SystemUtil.GetStringResource("KeyDesc_FNum") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "S", Description = SystemUtil.GetStringResource("KeyDesc_SS") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "P", Description = SystemUtil.GetStringResource("KeyDesc_PShift") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "C", Description = SystemUtil.GetStringResource("KeyDesc_CancelTouchAF") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "M", Description = SystemUtil.GetStringResource("KeyDesc_ExposureMode") });
                 }
 
                 return keyAssignments;
