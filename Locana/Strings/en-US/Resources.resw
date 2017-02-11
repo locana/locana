@@ -1269,4 +1269,10 @@ App version: {5}</value>
   <data name="KeyDesc_Zoom" xml:space="preserve">
     <value>Zoom control</value>
   </data>
+  <data name="ShowKeyCheatSheet" xml:space="preserve">
+    <value>Enable key shortcut cheat sheet</value>
+  </data>
+  <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
+    <value>Show keyboard shortcut cheat sheet by long pressing Ctrl key.</value>
+  </data>
 </root>

@@ -492,7 +492,7 @@
     <value>フォーカス枠情報を送信するようカメラに要求します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
   </data>
   <data name="Guide_FramingGrids" xml:space="preserve">
-    <value>構図決めをサポートする補助線を表示します</value>
+    <value>構図決めをサポートする補助線を表示します。</value>
   </data>
   <data name="Guide_Histogram" xml:space="preserve">
     <value>RGBヒストグラムを解析して表示します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
@@ -887,7 +887,7 @@ SSID: {0}
     <value>カメラ回転検知</value>
   </data>
   <data name="LiveviewRotation_guide" xml:space="preserve">
-    <value>一部の機種では、カメラ本体の回転をライブビュー映像に反映できます</value>
+    <value>一部の機種では、カメラ本体の回転をライブビュー映像に反映できます。</value>
   </data>
   <data name="PanelGroup_AppMenu" xml:space="preserve">
     <value>アプリメニュー</value>
@@ -1152,5 +1152,11 @@ Eメールに添付して開発者に送信しますか？</value>
   </data>
   <data name="KeyDesc_Zoom" xml:space="preserve">
     <value>ズームコントロール</value>
+  </data>
+  <data name="ShowKeyCheatSheet" xml:space="preserve">
+    <value>キーボード操作ガイドを有効にする</value>
+  </data>
+  <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
+    <value>Ctrlキーを長押しすると、キーボード操作のガイドが表示されます。</value>
   </data>
 </root>

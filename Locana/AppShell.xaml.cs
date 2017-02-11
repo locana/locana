@@ -1,4 +1,5 @@
 ﻿using Locana.Controls;
+using Locana.DataModel;
 using Locana.Pages;
 using Locana.Utility;
 using Microsoft.Toolkit.Uwp.UI.Controls;
@@ -251,7 +252,10 @@ namespace Locana
                 switch (e.Key)
                 {
                     case VirtualKey.Control:
-                        ShowKeyAssignmentView();
+                        if (ApplicationSettings.GetInstance().ShowKeyCheatSheet)
+                        {
+                            ShowKeyAssignmentView();
+                        }
                         break;
                 }
             }
