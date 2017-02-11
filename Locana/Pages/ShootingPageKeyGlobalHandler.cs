@@ -33,14 +33,14 @@ namespace Locana.Pages
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Home", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + End", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Z", Description = SystemUtil.GetStringResource("KeyDesc_Zoom") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "I", Description = SystemUtil.GetStringResource("KeyDesc_ISO") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "E", Description = SystemUtil.GetStringResource("KeyDesc_EV") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "F", Description = SystemUtil.GetStringResource("KeyDesc_FNum") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "S", Description = SystemUtil.GetStringResource("KeyDesc_SS") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "P", Description = SystemUtil.GetStringResource("KeyDesc_PShift") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "C", Description = SystemUtil.GetStringResource("KeyDesc_CancelTouchAF") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "M", Description = SystemUtil.GetStringResource("KeyDesc_ExposureMode") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Z", Description = SystemUtil.GetStringResource("KeyDesc_Zoom") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + I", Description = SystemUtil.GetStringResource("KeyDesc_ISO") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + E", Description = SystemUtil.GetStringResource("KeyDesc_EV") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + F", Description = SystemUtil.GetStringResource("KeyDesc_FNum") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + S", Description = SystemUtil.GetStringResource("KeyDesc_SS") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + P", Description = SystemUtil.GetStringResource("KeyDesc_PShift") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + C", Description = SystemUtil.GetStringResource("KeyDesc_CancelTouchAF") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + M", Description = SystemUtil.GetStringResource("KeyDesc_ExposureMode") });
                 }
 
                 return keyAssignments;
@@ -108,34 +108,74 @@ namespace Locana.Pages
                         }
                         break;
                     case VirtualKey.Up:
-                        if (IsAltKeyPressed && !AppBarUnit.IsOpen) { AppBarUnit.IsOpen = true; }
+                        if (IsAltKeyPressed && !AppBarUnit.IsOpen)
+                        {
+                            AppBarUnit.IsOpen = true;
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.Down:
-                        if (IsAltKeyPressed && AppBarUnit.IsOpen) { AppBarUnit.IsOpen = false; }
+                        if (IsAltKeyPressed && AppBarUnit.IsOpen)
+                        {
+                            AppBarUnit.IsOpen = false;
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.Z:
-                        _CommandBarManager.FireTapEvent(AppBarItem.Zoom, this);
+                        if (IsCtlKeyPressed)
+                        {
+                            _CommandBarManager.FireTapEvent(AppBarItem.Zoom, this);
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.I:
-                        _CommandBarManager.FireTapEvent(AppBarItem.IsoSlider, this);
+                        if (IsCtlKeyPressed)
+                        {
+                            _CommandBarManager.FireTapEvent(AppBarItem.IsoSlider, this);
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.E:
-                        _CommandBarManager.FireTapEvent(AppBarItem.EvSlider, this);
+                        if (IsCtlKeyPressed)
+                        {
+                            _CommandBarManager.FireTapEvent(AppBarItem.EvSlider, this);
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.F:
-                        _CommandBarManager.FireTapEvent(AppBarItem.FNumberSlider, this);
+                        if (IsCtlKeyPressed)
+                        {
+                            _CommandBarManager.FireTapEvent(AppBarItem.FNumberSlider, this);
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.S:
-                        _CommandBarManager.FireTapEvent(AppBarItem.ShutterSpeedSlider, this);
+                        if (IsCtlKeyPressed)
+                        {
+                            _CommandBarManager.FireTapEvent(AppBarItem.ShutterSpeedSlider, this);
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.P:
-                        _CommandBarManager.FireTapEvent(AppBarItem.ProgramShiftSlider, this);
+                        if (IsCtlKeyPressed)
+                        {
+                            _CommandBarManager.FireTapEvent(AppBarItem.ProgramShiftSlider, this);
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.C:
-                        _CommandBarManager.FireTapEvent(AppBarItem.CancelTouchAF, this);
+                        if (IsCtlKeyPressed)
+                        {
+                            _CommandBarManager.FireTapEvent(AppBarItem.CancelTouchAF, this);
+                            args.Handled = true;
+                        }
                         break;
                     case VirtualKey.M:
-                        await SequentialOperation.ToggleExposureMode(this.target);
+                        if (IsCtlKeyPressed)
+                        {
+                            await SequentialOperation.ToggleExposureMode(this.target);
+                            args.Handled = true;
+                        }
                         break;
 
                 }
