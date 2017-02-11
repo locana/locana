@@ -67,7 +67,8 @@ namespace Locana.Pages
                     case VirtualKey.R:
                         if (IsCtlKeyPressed) // Control+R (Switch multiple removal mode)
                         {
-                            if (Operator?.ContentsCollection.SelectivityFactor != SelectivityFactor.Delete)
+                            if (CommandBarManager.IsEnabled(AppBarItemType.Command, AppBarItem.DeleteMultiple)
+                                && Operator?.ContentsCollection.SelectivityFactor != SelectivityFactor.Delete)
                             {
                                 CommandBarDeleteMultipleSelected();
                             }
@@ -81,7 +82,8 @@ namespace Locana.Pages
                     case VirtualKey.L:
                         if (IsCtlKeyPressed) // Control+L (Switch multiple download mode)
                         {
-                            if (Operator?.ContentsCollection.SelectivityFactor != SelectivityFactor.Download)
+                            if (CommandBarManager.IsEnabled(AppBarItemType.Command, AppBarItem.DownloadMultiple)
+                                && Operator?.ContentsCollection.SelectivityFactor != SelectivityFactor.Download)
                             {
                                 CommandBarDownloadMultipleSelected();
                             }
@@ -95,15 +97,21 @@ namespace Locana.Pages
                     case VirtualKey.C:
                         if (IsCtlKeyPressed) // Control+C (Close: Equivalent to cross button)
                         {
-                            CommandBarCloseSelected();
-                            args.Handled = true;
+                            if (CommandBarManager.IsEnabled(AppBarItemType.Command, AppBarItem.Close))
+                            {
+                                CommandBarCloseSelected();
+                                args.Handled = true;
+                            }
                         }
                         break;
                     case VirtualKey.X:
                         if (IsCtlKeyPressed) // Control+X (Execute: Equivalent to check button)
                         {
-                            CommandBarOkSelected();
-                            args.Handled = true;
+                            if (CommandBarManager.IsEnabled(AppBarItemType.Command, AppBarItem.Ok))
+                            {
+                                CommandBarOkSelected();
+                                args.Handled = true;
+                            }
                         }
                         break;
                     case VirtualKey.P:
@@ -137,15 +145,21 @@ namespace Locana.Pages
                     case VirtualKey.Left:
                         if (IsCtlKeyPressed) // Control+Left (Turn photo left)
                         {
-                            CommandBarRotateLeftSelected();
-                            args.Handled = true;
+                            if (CommandBarManager.IsEnabled(AppBarItemType.Command, AppBarItem.RotateLeft))
+                            {
+                                CommandBarRotateLeftSelected();
+                                args.Handled = true;
+                            }
                         }
                         break;
                     case VirtualKey.Right:
                         if (IsCtlKeyPressed) // Control+Right (Turn photo right)
                         {
-                            CommandBarRotateRightSelected();
-                            args.Handled = true;
+                            if (CommandBarManager.IsEnabled(AppBarItemType.Command, AppBarItem.RotateRight))
+                            {
+                                CommandBarRotateRightSelected();
+                                args.Handled = true;
+                            }
                         }
                         break;
                 }
