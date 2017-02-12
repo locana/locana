@@ -1153,6 +1153,9 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="KeyDesc_Zoom" xml:space="preserve">
     <value>ズームコントロール</value>
   </data>
+  <data name="KeyDesc_NoAssignment" xml:space="preserve">
+    <value>この画面ではキーボードショートカットは使えません</value>
+  </data>
   <data name="ShowKeyCheatSheet" xml:space="preserve">
     <value>キーボード操作ガイドを有効にする</value>
   </data>

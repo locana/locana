@@ -289,15 +289,24 @@ namespace Locana
             }
 
             var page = AppFrame.Content as IKeyHandlerPage;
+            KeyAssignmentsView.KeyAssignmentCollection.Clear();
+
             if (page != null)
             {
-                KeyAssignmentsView.KeyAssignmentCollection.Clear();
                 foreach (var key in page.KeyAssignments)
                 {
                     KeyAssignmentsView.KeyAssignmentCollection.Add(key);
                 }
-                KeyAssignmentsView.Visibility = Visibility.Visible;
             }
+            else
+            {
+                KeyAssignmentsView.KeyAssignmentCollection.Add(new KeyAssignmentData
+                {
+                    AssignedKey = SystemUtil.GetStringResource("KeyDesc_NoAssignment"),
+                });
+            }
+
+            KeyAssignmentsView.Visibility = Visibility.Visible;
         }
     }
 }

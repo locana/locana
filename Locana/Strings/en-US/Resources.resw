@@ -1275,4 +1275,7 @@ App version: {5}</value>
   <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
     <value>Show keyboard shortcut cheat sheet by long pressing Ctrl key.</value>
   </data>
+  <data name="KeyDesc_NoAssignment" xml:space="preserve">
+    <value>No shortcut key is assigned here</value>
+  </data>
 </root>
