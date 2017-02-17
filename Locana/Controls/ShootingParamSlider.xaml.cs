@@ -136,8 +136,8 @@ namespace Locana.Controls
             var selected = (int)Math.Round((double)value);
 
             if (Labels == null || selected >= Labels.Count) { return value.ToString(); }
-
-            return Prefix + Labels[selected] + Postfix;
+            
+            return Prefix + Labels[selected].TrimEnd('"') + Postfix;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
