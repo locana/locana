@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:Locana.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="root"
     d:DesignHeight="100"
     d:DesignWidth="500"
     mc:Ignorable="d">
@@ -39,7 +40,8 @@
                 IsTabStop="False"
                 ManipulationMode="All"
                 TickFrequency="1"
-                TickPlacement="Inline" />
+                TickPlacement="Inline"
+                Visibility="{Binding Visibility, ElementName=root}" />
             <TextBlock
                 Name="MaxLabel"
                 Margin="8,4"

@@ -35,7 +35,7 @@
             TickFrequency="{Binding TickFrequency, ElementName=root}"
             TickPlacement="{Binding TickPlacement, ElementName=root}"
             ValueChanged="Slider_ValueChanged"
-            Value="{Binding Value, ElementName=root}" />
+             />
         <Rectangle
             x:Name="FlyoutAnchor"
             Width="1"
@@ -51,8 +51,7 @@
                     Name="MyToolTipFrame"
                     Margin="0"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Visibility="Visible">
+                    VerticalAlignment="Stretch">
                     <TextBlock
                         Name="MyToolTip"
                         Margin="8,4"

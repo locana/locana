@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Locana.Utility;
+using System;
 using System.Diagnostics;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -20,12 +21,14 @@ namespace Locana.Controls
             ToolTipTimer.Tick += TooltipTimer_Tick;
             ToolTipTimer.Interval = TimeSpan.FromSeconds(1);
             ToolTipFlyout.Hide();
+            Out("Instance created and hide.");
         }
 
         private void TooltipTimer_Tick(object sender, object e)
         {
             ToolTipFlyout.Hide();
             ToolTipTimer.Stop();
+            Out("TooltipTimer_Tick");
         }
 
         public delegate void TickableSliderValueChangedEventHandler(object sender, TickableSliderValueChangedArgs e);
@@ -37,7 +40,7 @@ namespace Locana.Controls
         {
             var selected = (int)Math.Round((sender as Slider).Value);
             ReflectNewValue(sender as Slider, selected);
-            Debug.WriteLine("Released");
+            Out("Released");
             ToolTipFlyout.Hide();
         }
 
@@ -45,7 +48,7 @@ namespace Locana.Controls
         {
             slider.Value = selected;
             ValueFixed?.Invoke(this, new TickableSliderValueChangedArgs() { NewValue = selected });
-            Debug.WriteLine("Save new value: " + selected);
+            Out("Save new value: " + selected);
         }
 
         public object Header
@@ -276,7 +279,11 @@ namespace Locana.Controls
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            set
+            {
+                SetValue(ValueProperty, value);
+                Slider.Value = value;
+            }
         }
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
@@ -288,6 +295,7 @@ namespace Locana.Controls
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as TickableSlider).Value = (double)e.NewValue;
+
         }
 
         DispatcherTimer ToolTipTimer = new DispatcherTimer();
@@ -301,6 +309,7 @@ namespace Locana.Controls
 
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
+            Out("ValueChanged: " + e.NewValue);
             ShowToolTip();
             ValueChanged?.Invoke(this, new TickableSliderValueChangedArgs() { NewValue = (int)Math.Round(e.NewValue) });
         }
@@ -340,7 +349,7 @@ namespace Locana.Controls
         {
             if ((amount < 0 && Slider.Value == Slider.Minimum) || (amount > 0 && Slider.Value == Slider.Maximum))
             {
-                Debug.WriteLine("Do nothing.");
+                Out("Do nothing.");
                 return false;
             }
 
@@ -357,17 +366,18 @@ namespace Locana.Controls
                 Slider.Value = (int)Math.Round(Slider.Value) + amount;
             }
 
-            Debug.WriteLine("Value: " + Slider.Value);
             ValueChanged?.Invoke(this, new TickableSliderValueChangedArgs() { NewValue = (int)Math.Round(Slider.Value) });
 
-            ShowToolTip();
-            CloseToolTipByTimer();
+            // ShowToolTip();
 
             return true;
         }
 
         private void ShowToolTip()
         {
+            // Suppress tooltip when it's collapsed.
+            if (this.Visibility == Visibility.Collapsed) { return; }
+
             var text = (string)ThumbToolTipValueConverter?.Convert(Slider.Value, typeof(string), null, null);
             MyToolTip.Text = text ?? ((int)Math.Round(Slider.Value)).ToString();
 
@@ -376,6 +386,9 @@ namespace Locana.Controls
 
             ToolTipFlyout.FlyoutPresenterStyle = BuildToolTipStyle(xOffset, yOffset);
             ToolTipFlyout.ShowAt(FlyoutAnchor);
+
+            CloseToolTipByTimer();
+
         }
 
         private static Style BuildToolTipStyle(double xOffset, double yOffset)
@@ -405,6 +418,11 @@ namespace Locana.Controls
         public void FixNewValue()
         {
             ReflectNewValue(Slider, (int)Math.Round(Slider.Value));
+        }
+
+        void Out(string s)
+        {
+            DebugUtil.Log(() => { return "[Tickable] " + s; });
         }
     }
 
