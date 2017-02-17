@@ -124,49 +124,70 @@ namespace Locana.Pages
                     case VirtualKey.Z:
                         if (IsCtlKeyPressed)
                         {
-                            _CommandBarManager.FireTapEvent(AppBarItem.Zoom, this);
+                            if (ScreenViewData.IsZoomAvailable)
+                            {
+                                _CommandBarManager.FireTapEvent(AppBarItem.Zoom, this);
+                            }
                             args.Handled = true;
                         }
                         break;
                     case VirtualKey.I:
                         if (IsCtlKeyPressed)
                         {
-                            _CommandBarManager.FireTapEvent(AppBarItem.IsoSlider, this);
+                            if (ScreenViewData.IsSetIsoSpeedRateAvailable)
+                            {
+                                _CommandBarManager.FireTapEvent(AppBarItem.IsoSlider, this);
+                            }
                             args.Handled = true;
                         }
                         break;
                     case VirtualKey.E:
                         if (IsCtlKeyPressed)
                         {
-                            _CommandBarManager.FireTapEvent(AppBarItem.EvSlider, this);
+                            if (ScreenViewData.IsSetEVAvailable)
+                            {
+                                _CommandBarManager.FireTapEvent(AppBarItem.EvSlider, this);
+                            }
                             args.Handled = true;
                         }
                         break;
                     case VirtualKey.F:
                         if (IsCtlKeyPressed)
                         {
-                            _CommandBarManager.FireTapEvent(AppBarItem.FNumberSlider, this);
+                            if (ScreenViewData.IsSetFNumberAvailable)
+                            {
+                                _CommandBarManager.FireTapEvent(AppBarItem.FNumberSlider, this);
+                            }
                             args.Handled = true;
                         }
                         break;
                     case VirtualKey.S:
                         if (IsCtlKeyPressed)
                         {
-                            _CommandBarManager.FireTapEvent(AppBarItem.ShutterSpeedSlider, this);
+                            if (ScreenViewData.IsSetShutterSpeedAvailable)
+                            {
+                                _CommandBarManager.FireTapEvent(AppBarItem.ShutterSpeedSlider, this);
+                            }
                             args.Handled = true;
                         }
                         break;
                     case VirtualKey.P:
                         if (IsCtlKeyPressed)
                         {
-                            _CommandBarManager.FireTapEvent(AppBarItem.ProgramShiftSlider, this);
+                            if (ScreenViewData.IsProgramShiftAvailable)
+                            {
+                                _CommandBarManager.FireTapEvent(AppBarItem.ProgramShiftSlider, this);
+                            }
                             args.Handled = true;
                         }
                         break;
                     case VirtualKey.C:
                         if (IsCtlKeyPressed)
                         {
-                            _CommandBarManager.FireTapEvent(AppBarItem.CancelTouchAF, this);
+                            if (_CommandBarManager.IsEnabled(AppBarItemType.Command, AppBarItem.CancelTouchAF))
+                            {
+                                _CommandBarManager.FireTapEvent(AppBarItem.CancelTouchAF, this);
+                            }
                             args.Handled = true;
                         }
                         break;
