@@ -10,6 +10,8 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <CollectionViewSource x:Name="GridSources" IsSourceGrouped="False" />
+        <local:TitleTextForegroundBrushConverter x:Key="TitleBrushConverter" />
+        <local:DescriptionTextForegroundBrushConverter x:Key="ContentBrushConverter" />
     </UserControl.Resources>
 
     <Grid
@@ -59,13 +61,14 @@
                         <TextBlock
                             x:Name="KeyAssignment"
                             HorizontalAlignment="Left"
+                            Foreground="{Binding IsEnabled, Converter={StaticResource TitleBrushConverter}}"
                             Style="{StaticResource SubtitleTextBlockStyle}"
                             Text="{Binding AssignedKey}" />
                         <TextBlock
                             x:Name="Description"
                             Grid.Row="1"
                             HorizontalAlignment="Left"
-                            Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
+                            Foreground="{Binding IsEnabled, Converter={StaticResource ContentBrushConverter}}"
                             Text="{Binding Description}" />
                     </Grid>
                 </DataTemplate>
