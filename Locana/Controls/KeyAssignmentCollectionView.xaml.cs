@@ -33,7 +33,7 @@ namespace Locana.Controls
     {
         public string AssignedKey { set; get; }
         public string Description { set; get; }
-        public bool IsEnabled { set; get; } = true;
+        public virtual bool IsEnabled { set; get; } = true;
     }
 
     public class TitleTextForegroundBrushConverter : IValueConverter

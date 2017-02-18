@@ -33,12 +33,36 @@ namespace Locana.Pages
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Home", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + End", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Z", Description = SystemUtil.GetStringResource("KeyDesc_Zoom") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + I", Description = SystemUtil.GetStringResource("KeyDesc_ISO") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + E", Description = SystemUtil.GetStringResource("KeyDesc_EV") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + F", Description = SystemUtil.GetStringResource("KeyDesc_FNum") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + S", Description = SystemUtil.GetStringResource("KeyDesc_SS") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + P", Description = SystemUtil.GetStringResource("KeyDesc_PShift") });
+                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsZoomAvailable)
+                    {
+                        AssignedKey = "Ctrl + Z",
+                        Description = SystemUtil.GetStringResource("KeyDesc_Zoom")
+                    });
+                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetIsoSpeedRateAvailable)
+                    {
+                        AssignedKey = "Ctrl + I",
+                        Description = SystemUtil.GetStringResource("KeyDesc_ISO")
+                    });
+                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetEVAvailable)
+                    {
+                        AssignedKey = "Ctrl + E",
+                        Description = SystemUtil.GetStringResource("KeyDesc_EV")
+                    });
+                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetFNumberAvailable)
+                    {
+                        AssignedKey = "Ctrl + F",
+                        Description = SystemUtil.GetStringResource("KeyDesc_FNum")
+                    });
+                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetShutterSpeedAvailable)
+                    {
+                        AssignedKey = "Ctrl + S",
+                        Description = SystemUtil.GetStringResource("KeyDesc_SS")
+                    });
+                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsProgramShiftAvailable)
+                    {
+                        AssignedKey = "Ctrl + P",
+                        Description = SystemUtil.GetStringResource("KeyDesc_PShift")
+                    });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + C", Description = SystemUtil.GetStringResource("KeyDesc_CancelTouchAF") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + M", Description = SystemUtil.GetStringResource("KeyDesc_ExposureMode") });
                 }
@@ -235,6 +259,29 @@ namespace Locana.Pages
                         IsAltKeyPressed = false;
                         break;
                 }
+            }
+        }
+    }
+
+    public class ShootingSettingsKeyAssignmentData : KeyAssignmentData
+    {
+        public ShootingSettingsKeyAssignmentData(Func<bool> keyAvailabilitySource)
+        {
+            IsEnabledSource = keyAvailabilitySource;
+        }
+
+        private readonly Func<bool> IsEnabledSource;
+
+        public override bool IsEnabled
+        {
+            get
+            {
+                return IsEnabledSource();
+            }
+
+            set
+            {
+                DebugUtil.Log(() => "Ignore setter of ShootingSettingsKeyAssignmentData#IsEnabled");
             }
         }
     }
