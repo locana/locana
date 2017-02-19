@@ -15,7 +15,6 @@ namespace Locana.Pages
 
         private bool IsCtlKeyPressed = false;
         private bool IsShiftKeyPressed = false;
-        private bool IsAltKeyPressed = false;
 
         private List<KeyAssignmentData> keyAssignments;
 
@@ -27,10 +26,10 @@ namespace Locana.Pages
                 {
                     keyAssignments = new List<KeyAssignmentData>();
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = SystemUtil.GetStringResource("KeyDesc_TakePicture") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Left", Description = SystemUtil.GetStringResource("KeyDesc_ShowCtrlPanel") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Right", Description = SystemUtil.GetStringResource("KeyDesc_HideCtrlPanel") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Up", Description = SystemUtil.GetStringResource("KeyDesc_OpenBottomBar") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Alt + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Left", Description = SystemUtil.GetStringResource("KeyDesc_ShowCtrlPanel") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Right", Description = SystemUtil.GetStringResource("KeyDesc_HideCtrlPanel") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Up", Description = SystemUtil.GetStringResource("KeyDesc_OpenBottomBar") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Home", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + End", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
                     keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsZoomAvailable)
@@ -83,17 +82,14 @@ namespace Locana.Pages
                     case VirtualKey.Shift:
                         IsShiftKeyPressed = true;
                         break;
-                    case VirtualKey.Menu:
-                        IsAltKeyPressed = true;
-                        break;
                     case VirtualKey.Space:
                         ShutterButtonPressed();
                         break;
                     case VirtualKey.Left:
-                        if (IsAltKeyPressed && !ControlPanelDisplayed) { ToggleControlPanel(); }
+                        if (IsCtlKeyPressed && !ControlPanelDisplayed) { ToggleControlPanel(); }
                         break;
                     case VirtualKey.Right:
-                        if (IsAltKeyPressed && ControlPanelDisplayed) { ToggleControlPanel(); }
+                        if (IsCtlKeyPressed && ControlPanelDisplayed) { ToggleControlPanel(); }
                         break;
                     case VirtualKey.Home:
                         if (IsCtlKeyPressed)
@@ -132,14 +128,14 @@ namespace Locana.Pages
                         }
                         break;
                     case VirtualKey.Up:
-                        if (IsAltKeyPressed && !AppBarUnit.IsOpen)
+                        if (IsCtlKeyPressed && !AppBarUnit.IsOpen)
                         {
                             AppBarUnit.IsOpen = true;
                             args.Handled = true;
                         }
                         break;
                     case VirtualKey.Down:
-                        if (IsAltKeyPressed && AppBarUnit.IsOpen)
+                        if (IsCtlKeyPressed && AppBarUnit.IsOpen)
                         {
                             AppBarUnit.IsOpen = false;
                             args.Handled = true;
@@ -254,9 +250,6 @@ namespace Locana.Pages
                             IsBarLeftOn = false;
                             if (ZoomElements.Visibility.IsVisible()) { ZoomOutStop(); }
                         }
-                        break;
-                    case VirtualKey.Menu:
-                        IsAltKeyPressed = false;
                         break;
                 }
             }
