@@ -1139,10 +1139,10 @@ Eメールに添付して開発者に送信しますか？</value>
     <value>写真撮影/録画開始・停止</value>
   </data>
   <data name="KeyDesc_TickLeft" xml:space="preserve">
-    <value>スライダーを左に1つ動かす</value>
+    <value>スライダーを左に1つ動かす/ズームアウト</value>
   </data>
   <data name="KeyDesc_TickRight" xml:space="preserve">
-    <value>スライダーを右に1つ動かす</value>
+    <value>スライダーを右に1つ動かす/ズームイン</value>
   </data>
   <data name="KeyDesc_Zoom" xml:space="preserve">
     <value>ズームコントロール</value>

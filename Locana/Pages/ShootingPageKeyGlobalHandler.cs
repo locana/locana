@@ -26,15 +26,16 @@ namespace Locana.Pages
                 {
                     keyAssignments = new List<KeyAssignmentData>();
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = SystemUtil.GetStringResource("KeyDesc_TakePicture") });
+
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Up", Description = SystemUtil.GetStringResource("KeyDesc_OpenBottomBar") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Right", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Left", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
                     keyAssignments.Add(new ConditionalKeyAssignmentData(() => ControlPanelState == DisplayState.Collapsible)
                     {
                         AssignedKey = "Ctrl + Q",
                         Description = SystemUtil.GetStringResource("KeyDesc_ToggleCtrlPanel")
                     });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Up", Description = SystemUtil.GetStringResource("KeyDesc_OpenBottomBar") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Home", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + End", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
                     keyAssignments.Add(new ConditionalKeyAssignmentData(() => ScreenViewData.IsZoomAvailable)
                     {
                         AssignedKey = "Ctrl + Z",
@@ -88,25 +89,7 @@ namespace Locana.Pages
                     case VirtualKey.Space:
                         ShutterButtonPressed();
                         break;
-                    case VirtualKey.Home:
-                        if (IsCtlKeyPressed)
-                        {
-                            if (ZoomElements.Visibility.IsVisible())
-                            {
-                                if (!IsBarLeftOn)
-                                {
-                                    if (IsShiftKeyPressed) { IsBarLeftOn = true; ZoomOutStart(); }
-                                    else { ZoomOutTick(); }
-                                }
-                            }
-                            else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(1); }
-                            else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(1); }
-                            else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(1); }
-                            else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(1); }
-                            else if (ProgramShiftSlider.Visibility.IsVisible()) { ProgramShiftSlider.TickSlider(1); }
-                        }
-                        break;
-                    case VirtualKey.End:
+                    case VirtualKey.Right:
                         if (IsCtlKeyPressed)
                         {
                             if (ZoomElements.Visibility.IsVisible())
@@ -115,6 +98,25 @@ namespace Locana.Pages
                                 {
                                     if (IsShiftKeyPressed) { IsBarRightOn = true; ZoomInStart(); }
                                     else { ZoomInTick(); }
+                                }
+
+                            }
+                            else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(1); }
+                            else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(1); }
+                            else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(1); }
+                            else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(1); }
+                            else if (ProgramShiftSlider.Visibility.IsVisible()) { ProgramShiftSlider.TickSlider(1); }
+                        }
+                        break;
+                    case VirtualKey.Left:
+                        if (IsCtlKeyPressed)
+                        {
+                            if (ZoomElements.Visibility.IsVisible())
+                            {
+                                if (!IsBarLeftOn)
+                                {
+                                    if (IsShiftKeyPressed) { IsBarLeftOn = true; ZoomOutStart(); }
+                                    else { ZoomOutTick(); }
                                 }
                             }
                             else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(-1); }
