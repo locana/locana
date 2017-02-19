@@ -1221,9 +1221,6 @@ App version: {5}</value>
   <data name="KeyDesc_FNum" xml:space="preserve">
     <value>F-number control</value>
   </data>
-  <data name="KeyDesc_HideCtrlPanel" xml:space="preserve">
-    <value>Hide control panel</value>
-  </data>
   <data name="KeyDesc_ISO" xml:space="preserve">
     <value>ISO control</value>
   </data>
@@ -1251,8 +1248,8 @@ App version: {5}</value>
   <data name="KeyDesc_SemanticZoom" xml:space="preserve">
     <value>Switch to album view or back to normal</value>
   </data>
-  <data name="KeyDesc_ShowCtrlPanel" xml:space="preserve">
-    <value>Show control panel</value>
+  <data name="KeyDesc_ToggleCtrlPanel" xml:space="preserve">
+    <value>Show/Hide control panel</value>
   </data>
   <data name="KeyDesc_SS" xml:space="preserve">
     <value>Shutter speed control</value>
@@ -1261,10 +1258,10 @@ App version: {5}</value>
     <value>Take picture or Start/Stop recording</value>
   </data>
   <data name="KeyDesc_TickLeft" xml:space="preserve">
-    <value>Tick slider left</value>
+    <value>Tick slider left/Zoom out</value>
   </data>
   <data name="KeyDesc_TickRight" xml:space="preserve">
-    <value>Tick slider right</value>
+    <value>Tick slider right/Zoom in</value>
   </data>
   <data name="KeyDesc_Zoom" xml:space="preserve">
     <value>Zoom control</value>

@@ -26,38 +26,42 @@ namespace Locana.Pages
                 {
                     keyAssignments = new List<KeyAssignmentData>();
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Space", Description = SystemUtil.GetStringResource("KeyDesc_TakePicture") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Left", Description = SystemUtil.GetStringResource("KeyDesc_ShowCtrlPanel") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Right", Description = SystemUtil.GetStringResource("KeyDesc_HideCtrlPanel") });
+
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Up", Description = SystemUtil.GetStringResource("KeyDesc_OpenBottomBar") });
                     keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Down", Description = SystemUtil.GetStringResource("KeyDesc_CloseBottomBar") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Home", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
-                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + End", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
-                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsZoomAvailable)
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Right", Description = SystemUtil.GetStringResource("KeyDesc_TickRight") });
+                    keyAssignments.Add(new KeyAssignmentData { AssignedKey = "Ctrl + Left", Description = SystemUtil.GetStringResource("KeyDesc_TickLeft") });
+                    keyAssignments.Add(new ConditionalKeyAssignmentData(() => ControlPanelState == DisplayState.Collapsible)
+                    {
+                        AssignedKey = "Ctrl + Q",
+                        Description = SystemUtil.GetStringResource("KeyDesc_ToggleCtrlPanel")
+                    });
+                    keyAssignments.Add(new ConditionalKeyAssignmentData(() => ScreenViewData.IsZoomAvailable)
                     {
                         AssignedKey = "Ctrl + Z",
                         Description = SystemUtil.GetStringResource("KeyDesc_Zoom")
                     });
-                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetIsoSpeedRateAvailable)
+                    keyAssignments.Add(new ConditionalKeyAssignmentData(() => ScreenViewData.IsSetIsoSpeedRateAvailable)
                     {
                         AssignedKey = "Ctrl + I",
                         Description = SystemUtil.GetStringResource("KeyDesc_ISO")
                     });
-                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetEVAvailable)
+                    keyAssignments.Add(new ConditionalKeyAssignmentData(() => ScreenViewData.IsSetEVAvailable)
                     {
                         AssignedKey = "Ctrl + E",
                         Description = SystemUtil.GetStringResource("KeyDesc_EV")
                     });
-                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetFNumberAvailable)
+                    keyAssignments.Add(new ConditionalKeyAssignmentData(() => ScreenViewData.IsSetFNumberAvailable)
                     {
                         AssignedKey = "Ctrl + F",
                         Description = SystemUtil.GetStringResource("KeyDesc_FNum")
                     });
-                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsSetShutterSpeedAvailable)
+                    keyAssignments.Add(new ConditionalKeyAssignmentData(() => ScreenViewData.IsSetShutterSpeedAvailable)
                     {
                         AssignedKey = "Ctrl + S",
                         Description = SystemUtil.GetStringResource("KeyDesc_SS")
                     });
-                    keyAssignments.Add(new ShootingSettingsKeyAssignmentData(() => ScreenViewData.IsProgramShiftAvailable)
+                    keyAssignments.Add(new ConditionalKeyAssignmentData(() => ScreenViewData.IsProgramShiftAvailable)
                     {
                         AssignedKey = "Ctrl + P",
                         Description = SystemUtil.GetStringResource("KeyDesc_PShift")
@@ -85,31 +89,7 @@ namespace Locana.Pages
                     case VirtualKey.Space:
                         ShutterButtonPressed();
                         break;
-                    case VirtualKey.Left:
-                        if (IsCtlKeyPressed && !ControlPanelDisplayed) { ToggleControlPanel(); }
-                        break;
                     case VirtualKey.Right:
-                        if (IsCtlKeyPressed && ControlPanelDisplayed) { ToggleControlPanel(); }
-                        break;
-                    case VirtualKey.Home:
-                        if (IsCtlKeyPressed)
-                        {
-                            if (ZoomElements.Visibility.IsVisible())
-                            {
-                                if (!IsBarLeftOn)
-                                {
-                                    if (IsShiftKeyPressed) { IsBarLeftOn = true; ZoomOutStart(); }
-                                    else { ZoomOutTick(); }
-                                }
-                            }
-                            else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(1); }
-                            else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(1); }
-                            else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(1); }
-                            else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(1); }
-                            else if (ProgramShiftSlider.Visibility.IsVisible()) { ProgramShiftSlider.TickSlider(1); }
-                        }
-                        break;
-                    case VirtualKey.End:
                         if (IsCtlKeyPressed)
                         {
                             if (ZoomElements.Visibility.IsVisible())
@@ -118,6 +98,25 @@ namespace Locana.Pages
                                 {
                                     if (IsShiftKeyPressed) { IsBarRightOn = true; ZoomInStart(); }
                                     else { ZoomInTick(); }
+                                }
+
+                            }
+                            else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(1); }
+                            else if (EvSlider.Visibility.IsVisible()) { EvSlider.TickSlider(1); }
+                            else if (FnumberSlider.Visibility.IsVisible()) { FnumberSlider.TickSlider(1); }
+                            else if (SSSlider.Visibility.IsVisible()) { SSSlider.TickSlider(1); }
+                            else if (ProgramShiftSlider.Visibility.IsVisible()) { ProgramShiftSlider.TickSlider(1); }
+                        }
+                        break;
+                    case VirtualKey.Left:
+                        if (IsCtlKeyPressed)
+                        {
+                            if (ZoomElements.Visibility.IsVisible())
+                            {
+                                if (!IsBarLeftOn)
+                                {
+                                    if (IsShiftKeyPressed) { IsBarLeftOn = true; ZoomOutStart(); }
+                                    else { ZoomOutTick(); }
                                 }
                             }
                             else if (ISOSlider.Visibility.IsVisible()) { ISOSlider.TickSlider(-1); }
@@ -218,6 +217,9 @@ namespace Locana.Pages
                             args.Handled = true;
                         }
                         break;
+                    case VirtualKey.Q:
+                        if (IsCtlKeyPressed) { ToggleControlPanel(); }
+                        break;
 
                 }
             }
@@ -256,9 +258,9 @@ namespace Locana.Pages
         }
     }
 
-    public class ShootingSettingsKeyAssignmentData : KeyAssignmentData
+    public class ConditionalKeyAssignmentData : KeyAssignmentData
     {
-        public ShootingSettingsKeyAssignmentData(Func<bool> keyAvailabilitySource)
+        public ConditionalKeyAssignmentData(Func<bool> keyAvailabilitySource)
         {
             IsEnabledSource = keyAvailabilitySource;
         }
