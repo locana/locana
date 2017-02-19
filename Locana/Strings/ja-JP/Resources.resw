@@ -1105,9 +1105,6 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="KeyDesc_FNum" xml:space="preserve">
     <value>F値コントロール</value>
   </data>
-  <data name="KeyDesc_HideCtrlPanel" xml:space="preserve">
-    <value>コントロールパネルを隠す</value>
-  </data>
   <data name="KeyDesc_ISO" xml:space="preserve">
     <value>ISOコントロール</value>
   </data>
@@ -1135,9 +1132,6 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="KeyDesc_SemanticZoom" xml:space="preserve">
     <value>アルバム表示への切り替え</value>
   </data>
-  <data name="KeyDesc_ShowCtrlPanel" xml:space="preserve">
-    <value>コントロールパネルを表示する</value>
-  </data>
   <data name="KeyDesc_SS" xml:space="preserve">
     <value>シャッタースピードコントロール</value>
   </data>
@@ -1161,5 +1155,8 @@ Eメールに添付して開発者に送信しますか？</value>
   </data>
   <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
     <value>Ctrlキーを長押しすると、キーボード操作のガイドが表示されます。</value>
+  </data>
+  <data name="KeyDesc_ToggleCtrlPanel" xml:space="preserve">
+    <value>コントロールパネル表示切り替え</value>
   </data>
 </root>
