@@ -75,8 +75,6 @@
         <Border
             x:Name="KeyAssignmentsView"
             MinWidth="420"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"
             Visibility="Collapsed">
             <controls:KeyAssignmentCollectionView
@@ -107,6 +105,8 @@
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
                         <Setter Target="KeyAssignmentsView.Margin" Value="24" />
                         <Setter Target="KeyAssignmentsView.BorderThickness" Value="1" />
+                        <Setter Target="KeyAssignmentsView.HorizontalAlignment" Value="Center" />
+                        <Setter Target="KeyAssignmentsView.VerticalAlignment" Value="Center" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -119,6 +119,8 @@
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
                         <Setter Target="KeyAssignmentsView.Margin" Value="24" />
                         <Setter Target="KeyAssignmentsView.BorderThickness" Value="1" />
+                        <Setter Target="KeyAssignmentsView.HorizontalAlignment" Value="Center" />
+                        <Setter Target="KeyAssignmentsView.VerticalAlignment" Value="Center" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -130,6 +132,8 @@
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Stretch" />
                         <Setter Target="KeyAssignmentsView.Margin" Value="0" />
                         <Setter Target="KeyAssignmentsView.BorderThickness" Value="0" />
+                        <Setter Target="KeyAssignmentsView.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="KeyAssignmentsView.VerticalAlignment" Value="Stretch" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
