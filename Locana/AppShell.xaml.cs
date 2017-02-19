@@ -342,18 +342,18 @@ namespace Locana
             }
 
             var page = AppFrame.Content as IKeyHandlerPage;
-            KeyAssignmentsView.KeyAssignmentCollection.Clear();
+            KeyAssignmentsViewContent.KeyAssignmentCollection.Clear();
 
             if (page != null)
             {
                 foreach (var key in page.KeyAssignments)
                 {
-                    KeyAssignmentsView.KeyAssignmentCollection.Add(key);
+                    KeyAssignmentsViewContent.KeyAssignmentCollection.Add(key);
                 }
             }
             else
             {
-                KeyAssignmentsView.KeyAssignmentCollection.Add(new KeyAssignmentData
+                KeyAssignmentsViewContent.KeyAssignmentCollection.Add(new KeyAssignmentData
                 {
                     AssignedKey = SystemUtil.GetStringResource("KeyDesc_NoAssignment"),
                 });

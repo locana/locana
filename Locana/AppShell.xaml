@@ -72,16 +72,19 @@
             Canvas.ZIndex="10"
             Visibility="Collapsed" />
 
-        <controls:KeyAssignmentCollectionView
+        <Border
             x:Name="KeyAssignmentsView"
             MinWidth="420"
-            Margin="24"
-            Padding="48,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            VerticalContentAlignment="Stretch"
-            Canvas.ZIndex="15"
-            Visibility="Collapsed" />
+            BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"
+            Visibility="Collapsed">
+            <controls:KeyAssignmentCollectionView
+                x:Name="KeyAssignmentsViewContent"
+                Padding="48,0"
+                VerticalContentAlignment="Stretch"
+                Canvas.ZIndex="15" />
+        </Border>
 
         <controls:Toast
             x:Name="MessageToast"
@@ -102,6 +105,8 @@
                         <Setter Target="MenuControl.IsPaneOpen" Value="True" />
                         <Setter Target="MessageToast.MinWidth" Value="640" />
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
+                        <Setter Target="KeyAssignmentsView.Margin" Value="24" />
+                        <Setter Target="KeyAssignmentsView.BorderThickness" Value="1" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -112,6 +117,8 @@
                         <Setter Target="MenuControl.DisplayMode" Value="CompactInline" />
                         <Setter Target="MessageToast.MinWidth" Value="480" />
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Center" />
+                        <Setter Target="KeyAssignmentsView.Margin" Value="24" />
+                        <Setter Target="KeyAssignmentsView.BorderThickness" Value="1" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -121,6 +128,8 @@
                     <VisualState.Setters>
                         <Setter Target="MenuControl.DisplayMode" Value="Overlay" />
                         <Setter Target="MessageToast.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="KeyAssignmentsView.Margin" Value="0" />
+                        <Setter Target="KeyAssignmentsView.BorderThickness" Value="0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

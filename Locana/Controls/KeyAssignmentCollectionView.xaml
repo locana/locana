@@ -17,8 +17,6 @@
     <Grid
         Padding="24"
         Background="{ThemeResource AppBarBackgroundThemeBrush}"
-        BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"
-        BorderThickness="1"
         Opacity="0.9">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
