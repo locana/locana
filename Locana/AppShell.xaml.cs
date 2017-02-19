@@ -245,6 +245,8 @@ namespace Locana
 
         #endregion
 
+        private bool IsAltKeyPressed = false;
+
         private void Root_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             switch (e.Key)
@@ -255,6 +257,54 @@ namespace Locana
                         if (ApplicationSettings.GetInstance().ShowKeyCheatSheet)
                         {
                             ShowKeyAssignmentView();
+                        }
+                    }
+                    break;
+                case VirtualKey.Menu:
+                    IsAltKeyPressed = true;
+                    break;
+                case VirtualKey.G:
+                    if (IsAltKeyPressed)
+                    {
+                        if (typeof(ContentsGridPage) != AppFrame.CurrentSourcePageType)
+                        {
+                            AppFrame.Navigate(typeof(ContentsGridPage));
+                        }
+                    }
+                    break;
+                case VirtualKey.E:
+                    if (IsAltKeyPressed)
+                    {
+                        if (typeof(EntrancePage) != AppFrame.CurrentSourcePageType)
+                        {
+                            AppFrame.Navigate(typeof(EntrancePage));
+                        }
+                    }
+                    break;
+                case VirtualKey.S:
+                    if (IsAltKeyPressed)
+                    {
+                        if (typeof(AppSettingPage) != AppFrame.CurrentSourcePageType)
+                        {
+                            AppFrame.Navigate(typeof(AppSettingPage));
+                        }
+                    }
+                    break;
+                case VirtualKey.D:
+                    if (IsAltKeyPressed)
+                    {
+                        if (typeof(DonationPage) != AppFrame.CurrentSourcePageType)
+                        {
+                            AppFrame.Navigate(typeof(DonationPage));
+                        }
+                    }
+                    break;
+                case VirtualKey.A:
+                    if (IsAltKeyPressed)
+                    {
+                        if (typeof(AboutPage) != AppFrame.CurrentSourcePageType)
+                        {
+                            AppFrame.Navigate(typeof(AboutPage));
                         }
                     }
                     break;
@@ -277,6 +327,9 @@ namespace Locana
                 case VirtualKey.Control:
                     keyCheatSheetHiddenByOtherKey = false;
                     KeyAssignmentsView.Visibility = Visibility.Collapsed;
+                    break;
+                case VirtualKey.Menu:
+                    IsAltKeyPressed = false;
                     break;
             }
         }
