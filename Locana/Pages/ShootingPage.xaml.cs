@@ -59,6 +59,7 @@ namespace Locana.Pages
                 .DeviceDependent(AppBarItem.EvSlider)
                 .DeviceDependent(AppBarItem.IsoSlider)
                 .DeviceDependent(AppBarItem.ProgramShiftSlider);
+
         }
 
         private DisplayRequest displayRequest = new DisplayRequest();
@@ -290,6 +291,9 @@ namespace Locana.Pages
                 Preference.LastControlUdn = target.Udn;
                 (Application.Current as App).AutoConnectionEnabled = false;
             }
+
+            CoreWindow.GetForCurrentThread().KeyDown += Global_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyUp += Global_KeyUp;
         }
 
         private async Task SetupGeolocatorManager()
@@ -318,6 +322,9 @@ namespace Locana.Pages
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
+            CoreWindow.GetForCurrentThread().KeyDown -= Global_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyUp -= Global_KeyUp;
+
             if (target != null)
             {
                 target.Status.PropertyChanged -= Status_PropertyChanged;
@@ -638,32 +645,62 @@ namespace Locana.Pages
 
         private void ZoomOutButton_Click(object sender, RoutedEventArgs e)
         {
-            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop).IgnoreExceptions();
+            ZoomOutStop();
         }
 
         private void ZoomOutButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.Action1Shot).IgnoreExceptions();
+            ZoomOutTick();
         }
 
         private void ZoomOutButton_Holding(object sender, HoldingRoutedEventArgs e)
         {
+            ZoomOutStart();
+        }
+
+        private void ZoomOutTick()
+        {
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.Action1Shot).IgnoreExceptions();
+        }
+
+        private void ZoomOutStart()
+        {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStart).IgnoreExceptions();
+        }
+
+        private void ZoomOutStop()
+        {
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionOut, ZoomParam.ActionStop).IgnoreExceptions();
         }
 
         private void ZoomInButton_Click(object sender, RoutedEventArgs e)
         {
-            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStop).IgnoreExceptions();
+            ZoomInStop();
         }
 
         private void ZoomInButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.Action1Shot).IgnoreExceptions();
+            ZoomInTick();
         }
 
         private void ZoomInButton_Holding(object sender, HoldingRoutedEventArgs e)
         {
+            ZoomInStart();
+        }
+
+        private void ZoomInTick()
+        {
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.Action1Shot).IgnoreExceptions();
+        }
+
+        private void ZoomInStart()
+        {
             target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStart).IgnoreExceptions();
+        }
+
+        private void ZoomInStop()
+        {
+            target?.Api?.Camera?.ActZoomAsync(ZoomParam.DirectionIn, ZoomParam.ActionStop).IgnoreExceptions();
         }
 
         private void ShutterButton_Tapped(object sender, TappedRoutedEventArgs e)

@@ -26,6 +26,7 @@ namespace Locana.DataModel
             RemoteContentsSet = Preference.RemoteContentsSet;
             LiveviewRotationEnabled = Preference.LiveviewRotationEnabled;
             ForcePhoneView = Preference.ForcePhoneView;
+            ShowKeyCheatSheet = Preference.ShowKeyCheatSheet;
         }
 
         public static ApplicationSettings GetInstance()
@@ -339,6 +340,18 @@ namespace Locana.DataModel
                 _ForcePhoneView = value;
                 Preference.ForcePhoneView = value;
                 NotifyChangedOnUI(nameof(ForcePhoneView));
+            }
+        }
+
+        private bool _ShowKeyCheatSheet = true;
+        public bool ShowKeyCheatSheet
+        {
+            get { return _ShowKeyCheatSheet; }
+            set
+            {
+                _ShowKeyCheatSheet = value;
+                Preference.ShowKeyCheatSheet = value;
+                NotifyChangedOnUI(nameof(ShowKeyCheatSheet));
             }
         }
     }

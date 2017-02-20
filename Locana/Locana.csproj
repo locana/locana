@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -143,13 +143,15 @@
     <Compile Include="Controls\ImageStreamView.xaml.cs">
       <DependentUpon>ImageStreamView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\KeyAssignmentCollectionView.xaml.cs">
+      <DependentUpon>KeyAssignmentCollectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MoviePlaybackScreen.xaml.cs">
       <DependentUpon>MoviePlaybackScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MultiModeShutterButton.xaml.cs">
       <DependentUpon>MultiModeShutterButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NavMenuListView.cs" />
     <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
@@ -170,6 +172,9 @@
     </Compile>
     <Compile Include="Controls\ShootingParamSlider.xaml.cs">
       <DependentUpon>ShootingParamSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TickableSlider.xaml.cs">
+      <DependentUpon>TickableSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
@@ -210,12 +215,14 @@
     <Compile Include="Pages\ContentsGridPage.xaml.cs">
       <DependentUpon>ContentsGridPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ContentsGridPageGlobalKeyHandler.cs" />
     <Compile Include="Pages\DonationPage.xaml.cs">
       <DependentUpon>DonationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EntrancePage.xaml.cs">
       <DependentUpon>EntrancePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\IKeyHandlerPage.cs" />
     <Compile Include="Pages\Segment\LogReport.cs" />
     <Compile Include="Pages\ShootingPage.xaml.cs">
       <DependentUpon>ShootingPage.xaml</DependentUpon>
@@ -223,6 +230,7 @@
     <Compile Include="Pages\QrCodePage.xaml.cs">
       <DependentUpon>QrCodePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ShootingPageKeyGlobalHandler.cs" />
     <Compile Include="Pages\WifiDirectPage.xaml.cs">
       <DependentUpon>WifiDirectPage.xaml</DependentUpon>
     </Compile>
@@ -260,6 +268,7 @@
     <Compile Include="UPnP\ValueLessResponse.cs" />
     <Compile Include="Utility\AnimationHelper.cs" />
     <Compile Include="Utility\CameraStatusExtension.cs" />
+    <Compile Include="Utility\CapabilityComparer.cs" />
     <Compile Include="Utility\CommandBarManager.cs" />
     <Compile Include="Utility\BoolToVisibilityConverter.cs" />
     <Compile Include="Utility\CancellationTokenSourceExtensions.cs" />
@@ -360,6 +369,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\KeyAssignmentCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MoviePlaybackScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -395,6 +408,10 @@
     <Page Include="Controls\ShootingParamSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TickableSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Toast.xaml">
       <Generator>MSBuild:Compile</Generator>

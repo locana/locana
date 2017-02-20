@@ -1,5 +1,4 @@
-﻿using Windows.Foundation;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -10,18 +9,7 @@ namespace Locana.Controls
     {
         public PageHeader()
         {
-            this.InitializeComponent();
-
-            this.Loaded += (s, a) =>
-            {
-                AppShell.Current.TogglePaneButtonRectChanged += Current_TogglePaneButtonSizeChanged;
-                this.titleBar.Margin = new Thickness(AppShell.Current.TogglePaneButtonRect.Right, 0, 0, 0);
-            };
-        }
-
-        private void Current_TogglePaneButtonSizeChanged(AppShell sender, Rect e)
-        {
-            this.titleBar.Margin = new Thickness(e.Right, 0, 0, 0);
+            InitializeComponent();
         }
 
         public UIElement HeaderContent

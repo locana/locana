@@ -1,13 +1,14 @@
-﻿<Page x:Class="Locana.Pages.ContentsGridPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:c="using:Locana.Controls"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:Locana.Pages"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:util="using:Locana.Utility"
-      xmlns:xc="using:Windows.UI.Xaml.Controls"
-      mc:Ignorable="d">
+﻿<Page
+    x:Class="Locana.Pages.ContentsGridPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Locana.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Locana.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:util="using:Locana.Utility"
+    xmlns:xc="using:Windows.UI.Xaml.Controls"
+    mc:Ignorable="d">
     <Page.Resources>
         <CollectionViewSource x:Name="GridSources" IsSourceGrouped="True" />
 
@@ -15,27 +16,31 @@
         <util:BoolToVisibilityReverseConverter x:Key="B2VRConverter" />
 
         <ItemsPanelTemplate x:Key="ExtraLargeGridItemTemplate">
-            <ItemsWrapGrid ItemHeight="210"
-                           ItemWidth="210"
-                           Orientation="Horizontal" />
+            <ItemsWrapGrid
+                ItemHeight="210"
+                ItemWidth="210"
+                Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="LargeGridItemTemplate">
-            <ItemsWrapGrid ItemHeight="180"
-                           ItemWidth="180"
-                           Orientation="Horizontal" />
+            <ItemsWrapGrid
+                ItemHeight="180"
+                ItemWidth="180"
+                Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="MediumGridItemTemplate">
-            <ItemsWrapGrid ItemHeight="150"
-                           ItemWidth="150"
-                           Orientation="Horizontal" />
+            <ItemsWrapGrid
+                ItemHeight="150"
+                ItemWidth="150"
+                Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="SmallGridItemTemplate">
-            <ItemsWrapGrid ItemHeight="120"
-                           ItemWidth="120"
-                           Orientation="Horizontal" />
+            <ItemsWrapGrid
+                ItemHeight="120"
+                ItemWidth="120"
+                Orientation="Horizontal" />
         </ItemsPanelTemplate>
 
         <c:GridViewItemSelectivityBinder x:Key="GridViewItemSelectivityBinder" />
@@ -47,6 +52,263 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <CommandBar
+            x:Name="TitleBar"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Stretch">
+            <CommandBar.Content>
+                <c:PageHeader>
+                    <c:PageHeader.HeaderContent>
+                        <TextBlock
+                            x:Name="TitleBarText"
+                            Style="{ThemeResource PageTitleTextBlockStyle}"
+                            TextTrimming="CharacterEllipsis" />
+                    </c:PageHeader.HeaderContent>
+                </c:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <c:PhotoPlaybackScreen
+            x:Name="PhotoScreen"
+            Grid.RowSpan="3"
+            Canvas.ZIndex="10"
+            Visibility="Collapsed" />
+
+        <c:MoviePlaybackScreen
+            x:Name="MoviePlayer"
+            Grid.RowSpan="2"
+            Canvas.ZIndex="10"
+            CurrentPosition="{Binding CurrentPosition}"
+            MovieType="LocalMovie"
+            PlaybackStatus="{Binding StreamingStatus}"
+            SeekAvailable="{Binding SeekAvailable}"
+            Visibility="Collapsed"
+            Duration="{Binding Duration}">
+            <c:MoviePlaybackScreen.Background>
+                <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+            </c:MoviePlaybackScreen.Background>
+        </c:MoviePlaybackScreen>
+
+        <ProgressRing
+            x:Name="ProgressCircle"
+            Grid.RowSpan="2"
+            Width="60"
+            Height="60"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Canvas.ZIndex="40"
+            Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+        <SemanticZoom x:Name="GridHolder" Grid.Row="1">
+            <SemanticZoom.ZoomedInView>
+                <GridView
+                    x:Name="ContentsGrid"
+                    ItemClick="ContentsGrid_ItemClick"
+                    ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
+                    ItemsSource="{Binding Source={StaticResource GridSources}}"
+                    Loaded="ContentsGrid_Loaded"
+                    ScrollViewer.IsHorizontalScrollChainingEnabled="False"
+                    SelectionChanged="ContentsGrid_SelectionChanged"
+                    Unloaded="ContentsGrid_Unloaded">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                Margin="2,2"
+                                Holding="ContentsGrid_Holding"
+                                RightTapped="ContentsGrid_RightTapped">
+                                <Grid.Background>
+                                    <SolidColorBrush Color="{ThemeResource SystemBaseLowColor}" />
+                                </Grid.Background>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="48" />
+                                </Grid.RowDefinitions>
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem
+                                            Click="Playback_Click"
+                                            Text="{Binding [Viewer_MenuPlayback], Source={StaticResource LocalizedStrings}}"
+                                            Visibility="{Binding IsPlayable, Converter={StaticResource B2VConverter}}" />
+                                        <MenuFlyoutItem
+                                            Click="Download_Click"
+                                            Text="{Binding [Viewer_MenuCopyToPhone], Source={StaticResource LocalizedStrings}}"
+                                            Visibility="{Binding IsCopyable, Converter={StaticResource B2VConverter}}" />
+                                        <MenuFlyoutItem
+                                            Click="Delete_Click"
+                                            Text="{Binding [Viewer_MenuDelete], Source={StaticResource LocalizedStrings}}"
+                                            Visibility="{Binding IsDeletable, Converter={StaticResource B2VConverter}}" />
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
+                                <ContentControl
+                                    Grid.RowSpan="2"
+                                    Margin="36"
+                                    ContentTemplate="{StaticResource ic_collection_white}"
+                                    Visibility="{Binding Path=ThumbnailExists, Converter={StaticResource B2VRConverter}}" />
+                                <ContentControl
+                                    Grid.RowSpan="2"
+                                    Margin="36"
+                                    ContentTemplate="{StaticResource ic_broken_image_white}"
+                                    Visibility="{Binding Path=IsBroken, Converter={StaticResource B2VConverter}}" />
+                                <Image
+                                    Grid.RowSpan="2"
+                                    Source="{Binding ThumbnailImage}"
+                                    Stretch="Uniform" />
+                                <TextBlock
+                                    Grid.RowSpan="2"
+                                    Margin="8,8,0,0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    IsHitTestVisible="True"
+                                    Style="{StaticResource TitleTextBlockStyle}"
+                                    Text="{Binding OverlayText}"
+                                    TextTrimming="None"
+                                    TextWrapping="NoWrap" />
+                                <Border Grid.RowSpan="2" Visibility="{Binding IsSelectable, Converter={StaticResource B2VRConverter}}">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+                                    </Border.Background>
+                                </Border>
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Margin="0,0,8,0"
+                                    HorizontalAlignment="Right"
+                                    IsHitTestVisible="False"
+                                    Orientation="Horizontal">
+                                    <ContentControl
+                                        Height="36"
+                                        ContentTemplate="{StaticResource ic_lock_white}"
+                                        IsHitTestVisible="False"
+                                        Visibility="{Binding Path=Source.Protected, Converter={StaticResource B2VConverter}}" />
+                                    <ContentControl
+                                        Height="36"
+                                        ContentTemplate="{StaticResource ic_theaters_white}"
+                                        IsHitTestVisible="False"
+                                        Visibility="{Binding IsMovie, Converter={StaticResource B2VConverter}}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Padding="8,0"
+                                        Style="{StaticResource TitleTextBlockStyle}"
+                                        Text="{Binding Key}" />
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                            <GroupStyle.HeaderContainerStyle>
+                                <Style TargetType="GridViewHeaderItem">
+                                    <Setter Property="IsTabStop" Value="False" />
+                                </Style>
+                            </GroupStyle.HeaderContainerStyle>
+                        </GroupStyle>
+                    </GridView.GroupStyle>
+                </GridView>
+            </SemanticZoom.ZoomedInView>
+            <SemanticZoom.ZoomedOutView>
+                <GridView
+                    x:Name="GroupsGrid"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                    IsItemClickEnabled="True"
+                    ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
+                    ScrollViewer.IsVerticalScrollChainingEnabled="False">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="2" Background="{ThemeResource ContentDialogBackgroundThemeBrush}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Source="{Binding Group.RandomThumbnail}" />
+                                <Border Grid.Row="0">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
+                                    </Border.Background>
+                                    <TextBlock
+                                        Margin="0"
+                                        Padding="8,0"
+                                        VerticalAlignment="Center"
+                                        Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        Text="{Binding Group.Key}" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.Header>
+                        <TextBlock
+                            Margin="4"
+                            Padding="8,0"
+                            VerticalAlignment="Bottom"
+                            Style="{StaticResource TitleTextBlockStyle}"
+                            Text="{Binding [Viewer_Header_GroupView], Source={StaticResource LocalizedStrings}}" />
+                    </GridView.Header>
+                    <GridView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderContainerStyle>
+                                <Style TargetType="GridViewHeaderItem">
+                                    <Setter Property="IsTabStop" Value="False" />
+                                </Style>
+                            </GroupStyle.HeaderContainerStyle>
+                        </GroupStyle>
+                    </GridView.GroupStyle>
+                </GridView>
+            </SemanticZoom.ZoomedOutView>
+        </SemanticZoom>
+
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Border>
+                <TextBlock
+                    x:Name="CautionText"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource SubheaderTextBlockStyle}"
+                    Visibility="Collapsed" />
+            </Border>
+            <Border>
+                <Button
+                    x:Name="MoreInfoButton"
+                    Margin="0,48,0,0"
+                    HorizontalAlignment="Center"
+                    Click="MoreInfoButton_Click"
+                    Content="{Binding [MoreInfo], Source={StaticResource LocalizedStrings}}"
+                    Visibility="Collapsed" />
+            </Border>
+        </StackPanel>
+
+        <xc:ContentDialog
+            x:Name="DeleteDialog"
+            Grid.Row="1"
+            MinHeight="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            PrimaryButtonText="{Binding PrimaryButtonText}"
+            SecondaryButtonText="{Binding SecondaryButtonText}">
+            <Border>
+                <TextBlock
+                    Margin="0,24,0,0"
+                    Text="{Binding DialogMessageText}"
+                    TextWrapping="WrapWholeWords" />
+            </Border>
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DialogTitleText}" />
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+        </xc:ContentDialog>
+
+        <CommandBar
+            Name="AppBarUnit"
+            Grid.Row="2"
+            Grid.RowSpan="1"
+            Canvas.ZIndex="40" />
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowWidthStates">
                 <VisualState x:Name="WideState">
@@ -72,232 +334,5 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-
-        <CommandBar x:Name="TitleBar"
-                    VerticalAlignment="Top"
-                    HorizontalContentAlignment="Stretch">
-            <CommandBar.Content>
-                <c:PageHeader>
-                    <c:PageHeader.HeaderContent>
-                        <TextBlock x:Name="TitleBarText"
-                                   Style="{ThemeResource PageTitleTextBlockStyle}"
-                                   TextTrimming="CharacterEllipsis" />
-                    </c:PageHeader.HeaderContent>
-                </c:PageHeader>
-            </CommandBar.Content>
-        </CommandBar>
-
-        <c:PhotoPlaybackScreen x:Name="PhotoScreen"
-                               Grid.RowSpan="3"
-                               Canvas.ZIndex="10"
-                               Visibility="Collapsed" />
-
-        <c:MoviePlaybackScreen x:Name="MoviePlayer"
-                               Grid.RowSpan="2"
-                               Canvas.ZIndex="10"
-                               CurrentPosition="{Binding CurrentPosition}"
-                               Duration="{Binding Duration}"
-                               MovieType="LocalMovie"
-                               PlaybackStatus="{Binding StreamingStatus}"
-                               SeekAvailable="{Binding SeekAvailable}"
-                               Visibility="Collapsed">
-            <c:MoviePlaybackScreen.Background>
-                <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
-            </c:MoviePlaybackScreen.Background>
-        </c:MoviePlaybackScreen>
-
-        <ProgressRing x:Name="ProgressCircle"
-                      Grid.RowSpan="2"
-                      Width="60"
-                      Height="60"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      Canvas.ZIndex="40"
-                      Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-        <SemanticZoom x:Name="GridHolder" Grid.Row="1">
-            <SemanticZoom.ZoomedInView>
-                <GridView x:Name="ContentsGrid"
-                          ItemContainerStyleSelector="{StaticResource GridViewItemSelectivityBinder}"
-                          ItemsSource="{Binding Source={StaticResource GridSources}}"
-                          Loaded="ContentsGrid_Loaded"
-                          ScrollViewer.IsHorizontalScrollChainingEnabled="False"
-                          SelectionChanged="ContentsGrid_SelectionChanged"
-                          Unloaded="ContentsGrid_Unloaded">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="2,2"
-                                  Holding="ContentsGrid_Holding"
-                                  RightTapped="ContentsGrid_RightTapped"
-                                  Tapped="ContentsGrid_Tapped">
-                                <Grid.Background>
-                                    <SolidColorBrush Color="{ThemeResource SystemBaseLowColor}" />
-                                </Grid.Background>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="48" />
-                                </Grid.RowDefinitions>
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Click="Playback_Click"
-                                                        Text="{Binding [Viewer_MenuPlayback],
-                                                                       Source={StaticResource LocalizedStrings}}"
-                                                        Visibility="{Binding IsPlayable,
-                                                                             Converter={StaticResource B2VConverter}}" />
-                                        <MenuFlyoutItem Click="Download_Click"
-                                                        Text="{Binding [Viewer_MenuCopyToPhone],
-                                                                       Source={StaticResource LocalizedStrings}}"
-                                                        Visibility="{Binding IsCopyable,
-                                                                             Converter={StaticResource B2VConverter}}" />
-                                        <MenuFlyoutItem Click="Delete_Click"
-                                                        Text="{Binding [Viewer_MenuDelete],
-                                                                       Source={StaticResource LocalizedStrings}}"
-                                                        Visibility="{Binding IsDeletable,
-                                                                             Converter={StaticResource B2VConverter}}" />
-
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <ContentControl Grid.RowSpan="2"
-                                                Margin="36"
-                                                ContentTemplate="{StaticResource ic_collection_white}"
-                                                Visibility="{Binding Path=ThumbnailExists,
-                                                                     Converter={StaticResource B2VRConverter}}" />
-                                <ContentControl Grid.RowSpan="2"
-                                                Margin="36"
-                                                ContentTemplate="{StaticResource ic_broken_image_white}"
-                                                Visibility="{Binding Path=IsBroken,
-                                                                     Converter={StaticResource B2VConverter}}" />
-                                <Image Grid.RowSpan="2"
-                                       Source="{Binding ThumbnailImage}"
-                                       Stretch="Uniform" />
-                                <TextBlock Grid.RowSpan="2"
-                                           Margin="8,8,0,0"
-                                           HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"
-                                           IsHitTestVisible="True"
-                                           Style="{StaticResource TitleTextBlockStyle}"
-                                           Text="{Binding OverlayText}"
-                                           TextTrimming="None"
-                                           TextWrapping="NoWrap" />
-                                <Border Grid.RowSpan="2" Visibility="{Binding IsSelectable, Converter={StaticResource B2VRConverter}}">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
-                                    </Border.Background>
-                                </Border>
-                                <StackPanel Grid.Row="1"
-                                            Margin="0,0,8,0"
-                                            HorizontalAlignment="Right"
-                                            IsHitTestVisible="False"
-                                            Orientation="Horizontal">
-                                    <ContentControl Height="36"
-                                                    ContentTemplate="{StaticResource ic_lock_white}"
-                                                    IsHitTestVisible="False"
-                                                    Visibility="{Binding Path=Source.Protected,
-                                                                         Converter={StaticResource B2VConverter}}" />
-                                    <ContentControl Height="36"
-                                                    ContentTemplate="{StaticResource ic_theaters_white}"
-                                                    IsHitTestVisible="False"
-                                                    Visibility="{Binding IsMovie,
-                                                                         Converter={StaticResource B2VConverter}}" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                    <GridView.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <TextBlock Padding="8,0"
-                                               Style="{StaticResource TitleTextBlockStyle}"
-                                               Text="{Binding Key}" />
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-                        </GroupStyle>
-                    </GridView.GroupStyle>
-                </GridView>
-            </SemanticZoom.ZoomedInView>
-            <SemanticZoom.ZoomedOutView>
-                <GridView x:Name="GroupsGrid"
-                          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                          ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
-                          ScrollViewer.IsVerticalScrollChainingEnabled="False">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="2" Background="{ThemeResource ContentDialogBackgroundThemeBrush}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0"
-                                       Grid.RowSpan="2"
-                                       Source="{Binding Group.RandomThumbnail}" />
-                                <Border Grid.Row="0">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="{ThemeResource SystemChromeBlackMediumColor}" />
-                                    </Border.Background>
-                                    <TextBlock Margin="0"
-                                               VerticalAlignment="Center"
-                                               Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}"
-                                               Padding="8,0"
-                                               Style="{StaticResource BaseTextBlockStyle}"
-                                               Text="{Binding Group.Key}" />
-                                </Border>
-                            </Grid>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                    <GridView.Header>
-                        <TextBlock Margin="4"
-                                   VerticalAlignment="Bottom"
-                                   Padding="8,0"
-                                   Style="{StaticResource TitleTextBlockStyle}"
-                                   Text="{Binding [Viewer_Header_GroupView],
-                                                  Source={StaticResource LocalizedStrings}}" />
-                    </GridView.Header>
-                </GridView>
-            </SemanticZoom.ZoomedOutView>
-        </SemanticZoom>
-
-        <StackPanel Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <Border>
-                <TextBlock x:Name="CautionText"
-                           HorizontalAlignment="Center"
-                           Style="{StaticResource SubheaderTextBlockStyle}"
-                           Visibility="Collapsed" />
-            </Border>
-            <Border>
-                <Button x:Name="MoreInfoButton"
-                        Margin="0,48,0,0"
-                        HorizontalAlignment="Center"
-                        Click="MoreInfoButton_Click"
-                        Content="{Binding [MoreInfo],
-                                          Source={StaticResource LocalizedStrings}}"
-                        Visibility="Collapsed" />
-            </Border>
-        </StackPanel>
-
-        <xc:ContentDialog x:Name="DeleteDialog"
-                          Grid.Row="1"
-                          MinHeight="0"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          PrimaryButtonText="{Binding PrimaryButtonText}"
-                          SecondaryButtonText="{Binding SecondaryButtonText}">
-            <Border>
-                <TextBlock Margin="0,24,0,0"
-                           Text="{Binding DialogMessageText}"
-                           TextWrapping="WrapWholeWords" />
-            </Border>
-            <ContentDialog.TitleTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding DialogTitleText}" />
-                </DataTemplate>
-            </ContentDialog.TitleTemplate>
-        </xc:ContentDialog>
-
-        <CommandBar Name="AppBarUnit"
-                    Grid.Row="2"
-                    Grid.RowSpan="1"
-                    Canvas.ZIndex="40" />
     </Grid>
 </Page>

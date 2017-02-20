@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -16,26 +15,24 @@ namespace Locana.Controls
     {
         public ShootingParamSlider()
         {
-            this.InitializeComponent();
-            Slider.AddHandler(PointerReleasedEvent, new PointerEventHandler(Slider_PointerReleased), true);
+            InitializeComponent();
+            Slider.ValueFixed += Slider_ValueFixed;
         }
 
-        public event EventHandler<ShootingParameterChangedEventArgs> SliderOperated;
-        private void Slider_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void Slider_ValueFixed(object sender, TickableSliderValueChangedArgs e)
         {
-            var selected = (int)Math.Round((sender as Slider).Value);
-            (sender as Slider).Value = selected;
-            DebugUtil.Log(() => "Slider released: " + selected);
+            var selected = e.NewValue;
             if (Parameter == null || selected < 0 || selected >= Parameter.Candidates.Count) { return; }
-            if (SliderOperated != null) { SliderOperated(this, new ShootingParameterChangedEventArgs() { Selected = Parameter.Candidates[selected] }); }
+            SliderOperated?.Invoke(this, new ShootingParameterChangedEventArgs() { Selected = Parameter.Candidates[selected] });
         }
+        public event EventHandler<ShootingParameterChangedEventArgs> SliderOperated;
 
         public Capability<string> Parameter
         {
             set
             {
                 SetValue(ParameterProperty, value);
-                UpdateDisplay<string>(value);
+                UpdateDisplay(value);
             }
             get { return (Capability<string>)GetValue(ParameterProperty); }
         }
@@ -58,12 +55,47 @@ namespace Locana.Controls
         public ImageSource IconSource { set { SettingImage.Source = value; } }
         public DataTemplate IconDataTemplate { set { SettingImageContent.ContentTemplate = value; } }
 
+        public string TooltipPrefix
+        {
+            get { return (string)GetValue(TooltipPrefixProperty); }
+            set { SetValue(TooltipPrefixProperty, value); }
+        }
+
+        public static readonly DependencyProperty TooltipPrefixProperty = DependencyProperty.Register(
+            nameof(TooltipPrefix),
+            typeof(string),
+            typeof(ShootingParamSlider),
+            new PropertyMetadata("", new PropertyChangedCallback(OnTooltipPrefixChanged)));
+
+        private static void OnTooltipPrefixChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ShootingParamSlider).TooltipPrefix = (string)e.NewValue;
+        }
+
+        public string TooltipPostfix
+        {
+            get { return (string)GetValue(TooltipPostfixProperty); }
+            set { SetValue(TooltipPostfixProperty, value); }
+        }
+
+        public static readonly DependencyProperty TooltipPostfixProperty = DependencyProperty.Register(
+            nameof(TooltipPostfix),
+            typeof(string),
+            typeof(ShootingParamSlider),
+            new PropertyMetadata("", new PropertyChangedCallback(OnTooltipPostfixChanged)));
+
+        private static void OnTooltipPostfixChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as ShootingParamSlider).TooltipPostfix = (string)e.NewValue;
+        }
+
         void UpdateDisplay<T>(Capability<T> parameter)
         {
             if (parameter == null || parameter.Candidates == null || parameter.Candidates.Count == 0) { return; }
 
             Slider.Minimum = 0;
             Slider.Maximum = parameter.Candidates.Count - 1;
+            DebugUtil.Log(() => { return "Min: " + Slider.Minimum + " Max: " + Slider.Maximum; });
             for (int i = 0; i < parameter.Candidates.Count; i++)
             {
                 if (parameter.Current.Equals(parameter.Candidates[i]))
@@ -79,21 +111,33 @@ namespace Locana.Controls
             {
                 labels.Add(value.ToString());
             }
-            Slider.ThumbToolTipValueConverter = new SliderValueConverter() { Labels = labels };
+            Slider.ThumbToolTipValueConverter = new SliderValueConverter() { Labels = labels, Prefix = this.TooltipPrefix, Postfix = this.TooltipPostfix };
+        }
+
+        public void TickSlider(int amount)
+        {
+            Slider.TickSlider(amount);
+        }
+
+        public void FixShootingParam()
+        {
+            Slider.FixNewValue();
         }
     }
 
     public class SliderValueConverter : IValueConverter
     {
         public List<string> Labels { get; set; }
+        public string Prefix { get; set; }
+        public string Postfix { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             var selected = (int)Math.Round((double)value);
 
             if (Labels == null || selected >= Labels.Count) { return value.ToString(); }
-
-            return Labels[selected];
+            
+            return Prefix + Labels[selected].TrimEnd('"') + Postfix;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -106,4 +150,6 @@ namespace Locana.Controls
     {
         public string Selected { get; set; }
     }
+
+
 }

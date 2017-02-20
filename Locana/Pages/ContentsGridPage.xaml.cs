@@ -36,109 +36,25 @@ namespace Locana.Pages
 
         public ContentsGridPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             InitVisualStates();
 
-            CommandBarManager.SetEvent(AppBarItem.Ok, async (s, args) =>
-            {
-                DebugUtil.Log(() => "Ok clicked");
-                switch (InnerState)
-                {
-                    case ViewerState.Multi:
-                        switch (Operator.ContentsCollection.SelectivityFactor)
-                        {
-                            case SelectivityFactor.Delete:
-                                await DeleteSelectedFiles();
-                                break;
-                            case SelectivityFactor.Download:
-                                FetchSelectedImages();
-                                break;
-                            default:
-                                DebugUtil.Log(() => "Nothing to do for current SelectivityFactor: " + Operator.ContentsCollection.SelectivityFactor);
-                                break;
-                        }
-                        UpdateSelectionMode(SelectivityFactor.None);
-                        UpdateInnerState(ViewerState.Single);
-                        break;
-                    default:
-                        DebugUtil.Log(() => "Nothing to do for current InnerState: " + InnerState);
-                        break;
-                }
-            })
-            .SetEvent(AppBarItem.DeleteMultiple, (s, args) =>
-            {
-                UpdateSelectionMode(SelectivityFactor.Delete);
-                UpdateInnerState(ViewerState.Multi);
-            })
-            .SetEvent(AppBarItem.DownloadMultiple, (s, args) =>
-            {
-                UpdateSelectionMode(SelectivityFactor.Download);
-                UpdateInnerState(ViewerState.Multi);
-            })
-            .SetEvent(AppBarItem.RotateRight, (s, args) =>
-            {
-                PhotoScreen.RotateImage(Rotation.Right);
-            })
-            .SetEvent(AppBarItem.RotateLeft, (s, args) =>
-            {
-                PhotoScreen.RotateImage(Rotation.Left);
-            })
-            .SetEvent(AppBarItem.ShowDetailInfo, async (s, args) =>
-            {
-                PhotoScreen.DetailInfoDisplayed = true;
-                await Task.Delay(500);
-                UpdateAppBar();
-            })
-            .SetEvent(AppBarItem.HideDetailInfo, async (s, args) =>
-            {
-                PhotoScreen.DetailInfoDisplayed = false;
-                await Task.Delay(500);
-                UpdateAppBar();
-            })
-            .SetEvent(AppBarItem.Resume, (s, args) =>
-            {
-                MoviePlayer.Resume();
-            })
-            .SetEvent(AppBarItem.Pause, (s, args) =>
-            {
-                MoviePlayer.Pause();
-            })
-            .SetEvent(AppBarItem.Close, (s, args) =>
-            {
-                switch (InnerState)
-                {
-                    case ViewerState.StillPlayback:
-                        ReleaseDetail();
-                        break;
-                    case ViewerState.MoviePlayback:
-                        FinishMoviePlayback();
-                        break;
-                }
-                UpdateInnerState(ViewerState.Single);
-            })
+            CommandBarManager.SetEvent(AppBarItem.Ok, (s, args) => CommandBarOkSelected())
+            .SetEvent(AppBarItem.DeleteMultiple, (s, args) => CommandBarDeleteMultipleSelected())
+            .SetEvent(AppBarItem.DownloadMultiple, (s, args) => CommandBarDownloadMultipleSelected())
+            .SetEvent(AppBarItem.RotateRight, (s, args) => CommandBarRotateRightSelected())
+            .SetEvent(AppBarItem.RotateLeft, (s, args) => CommandBarRotateLeftSelected())
+            .SetEvent(AppBarItem.ShowDetailInfo, (s, args) => CommandBarShowDetailInfo())
+            .SetEvent(AppBarItem.HideDetailInfo, (s, args) => CommandBarHideDetailInfo())
+            .SetEvent(AppBarItem.Resume, (s, args) => CommandBarResumeMovieSelected())
+            .SetEvent(AppBarItem.Pause, (s, args) => CommandBarPauseMovieSelected())
+            .SetEvent(AppBarItem.Close, (s, args) => CommandBarCloseSelected())
             .SetEvent(AppBarItem.LocalStorage, (s, args) =>
             {
                 var tuple = Tuple.Create<string, string>(nameof(StorageType.Local), null);
                 Frame.Navigate(typeof(ContentsGridPage), tuple);
             })
-            .SetEvent(AppBarItem.RemoteStorage, (s, args) =>
-            {
-                var menuFlyout = CreateRemoteDrivesMenuFlyout();
-
-                switch (menuFlyout.Items.Count)
-                {
-                    case 0:
-                        UpdateTopBar();
-                        break;
-                    // case 1:
-                    // TODO Transit directly
-                    // break;
-                    default:
-                        FlyoutBase.SetAttachedFlyout(s as FrameworkElement, menuFlyout);
-                        FlyoutBase.ShowAttachedFlyout(s as FrameworkElement);
-                        break;
-                }
-            })
+            .SetEvent(AppBarItem.RemoteStorage, (s, args) => TopBarRemoteStorage(s as FrameworkElement))
             .SetAccentColor(AppBarItem.RemoteStorage)
             .SetHeartBeat(AppBarItem.RemoteStorage)
             .SetEvent(AppBarItem.CancelSelection, (s, args) =>
@@ -147,6 +63,138 @@ namespace Locana.Pages
             });
 
             PhotoScreen.DetailInfoDisplayStatusUpdated += () => { UpdateAppBar(); };
+        }
+
+        private void TopBarRemoteStorage(FrameworkElement sender)
+        {
+            var menuFlyout = CreateRemoteDrivesMenuFlyout();
+
+            switch (menuFlyout.Items.Count)
+            {
+                case 0:
+                    UpdateTopBar();
+                    break;
+                case 1: // Transit directly if a single candidate is available
+                    var menu = menuFlyout.Items[0];
+#if DEBUG
+                    if (!(menu is RemoteStorageMenuFlyoutItem))
+                    {
+                        DummyStorageSelected();
+                        break;
+                    }
+#endif
+                    RemoteStorageSelected(menu as RemoteStorageMenuFlyoutItem);
+                    break;
+                default:
+                    FlyoutBase.SetAttachedFlyout(sender, menuFlyout);
+                    FlyoutBase.ShowAttachedFlyout(sender);
+                    break;
+            }
+        }
+
+        private async void CommandBarOkSelected()
+        {
+            DebugUtil.Log(() => "Ok clicked");
+            switch (InnerState)
+            {
+                case ViewerState.Multi:
+                    switch (Operator.ContentsCollection.SelectivityFactor)
+                    {
+                        case SelectivityFactor.Delete:
+                            await DeleteSelectedFiles();
+                            break;
+                        case SelectivityFactor.Download:
+                            FetchSelectedImages();
+                            break;
+                        default:
+                            DebugUtil.Log(() => "Nothing to do for current SelectivityFactor: " + Operator.ContentsCollection.SelectivityFactor);
+                            break;
+                    }
+                    UpdateSelectionMode(SelectivityFactor.None);
+                    UpdateInnerState(ViewerState.Single);
+                    break;
+                default:
+                    DebugUtil.Log(() => "Nothing to do for current InnerState: " + InnerState);
+                    break;
+            }
+        }
+
+        private void CommandBarDeleteMultipleSelected()
+        {
+            if (InnerState == ViewerState.Single)
+            {
+                UpdateSelectionMode(SelectivityFactor.Delete);
+                UpdateInnerState(ViewerState.Multi);
+            }
+        }
+
+        private void CommandBarDownloadMultipleSelected()
+        {
+            if (InnerState == ViewerState.Single)
+            {
+                UpdateSelectionMode(SelectivityFactor.Download);
+                UpdateInnerState(ViewerState.Multi);
+            }
+        }
+
+        private async void CommandBarShowDetailInfo()
+        {
+            PhotoScreen.DetailInfoDisplayed = true;
+            await Task.Delay(500);
+            UpdateAppBar();
+        }
+
+        private async void CommandBarHideDetailInfo()
+        {
+            PhotoScreen.DetailInfoDisplayed = false;
+            await Task.Delay(500);
+            UpdateAppBar();
+        }
+
+        private void CommandBarRotateLeftSelected()
+        {
+            if (InnerState == ViewerState.StillPlayback && PhotoScreen.Visibility.IsVisible())
+            {
+                PhotoScreen.RotateImage(Rotation.Left);
+            }
+        }
+
+        private void CommandBarRotateRightSelected()
+        {
+            if (InnerState == ViewerState.StillPlayback && PhotoScreen.Visibility.IsVisible())
+            {
+                PhotoScreen.RotateImage(Rotation.Right);
+            }
+        }
+
+        private void CommandBarResumeMovieSelected()
+        {
+            if (InnerState == ViewerState.MoviePlayback && MoviePlayer.Visibility.IsVisible())
+            {
+                MoviePlayer.Resume();
+            }
+        }
+
+        private void CommandBarPauseMovieSelected()
+        {
+            if (InnerState == ViewerState.MoviePlayback && MoviePlayer.Visibility.IsVisible())
+            {
+                MoviePlayer.Pause();
+            }
+        }
+
+        private void CommandBarCloseSelected()
+        {
+            switch (InnerState)
+            {
+                case ViewerState.StillPlayback:
+                    ReleaseDetail();
+                    break;
+                case ViewerState.MoviePlayback:
+                    FinishMoviePlayback();
+                    break;
+            }
+            UpdateInnerState(ViewerState.Single);
         }
 
         private ContentDialogSource DeleteConfirmationSource = new ContentDialogSource
@@ -209,6 +257,7 @@ namespace Locana.Pages
                     Text = "Dummy storage",
                 };
                 item.Tapped += DummyStorage_Tapped;
+                item.Click += DummyStorage_Click;
                 menu.Items.Add(item);
             }
 #endif
@@ -223,6 +272,7 @@ namespace Locana.Pages
                     Text = device.FriendlyName,
                 };
                 item.Tapped += RemoteStorage_Tapped;
+                item.Click += RemoteStorage_Click;
                 menu.Items.Add(item);
             });
 
@@ -238,21 +288,41 @@ namespace Locana.Pages
                         Text = upnp.FriendlyName,
                     };
                     item.Tapped += RemoteStorage_Tapped;
+                    item.Click += RemoteStorage_Click;
                     menu.Items.Add(item);
                 });
 
             return menu;
         }
 
+        private void RemoteStorage_Click(object sender, RoutedEventArgs e)
+        {
+            RemoteStorageSelected(sender as RemoteStorageMenuFlyoutItem);
+        }
+
         private void RemoteStorage_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var item = sender as RemoteStorageMenuFlyoutItem;
+            RemoteStorageSelected(sender as RemoteStorageMenuFlyoutItem);
+        }
+
+        private void RemoteStorageSelected(RemoteStorageMenuFlyoutItem item)
+        {
             var tuple = Tuple.Create(item.StorageType.ToString(), item.Id);
             Frame.Navigate(typeof(ContentsGridPage), tuple);
         }
 
 #if DEBUG
+        private void DummyStorage_Click(object sender, RoutedEventArgs e)
+        {
+            DummyStorageSelected();
+        }
+
         private void DummyStorage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            DummyStorageSelected();
+        }
+
+        private void DummyStorageSelected()
         {
             var tuple = Tuple.Create<string, string>(nameof(StorageType.Dummy), null);
             Frame.Navigate(typeof(ContentsGridPage), tuple);
@@ -268,6 +338,9 @@ namespace Locana.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             displayRequest.RequestActive();
+
+            CoreWindow.GetForCurrentThread().KeyDown += Global_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyUp += Global_KeyUp;
 
             var tuple = e.Parameter as Tuple<string, string>;
             switch (tuple?.Item1 ?? "")
@@ -511,16 +584,21 @@ namespace Locana.Pages
             {
                 case SelectivityFactor.None:
                     ContentsGrid.SelectionMode = ListViewSelectionMode.None;
+                    ContentsGrid.IsItemClickEnabled = true;
                     break;
                 case SelectivityFactor.Delete:
                 case SelectivityFactor.Download:
                     ContentsGrid.SelectionMode = ListViewSelectionMode.Multiple;
+                    ContentsGrid.IsItemClickEnabled = false;
                     break;
             }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            CoreWindow.GetForCurrentThread().KeyDown -= Global_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyUp -= Global_KeyUp;
+
             NetworkObserver.INSTANCE.Stop();
             NetworkObserver.INSTANCE.CdsDiscovered -= NetworkObserver_CdsDiscovered;
             NetworkObserver.INSTANCE.CameraDiscovered -= NetworkObserver_CameraDiscovered;
@@ -779,24 +857,14 @@ namespace Locana.Pages
                 UpdateInnerState(ViewerState.Single);
                 e.Handled = true;
             }
-
-            // Frame.Navigate(typeof(MainPage));
         }
 
         private void ContentsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GridSelectionChanged(sender, e);
-        }
-
-        private void GridSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
             var selector = sender as GridView;
             if (selector.SelectionMode == ListViewSelectionMode.Multiple)
             {
-                DebugUtil.Log(() => "SelectionChanged in multi mode");
                 var contents = selector.SelectedItems;
-                DebugUtil.Log(() => "Selected Items: " + contents.Count);
-
                 UpdateInnerState(ViewerState.Multi);
             }
         }
@@ -936,23 +1004,25 @@ namespace Locana.Pages
             }
         }
 
-        private async void ContentsGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        private void ContentsGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (ContentsGrid.SelectionMode == ListViewSelectionMode.Multiple)
+            switch (ContentsGrid.SelectionMode)
             {
-                return;
+                case ListViewSelectionMode.None:
+                    ThumbnailGridSelected(e.ClickedItem as Thumbnail);
+                    break;
             }
+        }
 
-            var image = sender as Grid;
-            var content = image.DataContext as Thumbnail;
-
+        private async void ThumbnailGridSelected(Thumbnail content)
+        {
             if (content.IsContent)
             {
                 PlaybackContent(content);
             }
             else
             {
-                var holder = image.DataContext as RemainingContentsHolder;
+                var holder = content as RemainingContentsHolder;
                 Operator.ContentsCollection.Remove(holder, false);
                 await Operator.LoadRemainingContents(holder);
             }

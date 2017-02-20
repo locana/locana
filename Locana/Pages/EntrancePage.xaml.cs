@@ -148,11 +148,9 @@ namespace Locana.Pages
             WifiHint.Visibility = (!connectedToCamera && NetworkObserver.INSTANCE.CameraDevices.Count == 0).AsVisibility();
         }
 
-        private void PanelHolder_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private void EntranceGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var grid = sender as Grid;
-            var content = grid.DataContext as EntrancePanel;
-            content.Transit();
+            (e.ClickedItem as EntrancePanel).Transit();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

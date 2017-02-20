@@ -203,6 +203,16 @@ namespace Locana.CameraControl
                     status.ColorTemperture = @event.WhiteBalance.Current.ColorTemperature;
                 }
             }
+
+            SortCapabilityCandidates(status);
+        }
+
+        private void SortCapabilityCandidates(CameraStatus status)
+        {
+            if (status.ExposureMode?.Candidates != null)
+            {
+                status.ExposureMode.Candidates.Sort(ExposureModeComparer.INSTANCE);
+            }
         }
 
         private async void StartPollingLoop()

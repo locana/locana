@@ -379,37 +379,18 @@ namespace Locana.Controls
         {
             RenewInfoTimer();
 
-            switch (this.MovieType)
+            if (PlaybackState != PlayerState.PausedOrStopped)
+            {
+                return;
+            }
+
+            switch (MovieType)
             {
                 case MovieFileType.SimpleStreamingMovie:
-                    if (OnStreamingOperationRequested != null)
-                    {
-                        var r = PlaybackRequest.None;
-                        switch (this.PlaybackStatus)
-                        {
-                            case StreamStatus.Paused:
-                            case StreamStatus.PausedByEdge:
-                                r = PlaybackRequest.Start;
-                                break;
-                            default:
-                                return;
-                        }
-                        if (r != PlaybackRequest.None)
-                        {
-                            OnStreamingOperationRequested(this, new PlaybackRequestArgs() { Request = r });
-                        }
-                    }
+                    OnStreamingOperationRequested?.Invoke(this, new PlaybackRequestArgs() { Request = PlaybackRequest.Start });
                     break;
                 case MovieFileType.LocalMovie:
-                    switch (LocalMoviePlayer.CurrentState)
-                    {
-                        case MediaElementState.Paused:
-                        case MediaElementState.Stopped:
-                            LocalMoviePlayer.Play();
-                            break;
-                        default:
-                            return;
-                    }
+                    LocalMoviePlayer.Play();
                     break;
             }
         }
@@ -418,38 +399,56 @@ namespace Locana.Controls
         {
             RenewInfoTimer();
 
-            switch (this.MovieType)
+            if (PlaybackState != PlayerState.Playing)
             {
-                case MovieFileType.SimpleStreamingMovie:
-                    if (OnStreamingOperationRequested != null)
-                    {
-                        var r = PlaybackRequest.None;
-                        switch (this.PlaybackStatus)
-                        {
-                            case StreamStatus.Started:
-                                r = PlaybackRequest.Pause;
-                                break;
-                            default:
-                                return;
-                        }
-                        if (r != PlaybackRequest.None)
-                        {
-                            OnStreamingOperationRequested(this, new PlaybackRequestArgs() { Request = r });
-                        }
-                    }
-                    break;
-                case MovieFileType.LocalMovie:
-                    switch (LocalMoviePlayer.CurrentState)
-                    {
-                        case MediaElementState.Playing:
-                            LocalMoviePlayer.Pause();
-                            break;
-                        default:
-                            return;
-                    }
-                    break;
+                return;
             }
 
+            switch (MovieType)
+            {
+                case MovieFileType.SimpleStreamingMovie:
+                    OnStreamingOperationRequested?.Invoke(this, new PlaybackRequestArgs() { Request = PlaybackRequest.Pause });
+                    break;
+                case MovieFileType.LocalMovie:
+                    LocalMoviePlayer.Pause();
+                    break;
+            }
+        }
+
+        public PlayerState PlaybackState
+        {
+            get
+            {
+                switch (MovieType)
+                {
+                    case MovieFileType.SimpleStreamingMovie:
+                        if (OnStreamingOperationRequested != null)
+                        {
+                            var r = PlaybackRequest.None;
+                            switch (PlaybackStatus)
+                            {
+                                case StreamStatus.Started:
+                                    return PlayerState.Playing;
+                                case StreamStatus.Paused:
+                                case StreamStatus.PausedByEdge:
+                                    return PlayerState.PausedOrStopped;
+                            }
+                        }
+                        break;
+                    case MovieFileType.LocalMovie:
+                        switch (LocalMoviePlayer.CurrentState)
+                        {
+                            case MediaElementState.Playing:
+                                return PlayerState.Playing;
+                            case MediaElementState.Paused:
+                            case MediaElementState.Stopped:
+                                return PlayerState.PausedOrStopped;
+                        }
+                        break;
+                }
+
+                return PlayerState.Undefined;
+            }
         }
 
         public void NotifyStartingStreamingMoviePlayback()
@@ -494,6 +493,13 @@ namespace Locana.Controls
         {
             LocalMoviePlayer.Stop();
             LocalMoviePositionTimer.Stop();
+        }
+
+        public enum PlayerState
+        {
+            Playing,
+            PausedOrStopped,
+            Undefined,
         }
     }
 

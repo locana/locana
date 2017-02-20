@@ -90,6 +90,14 @@ namespace Locana.Utility
 
         private readonly List<AppBarItem> Accented = new List<AppBarItem>();
 
+        public void FireTapEvent(AppBarItem item, object sender)
+        {
+            if (EventHolder.ContainsKey(item))
+            {
+                EventHolder[item].Invoke(sender, new RoutedEventArgs());
+            }
+        }
+
         public CommandBarManager SetEvent(AppBarItem item, RoutedEventHandler handler)
         {
             EventHolder.Add(item, handler);

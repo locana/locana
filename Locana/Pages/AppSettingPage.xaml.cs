@@ -274,6 +274,17 @@ namespace Locana.Pages
                 }
             });
 
+            section.Add(new ToggleSetting
+            {
+                SettingData = new AppSettingData<bool>()
+                {
+                    Title = SystemUtil.GetStringResource("ShowKeyCheatSheet"),
+                    Guide = SystemUtil.GetStringResource("ShowKeyCheatSheet_Guide"),
+                    StateProvider = () => ApplicationSettings.GetInstance().ShowKeyCheatSheet,
+                    StateObserver = enabled => ApplicationSettings.GetInstance().ShowKeyCheatSheet = enabled
+                }
+            });
+
             return section;
         }
 

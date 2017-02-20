@@ -1,27 +1,58 @@
-<UserControl x:Class="Locana.Controls.PageHeader"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="using:Locana.Controls"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Name="Root"
-             Height="48"
-             HorizontalAlignment="Stretch"
-             VerticalAlignment="Top"
-             HorizontalContentAlignment="Stretch"
-             VerticalContentAlignment="Top"
-             Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
-             d:DesignHeight="300"
-             d:DesignWidth="400"
-             mc:Ignorable="d">
-
-    <Grid x:Name="grid" Background="{x:Bind Background}">
+<UserControl
+    x:Class="Locana.Controls.PageHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:util="using:Locana.Utility"
+    x:Name="Root"
+    Height="48"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Top"
+    HorizontalContentAlignment="Stretch"
+    VerticalContentAlignment="Top"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+    mc:Ignorable="d">
+    <Grid Background="{x:Bind Background}">
         <Grid x:Name="titleBar">
-            <ContentPresenter x:Name="content"
-                              Margin="{x:Bind Padding}"
-                              HorizontalAlignment="{x:Bind HorizontalContentAlignment}"
-                              VerticalAlignment="{x:Bind VerticalContentAlignment}"
-                              Content="{x:Bind HeaderContent}" />
+            <ContentPresenter
+                x:Name="content"
+                Margin="{x:Bind Padding}"
+                HorizontalAlignment="{x:Bind HorizontalContentAlignment}"
+                VerticalAlignment="{x:Bind VerticalContentAlignment}"
+                Content="{x:Bind HeaderContent}" />
         </Grid>
+
+        <!--  Adaptive triggers  -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <util:LocanaStateTrigger LocanaState="ExtraWide" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="titleBar.Margin" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <util:LocanaStateTrigger LocanaState="Wide" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="titleBar.Margin" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <util:LocanaStateTrigger LocanaState="Narrow" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="titleBar.Margin" Value="48,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </UserControl>

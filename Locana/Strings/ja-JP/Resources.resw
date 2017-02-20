@@ -492,7 +492,7 @@
     <value>フォーカス枠情報を送信するようカメラに要求します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
   </data>
   <data name="Guide_FramingGrids" xml:space="preserve">
-    <value>構図決めをサポートする補助線を表示します</value>
+    <value>構図決めをサポートする補助線を表示します。</value>
   </data>
   <data name="Guide_Histogram" xml:space="preserve">
     <value>RGBヒストグラムを解析して表示します。機器によってはアプリのパフォーマンスに影響する場合があります。</value>
@@ -887,7 +887,7 @@ SSID: {0}
     <value>カメラ回転検知</value>
   </data>
   <data name="LiveviewRotation_guide" xml:space="preserve">
-    <value>一部の機種では、カメラ本体の回転をライブビュー映像に反映できます</value>
+    <value>一部の機種では、カメラ本体の回転をライブビュー映像に反映できます。</value>
   </data>
   <data name="PanelGroup_AppMenu" xml:space="preserve">
     <value>アプリメニュー</value>
@@ -1074,5 +1074,89 @@ Eメールに添付して開発者に送信しますか？</value>
   </data>
   <data name="ForcePhoneView_Guide" xml:space="preserve">
     <value>ウィンドウ幅や画面表示倍率設定にかかわらず、コンパクトな画面レイアウトを使用します。</value>
+  </data>
+  <data name="KeyAssignmentsTitle" xml:space="preserve">
+    <value>キー割り当て</value>
+  </data>
+  <data name="KeyDesc_CancelTouchAF" xml:space="preserve">
+    <value>タッチAFの解除</value>
+  </data>
+  <data name="KeyDesc_CloseBottomBar" xml:space="preserve">
+    <value>ボトムバーを閉じる</value>
+  </data>
+  <data name="KeyDesc_CloseCancel" xml:space="preserve">
+    <value>閉じる・キャンセル</value>
+  </data>
+  <data name="KeyDesc_DlMode" xml:space="preserve">
+    <value>ダウンロードモードへの切り替え</value>
+  </data>
+  <data name="KeyDesc_EV" xml:space="preserve">
+    <value>EVコントロール</value>
+  </data>
+  <data name="KeyDesc_Exec" xml:space="preserve">
+    <value>ファイル削除またはダウンロードの実行</value>
+  </data>
+  <data name="KeyDesc_ExifInfo" xml:space="preserve">
+    <value>EXIF情報の表示</value>
+  </data>
+  <data name="KeyDesc_ExposureMode" xml:space="preserve">
+    <value>露出モードの切り替え</value>
+  </data>
+  <data name="KeyDesc_FNum" xml:space="preserve">
+    <value>F値コントロール</value>
+  </data>
+  <data name="KeyDesc_ISO" xml:space="preserve">
+    <value>ISOコントロール</value>
+  </data>
+  <data name="KeyDesc_OpenBottomBar" xml:space="preserve">
+    <value>ボトムバーを開く</value>
+  </data>
+  <data name="KeyDesc_PlayPause" xml:space="preserve">
+    <value>動画コンテンツの再生・一時停止</value>
+  </data>
+  <data name="KeyDesc_PShift" xml:space="preserve">
+    <value>プログラムシフトコントロール</value>
+  </data>
+  <data name="KeyDesc_RmMode" xml:space="preserve">
+    <value>ファイル削除モードへの切り替え</value>
+  </data>
+  <data name="KeyDesc_RotateLeft" xml:space="preserve">
+    <value>画像を左に回転</value>
+  </data>
+  <data name="KeyDesc_RotateRight" xml:space="preserve">
+    <value>画像を右に回転</value>
+  </data>
+  <data name="KeyDesc_SelectContent" xml:space="preserve">
+    <value>フォーカスされたコンテンツを選択</value>
+  </data>
+  <data name="KeyDesc_SemanticZoom" xml:space="preserve">
+    <value>アルバム表示への切り替え</value>
+  </data>
+  <data name="KeyDesc_SS" xml:space="preserve">
+    <value>シャッタースピードコントロール</value>
+  </data>
+  <data name="KeyDesc_TakePicture" xml:space="preserve">
+    <value>写真撮影/録画開始・停止</value>
+  </data>
+  <data name="KeyDesc_TickLeft" xml:space="preserve">
+    <value>スライダーを左に1つ動かす/ズームアウト</value>
+  </data>
+  <data name="KeyDesc_TickRight" xml:space="preserve">
+    <value>スライダーを右に1つ動かす/ズームイン</value>
+  </data>
+  <data name="KeyDesc_Zoom" xml:space="preserve">
+    <value>ズームコントロール</value>
+  </data>
+  <data name="KeyDesc_NoAssignment" xml:space="preserve">
+    <value>この画面ではキーボードショートカットは使えません</value>
+  </data>
+  <data name="ShowKeyCheatSheet" xml:space="preserve">
+    <value>キーボード操作ガイドを有効にする</value>
+  </data>
+  <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
+    <value>Ctrlキーを長押しすると、キーボード操作のガイドが表示されます。</value>
+  </data>
+  <data name="KeyDesc_ToggleCtrlPanel" xml:space="preserve">
+    <value>コントロールパネル表示切り替え</value>
   </data>
 </root>

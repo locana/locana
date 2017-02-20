@@ -1191,4 +1191,88 @@ App version: {5}</value>
   <data name="ForcePhoneView_Guide" xml:space="preserve">
     <value>Use compact layout regardless of screen density settings and window width.</value>
   </data>
+  <data name="KeyAssignmentsTitle" xml:space="preserve">
+    <value>Key assignments</value>
+  </data>
+  <data name="KeyDesc_CancelTouchAF" xml:space="preserve">
+    <value>Touch-AF cancellation</value>
+  </data>
+  <data name="KeyDesc_CloseBottomBar" xml:space="preserve">
+    <value>Close bottom bar</value>
+  </data>
+  <data name="KeyDesc_CloseCancel" xml:space="preserve">
+    <value>Close/Cancel</value>
+  </data>
+  <data name="KeyDesc_DlMode" xml:space="preserve">
+    <value>Switch to file download mode or back to normal</value>
+  </data>
+  <data name="KeyDesc_EV" xml:space="preserve">
+    <value>EV control</value>
+  </data>
+  <data name="KeyDesc_Exec" xml:space="preserve">
+    <value>Execute removal or download</value>
+  </data>
+  <data name="KeyDesc_ExifInfo" xml:space="preserve">
+    <value>Show/Hide EXIF information</value>
+  </data>
+  <data name="KeyDesc_ExposureMode" xml:space="preserve">
+    <value>Exposure mode</value>
+  </data>
+  <data name="KeyDesc_FNum" xml:space="preserve">
+    <value>F-number control</value>
+  </data>
+  <data name="KeyDesc_ISO" xml:space="preserve">
+    <value>ISO control</value>
+  </data>
+  <data name="KeyDesc_OpenBottomBar" xml:space="preserve">
+    <value>Open bottom bar</value>
+  </data>
+  <data name="KeyDesc_PlayPause" xml:space="preserve">
+    <value>Play/Pause movie content</value>
+  </data>
+  <data name="KeyDesc_PShift" xml:space="preserve">
+    <value>Program shift control</value>
+  </data>
+  <data name="KeyDesc_RmMode" xml:space="preserve">
+    <value>Switch to file removal mode or back to normal</value>
+  </data>
+  <data name="KeyDesc_RotateLeft" xml:space="preserve">
+    <value>Rotate picture left</value>
+  </data>
+  <data name="KeyDesc_RotateRight" xml:space="preserve">
+    <value>Rotate picture right</value>
+  </data>
+  <data name="KeyDesc_SelectContent" xml:space="preserve">
+    <value>Select focused content</value>
+  </data>
+  <data name="KeyDesc_SemanticZoom" xml:space="preserve">
+    <value>Switch to album view or back to normal</value>
+  </data>
+  <data name="KeyDesc_ToggleCtrlPanel" xml:space="preserve">
+    <value>Show/Hide control panel</value>
+  </data>
+  <data name="KeyDesc_SS" xml:space="preserve">
+    <value>Shutter speed control</value>
+  </data>
+  <data name="KeyDesc_TakePicture" xml:space="preserve">
+    <value>Take picture or Start/Stop recording</value>
+  </data>
+  <data name="KeyDesc_TickLeft" xml:space="preserve">
+    <value>Tick slider left/Zoom out</value>
+  </data>
+  <data name="KeyDesc_TickRight" xml:space="preserve">
+    <value>Tick slider right/Zoom in</value>
+  </data>
+  <data name="KeyDesc_Zoom" xml:space="preserve">
+    <value>Zoom control</value>
+  </data>
+  <data name="ShowKeyCheatSheet" xml:space="preserve">
+    <value>Enable key shortcut cheat sheet</value>
+  </data>
+  <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
+    <value>Show keyboard shortcut cheat sheet by long pressing Ctrl key.</value>
+  </data>
+  <data name="KeyDesc_NoAssignment" xml:space="preserve">
+    <value>No shortcut key is assigned here</value>
+  </data>
 </root>
