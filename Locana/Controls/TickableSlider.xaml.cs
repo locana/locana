@@ -382,7 +382,8 @@ namespace Locana.Controls
             MyToolTip.Text = text ?? ((int)Math.Round(Slider.Value)).ToString();
 
             var xOffset = (Slider.ActualWidth / (Slider.Maximum - Slider.Minimum) * (Slider.Value - Slider.Minimum)) + 10;
-            double yOffset = -5;
+            double yOffset = -10;
+            xOffset = Math.Max(0, Math.Min(xOffset, (Slider.ActualWidth - MyToolTipFrame.ActualWidth)));
 
             ToolTipFlyout.FlyoutPresenterStyle = BuildToolTipStyle(xOffset, yOffset);
             ToolTipFlyout.ShowAt(FlyoutAnchor);
