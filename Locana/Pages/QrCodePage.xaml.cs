@@ -398,7 +398,7 @@ namespace Locana.Pages
                 {
                     qrdata = SonyQrDataParser.ParseData(sb.ToString());
                 }
-                catch (FormatException ex)
+                catch (System.FormatException ex)
                 {
                     DebugUtil.Log(() => "QR data parse error: " + ex.Message);
                 }

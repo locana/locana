@@ -2372,13 +2372,13 @@
           }
         }
       },
-      "ZXing.Net/0.14.0.1": {
+      "ZXing.Net/0.15.0": {
         "type": "package",
         "compile": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         },
         "runtime": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         }
       },
       "KzImageStreamUwp/1.0.0": {
@@ -2420,7 +2420,7 @@
           "NtJpegMetadata": "1.0.0",
           "NtNfcParserUwp": "1.0.0",
           "Win2D.uwp": "1.20.0",
-          "ZXing.Net": "0.14.0.1"
+          "ZXing.Net": "0.15.0"
         }
       },
       "NtHistogramWin2d/1.0.0": {
@@ -4867,13 +4867,13 @@
           "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "ZXing.Net/0.14.0.1": {
+      "ZXing.Net/0.15.0": {
         "type": "package",
         "compile": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         },
         "runtime": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         }
       },
       "KzImageStreamUwp/1.0.0": {
@@ -4915,7 +4915,7 @@
           "NtJpegMetadata": "1.0.0",
           "NtNfcParserUwp": "1.0.0",
           "Win2D.uwp": "1.20.0",
-          "ZXing.Net": "0.14.0.1"
+          "ZXing.Net": "0.15.0"
         }
       },
       "NtHistogramWin2d/1.0.0": {
@@ -7401,13 +7401,13 @@
           "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "ZXing.Net/0.14.0.1": {
+      "ZXing.Net/0.15.0": {
         "type": "package",
         "compile": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         },
         "runtime": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         }
       },
       "KzImageStreamUwp/1.0.0": {
@@ -7449,7 +7449,7 @@
           "NtJpegMetadata": "1.0.0",
           "NtNfcParserUwp": "1.0.0",
           "Win2D.uwp": "1.20.0",
-          "ZXing.Net": "0.14.0.1"
+          "ZXing.Net": "0.15.0"
         }
       },
       "NtHistogramWin2d/1.0.0": {
@@ -9905,13 +9905,13 @@
           "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "ZXing.Net/0.14.0.1": {
+      "ZXing.Net/0.15.0": {
         "type": "package",
         "compile": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         },
         "runtime": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         }
       },
       "KzImageStreamUwp/1.0.0": {
@@ -9953,7 +9953,7 @@
           "NtJpegMetadata": "1.0.0",
           "NtNfcParserUwp": "1.0.0",
           "Win2D.uwp": "1.20.0",
-          "ZXing.Net": "0.14.0.1"
+          "ZXing.Net": "0.15.0"
         }
       },
       "NtHistogramWin2d/1.0.0": {
@@ -12448,13 +12448,13 @@
           "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "ZXing.Net/0.14.0.1": {
+      "ZXing.Net/0.15.0": {
         "type": "package",
         "compile": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         },
         "runtime": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         }
       },
       "KzImageStreamUwp/1.0.0": {
@@ -12496,7 +12496,7 @@
           "NtJpegMetadata": "1.0.0",
           "NtNfcParserUwp": "1.0.0",
           "Win2D.uwp": "1.20.0",
-          "ZXing.Net": "0.14.0.1"
+          "ZXing.Net": "0.15.0"
         }
       },
       "NtHistogramWin2d/1.0.0": {
@@ -14952,13 +14952,13 @@
           "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "ZXing.Net/0.14.0.1": {
+      "ZXing.Net/0.15.0": {
         "type": "package",
         "compile": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         },
         "runtime": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         }
       },
       "KzImageStreamUwp/1.0.0": {
@@ -15000,7 +15000,7 @@
           "NtJpegMetadata": "1.0.0",
           "NtNfcParserUwp": "1.0.0",
           "Win2D.uwp": "1.20.0",
-          "ZXing.Net": "0.14.0.1"
+          "ZXing.Net": "0.15.0"
         }
       },
       "NtHistogramWin2d/1.0.0": {
@@ -17495,13 +17495,13 @@
           "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "ZXing.Net/0.14.0.1": {
+      "ZXing.Net/0.15.0": {
         "type": "package",
         "compile": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         },
         "runtime": {
-          "lib/windows8/ZXing.winmd": {}
+          "lib/uap10/zxing.dll": {}
         }
       },
       "KzImageStreamUwp/1.0.0": {
@@ -17543,7 +17543,7 @@
           "NtJpegMetadata": "1.0.0",
           "NtNfcParserUwp": "1.0.0",
           "Win2D.uwp": "1.20.0",
-          "ZXing.Net": "0.14.0.1"
+          "ZXing.Net": "0.15.0"
         }
       },
       "NtHistogramWin2d/1.0.0": {
@@ -26033,20 +26033,18 @@
         "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll"
       ]
     },
-    "ZXing.Net/0.14.0.1": {
-      "sha512": "XnYnyNARozhoRJwdioHTcsJFMsIbYj/wwecL9sGq0mhmEA7LbElzLiVLUMuZRFbrHiElGbVCjD2GbeQG3tzZ7Q==",
+    "ZXing.Net/0.15.0": {
+      "sha512": "67P36PnI+m8BM6VSXDBjClICoWjYPJAZsZTdwcelNhMIgDCI3FwMn00cBE5b+qRAUjP9aGx0LxBtLtUMzNODzg==",
       "type": "package",
-      "path": "zxing.net/0.14.0.1",
+      "path": "zxing.net/0.15.0",
       "files": [
-        "ZXing.Net.0.14.0.1.nupkg.sha512",
-        "ZXing.Net.nuspec",
         "lib/MonoAndroid/zxing.monoandroid.dll",
         "lib/MonoAndroid/zxing.monoandroid.pdb",
         "lib/MonoAndroid/zxing.monoandroid.xml",
-        "lib/native/ZXing.XML",
-        "lib/native/ZXing.pdb",
-        "lib/native/ZXing.pri",
-        "lib/native/ZXing.winmd",
+        "lib/native/zxing.XML",
+        "lib/native/zxing.pdb",
+        "lib/native/zxing.pri",
+        "lib/native/zxing.winmd",
         "lib/net20-cf/zxing.ce2.0.dll",
         "lib/net20-cf/zxing.ce2.0.pdb",
         "lib/net20-cf/zxing.ce2.0.xml",
@@ -26065,6 +26063,21 @@
         "lib/net40/zxing.presentation.XML",
         "lib/net40/zxing.presentation.dll",
         "lib/net40/zxing.presentation.pdb",
+        "lib/net45/zxing.XML",
+        "lib/net45/zxing.dll",
+        "lib/net45/zxing.pdb",
+        "lib/net45/zxing.presentation.XML",
+        "lib/net45/zxing.presentation.dll",
+        "lib/net45/zxing.presentation.pdb",
+        "lib/net461/zxing.XML",
+        "lib/net461/zxing.dll",
+        "lib/net461/zxing.pdb",
+        "lib/net461/zxing.presentation.XML",
+        "lib/net461/zxing.presentation.dll",
+        "lib/net461/zxing.presentation.pdb",
+        "lib/netstandard/zxing.dll",
+        "lib/netstandard/zxing.pdb",
+        "lib/netstandard/zxing.xml",
         "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.XML",
         "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.dll",
         "lib/portable-win+net40+sl4+sl5+wp7+wp71+wp8/zxing.portable.pdb",
@@ -26080,20 +26093,22 @@
         "lib/sl5/zxing.sl5.XML",
         "lib/sl5/zxing.sl5.dll",
         "lib/sl5/zxing.sl5.pdb",
+        "lib/uap10/zxing.dll",
+        "lib/uap10/zxing.pdb",
+        "lib/uap10/zxing.pri",
+        "lib/uap10/zxing.xml",
         "lib/windows8-managed/zxing.winrt.XML",
         "lib/windows8-managed/zxing.winrt.dll",
         "lib/windows8-managed/zxing.winrt.pdb",
-        "lib/windows8/ZXing.XML",
-        "lib/windows8/ZXing.pdb",
-        "lib/windows8/ZXing.pri",
-        "lib/windows8/ZXing.winmd",
+        "lib/windows8/zxing.XML",
+        "lib/windows8/zxing.pdb",
+        "lib/windows8/zxing.pri",
+        "lib/windows8/zxing.winmd",
         "lib/wp8/zxing.wp8.0.XML",
         "lib/wp8/zxing.wp8.0.dll",
         "lib/wp8/zxing.wp8.0.pdb",
-        "lib/wpa81/ZXing.XML",
-        "lib/wpa81/ZXing.pdb",
-        "lib/wpa81/ZXing.pri",
-        "lib/wpa81/ZXing.winmd"
+        "zxing.net.0.15.0.nupkg.sha512",
+        "zxing.net.nuspec"
       ]
     },
     "KzImageStreamUwp/1.0.0": {
