@@ -318,7 +318,7 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.Toolkit.Uwp/1.2.0": {
+      "Microsoft.Toolkit.Uwp/1.3.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -330,10 +330,10 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
@@ -342,13 +342,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
           "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
-          "Win2D.uwp": "1.18.0"
+          "Win2D.uwp": "1.19.0"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
@@ -357,12 +357,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.3.1",
+          "Robmikh.CompositionSurfaceFactory": "0.7.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
@@ -427,6 +428,44 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Robmikh.CompositionSurfaceFactory/0.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Win2D.uwp": "1.19.0"
+        },
+        "compile": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.dll": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.pri": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.pri": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          },
+          "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.pri": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
         }
       },
       "runtime.native.System.IO.Compression/4.1.0": {
@@ -2651,7 +2690,7 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.Toolkit.Uwp/1.2.0": {
+      "Microsoft.Toolkit.Uwp/1.3.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -2663,10 +2702,10 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
@@ -2675,13 +2714,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
           "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
-          "Win2D.uwp": "1.18.0"
+          "Win2D.uwp": "1.19.0"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
@@ -2690,12 +2729,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.3.1",
+          "Robmikh.CompositionSurfaceFactory": "0.7.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
@@ -2761,6 +2801,22 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Robmikh.CompositionSurfaceFactory/0.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Win2D.uwp": "1.19.0"
+        },
+        "compile": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.dll": {},
+          "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.pri": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -5110,7 +5166,7 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.Toolkit.Uwp/1.2.0": {
+      "Microsoft.Toolkit.Uwp/1.3.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -5122,10 +5178,10 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
@@ -5134,13 +5190,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
           "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
-          "Win2D.uwp": "1.18.0"
+          "Win2D.uwp": "1.19.0"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
@@ -5149,12 +5205,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.3.1",
+          "Robmikh.CompositionSurfaceFactory": "0.7.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
@@ -5220,6 +5277,22 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Robmikh.CompositionSurfaceFactory/0.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Win2D.uwp": "1.19.0"
+        },
+        "compile": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.dll": {},
+          "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.pri": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -7609,7 +7682,7 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.Toolkit.Uwp/1.2.0": {
+      "Microsoft.Toolkit.Uwp/1.3.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -7621,10 +7694,10 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
@@ -7633,13 +7706,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
           "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
-          "Win2D.uwp": "1.18.0"
+          "Win2D.uwp": "1.19.0"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
@@ -7648,12 +7721,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.3.1",
+          "Robmikh.CompositionSurfaceFactory": "0.7.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
@@ -7719,6 +7793,22 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Robmikh.CompositionSurfaceFactory/0.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Win2D.uwp": "1.19.0"
+        },
+        "compile": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.dll": {},
+          "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.pri": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -10077,7 +10167,7 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.Toolkit.Uwp/1.2.0": {
+      "Microsoft.Toolkit.Uwp/1.3.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -10089,10 +10179,10 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
@@ -10101,13 +10191,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
           "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
-          "Win2D.uwp": "1.18.0"
+          "Win2D.uwp": "1.19.0"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
@@ -10116,12 +10206,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.3.1",
+          "Robmikh.CompositionSurfaceFactory": "0.7.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
@@ -10187,6 +10278,22 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Robmikh.CompositionSurfaceFactory/0.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Win2D.uwp": "1.19.0"
+        },
+        "compile": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.dll": {},
+          "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.pri": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -12582,7 +12689,7 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.Toolkit.Uwp/1.2.0": {
+      "Microsoft.Toolkit.Uwp/1.3.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -12594,10 +12701,10 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
@@ -12606,13 +12713,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
           "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
-          "Win2D.uwp": "1.18.0"
+          "Win2D.uwp": "1.19.0"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
@@ -12621,12 +12728,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.3.1",
+          "Robmikh.CompositionSurfaceFactory": "0.7.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
@@ -12692,6 +12800,22 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Robmikh.CompositionSurfaceFactory/0.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Win2D.uwp": "1.19.0"
+        },
+        "compile": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.dll": {},
+          "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.pri": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -15050,7 +15174,7 @@
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
         "type": "package"
       },
-      "Microsoft.Toolkit.Uwp/1.2.0": {
+      "Microsoft.Toolkit.Uwp/1.3.1": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1"
@@ -15062,10 +15186,10 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
@@ -15074,13 +15198,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
           "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
-          "Win2D.uwp": "1.18.0"
+          "Win2D.uwp": "1.19.0"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
@@ -15089,12 +15213,13 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
-      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Toolkit.Uwp": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
-          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+          "Microsoft.Toolkit.Uwp": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI": "1.3.1",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.3.1",
+          "Robmikh.CompositionSurfaceFactory": "0.7.1"
         },
         "compile": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
@@ -15160,6 +15285,22 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Robmikh.CompositionSurfaceFactory/0.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Win2D.uwp": "1.19.0"
+        },
+        "compile": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.dll": {},
+          "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.pri": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -19660,70 +19801,75 @@
         "runtime.json"
       ]
     },
-    "Microsoft.Toolkit.Uwp/1.2.0": {
-      "sha512": "YZZTfjWNLV3PZ770PtgxxcPRE0ej4S1lLrdOZbCs62OA9Gt0EJOowvwXElPDTBNozn9JtgVZZKn4aBrAlWZ7og==",
+    "Microsoft.Toolkit.Uwp/1.3.1": {
+      "sha512": "+E8v/cm1WMsOICOriQ7IloFkN3x+G+LXmC3mlhvYpucmN6X9B7BJI18CgCRvQjTp1t53BDl387p7QIYxT7/bAQ==",
       "type": "package",
-      "path": "microsoft.toolkit.uwp/1.2.0",
+      "path": "microsoft.toolkit.uwp/1.3.1",
       "files": [
-        "Microsoft.Toolkit.Uwp.1.2.0.nupkg.sha512",
-        "Microsoft.Toolkit.Uwp.nuspec",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.dll",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.pdb",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.pri",
-        "lib/uap10.0/Microsoft.Toolkit.Uwp.xml"
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.xml",
+        "microsoft.toolkit.uwp.1.3.1.nupkg.sha512",
+        "microsoft.toolkit.uwp.nuspec"
       ]
     },
-    "Microsoft.Toolkit.Uwp.UI/1.2.0": {
-      "sha512": "G534s6yLmM8T18uSghrte0MuHrde84wEajhwsfocBZYZ88VvLuJRoPVcgpB8RwSst9pLv2nqSBbN82PThXyYGA==",
+    "Microsoft.Toolkit.Uwp.UI/1.3.1": {
+      "sha512": "VGbyNQYFBnfyRrSOIkisUPEiThkkijnqnM/jg0kGYIQBpGjeF+lpTr4kWb6fjK0voo+1dUtyX0LWJe5+7brrkg==",
       "type": "package",
-      "path": "microsoft.toolkit.uwp.ui/1.2.0",
+      "path": "microsoft.toolkit.uwp.ui/1.3.1",
       "files": [
-        "Microsoft.Toolkit.Uwp.UI.1.2.0.nupkg.sha512",
-        "Microsoft.Toolkit.Uwp.UI.nuspec",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.pdb",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.pri",
-        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.xml"
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.xml",
+        "microsoft.toolkit.uwp.ui.1.3.1.nupkg.sha512",
+        "microsoft.toolkit.uwp.ui.nuspec"
       ]
     },
-    "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
-      "sha512": "uitHw6qNyo7z28FrGV5a+LDBxLBt39gZEyUQpYdelhO6hzHKzbjEO2FJWSLQohFH04DkMv4hT9DcZOFXLFg0bQ==",
+    "Microsoft.Toolkit.Uwp.UI.Animations/1.3.1": {
+      "sha512": "LECH71p/EWDrMkD+ebarVDzr1xSNq8ErJgbYbfD7PoFQDzqoC6Usr98MWTJPIHSzvCXJgSqzUhsooe0EA0+Idw==",
       "type": "package",
-      "path": "microsoft.toolkit.uwp.ui.animations/1.2.0",
+      "path": "microsoft.toolkit.uwp.ui.animations/1.3.1",
       "files": [
-        "Microsoft.Toolkit.Uwp.UI.Animations.1.2.0.nupkg.sha512",
-        "Microsoft.Toolkit.Uwp.UI.Animations.nuspec",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.pdb",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.pri",
-        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.xml"
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.xml",
+        "microsoft.toolkit.uwp.ui.animations.1.3.1.nupkg.sha512",
+        "microsoft.toolkit.uwp.ui.animations.nuspec"
       ]
     },
-    "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
-      "sha512": "MrDNHZm3Dfq6pWikiRLE9tJESb/jZMrnkCALNySLoxATdOTiQNaK1GOMBawvv6pWIaPwqevYpIO2v2JjqS12WA==",
+    "Microsoft.Toolkit.Uwp.UI.Controls/1.3.1": {
+      "sha512": "i1Yd1dHTTB2mU8EZqv6i0fqOkaTXWG05nFtUgFZCKBoxcRgKjPvPXPn5YyWoWyyxEbfCH3x3y19K4RxCR+eTxA==",
       "type": "package",
-      "path": "microsoft.toolkit.uwp.ui.controls/1.2.0",
+      "path": "microsoft.toolkit.uwp.ui.controls/1.3.1",
       "files": [
-        "Microsoft.Toolkit.Uwp.UI.Controls.1.2.0.nupkg.sha512",
-        "Microsoft.Toolkit.Uwp.UI.Controls.nuspec",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.pdb",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.pri",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.xml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/BladeView/BladeView.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/DropShadowPanel/DropShadowPanel.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Expander/Expander.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/GridSplitter/GridSplitter.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/HamburgerMenu/HamburgerMenu.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/HeaderedTextBlock/HeaderedTextBlock.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/ImageEx/ImageEx.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Loading/Loading.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/MarkdownTextBlock/MarkdownTextBlock.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/MasterDetailsView/MasterDetailsView.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Microsoft.Toolkit.Uwp.UI.Controls.xr.xml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/PullToRefreshListView/PullToRefreshListView.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RadialGauge/RadialGauge.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RangeSelector/RangeSelector.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RotatorTile/RotatorTile.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/ScrollHeader/ScrollHeader.xaml",
         "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/SlidableListItem/SlidableListItem.xaml",
-        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Themes/Generic.xaml"
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Themes/Generic.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/TileControl/TileControl.xaml",
+        "microsoft.toolkit.uwp.ui.controls.1.3.1.nupkg.sha512",
+        "microsoft.toolkit.uwp.ui.controls.nuspec"
       ]
     },
     "Microsoft.VisualBasic/10.0.1": {
@@ -19844,6 +19990,25 @@
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "tools/install.ps1"
+      ]
+    },
+    "Robmikh.CompositionSurfaceFactory/0.7.1": {
+      "sha512": "wbTtNg4/svj+foIP3sRZszbL/SwA2bioLTQzd58HKdcfFE2CIQyhwQeL829ioWseo0zU0fIqZyiw5CUDqKWS3g==",
+      "type": "package",
+      "path": "robmikh.compositionsurfacefactory/0.7.1",
+      "files": [
+        "build/native/Robmikh.CompositionSurfaceFactory.props",
+        "build/native/Robmikh.CompositionSurfaceFactory.targets",
+        "lib/uap10.0/Robmikh.CompositionSurfaceFactory.winmd",
+        "lib/uap10.0/Robmikh.CompositionSurfaceFactory.xml",
+        "robmikh.compositionsurfacefactory.0.7.1.nupkg.sha512",
+        "robmikh.compositionsurfacefactory.nuspec",
+        "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.dll",
+        "runtimes/win10-arm/native/Robmikh.CompositionSurfaceFactory.pri",
+        "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.dll",
+        "runtimes/win10-x64/native/Robmikh.CompositionSurfaceFactory.pri",
+        "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.dll",
+        "runtimes/win10-x86/native/Robmikh.CompositionSurfaceFactory.pri"
       ]
     },
     "runtime.any.System.Collections/4.0.11": {
@@ -25828,7 +25993,7 @@
       "Microsoft.ApplicationInsights.PersistenceChannel >= 1.2.3",
       "Microsoft.ApplicationInsights.WindowsApps >= 1.1.1",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.1",
-      "Microsoft.Toolkit.Uwp.UI.Controls >= 1.2.0",
+      "Microsoft.Toolkit.Uwp.UI.Controls >= 1.3.1",
       "Newtonsoft.Json >= 9.0.1",
       "Win2D.uwp >= 1.20.0",
       "ZXing.Net >= 0.14.0.1"
@@ -25875,7 +26040,7 @@
       "Microsoft.ApplicationInsights.PersistenceChannel": "1.2.3",
       "Microsoft.ApplicationInsights.WindowsApps": "1.1.1",
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
-      "Microsoft.Toolkit.Uwp.UI.Controls": "1.2.0",
+      "Microsoft.Toolkit.Uwp.UI.Controls": "[1.3.1, )",
       "Newtonsoft.Json": "9.0.1",
       "Win2D.uwp": "1.20.0",
       "ZXing.Net": "0.14.0.1"
