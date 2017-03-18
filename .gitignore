@@ -182,3 +182,6 @@ FakesAssemblies/
 **/Package.StoreAssociation.xml
 **/_language-*.appx
 **/_scale-*.appx
+
+project.lock.json
+*.nuget.props
