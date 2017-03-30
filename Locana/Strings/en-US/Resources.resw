@@ -1275,4 +1275,10 @@ App version: {5}</value>
   <data name="KeyDesc_NoAssignment" xml:space="preserve">
     <value>No shortcut key is assigned here</value>
   </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy policy</value>
+  </data>
+  <data name="PrivacyPolicyURL" xml:space="preserve">
+    <value>https://locana.github.io/privacy.html</value>
+  </data>
 </root>

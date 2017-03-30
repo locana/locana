@@ -1159,4 +1159,7 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="KeyDesc_ToggleCtrlPanel" xml:space="preserve">
     <value>コントロールパネル表示切り替え</value>
   </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>プライバシーポリシー</value>
+  </data>
 </root>
