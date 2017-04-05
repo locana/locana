@@ -93,7 +93,11 @@ namespace Locana.Pages
             CaptureTimer.Start();
             FocusTimer.Start();
 
-            await SetPreviewRotationAsync();
+            try
+            {
+                await SetPreviewRotationAsync();
+            }
+            catch (Exception ex) { OnDetectCameraError(ex); }
         }
 
         private void OnDetectCameraError(Exception ex = null)
@@ -121,11 +125,7 @@ namespace Locana.Pages
 
         private void FocusTick(object sender, object e)
         {
-            try
-            {
-                TryToFocus();
-            }
-            catch (Exception ex) { OnDetectCameraError(ex); }
+            TryToFocus();
         }
 
         private const string DEVCIE_FAMILY_DESKTOP = "Windows.Desktop";
@@ -197,12 +197,14 @@ namespace Locana.Pages
 
         async void TryToFocus()
         {
-            if (_mediaCapture == null) { return; }
-
-            var focusControl = _mediaCapture.VideoDeviceController.FocusControl;
-            if (focusControl.Supported)
+            var control = _mediaCapture?.VideoDeviceController?.FocusControl;
+            if (control != null && control.Supported)
             {
-                await focusControl.FocusAsync();
+                try
+                {
+                    await control.FocusAsync();
+                }
+                catch (Exception ex) { OnDetectCameraError(ex); }
             }
         }
 
@@ -278,6 +280,7 @@ namespace Locana.Pages
                 {
                     await _mediaCapture.InitializeAsync(settings);
                     _isInitialized = true;
+                    await SetLargestResolution(_mediaCapture, MediaStreamType.VideoPreview);
                 }
                 catch (UnauthorizedAccessException)
                 {
@@ -286,8 +289,6 @@ namespace Locana.Pages
                     // TODO another toast to request permission?
                     return;
                 }
-
-                await SetLargestResolution(_mediaCapture, MediaStreamType.VideoPreview);
 
                 // If initialization succeeded, start the preview
                 if (_isInitialized)
@@ -316,7 +317,11 @@ namespace Locana.Pages
             PreviewControl.FlowDirection = FlowDirection.LeftToRight;
 
             // Start the preview
-            await _mediaCapture.StartPreviewAsync();
+            try
+            {
+                await _mediaCapture.StartPreviewAsync();
+            }
+            catch (Exception ex) { OnDetectCameraError(ex); }
             _isPreviewing = true;
         }
 
@@ -331,15 +336,18 @@ namespace Locana.Pages
             {
                 await _mediaCapture?.StopPreviewAsync();
             }
-            catch { }
+            catch (Exception ex) { OnDetectCameraError(ex); }
 
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 PreviewControl.Source = null;
-
-                // Allow the device to sleep now that the preview is stopped
-                _displayRequest.RequestRelease();
+                try
+                {
+                    // Allow the device to sleep now that the preview is stopped
+                    _displayRequest.RequestRelease();
+                }
+                catch (Exception ex) { OnDetectCameraError(ex); }
             });
         }
 
