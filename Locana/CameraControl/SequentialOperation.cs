@@ -165,7 +165,7 @@ namespace Locana.CameraControl
                         try
                         {
                             var uri = new Uri(url);
-                            MediaDownloader.Instance.EnqueuePostViewImage(uri);
+                            var task = MediaDownloader.Instance.EnqueuePostViewImage(uri);
                         }
                         catch (Exception e)
                         {

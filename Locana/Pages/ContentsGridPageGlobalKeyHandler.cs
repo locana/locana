@@ -11,8 +11,6 @@ namespace Locana.Pages
     {
 
         private bool IsCtlKeyPressed = false;
-        private bool IsShiftKeyPressed = false;
-        private bool IsAltKeyPressed = false;
 
         private List<KeyAssignmentData> keyAssignments;
 
@@ -47,12 +45,6 @@ namespace Locana.Pages
                 {
                     case VirtualKey.Control:
                         IsCtlKeyPressed = true;
-                        break;
-                    case VirtualKey.Shift:
-                        IsShiftKeyPressed = true;
-                        break;
-                    case VirtualKey.Menu:
-                        IsAltKeyPressed = true;
                         break;
                     case VirtualKey.Z:
                         if (IsCtlKeyPressed) // Control+Z (Switch semantic zoom)
@@ -174,12 +166,6 @@ namespace Locana.Pages
                 {
                     case VirtualKey.Control:
                         IsCtlKeyPressed = false;
-                        break;
-                    case VirtualKey.Shift:
-                        IsShiftKeyPressed = false;
-                        break;
-                    case VirtualKey.Menu:
-                        IsAltKeyPressed = false;
                         break;
                 }
             }

@@ -424,7 +424,6 @@ namespace Locana.Controls
                     case MovieFileType.SimpleStreamingMovie:
                         if (OnStreamingOperationRequested != null)
                         {
-                            var r = PlaybackRequest.None;
                             switch (PlaybackStatus)
                             {
                                 case StreamStatus.Started:
