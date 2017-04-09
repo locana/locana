@@ -1,4 +1,5 @@
 ﻿using Locana.Controls;
+using Locana.DataModel;
 using Locana.Pages.Segment;
 using Locana.Utility;
 using Newtonsoft.Json;
@@ -38,7 +39,7 @@ namespace Locana.Pages
         }
 
         private static bool IsManifestLoaded = false;
-        private static LicenseJson license;
+        private static OssLicenses licenses;
         private static string copyright = "";
 
         CommandBarManager CommandBarManager = new CommandBarManager();
@@ -62,6 +63,7 @@ namespace Locana.Pages
             SupportLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenSupportTwitter"), SystemUtil.GetStringResource("SupportTwitterURL")));
             RepoLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenGithub"), SystemUtil.GetStringResource("RepoURL")));
 
+            // LoadContributors();
             LoadLicenseFile();
 
             logReport.Setup(Dispatcher);
@@ -82,9 +84,49 @@ namespace Locana.Pages
             }
         }
 
+        /*
+        private async void LoadContributors()
+        {
+            var installedFolder = Package.Current.InstalledLocation;
+            var folder = await installedFolder.GetFolderAsync("Assets");
+            var file = await folder.GetFileAsync("Contributors.txt");
+            using (var stream = await file.OpenReadAsync())
+            {
+                using (var reader = new StreamReader(stream.AsStreamForRead()))
+                {
+                    var contributors = JsonConvert.DeserializeObject<ContributorsInfo>(reader.ReadToEnd()).Contributors;
+
+                    var first = true;
+                    foreach (var contributor in contributors)
+                    {
+                        if (first)
+                        {
+                            first = false;
+                        }
+                        else
+                        {
+                            Contributors.Inlines.Add(new Run() { Text = "\n" });
+                        }
+
+                        if (string.IsNullOrEmpty(contributor.Url))
+                        {
+                            Contributors.Inlines.Add(new Run { Text = contributor.Name });
+                        }
+                        else
+                        {
+                            Contributors.Inlines.Add(GetAsLink(contributor.Name, contributor.Url));
+                        }
+
+                        Contributors.Inlines.Add(new Run { Text = " - " + contributor.WhatFor });
+                    }
+                }
+            }
+        }
+        */
+
         private async void LoadLicenseFile()
         {
-            if (license == null)
+            if (licenses == null)
             {
                 var installedFolder = Package.Current.InstalledLocation;
                 var folder = await installedFolder.GetFolderAsync("Assets");
@@ -93,14 +135,14 @@ namespace Locana.Pages
                 {
                     using (var reader = new StreamReader(stream.AsStreamForRead()))
                     {
-                        license = JsonConvert.DeserializeObject<LicenseJson>(reader.ReadToEnd());
+                        licenses = JsonConvert.DeserializeObject<OssLicenses>(reader.ReadToEnd());
                     }
                 }
             }
 
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                foreach (var oss in license.OssList)
+                foreach (var oss in licenses.OssList)
                 {
                     Contents.Inlines.Add(new Run() { Text = oss.Name, FontSize = 18 });
                     Contents.Inlines.Add(new LineBreak());

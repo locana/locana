@@ -2,7 +2,8 @@
   "contributors": [
     {
       "name": "",
-      "url": ""
+      "url": "",
+      "what_for": ""
     }
   ]
 }

@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Locana
+namespace Locana.DataModel
 {
-    public class LicenseJson
+    public class OssLicenses
     {
         [JsonProperty("oss_list")]
         public List<OssInfo> OssList { set; get; }
