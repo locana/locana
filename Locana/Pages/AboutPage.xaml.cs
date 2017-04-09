@@ -59,7 +59,7 @@ namespace Locana.Pages
             DEV_BY.Inlines.Add(GetAsLink("naotaco", "https://twitter.com/naotaco_dev"));
 
             FaqLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenFAQ"), SystemUtil.GetStringResource("FAQURL")));
-            PPLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("PrivacyPolicyURL"), SystemUtil.GetStringResource("PrivacyPolicyURL")));
+            PPLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("PrivacyPolicyURL")));
             SupportLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenSupportTwitter"), SystemUtil.GetStringResource("SupportTwitterURL")));
             RepoLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenGithub"), SystemUtil.GetStringResource("RepoURL")));
 
