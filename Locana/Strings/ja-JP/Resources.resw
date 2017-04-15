@@ -1162,4 +1162,10 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="PrivacyPolicy" xml:space="preserve">
     <value>プライバシーポリシー</value>
   </data>
+  <data name="LocalDirSetting" xml:space="preserve">
+    <value>ローカルフォルダー</value>
+  </data>
+  <data name="LocalDirSetting_Guide" xml:space="preserve">
+    <value>ダウンロードしたコンテンツを保存するフォルダーを変更できます。</value>
+  </data>
 </root>

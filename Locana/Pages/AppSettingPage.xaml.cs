@@ -4,7 +4,10 @@ using Locana.Playback;
 using Locana.Utility;
 using System;
 using Windows.Devices.Geolocation;
+using Windows.Storage.AccessCache;
+using Windows.Storage.Pickers;
 using Windows.System;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
@@ -317,6 +320,42 @@ namespace Locana.Pages
                  },
                 Candidates = SettingValueConverter.FromContentsSet(EnumUtil<ContentsSet>.GetValueEnumerable())
             }));
+
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop")
+            {
+                var dirData = new AppSettingData<string>()
+                {
+                    Title = SystemUtil.GetStringResource("LocalDirSetting"),
+                    Guide = SystemUtil.GetStringResource("LocalDirSetting_Guide"),
+                    StateProvider = () => ApplicationSettings.GetInstance().LocalDirectoryPath,
+                    StateObserver = newValue =>
+                    {
+                        ApplicationSettings.GetInstance().LocalDirectoryPath = newValue;
+                    }
+                };
+                var dirSetting = new LocalDirSetting
+                {
+                    SettingData = dirData
+                };
+
+                dirSetting.Button.Click += async (sender, e) =>
+                {
+                    var picker = new FolderPicker
+                    {
+                        ViewMode = PickerViewMode.List,
+                        SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                    };
+                    picker.FileTypeFilter.Add("*");
+                    var folder = await picker.PickSingleFolderAsync();
+                    if (folder != null)
+                    {
+                        StorageApplicationPermissions.FutureAccessList.AddOrReplace("LocalPictureDirToken", folder);
+                        dirData.CurrentSetting = folder.Path;
+                    }
+                };
+
+                section.Add(dirSetting);
+            }
 
             return section;
         }

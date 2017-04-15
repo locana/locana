@@ -179,6 +179,9 @@
     <Compile Include="Controls\Toast.xaml.cs">
       <DependentUpon>Toast.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LocalDirSetting.xaml.cs">
+      <DependentUpon>LocalDirSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ToggleSetting.xaml.cs">
       <DependentUpon>ToggleSetting.xaml</DependentUpon>
     </Compile>
@@ -415,6 +418,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Toast.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LocalDirSetting.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
