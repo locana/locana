@@ -14,13 +14,14 @@ namespace Locana.Playback
         public override async Task Load(ContentsSet contentsSet, CancellationTokenSource cancel)
         {
             await LoadPictures(cancel);
-            await LoadVideos(cancel);
+            // await LoadVideos(cancel);
 
             OnCompleted();
         }
 
         private async Task LoadPictures(CancellationTokenSource cancel)
         {
+            /*
             var library = KnownFolders.PicturesLibrary;
 
             var folders = await library.GetFoldersAsync();
@@ -40,8 +41,19 @@ namespace Locana.Playback
                     break;
                 }
             }
+            */
+
+            var folder = await StorageFolder.GetFolderFromPathAsync(ApplicationSettings.GetInstance().LocalDirectoryPath);
+
+            DebugUtil.LogSensitive(() => "Load from local picture folder: {0}", folder.Name);
+            await LoadContentsAsync(folder, cancel).ConfigureAwait(false);
+            if (cancel?.IsCancellationRequested ?? false)
+            {
+                OnCancelled();
+            }
         }
 
+        /*
         private async Task LoadVideos(CancellationTokenSource cancel)
         {
             var library = KnownFolders.VideosLibrary;
@@ -64,6 +76,7 @@ namespace Locana.Playback
                 }
             }
         }
+        */
 
         private async Task LoadContentsAsync(StorageFolder folder, CancellationTokenSource cancel)
         {

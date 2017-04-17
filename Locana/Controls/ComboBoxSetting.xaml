@@ -1,18 +1,18 @@
-<UserControl x:Class="Locana.Controls.ComboBoxSetting"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="using:Locana.Controls"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             d:DesignHeight="300"
-             d:DesignWidth="400"
-             mc:Ignorable="d">
+<UserControl
+    x:Class="Locana.Controls.ComboBoxSetting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Locana.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot"
-          Margin="0,5"
-          Visibility="{Binding SettingVisibility,
-                               Mode=OneWay,
-                               FallbackValue=Visible}">
+    <Grid
+        x:Name="LayoutRoot"
+        Margin="0,5"
+        Visibility="{Binding SettingVisibility, Mode=OneWay, FallbackValue=Visible}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -22,35 +22,32 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Name="SettingName"
-                   Margin="0,0,10,5"
-                   VerticalAlignment="Center"
-                   Style="{StaticResource SubtitleTextBlockStyle}"
-                   Text="{Binding Title,
-                                  Mode=OneWay}"
-                   TextWrapping="Wrap" />
-        <ComboBox Name="Picker"
-                  Grid.Column="1"
-                  Margin="0,0,10,0"
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Center"
-                  HorizontalContentAlignment="Center"
-                  BorderThickness="1"
-                  IsEnabled="{Binding IsActive,
-                                      Mode=OneWay}"
-                  ItemsSource="{Binding Candidates,
-                                        Mode=OneWay}"
-                  SelectedIndex="{Binding CurrentSetting,
-                                          Mode=TwoWay}" />
-        <TextBlock Name="SettingGuide"
-                   Grid.Row="1"
-                   Grid.ColumnSpan="2"
-                   Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
-                   Style="{StaticResource BodyTextBlockStyle}"
-                   Text="{Binding Guide,
-                                  Mode=OneWay}"
-                   TextWrapping="Wrap"
-                   Visibility="{Binding GuideVisibility,
-                                        Mode=OneWay}" />
+        <TextBlock
+            Name="SettingName"
+            Margin="0,0,10,5"
+            VerticalAlignment="Center"
+            Style="{StaticResource SubtitleTextBlockStyle}"
+            Text="{Binding Title, Mode=OneWay}"
+            TextWrapping="Wrap" />
+        <ComboBox
+            Name="Picker"
+            Grid.Column="1"
+            Margin="0,0,10,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            BorderThickness="1"
+            IsEnabled="{Binding IsActive, Mode=OneWay}"
+            ItemsSource="{Binding Candidates, Mode=OneWay}"
+            SelectedIndex="{Binding CurrentSetting, Mode=TwoWay}" />
+        <TextBlock
+            Name="SettingGuide"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}"
+            Style="{StaticResource BodyTextBlockStyle}"
+            Text="{Binding Guide, Mode=OneWay}"
+            TextWrapping="Wrap"
+            Visibility="{Binding GuideVisibility, Mode=OneWay}" />
     </Grid>
 </UserControl>

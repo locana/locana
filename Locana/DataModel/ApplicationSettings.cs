@@ -27,6 +27,7 @@ namespace Locana.DataModel
             LiveviewRotationEnabled = Preference.LiveviewRotationEnabled;
             ForcePhoneView = Preference.ForcePhoneView;
             ShowKeyCheatSheet = Preference.ShowKeyCheatSheet;
+            LocalDirectoryPath = Preference.LocalDirectoryPath;
         }
 
         public static ApplicationSettings GetInstance()
@@ -352,6 +353,18 @@ namespace Locana.DataModel
                 _ShowKeyCheatSheet = value;
                 Preference.ShowKeyCheatSheet = value;
                 NotifyChangedOnUI(nameof(ShowKeyCheatSheet));
+            }
+        }
+
+        private string _LocalDirectoryPath;
+        public string LocalDirectoryPath
+        {
+            get { return _LocalDirectoryPath; }
+            set
+            {
+                _LocalDirectoryPath = value;
+                Preference.LocalDirectoryPath = value;
+                NotifyChangedOnUI(nameof(LocalDirectoryPath));
             }
         }
     }

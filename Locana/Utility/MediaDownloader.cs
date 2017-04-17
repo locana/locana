@@ -14,8 +14,6 @@ namespace Locana.Utility
     {
         private MediaDownloader() { }
 
-        private static string DIRECTORY_NAME = SystemUtil.GetStringResource("ApplicationTitle");
-
         private const int BUFFER_SIZE = 8 * 1024;
 
         private static readonly HttpClient HttpClient = new HttpClient();
@@ -59,7 +57,7 @@ namespace Locana.Utility
 
         public Task EnqueuePostViewImage(Uri uri)
         {
-            return Enqueue(uri, DIRECTORY_NAME, Mediatype.Image, null, ".jpg");
+            return Enqueue(uri, Album.LOCANA_DIRECTORY, Mediatype.Image, null, ".jpg");
         }
 
         private async Task Enqueue(Uri uri, string namebase, Mediatype type, CancellationTokenSource cts, string extension = null)
@@ -187,23 +185,7 @@ namespace Locana.Utility
 
                 using (imageStream)
                 {
-                    StorageFolder rootFolder;
-                    switch (req.Mediatype)
-                    {
-                        case Mediatype.Image:
-                            rootFolder = KnownFolders.PicturesLibrary;
-                            break;
-                        case Mediatype.Video:
-                            rootFolder = KnownFolders.PicturesLibrary;
-                            // Use Pictures folder according to the behavior of built-in Camera apps
-                            // rootFolder = KnownFolders.VideosLibrary;
-                            break;
-                        default:
-                            req.CompletionSource?.TrySetException(new NotSupportedException(req.Mediatype + " is not supported"));
-                            return;
-                    }
-
-                    var folder = await rootFolder.CreateFolderAsync(DIRECTORY_NAME, CreationCollisionOption.OpenIfExists);
+                    var folder = await StorageFolder.GetFolderFromPathAsync(ApplicationSettings.GetInstance().LocalDirectoryPath);
                     var filename = string.Format(req.NameBase + "_{0:yyyyMMdd_HHmmss}" + req.FileExtension, DateTime.Now);
                     var file = await folder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
 

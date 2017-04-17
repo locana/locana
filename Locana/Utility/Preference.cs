@@ -1,4 +1,5 @@
 ﻿using Locana.Controls;
+using Locana.DataModel;
 using Locana.Playback;
 using System;
 using Windows.Storage;
@@ -24,6 +25,7 @@ namespace Locana.Utility
         private const string rotate_liveview = "lotate_liveview";
         private const string force_phone_view = "force_phone_view";
         private const string show_key_cheat_sheet = "show_key_cheat_sheet";
+        private const string local_dir_path = "local_dir_path";
 
         private const string init_launched_datetime = "init_datetime";
         private const string last_version = "last_version";
@@ -184,6 +186,16 @@ namespace Locana.Utility
         {
             get { return GetProperty(show_key_cheat_sheet, true); }
             set { SetProperty(show_key_cheat_sheet, value); }
+        }
+
+        public static string LocalDirectoryPath
+        {
+            get
+            {
+                return GetProperty(local_dir_path, KnownFolders.PicturesLibrary.Path + "\\" + Album.LOCANA_DIRECTORY);
+            }
+
+            set { SetProperty(local_dir_path, value); }
         }
     }
 }

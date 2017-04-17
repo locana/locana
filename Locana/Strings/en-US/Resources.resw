@@ -1281,4 +1281,10 @@ App version: {5}</value>
   <data name="PrivacyPolicyURL" xml:space="preserve">
     <value>https://locana.github.io/privacy.html</value>
   </data>
+  <data name="LocalDirSetting" xml:space="preserve">
+    <value>Local folder</value>
+  </data>
+  <data name="LocalDirSetting_Guide" xml:space="preserve">
+    <value>Where to save downloaded pictures and movies.</value>
+  </data>
 </root>
