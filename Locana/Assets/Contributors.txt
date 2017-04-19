@@ -1,9 +1,14 @@
 {
   "contributors": [
     {
-      "name": "",
+      "name": "Qi Gao",
+      "url": "https://twitter.com/qigaoo",
+      "what_for": "Chinese translator"
+    },
+	{
+      "name": "Heimen Stoffels",
       "url": "",
-      "what_for": ""
-    }
+      "what_for": "Dutch translator"
+    },
   ]
 }
