@@ -1,0 +1,1283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Over Locana</value>
+  </data>
+  <data name="AddGeotag" xml:space="preserve">
+    <value>Geotaggen inschakelen</value>
+  </data>
+  <data name="AddGeotag_guide" xml:space="preserve">
+    <value>Geotag toevoegen aan zojuist gemaakte afbeeldingen.
+Op sommige apparaten is een mobiele netwerkverbinding benodigd om locatie-informatie op te vragen.</value>
+  </data>
+  <data name="Aperture" xml:space="preserve">
+    <value>Opening</value>
+  </data>
+  <data name="AppBar_Cancel" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="AppBar_CancelTouchAf" xml:space="preserve">
+    <value>AF ontgrendelen</value>
+  </data>
+  <data name="AppBar_Close" xml:space="preserve">
+    <value>Sluiten</value>
+  </data>
+  <data name="AppBar_Delete" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="AppBar_Download" xml:space="preserve">
+    <value>Downloaden</value>
+  </data>
+  <data name="AppBar_Exit" xml:space="preserve">
+    <value>Oké</value>
+  </data>
+  <data name="AppBar_LocalStorage" xml:space="preserve">
+    <value>Lokale opslag</value>
+  </data>
+  <data name="AppBar_Pause" xml:space="preserve">
+    <value>Pauzeren</value>
+  </data>
+  <data name="AppBar_Play" xml:space="preserve">
+    <value>Afspele</value>
+  </data>
+  <data name="AppBar_RemoteStorage" xml:space="preserve">
+    <value>Netwerkopslag</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Locana</value>
+  </data>
+  <data name="AppSettings" xml:space="preserve">
+    <value>App-instellingen</value>
+  </data>
+  <data name="AppShell_RemoteShooting" xml:space="preserve">
+    <value>Afstandsbediening</value>
+  </data>
+  <data name="AssistPattern" xml:space="preserve">
+    <value>Hulppatroon</value>
+  </data>
+  <data name="AudioRecording" xml:space="preserve">
+    <value>Audio-opname met film</value>
+  </data>
+  <data name="AutoPowerOff" xml:space="preserve">
+    <value>Automatisch uitschakelen</value>
+  </data>
+  <data name="AutoPowerOff_Never" xml:space="preserve">
+    <value>Nooit</value>
+  </data>
+  <data name="BeepMode" xml:space="preserve">
+    <value>Systeemgeluid</value>
+  </data>
+  <data name="BeepModeShutterOnly" xml:space="preserve">
+    <value>Alleen sluitergeluid</value>
+  </data>
+  <data name="BottomLeft" xml:space="preserve">
+    <value>Linker benedenhoek</value>
+  </data>
+  <data name="BottomRight" xml:space="preserve">
+    <value>Rechter benedenhoek</value>
+  </data>
+  <data name="ColorMode_Neutral" xml:space="preserve">
+    <value>Neutraal</value>
+  </data>
+  <data name="ColorMode_Vivid" xml:space="preserve">
+    <value>Levendig</value>
+  </data>
+  <data name="ColorSetting" xml:space="preserve">
+    <value>Kleur</value>
+  </data>
+  <data name="Color_Black" xml:space="preserve">
+    <value>Zwart</value>
+  </data>
+  <data name="Color_Blue" xml:space="preserve">
+    <value>Blauw</value>
+  </data>
+  <data name="Color_Green" xml:space="preserve">
+    <value>Groen</value>
+  </data>
+  <data name="Color_Red" xml:space="preserve">
+    <value>Rood</value>
+  </data>
+  <data name="Color_White" xml:space="preserve">
+    <value>Wit</value>
+  </data>
+  <data name="CommandBar_EV" xml:space="preserve">
+    <value>EV-verschuiving</value>
+  </data>
+  <data name="CommandBar_Fnumber" xml:space="preserve">
+    <value>F-nummer</value>
+  </data>
+  <data name="CommandBar_ISO" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="CommandBar_PShift" xml:space="preserve">
+    <value>Programmaverschuiving</value>
+  </data>
+  <data name="CommandBar_SS" xml:space="preserve">
+    <value>Sluitersnelheid</value>
+  </data>
+  <data name="CommandBar_Zoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="Constraint" xml:space="preserve">
+    <value>Premium-mogelijkheden</value>
+  </data>
+  <data name="Constraint_limited" xml:space="preserve">
+    <value>Sommige mogelijkheden zijn beperkt na het aflopen van de uitprobeerperiode.</value>
+  </data>
+  <data name="Constraint_trial" xml:space="preserve">
+    <value>De volledige set van mogelijkheden is actief tijdens de uitprobeerperiode.</value>
+  </data>
+  <data name="Constraint_unlimited" xml:space="preserve">
+    <value>De volledige set van van mogelijkheden is ongelimiteerd. Bedankt voor de aankoop!!</value>
+  </data>
+  <data name="ContainsLicense" xml:space="preserve">
+    <value>Deze applicatie maakt gebruik van de volgende open bron-software.</value>
+  </data>
+  <data name="ContentsSet_Movie" xml:space="preserve">
+    <value>Films</value>
+  </data>
+  <data name="ContentsSet_Picture" xml:space="preserve">
+    <value>Afbeeldingen</value>
+  </data>
+  <data name="ContentsSet_PictureMovie" xml:space="preserve">
+    <value>Afbeeldingen en flims</value>
+  </data>
+  <data name="ContentTypes" xml:space="preserve">
+    <value>Inhoudstypefilter</value>
+  </data>
+  <data name="ContentTypesGuide" xml:space="preserve">
+    <value>Het inhoudstype dat moet worden weergegeven in het raster.</value>
+  </data>
+  <data name="ContinuousShootMode_Burst" xml:space="preserve">
+    <value>Burst</value>
+  </data>
+  <data name="ContinuousShootMode_Cont" xml:space="preserve">
+    <value>Continue vastleggen</value>
+  </data>
+  <data name="ContinuousShootMode_MotionShot" xml:space="preserve">
+    <value>Bewegende opname</value>
+  </data>
+  <data name="ContinuousShootMode_Single" xml:space="preserve">
+    <value>Enkel</value>
+  </data>
+  <data name="ContinuousShootMode_SpeedPriority" xml:space="preserve">
+    <value>Snel vastleggen</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_1_25Sec" xml:space="preserve">
+    <value>10afb./1.25sec.</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_2Sec" xml:space="preserve">
+    <value>10afb./2sec.</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_5Sec" xml:space="preserve">
+    <value>10afb./5sec.</value>
+  </data>
+  <data name="ContinuousShootSpeed_High" xml:space="preserve">
+    <value>Hoog</value>
+  </data>
+  <data name="ContinuousShootSpeed_Low" xml:space="preserve">
+    <value>Laag</value>
+  </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>Bijdragers</value>
+  </data>
+  <data name="ContShootingMode" xml:space="preserve">
+    <value>Besturingsmodus</value>
+  </data>
+  <data name="ContShootingSpeed" xml:space="preserve">
+    <value>Cont. vastlegsnelheid</value>
+  </data>
+  <data name="CopyRight" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Accept" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Deny" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Description" xml:space="preserve">
+    <value>Er is een niet-verzonden logbestand aangetroffen.
+Wilt u dit bestand als e-mail versturen naar de ontwikkelaar?</value>
+  </data>
+  <data name="DebugLog_EmailBody" xml:space="preserve">
+    <value>[Systeeminformatie]
+Systeemfamilie: {0}
+Bouwnummer van best.systeem: {1}
+Architectuur: {2}
+Maker: {3}
+Apparaatmodel: {4}
+App-versie: {5}</value>
+  </data>
+  <data name="DebugLog_EmailSubject" xml:space="preserve">
+    <value>Locana debug log report</value>
+  </data>
+  <data name="DebugLog_EmailTo" xml:space="preserve">
+    <value>locana.dev@gmail.com</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Accept" xml:space="preserve">
+    <value>Oké</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Deny" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Description" xml:space="preserve">
+    <value>Het foutopsporingslog zal worden weggeschreven naar een bestand zolang deze instelling is ingeschakeld.</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Accept" xml:space="preserve">
+    <value>Oké</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Deny" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Description" xml:space="preserve">
+    <value>Start de e-mailapp om het foutopsporingslog te versturen.</value>
+  </data>
+  <data name="DebugLog_Setting_Guide" xml:space="preserve">
+    <value>Schakel dit in om het foutopsporingslog weg te schrijven naar een bestand. Reproduceer de fout/het probleem terwijl deze instelling is ingeschakeld. Het gegenereerde logbestand kan per e-mail worden verstuurd aan de ontwikkelaar. Locana zal het nooit automatisch versturen.</value>
+  </data>
+  <data name="DebugLog_Setting_Title" xml:space="preserve">
+    <value>Foutopsporingsmodus</value>
+  </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>Weet u zeker dat het/de bestand(en) wilt verwijderen?</value>
+  </data>
+  <data name="DevelopedBy" xml:space="preserve">
+    <value>Ontwikkeld door</value>
+  </data>
+  <data name="DialogTitle_Confirmation" xml:space="preserve">
+    <value>Bevestiging</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value> - - - </value>
+  </data>
+  <data name="Disabled_word" xml:space="preserve">
+    <value>Uitgeschakeld</value>
+  </data>
+  <data name="DisplayHistogram" xml:space="preserve">
+    <value>Histogram weergeven</value>
+  </data>
+  <data name="DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>Sluiterknop weergeven</value>
+  </data>
+  <data name="Donation" xml:space="preserve">
+    <value>Donatie</value>
+  </data>
+  <data name="Download_Completion" xml:space="preserve">
+    <value>Het downloaden is voltooid</value>
+  </data>
+  <data name="Download_DialogMessage" xml:space="preserve">
+    <value>Bezig met downloaden
+{0}/{1}</value>
+  </data>
+  <data name="Download_Failure" xml:space="preserve">
+    <value>Het downloaden is mislukt</value>
+  </data>
+  <data name="ErrorMessage_CameraSetupFailure" xml:space="preserve">
+    <value>Het instellen van de verbinding is mislukt</value>
+  </data>
+  <data name="ErrorMessage_CantFindSonyRecord" xml:space="preserve">
+    <value>De NFC-gegevens bevatten geen netwerk-ID en/of wachtwoord.</value>
+  </data>
+  <data name="ErrorMessage_FailedToGetGeoposition" xml:space="preserve">
+    <value>Het ophalen van locatie-informatie is mislukt. Het originele bestand is opgeslagen.</value>
+  </data>
+  <data name="ErrorMessage_fatal" xml:space="preserve">
+    <value>Er is een onverwachte fout opgetreden.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_DuplicatedGeotag" xml:space="preserve">
+    <value>De originele geotag wordt geprefereerd. Het originele bestand is opgeslagen.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Geotagging" xml:space="preserve">
+    <value>Het toevoegen van de geotag is mislukt. Het originele bestand is opgeslagen.</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Gone" xml:space="preserve">
+    <value>Het ophalen van sommige afbeeldingen is mislukt vanwege het limiet op continue vastleggen.</value>
+  </data>
+  <data name="ErrorMessage_Interval" xml:space="preserve">
+    <value>Er is een fout opgetreden. Het vastleggen met tussenpoos is gestopt.</value>
+  </data>
+  <data name="ErrorMessage_ParseNFC" xml:space="preserve">
+    <value>Het uitlezen van de NFC-gegevens is mislukt.</value>
+  </data>
+  <data name="ErrorMessage_shootingFailure" xml:space="preserve">
+    <value>Het vastleggen of opnemen is mislukt. Zorg ervoor dat uw camera juist is ingesteld. (Misschien ontbreekt de geheugenkaart?)</value>
+  </data>
+  <data name="Error_Message_FailedToGetInfo" xml:space="preserve">
+    <value>Het ophalen van informatie is mislukt.
+Controleer uw internetverbinding.</value>
+  </data>
+  <data name="Error_StopContinuousShooting" xml:space="preserve">
+    <value>Het stoppen van continue vastleggen is mislukt. Probeer het opnieuw of stop middels hardwarematige knop op de camera.</value>
+  </data>
+  <data name="ExifExposureProgram_A" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="ExifExposureProgram_Bulb" xml:space="preserve">
+    <value>Gloeilamp</value>
+  </data>
+  <data name="ExifExposureProgram_HighSpeed" xml:space="preserve">
+    <value>Hoge snelheid</value>
+  </data>
+  <data name="ExifExposureProgram_Landscape" xml:space="preserve">
+    <value>Landschap</value>
+  </data>
+  <data name="ExifExposureProgram_M" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="ExifExposureProgram_P" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="ExifExposureProgram_Portrait" xml:space="preserve">
+    <value>Portret</value>
+  </data>
+  <data name="ExifExposureProgram_S" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="ExifExposureProgram_SlowSpeed" xml:space="preserve">
+    <value>Langzame snelheid</value>
+  </data>
+  <data name="ExifExposureProgram_Unknown" xml:space="preserve">
+    <value>Onbekend</value>
+  </data>
+  <data name="ExifWBValue_Cloudy" xml:space="preserve">
+    <value>Bewolkt</value>
+  </data>
+  <data name="ExifWBValue_CoolWhiteFluorescent" xml:space="preserve">
+    <value>Koel wit fluorescerend</value>
+  </data>
+  <data name="ExifWBValue_D50" xml:space="preserve">
+    <value>D50</value>
+  </data>
+  <data name="ExifWBValue_D55" xml:space="preserve">
+    <value>D55</value>
+  </data>
+  <data name="ExifWBValue_D65" xml:space="preserve">
+    <value>D65</value>
+  </data>
+  <data name="ExifWBValue_D75" xml:space="preserve">
+    <value>D75</value>
+  </data>
+  <data name="ExifWBValue_Daylight" xml:space="preserve">
+    <value>Daglicht</value>
+  </data>
+  <data name="ExifWBValue_DaylightFluorescent" xml:space="preserve">
+    <value>Fluorescerend daglicht</value>
+  </data>
+  <data name="ExifWBValue_DayWhiteFluorescent" xml:space="preserve">
+    <value>Fluorescerend dagwit</value>
+  </data>
+  <data name="ExifWBValue_FineWeather" xml:space="preserve">
+    <value>Fine Weather</value>
+  </data>
+  <data name="ExifWBValue_Flash" xml:space="preserve">
+    <value>Flits</value>
+  </data>
+  <data name="ExifWBValue_Fluorescent" xml:space="preserve">
+    <value>Fluorescerend</value>
+  </data>
+  <data name="ExifWBValue_ISOStudioTungsten" xml:space="preserve">
+    <value>ISO Studio Tungsten</value>
+  </data>
+  <data name="ExifWBValue_Other" xml:space="preserve">
+    <value>Overig</value>
+  </data>
+  <data name="ExifWBValue_Shade" xml:space="preserve">
+    <value>Schaduw</value>
+  </data>
+  <data name="ExifWBValue_StandardLightA" xml:space="preserve">
+    <value>Standaard licht A</value>
+  </data>
+  <data name="ExifWBValue_StandardLightB" xml:space="preserve">
+    <value>Standaard licht B</value>
+  </data>
+  <data name="ExifWBValue_StandardLightC" xml:space="preserve">
+    <value>Standaard licht C</value>
+  </data>
+  <data name="ExifWBValue_TungstenIncandescent" xml:space="preserve">
+    <value>Tungsten (Gloeiend)</value>
+  </data>
+  <data name="ExifWBValue_Unknown" xml:space="preserve">
+    <value>Onbekend</value>
+  </data>
+  <data name="ExifWBValue_WarmWhiteFluorescent" xml:space="preserve">
+    <value>Fluorescerend warm wit</value>
+  </data>
+  <data name="ExifWBValue_WhiteFluorescent" xml:space="preserve">
+    <value>Fluorescerend wit</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired" xml:space="preserve">
+    <value>Automatisch, gebruikt</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired_RedEyeReduction" xml:space="preserve">
+    <value>Automatisch, gebruikt met rode ogen-reductie</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired" xml:space="preserve">
+    <value>Automatisch, niet gebruikt</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>Automatisch, niet gebruikt met rode ogen-reductie</value>
+  </data>
+  <data name="Exif_Flash_Fired" xml:space="preserve">
+    <value>Gebruikt</value>
+  </data>
+  <data name="Exif_Flash_Fired_RedEyeReduction" xml:space="preserve">
+    <value>Gebruikt met rode ogen-reductie</value>
+  </data>
+  <data name="Exif_Flash_NoFlash" xml:space="preserve">
+    <value>Geen flits</value>
+  </data>
+  <data name="Exif_Flash_NoFlashFunction" xml:space="preserve">
+    <value>Geen flitsfunctie</value>
+  </data>
+  <data name="Exif_Flash_NoFlash_RedEyeReduction" xml:space="preserve">
+    <value>Geen flits met rode ogen-reductie</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired" xml:space="preserve">
+    <value>Uit, niet gebruikt</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>Uit, niet gebruikt met rode ogen-reductie</value>
+  </data>
+  <data name="Exif_Flash_On_Fired" xml:space="preserve">
+    <value>Aan, gebruikt</value>
+  </data>
+  <data name="Exif_Flash_On_Fired_RedEyeReduction" xml:space="preserve">
+    <value>Aan, gebruikt met rode ogen-reductie</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired" xml:space="preserve">
+    <value>Aan, niet gebruikt</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>Aan, niet gebruikt met rode ogen-reductie</value>
+  </data>
+  <data name="Exif_Flash_Unknown" xml:space="preserve">
+    <value>Onbekend</value>
+  </data>
+  <data name="Exif_MeteringMode_Average" xml:space="preserve">
+    <value>Gemiddelde</value>
+  </data>
+  <data name="Exif_MeteringMode_CenterWeightedAverage" xml:space="preserve">
+    <value>Centrumgericht gemiddelde</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSegment" xml:space="preserve">
+    <value>Multi-segment</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSpot" xml:space="preserve">
+    <value>Multi-locatie</value>
+  </data>
+  <data name="Exif_MeteringMode_Other" xml:space="preserve">
+    <value>Overig</value>
+  </data>
+  <data name="Exif_MeteringMode_Partial" xml:space="preserve">
+    <value>Gedeeltelijk</value>
+  </data>
+  <data name="Exif_MeteringMode_Spot" xml:space="preserve">
+    <value>Locatie</value>
+  </data>
+  <data name="Exif_MeteringMode_Unknown" xml:space="preserve">
+    <value>Onbekend</value>
+  </data>
+  <data name="Exif_NoData" xml:space="preserve">
+    <value>Geen EXIF-gegevens</value>
+  </data>
+  <data name="ExposureCompensation" xml:space="preserve">
+    <value>Belichtingscompensatie</value>
+  </data>
+  <data name="ExposureMode" xml:space="preserve">
+    <value>Belichtingsmodus</value>
+  </data>
+  <data name="ExposureMode_A" xml:space="preserve">
+    <value>Openingsprioriteit</value>
+  </data>
+  <data name="ExposureMode_iA" xml:space="preserve">
+    <value>Intelligent automatisch</value>
+  </data>
+  <data name="ExposureMode_M" xml:space="preserve">
+    <value>Handmatig</value>
+  </data>
+  <data name="ExposureMode_P" xml:space="preserve">
+    <value>Programma automatisch</value>
+  </data>
+  <data name="ExposureMode_S" xml:space="preserve">
+    <value>Sluiterprioriteit</value>
+  </data>
+  <data name="ExposureMode_sA" xml:space="preserve">
+    <value>Superieur automatisch</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="FAQURL" xml:space="preserve">
+    <value>http://locana.github.io/locana_faq.html</value>
+  </data>
+  <data name="FibonacciSpiralOrigin" xml:space="preserve">
+    <value>Herkomst van het Fibonacci-spiraal</value>
+  </data>
+  <data name="FlashMode" xml:space="preserve">
+    <value>Flitsmodus</value>
+  </data>
+  <data name="FlashMode_Auto" xml:space="preserve">
+    <value>Automatisch</value>
+  </data>
+  <data name="FlashMode_RearSync" xml:space="preserve">
+    <value>Achter gordijn-synchronisatie</value>
+  </data>
+  <data name="FlashMode_SlowSync" xml:space="preserve">
+    <value>Langzame synchronisatie</value>
+  </data>
+  <data name="FlashMode_Wireless" xml:space="preserve">
+    <value>Draadloos</value>
+  </data>
+  <data name="FlipMode" xml:space="preserve">
+    <value>Omslaan</value>
+  </data>
+  <data name="FlipMode_Off" xml:space="preserve">
+    <value>Uit</value>
+  </data>
+  <data name="FlipMode_On" xml:space="preserve">
+    <value>Aan</value>
+  </data>
+  <data name="FocusFrameDisplay" xml:space="preserve">
+    <value>Focusframe weergeven</value>
+  </data>
+  <data name="FocusMode" xml:space="preserve">
+    <value>Focusmodus</value>
+  </data>
+  <data name="FocusMode_AFC" xml:space="preserve">
+    <value>AF-C</value>
+  </data>
+  <data name="FocusMode_AFS" xml:space="preserve">
+    <value>AF-S</value>
+  </data>
+  <data name="FocusMode_Manual" xml:space="preserve">
+    <value>MF</value>
+  </data>
+  <data name="ForcePhoneView" xml:space="preserve">
+    <value>Compacte indeling forceren</value>
+  </data>
+  <data name="ForcePhoneView_Guide" xml:space="preserve">
+    <value>Gebruik de compacte indeling, ongeacht het aantal DPI en schermformaat.</value>
+  </data>
+  <data name="FramingGridColor" xml:space="preserve">
+    <value>Kleur van hulplijnen</value>
+  </data>
+  <data name="FramingGrids" xml:space="preserve">
+    <value>Compositie-assistent</value>
+  </data>
+  <data name="FullVersion" xml:space="preserve">
+    <value>Upgraden naar volledige versie</value>
+  </data>
+  <data name="Gallery_Transferring" xml:space="preserve">
+    <value>Bezig met overdacht...</value>
+  </data>
+  <data name="Grid_Crosshairs" xml:space="preserve">
+    <value>Crosshairs</value>
+  </data>
+  <data name="Grid_Diagonal" xml:space="preserve">
+    <value>Diagonaal</value>
+  </data>
+  <data name="Grid_Fibonacci" xml:space="preserve">
+    <value>Fibonacci-spiraal</value>
+  </data>
+  <data name="Grid_GoldenRatio" xml:space="preserve">
+    <value>Gouden verhouding</value>
+  </data>
+  <data name="Grid_RuleOfThirds" xml:space="preserve">
+    <value>Regel van derden</value>
+  </data>
+  <data name="Grid_Square" xml:space="preserve">
+    <value>Vierkant</value>
+  </data>
+  <data name="Guide_DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>De hardwarematige sluiterknop van uw telefoon kan dienen als sluiter op afstand of als andere functie.</value>
+  </data>
+  <data name="Guide_FocusFrameDisplay" xml:space="preserve">
+    <value>Focusframe-informatie meesturen. Dit kan leiden tot prestatieverlies op sommige apparaten.</value>
+  </data>
+  <data name="Guide_FramingGrids" xml:space="preserve">
+    <value>Lijnen tekenen om te helpen bij de fotocompositie.</value>
+  </data>
+  <data name="Guide_Histogram" xml:space="preserve">
+    <value>RGB-histogram van zoeker weergeven. Dit kan leiden tot prestatieverlies op sommige apparaten.</value>
+  </data>
+  <data name="Guide_NFC" xml:space="preserve">
+    <value>Raak een camera met ingestelde NFC aan om het WiFi-wachtwoord uit te kunnen lezen!</value>
+  </data>
+  <data name="Guide_PrioritizeOriginalSize" xml:space="preserve">
+    <value>Afbeeldingen met 2M-grootte worden standaard geprefereerd over de originelen.</value>
+  </data>
+  <data name="Guide_ReceiveCapturedImage" xml:space="preserve">
+    <value>Download zojuist gemaakte afbeeldingen naar de "Afbeeldingen"-map. Deze optie is inactief als opnemen met tussenpoos bezig is.</value>
+  </data>
+  <data name="HideDetailInfo" xml:space="preserve">
+    <value>Informatie verbergen</value>
+  </data>
+  <data name="InfraredRemoteControl" xml:space="preserve">
+    <value>IR-afstandsbediening</value>
+  </data>
+  <data name="IntervalSetting" xml:space="preserve">
+    <value>Vastleggen met tussenpoos</value>
+  </data>
+  <data name="IrRemoteSetting_Off" xml:space="preserve">
+    <value>Uit</value>
+  </data>
+  <data name="IrRemoteSetting_On" xml:space="preserve">
+    <value>Aan</value>
+  </data>
+  <data name="ISO" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="KeyAssignmentsTitle" xml:space="preserve">
+    <value>Toetstoewijzingen</value>
+  </data>
+  <data name="KeyDesc_CancelTouchAF" xml:space="preserve">
+    <value>Touch-AF-annulering</value>
+  </data>
+  <data name="KeyDesc_CloseBottomBar" xml:space="preserve">
+    <value>Onderbalk sluiten</value>
+  </data>
+  <data name="KeyDesc_CloseCancel" xml:space="preserve">
+    <value>Sluiten/Annuleren</value>
+  </data>
+  <data name="KeyDesc_DlMode" xml:space="preserve">
+    <value>Overschakelen naar bestandsdownloadmodus of terug naar normale modus</value>
+  </data>
+  <data name="KeyDesc_EV" xml:space="preserve">
+    <value>EV-beheer</value>
+  </data>
+  <data name="KeyDesc_Exec" xml:space="preserve">
+    <value>Verwijdering of download uitvoeren</value>
+  </data>
+  <data name="KeyDesc_ExifInfo" xml:space="preserve">
+    <value>EXIF-informatie weergeven/verbergen</value>
+  </data>
+  <data name="KeyDesc_ExposureMode" xml:space="preserve">
+    <value>Belichtingsmodus</value>
+  </data>
+  <data name="KeyDesc_FNum" xml:space="preserve">
+    <value>F-nummerbeheer</value>
+  </data>
+  <data name="KeyDesc_ISO" xml:space="preserve">
+    <value>ISO-beheer</value>
+  </data>
+  <data name="KeyDesc_NoAssignment" xml:space="preserve">
+    <value>Er is geen sneltoets toegewezen</value>
+  </data>
+  <data name="KeyDesc_OpenBottomBar" xml:space="preserve">
+    <value>Onderbalk openen</value>
+  </data>
+  <data name="KeyDesc_PlayPause" xml:space="preserve">
+    <value>Filminhoud afspelen/pauzeren</value>
+  </data>
+  <data name="KeyDesc_PShift" xml:space="preserve">
+    <value>Programmaverschuiving-beheer</value>
+  </data>
+  <data name="KeyDesc_RmMode" xml:space="preserve">
+    <value>Overschakelen naar bestandsverwijderingmodus of terug naar normale modus</value>
+  </data>
+  <data name="KeyDesc_RotateLeft" xml:space="preserve">
+    <value>Afbeelding naar links draaien</value>
+  </data>
+  <data name="KeyDesc_RotateRight" xml:space="preserve">
+    <value>Afbeelding naar rechts draaien</value>
+  </data>
+  <data name="KeyDesc_SelectContent" xml:space="preserve">
+    <value>Selecteer de gefocuste inhoud</value>
+  </data>
+  <data name="KeyDesc_SemanticZoom" xml:space="preserve">
+    <value>Overschakelen naar albumweergave of terug naar normale modus</value>
+  </data>
+  <data name="KeyDesc_SS" xml:space="preserve">
+    <value>Sluitersnelheid-beheer</value>
+  </data>
+  <data name="KeyDesc_TakePicture" xml:space="preserve">
+    <value>Maak een foto of start/stop een opname</value>
+  </data>
+  <data name="KeyDesc_TickLeft" xml:space="preserve">
+    <value>Schuifbalk links/Uitzoomen</value>
+  </data>
+  <data name="KeyDesc_TickRight" xml:space="preserve">
+    <value>Schuifbalk rechts/Inzoomen</value>
+  </data>
+  <data name="KeyDesc_ToggleCtrlPanel" xml:space="preserve">
+    <value>Controlepaneel weergeven/verbergen</value>
+  </data>
+  <data name="KeyDesc_Zoom" xml:space="preserve">
+    <value>Zoombeheer</value>
+  </data>
+  <data name="LiveviewRotation" xml:space="preserve">
+    <value>Camera-draaiing detecteren</value>
+  </data>
+  <data name="LiveviewRotation_guide" xml:space="preserve">
+    <value>Synchroniseert de camera- en liveweergave-oriëntatie. Let op: deze functie wordt slechts door sommige apparaten ondersteund.</value>
+  </data>
+  <data name="Liveview_Flip" xml:space="preserve">
+    <value>Liveweergave omdraaien</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal" xml:space="preserve">
+    <value>Horizontaal</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal_Vertical" xml:space="preserve">
+    <value>Horizontaal en verticaal</value>
+  </data>
+  <data name="Liveview_Flip_Vertical" xml:space="preserve">
+    <value>Verticaal</value>
+  </data>
+  <data name="LocalCameraUnavailable" xml:space="preserve">
+    <value>Het camera-apparaat is niet beschikbaar</value>
+  </data>
+  <data name="LoopRec" xml:space="preserve">
+    <value>Herhaalopname</value>
+  </data>
+  <data name="LoopRecTime" xml:space="preserve">
+    <value>Herhaal-opnametijd</value>
+  </data>
+  <data name="LoopTime_Unlimited" xml:space="preserve">
+    <value>Ongelimiteerd</value>
+  </data>
+  <data name="Message_ContinuousShootingGuide" xml:space="preserve">
+    <value>Houdt de knop lang ingedrukt of gebruik de hardwarematige sluiterknop continue vastleggen te bedienen.</value>
+  </data>
+  <data name="Message_Encourage" xml:space="preserve">
+    <value>Doneren zorgt ervoor dat we worden aangemoedigd om aan de app te blijven werken!</value>
+  </data>
+  <data name="Message_ImageCapture_Succeed" xml:space="preserve">
+    <value>Vastgelegd!</value>
+  </data>
+  <data name="Message_ImageDL_Succeed" xml:space="preserve">
+    <value>De afbeelding is gedownload!</value>
+  </data>
+  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
+    <value>Opgeslagen met locatie-informatie!</value>
+  </data>
+  <data name="Message_NFC_succeed" xml:space="preserve">
+    <value>Het WiFi-wachtwoord is gedetecteerd en opgeslagen op het klembord!
+
+SSID: {0}
+Wachtwoord: {1}</value>
+  </data>
+  <data name="MetaDataName_CameraModel" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="MetaDataName_DateTime" xml:space="preserve">
+    <value>Datum/tijd</value>
+  </data>
+  <data name="MetaDataName_ExposureCompensation" xml:space="preserve">
+    <value>Belichtingscompensatie</value>
+  </data>
+  <data name="MetaDataName_ExposureProgram" xml:space="preserve">
+    <value>Belichtingsmodus</value>
+  </data>
+  <data name="MetaDataName_ExposureTime" xml:space="preserve">
+    <value>Sluitersnelheid</value>
+  </data>
+  <data name="MetaDataName_Flash" xml:space="preserve">
+    <value>Flits</value>
+  </data>
+  <data name="MetaDataName_Fnumber" xml:space="preserve">
+    <value>F-nummer</value>
+  </data>
+  <data name="MetaDataName_FocalLength" xml:space="preserve">
+    <value>Brandpuntafstand</value>
+  </data>
+  <data name="MetaDataName_ImageSize" xml:space="preserve">
+    <value>Afbeeldingsgrootte</value>
+  </data>
+  <data name="MetaDataName_Iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="MetaDataName_LensModel" xml:space="preserve">
+    <value>Lens</value>
+  </data>
+  <data name="MetaDataName_MeteringMode" xml:space="preserve">
+    <value>Meetmodus</value>
+  </data>
+  <data name="MetaData_Geotag" xml:space="preserve">
+    <value>Geotaggen</value>
+  </data>
+  <data name="MilliMeter_NoTrans" xml:space="preserve">
+    <value>{0} mm</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>{0} minuten</value>
+  </data>
+  <data name="Minutes_NoTrans" xml:space="preserve">
+    <value>{0} min.</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>Meer informatie</value>
+  </data>
+  <data name="MovieFileFormat" xml:space="preserve">
+    <value>Filmformaat</value>
+  </data>
+  <data name="MovieFormatMode_MP4" xml:space="preserve">
+    <value>MP4</value>
+  </data>
+  <data name="MovieFormatMode_XAVCS" xml:space="preserve">
+    <value>XAVC S</value>
+  </data>
+  <data name="MovieQuality" xml:space="preserve">
+    <value>Filmkwaliteit</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>UIT</value>
+  </data>
+  <data name="Off_LCC" xml:space="preserve">
+    <value>Uit</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>AAN</value>
+  </data>
+  <data name="On_LCC" xml:space="preserve">
+    <value>Aan</value>
+  </data>
+  <data name="OpenFAQ" xml:space="preserve">
+    <value>FAQ-pagina openen</value>
+  </data>
+  <data name="OpenGithub" xml:space="preserve">
+    <value>GitHub-broncodepagina openen</value>
+  </data>
+  <data name="OpenSupportTwitter" xml:space="preserve">
+    <value>Ondersteuningsaccount op Twitter openen</value>
+  </data>
+  <data name="OSSText" xml:space="preserve">
+    <value>Open bron-licenties</value>
+  </data>
+  <data name="PanelGroup_AppMenu" xml:space="preserve">
+    <value>Applicatiemenu</value>
+  </data>
+  <data name="PanelGroup_Devices" xml:space="preserve">
+    <value>Gedetecteerde apparaten</value>
+  </data>
+  <data name="PeriodicalShooting_SkipLimitExceed" xml:space="preserve">
+    <value>Er is iets misgegaan. Het lijkt erop dat het apparaat er niet klaar voor is om langdurig vast te leggen. Het opnemen met tussenpoos is gesopt.</value>
+  </data>
+  <data name="PeriodicalShooting_Skipped" xml:space="preserve">
+    <value>De camera is bezig. Overgeslagen.</value>
+  </data>
+  <data name="PeriodicalShooting_Status" xml:space="preserve">
+    <value>Er wordt elke {0} sec. een foto genomen. {1} foto's genomen.</value>
+  </data>
+  <data name="PeriodicalShooting_StoppedByUser" xml:space="preserve">
+    <value>Het opnemen met tussenpoos is gesopt.</value>
+  </data>
+  <data name="PhotoGallery" xml:space="preserve">
+    <value>Fotogalerij</value>
+  </data>
+  <data name="Pics_NoTrans" xml:space="preserve">
+    <value>{0} afb.</value>
+  </data>
+  <data name="PivotTitle_Advanced" xml:space="preserve">
+    <value>Geavanceerde instellingen</value>
+  </data>
+  <data name="PostviewTransferSetting" xml:space="preserve">
+    <value>Zojuist gemaakte afbeeldingen synchroniseren</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy-overeenkomst</value>
+  </data>
+  <data name="PrivacyPolicyURL" xml:space="preserve">
+    <value>https://locana.github.io/privacy.html</value>
+  </data>
+  <data name="Progress_ChangingCameraState" xml:space="preserve">
+    <value>Bezig met wijzigen van camerastatus...</value>
+  </data>
+  <data name="Progress_OpeningDetailImage" xml:space="preserve">
+    <value>Bezig met openen van gedetailleerde afbeelding...</value>
+  </data>
+  <data name="Progress_OpeningMovieStream" xml:space="preserve">
+    <value>Bezig met openen van filmstream...</value>
+  </data>
+  <data name="QrCodeIncompatible" xml:space="preserve">
+    <value>Deze QR-code bevat geen WiFi-informatie.</value>
+  </data>
+  <data name="QrCodeMessage" xml:space="preserve">
+    <value>Plaats QR-code op het midden van het scherm.</value>
+  </data>
+  <data name="QrCodePageTitle" xml:space="preserve">
+    <value>WiFi-wachtwoord scannen</value>
+  </data>
+  <data name="QrCodeTile" xml:space="preserve">
+    <value>WiFi-wachtwoord
+scannen</value>
+  </data>
+  <data name="RemoteStorageOffline" xml:space="preserve">
+    <value>{0} is offline</value>
+  </data>
+  <data name="RepoURL" xml:space="preserve">
+    <value>https://github.com/locana/locana</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Opnieuw proberen</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>Naar links draaien</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>Naar rechts draaien</value>
+  </data>
+  <data name="SceneSelection" xml:space="preserve">
+    <value>Scène</value>
+  </data>
+  <data name="Scene_Normal" xml:space="preserve">
+    <value>Normaal</value>
+  </data>
+  <data name="Scene_UnderWater" xml:space="preserve">
+    <value>Onder water</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>{0} seconden</value>
+  </data>
+  <data name="SelfTimer" xml:space="preserve">
+    <value>Zelfontspanner</value>
+  </data>
+  <data name="SettingSection_ContentsSync" xml:space="preserve">
+    <value>Inhoudssynchronisatie-instellingen</value>
+  </data>
+  <data name="SettingSection_Display" xml:space="preserve">
+    <value>Scherminstellingen</value>
+  </data>
+  <data name="SettingSection_Image" xml:space="preserve">
+    <value>Foto-instellingen</value>
+  </data>
+  <data name="Setting_PostViewImageSize" xml:space="preserve">
+    <value>Te ontvangen afbeeldingsgrootte</value>
+  </data>
+  <data name="Setting_PrioritizeOriginalSize" xml:space="preserve">
+    <value>Originele grootte prefereren</value>
+  </data>
+  <data name="ShootMode" xml:space="preserve">
+    <value>Operatiemodus</value>
+  </data>
+  <data name="ShootModeAudio" xml:space="preserve">
+    <value>Audio-opname</value>
+  </data>
+  <data name="ShootModeIntervalStill" xml:space="preserve">
+    <value>Opnemen met tussenpoos</value>
+  </data>
+  <data name="ShootModeMovie" xml:space="preserve">
+    <value>Filmopname</value>
+  </data>
+  <data name="ShootModeStill" xml:space="preserve">
+    <value>Foto-opname</value>
+  </data>
+  <data name="ShowDetailInfo" xml:space="preserve">
+    <value>Informatie weergeven</value>
+  </data>
+  <data name="ShowKeyCheatSheet" xml:space="preserve">
+    <value>Sneltoetsoverzicht inschakelen</value>
+  </data>
+  <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
+    <value>Sneltoetsoverzicht weergeven door de Ctrl-toets lang ingedrukt te houden.</value>
+  </data>
+  <data name="ShutterSpeed" xml:space="preserve">
+    <value>SS</value>
+  </data>
+  <data name="Size2M" xml:space="preserve">
+    <value>2M pixels</value>
+  </data>
+  <data name="SizeOriginal" xml:space="preserve">
+    <value>Origineel</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>Broncode</value>
+  </data>
+  <data name="SteadyShot" xml:space="preserve">
+    <value>Standvastige opname</value>
+  </data>
+  <data name="StillImageSize" xml:space="preserve">
+    <value>Afbeeldingsresolutie</value>
+  </data>
+  <data name="StillQuality" xml:space="preserve">
+    <value>Afbeeldingskwaliteit</value>
+  </data>
+  <data name="StillQuality_Fine" xml:space="preserve">
+    <value>Scherp</value>
+  </data>
+  <data name="StillQuality_RawAndJpeg" xml:space="preserve">
+    <value>RAW+JPEG</value>
+  </data>
+  <data name="StillQuality_Standard" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Ondersteuning</value>
+  </data>
+  <data name="SupportTwitterURL" xml:space="preserve">
+    <value>https://twitter.com/locana_support</value>
+  </data>
+  <data name="TrackingFocusMode" xml:space="preserve">
+    <value>Focus bijhouden</value>
+  </data>
+  <data name="TrialMessage" xml:space="preserve">
+    <value>Beperkte mogelijkheden in de uitprobeerversie.</value>
+  </data>
+  <data name="TrialVersion" xml:space="preserve">
+    <value>Uitprobeerversie</value>
+  </data>
+  <data name="TvColorSystem" xml:space="preserve">
+    <value>TV-systeem</value>
+  </data>
+  <data name="TvColorSystemMode_NTSC" xml:space="preserve">
+    <value>NTSC</value>
+  </data>
+  <data name="TvColorSystemMode_PAL" xml:space="preserve">
+    <value>PAL</value>
+  </data>
+  <data name="UpperLeft" xml:space="preserve">
+    <value>Linker bovenhoek</value>
+  </data>
+  <data name="UpperRight" xml:space="preserve">
+    <value>Rechter bovenhoek</value>
+  </data>
+  <data name="UsingLocationDeclined" xml:space="preserve">
+    <value>Het lijkt erop dat Locana geen toestemming heeft om locatie-informatie te mogen gebruiken.
+Schakel dit in in de privacy-instellingen om de geotagging-functie te kunnen gebruiken.</value>
+  </data>
+  <data name="UsingLocationUnspecified" xml:space="preserve">
+    <value>Er is een onverwachte fout opgetreden tijdens het ophalen van de locatie.
+Zorg ervoor dat locatie-informatie is ingeschakeld in de instellingen en probeer het opnieuw.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Versie</value>
+  </data>
+  <data name="VersionNumber" xml:space="preserve">
+    <value>ver. {0}</value>
+  </data>
+  <data name="ViewAngle" xml:space="preserve">
+    <value>Kijkhoek</value>
+  </data>
+  <data name="ViewAngleUnit" xml:space="preserve">
+    <value>{0} graden</value>
+  </data>
+  <data name="Viewer_FailedPlaybackMovie" xml:space="preserve">
+    <value>Het afspelen van filminhoud is mislukt</value>
+  </data>
+  <data name="Viewer_FailedToLoadContents" xml:space="preserve">
+    <value>Het laden van de inhoudslijst is mislukt</value>
+  </data>
+  <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
+    <value>Het open van de gedetailleerde afbeelding is mislukt</value>
+  </data>
+  <data name="Viewer_Header_GroupView" xml:space="preserve">
+    <value>Albums</value>
+  </data>
+  <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
+    <value>Downloaden</value>
+  </data>
+  <data name="Viewer_MenuDelete" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Viewer_MenuPlayback" xml:space="preserve">
+    <value>Afspelen</value>
+  </data>
+  <data name="Viewer_NoAvContentApi" xml:space="preserve">
+    <value>Deze functie is momenteel niet beschikbaar. Herstart vanaf het vastlegscherm.</value>
+  </data>
+  <data name="Viewer_NoContents" xml:space="preserve">
+    <value>Er is geen beschikbare inhoud</value>
+  </data>
+  <data name="Viewer_NoStorage" xml:space="preserve">
+    <value>Er lijkt geen geheugenkaart aanwezig te zijn</value>
+  </data>
+  <data name="Viewer_StorageAccessNotSupported" xml:space="preserve">
+    <value>Geheugentoegang wordt niet ondersteund door uw camera-apparaat</value>
+  </data>
+  <data name="Viewer_StoragePhone" xml:space="preserve">
+    <value>Lokale opslag</value>
+  </data>
+  <data name="Viewer_StreamClosedByExternalCause" xml:space="preserve">
+    <value>De stream is gestopt door een externe fout</value>
+  </data>
+  <data name="Viewer_UnplayableContent" xml:space="preserve">
+    <value>Deze inhoud is niet afspeelbaar</value>
+  </data>
+  <data name="WB_Auto" xml:space="preserve">
+    <value>Automatisch</value>
+  </data>
+  <data name="WB_Cloudy" xml:space="preserve">
+    <value>Bewolkt</value>
+  </data>
+  <data name="WB_ColorTemperture" xml:space="preserve">
+    <value>Kleurtemperatuur</value>
+  </data>
+  <data name="WB_Custom" xml:space="preserve">
+    <value>Aangepast</value>
+  </data>
+  <data name="WB_Custom1" xml:space="preserve">
+    <value>Aangepast 1</value>
+  </data>
+  <data name="WB_Custom2" xml:space="preserve">
+    <value>Aangepast 2</value>
+  </data>
+  <data name="WB_Custom3" xml:space="preserve">
+    <value>Aangepast 3</value>
+  </data>
+  <data name="WB_DayLight" xml:space="preserve">
+    <value>Daglicht</value>
+  </data>
+  <data name="WB_Flash" xml:space="preserve">
+    <value>Flits</value>
+  </data>
+  <data name="WB_Fluorescent_CoolWhite" xml:space="preserve">
+    <value>Fluorescerend koel wit</value>
+  </data>
+  <data name="WB_Fluorescent_DayLight" xml:space="preserve">
+    <value>Fluorescerend daglicht</value>
+  </data>
+  <data name="WB_Fluorescent_DayWhite" xml:space="preserve">
+    <value>Fluorescerend dagwit</value>
+  </data>
+  <data name="WB_Fluorescent_WarmWhite" xml:space="preserve">
+    <value>Fluorescerend warm wit</value>
+  </data>
+  <data name="WB_Incandescent" xml:space="preserve">
+    <value>Gloeiend</value>
+  </data>
+  <data name="WB_Shade" xml:space="preserve">
+    <value>Schaduw</value>
+  </data>
+  <data name="WhiteBalance" xml:space="preserve">
+    <value>Witbalans</value>
+  </data>
+  <data name="WifiHint" xml:space="preserve">
+    <value>Bent u de WiFi-verbinding met het camera-apparaat verloren?
+Laten we verbinden met het WiFI-toegangspunt waarvan de naam begint met "DIRECT-".</value>
+  </data>
+  <data name="WifiSettingLauncherButtonText" xml:space="preserve">
+    <value>WiFi-instellingen</value>
+  </data>
+  <data name="WindNoiseReduction" xml:space="preserve">
+    <value>Windruisreductie</value>
+  </data>
+  <data name="x_by_x_NoTrans" xml:space="preserve">
+    <value>{0} x {1}</value>
+  </data>
+  <data name="ZoomMode_ClearImageDigital" xml:space="preserve">
+    <value>Heldere afbeeldingszoom</value>
+  </data>
+  <data name="ZoomMode_Optical" xml:space="preserve">
+    <value>Alleen optisch</value>
+  </data>
+  <data name="ZoomSetting" xml:space="preserve">
+    <value>Zoominstelling</value>
+  </data>
+</root>
