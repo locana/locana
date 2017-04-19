@@ -27,6 +27,7 @@ namespace Locana.DataModel
             LiveviewRotationEnabled = Preference.LiveviewRotationEnabled;
             ForcePhoneView = Preference.ForcePhoneView;
             ShowKeyCheatSheet = Preference.ShowKeyCheatSheet;
+            LanguageOverride = Preference.LanguageOverride;
         }
 
         public static ApplicationSettings GetInstance()
@@ -352,6 +353,18 @@ namespace Locana.DataModel
                 _ShowKeyCheatSheet = value;
                 Preference.ShowKeyCheatSheet = value;
                 NotifyChangedOnUI(nameof(ShowKeyCheatSheet));
+            }
+        }
+
+        private string _LanguageOverride = null;
+        public string LanguageOverride
+        {
+            get { return _LanguageOverride; }
+            set
+            {
+                _LanguageOverride = value;
+                Preference.LanguageOverride = value;
+                NotifyChangedOnUI(nameof(LanguageOverride));
             }
         }
     }

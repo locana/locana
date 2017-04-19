@@ -1162,4 +1162,7 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="PrivacyPolicy" xml:space="preserve">
     <value>プライバシーポリシー</value>
   </data>
+  <data name="LanguageSetting" xml:space="preserve">
+    <value>言語設定</value>
+  </data>
 </root>

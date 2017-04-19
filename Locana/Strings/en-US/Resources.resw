@@ -1281,4 +1281,7 @@ App version: {5}</value>
   <data name="PrivacyPolicyURL" xml:space="preserve">
     <value>https://locana.github.io/privacy.html</value>
   </data>
+  <data name="LanguageSetting" xml:space="preserve">
+    <value>Language setting</value>
+  </data>
 </root>

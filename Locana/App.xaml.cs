@@ -5,6 +5,7 @@ using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Store;
+using Windows.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
@@ -27,6 +28,9 @@ namespace Locana
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.Resuming += OnResuming;
+
+            // We can't use ApplicationSettings here.
+            ApplicationLanguages.PrimaryLanguageOverride = Preference.LanguageOverride;
 
             Kazyx.DeviceDiscovery.SsdpDiscovery.Logger = (msg) => DebugUtil.Log(() => msg);
             Kazyx.ImageStream.StreamProcessor.Logger = (msg) => DebugUtil.Log(() => msg);
