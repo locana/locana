@@ -1,0 +1,1283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>关于Locana</value>
+  </data>
+  <data name="AddGeotag" xml:space="preserve">
+    <value>使用定位</value>
+  </data>
+  <data name="AddGeotag_guide" xml:space="preserve">
+    <value>给拍摄的照片添加位置信息
+在一些设备上，蜂窝数据不能获得位置信息</value>
+  </data>
+  <data name="Aperture" xml:space="preserve">
+    <value>光圈</value>
+  </data>
+  <data name="AppBar_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppBar_CancelTouchAf" xml:space="preserve">
+    <value>开启AF</value>
+  </data>
+  <data name="AppBar_Close" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="AppBar_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="AppBar_Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="AppBar_Exit" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="AppBar_LocalStorage" xml:space="preserve">
+    <value>本地存储</value>
+  </data>
+  <data name="AppBar_Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="AppBar_Play" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="AppBar_RemoteStorage" xml:space="preserve">
+    <value>网络存储</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Locana</value>
+  </data>
+  <data name="AppSettings" xml:space="preserve">
+    <value>软件设置</value>
+  </data>
+  <data name="AppShell_RemoteShooting" xml:space="preserve">
+    <value>遥控</value>
+  </data>
+  <data name="AssistPattern" xml:space="preserve">
+    <value>构图模式</value>
+  </data>
+  <data name="AudioRecording" xml:space="preserve">
+    <value>录制声音</value>
+  </data>
+  <data name="AutoPowerOff" xml:space="preserve">
+    <value>自动关机</value>
+  </data>
+  <data name="AutoPowerOff_Never" xml:space="preserve">
+    <value>从不</value>
+  </data>
+  <data name="BeepMode" xml:space="preserve">
+    <value>系统音</value>
+  </data>
+  <data name="BeepModeShutterOnly" xml:space="preserve">
+    <value>快门声</value>
+  </data>
+  <data name="BottomLeft" xml:space="preserve">
+    <value>左下</value>
+  </data>
+  <data name="BottomRight" xml:space="preserve">
+    <value>右下</value>
+  </data>
+  <data name="ColorMode_Neutral" xml:space="preserve">
+    <value>自然</value>
+  </data>
+  <data name="ColorMode_Vivid" xml:space="preserve">
+    <value>生动</value>
+  </data>
+  <data name="ColorSetting" xml:space="preserve">
+    <value>彩色</value>
+  </data>
+  <data name="Color_Black" xml:space="preserve">
+    <value>黑</value>
+  </data>
+  <data name="Color_Blue" xml:space="preserve">
+    <value>蓝</value>
+  </data>
+  <data name="Color_Green" xml:space="preserve">
+    <value>绿</value>
+  </data>
+  <data name="Color_Red" xml:space="preserve">
+    <value>红</value>
+  </data>
+  <data name="Color_White" xml:space="preserve">
+    <value>白</value>
+  </data>
+  <data name="CommandBar_EV" xml:space="preserve">
+    <value>EV</value>
+  </data>
+  <data name="CommandBar_Fnumber" xml:space="preserve">
+    <value>光圈</value>
+  </data>
+  <data name="CommandBar_ISO" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="CommandBar_PShift" xml:space="preserve">
+    <value>程序切换</value>
+  </data>
+  <data name="CommandBar_SS" xml:space="preserve">
+    <value>快门速度</value>
+  </data>
+  <data name="CommandBar_Zoom" xml:space="preserve">
+    <value>变焦</value>
+  </data>
+  <data name="Constraint" xml:space="preserve">
+    <value>高级功能</value>
+  </data>
+  <data name="Constraint_limited" xml:space="preserve">
+    <value>试用期结束，某些功能受限制</value>
+  </data>
+  <data name="Constraint_trial" xml:space="preserve">
+    <value>试用期内所有功能正常使用</value>
+  </data>
+  <data name="Constraint_unlimited" xml:space="preserve">
+    <value>完整版所有功能不受限制。感谢您的支持!</value>
+  </data>
+  <data name="ContainsLicense" xml:space="preserve">
+    <value>此应用程序包含以下开源软件。</value>
+  </data>
+  <data name="ContentsSet_Movie" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="ContentsSet_Picture" xml:space="preserve">
+    <value>照片</value>
+  </data>
+  <data name="ContentsSet_PictureMovie" xml:space="preserve">
+    <value>照片和视频</value>
+  </data>
+  <data name="ContentTypes" xml:space="preserve">
+    <value>内容类型过滤</value>
+  </data>
+  <data name="ContentTypesGuide" xml:space="preserve">
+    <value>要在网格中显示的内容类型</value>
+  </data>
+  <data name="ContinuousShootMode_Burst" xml:space="preserve">
+    <value>Burst</value>
+  </data>
+  <data name="ContinuousShootMode_Cont" xml:space="preserve">
+    <value>连拍</value>
+  </data>
+  <data name="ContinuousShootMode_MotionShot" xml:space="preserve">
+    <value>运动镜头</value>
+  </data>
+  <data name="ContinuousShootMode_Single" xml:space="preserve">
+    <value>单张</value>
+  </data>
+  <data name="ContinuousShootMode_SpeedPriority" xml:space="preserve">
+    <value>快速连拍</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_1_25Sec" xml:space="preserve">
+    <value>10张/1.25秒</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_2Sec" xml:space="preserve">
+    <value>10张/2秒</value>
+  </data>
+  <data name="ContinuousShootSpeed_FixedFrames_10_In_5Sec" xml:space="preserve">
+    <value>10张/5秒</value>
+  </data>
+  <data name="ContinuousShootSpeed_High" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="ContinuousShootSpeed_Low" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>捐赠者</value>
+  </data>
+  <data name="ContShootingMode" xml:space="preserve">
+    <value>驱动模式</value>
+  </data>
+  <data name="ContShootingSpeed" xml:space="preserve">
+    <value>连拍速度</value>
+  </data>
+  <data name="CopyRight" xml:space="preserve">
+    <value>版权</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Accept" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Deny" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DebugLog_DetectPreviousDialog_Description" xml:space="preserve">
+    <value>未发送的故障日志
+通过邮件发送给开发者？</value>
+  </data>
+  <data name="DebugLog_EmailBody" xml:space="preserve">
+    <value>[System information]
+System family: {0}
+OS build number: {1}
+Architecture: {2}
+Manufacturer: {3}
+Device model: {4}
+App version: {5}</value>
+  </data>
+  <data name="DebugLog_EmailSubject" xml:space="preserve">
+    <value>Locana debug log report</value>
+  </data>
+  <data name="DebugLog_EmailTo" xml:space="preserve">
+    <value>locana.dev@gmail.com</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Accept" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Deny" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DebugLog_EnableDialog_Description" xml:space="preserve">
+    <value>该设置启用时，调试日志将被写入到文件中</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Accept" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Deny" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DebugLog_LaunchEmailDialog_Description" xml:space="preserve">
+    <value>启动Email程序发送调试日志报告</value>
+  </data>
+  <data name="DebugLog_Setting_Guide" xml:space="preserve">
+    <value>Enable to start writing debug log file. Please reproduce defect while this setting is enabled.
+Generated log file can be sent to the developer via email. Locana never send it automatically.</value>
+  </data>
+  <data name="DebugLog_Setting_Title" xml:space="preserve">
+    <value>调试模式</value>
+  </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>确认要删除文件吗?</value>
+  </data>
+  <data name="DevelopedBy" xml:space="preserve">
+    <value>开发者</value>
+  </data>
+  <data name="DialogTitle_Confirmation" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value> - - - </value>
+  </data>
+  <data name="Disabled_word" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="DisplayHistogram" xml:space="preserve">
+    <value>显示直方图</value>
+  </data>
+  <data name="DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>显示快门按钮</value>
+  </data>
+  <data name="Donation" xml:space="preserve">
+    <value>捐赠</value>
+  </data>
+  <data name="Download_Completion" xml:space="preserve">
+    <value>下载完成</value>
+  </data>
+  <data name="Download_DialogMessage" xml:space="preserve">
+    <value>下载中...
+{0}/{1}</value>
+  </data>
+  <data name="Download_Failure" xml:space="preserve">
+    <value>下载失败</value>
+  </data>
+  <data name="ErrorMessage_CameraSetupFailure" xml:space="preserve">
+    <value>安装连接失败</value>
+  </data>
+  <data name="ErrorMessage_CantFindSonyRecord" xml:space="preserve">
+    <value>NFC数据没有包含网络ID或密码</value>
+  </data>
+  <data name="ErrorMessage_FailedToGetGeoposition" xml:space="preserve">
+    <value>获取位置信息失败，原始文件已保存</value>
+  </data>
+  <data name="ErrorMessage_fatal" xml:space="preserve">
+    <value>发生意外的错误</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_DuplicatedGeotag" xml:space="preserve">
+    <value>原位置信息是首选，原始文件已保存</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Geotagging" xml:space="preserve">
+    <value>无法添加位置信息，原始文件已保存</value>
+  </data>
+  <data name="ErrorMessage_ImageDL_Gone" xml:space="preserve">
+    <value>由于连拍的限制，未能获取照片</value>
+  </data>
+  <data name="ErrorMessage_Interval" xml:space="preserve">
+    <value>发生错误，停止拍摄</value>
+  </data>
+  <data name="ErrorMessage_ParseNFC" xml:space="preserve">
+    <value>无法读取到NFC数据</value>
+  </data>
+  <data name="ErrorMessage_shootingFailure" xml:space="preserve">
+    <value>未能开始拍摄或录制，请检查设备状态以及是否插入存储卡</value>
+  </data>
+  <data name="Error_Message_FailedToGetInfo" xml:space="preserve">
+    <value>未能检索到数据。
+请检查Internet连接状态。</value>
+  </data>
+  <data name="Error_StopContinuousShooting" xml:space="preserve">
+    <value>连续拍摄失败。请再次尝试或关闭相机上的停止按钮。</value>
+  </data>
+  <data name="ExifExposureProgram_A" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="ExifExposureProgram_Bulb" xml:space="preserve">
+    <value>B门</value>
+  </data>
+  <data name="ExifExposureProgram_HighSpeed" xml:space="preserve">
+    <value>高速</value>
+  </data>
+  <data name="ExifExposureProgram_Landscape" xml:space="preserve">
+    <value>风景</value>
+  </data>
+  <data name="ExifExposureProgram_M" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="ExifExposureProgram_P" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="ExifExposureProgram_Portrait" xml:space="preserve">
+    <value>肖像</value>
+  </data>
+  <data name="ExifExposureProgram_S" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="ExifExposureProgram_SlowSpeed" xml:space="preserve">
+    <value>低速</value>
+  </data>
+  <data name="ExifExposureProgram_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="ExifWBValue_Cloudy" xml:space="preserve">
+    <value>阴天</value>
+  </data>
+  <data name="ExifWBValue_CoolWhiteFluorescent" xml:space="preserve">
+    <value>荧光灯-冷白色</value>
+  </data>
+  <data name="ExifWBValue_D50" xml:space="preserve">
+    <value>D50</value>
+  </data>
+  <data name="ExifWBValue_D55" xml:space="preserve">
+    <value>D55</value>
+  </data>
+  <data name="ExifWBValue_D65" xml:space="preserve">
+    <value>D65</value>
+  </data>
+  <data name="ExifWBValue_D75" xml:space="preserve">
+    <value>D75</value>
+  </data>
+  <data name="ExifWBValue_Daylight" xml:space="preserve">
+    <value>日光</value>
+  </data>
+  <data name="ExifWBValue_DaylightFluorescent" xml:space="preserve">
+    <value>荧光灯-日光</value>
+  </data>
+  <data name="ExifWBValue_DayWhiteFluorescent" xml:space="preserve">
+    <value>荧光灯-白色</value>
+  </data>
+  <data name="ExifWBValue_FineWeather" xml:space="preserve">
+    <value>晴天</value>
+  </data>
+  <data name="ExifWBValue_Flash" xml:space="preserve">
+    <value>闪光</value>
+  </data>
+  <data name="ExifWBValue_Fluorescent" xml:space="preserve">
+    <value>荧光灯</value>
+  </data>
+  <data name="ExifWBValue_ISOStudioTungsten" xml:space="preserve">
+    <value>演播室钨灯</value>
+  </data>
+  <data name="ExifWBValue_Other" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="ExifWBValue_Shade" xml:space="preserve">
+    <value>阴影</value>
+  </data>
+  <data name="ExifWBValue_StandardLightA" xml:space="preserve">
+    <value>标准白平衡A</value>
+  </data>
+  <data name="ExifWBValue_StandardLightB" xml:space="preserve">
+    <value>标准白平衡B</value>
+  </data>
+  <data name="ExifWBValue_StandardLightC" xml:space="preserve">
+    <value>标准白平衡C</value>
+  </data>
+  <data name="ExifWBValue_TungstenIncandescent" xml:space="preserve">
+    <value>钨灯/白炽灯</value>
+  </data>
+  <data name="ExifWBValue_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="ExifWBValue_WarmWhiteFluorescent" xml:space="preserve">
+    <value>荧光灯-暖白色</value>
+  </data>
+  <data name="ExifWBValue_WhiteFluorescent" xml:space="preserve">
+    <value>荧光灯-白色</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired" xml:space="preserve">
+    <value>自动，强制闪光</value>
+  </data>
+  <data name="Exif_Flash_Auto_Fired_RedEyeReduction" xml:space="preserve">
+    <value>自动，补光并减轻红眼</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired" xml:space="preserve">
+    <value>自动，无闪光</value>
+  </data>
+  <data name="Exif_Flash_Auto_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>自动，不补光但减轻红眼</value>
+  </data>
+  <data name="Exif_Flash_Fired" xml:space="preserve">
+    <value>强制闪光</value>
+  </data>
+  <data name="Exif_Flash_Fired_RedEyeReduction" xml:space="preserve">
+    <value>减轻红眼闪光</value>
+  </data>
+  <data name="Exif_Flash_NoFlash" xml:space="preserve">
+    <value>无闪光</value>
+  </data>
+  <data name="Exif_Flash_NoFlashFunction" xml:space="preserve">
+    <value>无闪光灯功能</value>
+  </data>
+  <data name="Exif_Flash_NoFlash_RedEyeReduction" xml:space="preserve">
+    <value>无减轻红眼闪光功能</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired" xml:space="preserve">
+    <value>关，无闪光</value>
+  </data>
+  <data name="Exif_Flash_Off_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>关，不闪光但减轻红眼</value>
+  </data>
+  <data name="Exif_Flash_On_Fired" xml:space="preserve">
+    <value>开，闪光</value>
+  </data>
+  <data name="Exif_Flash_On_Fired_RedEyeReduction" xml:space="preserve">
+    <value>开，闪光并减轻红眼</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired" xml:space="preserve">
+    <value>开，无闪光</value>
+  </data>
+  <data name="Exif_Flash_On_NotFired_RedEyeReduction" xml:space="preserve">
+    <value>开，不闪光但减轻红眼</value>
+  </data>
+  <data name="Exif_Flash_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Exif_MeteringMode_Average" xml:space="preserve">
+    <value>多重测光</value>
+  </data>
+  <data name="Exif_MeteringMode_CenterWeightedAverage" xml:space="preserve">
+    <value>中心加权平均测光</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSegment" xml:space="preserve">
+    <value>多区域测光</value>
+  </data>
+  <data name="Exif_MeteringMode_MultiSpot" xml:space="preserve">
+    <value>多点测光</value>
+  </data>
+  <data name="Exif_MeteringMode_Other" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="Exif_MeteringMode_Partial" xml:space="preserve">
+    <value>局部测光</value>
+  </data>
+  <data name="Exif_MeteringMode_Spot" xml:space="preserve">
+    <value>点测光</value>
+  </data>
+  <data name="Exif_MeteringMode_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Exif_NoData" xml:space="preserve">
+    <value>无EXIF信息</value>
+  </data>
+  <data name="ExposureCompensation" xml:space="preserve">
+    <value>曝光补偿</value>
+  </data>
+  <data name="ExposureMode" xml:space="preserve">
+    <value>曝光模式</value>
+  </data>
+  <data name="ExposureMode_A" xml:space="preserve">
+    <value>A档</value>
+  </data>
+  <data name="ExposureMode_iA" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="ExposureMode_M" xml:space="preserve">
+    <value>手动</value>
+  </data>
+  <data name="ExposureMode_P" xml:space="preserve">
+    <value>P档</value>
+  </data>
+  <data name="ExposureMode_S" xml:space="preserve">
+    <value>S档</value>
+  </data>
+  <data name="ExposureMode_sA" xml:space="preserve">
+    <value>增强自动</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="FAQURL" xml:space="preserve">
+    <value>http://locana.github.io/locana_faq.html</value>
+  </data>
+  <data name="FibonacciSpiralOrigin" xml:space="preserve">
+    <value>螺旋位置</value>
+  </data>
+  <data name="FlashMode" xml:space="preserve">
+    <value>闪光模式</value>
+  </data>
+  <data name="FlashMode_Auto" xml:space="preserve">
+    <value>自动闪光</value>
+  </data>
+  <data name="FlashMode_RearSync" xml:space="preserve">
+    <value>后帘同步</value>
+  </data>
+  <data name="FlashMode_SlowSync" xml:space="preserve">
+    <value>低速同步</value>
+  </data>
+  <data name="FlashMode_Wireless" xml:space="preserve">
+    <value>无线遥控</value>
+  </data>
+  <data name="FlipMode" xml:space="preserve">
+    <value>翻转</value>
+  </data>
+  <data name="FlipMode_Off" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="FlipMode_On" xml:space="preserve">
+    <value>开 </value>
+  </data>
+  <data name="FocusFrameDisplay" xml:space="preserve">
+    <value>显示对焦框</value>
+  </data>
+  <data name="FocusMode" xml:space="preserve">
+    <value>对焦模式</value>
+  </data>
+  <data name="FocusMode_AFC" xml:space="preserve">
+    <value>AF-C</value>
+  </data>
+  <data name="FocusMode_AFS" xml:space="preserve">
+    <value>AF-S</value>
+  </data>
+  <data name="FocusMode_Manual" xml:space="preserve">
+    <value>MF</value>
+  </data>
+  <data name="ForcePhoneView" xml:space="preserve">
+    <value>紧凑模式</value>
+  </data>
+  <data name="ForcePhoneView_Guide" xml:space="preserve">
+    <value>使用紧凑模式，不管屏幕设置和窗口宽度</value>
+  </data>
+  <data name="FramingGridColor" xml:space="preserve">
+    <value>辅助线颜色</value>
+  </data>
+  <data name="FramingGrids" xml:space="preserve">
+    <value>构图辅助</value>
+  </data>
+  <data name="FullVersion" xml:space="preserve">
+    <value>升级到完整版本</value>
+  </data>
+  <data name="Gallery_Transferring" xml:space="preserve">
+    <value>缓冲中...</value>
+  </data>
+  <data name="Grid_Crosshairs" xml:space="preserve">
+    <value>十字线</value>
+  </data>
+  <data name="Grid_Diagonal" xml:space="preserve">
+    <value>对角线</value>
+  </data>
+  <data name="Grid_Fibonacci" xml:space="preserve">
+    <value>黄金螺旋</value>
+  </data>
+  <data name="Grid_GoldenRatio" xml:space="preserve">
+    <value>黄金比例</value>
+  </data>
+  <data name="Grid_RuleOfThirds" xml:space="preserve">
+    <value>三等分线网格</value>
+  </data>
+  <data name="Grid_Square" xml:space="preserve">
+    <value>方形网格</value>
+  </data>
+  <data name="Guide_DisplayTakeImageButtonSetting" xml:space="preserve">
+    <value>您手机的快门键可以触发远程快门</value>
+  </data>
+  <data name="Guide_FocusFrameDisplay" xml:space="preserve">
+    <value>请求发送焦点帧信息。这可能会导致一些设备的性能问题。</value>
+  </data>
+  <data name="Guide_FramingGrids" xml:space="preserve">
+    <value>辅助构图框线</value>
+  </data>
+  <data name="Guide_Histogram" xml:space="preserve">
+    <value>显示取景器视图的RGB直方图，这可能会导致一些设备的性能问题。</value>
+  </data>
+  <data name="Guide_NFC" xml:space="preserve">
+    <value>触碰NFC来连接WI-FI</value>
+  </data>
+  <data name="Guide_PrioritizeOriginalSize" xml:space="preserve">
+    <value>默认照片大小为2M</value>
+  </data>
+  <data name="Guide_ReceiveCapturedImage" xml:space="preserve">
+    <value>下载最新的照片到“图片”文件夹。当间隔拍摄正在进行时，此功能不可用。</value>
+  </data>
+  <data name="HideDetailInfo" xml:space="preserve">
+    <value>隐藏的信息</value>
+  </data>
+  <data name="InfraredRemoteControl" xml:space="preserve">
+    <value>红外遥控</value>
+  </data>
+  <data name="IntervalSetting" xml:space="preserve">
+    <value>间隔拍摄</value>
+  </data>
+  <data name="IrRemoteSetting_Off" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="IrRemoteSetting_On" xml:space="preserve">
+    <value>开</value>
+  </data>
+  <data name="ISO" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="KeyAssignmentsTitle" xml:space="preserve">
+    <value>快捷键</value>
+  </data>
+  <data name="KeyDesc_CancelTouchAF" xml:space="preserve">
+    <value>取消触控对焦</value>
+  </data>
+  <data name="KeyDesc_CloseBottomBar" xml:space="preserve">
+    <value>关闭底边栏</value>
+  </data>
+  <data name="KeyDesc_CloseCancel" xml:space="preserve">
+    <value>关闭/取消</value>
+  </data>
+  <data name="KeyDesc_DlMode" xml:space="preserve">
+    <value>切换到文件下载模式或恢复正常</value>
+  </data>
+  <data name="KeyDesc_EV" xml:space="preserve">
+    <value>调整EV值</value>
+  </data>
+  <data name="KeyDesc_Exec" xml:space="preserve">
+    <value>执行删除或下载</value>
+  </data>
+  <data name="KeyDesc_ExifInfo" xml:space="preserve">
+    <value>显示/隐藏EXIF信息</value>
+  </data>
+  <data name="KeyDesc_ExposureMode" xml:space="preserve">
+    <value>曝光模式</value>
+  </data>
+  <data name="KeyDesc_FNum" xml:space="preserve">
+    <value>光圈控制</value>
+  </data>
+  <data name="KeyDesc_ISO" xml:space="preserve">
+    <value>ISO控制</value>
+  </data>
+  <data name="KeyDesc_NoAssignment" xml:space="preserve">
+    <value>未指定快捷键</value>
+  </data>
+  <data name="KeyDesc_OpenBottomBar" xml:space="preserve">
+    <value>打开底边栏</value>
+  </data>
+  <data name="KeyDesc_PlayPause" xml:space="preserve">
+    <value>播放/暂停影片</value>
+  </data>
+  <data name="KeyDesc_PShift" xml:space="preserve">
+    <value>快捷键</value>
+  </data>
+  <data name="KeyDesc_RmMode" xml:space="preserve">
+    <value>切换到文件删除模式或返回</value>
+  </data>
+  <data name="KeyDesc_RotateLeft" xml:space="preserve">
+    <value>图片左旋转</value>
+  </data>
+  <data name="KeyDesc_RotateRight" xml:space="preserve">
+    <value>图片右旋转</value>
+  </data>
+  <data name="KeyDesc_SelectContent" xml:space="preserve">
+    <value>选择内容</value>
+  </data>
+  <data name="KeyDesc_SemanticZoom" xml:space="preserve">
+    <value>切换到相册查看或返回</value>
+  </data>
+  <data name="KeyDesc_SS" xml:space="preserve">
+    <value>快门速度控制</value>
+  </data>
+  <data name="KeyDesc_TakePicture" xml:space="preserve">
+    <value>拍照或开始/停止记录</value>
+  </data>
+  <data name="KeyDesc_TickLeft" xml:space="preserve">
+    <value>滑块向左/缩小</value>
+  </data>
+  <data name="KeyDesc_TickRight" xml:space="preserve">
+    <value>滑块向右/放大</value>
+  </data>
+  <data name="KeyDesc_ToggleCtrlPanel" xml:space="preserve">
+    <value>显示/隐藏控制面板</value>
+  </data>
+  <data name="KeyDesc_Zoom" xml:space="preserve">
+    <value>缩放控制</value>
+  </data>
+  <data name="LiveviewRotation" xml:space="preserve">
+    <value>检测相机旋转</value>
+  </data>
+  <data name="LiveviewRotation_guide" xml:space="preserve">
+    <value>同步相机和实时视图方向。注意，该功能只支持部分设置。</value>
+  </data>
+  <data name="Liveview_Flip" xml:space="preserve">
+    <value>翻转实时取景</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal" xml:space="preserve">
+    <value>水平</value>
+  </data>
+  <data name="Liveview_Flip_Horizontal_Vertical" xml:space="preserve">
+    <value>水平和垂直</value>
+  </data>
+  <data name="Liveview_Flip_Vertical" xml:space="preserve">
+    <value>垂直</value>
+  </data>
+  <data name="LocalCameraUnavailable" xml:space="preserve">
+    <value>摄像装置可用</value>
+  </data>
+  <data name="LoopRec" xml:space="preserve">
+    <value>循环录像</value>
+  </data>
+  <data name="LoopRecTime" xml:space="preserve">
+    <value>Loop rec. time</value>
+  </data>
+  <data name="LoopTime_Unlimited" xml:space="preserve">
+    <value>无限</value>
+  </data>
+  <data name="Message_ContinuousShootingGuide" xml:space="preserve">
+    <value>长按按钮或使用硬件快门按钮进行连续拍摄</value>
+  </data>
+  <data name="Message_Encourage" xml:space="preserve">
+    <value>您的捐助将有助于我们在未来为您提供更优质的体验</value>
+  </data>
+  <data name="Message_ImageCapture_Succeed" xml:space="preserve">
+    <value>捕获</value>
+  </data>
+  <data name="Message_ImageDL_Succeed" xml:space="preserve">
+    <value>影像传输</value>
+  </data>
+  <data name="Message_ImageDL_Succeed_withGeotag" xml:space="preserve">
+    <value>保存位置信息！</value>
+  </data>
+  <data name="Message_NFC_succeed" xml:space="preserve">
+    <value>WI-FI密码已存储到剪贴版中！
+SSID: {0}
+密码: {1}</value>
+  </data>
+  <data name="MetaDataName_CameraModel" xml:space="preserve">
+    <value>相机型号</value>
+  </data>
+  <data name="MetaDataName_DateTime" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="MetaDataName_ExposureCompensation" xml:space="preserve">
+    <value>曝光补偿</value>
+  </data>
+  <data name="MetaDataName_ExposureProgram" xml:space="preserve">
+    <value>曝光模式</value>
+  </data>
+  <data name="MetaDataName_ExposureTime" xml:space="preserve">
+    <value>快门速度</value>
+  </data>
+  <data name="MetaDataName_Flash" xml:space="preserve">
+    <value>闪光</value>
+  </data>
+  <data name="MetaDataName_Fnumber" xml:space="preserve">
+    <value>光圈</value>
+  </data>
+  <data name="MetaDataName_FocalLength" xml:space="preserve">
+    <value>焦距</value>
+  </data>
+  <data name="MetaDataName_ImageSize" xml:space="preserve">
+    <value>照片尺寸</value>
+  </data>
+  <data name="MetaDataName_Iso" xml:space="preserve">
+    <value>ISO</value>
+  </data>
+  <data name="MetaDataName_LensModel" xml:space="preserve">
+    <value>镜头</value>
+  </data>
+  <data name="MetaDataName_MeteringMode" xml:space="preserve">
+    <value>测光模式</value>
+  </data>
+  <data name="MetaData_Geotag" xml:space="preserve">
+    <value>地理标记</value>
+  </data>
+  <data name="MilliMeter_NoTrans" xml:space="preserve">
+    <value>{0} mm</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>{0} min.</value>
+  </data>
+  <data name="Minutes_NoTrans" xml:space="preserve">
+    <value>{0} min.</value>
+  </data>
+  <data name="MoreInfo" xml:space="preserve">
+    <value>更多信息</value>
+  </data>
+  <data name="MovieFileFormat" xml:space="preserve">
+    <value>影像格式</value>
+  </data>
+  <data name="MovieFormatMode_MP4" xml:space="preserve">
+    <value>MP4</value>
+  </data>
+  <data name="MovieFormatMode_XAVCS" xml:space="preserve">
+    <value>XAVC S</value>
+  </data>
+  <data name="MovieQuality" xml:space="preserve">
+    <value>影像质量</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="Off_LCC" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>开</value>
+  </data>
+  <data name="On_LCC" xml:space="preserve">
+    <value>开</value>
+  </data>
+  <data name="OpenFAQ" xml:space="preserve">
+    <value>Open FAQ page</value>
+  </data>
+  <data name="OpenGithub" xml:space="preserve">
+    <value>Open GitHub repository</value>
+  </data>
+  <data name="OpenSupportTwitter" xml:space="preserve">
+    <value>Open support account on Twitter</value>
+  </data>
+  <data name="OSSText" xml:space="preserve">
+    <value>开放源码许可证</value>
+  </data>
+  <data name="PanelGroup_AppMenu" xml:space="preserve">
+    <value>菜单</value>
+  </data>
+  <data name="PanelGroup_Devices" xml:space="preserve">
+    <value>检测设备</value>
+  </data>
+  <data name="PeriodicalShooting_SkipLimitExceed" xml:space="preserve">
+    <value>出现错误，设备未准备好进行长时间拍摄。暂停间隔拍摄。</value>
+  </data>
+  <data name="PeriodicalShooting_Skipped" xml:space="preserve">
+    <value>相机正在处理中   跳过</value>
+  </data>
+  <data name="PeriodicalShooting_Status" xml:space="preserve">
+    <value>每隔{0} 秒拍摄照片，已拍照片{1}张</value>
+  </data>
+  <data name="PeriodicalShooting_StoppedByUser" xml:space="preserve">
+    <value>停止间隔拍摄</value>
+  </data>
+  <data name="PhotoGallery" xml:space="preserve">
+    <value>影像库</value>
+  </data>
+  <data name="Pics_NoTrans" xml:space="preserve">
+    <value>{0} pics.</value>
+  </data>
+  <data name="PivotTitle_Advanced" xml:space="preserve">
+    <value>高级设置</value>
+  </data>
+  <data name="PostviewTransferSetting" xml:space="preserve">
+    <value>同步最新的照片</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>保密条款</value>
+  </data>
+  <data name="PrivacyPolicyURL" xml:space="preserve">
+    <value>https://locana.github.io/privacy.html</value>
+  </data>
+  <data name="Progress_ChangingCameraState" xml:space="preserve">
+    <value>改变相机状态…</value>
+  </data>
+  <data name="Progress_OpeningDetailImage" xml:space="preserve">
+    <value>查看影像细节...</value>
+  </data>
+  <data name="Progress_OpeningMovieStream" xml:space="preserve">
+    <value>打开视频...</value>
+  </data>
+  <data name="QrCodeIncompatible" xml:space="preserve">
+    <value>此QR码不包含Wi-Fi信息</value>
+  </data>
+  <data name="QrCodeMessage" xml:space="preserve">
+    <value>请将QR码放在屏幕中央</value>
+  </data>
+  <data name="QrCodePageTitle" xml:space="preserve">
+    <value>扫描的Wi-Fi密码</value>
+  </data>
+  <data name="QrCodeTile" xml:space="preserve">
+    <value>扫描Wi-Fi
+密码</value>
+  </data>
+  <data name="RemoteStorageOffline" xml:space="preserve">
+    <value>{0} 远程存储未连接</value>
+  </data>
+  <data name="RepoURL" xml:space="preserve">
+    <value>https://github.com/locana/locana</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="RotateLeft" xml:space="preserve">
+    <value>左旋转</value>
+  </data>
+  <data name="RotateRight" xml:space="preserve">
+    <value>又旋转</value>
+  </data>
+  <data name="SceneSelection" xml:space="preserve">
+    <value>场景</value>
+  </data>
+  <data name="Scene_Normal" xml:space="preserve">
+    <value>标准</value>
+  </data>
+  <data name="Scene_UnderWater" xml:space="preserve">
+    <value>水下</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>{0}″</value>
+  </data>
+  <data name="SelfTimer" xml:space="preserve">
+    <value>自拍定时</value>
+  </data>
+  <data name="SettingSection_ContentsSync" xml:space="preserve">
+    <value>内容同步设置</value>
+  </data>
+  <data name="SettingSection_Display" xml:space="preserve">
+    <value>场景设置</value>
+  </data>
+  <data name="SettingSection_Image" xml:space="preserve">
+    <value>照片设置</value>
+  </data>
+  <data name="Setting_PostViewImageSize" xml:space="preserve">
+    <value>复制的影像尺寸</value>
+  </data>
+  <data name="Setting_PrioritizeOriginalSize" xml:space="preserve">
+    <value>原始大小</value>
+  </data>
+  <data name="ShootMode" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="ShootModeAudio" xml:space="preserve">
+    <value>音频录制</value>
+  </data>
+  <data name="ShootModeIntervalStill" xml:space="preserve">
+    <value>暂停录制</value>
+  </data>
+  <data name="ShootModeMovie" xml:space="preserve">
+    <value>REC</value>
+  </data>
+  <data name="ShootModeStill" xml:space="preserve">
+    <value>拍摄照片</value>
+  </data>
+  <data name="ShowDetailInfo" xml:space="preserve">
+    <value>显示信息</value>
+  </data>
+  <data name="ShowKeyCheatSheet" xml:space="preserve">
+    <value>启用快捷键</value>
+  </data>
+  <data name="ShowKeyCheatSheet_Guide" xml:space="preserve">
+    <value>显示键盘快捷键，请长按Ctrl键。</value>
+  </data>
+  <data name="ShutterSpeed" xml:space="preserve">
+    <value>SS</value>
+  </data>
+  <data name="Size2M" xml:space="preserve">
+    <value>2M</value>
+  </data>
+  <data name="SizeOriginal" xml:space="preserve">
+    <value>原始</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>源代码</value>
+  </data>
+  <data name="SteadyShot" xml:space="preserve">
+    <value>防抖</value>
+  </data>
+  <data name="StillImageSize" xml:space="preserve">
+    <value>分辨率</value>
+  </data>
+  <data name="StillQuality" xml:space="preserve">
+    <value>照片质量</value>
+  </data>
+  <data name="StillQuality_Fine" xml:space="preserve">
+    <value>Fine</value>
+  </data>
+  <data name="StillQuality_RawAndJpeg" xml:space="preserve">
+    <value>RAW+JPEG</value>
+  </data>
+  <data name="StillQuality_Standard" xml:space="preserve">
+    <value>标准</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>支持</value>
+  </data>
+  <data name="SupportTwitterURL" xml:space="preserve">
+    <value>https://twitter.com/locana_support</value>
+  </data>
+  <data name="TrackingFocusMode" xml:space="preserve">
+    <value>对焦跟踪</value>
+  </data>
+  <data name="TrialMessage" xml:space="preserve">
+    <value>试用版，功能受限</value>
+  </data>
+  <data name="TrialVersion" xml:space="preserve">
+    <value>试用版</value>
+  </data>
+  <data name="TvColorSystem" xml:space="preserve">
+    <value>电视制式</value>
+  </data>
+  <data name="TvColorSystemMode_NTSC" xml:space="preserve">
+    <value>NTSC</value>
+  </data>
+  <data name="TvColorSystemMode_PAL" xml:space="preserve">
+    <value>PAL</value>
+  </data>
+  <data name="UpperLeft" xml:space="preserve">
+    <value>左上</value>
+  </data>
+  <data name="UpperRight" xml:space="preserve">
+    <value>右上</value>
+  </data>
+  <data name="UsingLocationDeclined" xml:space="preserve">
+    <value>Locana似乎不能使用位置信息
+请在隐私设置里启用定位功能</value>
+  </data>
+  <data name="UsingLocationUnspecified" xml:space="preserve">
+    <value>定位时发生错误
+请确认定位设置，并重试</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="VersionNumber" xml:space="preserve">
+    <value>ver. {0}</value>
+  </data>
+  <data name="ViewAngle" xml:space="preserve">
+    <value>视角</value>
+  </data>
+  <data name="ViewAngleUnit" xml:space="preserve">
+    <value>{0} °</value>
+  </data>
+  <data name="Viewer_FailedPlaybackMovie" xml:space="preserve">
+    <value>播放影片内容失败</value>
+  </data>
+  <data name="Viewer_FailedToLoadContents" xml:space="preserve">
+    <value>加载内容列表失败</value>
+  </data>
+  <data name="Viewer_FailedToOpenDetail" xml:space="preserve">
+    <value>打开图像失败</value>
+  </data>
+  <data name="Viewer_Header_GroupView" xml:space="preserve">
+    <value>相册</value>
+  </data>
+  <data name="Viewer_MenuCopyToPhone" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="Viewer_MenuDelete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Viewer_MenuPlayback" xml:space="preserve">
+    <value>回放</value>
+  </data>
+  <data name="Viewer_NoAvContentApi" xml:space="preserve">
+    <value>无法使用该功能，请重试</value>
+  </data>
+  <data name="Viewer_NoContents" xml:space="preserve">
+    <value>无内容</value>
+  </data>
+  <data name="Viewer_NoStorage" xml:space="preserve">
+    <value>请插入存储卡</value>
+  </data>
+  <data name="Viewer_StorageAccessNotSupported" xml:space="preserve">
+    <value>您的设备不支持存储访问</value>
+  </data>
+  <data name="Viewer_StoragePhone" xml:space="preserve">
+    <value>本地存储</value>
+  </data>
+  <data name="Viewer_StreamClosedByExternalCause" xml:space="preserve">
+    <value>由于外部错误关闭</value>
+  </data>
+  <data name="Viewer_UnplayableContent" xml:space="preserve">
+    <value>此内容不可播放</value>
+  </data>
+  <data name="WB_Auto" xml:space="preserve">
+    <value>自动白平衡</value>
+  </data>
+  <data name="WB_Cloudy" xml:space="preserve">
+    <value>阴天</value>
+  </data>
+  <data name="WB_ColorTemperture" xml:space="preserve">
+    <value>色温</value>
+  </data>
+  <data name="WB_Custom" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="WB_Custom1" xml:space="preserve">
+    <value>自定义1</value>
+  </data>
+  <data name="WB_Custom2" xml:space="preserve">
+    <value>自定义2</value>
+  </data>
+  <data name="WB_Custom3" xml:space="preserve">
+    <value>自定义3</value>
+  </data>
+  <data name="WB_DayLight" xml:space="preserve">
+    <value>日光</value>
+  </data>
+  <data name="WB_Flash" xml:space="preserve">
+    <value>闪光</value>
+  </data>
+  <data name="WB_Fluorescent_CoolWhite" xml:space="preserve">
+    <value>荧光灯-冷白色</value>
+  </data>
+  <data name="WB_Fluorescent_DayLight" xml:space="preserve">
+    <value>荧光灯-日光</value>
+  </data>
+  <data name="WB_Fluorescent_DayWhite" xml:space="preserve">
+    <value>荧光灯-日光白色</value>
+  </data>
+  <data name="WB_Fluorescent_WarmWhite" xml:space="preserve">
+    <value>荧光灯-暖白色</value>
+  </data>
+  <data name="WB_Incandescent" xml:space="preserve">
+    <value>白炽灯</value>
+  </data>
+  <data name="WB_Shade" xml:space="preserve">
+    <value>阴影</value>
+  </data>
+  <data name="WhiteBalance" xml:space="preserve">
+    <value>白平衡</value>
+  </data>
+  <data name="WifiHint" xml:space="preserve">
+    <value>失去相机Wi-Fi连接？
+请连接到Wi-Fi接入点，其名称以“DIRECT-”开头</value>
+  </data>
+  <data name="WifiSettingLauncherButtonText" xml:space="preserve">
+    <value>WI-FI设定</value>
+  </data>
+  <data name="WindNoiseReduction" xml:space="preserve">
+    <value>削减风噪声</value>
+  </data>
+  <data name="x_by_x_NoTrans" xml:space="preserve">
+    <value>{0} x {1}</value>
+  </data>
+  <data name="ZoomMode_ClearImageDigital" xml:space="preserve">
+    <value>清晰影像缩放</value>
+  </data>
+  <data name="ZoomMode_Optical" xml:space="preserve">
+    <value>光学的</value>
+  </data>
+  <data name="ZoomSetting" xml:space="preserve">
+    <value>变焦设置</value>
+  </data>
+</root>
