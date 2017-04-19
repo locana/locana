@@ -250,6 +250,7 @@
     <Compile Include="Playback\PlaybackModeHelper.cs" />
     <Compile Include="Playback\Loader\RemoteApiContentsLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Localization.cs" />
     <Compile Include="Settings\SettingPanelBuilder.cs" />
     <Compile Include="UPnP\ContentDirectory\BrowseRequest.cs" />
     <Compile Include="UPnP\ContentDirectory\ContentDirectory.cs" />

@@ -2,6 +2,7 @@
 using Kazyx.RemoteApi.Camera;
 using Locana.Controls;
 using Locana.Playback;
+using Locana.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -727,6 +728,24 @@ namespace Locana.Utility
                         return SystemUtil.GetStringResource("ContentsSet_Movie");
                     default:
                         throw new NotImplementedException();
+                }
+            }).ToArray();
+        }
+
+        internal static string[] FromLocalization(IEnumerable<Localization> langs)
+        {
+            return langs.Select(lang =>
+            {
+                switch (lang)
+                {
+                    case Localization.Default:
+                        return "System Default";
+                    case Localization.English:
+                        return "English";
+                    case Localization.Japanese:
+                        return "日本語";
+                    default:
+                        return lang.ToString();
                 }
             }).ToArray();
         }

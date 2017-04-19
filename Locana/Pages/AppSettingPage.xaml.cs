@@ -1,9 +1,11 @@
 ﻿using Locana.Controls;
 using Locana.DataModel;
 using Locana.Playback;
+using Locana.Resources;
 using Locana.Utility;
 using System;
 using Windows.Devices.Geolocation;
+using Windows.Globalization;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -284,6 +286,30 @@ namespace Locana.Pages
                     StateObserver = enabled => ApplicationSettings.GetInstance().ShowKeyCheatSheet = enabled
                 }
             });
+
+            section.Add(new ComboBoxSetting(new AppSettingData<int>()
+            {
+                Title = SystemUtil.GetStringResource("LanguageSetting"),
+                StateProvider = () => (int)LocalizationExtensions.FromLang(ApplicationSettings.GetInstance().LanguageOverride),
+                StateObserver = (index) =>
+                {
+                    if (index == -1)
+                    {
+                        return;
+                    }
+                    var lang = ((Localization)index).AsLang();
+                    if (ApplicationSettings.GetInstance().LanguageOverride != lang)
+                    {
+                        ApplicationSettings.GetInstance().LanguageOverride = lang;
+                        ApplicationLanguages.PrimaryLanguageOverride = lang;
+
+                        // TODO Reload AppShell
+                        // AppShell.Current.Frame.Navigate(typeof(AppShell)); NullReferenceException!!
+                    }
+                },
+                Candidates = SettingValueConverter.FromLocalization(EnumUtil<Localization>.GetValueEnumerable())
+            }
+            ));
 
             return section;
         }

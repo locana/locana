@@ -24,6 +24,7 @@ namespace Locana.Utility
         private const string rotate_liveview = "lotate_liveview";
         private const string force_phone_view = "force_phone_view";
         private const string show_key_cheat_sheet = "show_key_cheat_sheet";
+        private const string lang_override = "lang_override";
 
         private const string init_launched_datetime = "init_datetime";
         private const string last_version = "last_version";
@@ -184,6 +185,12 @@ namespace Locana.Utility
         {
             get { return GetProperty(show_key_cheat_sheet, true); }
             set { SetProperty(show_key_cheat_sheet, value); }
+        }
+
+        public static string LanguageOverride
+        {
+            get { return GetProperty(lang_override, ""); }
+            set { SetProperty(lang_override, value); }
         }
     }
 }
