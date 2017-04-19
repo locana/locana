@@ -289,7 +289,7 @@ namespace Locana.Pages
 
             section.Add(new ComboBoxSetting(new AppSettingData<int>()
             {
-                Title = SystemUtil.GetStringResource("LanguageSetting"),
+                Title = "🌏 " + SystemUtil.GetStringResource("LanguageSetting"),
                 StateProvider = () => (int)LocalizationExtensions.FromLang(ApplicationSettings.GetInstance().LanguageOverride),
                 StateObserver = (index) =>
                 {
