@@ -744,6 +744,8 @@ namespace Locana.Utility
                         return "English";
                     case Localization.Japanese:
                         return "日本語";
+                    case Localization.SimplifiedChinese:
+                        return "简体中文";
                     default:
                         return lang.ToString();
                 }
