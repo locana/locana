@@ -1165,4 +1165,10 @@ Eメールに添付して開発者に送信しますか？</value>
   <data name="LanguageSetting" xml:space="preserve">
     <value>言語設定</value>
   </data>
+  <data name="ExitAppConfirmation" xml:space="preserve">
+    <value>言語設定を反映するためLocanaを終了しますか？</value>
+  </data>
+  <data name="LanguageSetting_Guide" xml:space="preserve">
+    <value>言語設定はアプリ再起動後に反映されます。</value>
+  </data>
 </root>

@@ -1284,4 +1284,10 @@ App version: {5}</value>
   <data name="LanguageSetting" xml:space="preserve">
     <value>Language setting</value>
   </data>
+  <data name="ExitAppConfirmation" xml:space="preserve">
+    <value>Exit Locana to apply language setting?</value>
+  </data>
+  <data name="LanguageSetting_Guide" xml:space="preserve">
+    <value>Language setting will be applied after application restart.</value>
+  </data>
 </root>

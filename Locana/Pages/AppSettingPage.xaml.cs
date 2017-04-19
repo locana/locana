@@ -5,7 +5,6 @@ using Locana.Resources;
 using Locana.Utility;
 using System;
 using Windows.Devices.Geolocation;
-using Windows.Globalization;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -126,7 +125,7 @@ namespace Locana.Pages
             geoSetting.CurrentSetting = false;
         }
 
-        private static SettingSection BuildDisplaySection()
+        private SettingSection BuildDisplaySection()
         {
             var section = new SettingSection(SystemUtil.GetStringResource("SettingSection_Display"));
 
@@ -290,8 +289,9 @@ namespace Locana.Pages
             section.Add(new ComboBoxSetting(new AppSettingData<int>()
             {
                 Title = "🌏 " + SystemUtil.GetStringResource("LanguageSetting"),
+                Guide = SystemUtil.GetStringResource("LanguageSetting_Guide"),
                 StateProvider = () => (int)LocalizationExtensions.FromLang(ApplicationSettings.GetInstance().LanguageOverride),
-                StateObserver = (index) =>
+                StateObserver = async (index) =>
                 {
                     if (index == -1)
                     {
@@ -301,10 +301,12 @@ namespace Locana.Pages
                     if (ApplicationSettings.GetInstance().LanguageOverride != lang)
                     {
                         ApplicationSettings.GetInstance().LanguageOverride = lang;
-                        ApplicationLanguages.PrimaryLanguageOverride = lang;
 
-                        // TODO Reload AppShell
-                        // AppShell.Current.Frame.Navigate(typeof(AppShell)); NullReferenceException!!
+                        RestartDialog.DataContext = ExitConfirmationSource;
+                        if (await RestartDialog.ShowAsync() == ContentDialogResult.Primary)
+                        {
+                            Application.Current.Exit();
+                        }
                     }
                 },
                 Candidates = SettingValueConverter.FromLocalization(EnumUtil<Localization>.GetValueEnumerable())
@@ -346,5 +348,12 @@ namespace Locana.Pages
 
             return section;
         }
+
+        private ContentDialogSource ExitConfirmationSource = new ContentDialogSource
+        {
+            PrimaryButtonTextRes = "AppBar_Exit",
+            SecondaryButtonTextRes = "AppBar_Cancel",
+            DialogMessageTextRes = "ExitAppConfirmation",
+        };
     }
 }
