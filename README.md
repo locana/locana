@@ -23,7 +23,7 @@ $ git submodule update --init
 
 ### Import project
 
-Import `Locana/Locana.csproj` on Visual Studio 2015.
+Import `Locana/Locana.csproj` on Visual Studio 2017.
 
 ## Beta version apps
 
