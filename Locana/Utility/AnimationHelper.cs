@@ -200,7 +200,7 @@ namespace Locana.Utility
 
         private static DoubleAnimationUsingKeyFrames _Animation(Duration duration, double origin, double diff)
         {
-            if (diff == Double.NaN) { diff = 0; }
+            if (double.IsNaN(diff) || double.IsNaN(origin)) { diff = 0; }
             var animation = new DoubleAnimationUsingKeyFrames();
             animation.KeyFrames.Add(new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)), Value = origin });
             animation.KeyFrames.Add(new EasingDoubleKeyFrame() { KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(duration.TimeSpan.Milliseconds / 3)), Value = origin + diff * 0.7 });
@@ -210,6 +210,7 @@ namespace Locana.Utility
 
         public static Storyboard CreateSmoothRotateAnimation(AnimationRequest request, double angle)
         {
+            if (double.IsNaN(angle)) { angle = 0; }
             var transform = request.Target.RenderTransform as CompositeTransform;
 
             if (transform == null)
@@ -252,6 +253,8 @@ namespace Locana.Utility
         /// <returns></returns>
         public static Storyboard CreateSmoothRotateScaleAnimation(AnimationRequest request, double angle, double scale)
         {
+            if (double.IsNaN(angle)) { angle = 0f; }
+            if (double.IsNaN(scale)) { scale = 0f; }
             var transform = request.Target.RenderTransform as CompositeTransform;
 
             if (transform == null)
@@ -300,6 +303,9 @@ namespace Locana.Utility
 
         public static Storyboard CreateRotateAnimation(AnimationRequest request, double from, double to)
         {
+            if (double.IsNaN(from)) { from = 0f; }
+            if (double.IsNaN(to)) { to = 0f; }
+
             var duration = new Duration(TimeSpan.FromMilliseconds(200));
             if (request.Duration != null && request.Duration.Milliseconds != 0)
             {
