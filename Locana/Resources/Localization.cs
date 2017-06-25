@@ -7,6 +7,8 @@ namespace Locana.Resources
         Default = 0,
         English = 1,
         Japanese = 2,
+        SimplifiedChinese = 3,
+        Dutch = 4,
     }
 
     public static class LocalizationExtensions
@@ -16,23 +18,31 @@ namespace Locana.Resources
             switch (lang)
             {
                 case Localization.English:
-                    return "en";
+                    return "en-us";
                 case Localization.Japanese:
-                    return "jp";
+                    return "ja-jp";
+                case Localization.SimplifiedChinese:
+                    return "zh-cn";
+                case Localization.Dutch:
+                    return "nl-nl";
             }
             return "";
         }
 
         public static Localization FromLang(string lang)
         {
-            switch (lang)
+            switch (lang.ToLower())
             {
                 case "":
                     return Localization.Default;
-                case "en":
+                case "en-us":
                     return Localization.English;
-                case "jp":
+                case "ja-jp":
                     return Localization.Japanese;
+                case "zh-cn":
+                    return Localization.SimplifiedChinese;
+                case "nl-nl":
+                    return Localization.Dutch;
                 default:
                     DebugUtil.Log(() => "Unknown language code " + lang);
                     return Localization.Default;
