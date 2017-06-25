@@ -63,7 +63,7 @@ namespace Locana.Pages
             SupportLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenSupportTwitter"), SystemUtil.GetStringResource("SupportTwitterURL")));
             RepoLink.Inlines.Add(GetAsLink(SystemUtil.GetStringResource("OpenGithub"), SystemUtil.GetStringResource("RepoURL")));
 
-            // LoadContributors();
+            LoadContributors();
             LoadLicenseFile();
 
             logReport.Setup(Dispatcher);
@@ -83,8 +83,7 @@ namespace Locana.Pages
                 }
             }
         }
-
-        /*
+        
         private async void LoadContributors()
         {
             var installedFolder = Package.Current.InstalledLocation;
@@ -122,7 +121,6 @@ namespace Locana.Pages
                 }
             }
         }
-        */
 
         private async void LoadLicenseFile()
         {
