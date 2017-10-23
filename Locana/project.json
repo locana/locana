@@ -7,7 +7,7 @@
     "Microsoft.Toolkit.Uwp.UI.Controls": "2.0.0",
     "Newtonsoft.Json": "10.0.3",
     "Win2D.uwp": "1.21.0",
-    "ZXing.Net": "0.15.0"
+    "ZXing.Net": "0.16.2"
   },
   "frameworks": {
     "uap10.0.10586": {}
