@@ -6,7 +6,7 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.1",
     "Microsoft.Toolkit.Uwp.UI.Controls": "1.4.1",
     "Newtonsoft.Json": "10.0.3",
-    "Win2D.uwp": "1.20.0",
+    "Win2D.uwp": "1.21.0",
     "ZXing.Net": "0.15.0"
   },
   "frameworks": {
